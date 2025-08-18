@@ -1,0 +1,100 @@
+project:
+  type: website
+  post-render:
+    - helpers/convert_pypercent.py
+    - helpers/convert_qmd_to_md.py
+  render:
+    - index.qmd
+    - 404.qmd
+    - general/*.qmd
+    - lectures/*.qmd
+    - tutorials/*.qmd
+website:
+  title: "Management Science"
+  repo-url: https://github.com/beyondsimulations/Management-Science
+  site-url: https://beyondsimulations.github.io/Management-Science
+  bread-crumbs: true
+  sidebar:
+    style: floating
+    #logo: https://images.beyondsimulations.com/logo/midjourney-clock.jpeg
+    collapse-level: 1
+    search: true
+    contents:
+      - text: "Welcome"
+        href: index.qmd
+      - text: "Syllabus"
+        href: general/syllabus.qmd
+      - text: "***"
+      - text: "01 Introduction"
+        href: lectures/lecture-01.qmd
+      - text: "***"
+      - text: "Cheatsheet"
+        href: general/cheatsheet.qmd
+      - text: "FAQs"
+        href: general/faq.qmd
+      - text: "Literature"
+        href: general/literature.qmd
+
+  page-footer:
+    center: "Mathematics, Tobias Vlćek </br>CC BY-SA 4.0"
+    right:
+      - icon: github
+        href: https://github.com/beyondsimulations/Management-Science
+      - icon: linkedin
+        href: https://linkedin.com/in/tobiasvlcek
+      - icon: envelope
+        href: mailto:vlcek@beyondsimulations.com
+      - icon: lock
+        href: general/privacy.qmd
+
+format:
+  html:
+    theme:
+      - default
+      - styles.scss
+      - brand
+    toc: true
+    highlight-style: arrow
+    code-copy: true
+    code-link: true
+    toc-location: right
+    code-overflow: wrap
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    include-in-header:
+      - general/header.html
+    include-after-body:
+      text: |
+        <script src="https://cdn.jsdelivr.net/gh/beyondsimulations/web-embedded-chat@main/floating-chat.js"></script>
+        <script>
+            new UniversalChatWidget({
+                title: "Course Assistant",
+                apiEndpoint: "https://model-proxy.vlcek-4b4.workers.dev",
+                model: "management-science",
+                userMessageOpacity: 0.5,
+                assistantMessageOpacity: 0.5,
+                position: "bottom-right",
+                windowHeight: 800
+            });
+        </script>
+
+  hugo-md: default
+
+  typst:
+    papersize: a4
+
+format-links:
+  - html
+  - format: typst
+    text: PDF
+    icon: file-pdf
+
+bibliography: Literature.bib
+
+engine: julia
+
+execute:
+  freeze: auto
+
+brand: _brand.yml
