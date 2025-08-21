@@ -16,7 +16,7 @@ website:
   bread-crumbs: true
   sidebar:
     style: floating
-    #logo: https://images.beyondsimulations.com/logo/midjourney-clock.jpeg
+    logo: https://images.beyondsimulations.com/lectures/mj-machine.png
     collapse-level: 1
     search: true
     contents:
@@ -36,7 +36,7 @@ website:
         href: general/literature.qmd
 
   page-footer:
-    center: "Mathematics, Tobias Vlćek </br>CC BY-SA 4.0"
+    center: "Mathematics, Tobias Vlćek </br>CC BY-NC-SA 4.0"
     right:
       - icon: github
         href: https://github.com/beyondsimulations/Management-Science
@@ -91,8 +91,6 @@ format-links:
     icon: file-pdf
 
 bibliography: Literature.bib
-
-engine: julia
 
 execute:
   freeze: auto
