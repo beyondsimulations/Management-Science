@@ -114,7 +114,9 @@ uv init
 - `README.md` (you can jot notes here)
 - (A `.venv` folder will appear later once packages are added or synced.)
 
+:::{.callout-note}
 You do **not** need to edit any of these (except maybe `README.md` for your notes and `main.py` if you want to run something different).
+:::
 
 ---
 
@@ -170,7 +172,7 @@ If your `pyproject.toml` changed (e.g. you pulled code from someone else):
 uv sync
 ```
 
-::: callout-tip
+:::{.callout-tip}
 If something seems “off”, just close the terminal and reopen in the project folder. Fresh starts fix many early mistakes.
 :::
 
@@ -182,7 +184,9 @@ Occasionally:
 uv self update
 ```
 
-(If it ever errors, you can just reinstall using the same one-liner from earlier.)
+:::{.callout-tip}
+If it ever errors, you can just reinstall using the same one-liner from earlier.
+:::
 
 ---
 
