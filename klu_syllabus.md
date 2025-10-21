@@ -5,7 +5,7 @@
 
 ## Lecturer Information
 
-**Name:** Dr. Tobias Vlček
+**Name:** Dr. Tobias Vlćek
 **Email:** vlcek@beyondsimulations.com
 
 ## Schedule
