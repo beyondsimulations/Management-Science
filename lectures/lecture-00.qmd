@@ -1,0 +1,208 @@
+---
+title: "Introduction"
+subtitle: "Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_00_introduction.qmd)"
+    output-file: lec_00_presentation.html
+---
+
+# [About this Course]{.flow} {.title}
+
+## About me
+
+:::{.incremental}
+- **Field:** Optimizing and simulating complex systems
+- **Languages:** of choice: Julia, Python and Rust
+- **Interest:** Modelling, Simulations, Machine Learning
+- **Teaching:** OR, Algorithms, and Programming
+- **Contact:** [vlcek@beyondsimulations.com](mailto:vlcek@beyondsimulations.com)
+:::
+
+. . .
+
+:::{.callout-tip}
+I really appreciate active participation and interaction!
+:::
+
+## Course Outline
+
+
+## Participation
+
+
+## Teaching
+
+
+## Passing the Course
+
+
+## Handing in Assignments
+
+
+## Learning Python
+
+- In my experience, the best way to learn is by **doing**!
+- Here, we will focus on decision algorithms
+- You will start to learn Python by [doing the tutorials]{.highlight}
+
+. . .
+
+:::{.callout-tip}
+Don't worry, I will help you out if you have any questions!
+:::
+
+## Difficulty of the Course
+
+## Goals of the Course
+
+## Why Python?
+
+- **Origins**: Conceived in late 1980s as a teaching and scripting language
+- **Simple Syntax**: Python’s syntax is mostly straightforward and very easy to learn
+- **Versatility**: Used in web development, data analysis, artificial intelligence, and more
+- **Community Support**: A large community of users worldwide and extensive documentation
+
+## Help from AI
+
+- You are [allowed to use AI]{.highlight} in the course, we use it as well (e.g., Claude, ChatGPT, LLama3 ...)
+- These **tools are great** for learning Python!
+- Can help you a lot **to get started** with programming
+
+. . .
+
+:::{.callout-warning}
+But you should *not* simply use them to *replace* your learning.
+:::
+
+# [How to learn programming]{.flow} {.title}
+
+## Our Recommendation
+
+1. [Be present]{.highlight}: Attend the lecture and solve the tutorials
+2. [Put in some work]{.highlight}: Repeat code and try to understand it
+3. [Do coding]{.highlight}: Run code, play around, modify, and solve
+
+. . .
+
+:::{.callout-tip}
+Great resources to start are books and small challenges. You can find a list of recommendations in the [literature recommendations](../general/literature.qmd).
+:::
+
+## Don't give up!
+
+# [Setting up Python]{.flow} {.title}
+
+## Install VS Code
+
+- Download and install from the [website](https://code.visualstudio.com/)
+- Built for **Windows, Linux and Mac**
+- Install the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) and [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) extension
+- [Now you are ready to go!]{.highlight}
+
+. . .
+
+::: {.callout-tip}
+Unsure on how to work with VS Code and notebooks?
+Ask me! I'm happy to help you out!
+:::
+
+## What is an IDE?
+
+- Integrated Development Environment `=` application
+- It allows you to write, run and debug code scripts
+- Other IDEs include for example:
+  - [PyCharm](https://www.jetbrains.com/pycharm/) from JetBrains
+  - [Zed](https://zed.dev/)
+
+## Installation of Python with `uv`
+
+- We will use `uv` to install and manage Python versions
+- It works on Windows, Mac and Linux
+- It helps us to manage packages and virtual environments
+- Now, we all [go here](../general/uv.qmd) and install `uv` and Python
+
+. . .
+
+::: {.callout-tip}
+If the installation does not work, **let me know!**
+:::
+
+# [Using Notebooks with uv]{.flow} {.title}
+
+## Quick Check
+
+- Have you installed `uv` and initialized the project?
+- Great! Before we continue, check the following:
+  - [] You have a folder for the course
+  - [] You have initialized `uv` with `uv init` inside the folder
+  - [] You can see a file called `pyproject.toml` in the folder
+
+  . . .
+
+:::{.callout-tip}
+Something not working yet? Ask me!
+:::
+
+## Using Notebooks
+
+- Now we need to add a kernel to our project
+- Run `uv add --dev ipykernel` from your terminal
+- This allows us to use `uv` Python in notebooks
+- Now, install the extension (Jupytext for Notebooks)[https://marketplace.visualstudio.com/items?itemName=congyiwu.vscode-jupytext]
+- Done? Perfect. Now we can start!
+
+## Working with Notebooks
+
+- Now you can download the files from the website
+- Just click on one of the sessions and open it
+- Select `Python` on the right side
+- Download and save the files **to your course folder**
+- Open them and select “Open with Jupyter Notebook”
+
+. . .
+
+:::{.callout-tip}
+That was the hardest part today!
+:::
+
+
+## {.loud-slide}
+::: {.r-fit-text}
+Any questions
+
+so far?
+:::
+
+## The End
+
+::: {.callout-note}
+**That's it for our introduction!**\
+Let's have a short break and then continue.
+:::
+
+# [Literature]{.flow} {.title}
+
+## Interesting Literature on Algorithms
+
+- Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^4]
+- Ferguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.
+
+[^4]: A great inspiration to learn more about Algorithms!
+
+
+## Books on Programming
+
+- Downey, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O’Reilly. [Here](https://greenteapress.com/wp/think-python-3rd-edition/)
+- Elter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.
+
+. . .
+
+::: {.callout-note}
+Think Python is a great book to start with. It's available online for free. Schrödinger Programmiert Python is a great alternative for German students, as it is a very playful introduction to programming with lots of examples.
+:::
+
+## More Literature
+
+For more interesting literature, take a look at the [literature list](../general/literature.qmd) of this course.

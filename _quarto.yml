@@ -25,8 +25,32 @@ website:
       - text: "Syllabus"
         href: general/syllabus.qmd
       - text: "***"
-      - text: "01 Introduction"
-        href: lectures/lecture-01.qmd
+      - section: "01 Let's Start"
+        contents:
+          - text: "Introduction"
+            href: lectures/lec_00_introduction.qmd
+          - text: "01-01 - Variables"
+            href: tutorials/tut_01_01_variables.qmd
+          - text: "01-02 - Comparisons"
+            href: tutorials/tut_01_02_comparisons.qmd
+          - text: "01-03 - Decisions"
+            href: tutorials/tut_01_03_stopping.qmd
+      - section: "02 Learning"
+        contents:
+          - text: "01-01 - Variables"
+            href: tutorials/tut_01_01_variables.qmd
+          - text: "01-02 - Comparisons"
+            href: tutorials/tut_01_02_comparisons.qmd
+          - text: "01-03 - Decisions"
+            href: tutorials/tut_01_03_stopping.qmd
+      - section: "03 Foundation"
+        contents:
+          - text: "01-01 - Variables"
+            href: tutorials/tut_01_01_variables.qmd
+          - text: "01-02 - Comparisons"
+            href: tutorials/tut_01_02_comparisons.qmd
+          - text: "01-03 - Decisions"
+            href: tutorials/tut_01_03_stopping.qmd
       - text: "***"
       - text: "Cheatsheet"
         href: general/cheatsheet.qmd
@@ -36,7 +60,7 @@ website:
         href: general/literature.qmd
 
   page-footer:
-    center: "Mathematics, Tobias Vlćek </br>CC BY-NC-SA 4.0"
+    center: "Management Science, Tobias Vlćek </br>CC BY-NC-SA 4.0"
     left:
       - icon: github
         href: https://github.com/beyondsimulations/Management-Science
@@ -56,10 +80,10 @@ format:
       - styles.scss
       - brand
     toc: true
-    highlight-style: arrow
+    highlight-style: github
     code-copy: true
     code-link: true
-    toc-location: right
+    toc-location: left
     code-overflow: wrap
     html-math-method:
       method: mathjax
