@@ -27,7 +27,7 @@ website:
       - text: "***"
       - section: "01 Let's Start"
         contents:
-          - text: "Introduction"
+          - text: "01-00 Introduction"
             href: lectures/lec_00_introduction.qmd
           - text: "01-01 - Variables"
             href: tutorials/tut_01_01_variables.qmd
@@ -37,20 +37,28 @@ website:
             href: tutorials/tut_01_03_stopping.qmd
       - section: "02 Learning"
         contents:
-          - text: "01-01 - Variables"
-            href: tutorials/tut_01_01_variables.qmd
-          - text: "01-02 - Comparisons"
-            href: tutorials/tut_01_02_comparisons.qmd
-          - text: "01-03 - Decisions"
-            href: tutorials/tut_01_03_stopping.qmd
+          - text: "02-01 - Lists"
+            href: tutorials/tut_02_01_lists.qmd
+          - text: "02-02 - Loops"
+            href: tutorials/tut_02_02_loops.qmd
+          - text: "02-03 - Randomness"
+            href: tutorials/tut_02_03_randomness.qmd
+          - text: "02-04 - Reflection"
+            href: tutorials/tut_02_04_reflection.qmd
+          - text: "02-05 - Functions"
+            href: tutorials/tut_02_05_functions.qmd
       - section: "03 Foundation"
         contents:
-          - text: "01-01 - Variables"
-            href: tutorials/tut_01_01_variables.qmd
-          - text: "01-02 - Comparisons"
-            href: tutorials/tut_01_02_comparisons.qmd
-          - text: "01-03 - Decisions"
-            href: tutorials/tut_01_03_stopping.qmd
+          - text: "03-01 - Packages"
+            href: tutorials/tut_03_01_packages.qmd
+          - text: "03-02 - Recap"
+            href: tutorials/tut_03_02_recap.qmd
+          - text: "03-03 - Dictionaries"
+            href: tutorials/tut_03_03_dicts.qmd
+          - text: "03-04 - Dataframes"
+            href: tutorials/tut_03_04_dataframes.qmd
+          - text: "03-05 - Summary"
+            href: tutorials/tut_03_05_summary.qmd
       - text: "***"
       - text: "Cheatsheet"
         href: general/cheatsheet.qmd

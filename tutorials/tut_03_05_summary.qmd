@@ -1,5 +1,5 @@
 ---
-title: "Tutorial III.IV - Recap with Randomness"
+title: "Tutorial III.IV - Summary with Randomness"
 subtitle: "Management Science"
 format-links:
   - text: Python
