@@ -6,6 +6,7 @@ subtitle: "A small guide using uv"
 ## Why we use `uv` for this course
 
 `uv` is a new (and very fast) Python tool written in Rust. It:
+
 - Installs Python for you (no manual downloads).
 - Creates isolated *virtual environments* (safe sandboxes per project).
 - Installs and updates packages quickly.
@@ -105,6 +106,7 @@ uv init
 ```
 
 `uv init` creates:
+
 - `main.py` (starter script)
 - `pyproject.toml` (project + dependencies config)
 - `.python-version` (records the Python version we chose)
@@ -200,6 +202,7 @@ uv --help
 ## Recap
 
 You can now:
+
 1. Install `uv`.
 2. Create a project.
 3. Run a script.
