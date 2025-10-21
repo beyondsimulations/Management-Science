@@ -29,5 +29,6 @@ solutions/
 general/header.html
 .DS_Store
 notes/
+_repo-md/
 
 **/*.quarto_ipynb

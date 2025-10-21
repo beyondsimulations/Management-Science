@@ -149,8 +149,9 @@ Something not working yet? Ask me!
 
 - Now we need to add a kernel to our project
 - Run `uv add --dev ipykernel` from your terminal
+- Now run `uv add jupyter` in the terminal
 - This allows us to use `uv` Python in notebooks
-- Now, install the extension (Jupytext for Notebooks)[https://marketplace.visualstudio.com/items?itemName=congyiwu.vscode-jupytext]
+- Next, install the extension (Jupytext for Notebooks)[https://marketplace.visualstudio.com/items?itemName=congyiwu.vscode-jupytext]
 - Done? Perfect. Now we can start!
 
 ## Working with Notebooks
