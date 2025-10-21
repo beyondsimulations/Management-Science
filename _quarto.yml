@@ -16,7 +16,7 @@ website:
   bread-crumbs: true
   sidebar:
     style: floating
-    logo: https://images.beyondsimulations.com/lectures/mj-machine.png
+    logo: https://images.beyondsimulations.com/lectures/mj-laptops.png
     collapse-level: 1
     search: true
     contents:
