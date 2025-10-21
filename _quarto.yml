@@ -60,6 +60,8 @@ website:
           - text: "03-05 - Summary"
             href: tutorials/tut_03_05_summary.qmd
       - text: "***"
+      - text: "Installation"
+        href: general/uv.qmd
       - text: "Cheatsheet"
         href: general/cheatsheet.qmd
       - text: "FAQs"
