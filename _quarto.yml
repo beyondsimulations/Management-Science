@@ -93,7 +93,7 @@ format:
     highlight-style: github
     code-copy: true
     code-link: true
-    toc-location: left
+    toc-location: right
     code-overflow: wrap
     html-math-method:
       method: mathjax
