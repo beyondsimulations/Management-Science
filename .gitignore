@@ -29,3 +29,5 @@ solutions/
 general/header.html
 .DS_Store
 notes/
+
+**/*.quarto_ipynb
