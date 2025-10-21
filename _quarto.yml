@@ -37,14 +37,16 @@ website:
 
   page-footer:
     center: "Mathematics, Tobias Vlćek </br>CC BY-NC-SA 4.0"
-    right:
+    left:
       - icon: github
         href: https://github.com/beyondsimulations/Management-Science
       - icon: linkedin
         href: https://linkedin.com/in/tobiasvlcek
       - icon: envelope
         href: mailto:vlcek@beyondsimulations.com
-      - icon: lock
+      - icon: skip-backward
+        href: https://beyondsimulations.github.io/lectures
+      - icon: shield-check
         href: general/privacy.qmd
 
 format:
