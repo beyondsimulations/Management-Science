@@ -1,0 +1,109 @@
+---
+title: "Assignments in this Course"
+---
+
+### What I'm Looking For
+
+#### Excellent (90-100%)
+- All functions work correctly
+- Clear improvements achieved
+- Insightful business analysis
+- Clean, well-commented code
+- Goes beyond requirements (e.g., tests multiple strategies)
+
+#### Good (70-89%)
+- Most functions work
+- Some improvement achieved
+- Reasonable business insights
+- Code mostly clear
+- Meets all basic requirements
+
+#### Satisfactory (50-69%)
+- Basic functions work
+- Valid solutions produced
+- Attempted business analysis
+- Code runs without errors
+- Most requirements attempted
+
+---
+
+### Tips for Success
+
+**Using AI Tools (ChatGPT, GitHub Copilot, etc.)**
+- ✅ DO use them to understand concepts and debug
+- ✅ DO use them to learn new Python syntax
+- ✅ DO use them to improve your code
+- ❌ DON'T just copy-paste without understanding
+- ❌ DON'T submit code you can't explain
+
+**Start Simple**
+- Get a working solution first, then optimize
+- Test with small examples first
+- Print intermediate results to check your logic
+
+**Think Like a Consultant**
+- Every optimization has a real business impact
+- Consider implementation feasibility
+- Balance perfection with practicality
+
+**Common Pitfalls to Avoid**
+- Forgetting to return to depot in routing
+- Not checking schedule validity after changes
+- Optimizing forever - "good enough" is often perfect
+- Forgetting the business questions
+
+---
+
+### Submission Requirements
+
+Submit a Jupyter notebook containing:
+1. Your code implementations (with comments!)
+2. Output showing your code works
+3. Visualizations of results
+4. Business analysis answers (clearly marked)
+
+**File naming:** `Assignment2_[GroupNames].ipynb`
+
+---
+
+### Support Resources
+
+**Course Hours**
+- Focus on understanding concepts
+- Help with debugging
+- Clarifying requirements
+
+**What You Can Use**
+- All course notebooks
+- NumPy/Pandas documentation
+- Python tutorials
+- Discussion with classmates
+- AI tools (with understanding!)
+
+**Academic Integrity**
+- Your code should be your own work
+- You must understand everything you submit
+- Cite any external sources used
+
+---
+
+### Late Policy
+- -10% per day late
+- Maximum 3 days late
+- Exceptions only for documented emergencies
+
+---
+
+### Final Thoughts
+
+This assignment is about learning to apply optimization thinking to real problems. Using AI tools is encouraged as long as you understand the code - this mirrors real-world practice where developers use all available tools.
+
+Focus on:
+- Understanding the problems
+- Applying algorithmic thinking
+- Interpreting results
+- Making business recommendations
+
+Remember: You're training to be business problem-solvers who can work with data and algorithms. The goal is insight and understanding, not perfect code!
+
+Good luck! 🚀

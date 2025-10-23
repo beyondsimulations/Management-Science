@@ -1,0 +1,259 @@
+---
+title: "Assignment 2: Optimization in Practice"
+---
+
+## Assignment Overview
+
+**Due:** Start of Lecture 10
+**Weight:** 20% of final grade
+**Expected Time:** 4-5 hours
+**Work:** Groups
+
+Your consulting firm has been hired by "CityExpress," a local delivery company. They need help with:
+1. Optimizing delivery routes to reduce costs
+2. Creating efficient staff schedules that balance operational needs and worker preferences
+
+## Consultants
+Who is part of your group?
+
+```{python}
+"""
+YOUR ANSWER HERE:
+"""
+```
+
+## Setup
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sets a random seed for reproducibility (no need to adjust this for you)
+np.random.seed(42)
+```
+
+## Part A: Smart Delivery Routes (50%)
+
+### Scenario
+CityExpress has 12 customer orders to deliver tomorrow. They need an efficient route starting and ending at their depot.
+
+### The Data
+
+```{python}
+# Location coordinates (in km from origin)
+locations = {
+    0: (10, 10),   # Depot
+    1: (8, 15),    # Customer 1
+    2: (14, 18),   # Customer 2
+    3: (5, 12),    # Customer 3
+    4: (18, 8),    # Customer 4
+    5: (12, 5),    # Customer 5
+    6: (3, 7),     # Customer 6
+    7: (16, 14),   # Customer 7
+    8: (7, 3),     # Customer 8
+    9: (15, 6),    # Customer 9
+    10: (11, 17),  # Customer 10
+    11: (4, 16),   # Customer 11
+    12: (19, 12)   # Customer 12
+}
+```
+
+### Task 1: Build a Basic Route (20%)
+
+```{python}
+def calculate_distance(loc1, loc2):
+    """Calculate Euclidean distance between two locations."""
+    x1, y1 = loc1
+    x2, y2 = loc2
+    # YOUR CODE HERE
+
+    return distance
+
+def calculate_total_distance(route, locations):
+    """Calculate total distance for a route."""
+    total = 0
+    # YOUR CODE HERE
+
+    # Sum distances between consecutive locations
+    return total
+
+def nearest_neighbor_route(depot, locations):
+    """
+    Build route using nearest neighbor heuristic.
+    Always visit the nearest unvisited customer next.
+    """
+    route = [depot] # Start with depots
+    # YOUR CODE HERE
+
+    route.append(depot)  # End with depot
+    return route
+
+# Build your route
+# YOUR CODE HERE
+
+```
+
+### Task 2: Improve Your Route (20%)
+
+```{python}
+# Try to improve route by swapping two customers.
+def try_swap_improvement(route, locations):
+    """
+    Try to improve route by swapping two customers.
+    """
+    # YOUR CODE HERE (replace pass)
+    pass
+
+def improve_route(initial_route, locations, max_iterations=50):
+    """
+    Repeatedly try to improve the route.
+    """
+    # YOUR CODE HERE (replace pass)
+    pass
+
+# Improve your route
+# YOUR CODE HERE
+
+```
+
+### Task 3: Visualize and Analyze (10%)
+
+- Visualize both routes (before and after improvement)
+- Calculate and compare
+  - Original route distance
+  - Improved route distance
+  - Percentage improvement
+  - Estimated cost savings (€2 per km)
+
+```{python}
+# Visualize both routes
+# YOUR CODE HERE
+
+# Calculate metrics
+# # YOUR CODE HERE
+```
+
+**Business Question:** If CityExpress has 50 deliveries per day, how much could they save per month with route optimization? (3-4 sentences)
+
+```{python}
+"""
+YOUR ANSWER HERE:
+"""
+```
+
+## Part B: Staff Scheduling (50%)
+
+### Scenario
+The warehouse needs to schedule 6 workers across 5 days (Mon-Fri). Each day needs 2-3 workers, and each worker should work exactly 3 days.
+
+### Task 1: Create a Valid Schedule (20%)
+
+```{python}
+def check_schedule_valid(schedule):
+    """
+    Check if schedule meets all constraints.
+    Returns whether it is_valid and a number_of_violations)
+    """
+    # Check: Each worker works exactly 3 days
+    # Check: Each day has 2-3 workers
+    # YOUR CODE HERE (replace pass)
+    pass
+
+
+def create_basic_schedule():
+    """
+    Create a valid schedule.
+    Returns: 5x6 array where schedule[day][worker] = 1 if working, 0 if off
+    """
+    schedule = np.zeros((5, 6), dtype=int)
+
+    # Strategy: Assign workers to days ensuring constraints are met
+    # Hint: Start by giving each worker 3 random days
+    # Then check and adjust daily coverage
+    # YOUR CODE HERE
+
+    return schedule
+
+# Create and validate schedule
+# YOUR CODE HERE
+
+```
+
+### Task 2: Optimize for Worker Preferences (20%)
+
+```{python}
+# Worker preferences (day indices: 0=Mon, 1=Tue, 2=Wed, 3=Thu, 4=Fri)
+worker_preferences = {
+    0: [0, 1, 2],  # Worker 0 prefers Mon, Tue, Wed
+    1: [2, 3, 4],  # Worker 1 prefers Wed, Thu, Fri
+    2: [0, 2, 4],  # Worker 2 prefers Mon, Wed, Fri
+    3: [1, 3],     # Worker 3 prefers Tue, Thu
+    4: [0, 1],     # Worker 4 prefers Mon, Tue
+    5: [3, 4]      # Worker 5 prefers Thu, Fri
+}
+
+def calculate_satisfaction(schedule, preferences):
+    """Calculate total satisfaction score."""
+    total_score = 0
+    # For each worker, count how many preferred days they got
+    # YOUR CODE HERE (replace pass)
+
+    pass
+
+def improve_schedule_for_satisfaction(schedule, preferences, iterations=50):
+    """Improve schedule by swapping to increase satisfaction."""
+    # YOUR CODE HERE (replace pass)
+    pass
+
+# Calculate initial satisfaction
+# YOUR CODE HERE
+
+# Improve schedule
+# YOUR CODE HERE
+
+```
+
+### Task 3: Visualize and Analyze (10%)
+
+- Create visualizations for both schedules
+- Calculate and compare:
+  - Total satisfaction score (initial vs improved)
+  - Distribution of workload across days
+  - Fairness metric (standard deviation of satisfaction across workers)
+
+
+```{python}
+# Visualize both schedules
+# YOUR CODE HERE
+
+# Analyze fairness
+# YOUR CODE HERE
+
+# Daily coverage
+# YOUR CODE HERE
+#
+```
+
+**Business Question:** What's the trade-off between operational needs and worker satisfaction? How would you handle a worker who can't work their preferred days? (3-4 sentences)
+
+```{python}
+"""
+YOUR ANSWER HERE:
+"""
+```
+
+## Submission Checklist
+
+- [ ] All code cells run without errors
+- [ ] Routes are properly visualized
+- [ ] Schedules meet all constraints
+- [ ] Business questions are answered
+- [ ] Code is commented
+- [ ] Names added to top of notebook
+
+## Tips
+
+- Use AI tools to help understand concepts and programm, but make sure you understand the code
+- Start simple - get something working before optimizing
+- Remember: the goal is good solutions, not perfect ones
