@@ -404,8 +404,8 @@ def calculate_metrics(self, schedule):
 **Hours 3-4: Competition - "The Bike Factory Friday Crisis"**
 - **Scenario:** Custom bicycle factory, Friday afternoon chaos
   - "We just got 8 rush orders for Monday delivery!"
-  - 40 total jobs for weekend production
-  - 5 different workstations (frame, paint, assembly, quality, packaging)
+  - 20 total jobs for weekend production
+  - 3 different workstations (frame, paint, assembly, quality, packaging)
   - Each job needs specific sequence through stations
   - Overtime costs €100/hour after 8pm
 
@@ -437,51 +437,77 @@ def calculate_metrics(self, schedule):
 **Key Question:** How do we systematically improve solutions?
 **Core Concept:** Local Search and 2-Opt
 
-**Hour 1: Interactive Lecture - The Art of Improvement**
-- Shortest Path in a Graph
-- The Traveling Salesman Problem: Simple to state, hard to solve
-- Live demonstration: "The Coffee Delivery Challenge"
-- From TSP to VRP: Adding vehicles and capacity
-- Neighborhood structures:
+**Hour 1: Interactive Lecture - The Traveling Salesman Problem**
+- What is TSP? Real-world examples (delivery, drilling, genome sequencing)
+- Why is it hard? (Factorial growth: 10! = 3.6M routes)
+- Construction heuristics: Nearest neighbor (greedy)
+- Improvement: 2-opt swap explained visually
+- When to stop improving? (no improvement found)
+- The local optima trap: Why we get stuck
+- Mention other neighborhood structures without too much detail:
   - 2-opt: swap edges
   - Swap: exchange customers between routes
   - Relocate: move one customer to different position
-- Hill climbing: Always go uphill until you can't
-- The local optima trap: Why we get stuck
 
-**Hour 2: Notebook Session - Building Route Optimizers**
-*Interactive Notebook: routing_and_local_search.ipynb*
+**Hour 2: Notebook Session - Building a TSP solver**
 ```python
-# Students will implement:
-# A shortest path algorithm on a graph
-# A simple TSP solver with 2-opt local Search
+# Provided to students:
+- Distance calculation function
+- Route visualization function
+- Starting template
 
+# Students implement:
+def nearest_neighbor_route(start, cities, distances):
+    """Build route by always going to nearest unvisited city"""
+    # Students fill in
+
+def calculate_route_distance(route, distances):
+    """Calculate total distance of route"""
+    # Students fill in
+
+def two_opt_swap(route, i, j):
+    """Reverse segment of route between i and j"""
+    return route[:i] + route[i:j+1][::-1] + route[j+1:]
+
+def improve_route(route, distances):
+    """Keep trying 2-opt swaps until no improvement"""
+    # Students fill in
+    improved = True
+    while improved:
+        improved = False
+        for i in range(len(route)-1):
+            for j in range(i+2, len(route)):
+                # Try swap, keep if better
+                pass
 ```
+
 - **Class Discussion (5 min):**
   - How much improvement did 2-opt give?
   - Why does it eventually stop improving?
   - Ideas for escaping local optima?
 
-**Hours 3-4: Competition - "The Urban Delivery Challenge"**
-- **Scenario:** Startup delivery company's first big contract
-  - "We promised same-day delivery across Berlin!"
-  - 20 delivery locations across the city
-  - 1 delivery van from one location
-  - All deliveries must be completed today
-  - Some customers have time windows
+**Hours 3-4: Competition - "The Bakery Delivery Route"**
+- **Scenario:** Artisan bakery delivers to 12 cafes each morning
+
+  - "We promise fresh bread every morning!"
+  - Must visit all cafes exactly once
+  - Return to bakery at the end
+  - Some cafes have time windows
 
 - **Data Provided:**
-  - Customer locations (real Berlin coordinates)
-  - Time windows for 30% of customers
+  - 12 cafe locations (x, y coordinates)
+  - Bakery location (x, y coordinates)
+  - Time windows for 3 bakeries
   - Distance/time matrix
   - Vehicle specs (capacity, speed, cost per km)
 
-- **Task:** Minimize total distance + time window violations
+- **Task:** Minimize total distance
 
 - **Competition Format:**
-  - 60 minutes development
-  - Must implement construction + improvement
-  - Submit routes visualization + total cost
+  - Initial route (construction method)
+  - Final route (after improvement)
+  - Total distance for each
+  - Route visualization
   - Winner explains construction + improvement strategy
 
 - **Bonus Points:** Best score (distance)
