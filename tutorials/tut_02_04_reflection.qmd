@@ -1,7 +1,7 @@
 ---
 title: "Tutorial II.IV - Reflection"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_02_04_recap.py
     icon: hand-thumbs-up

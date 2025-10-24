@@ -1,7 +1,7 @@
 ---
 title: "Tutorial III.IV - Summary with Randomness"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_03_05_recap.py
     icon: hand-thumbs-up

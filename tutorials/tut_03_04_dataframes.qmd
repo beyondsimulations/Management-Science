@@ -1,7 +1,7 @@
 ---
 title: "Tutorial III.IV - DataFrames"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_03_04_dataframes.py
     icon: hand-thumbs-up

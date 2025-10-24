@@ -4,7 +4,7 @@ subtitle: "Lecture 1 - Introduction & Python Setup"
 author: "Dr. Tobias Vlćek"
 format:
   revealjs:
-    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_00_introduction.qmd)"
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_01_introduction.qmd)"
     output-file: lec_01_presentation.html
 ---
 
@@ -32,25 +32,27 @@ I really appreciate active participation and interaction!
 - **Part I:** Python Foundation (Lectures 1-3)
   - Variables, loops, functions, data science tools
 - **Part II:** Management Science Tools (Lectures 4-9)
-  - Monte Carlo, Forecasting, Scheduling, Routing, Multi-objective Optimization, Metaheuristics
+  - Monte Carlo, Scheduling, Routing, Metaheuristics
 - **Part III:** Consulting Competition (Lectures 10-12)
-  - Client briefings, team development, final presentations
+  - Client briefings, development, final presentations
 :::
 
 . . .
 
 :::{.callout-important}
-You're not just students. You're now **consultants** learning to solve real business problems!
+You're not just students. [You're now consultants]{.highlight} learning to solve real business problems!
 :::
 
 
-## From Amazon to Hospitals: Where Algorithms Make Millions
+## From Amazon to Hospitals
+
+[Where Algorithms Make Millions]{.highlight}
 
 :::{.incremental}
 - **Amazon:** Routing algorithms save millions in delivery costs
 - **Uber:** Real-time matching algorithms connect drivers and riders
-- **Hospitals:** Scheduling algorithms optimize nurse shifts and OR usage
-- **Airlines:** Revenue management algorithms price tickets dynamically
+- **Hospitals:** Scheduling algorithms optimize shifts and OR usage
+- **Airlines:** Revenue algorithms price tickets dynamically
 - **Manufacturing:** Production scheduling reduces waste and delays
 :::
 
@@ -59,7 +61,9 @@ You're not just students. You're now **consultants** learning to solve real busi
 [Management Science is everywhere!]{.highlight}
 
 
-## The Consultant Mindset
+## This Course Approach
+
+[The Consultant Mindset]{.highlight}
 
 ::: incremental
 - You'll work on **business problems**
@@ -83,7 +87,7 @@ Think like a consultant: What value does my solution bring to the business?
 - **Interactive format:**
   - Concepts & Setup
   - Hands-on Python notebooks
-  - Consutling Competition
+  - Consulting Competition
 - **Final competition:** Apply everything you've learned
 :::
 
@@ -118,7 +122,7 @@ We will have several competitions including our final competition, where you wil
 . . .
 
 :::{.callout-note}
-Late submissions: -10% per day (max 3 days)
+**Late submissions:** -10% per day (max 3 days)
 :::
 
 
@@ -152,7 +156,7 @@ The course gets easier after week 3 - the hardest part is getting started!
 
 ## Course Goals
 
-By the end, you will be able to:
+[By the end, you will be able to:]{.highlight}
 
 :::{.incremental}
 1. **Write Python code** to solve business problems
@@ -176,7 +180,7 @@ By the end, you will be able to:
 ## Help from AI
 
 - You are [allowed to use AI]{.highlight} in the course
-- I use it as well (e.g., Claude, ChatGPT, Gemini - but don't use Grok...)
+- I use it as well (e.g., Claude, ChatGPT, Gemini, ...)
 - These **tools are great** for learning Python!
 - Can help you a lot **to get started** with programming
 - I will also teach you how to use it effectively
@@ -214,24 +218,10 @@ Great resources to start are books and small challenges. You can find a list of 
 . . .
 
 :::{.callout-important}
-**Lectures 1-3 are the hardest**. Push through and it gets much easier!
+[Lectures 1-3 are the hardest.]{.highlight} Push through and it gets much easier!
 :::
 
 # [Setting up Python]{.flow} {.title}
-
-## Install VS Code
-
-- Download and install from the [website](https://code.visualstudio.com/)
-- Built for **Windows, Linux and Mac**
-- Install the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) and [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) extension
-- [Now you are ready to go!]{.highlight}
-
-. . .
-
-::: {.callout-tip}
-Unsure on how to work with VS Code and notebooks?
-Ask me! I'm happy to help you out!
-:::
 
 ## What is an IDE?
 
@@ -240,6 +230,20 @@ Ask me! I'm happy to help you out!
 - Other IDEs include for example:
   - [PyCharm](https://www.jetbrains.com/pycharm/) from JetBrains
   - [Zed](https://zed.dev/)
+
+## Install VS Code
+
+- Download and install from the [website](https://code.visualstudio.com/)
+- Built for **Windows, Linux and Mac**
+- Install the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) and [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) extension
+- [Great! First steps are done]{.highlight}
+
+. . .
+
+::: {.callout-tip}
+Unsure on how to work with VS Code and notebooks?
+Ask me! I'm happy to help you out!
+:::
 
 ## Installation of Python with `uv`
 
@@ -254,20 +258,20 @@ Ask me! I'm happy to help you out!
 If the installation does not work, **let me know!**
 :::
 
-# [Using Notebooks with uv]{.flow} {.title}
+# [Notebooks with uv]{.flow} {.title}
 
 ## Quick Check
 
 - Have you installed `uv` and initialized the project?
-- Great! Before we continue, check the following:
-  - [] You have a folder for the course
-  - [] You have initialized `uv` with `uv init` inside the folder
-  - [] You can see a file called `pyproject.toml` in the folder
+- **Great! Before we continue, check the following:**
+  - [ ] You have a folder for the course
+  - [ ] You have initialized `uv` with `uv init` inside the folder
+  - [ ] You can see a file called `pyproject.toml` in the folder
 
-  . . .
+. . .
 
 :::{.callout-tip}
-Something not working yet? Ask me!
+[Something not working yet? Ask me!]{.highlight}
 :::
 
 ## Let's Write Some Code!
@@ -275,6 +279,9 @@ Something not working yet? Ask me!
 Once the installation is complete, let's test it:
 
 ```{.python}
+#| eval: true
+#| output-location: fragment
+
 print("Hello, Management Science!")
 print("I'm ready to solve business problems!")
 ```
@@ -289,16 +296,16 @@ print("I'm ready to solve business problems!")
 - Run `uv add --dev ipykernel` from your terminal
 - Now run `uv add jupyter` in the terminal
 - This allows us to use `uv` Python in notebooks
-- Next, install the extension (Jupytext for Notebooks)[https://marketplace.visualstudio.com/items?itemName=congyiwu.vscode-jupytext]
+- Next, install the extension [Jupytext for Notebooks](https://marketplace.visualstudio.com/items?itemName=congyiwu.vscode-jupytext)
 - Done? Perfect. Now we can start!
 
 ## Working with Notebooks
 
 - Now you can download the files from the website
 - Just click on one of the sessions and open it
-- Select `Jupyter` on the right side
+- Select `Python` on the right side
 - Download and save the files **to your course folder**
-- Open them and select “Open with Jupyter Notebook”
+- Open them and select [“Open with Jupyter Notebook”]{.highlight}
 
 . . .
 
@@ -316,7 +323,7 @@ so far?
 
 ## What's Next?
 
-After the break, we'll dive into:
+[After the break, we'll dive into:]{.highlight}
 
 - **Tutorial 1:** Variables and basic data types
 - **Tutorial 2:** Lists and loops
@@ -329,11 +336,9 @@ After the break, we'll dive into:
 Make sure your Jupyter notebook is working before we continue!
 :::
 
-## The End of Hour 1
+## The End
 
-**That's it for our introduction!**
-
-Take a 10-minute break, then we'll start with the interactive notebooks.
+[That's it for our introduction!]{.highlight}
 
 Make sure you have:
 
@@ -341,6 +346,10 @@ Make sure you have:
 - [ ] Python environment set up with `uv`
 - [ ] Jupyter notebooks working
 - [ ] The tutorial files downloaded
+
+::: callout-tip
+Take a **10-minute break**, then we'll start with the interactive notebooks.
+:::
 
 # [Literature]{.flow} {.title}
 
@@ -350,7 +359,6 @@ Make sure you have:
 - Ferguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.
 
 [^4]: A great inspiration to learn more about Algorithms!
-
 
 ## Books on Programming
 

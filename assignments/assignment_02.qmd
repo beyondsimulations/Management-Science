@@ -1,5 +1,10 @@
 ---
 title: "Assignment 2: Optimization in Practice"
+subtitle: "Management Science"
+code-links:
+  - text: Python
+    href: assignment_02.py
+    icon: hand-thumbs-up
 ---
 
 ## Assignment Overview

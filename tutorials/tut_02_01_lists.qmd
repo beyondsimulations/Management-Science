@@ -1,7 +1,7 @@
 ---
 title: "Tutorial II.I - Lists and Tuples"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_02_01_lists.py
     icon: hand-thumbs-up

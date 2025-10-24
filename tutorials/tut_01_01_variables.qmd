@@ -1,7 +1,7 @@
 ---
 title: "Tutorial I.I - Variables and Types"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_01_01_variables.py
     icon: hand-thumbs-up

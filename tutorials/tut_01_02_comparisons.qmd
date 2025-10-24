@@ -1,7 +1,7 @@
 ---
 title: "Tutorial I.II - Comparison Operators"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_01_02_comparisons.py
     icon: hand-thumbs-up

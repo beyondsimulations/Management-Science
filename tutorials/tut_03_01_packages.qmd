@@ -1,7 +1,7 @@
 ---
 title: "Tutorial III.I - Package Management"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_03_01_packages.py
     icon: hand-thumbs-up

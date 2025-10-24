@@ -1,7 +1,7 @@
 ---
 title: "Tutorial II.III - Explore and Exploit"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_02_03_explore_exploit.py
     icon: hand-thumbs-up

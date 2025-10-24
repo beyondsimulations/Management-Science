@@ -1,7 +1,7 @@
 ---
 title: "Tutorial III.III - Dictionaries"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_03_03_dicts.py
     icon: hand-thumbs-up

@@ -1,7 +1,7 @@
 ---
 title: "Tutorial II.V - Functions"
 subtitle: "Management Science"
-format-links:
+code-links:
   - text: Python
     href: tut_02_05_functions.py
     icon: hand-thumbs-up
