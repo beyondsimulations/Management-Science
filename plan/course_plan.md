@@ -31,7 +31,7 @@ Actual format depends on course section and academic hours are each 45 minutes l
 - Focus on insights over implementation elegance
 
 ### Assignment Strategy
-- Assignment 1: Risk & Forecasting (Due Lecture 7)
+- Assignment 1: Risk & Forecasting (Due Lecture 8)
 - Assignment 2: Full Optimization Toolkit (Due Lecture 10)
 - Final Competition: Client projects (Lectures 10-12)
 
@@ -334,7 +334,7 @@ def simulate_coffee_shop(n_simulations=10000):
 **Hours 3-4: Competition - "The Startup Investment Challenge"**
 
 **Scenario:**
-TechVenture Innovation Fund has €3M to invest. You must select **exactly 3 startups** out of 5 candidates to invest €1M each. Which combination gives the best expected total return?
+TechVenture Innovation Fund has €2M to invest. You must select **exactly 2 startups** out of 4 candidates to invest €1M each. Which combination gives the best expected total return?
 
 **Data Provided for Each Startup:**
 Each startup's annual return follows a known probability distribution:
@@ -355,23 +355,19 @@ Each startup's annual return follows a known probability distribution:
    - Return distribution: Uniform(min=10%, max=35%)
    - Market: B2B payment processing
 
-5. **FoodBot Delivery** - Autonomous Food Delivery
-   - Return distribution: Normal(mean=22%, std=18%)
-   - Market: Urban last-mile delivery
-
 **Task:**
 Use Monte Carlo simulation to:
 1. Simulate 10,000 scenarios for each startup's annual return
-2. For each possible combination of 3 startups, calculate:
-   - Expected total return (sum of 3 startups × €1M each)
+2. For each possible combination of 2 startups, calculate:
+   - Expected total return (sum of 2 startups × €1M each)
    - Risk (standard deviation of total return)
    - Probability of losing money (return < 0%)
    - Probability of achieving 50% total return
-3. Recommend the best combination of 3 startups
+3. Recommend the best combination of 2 startups
 
 **Deliverables:**
 - One-slide recommendation
-- Which 3 startups to invest in
+- Which 2 startups to invest in
 - Expected total return
 - Risk assessment (probability of loss)
 - Brief justification (1-2 sentences)
@@ -399,9 +395,8 @@ investment_per_startup = 1_000_000  # €1M
 
 **Tips for Students:**
 - Focus on getting one startup simulation working first
-- Then scale to all 5 startups
+- Then scale to all 4 startups
 - Use loops or lists to avoid repetitive code
-- Remember: There are only 10 possible combinations of 3-out-of-5 (manageable!)
 - Copilot can help with visualization code
 
 **Assignment 1 Introduction (Last 10 min):**
@@ -429,14 +424,13 @@ investment_per_startup = 1_000_000  # €1M
 # - Converting strings to dates: pd.to_datetime()
 # - Extracting date components: .dt.month, .dt.day_of_week, .dt.year
 # - Sorting by date
-# - Resampling to different frequencies (daily → monthly)
 
 # Part 2: Moving Averages (15 min)
 # - Simple moving average: df['sales'].rolling(window=7).mean()
 # - Why we use rolling averages (smoothing noise)
 # - Visualizing original vs. smoothed data
 
-# Part 3: Forecasting Methods (10 min)
+# Part 3: Forecasting Methods (25 min)
 # Students will implement:
 # 1. Simple moving average forecast
 # 2. Weighted moving average (recent data matters more)
@@ -516,18 +510,17 @@ def calculate_metrics(self, schedule):
 **Hours 3-4: Competition - "The Bike Factory Friday Crisis"**
 - **Scenario:** Custom bicycle factory, Friday afternoon chaos
   - "We just got 8 rush orders for Monday delivery!"
-  - 20 total jobs for weekend production
-  - 3 different workstations (frame, paint, assembly, quality, packaging)
-  - Each job needs specific sequence through stations
+  - 16 total jobs for weekend production
+  - 2 different workstations (paint, assembly)
+  - Each job needs to be painterd first and then assembled
   - Overtime costs €100/hour after 8pm
 
 - **Data Provided:**
-  - Job details: processing times, due dates, priority levels
+  - Job details: processing times on both workstations
   - Machine capabilities and setup times
   - Current time: Friday 2pm
-  - Rush order premium: €500 if on time, €0 if late
 
-- **Task:** Minimize total cost (tardiness penalties + overtime)
+- **Task:** Minimize total cost (overtime)
 
 - **Competition Format:**
   - 60 minutes development
@@ -599,7 +592,6 @@ def improve_route(route, distances):
 
 **Hours 3-4: Competition - "The Bakery Delivery Route"**
 - **Scenario:** Artisan bakery delivers to 12 cafes each morning
-
   - "We promise fresh bread every morning!"
   - Must visit all cafes exactly once
   - Return to bakery at the end
