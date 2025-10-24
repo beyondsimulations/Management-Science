@@ -1,11 +1,11 @@
 ---
-title: "Introduction"
-subtitle: "Management Science"
+title: "Welcome to Management Science"
+subtitle: "Lecture 1 - Introduction & Python Setup"
 author: "Dr. Tobias Vlćek"
 format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_00_introduction.qmd)"
-    output-file: lec_00_presentation.html
+    output-file: lec_01_presentation.html
 ---
 
 # [About this Course]{.flow} {.title}
@@ -28,17 +28,92 @@ I really appreciate active participation and interaction!
 
 ## Course Outline
 
+:::{.incremental}
+- **Part I:** Python Foundation (Lectures 1-3)
+  - Variables, loops, functions, data science tools
+- **Part II:** Management Science Tools (Lectures 4-9)
+  - Monte Carlo, Forecasting, Scheduling, Routing, Multi-objective Optimization, Metaheuristics
+- **Part III:** Consulting Competition (Lectures 10-12)
+  - Real client briefings, team development, final presentations
+:::
 
-## Participation
+. . .
+
+:::{.callout-important}
+You're not just students. You're now **junior consultants** learning to solve real business problems!
+:::
 
 
-## Teaching
+## From Amazon to Hospitals: Where Algorithms Make Millions
+
+:::{.incremental}
+- **Amazon:** Routing algorithms save millions in delivery costs
+- **Uber:** Real-time matching algorithms connect drivers and riders
+- **Hospitals:** Scheduling algorithms optimize nurse shifts and OR usage
+- **Airlines:** Revenue management algorithms price tickets dynamically
+- **Manufacturing:** Production scheduling reduces waste and delays
+:::
+
+. . .
+
+[Management Science is everywhere!]{.highlight}
 
 
-## Passing the Course
+## The Consultant Mindset
+
+::: incremental
+- You'll work on **business problems**
+- Learn to **communicate solutions** to non-technical clients
+- Build **practical tools** that solve actual challenges
+- Compete in a **consulting competition** with real scenarios
+:::
+
+. . .
+
+:::{.callout-tip}
+Think like a consultant: What value does my solution bring to the business?
+:::
 
 
-## Handing in Assignments
+## Course Structure
+
+::: incremental
+- **12 lectures** of intensive learning
+- **3 hours per lecture** (with breaks!)
+- **Interactive format:**
+  - Concepts & Setup
+  - Hands-on Python notebooks
+  - Consutling Competition
+- **Final competition:** Apply everything you've learned
+:::
+
+. . .
+
+[Each lecture builds on the previous - attendance is important!]{.highlight}
+
+
+## Grading
+
+**Grade Composition:**
+
+- 2 Assignments: 60%
+- Final Consulting Project: 40%
+- Bonus Points in Competitions
+
+## Assignments
+
+**Assignment Strategy:**
+
+- Start with **easy warm-ups** in tutorials
+- Progress to **real-world problems**
+- All assignments have **clear rubrics**
+- Bonus points for **creative solutions**!
+
+. . .
+
+:::{.callout-note}
+Late submissions: -10% per day (max 3 days)
+:::
 
 
 ## Learning Python
@@ -53,9 +128,37 @@ I really appreciate active participation and interaction!
 Don't worry, I will help you out if you have any questions!
 :::
 
-## Difficulty of the Course
+## What to Expect
 
-## Goals of the Course
+:::{.incremental}
+- **No prior programming required** - we start from zero!
+- **But experience is helpful!**
+- **Fast-paced** but with lots of support
+- **Practical focus** - less theory, more doing
+- **Mistakes are welcome** - they're how we learn
+:::
+
+. . .
+
+:::{.callout-tip}
+The course gets easier after week 3 - the hardest part is getting started!
+:::
+
+## Course Goals
+
+By the end, you will be able to:
+
+:::{.incremental}
+1. **Write Python code** to solve business problems
+2. **Apply algorithms** for scheduling, routing, and optimization
+3. **Simulate uncertainty** using Monte Carlo methods
+4. **Present solutions** like a management consultant
+5. **Build tools** that create business value
+:::
+
+. . .
+
+[You'll leave with a portfolio of ideas to work on real solutions!]{.highlight}
 
 ## Why Python?
 
@@ -66,9 +169,10 @@ Don't worry, I will help you out if you have any questions!
 
 ## Help from AI
 
-- You are [allowed to use AI]{.highlight} in the course, we use it as well (e.g., Claude, ChatGPT, LLama3 ...)
+- You are [allowed to use AI]{.highlight} in the course, I use it as well (e.g., Claude, ChatGPT, Gemini - but please don't use Grok...)
 - These **tools are great** for learning Python!
 - Can help you a lot **to get started** with programming
+- I will also teach you how to use it effectively
 
 . . .
 
@@ -78,7 +182,7 @@ But you should *not* simply use them to *replace* your learning.
 
 # [How to learn programming]{.flow} {.title}
 
-## Our Recommendation
+## My Recommendation
 
 1. [Be present]{.highlight}: Attend the lecture and solve the tutorials
 2. [Put in some work]{.highlight}: Repeat code and try to understand it
@@ -91,6 +195,20 @@ Great resources to start are books and small challenges. You can find a list of 
 :::
 
 ## Don't give up!
+
+[Programming is like learning to ride a bike]{.highlight}
+
+. . .
+
+- You'll fall a few times
+- It feels impossible at first
+- Then suddenly... it clicks!
+
+. . .
+
+:::{.callout-important}
+**Lectures 1-3 are the hardest** - push through and it gets much easier!
+:::
 
 # [Setting up Python]{.flow} {.title}
 
@@ -145,22 +263,34 @@ If the installation does not work, **let me know!**
 Something not working yet? Ask me!
 :::
 
+## Let's Write Some Code!
+
+Once the installation is complete, let's test it:
+
+```{.python}
+print("Hello, Management Science!")
+print("I'm ready to solve business problems!")
+```
+
+. . .
+
+[Congratulations - you're now a Python programmer!]{.highlight}
+
 ## Using Notebooks
 
 - Now we need to add a kernel to our project
 - Run `uv add --dev ipykernel` from your terminal
 - Now run `uv add jupyter` in the terminal
 - This allows us to use `uv` Python in notebooks
-- Next, install the extension (Jupytext for Notebooks)[https://marketplace.visualstudio.com/items?itemName=congyiwu.vscode-jupytext]
 - Done? Perfect. Now we can start!
 
 ## Working with Notebooks
 
 - Now you can download the files from the website
 - Just click on one of the sessions and open it
-- Select `Python` on the right side
+- Select `Jupyter` on the right side
 - Download and save the files **to your course folder**
-- Open them and select “Open with Jupyter Notebook”
+- Open them and you are good to go!
 
 . . .
 
@@ -176,12 +306,33 @@ Any questions
 so far?
 :::
 
-## The End
+## What's Next?
 
-::: {.callout-note}
-**That's it for our introduction!**\
-Let's have a short break and then continue.
+After the break, we'll dive into:
+
+- **Tutorial 1:** Variables and basic data types
+- **Tutorial 2:** Lists and loops
+- **Tutorial 3:** Conditionals and control flow
+
+. . .
+
+:::{.callout-note}
+**Ready for the tutorials?**
+Make sure your Jupyter notebook is working before we continue!
 :::
+
+## The End of Hour 1
+
+**That's it for our introduction!**
+
+Take a 10-minute break, then we'll start with the interactive notebooks.
+
+Make sure you have:
+
+- [ ] VS Code installed and running
+- [ ] Python environment set up with `uv`
+- [ ] Jupyter notebooks working
+- [ ] The tutorial files downloaded
 
 # [Literature]{.flow} {.title}
 
