@@ -157,7 +157,6 @@ In the final presentations, each best group of the three topics with the best so
 - Master functions for code organization
 - Understand dictionaries and tuples for structured data
 - Learn sorting of structured data
-- Build integrated mini-project
 
 **Hour 1: Interactive Notebook #4 - Functions**
 - Why functions? (code reusability)
@@ -183,13 +182,9 @@ In the final presentations, each best group of the three topics with the best so
 - Finding min/max in dictionaries
 - Applying to scheduling problems (SPT, EDD rules preview)
 
-**Hour 4: Interactive Notebook #7 - Integration Mini-Project + GitHub Copilot Setup**
-- **Simplified order management system** (30 min)
-  - Order processing and validation
-  - Inventory management (check stock, update inventory)
-  - Order prioritization by criteria
-  - Basic reporting
-  - **Integration of core skills: functions + dictionaries + sorting**
+**Hour 4: Interactive Notebook #7 - Small Recap + GitHub Copilot Setup**
+- Recap on previous topics with a few training tasks
+- **Integration of core skills: functions + dictionaries + sorting**
 
 - **GitHub Copilot Introduction** (15 min)
   - What is GitHub Copilot? Your AI pair programmer
@@ -247,19 +242,20 @@ In the final presentations, each best group of the three topics with the best so
 - **Reading CSV files** with `pd.read_csv()` - most important skill!
 - **Practice: Sales data exploration** (guided, 15 min)
 
-**Hour 3: Interactive Notebook #10 - Time Series & Aggregations**
+**Hour 3: Interactive Notebook #10 - GroupBy & Aggregations**
 - **GroupBy aggregations** (essential for business analysis):
   - Basic: `df.groupby('category')['sales'].sum()`
   - Multiple aggregations: `.agg(['sum', 'mean', 'count'])`
-  - Grouping by multiple columns
-- **Basic datetime operations** (only what's needed for forecasting):
-  - Converting strings to dates: `pd.to_datetime()`
-  - Extracting components: `.dt.month`, `.dt.day_of_week`
-- **Rolling averages** (critical for forecasting):
-  - `df['sales'].rolling(window=7).mean()` - 7-day moving average
-  - Understanding why we use rolling averages
-- Cumulative calculations with `cumsum()` (for running totals)
-- **Practice: Monthly sales analysis with trends** (guided, 20 min)
+  - Grouping by multiple columns (optional, brief mention only)
+- **Practice examples** (simple, concrete):
+  - Total sales by product category
+  - Average price by region
+  - Count of orders by customer
+- **Hands-on exercise** (guided, 25 min):
+  - Load product sales CSV
+  - Find best-selling category
+  - Calculate average sale per category
+  - Create simple bar chart of results
 
 **Hour 4: Interactive Notebook #11 - Visualization & Integration with Copilot**
 - **Copilot Check-In (5 min)**
@@ -281,12 +277,11 @@ In the final presentations, each best group of the three topics with the best so
   - Distribution plots for Monte Carlo results
 
 - **Integrated exercises WITH Copilot** (30 min):
-  - **Exercise 1:** Load sales CSV, calculate monthly totals, create trend plot
+  - **Exercise 1:** Load sales CSV, use groupby to calculate category totals, create bar chart
     - Students write comments, let Copilot suggest code
-    - Example: "# Create a line plot of monthly sales with title and labels"
-  - **Exercise 2:** Simulate dice rolls (NumPy), plot distribution (Pandas + matplotlib)
+  - **Exercise 2:** Simulate dice rolls (NumPy), plot distribution histogram
     - Practice: Ask Copilot to help with histogram styling
-  - **Exercise 3:** Calculate rolling 7-day average of daily sales, visualize
+  - **Exercise 3:** Filter top 10 products by sales, create sorted bar chart
     - Challenge: Customize plot appearance with Copilot's help
 
 - **Copilot Tips for Visualizations** (5 min)
@@ -337,22 +332,77 @@ def simulate_coffee_shop(n_simulations=10000):
 **Discussion (last 5 minutes):** What do the results tell us? Share insights, debugging tips, interpretation challenges.
 
 **Hours 3-4: Competition - "The Startup Investment Challenge"**
-- **Scenario:** TechVenture Innovation Fund needs investment analysis
-- **Data Provided:**
-  - 5 potential startups with historical metrics
-  - Market research data
-  - Competitor performance data
-- **Task:** Build simulation to find optimal portfolio allocation
-- **Deliverables:**
-  - Deliverable: One-slide recommendation with risk profile
-  - Risk/return analysis for each startup
-  - Recommended portfolio mix
-  - Probability of 3x return
-- **Competition Format:**
-  - 60 minutes development
-  - 20 minutes for top 3 teams to present one-slider
-  - 10 minutes for winning solution walkthrough
-- **Bonus Points:** Best risk-adjusted returns
+
+**Scenario:**
+TechVenture Innovation Fund has €3M to invest. You must select **exactly 3 startups** out of 5 candidates to invest €1M each. Which combination gives the best expected total return?
+
+**Data Provided for Each Startup:**
+Each startup's annual return follows a known probability distribution:
+
+1. **CloudAI Solutions** - AI SaaS Platform
+   - Return distribution: Normal(mean=25%, std=15%)
+   - Market: Enterprise AI tools
+
+2. **GreenGrid Energy** - Renewable Energy Tech
+   - Return distribution: Normal(mean=18%, std=8%)
+   - Market: Solar storage systems
+
+3. **HealthTrack Pro** - Medical Devices
+   - Return distribution: Normal(mean=30%, std=25%)
+   - Market: Wearable diagnostics (high risk, high reward)
+
+4. **FinFlow** - Fintech Payment Platform
+   - Return distribution: Uniform(min=10%, max=35%)
+   - Market: B2B payment processing
+
+5. **FoodBot Delivery** - Autonomous Food Delivery
+   - Return distribution: Normal(mean=22%, std=18%)
+   - Market: Urban last-mile delivery
+
+**Task:**
+Use Monte Carlo simulation to:
+1. Simulate 10,000 scenarios for each startup's annual return
+2. For each possible combination of 3 startups, calculate:
+   - Expected total return (sum of 3 startups × €1M each)
+   - Risk (standard deviation of total return)
+   - Probability of losing money (return < 0%)
+   - Probability of achieving 50% total return
+3. Recommend the best combination of 3 startups
+
+**Deliverables:**
+- One-slide recommendation
+- Which 3 startups to invest in
+- Expected total return
+- Risk assessment (probability of loss)
+- Brief justification (1-2 sentences)
+- Optional (but nice histogram or box plot comparing return distributions)
+
+**Competition Format:**
+- **60 minutes development**
+- **Submit:** one-slide PDF
+- **20 minutes:** Top 3 teams present their recommendation (2 min each + Q&A)
+
+**Starter Code Provided:**
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Simulation parameters
+n_simulations = 10000
+investment_per_startup = 1_000_000  # €1M
+
+# Startup return distributions
+# YOUR CODE
+
+```
+
+**Tips for Students:**
+- Focus on getting one startup simulation working first
+- Then scale to all 5 startups
+- Use loops or lists to avoid repetitive code
+- Remember: There are only 10 possible combinations of 3-out-of-5 (manageable!)
+- Copilot can help with visualization code
 
 **Assignment 1 Introduction (Last 10 min):**
 - "The Risk & Forecast Analyzer" - Due Lecture 8
@@ -371,28 +421,39 @@ def simulate_coffee_shop(n_simulations=10000):
 - Cost of forecast errors
 - Simple methods often win
 
-**Hour 2: Notebook Session - From Simple to Smart**
+**Hour 2: Notebook Session - Time Series & Forecasting Methods**
+
 ```python
+# Part 1: Working with Time Series Data (20 min)
+# Students will learn:
+# - Converting strings to dates: pd.to_datetime()
+# - Extracting date components: .dt.month, .dt.day_of_week, .dt.year
+# - Sorting by date
+# - Resampling to different frequencies (daily → monthly)
+
+# Part 2: Moving Averages (15 min)
+# - Simple moving average: df['sales'].rolling(window=7).mean()
+# - Why we use rolling averages (smoothing noise)
+# - Visualizing original vs. smoothed data
+
+# Part 3: Forecasting Methods (10 min)
 # Students will implement:
-# 1. Moving averages (simple, weighted)
-# 2. Exponential smoothing
-# 3. Seasonal decomposition
-# 4. Forecast accuracy metrics
-# 5. Prediction intervals
+# 1. Simple moving average forecast
+# 2. Weighted moving average (recent data matters more)
+# 3. Exponential smoothing (introduction)
+# 4. Forecast accuracy metrics (MAE, RMSE)
 
 def forecast_demand(historical_data, method='exponential'):
     """Students build multiple forecasting methods"""
-    # Guided implementation
+    # Guided implementation with starter code
 ```
 **Discussion (last 5 minutes):** What do the results tell us? Share insights, debugging tips, interpretation challenges.
 
-**Hours 3-4: Competition - "The Black Friday Predictor"**
-- **Scenario:** Major retailer needs Black Friday inventory planning
+**Hours 3-4: Competition - "The Predictor"**
+- **Scenario:** Major retailer needs inventory planning for christmas weeks
 - **Data Provided:**
-  - 3 years of daily sales for 10 products
-  - Previous Black Friday patterns
-  - Product categories (as they might influence each other)
-- **Task:** November demand forecast per product
+  - 2 years of weekly sales for 3 products
+- **Task:**  December demand forecast per product
 - **Competition Format:**
   - 60 minutes development
   - 10 minutes teams receive held-out data to test their algorithm
@@ -413,7 +474,6 @@ def forecast_demand(historical_data, method='exponential'):
 - Classic greedy rules explained:
   - SPT (Shortest Processing Time): Get quick wins
   - EDD (Earliest Due Date): Keep customers happy
-  - Critical Ratio: Balance urgency and time
   - FIFO: When in doubt, be fair
 - Real-world impact: How Toyota uses these rules
 - When greedy works (and when it fails spectacularly)
@@ -430,10 +490,6 @@ def schedule_SPT(self):
 def schedule_EDD(self):
     """Earliest Due Date First"""
     # Sort by due date, assign to machines
-
-def schedule_critical_ratio(self):
-    """Critical Ratio: (due_date - current_time) / processing_time"""
-    # Dynamic rule that adapts as time progresses
 
 def visualize_gantt(self, schedule):
     """Create Gantt chart visualization"""
@@ -576,84 +632,116 @@ def improve_route(route, distances):
 
 **Hour 1: Interactive Lecture - The Balance Challenge**
 - **Opening Hook:** "The Tesla Dilemma"
-  - Making electric cars (performance vs. range vs. cost vs. sustainability)
-  - "You can't maximize everything"
+  - Making electric cars (performance vs. range vs. cost)
+  - "You can't maximize everything - every design is a trade-off"
 
-- Real-world conflicts:
-  - Fast delivery - Low cost - Low emissions
-  - Product quality - Manufacturing speed - Worker satisfaction
-  - Profit - Customer satisfaction - Environmental impact
+- **Real-world conflicts** (keep it simple):
+  - Fast delivery vs. Low cost vs. Low emissions
+  - Product quality vs. Manufacturing speed
+  - Profit vs. Environmental impact
 
-- The Transportation Problem
-  - Assigning depots to customers
-  - Different assignments with different objectives possible
+- **Simple Transportation Problem Example:**
+  - Assigning deliveries to warehouses
+  - Warehouse A: Close (low cost) but small (limited capacity)
+  - Warehouse B: Far (high cost) but large (high capacity)
+  - Different assignments = different trade-offs
 
-- Pareto Frontier explained:
+- **Pareto Frontier Explained Visually:**
   - Dominated vs. non-dominated solutions
   - "You can only improve one thing by making something else worse"
-  - Visual: 2D and 3D Pareto fronts
+  - **Focus on 2D visualization only** (cost vs. emissions)
+  - Interactive demo: plot 5-6 solution points, identify dominated ones
 
-- Approaches to multi-objective problems:
-  1. **Weighted Sum:** Assign importance to each objective
-  2. **ε-Constraint:** Optimize one, constrain others
-  3. **Goal Programming:** Set targets, minimize deviation
-  4. **Pareto Search:** Find all non-dominated solutions
+- **The Weighted Sum Approach** (primary method):
+  - Combine multiple objectives into single score
+  - `total_score = w1 × cost + w2 × emissions`
+  - Adjusting weights = shifting priorities
+  - Live demo: change weights, watch optimal solution shift
+  - Simple and practical for business decisions
 
-- Real examples:
-  - Amazon: Speed vs. Cost vs. Carbon footprint
-  - Airlines: On-time vs. Fuel cost vs. Passenger satisfaction
-  - Supply chains: Reliability vs. Inventory vs. Lead time
+- **Brief mention** (5 min): Other approaches exist (ε-constraint, goal programming) but weighted sum is most practical for consultants
 
-**Hour 2: Notebook Session - Finding the Balance**
+- **Real examples:**
+  - Amazon: "Fast shipping costs more, so we offer Prime vs. Standard"
+  - Airlines: "We balance on-time vs. fuel cost with buffer time"
+
+**Hour 2: Notebook Session - Weighted Sum in Action**
+*Students implement a simple delivery assignment problem with two objectives*
+
 ```python
-# Students will implement:
-# Multi Objective Optimizier (if this is possible based on greedy algorithms and local search!)
+# Simplified notebook with pre-built functions for students
 
-# Interactive exploration:
-# 1. Students adjust weights and see how solution changes
-# 2. Visualize Pareto frontier
-# 3. Identify "knee points" (best balanced solutions)
-# 4. Analyze trade-off rates
+# Part 1: Understanding the Problem (10 min)
+# - Given: 10 deliveries, 2 warehouses (A: close/small, B: far/large)
+# - Objective 1: Minimize cost (distance-based)
+# - Objective 2: Minimize carbon emissions (truck type matters)
+# - Students calculate cost and emissions for a given assignment
+
+# Part 2: Weighted Sum Function (15 min)
+def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
+    """Calculate combined score using weights"""
+    cost = calculate_cost(assignment)
+    emissions = calculate_emissions(assignment)
+    return w_cost * cost + w_emissions * emissions
+
+# Students implement this function
+# Test with different assignments
+
+# Part 3: Exploring Trade-offs (15 min)
+# Students try different weight combinations:
+# - w_cost=1.0, w_emissions=0.0 (only care about cost)
+# - w_cost=0.0, w_emissions=1.0 (only care about emissions)
+# - w_cost=0.5, w_emissions=0.5 (balanced)
+# - w_cost=0.7, w_emissions=0.3 (cost-focused)
+
+# Part 4: Visualizing the Pareto Frontier (15 min)
+# Pre-built plotting function provided
+# Students generate 5-10 different solutions (using greedy heuristics from Lecture 6)
+# Plot them on cost vs. emissions chart
+# Identify which solutions are dominated
 ```
 
 - **Class Discussion (5 min):**
-  - Which objective matters most to you? Why?
-  - How would you present trade-offs to a CEO?
-  - What happens when stakeholders disagree on weights?
+  - Which weight combination would you recommend? Why?
+  - How would you present these trade-offs to a CEO?
+  - What if the CEO says "I want low cost AND low emissions"?
 
 **Hours 3-4: Competition - "The Green Logistics Challenge"**
+
 - **Scenario:** Logistics company facing new EU regulations
   - "We must cut carbon 40% by 2030 while staying profitable and maintaining service"
-  - Design next-generation transportation problem assignment
+  - Design transportation problem assignment
 
-- **Three Conflicting Objectives:**
-  1. **Minimize Cost:** Fleet + fuel + warehouse + labor
-  2. **Minimize Carbon Emissions:** New EU regulations with penalties
+- **Two Objectives:**
+  1. **Minimize Delivery Cost:** Distance × delivery frequency × cost per km
+  2. **Minimize Carbon Emissions:** Distance × delivery frequency × emissions per km
 
 - **Data Provided:**
-  - 20 customer zones across Europe
-  - 5 potential warehouse locations
-  - Fleet options:
-    - Diesel trucks: cheap, fast, high emissions
-    - Electric vans: expensive, slower (charging), zero emissions
-    - Hybrid: medium on all
-  - Delivery volume forecasts
-  - Carbon pricing scenarios (€50, €100, €200 per ton)
+  - 12 customers (x, y) coordinates
+  - 3 distribution center locations (fixed positions)
+  - 1 distribution center has electric cars with low emissions but is more expensive
+  - Each distribution center has capacity limit (max 6 zones)
+  - Emission rates: standard trucks emit 0.2 kg CO₂/km
 
-- **Task:** Design transportation network + fleet composition
+- **Task:** Assign each of the 12 customers to one of the 3 distribution centers
+
+- **Constraints:**
+  - Each customer assigned to exactly one center
+  - No center exceeds 6 zones (capacity)
+  - All customers must be served
 
 - **Deliverables:**
-  1. Your proposed solution (network + fleet)
-  2. Performance on both objectives
-  3. Pareto frontier showing alternatives
-  4. Recommendation with justification
+  1. Your zone-to-center assignment
+  2. Total cost and total emissions
+  3. Optional: Scatter plot showing zones colored by assigned center
+  4. Brief justification (1-2 sentences): Why these weights?
 
 - **Competition Format:**
-  - 60 minutes development
-  - Pareto frontier between both alternatives
-  - Best solution based on your heuristic approach
-  - Team closest to optimal allocation wins
-  - Top 3 teams present their Pareto frontier and defend recommendations
+  - **60 minutes development**
+  - Students can use greedy assignment (from Lecture 6) with weighted sum
+  - Submit: metrics + one visualization slide
+  - **Evaluation**: Each team picks their own weights (must justify)
+  - **Winner**: Best solution quality given their stated weights + best justification
 
 ### Lecture 9: Escaping the Trap - Simulated Annealing & Metaheuristics
 
