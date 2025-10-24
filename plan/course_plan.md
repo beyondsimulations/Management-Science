@@ -206,22 +206,23 @@ In the final presentations, each best group of the three topics with the best so
 ### Lecture 3: Data Science Foundation - NumPy & Pandas
 
 **Objectives:**
-- Master NumPy for numerical computing and Monte Carlo simulations
+- Master NumPy basics for numerical computing
 - Learn essential Pandas operations for data manipulation
 - Create basic visualizations for business insights
 - Final readiness check before algorithms
 
 **Hour 1: Interactive Notebook #8 - NumPy Essentials**
 - Why NumPy? Speed vs. Python lists for numerical work
-- Creating arrays (from lists, `zeros()`, `ones()`, `arange()`, `linspace()`)
+- Creating arrays (from lists, `zeros()`, `ones()`, `arange()`)
 - Vectorized operations (fast element-wise math without loops)
-- Statistical functions: `mean()`, `std()`, `min()`, `max()`, `percentile()`
-- **Random number generation** (critical for Monte Carlo):
+  - Example: `prices * 1.2` (add 20% tax to all prices at once)
+  - Example: `revenues - costs` (calculate profit for all products)
+- Statistical functions: `mean()`, `std()`, `min()`, `max()`
+- **Random number generation** (preview for Lecture 4):
   - `np.random.uniform()` - random numbers in a range
   - `np.random.normal()` - bell curve distributions
   - `np.random.randint()` - random integers
-- **Simple Monte Carlo example:** Coin flip simulation (build intuition)
-- Boolean indexing and filtering (`arr[arr > 5]`)
+  - Simple example: Simulate 100 dice rolls, calculate average
 - **Practice exercises integrated throughout** (5-10 min coding each)
 
 **Hour 2: Interactive Notebook #9 - Pandas Basics**
@@ -235,27 +236,34 @@ In the final presentations, each best group of the three topics with the best so
 - Selecting data:
   - Single columns: `df['column_name']`
   - Multiple columns: `df[['col1', 'col2']]`
-  - Rows by position: `df.iloc[0:10]`
 - Creating new calculated columns: `df['profit'] = df['revenue'] - df['cost']`
 - **Filtering data** with boolean conditions: `df[df['sales'] > 1000]`
+  - Keep it simple: one condition at a time
+  - Example: Find all products with price > 100
+  - Example: Find all sales in January
 - Sorting with `sort_values()`: ascending and descending
 - **Reading CSV files** with `pd.read_csv()` - most important skill!
-- **Practice: Sales data exploration** (guided, 15 min)
+- **Practice: Sales data exploration** (guided, 20 min)
+  - Load CSV, explore with head/info/describe
+  - Filter for specific conditions
+  - Create calculated column
+  - Sort results
 
 **Hour 3: Interactive Notebook #10 - GroupBy & Aggregations**
 - **GroupBy aggregations** (essential for business analysis):
-  - Basic: `df.groupby('category')['sales'].sum()`
-  - Multiple aggregations: `.agg(['sum', 'mean', 'count'])`
-  - Grouping by multiple columns (optional, brief mention only)
+  - Basic single aggregation: `df.groupby('category')['sales'].sum()`
+  - Other useful aggregations: `.mean()`, `.count()`, `.max()`, `.min()`
+  - Brief demo of multiple aggregations: `.agg(['sum', 'mean'])` (optional, not required)
 - **Practice examples** (simple, concrete):
   - Total sales by product category
   - Average price by region
   - Count of orders by customer
-- **Hands-on exercise** (guided, 25 min):
+- **Hands-on exercise** (guided, 30 min):
   - Load product sales CSV
   - Find best-selling category
   - Calculate average sale per category
-  - Create simple bar chart of results
+  - Identify top 5 products by revenue
+- **Final 10 min:** Create simple bar chart of results (preview for Hour 4)
 
 **Hour 4: Interactive Notebook #11 - Visualization & Integration with Copilot**
 - **Copilot Check-In (5 min)**
@@ -263,26 +271,26 @@ In the final presentations, each best group of the three topics with the best so
   - Troubleshoot common issues
   - Remind: "Today we'll use Copilot to help with plotting!"
 
-- **Visualization Basics** (25 min)
+- **Visualization Basics** (20 min)
   - Why visualize? "A picture is worth a thousand rows"
-  - Basic plotting with matplotlib:
+  - Basic plotting with matplotlib/pandas:
+    - Bar charts: `df.plot(kind='bar')` - for comparisons (MOST USEFUL)
     - Line plots: `df.plot()` - for time series
-    - Bar charts: `df.plot(kind='bar')` - for comparisons
     - Histograms: `df['column'].hist()` - for distributions
     - Scatter plots: `df.plot.scatter(x='x', y='y')` - for relationships
   - Customizing plots:
     - Titles: `plt.title('Sales Over Time')`
     - Labels: `plt.xlabel()`, `plt.ylabel()`
-    - Legends: `plt.legend()`
-  - Distribution plots for Monte Carlo results
 
 - **Integrated exercises WITH Copilot** (30 min):
-  - **Exercise 1:** Load sales CSV, use groupby to calculate category totals, create bar chart
+  - **Exercise 1:** Load sales CSV, calculate category totals with groupby, create bar chart
     - Students write comments, let Copilot suggest code
-  - **Exercise 2:** Simulate dice rolls (NumPy), plot distribution histogram
+    - Focus: Understanding the data pipeline
+  - **Exercise 2:** Simulate 1000 dice rolls (NumPy), plot distribution histogram
     - Practice: Ask Copilot to help with histogram styling
-  - **Exercise 3:** Filter top 10 products by sales, create sorted bar chart
-    - Challenge: Customize plot appearance with Copilot's help
+    - See the bell curve appear!
+  - **Exercise 3:** Find top 10 products by sales, create sorted bar chart
+    - Combine: filtering/sorting + groupby + visualization
 
 - **Copilot Tips for Visualizations** (5 min)
   - "Copilot is GREAT at matplotlib boilerplate"
@@ -292,7 +300,10 @@ In the final presentations, each best group of the three topics with the best so
 
 - **Final 10 minutes:**
   - Quick recap: "What did we learn and why does it matter?"
-  - Preview of Lecture 4: "Next week, Monte Carlo simulations for real business decisions"
+    - NumPy: Fast numerical operations
+    - Pandas: Data exploration, filtering, groupby
+    - Visualization: Communicate insights
+  - Preview of Lecture 4: "Next week, Monte Carlo simulations - we'll use everything we learned today to model business uncertainty"
   - **Copilot strategy going forward:**
     - "Use it for syntax, not thinking"
     - "Your job: understand the logic, Copilot's job: remember the syntax"
@@ -444,7 +455,7 @@ def forecast_demand(historical_data, method='exponential'):
 **Discussion (last 5 minutes):** What do the results tell us? Share insights, debugging tips, interpretation challenges.
 
 **Hours 3-4: Competition - "The Predictor"**
-- **Scenario:** Major retailer needs inventory planning for christmas weeks
+- **Scenario:** Major retailer needs inventory planning for four christmas weeks
 - **Data Provided:**
   - 2 years of weekly sales for 3 products
 - **Task:**  December demand forecast per product
@@ -452,6 +463,7 @@ def forecast_demand(historical_data, method='exponential'):
   - 60 minutes development
   - 10 minutes teams receive held-out data to test their algorithm
   - Accuracy comparison (using held-out data)
+  - Visualization of results
 - **Bonus Points:** Lowest total forecast error
 
 ### Lecture 6: Smart Quick Decisions in Scheduling
@@ -601,7 +613,6 @@ def improve_route(route, distances):
   - 12 cafe locations (x, y coordinates)
   - Bakery location (x, y coordinates)
   - Time windows for 3 bakeries
-  - Distance/time matrix
   - Vehicle specs (capacity, speed, cost per km)
 
 - **Task:** Minimize total distance
