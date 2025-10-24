@@ -723,14 +723,12 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   - 12 customers (x, y) coordinates
   - 3 distribution center locations (fixed positions)
   - 1 distribution center has electric cars with low emissions but is more expensive
-  - Each distribution center has capacity limit (max 6 zones)
   - Emission rates: standard trucks emit 0.2 kg CO₂/km
 
 - **Task:** Assign each of the 12 customers to one of the 3 distribution centers
 
 - **Constraints:**
   - Each customer assigned to exactly one center
-  - No center exceeds 6 zones (capacity)
   - All customers must be served
 
 - **Deliverables:**
@@ -831,51 +829,99 @@ Tabu            | Medium    | Medium| Great            | Cycling problems
   - What happened when you cooled too fast? Too slow?
   - Which cooling schedule worked best?
 
-**Hours 3-4: Competition - "The Hospital Scheduling Crisis"**
-- **Scenario:** City hospital emergency department scheduling nightmare
-  - "We have a scheduling crisis! Staff are quitting due to unfair schedules and we're violating labor laws!"
-  - Must create 2-week schedule for emergency department
-  - Balance coverage and costs
+**Hours 3-4: Competition - "The Weekend Restaurant Staffing Challenge"**
+
+- **Scenario:** A three Michelin star restaurant weekend scheduling crisis
+  - "I need to schedule my 18 servers across 6 shifts this weekend"
+  - "Problem: My experienced servers are expensive, but customers expect quality service"
+  - "Last weekend I had all junior staff on Saturday dinner - disaster! But using experienced staff everywhere kills my profit margins"
+
+- **The Challenge:**
+  - We have skill requirements for quality service (experienced servers needed)
+  - But we don't have enough experienced servers to meet all requirements
+  - Must balance: Labor costs vs. Service quality penalties
+  - Students can use greedy heuristics OR Simulated Annealing
 
 - **Data Provided:**
-  - **30 staff members** with:
-    - Skills: Junior nurse, Senior nurse (Costs)
-    - Availability: Some can't work certain days
-    - Maximum hours per week
 
-  - **Shift requirements** (per day):
-    - Morning (6am-2pm): Need 5 staff (3 senior, 2 junior)
-    - Afternoon (2pm-10pm): Need 6 staff (3 senior, 3 junior)
-    - Night (10pm-6am): Need 4 staff (2 senior, 2 junior)
+  **18 Servers Available:**
+  - 6 Experienced Servers (€75/hour, can handle any shift)
+  - 12 Junior Servers (€25/hour, still learning)
 
-  - **Constraints:**
-    - No staff works >5 days per week
-    - No staff works >10 hours per day
-    - Minimum 11 hours rest between shifts
+  **6 Shifts This Weekend (Friday-Sunday):**
+  - Friday Dinner - 4 hours
+  - Friday Late - 4 hours
+  - Saturday Lunch - 4 hours
+  - Saturday Dinner - 4 hours
+  - Sunday Lunch - 4 hours
+  - Sunday Dinner - 4 hours
 
-  - **Costs:**
-    - Understaffed shift: €1,000 penalty per missing staff
-    - Overtime (>40 hrs/week): €50/hour
+  **Each shift needs exactly 3 servers**
+  - Total: 6 shifts × 3 servers = 18 positions
+  - Everyone works exactly once
 
-- **Task:** Create optimal 14-day schedule using Simulated Annealing
+- **Shift Quality Requirements:**
+  - **Dinner shifts** (busy, high-value customers): Need at least 2 Experienced servers
+  - **Lunch shifts** (moderate traffic): Need at least 1 Experienced server
+  - **Late shift** (cleanup): No requirement (can be all Junior)
+
+- **The Problem:**
+  - Minimum Experienced needed: 2+0+1+2+1+2 = **8 Experienced servers**
+  - Available: **Only 6 Experienced servers** ❌
+  - **We MUST violate some requirements!** Which shifts take the hit?
+
+- **Cost Structure:**
+  - **Labor cost:** Experienced = €25/hour, Junior = €15/hour
+  - **Understaffing penalty:** €200 per shift that doesn't meet skill requirements
+    - Dinner with <2 Experienced: €200 penalty (poor service, complaints)
+    - Lunch with <1 Experienced: €200 penalty (slower service)
+    - Late shift: No penalty (it's just cleanup)
+
+- **Task:** Assign 18 servers to 6 shifts (3 per shift) to minimize total cost (labor + penalties)
+
+- **Constraints:**
+  - Each shift gets exactly 3 servers
+  - Each server works exactly 1 shift
+  - All 18 positions must be filled
+
+- **Approaches Allowed:**
+  - **Greedy heuristic** - Design your own rule-based assignment (good enough for credit!)
+  - **Simulated Annealing** - Explore solution space systematically (likely to win!)
+  - **Random search** - Generate many random solutions, pick best
+  - **Your creative approach** - Surprise us!
+
+- **Neighborhood Move for SA (if using SA):**
+  - Swap two servers' shift assignments
+  - Very simple: just exchange their positions
 
 - **Deliverables:**
-  1. Complete schedule (staff × shifts × days)
-  2. Total cost breakdown (including constraints)
+  1. Complete schedule (which servers on which shifts)
+  2. Total labor cost breakdown
+  3. Penalties incurred (which shifts violated, why)
+  4. Total cost (labor + penalties)
+  5. Brief explanation (2-3 sentences): What was your approach?
 
 - **Competition Format:**
-  - 60 minutes development
-  - Must implement Simulated Annealing
-  - Submit metrics for cost, workload and constraint violation
-
-- **Additional 10 Bonus Points:**
-  - "Best SA Visualizer" - best visualization of SA progress
-  - Must show temperature, acceptance rate, solution quality evolution
+  - **60 minutes development**
+  - **Any approach accepted** - Focus is on understanding trade-offs
+  - Submit: one-slide summary with schedule + costs
+  - **Evaluation:** Lowest total cost wins
 
 - **Bonus Points:**
-  - Lowest total cost
-  - Zero constraint violations
-  - Best fairness score (most balanced workload)
+  - **Best total cost** (lowest): Standard competition bonus (10/6/3 points)
+
+- **Tips for Students:**
+  - **Greedy approach ideas:**
+    - Assign experienced servers to dinner shifts first (prioritize high penalties)
+    - Minimize penalties first, then optimize labor cost
+    - Try multiple greedy rules, pick best result
+
+  - **SA approach tips:**
+    - Start with random solution or greedy solution
+    - Swap neighborhood is simple and effective
+    - Cooling schedule: T = 0.95 × T works well
+    - Run 1000-3000 iterations
+    - Track cost over time to see improvement
 
 ## PART III: Consulting Competition (Lectures 10-12)
 *No mini-competitions - focus on final project*
@@ -893,16 +939,15 @@ Tabu            | Medium    | Medium| Great            | Cycling problems
 **CEO Persona:** "We're bleeding money on delivery costs while customers complain about cold food"
 
 **The Problem:**
-"We deliver 100 meals daily in Berlin. Current system: drivers choose their own routes. Result: €50 average cost per delivery hour, 35% late deliveries, cold food complaints. We need smart routing that considers traffic, meal prep times, and keeps food hot."
+"We deliver 32 meals daily in Berlin. Current system: drivers choose their own routes. Result: €50 average cost per delivery hour, 35% late deliveries, cold food complaints. We need smart routing that keeps food hot."
 
 **Technical Requirements:**
-- Time windows for all deliveries
-- Traffic variation by time of day (approximated)
-- Driver shift constraints
+- Time windows for all deliveries (but simple ones)
+- Violations mean cold food and a penalty
 - 3 drivers from one depot
 
 **Deliverables Required:**
-1. Routing algorithm for 100 orders
+1. Routing algorithm for 32 orders
 2. Visualization of the routes
 3. Performance metrics
 4. Cost savings projection
@@ -912,7 +957,7 @@ Tabu            | Medium    | Medium| Great            | Cycling problems
 **COO Message:** "Our nurses are burning out, and overtime is killing our budget"
 
 **The Problem:**
-- 50 nurses, 3 departments, complex requirements
+- 20 nurses, 2 departments, complex requirements
 - Current: €300K monthly overtime, 25% sick leave, high turnover
 - Need: automated fair scheduling
 
@@ -923,7 +968,7 @@ Tabu            | Medium    | Medium| Great            | Cycling problems
 - Fairness metrics
 
 **Deliverables:**
-1. Monthly schedule
+1. Weekly schedule
 2. Fairness and satisfaction metrics
 3. Overtime reduction metrics
 4. What-if analysis (1 or 2 random staff members sick)
