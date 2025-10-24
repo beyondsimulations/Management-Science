@@ -274,22 +274,6 @@ If the installation does not work, **let me know!**
 [Something not working yet? Ask me!]{.highlight}
 :::
 
-## Let's Write Some Code!
-
-Once the installation is complete, let's test it:
-
-```{.python}
-#| eval: true
-#| output-location: fragment
-
-print("Hello, Management Science!")
-print("I'm ready to solve business problems!")
-```
-
-. . .
-
-[Congratulations - you're now a Python programmer!]{.highlight}
-
 ## Using Notebooks
 
 - Now we need to add a kernel to our project

@@ -1,0 +1,188 @@
+---
+title: "Dealing with Uncertainty"
+subtitle: "Lecture 4 - Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_04_introduction.qmd)"
+    output-file: lec_04_presentation.html
+---
+
+
+# [Introduction]{.flow} {.title}
+
+## **[Client Briefing: TechVenture Innovation Fund]{.invert-font} {background-image="https://unsplash.com/photos/wgtJfd2Jhnk/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTF8fHNpbGljb24lMjB2YWxsZXl8ZW58MHx8fHwxNzYxMzM1MTMwfDA&force=true&w=2400" background-size="cover"}**
+
+\<!--
+This slide introduces the "client" for the day.
+Use a high-quality background image that matches the domain.
+Use pauses (...) to build the story.
+--\>
+
+. . .
+
+[The CEO's Problem:** "We have €2M to invest in **2 of 4 startups**. We can't predict the future. How do we make the best choice without just guessing?"]{.invert-font .fragment}
+
+## The Business Challenge: Valuing Uncertainty
+
+[Question]{.question}: **Why is this a hard problem for our client?**
+
+. . .
+
+::: incremental
+* **Point 1:** The real world is not certain. We don't know the *exact* return, only a *range* of possibilities (e.g., a bell curve).
+* **Point 2:** A simple "guesstimate" (just using the average) is dangerous. It completely hides the **risk of failure**.
+* **Point 3:** Our client needs to understand the **full spectrum of outcomes**, from the best case to the worst case.
+:::
+
+. . .
+
+**Our Job:** Give them a "crystal ball" to see 10,000 possible futures at once.
+
+## Today: Monte Carlo Simulation
+
+To solve this, we're adding a new tool to our toolkit.
+
+| Problem                  | Tool                       |
+| :----------------------- | :------------------------- |
+| Repetitive Tasks         | Functions                  |
+| Unstructured Data        | Dictionaries               |
+| Tabular Data             | Pandas                     |
+| **Business Uncertainty** | **Monte Carlo Simulation** |
+
+## Core Concept
+
+[Rolling the Dice 10,000 Times]{.highlight}
+
+**How it works (The Analogy):** Imagine a simple casino game where you roll two dice.
+
+* How do you know the *real* odds of rolling a 7?
+* You could try to calculate the 36 combinations... **OR...**
+* You could just **roll the dice 10,000 times** in Python and record the results.
+
+. . .
+
+**This is Monte Carlo Simulation:**
+
+## The Approach
+
+1. **Model the Risk:** Instead of a die roll, we use `np.random.normal()` to model an uncertain variable (like daily_customers or investment_return).
+2. **Simulate:** We run our model 10,000 times, getting 10,000 possible "futures."
+3. **Analyze:** We look at the *distribution* of all 10,000 outcomes to find the average profit, the risk of loss (e.g., % of outcomes < 0), and the 90% confidence range.
+
+## The Logic (in 3 Steps)
+
+::: panel-tabset
+
+## Model the Risk
+
+Define each startup's potential return not as one number, but as a distribution.
+
+```{.python}
+return = np.random.normal(loc=0.25, scale=0.15)
+```
+
+## Run the Simulation
+
+```{.python}
+for i in range(10000):
+  # "Roll the dice" for each startup
+  # Calculate total profit for this one "future"
+  # Store the result
+```
+
+## Analyze the Results
+
+Plot all 10,000 total profit results as a histogram. We can now see the risk.
+
+```{.python}
+all_profits.mean()
+all_profits.std()
+```
+
+## Example
+
+[Key New Function:]{.highlight} `np.random.normal()`
+
+* loc = The "center" or *average* (e.g., 25% return).
+* scale = The "spread" or *standard deviation* (e.g., +/- 15%).
+* size = How many "dice rolls" (e.g., 10,000).
+
+```{.python}
+#| eval: false
+#| echo: true
+
+import numpy as np
+
+# Simulate 10,000 possible return scenarios for CloudAI
+# Average return = 25% (0.25)
+# Risk/StdDev = 15% (0.15)
+#
+returns_cloudai = np.random.normal(
+  loc=0.25,
+  scale=0.15,
+  size=10000
+)
+
+```
+
+## Tip: Using GenAI for This**
+
+- GitHub Copilot is your **AI Pair Programmer**
+- It's excellent at this!
+- Don't ask it to "solve the problem.
+- Ask it to "help with the tool."
+
+. . .
+
+[Question:]{.question} What would be a good prompt?
+
+## Good Prompt
+
+[You are the strategist:]{.highlight}
+
+> I have a variable 'avg_purchase' that is a uniform distribution between $8 and $12. Write the numpy code to simulate this 10,000 times.
+
+. . .
+
+[Question:]{.question} What would be a bad prompt?
+
+## Bad Prompt
+
+[AI is the strategist:]{.highlight}
+
+> Solve the TechVenture startup problem.
+
+. . .
+
+::: callout-tip
+Your job is to **think**; let Copilot remember the exact syntax.
+:::
+
+# [Your Mission for Today]{.flow} {.title}
+
+[The Plan (Hour 2)]{.highlight}
+
+1. **Hour 2: Basic Training (45 min)**
+   1. **Goal:** Master the np.random tool.
+   2. **Where:** Interactive Notebook below this lecture
+   3. We will code-along to build a simple simulation for *one* coffee shop.
+
+# [Your Mission for Today]{.flow} {.title}
+
+[The Plan (Hour 3-4)]{.highlight}
+
+2. **Hours 3-4: The Competition (80 min)**
+   1. **Goal:** Solve the ["TechVenture Investment Challenge"]{.highlight}
+   2. **Deliverable:** A 1-slide recommendation.
+   3. **Your Pitch:** Which 2 startups should they fund and why?
+
+. . .
+
+3. **Presentations & Debrief (10 min)**
+   2. Top 3 teams present their 1-slide pitch.
+   3. **10 / 6 / 3 Bonus Points** are on the line.
+
+. . .
+
+**Let's open the notebook and start building.**
