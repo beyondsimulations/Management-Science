@@ -2,80 +2,62 @@
 title: "Assignments in this Course"
 ---
 
-## Introduction
+## Welcome
 
-These assignments are about learning to apply optimization thinking to real problems. Using AI tools is encouraged as long as you understand the code as this mirrors real-world practice where developers use all available tools.
+This course uses two practical assignments to help you learn how to think like an optimization-minded analyst. Your focus throughout should be: understand the problem, design a sensible algorithmic approach, interpret results, and translate findings into clear business recommendations. Perfect code is not the goal—insight is.
 
-Focus on:
+::: callout-tip
+You’re encouraged to use AI tools responsibly. Treat them like a smart pair-programmer that helps you learn and debug, but make sure you understand all code you submit and can explain it.
+:::
 
-- Understanding the problems
-- Applying algorithmic thinking
-- Interpreting results
-- Making business recommendations
+## The Two Assignments
 
-Remember: You're training to be business problem-solvers who can work with data and algorithms. The goal is insight and understanding, not perfect code!
+**Assignment 1:**
 
-## How Assignments are Graded
+*Risk Analysis & Forecasting (Due at the start of Lecture 7, weight 30%)*
+You’ll simulate investment outcomes to understand risk and then forecast demand using simple time-series techniques. Expect to implement Monte Carlo simulations, moving averages, and exponential smoothing, then compare methods and justify a recommendation. See details in assignment_01.qmd.
 
-**Technical Implementation (50%)**
+**Assignment 2:**
 
-- Correctness of algorithms
-- Code quality and documentation
-- Efficiency and scalability
-- Additional features
+*Optimization in Practice (Due at the start of Lecture 10, weight 20%)*
+You’ll build and improve delivery routes and construct valid staff schedules under constraints, then iterate to improve quality and satisfaction. Expect to implement heuristics, evaluate improvements, visualize routes/schedules, and discuss trade-offs. See details in assignment_02.qmd.
 
-**Analysis & Insights (30%)**
+Work is in groups for both assignments. Typical time commitment is 3–5 hours for Assignment 1 and 4–5 hours for Assignment 2.
 
-- Problem understanding
-- Results interpretation
-- Business recommendations
+## How You’ll Be Graded
 
-**Communication (20%)**
+Across both assignments, the grading is consistent:
 
-- Clarity of documentation
-- Visualization quality
+- **Technical implementation (50%):** correctness of methods, readable and well-structured code, and reasonable efficiency.
+- **Analysis and insights (30%):** problem understanding, interpretation of results, and quality of recommendations.
+- **Communication (20%):** clarity of writing, visualizations, and overall presentation.
 
+## Using AI Tools and Scientific Integrity
+
+Use AI to clarify concepts, explore alternatives, and debug. Please, do not submit code you don’t understand. You’re responsible for every line. If you draw from external sources, cite them briefly in your notebook.
 
 ## Tips for Success
 
-**Using AI Tools (ChatGPT, GitHub Copilot, etc.)**
+- Start simple, then iterate. Get a working baseline first.
+- Check your logic with small tests and intermediate prints.
+- Keep business questions in view—your job is to inform a decision.
 
-- DO use them to understand concepts and debug
-- DO use them to learn new Python syntax
-- DO use them to improve your code
-- ❌ DON'T just copy-paste without understanding
-- ❌ DON'T submit code you can't explain, I will know ;)
-
-**Academic Integrity**
-
-- Your code should be your own work
-- You must understand everything you submit
-- Cite any external sources used
-
-**Start Simple**
-
-- Get a working solution first, then optimize
-- Print intermediate results to check your logic
-
-**Common Pitfalls to Avoid**
-- Forgetting to return to depot in routing
-- Not checking schedule validity after changes
-- Optimizing forever - "good enough" is often perfect
-- Forgetting to answer the business questions
+:::callout-tip
+Common pitfalls to watch for: forgetting return-to-depot in routing, violating constraints after a change, optimizing forever instead of delivering “good enough,” and failing to actually answer the business questions.
+:::
 
 ## Submission Requirements
 
-Submit a Jupyter notebook containing:
+Submit one Jupyter notebook per assignment that includes:
 
-1. Your code implementations (with comments!)
-2. Output showing your code works
-3. Visualizations of results
-4. Business analysis answers (clearly marked)
+- Your commented code with outputs and clear visualizations.
+- Short, direct answers to the business questions.
 
-**File naming:** `Assignment_01_[GroupNames].ipynb`
+File naming:
+
+- Assignment 1: Assignment_01_[GroupNames].ipynb
+- Assignment 2: Assignment_02_[GroupNames].ipynb
 
 ## Late Policy
 
-- -10% per day late
-- Maximum 3 days late
-- Exceptions only for documented emergencies
+Submissions lose 10% per day late, up to a maximum of three days. Exceptions are granted only for documented emergencies.
