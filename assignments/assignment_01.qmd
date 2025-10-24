@@ -6,7 +6,7 @@ title: "Assignment 1: Risk Analysis & Forecasting"
 
 **Due:** Start of Lecture 7
 **Weight:** 30% of final grade
-**Expected Time:** 3-5 hours
+**Expected Time:** 4-6 hours
 **Work:** Groups
 
 You're a a group of junior analyst at a consulting firm. A client needs help with:
@@ -166,25 +166,59 @@ def moving_average_forecast(data, window_size=3):
 
 ### Task 2: Exponential Smoothing (15%)
 
+**Understanding Exponential Smoothing:**
+
+Exponential smoothing gives more weight to recent observations while still considering historical data. The formula is:
+
+$$F_t = α × A_(t-1) + (1 - α) × F_(t-1)$$
+
+Where:
+
+- $F_t$ = Forecast for period $t$
+- $A_(t-1)$ = Actual value in previous period
+- $F_(t-1)$ = Forecast for previous period
+- $α$ = Smoothing parameter between 0 and 1
+
+**How it works:**
+
+- Start with the first actual value as your initial forecast: $F_1 = A_1$
+- For each subsequent period, update the forecast using the formula above
+- Higher α (e.g., 0.7) = more weight on recent data (responsive to changes)
+- Lower α (e.g., 0.1) = more weight on historical pattern (smooth, stable)
+
+**Example with α = 0.3:**
+
+- Month 1: Actual = 120, Forecast = 120 (initial)
+- Month 2: Actual = 135, Forecast = 0.3 × 120 + 0.7 × 120 = 120
+- Month 3: Actual = 155, Forecast = 0.3 × 135 + 0.7 × 120 = 124.5
+- And so on...
+
 ```{python}
 def exponential_smoothing(data, alpha=0.3):
     """
-    Calculate exponential smoothing forecast.
+    Calculate exponential smoothing forecast for next period.
 
     Args:
-        data: Historical values
+        data: Historical values (list or array)
         alpha: Smoothing parameter (0-1)
+               Higher alpha = more weight on recent data
 
     Returns:
         float: Forecast for next period
     """
-    # YOUR CODE HERE
-    # Formula: forecast = alpha * actual + (1-alpha) * previous_forecast
-    # Start with first value as initial forecast
+    # Initialize forecast with first actual value
+    forecast = data[0]
 
+    # YOUR CODE HERE
+    # Loop through data starting from index 1
+    # For each actual value, update forecast using the formula:
+    #   forecast = alpha * actual + (1 - alpha) * forecast
+
+    # Return the final forecast (which predicts the next period)
     return forecast
 
 # Test different alpha values and print the results
+# Try alpha = 0.1 (smooth), 0.3 (balanced), 0.7 (responsive)
 # YOUR CODE HERE
 
 ```

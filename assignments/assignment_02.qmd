@@ -6,7 +6,7 @@ title: "Assignment 2: Optimization in Practice"
 
 **Due:** Start of Lecture 10
 **Weight:** 20% of final grade
-**Expected Time:** 4-5 hours
+**Expected Time:** 5-7 hours
 **Work:** Groups
 
 Your consulting firm has been hired by "CityExpress," a local delivery company. They need help with:
@@ -96,21 +96,61 @@ def nearest_neighbor_route(depot, locations):
 
 ### Task 2: Improve Your Route (20%)
 
+**Understanding 2-Opt Improvement:**
+
+The 2-opt algorithm improves a route by removing two edges and reconnecting them in a different way. This is like "uncrossing" routes that cross over themselves.
+
+**Visual Example:**
+
+```
+Before:  A → B → C → D → A
+If we take edges (A→B) and (C→D) and swap them:
+After:   A → C → B → D → A  (reversed the B→C segment)
+```
+
+**The Algorithm:**
+
+1. Start with your current best route and its distance
+2. Try swapping every possible pair of edges:
+   - Take positions i and j in the route (where i < j)
+   - Reverse the segment between i and j
+   - Calculate the new distance
+3. If the new route is better, keep it as your new best
+4. Repeat until no improvement is found
+
 ```{python}
-# Try to improve route by swapping two customers.
 def try_swap_improvement(route, locations):
     """
-    Try to improve route by swapping two customers.
+    Try all possible 2-opt swaps and return the best improvement found.
+
+    Args:
+        route: Current route (list of location indices)
+        locations: Dictionary of location coordinates
+
     """
     # YOUR CODE HERE (replace pass)
+    #
     pass
 
 def improve_route(initial_route, locations, max_iterations=50):
     """
-    Repeatedly try to improve the route.
+    Repeatedly apply 2-opt improvements until no improvement is found.
+
+    Args:
+        initial_route: Starting route
+        locations: Dictionary of location coordinates
+        max_iterations: Maximum number of improvement attempts
+
     """
-    # YOUR CODE HERE (replace pass)
-    pass
+    # Loop while iteration < max_iterations:
+    #   1. Call try_swap_improvement on current_route
+    #   2. If no improvement found, break
+    #   3. Otherwise, update current_route and current_distance
+    #   4. Increment iteration counter
+    # YOUR CODE HERE
+
+
+    return current_route, current_distance, iteration
 
 # Improve your route
 # YOUR CODE HERE
@@ -149,14 +189,46 @@ The warehouse needs to schedule 6 workers across 5 days (Mon-Fri). Each day need
 
 ### Task 1: Create a Valid Schedule (20%)
 
+**Understanding the Scheduling Problem:**
+
+We need to create a schedule that satisfies two types of constraints:
+
+1. **Worker constraints**: Each worker must work exactly 3 days
+2. **Daily constraints**: Each day must have 2-3 workers
+
+**Schedule Representation:**
+
+- Schedule is a 5x6 array (5 days × 6 workers)
+- schedule[day][worker] = 1 if worker works that day, 0 otherwise
+
+```
+Example:
+         Worker0  Worker1  Worker2  Worker3  Worker4  Worker5
+Monday      1        0        1        0        1        0     (3 workers)
+Tuesday     0        1        0        1        1        0     (3 workers)
+...
+```
+
 ```{python}
 def check_schedule_valid(schedule):
     """
     Check if schedule meets all constraints.
-    Returns whether it is_valid and a number_of_violations)
+
+    Args:
+        schedule: 5x6 numpy array (days × workers)
+
     """
-    # Check: Each worker works exactly 3 days
-    # Check: Each day has 2-3 workers
+    violations = []
+
+    # Check constraint 1: Each worker works exactly 3 days
+    # Hint: Use schedule.sum(axis=0) to get days per worker
+    # Example: if worker i doesn't work 3 days, add to violations
+    # YOUR CODE HERE
+
+
+    # Check constraint 2: Each day has 2-3 workers
+    # Hint: Use schedule.sum(axis=1) to get workers per day
+    # Example: if day j has <2 or >3 workers, add to violations
     # YOUR CODE HERE (replace pass)
     pass
 
@@ -168,9 +240,12 @@ def create_basic_schedule():
     """
     schedule = np.zeros((5, 6), dtype=int)
 
-    # Strategy: Assign workers to days ensuring constraints are met
-    # Hint: Start by giving each worker 3 random days
-    # Then check and adjust daily coverage
+    # Strategy: Assign each worker to exactly 3 days
+    # For each worker:
+    #   1. Randomly select 3 days from [0, 1, 2, 3, 4]
+    #      Hint: np.random.choice(5, size=3, replace=False)
+    #   2. Set schedule[selected_days, worker] = 1
+    # After creating schedule, check if it's valid
     # YOUR CODE HERE
 
     return schedule
@@ -180,7 +255,22 @@ def create_basic_schedule():
 
 ```
 
-### Task 2: Optimize for Worker Preferences (20%)
+### Task 2: Check Worker Preferences (20%)
+
+**Understanding Worker Satisfaction:**
+
+Each worker has preferred days they'd like to work. Satisfaction = number of preferred days assigned.
+
+**Example:**
+
+- Worker 0 prefers [Monday, Tuesday, Wednesday]
+- If scheduled for [Monday, Tuesday, Friday]: satisfaction = 2 (got 2 out of 3 preferred)
+- If scheduled for [Monday, Wednesday, Friday]: satisfaction = 2
+- If scheduled for [Monday, Tuesday, Wednesday]: satisfaction = 3 (perfect!)
+
+**Improvement Strategy:**
+
+Try swapping work assignments between workers to increase total satisfaction while maintaining validity.
 
 ```{python}
 # Worker preferences (day indices: 0=Mon, 1=Tue, 2=Wed, 3=Thu, 4=Fri)
@@ -194,17 +284,52 @@ worker_preferences = {
 }
 
 def calculate_satisfaction(schedule, preferences):
-    """Calculate total satisfaction score."""
-    total_score = 0
-    # For each worker, count how many preferred days they got
-    # YOUR CODE HERE (replace pass)
+    """
+    Calculate total satisfaction score.
 
+    Args:
+        schedule: 5x6 numpy array (days × workers)
+        preferences: Dictionary mapping worker to list of preferred days
+
+    Returns:
+        tuple: (total_score, individual_scores)
+               total_score: Sum of all worker satisfaction
+               individual_scores: List of satisfaction per worker
+    """
+    individual_scores = []
+
+
+    # For each worker:
+    #   1. Find which days they are scheduled (where schedule[:, worker] == 1)
+    #      Hint: np.where(schedule[:, worker] == 1)[0] gives scheduled days
+    #   2. Count how many scheduled days are in their preferences
+    #      Hint: Use a loop or list comprehension
+    #   3. Add to individual_scores
+    # YOUR CODE HERE (replace pass)
     pass
 
 def improve_schedule_for_satisfaction(schedule, preferences, iterations=50):
-    """Improve schedule by swapping to increase satisfaction."""
+    """
+    Improve schedule by swapping assignments between workers.
+
+    Strategy: Try swapping a working day from one worker to another worker's off day.
+    Only keep swaps that increase satisfaction while maintaining validity.
+
+    Args:
+        schedule: Initial schedule (5x6 array)
+        preferences: Worker preferences dictionary
+        iterations: Maximum number of swap attempts
+
+    """
+
+    # For iteration in range(iterations):
+    #     Pick two random workers: w1, w2
+    #     Pick a day that w1 works but w2 doesn't
+    #     Pick a day that w2 works but w1 doesn't
+    #     Swap them and check if better
     # YOUR CODE HERE (replace pass)
     pass
+
 
 # Calculate initial satisfaction
 # YOUR CODE HERE
@@ -224,15 +349,16 @@ def improve_schedule_for_satisfaction(schedule, preferences, iterations=50):
 
 
 ```{python}
-# Visualize both schedules
+# Visualize both schedules (hint: Use generative AI to help you with the plot)
 # YOUR CODE HERE
 
-# Analyze fairness
+# Analyze and compare
+# Calculate:
+# 1. Total satisfaction (initial vs improved)
+# 2. Workers per day for both schedules
+# 3. Individual satisfaction scores
 # YOUR CODE HERE
 
-# Daily coverage
-# YOUR CODE HERE
-#
 ```
 
 **Business Question:** What's the trade-off between operational needs and worker satisfaction? How would you handle a worker who can't work their preferred days? (3-4 sentences)
