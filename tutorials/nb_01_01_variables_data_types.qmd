@@ -25,7 +25,7 @@ If a cell is marked with YOUR CODE BELOW, you are expected to write your code in
 
 Variables are like labeled containers that store information. In our coffee shop, we need to keep track of prices, customer names, order quantities, and more.
 
-```{.python}
+```{python}
 #| eval: true
 # Variables are created by giving them a name and a value
 coffee_price = 4.50
@@ -54,14 +54,14 @@ Create three variables for a new order:
 - `quantity` should be 2
 - `shop_closed` = False
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 latte_price = 5.25
@@ -71,7 +71,7 @@ shop_closed = False
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -87,7 +87,7 @@ print("Perfect! You've created your first variables for the coffee shop!")
 Variables can change! A customer changed their mind and wants 4 lattes instead of 2.
 Update the `quantity` variable to 4 and create a new variable `total_order` that stores the total price.
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 # Assume latte_price = 5.25 and quantity = 2 from previous exercise
@@ -96,7 +96,7 @@ Update the `quantity` variable to 4 and create a new variable `total_order` that
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 quantity = 4
@@ -104,7 +104,7 @@ total_order = latte_price * quantity
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -122,7 +122,7 @@ Python has different types of data. The three most common are:
 - **str** (strings): Text like "coffee", "Bean Counter", "Order #123"
 - **bool** (boolean): True or False
 
-```{.python}
+```{python}
 #| eval: true
 # Different data types in our coffee shop
 cups_sold = 150           # int - whole number
@@ -153,14 +153,14 @@ Create variables of each type for our coffee shop:
 - `average_tip` (float): 2.50 dollars average tip
 - `best_seller` (str): "Caramel Macchiato"
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 daily_customers = 85
@@ -169,7 +169,7 @@ best_seller = "Caramel Macchiato"
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -189,7 +189,7 @@ Convert the string `card_points = "1234"` to an integer and create a new variabl
 You can use the `int()` function to convert a string to an integer or use the `float()` function to convert a string to a float.
 :::
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 card_points = "1234"
@@ -197,7 +197,7 @@ card_points = "1234"
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 card_number = "1234"
@@ -206,7 +206,7 @@ new_points = card_number_int + 100
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -219,7 +219,7 @@ print("Perfect! You can convert between data types!")
 
 Now let's use Python's arithmetic operations to handle coffee shop calculations!
 
-```{.python}
+```{python}
 #| eval: true
 # Basic arithmetic operations
 espresso_price = 3.50
@@ -261,13 +261,13 @@ A group orders:
 
 Calculate the `subtotal`, then add 8% tax to get the `total_with_tax`.
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 
 ```
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -278,7 +278,7 @@ print("Excellent calculation! You've mastered basic arithmetic!")
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 cappuccino_total = 3 * 4.75
@@ -301,7 +301,7 @@ The group wants to split the bill evenly among 4 people. Calculate:
 You could use `//` for floor division and `%` for remainder, but you don't need to do that as other solutions are possible. If you want to round the cents, you can use the `round()` function.
 :::
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 # Assume total_with_tax = 32.616 from previous exercise
@@ -309,7 +309,7 @@ You could use `//` for floor division and `%` for remainder, but you don't need 
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 total_with_tax = 32.616
@@ -319,7 +319,7 @@ cents = round((per_person - dollars) * 100)
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -333,7 +333,7 @@ print("Great work! You can split bills and handle money calculations!")
 
 F-strings make it easy to create formatted output - perfect for receipts and displays!
 
-```{.python}
+```{python}
 #| eval: true
 # F-strings let you embed variables and expressions in text
 item = "Flat White"
@@ -378,14 +378,14 @@ Create a formatted receipt for a coffee order with these variables:
 
 Format it as: "Order: [size] [coffee_type] - $[price with 2 decimal places]"
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 coffee_type = "Americano"
@@ -396,7 +396,7 @@ receipt = f"Order: {size} {coffee_type} - ${price:.2f}"
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer

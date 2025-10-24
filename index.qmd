@@ -6,9 +6,9 @@ html: default
 
 # Course Description
 
-Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making. By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.
+**Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making.** By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.
 
-In this course, you'll build a comprehensive "consultant's toolkit" by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you'll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of "executives."
+In this course, you'll build a comprehensive toolkit by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you'll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of "executives."
 
 # Learning Outcomes
 
@@ -17,12 +17,11 @@ By the end of this course, you will be able to:
 **Technical Skills:**
 
 - Implement Management Science solutions in Python
-- Write clean, modular Python code (functions, control flow, data structures)
 - Work effectively with NumPy and Pandas for analysis and modeling
 - Apply Monte Carlo simulation to model uncertainty and risk
 - Build and evaluate forecasting models for demand and time series
-- Design and analyze scheduling solutions (SPT, EDD rules) with key performance metrics
-- Solve routing problems using heuristics and local search improvements (nearest neighbor, 2-opt)
+- Design and analyze scheduling solutions with key performance metrics
+- Solve routing problems using heuristics and local search improvements
 - Handle multi-objective trade-offs and combine decision criteria meaningfully
 - Understand and apply metaheuristics for complex optimization problems
 
@@ -33,20 +32,17 @@ By the end of this course, you will be able to:
 - Present solutions in a consulting-style format to business stakeholders
 - Approach complex problems with structured analytical thinking
 
-**Note:** This course is specifically designed for business students. No prior programming experience required—our teaching format supports different skill levels so every student can progress effectively.
+::: callout-note
+This course is specifically designed for business students. No prior programming experience required, the teaching format supports different skill levels so every student can progress effectively.
+:::
 
 # Course Structure
 
 The course is organized into three distinct parts across 12 lectures:
 
-## Part I: Python Foundation (Lectures 1-3)
-*Building your analytical toolkit*
-
-## Part II: Management Science Tools (Lectures 4-9)
-*Mini-competitions begin - apply algorithms to real business problems*
-
-## Part III: Consulting Competition (Lectures 10-12)
-*Client challenges with professional presentations*
+- **Part I:** Python Foundation (Lectures 1-3)
+- **Part II:** Management Science Tools (Lectures 4-9)
+- **Part III:** Consulting Competition (Lectures 10-12)
 
 # Assignments & Grading
 
@@ -60,13 +56,6 @@ The course is organized into three distinct parts across 12 lectures:
 
 - Win mini-competitions during lectures (Lectures 4-9)
 - Best client project in Part III chosen by peer teams
-
-## Time Expectations
-
-- 4-6 hours per week outside class
-- Assignments take 4-7 hours each
-- Focus on insights over perfect code
-- functional and clear solutions are the goal
 
 # Resources & Support
 
@@ -83,16 +72,18 @@ The course is organized into three distinct parts across 12 lectures:
 2. **Team support:** Leverage your group for collaborative problem-solving
 3. **Email:** Response within 48 hours for urgent questions
 
-# Important Dates
+# AI Policy
 
-| Date | Milestone |
-|------|-----------|
-| Lecture 1 | Course begins, teams formed |
-| Lecture 4 | Mini-competitions begin |
-| Lecture 8 | Assignment 1 due (Risk & Forecasting) |
-| Lecture 10 | Assignment 2 due (Optimization Toolkit) |
-| Lecture 10 | Client project teams formed |
-| Lecture 12 | Final presentations (Consulting Finals) |
+*Level 1: Pause – Use of AI defined by the educator*
+
+A course chatbot is available on the learning website for exploratory study. It is designed to guide your problem-solving process rather than provide answers directly. Use it as a learning tool, not a solution generator.
+
+You may also use external AI tools (e.g., ChatGPT, Claude, Mistral, Gemini). However:
+
+1. Please be careful and try to understand the code generated.
+2. Relying on AI to solve tasks for you weakens your own learning.
+3. AI should ideally support understanding — not replace practice.
+4. Using AI without understand the code can lead to security risks.
 
 # How to Navigate This Course
 

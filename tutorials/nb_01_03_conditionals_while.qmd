@@ -32,7 +32,7 @@ If a cell is marked with YOUR CODE BELOW, you are expected to write your code in
 
 To make smart decisions, we need to compare values and combine conditions.
 
-```{.python}
+```{python}
 #| eval: true
 # Comparison operators
 temperature = 68
@@ -45,7 +45,7 @@ print(f"Temperature == 68: {temperature == 68}")
 print(f"Temperature != 70: {temperature != 70}")
 ```
 
-```{.python}
+```{python}
 #| eval: true
 # Boolean logic with 'and' & 'or'
 temperature = 68
@@ -88,7 +88,7 @@ Check if coffee beans meet quality standards. Beans pass if:
 
 Create a variable `passes_quality` that is True if both conditions are met.
 
-```{.python}
+```{python}
 #| eval: false
 moisture_level = 11
 defect_count = 3
@@ -100,7 +100,7 @@ defect_count = 3
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 moisture_level = 11
@@ -111,7 +111,7 @@ print(f"Quality check passed: {passes_quality}")
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -129,7 +129,7 @@ Customers get a special offer if they meet ANY of these conditions:
 
 Determine if the customer is eligible and print an appropriate message.
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 is_member = False
@@ -143,14 +143,14 @@ is_birthday = False
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 eligible_for_offer = is_member or total_spent > 100 or is_birthday
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -162,7 +162,7 @@ print("Perfect! Your special offer system works with OR logic!")
 
 Conditional statements let your program make decisions based on conditions. Think of them as automated decision rules.
 
-```{.python}
+```{python}
 #| eval: true
 # Basic if statement structure
 stock_level = 15
@@ -177,7 +177,7 @@ else:
     print(f"Current stock: {stock_level}")
 ```
 
-```{.python}
+```{python}
 #| eval: true
 # Using elif for multiple conditions
 coffee_beans_kg = 8
@@ -215,7 +215,7 @@ Create a stock alert system. You need to:
 2. If it is, print "Order more milk!" and set `order` to `True`
 3. Otherwise, print "Milk stock OK"
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 milk_liters = 7
@@ -224,7 +224,7 @@ order = False
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 milk_liters = 7
@@ -239,7 +239,7 @@ else:
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -257,7 +257,7 @@ Create a pricing system with multiple tiers. The rules are:
 
 Calculate and print the `price_per_item` and `total_cost` for the given `quantity`.
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 quantity = 25
@@ -269,7 +269,7 @@ quantity = 25
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 quantity = 25
@@ -287,7 +287,7 @@ print(f"Total cost: ${total_cost}")
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -300,7 +300,7 @@ print(f"Perfect! Price per item: ${price_per_item}, Total: ${total_cost}")
 
 Combining loops with conditionals lets us filter and process data intelligently.
 
-```{.python}
+```{python}
 #| eval: true
 # Process a list with conditions
 daily_sales = [1250, 1890, 950, 2100, 1650]
@@ -335,7 +335,7 @@ for item in original_list:
 
 Create a list containing only orders above $50. Also count how many high-value orders there are.
 
-```{.python}
+```{python}
 #| eval: false
 all_orders = [35.50, 67.25, 45.00, 89.99, 52.10, 23.75, 91.50, 48.00]
 
@@ -351,7 +351,7 @@ count = 0
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 all_orders = [35.50, 67.25, 45.00, 89.99, 52.10, 23.75, 91.50, 48.00]
@@ -366,7 +366,7 @@ for order in all_orders:
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -383,7 +383,7 @@ Categorize products by stock level and create separate lists for each category:
 - Low: stock >= 10 and stock < 25
 - Good: stock >= 25
 
-```{.python}
+```{python}
 #| eval: false
 products = ["Coffee", "Milk", "Sugar", "Cups", "Lids", "Stirrers"]
 stock_levels = [5, 18, 35, 8, 42, 15]
@@ -400,7 +400,7 @@ good = []
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 products = ["Coffee", "Milk", "Sugar", "Cups", "Lids", "Stirrers"]
@@ -420,7 +420,7 @@ for i in range(len(products)):
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -437,7 +437,7 @@ print(f"Good: {good}")
 
 While loops continue running as long as a condition is True. Perfect for simulations and processes with unknown iterations!
 
-```{.python}
+```{python}
 #| eval: true
 # While loop example - counting down inventory
 stock = 20
@@ -475,7 +475,7 @@ Track:
 - How many minutes it takes
 - The final queue size
 
-```{.python}
+```{python}
 #| eval: false
 queue_size = 5  # Starting queue
 minutes = 0
@@ -491,7 +491,7 @@ arrival_rate = 3  # New customers per minute
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 queue_size = 5
@@ -505,7 +505,7 @@ while queue_size <= 20:
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
@@ -518,7 +518,7 @@ print(f"Excellent! After {minutes} minutes, queue size is {queue_size}")
 
 Let's combine everything to build sophisticated filtering systems.
 
-```{.python}
+```{python}
 #| eval: true
 # Complex filtering example
 products = ["Espresso", "Latte", "Muffin", "Sandwich", "Tea", "Cookie"]
@@ -555,7 +555,7 @@ Find products eligible for promotion. Products qualify if they are:
 
 Also calculate the total discount if we offer 15% off eligible items.
 
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 products = ["Coffee", "Tea", "Muffin", "Sandwich", "Smoothie", "Cookie"]
@@ -572,7 +572,7 @@ total_discount = 0
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
 # Solution
 products = ["Coffee", "Tea", "Muffin", "Sandwich", "Smoothie", "Cookie"]
@@ -589,7 +589,7 @@ for i in range(len(products)):
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
 # Test your answer
