@@ -28,11 +28,15 @@ I really appreciate active participation and interaction!
 
 ## Management Science
 
-[Question: What is Management Science?]
+[Question: What is Management Science?]{.question}
 
 . . .
 
-Management science (or managerial science) is a wide and interdisciplinary study of solving complex problems and making strategic decisions as it pertains to institutions, corporations, governments and other types of organizational entities. It is closely related to management, economics, business, engineering, management consulting, and other fields. It uses various scientific research-based principles, strategies, and analytical methods including mathematical modeling, statistics and numerical algorithms and aims to improve an organization's ability to enact rational and accurate management decisions by arriving at optimal or near optimal solutions to complex decision problems.[^ms]
+Management science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.[^ms]
+
+. . .
+
+[It is not the science of management!]{.highlight}
 
 [^ms]: An Introduction to Management Science: Quantitative Approaches to Decision Making (15 ed.). Boston: Cengage Learning, Inc. 2019. ISBN 978-1-337-40652-9.
 
@@ -50,7 +54,7 @@ Management science (or managerial science) is a wide and interdisciplinary study
 . . .
 
 :::{.callout-important}
-You're not just students. [You're now consultants]{.highlight} learning to solve real business problems!
+[You're now consultants]{.highlight} learning to solve real business problems!
 :::
 
 
@@ -116,13 +120,13 @@ Think like a consultant: What value does my solution bring to the business?
 
 . . .
 
-::: callout-tip
+::: callout-important
 We will have several competitions including our final competition, where you will have the chance to earn bonus points!
 :::
 
 ## Assignments
 
-**Assignment Strategy:**
+[Assignment Strategy:]{.highlight}
 
 - Start with **easy warm-ups** in tutorials
 - Progress to **real-world problems**
@@ -131,7 +135,7 @@ We will have several competitions including our final competition, where you wil
 
 . . .
 
-:::{.callout-note}
+:::{.callout-warning}
 **Late submissions:** -10% per day (max 3 days)
 :::
 
@@ -152,7 +156,7 @@ Don't worry, I will help you out if you have any questions!
 
 :::{.incremental}
 - **No prior programming required** - we start from zero!
-- **But experience is helpful!**
+- [But experience is helpful!]{.highlight}
 - **Fast-paced** but with lots of support
 - **Practical focus** - less theory, more doing
 - **Mistakes are welcome** - they're how we learn
@@ -208,6 +212,7 @@ But you should *not* simply use them to *replace* your learning.
 1. [Be present]{.highlight}: Attend the lecture and solve the tutorials
 2. [Put in work]{.highlight}: Repeat code and try to understand it
 3. [Do coding]{.highlight}: Run code, play around, modify, and solve
+4. [Compete]{.highlight}: Participate in the competitions to learn
 
 . . .
 
@@ -280,23 +285,25 @@ If the installation does not work, **let me know!**
 
 . . .
 
-:::{.callout-tip}
+:::{.callout-warning}
 [Something not working yet? Ask me!]{.highlight}
 :::
 
 ## Using Notebooks
 
+::: incremental
 - Now we need to add a kernel to our project
 - Run `uv add --dev ipykernel` from your terminal
 - Now run `uv add jupyter` in the terminal
 - This allows us to use `uv` Python in notebooks
 - Next, install the extension [Jupytext for Notebooks](https://marketplace.visualstudio.com/items?itemName=congyiwu.vscode-jupytext)
-- Done? Perfect. Now we can start!
+- [Done? Perfect. Now we can start!]{.highlight}
+:::
 
 ## Working with Notebooks
 
 - Now you can download the files from the website
-- Just click on one of the sessions and open it
+- Just click the first session with code and open it
 - Select `Python` on the right side
 - Download and save the files **to your course folder**
 - Open them and select [“Open with Jupyter Notebook”]{.highlight}
@@ -334,12 +341,14 @@ Make sure your Jupyter notebook is working before we continue!
 
 [That's it for our introduction!]{.highlight}
 
-Make sure you have:
+**Make sure you have:**
 
 - [ ] VS Code installed and running
 - [ ] Python environment set up with `uv`
 - [ ] Jupyter notebooks working
 - [ ] The tutorial files downloaded
+
+. . .
 
 ::: callout-tip
 Take a **10-minute break**, then we'll start with the interactive notebooks.
