@@ -198,53 +198,77 @@ In the final presentations, each best group of the three topics with the best so
 ### Lecture 3: Data Science Foundation - NumPy & Pandas
 
 **Objectives:**
-- Master NumPy for numerical computing and Monte Carlo
-- Learn Pandas for data manipulation and forecasting prep
-- Create visualizations for business insights
+- Master NumPy for numerical computing and Monte Carlo simulations
+- Learn essential Pandas operations for data manipulation
+- Create basic visualizations for business insights
 - Final readiness check before algorithms
 
 **Hour 1: Interactive Notebook #8 - NumPy Essentials**
-- Why NumPy? Speed vs. Python lists
-- Creating arrays (from lists, zeros, ones, arange, linspace)
-- Vectorized operations (fast element-wise math)
-- Statistical functions: mean, std, min, max, percentiles
-- **Random number generation** (uniform, normal, integers)
-- Simple Monte Carlo simulation example
-- Boolean indexing and filtering
+- Why NumPy? Speed vs. Python lists for numerical work
+- Creating arrays (from lists, `zeros()`, `ones()`, `arange()`, `linspace()`)
+- Vectorized operations (fast element-wise math without loops)
+- Statistical functions: `mean()`, `std()`, `min()`, `max()`, `percentile()`
+- **Random number generation** (critical for Monte Carlo):
+  - `np.random.uniform()` - random numbers in a range
+  - `np.random.normal()` - bell curve distributions
+  - `np.random.randint()` - random integers
+- **Simple Monte Carlo example:** Coin flip simulation (build intuition)
+- Boolean indexing and filtering (`arr[arr > 5]`)
+- **Practice exercises integrated throughout** (5-10 min coding each)
 
 **Hour 2: Interactive Notebook #9 - Pandas Basics**
-- DataFrames vs arrays (labeled columns)
-- Creating DataFrames from dictionaries
-- Exploring data: `head()`, `info()`, `describe()`, `shape`
-- Selecting columns and rows (`iloc`, column names)
-- Creating new calculated columns
-- **Filtering data** with boolean conditions
-- Sorting with `sort_values()`
-- **Reading CSV files** with `pd.read_csv()`
+- What is a DataFrame? (Spreadsheet in Python with superpowers)
+- Creating DataFrames from dictionaries and lists
+- Exploring data:
+  - `head()`, `tail()` - preview data
+  - `info()` - column types and missing values
+  - `describe()` - statistical summary
+  - `shape` - rows and columns count
+- Selecting data:
+  - Single columns: `df['column_name']`
+  - Multiple columns: `df[['col1', 'col2']]`
+  - Rows by position: `df.iloc[0:10]`
+- Creating new calculated columns: `df['profit'] = df['revenue'] - df['cost']`
+- **Filtering data** with boolean conditions: `df[df['sales'] > 1000]`
+- Sorting with `sort_values()`: ascending and descending
+- **Reading CSV files** with `pd.read_csv()` - most important skill!
+- **Practice: Sales data exploration** (guided, 15 min)
 
-**Hour 3: Interactive Notebook #10 - Pandas for Analysis**
-- **GroupBy aggregations** (sum, mean, count, multiple agg)
-- **Datetime operations** (extract month, week, day_of_week)
-- **Rolling averages** (critical for forecasting)
-- Cumulative calculations (`cumsum`)
-- Pivot tables for cross-tabulation
-- Merging datasets with `merge()`
-- Seasonal analysis patterns
+**Hour 3: Interactive Notebook #10 - Time Series & Aggregations**
+- **GroupBy aggregations** (essential for business analysis):
+  - Basic: `df.groupby('category')['sales'].sum()`
+  - Multiple aggregations: `.agg(['sum', 'mean', 'count'])`
+  - Grouping by multiple columns
+- **Basic datetime operations** (only what's needed for forecasting):
+  - Converting strings to dates: `pd.to_datetime()`
+  - Extracting components: `.dt.month`, `.dt.day_of_week`
+- **Rolling averages** (critical for forecasting):
+  - `df['sales'].rolling(window=7).mean()` - 7-day moving average
+  - Understanding why we use rolling averages
+- Cumulative calculations with `cumsum()` (for running totals)
+- **Practice: Monthly sales analysis with trends** (guided, 20 min)
 
-**Hour 4: Interactive Notebook #11 - Visualization & Final Integration**
-- Basic plotting with matplotlib (line, bar, histogram, scatter)
-- Creating multi-plot dashboards with subplots
-- Time series visualizations
+**Hour 4: Interactive Notebook #11 - Visualization & Integration**
+- Why visualize? "A picture is worth a thousand rows"
+- Basic plotting with matplotlib:
+  - Line plots: `df.plot()` - for time series
+  - Bar charts: `df.plot(kind='bar')` - for comparisons
+  - Histograms: `df['column'].hist()` - for distributions
+  - Scatter plots: `df.plot.scatter(x='x', y='y')` - for relationships
+- Customizing plots:
+  - Titles: `plt.title('Sales Over Time')`
+  - Labels: `plt.xlabel()`, `plt.ylabel()`
+  - Legends: `plt.legend()`
 - Distribution plots for Monte Carlo results
-- Customizing plots (titles, labels, legends, colors)
-- **Complete analytics project:** delivery startup analysis
-  - Data exploration and cleaning
-  - Time-based analysis (hourly, daily patterns)
-  - Driver performance metrics
-  - Business insights visualization
-- **Final readiness check before algorithms**
-- **15 min:** GitHub Education + Copilot setup guide
-- **AI pair programming best practices**
+- **Integrated exercises** (30 min):
+  - Exercise 1: Load sales CSV, calculate monthly totals, create trend plot
+  - Exercise 2: Simulate dice rolls (NumPy), plot distribution (Pandas + matplotlib)
+  - Exercise 3: Calculate rolling 7-day average of daily sales, visualize
+- **Final 15 minutes:**
+  - Quick recap: "What did we learn and why does it matter?"
+  - Preview of Lecture 4: "Next week, Monte Carlo simulations for real business decisions"
+  - **GitHub Education + Copilot setup reminder** (share setup guide link)
+  - **AI pair programming tips:** "How to ask Copilot for help effectively"
 
 ## PART II: MANAGEMENT SCIENCE TOOLS (Lectures 4-9)
 *Mini-competitions begin here*
@@ -299,7 +323,7 @@ def simulate_coffee_shop(n_simulations=10000):
 - **Bonus Points:** Best risk-adjusted returns
 
 **Assignment 1 Introduction (Last 10 min):**
-- "The Risk & Forecast Analyzer" - Due Lecture 7
+- "The Risk & Forecast Analyzer" - Due Lecture 8
 - Part A: Portfolio optimization
 - Part B: Demand forecasting implementation
 
@@ -431,7 +455,6 @@ def calculate_metrics(self, schedule):
 - Will require scheduling + routing + improvement
 
 ### Lecture 7: Better Routing - Local Search & Improvements
-**Assignment 1 Due**
 
 **Domain Focus:** Logistics & Delivery
 **Key Question:** How do we systematically improve solutions?
@@ -513,6 +536,7 @@ def improve_route(route, distances):
 - **Bonus Points:** Best score (distance)
 
 ### **Lecture 8: Tough Trade-offs - Multi-Objective Optimization**
+**Assignment 1 Due**
 
 **Domain Focus:** Sustainability & Strategic Planning
 **Key Question:** What do you do when you can't have it all?

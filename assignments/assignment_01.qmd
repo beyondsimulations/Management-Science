@@ -4,7 +4,7 @@ title: "Assignment 1: Risk Analysis & Forecasting"
 
 ## Assignment Overview
 
-**Due:** Start of Lecture 7
+**Due:** Start of Lecture 8
 **Weight:** 30% of final grade
 **Expected Time:** 4-6 hours
 **Work:** Groups
