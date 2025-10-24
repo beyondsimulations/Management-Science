@@ -183,15 +183,28 @@ In the final presentations, each best group of the three topics with the best so
 - Finding min/max in dictionaries
 - Applying to scheduling problems (SPT, EDD rules preview)
 
-**Hour 4: Interactive Notebook #7 - Integration Mini-Project**
-- **Complete order management system**
-- Order processing and validation
-- Inventory management (check stock, update inventory)
-- Order prioritization by multiple criteria
-- Delivery scheduling with time calculations
-- Business reporting
-- **Integration of all skills learned in Lectures 1-2**
-- 10 minute recap and preview of data analysis
+**Hour 4: Interactive Notebook #7 - Integration Mini-Project + GitHub Copilot Setup**
+- **Simplified order management system** (30 min)
+  - Order processing and validation
+  - Inventory management (check stock, update inventory)
+  - Order prioritization by criteria
+  - Basic reporting
+  - **Integration of core skills: functions + dictionaries + sorting**
+
+- **GitHub Copilot Introduction** (15 min)
+  - What is GitHub Copilot? Your AI pair programmer
+  - Live demo: "Watch Copilot help me write code"
+    - Example: Ask Copilot to write a function to calculate shipping costs
+    - Show how to accept/reject/modify suggestions
+  - Setup instructions walkthrough:
+    - GitHub Student Developer Pack (free Copilot access)
+    - Installing Copilot in VS Code / Jupyter
+    - Quick troubleshooting tips
+  - **When to use Copilot:**
+    - Understanding syntax
+    - Writing boilerplate code
+    - Getting unstuck on simple problems
+    - ❌ Replacing learning fundamentals
 
 ---
 
@@ -248,27 +261,46 @@ In the final presentations, each best group of the three topics with the best so
 - Cumulative calculations with `cumsum()` (for running totals)
 - **Practice: Monthly sales analysis with trends** (guided, 20 min)
 
-**Hour 4: Interactive Notebook #11 - Visualization & Integration**
-- Why visualize? "A picture is worth a thousand rows"
-- Basic plotting with matplotlib:
-  - Line plots: `df.plot()` - for time series
-  - Bar charts: `df.plot(kind='bar')` - for comparisons
-  - Histograms: `df['column'].hist()` - for distributions
-  - Scatter plots: `df.plot.scatter(x='x', y='y')` - for relationships
-- Customizing plots:
-  - Titles: `plt.title('Sales Over Time')`
-  - Labels: `plt.xlabel()`, `plt.ylabel()`
-  - Legends: `plt.legend()`
-- Distribution plots for Monte Carlo results
-- **Integrated exercises** (30 min):
-  - Exercise 1: Load sales CSV, calculate monthly totals, create trend plot
-  - Exercise 2: Simulate dice rolls (NumPy), plot distribution (Pandas + matplotlib)
-  - Exercise 3: Calculate rolling 7-day average of daily sales, visualize
-- **Final 15 minutes:**
+**Hour 4: Interactive Notebook #11 - Visualization & Integration with Copilot**
+- **Copilot Check-In (5 min)**
+  - Quick poll: Who has Copilot working?
+  - Troubleshoot common issues
+  - Remind: "Today we'll use Copilot to help with plotting!"
+
+- **Visualization Basics** (25 min)
+  - Why visualize? "A picture is worth a thousand rows"
+  - Basic plotting with matplotlib:
+    - Line plots: `df.plot()` - for time series
+    - Bar charts: `df.plot(kind='bar')` - for comparisons
+    - Histograms: `df['column'].hist()` - for distributions
+    - Scatter plots: `df.plot.scatter(x='x', y='y')` - for relationships
+  - Customizing plots:
+    - Titles: `plt.title('Sales Over Time')`
+    - Labels: `plt.xlabel()`, `plt.ylabel()`
+    - Legends: `plt.legend()`
+  - Distribution plots for Monte Carlo results
+
+- **Integrated exercises WITH Copilot** (30 min):
+  - **Exercise 1:** Load sales CSV, calculate monthly totals, create trend plot
+    - Students write comments, let Copilot suggest code
+    - Example: "# Create a line plot of monthly sales with title and labels"
+  - **Exercise 2:** Simulate dice rolls (NumPy), plot distribution (Pandas + matplotlib)
+    - Practice: Ask Copilot to help with histogram styling
+  - **Exercise 3:** Calculate rolling 7-day average of daily sales, visualize
+    - Challenge: Customize plot appearance with Copilot's help
+
+- **Copilot Tips for Visualizations** (5 min)
+  - "Copilot is GREAT at matplotlib boilerplate"
+  - Show: Comment → Copilot generates full plotting code
+  - Tip: Always review and understand what Copilot suggests
+  - Common pitfall: Copilot might use outdated syntax, verify it works!
+
+- **Final 10 minutes:**
   - Quick recap: "What did we learn and why does it matter?"
   - Preview of Lecture 4: "Next week, Monte Carlo simulations for real business decisions"
-  - **GitHub Education + Copilot setup reminder** (share setup guide link)
-  - **AI pair programming tips:** "How to ask Copilot for help effectively"
+  - **Copilot strategy going forward:**
+    - "Use it for syntax, not thinking"
+    - "Your job: understand the logic, Copilot's job: remember the syntax"
 
 ## PART II: MANAGEMENT SCIENCE TOOLS (Lectures 4-9)
 *Mini-competitions begin here*
