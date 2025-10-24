@@ -11,7 +11,7 @@ title: "Assignment 2: Optimization in Practice"
 
 Your consulting firm has been hired by "CityExpress," a local delivery company. They need help with:
 1. Optimizing delivery routes to reduce costs
-2. Creating efficient staff schedules that balance operational needs and worker preferences
+2. Creating efficient shift assignments that balance operational needs and worker preferences
 
 ## Consultants
 Who is part of your group?
@@ -83,7 +83,7 @@ def nearest_neighbor_route(depot, locations):
     Build route using nearest neighbor heuristic.
     Always visit the nearest unvisited customer next.
     """
-    route = [depot] # Start with depots
+    route = [depot] # Start with depot
     # YOUR CODE HERE
 
     route.append(depot)  # End with depot
@@ -127,9 +127,11 @@ def try_swap_improvement(route, locations):
         route: Current route (list of location indices)
         locations: Dictionary of location coordinates
 
+    Returns:
+        tuple: (best_route, best_distance) or (None, None) if no improvement
     """
     # YOUR CODE HERE (replace pass)
-    #
+
     pass
 
 def improve_route(initial_route, locations, max_iterations=50):
@@ -147,10 +149,9 @@ def improve_route(initial_route, locations, max_iterations=50):
     #   2. If no improvement found, break
     #   3. Otherwise, update current_route and current_distance
     #   4. Increment iteration counter
-    # YOUR CODE HERE
+    # YOUR CODE HERE (replace pass)
 
-
-    return current_route, current_distance, iteration
+    pass
 
 # Improve your route
 # YOUR CODE HERE
@@ -160,7 +161,7 @@ def improve_route(initial_route, locations, max_iterations=50):
 ### Task 3: Visualize and Analyze (10%)
 
 - Visualize both routes (before and after improvement)
-- Calculate and compare
+- Calculate and compare:
   - Original route distance
   - Improved route distance
   - Percentage improvement
@@ -171,7 +172,7 @@ def improve_route(initial_route, locations, max_iterations=50):
 # YOUR CODE HERE
 
 # Calculate metrics
-# # YOUR CODE HERE
+# YOUR CODE HERE
 ```
 
 **Business Question:** If CityExpress has 50 deliveries per day, how much could they save per month with route optimization? (3-4 sentences)
@@ -182,186 +183,241 @@ YOUR ANSWER HERE:
 """
 ```
 
-## Part B: Staff Scheduling (50%)
+## Part B: Smart Shift Assignment (50%)
 
 ### Scenario
-The warehouse needs to schedule 6 workers across 5 days (Mon-Fri). Each day needs 2-3 workers, and each worker should work exactly 3 days.
+CityExpress warehouse needs to assign 6 workers to 6 different shifts this week. Each worker works exactly one shift. Your job: maximize worker satisfaction by matching them to their preferred shifts.
 
-### Task 1: Create a Valid Schedule (20%)
+### Connection to Lecture 6
 
-**Understanding the Scheduling Problem:**
+Remember **greedy heuristics** from job shop scheduling (SPT, EDD)? You'll design similar rules here—but for workers and shifts instead of jobs and machines.
 
-We need to create a schedule that satisfies two types of constraints:
+**Think about:**
 
-1. **Worker constraints**: Each worker must work exactly 3 days
-2. **Daily constraints**: Each day must have 2-3 workers
+- SPT prioritized **shortest** jobs first
+- EDD prioritized jobs with **earliest deadlines** first
+- What should **you** prioritize for shift assignment?
 
-**Schedule Representation:**
-
-- Schedule is a 5x6 array (5 days × 6 workers)
-- schedule[day][worker] = 1 if worker works that day, 0 otherwise
-
-```
-Example:
-         Worker0  Worker1  Worker2  Worker3  Worker4  Worker5
-Monday      1        0        1        0        1        0     (3 workers)
-Tuesday     0        1        0        1        1        0     (3 workers)
-...
-```
+### The Data
 
 ```{python}
-def check_schedule_valid(schedule):
-    """
-    Check if schedule meets all constraints.
+# 6 shifts available this week
+shifts = [
+    'Monday-Morning',
+    'Monday-Evening',
+    'Tuesday-Morning',
+    'Tuesday-Evening',
+    'Wednesday-Morning',
+    'Wednesday-Evening'
+]
 
-    Args:
-        schedule: 5x6 numpy array (days × workers)
-
-    """
-    violations = []
-
-    # Check constraint 1: Each worker works exactly 3 days
-    # Hint: Use schedule.sum(axis=0) to get days per worker
-    # Example: if worker i doesn't work 3 days, add to violations
-    # YOUR CODE HERE
-
-
-    # Check constraint 2: Each day has 2-3 workers
-    # Hint: Use schedule.sum(axis=1) to get workers per day
-    # Example: if day j has <2 or >3 workers, add to violations
-    # YOUR CODE HERE (replace pass)
-    pass
-
-
-def create_basic_schedule():
-    """
-    Create a valid schedule.
-    Returns: 5x6 array where schedule[day][worker] = 1 if working, 0 if off
-    """
-    schedule = np.zeros((5, 6), dtype=int)
-
-    # Strategy: Assign each worker to exactly 3 days
-    # For each worker:
-    #   1. Randomly select 3 days from [0, 1, 2, 3, 4]
-    #      Hint: np.random.choice(5, size=3, replace=False)
-    #   2. Set schedule[selected_days, worker] = 1
-    # After creating schedule, check if it's valid
-    # YOUR CODE HERE
-
-    return schedule
-
-# Create and validate schedule
-# YOUR CODE HERE
-
-```
-
-### Task 2: Check Worker Preferences (20%)
-
-**Understanding Worker Satisfaction:**
-
-Each worker has preferred days they'd like to work. Satisfaction = number of preferred days assigned.
-
-**Example:**
-
-- Worker 0 prefers [Monday, Tuesday, Wednesday]
-- If scheduled for [Monday, Tuesday, Friday]: satisfaction = 2 (got 2 out of 3 preferred)
-- If scheduled for [Monday, Wednesday, Friday]: satisfaction = 2
-- If scheduled for [Monday, Tuesday, Wednesday]: satisfaction = 3 (perfect!)
-
-**Improvement Strategy:**
-
-Try swapping work assignments between workers to increase total satisfaction while maintaining validity.
-
-```{python}
-# Worker preferences (day indices: 0=Mon, 1=Tue, 2=Wed, 3=Thu, 4=Fri)
+# Worker shift preferences (in order of preference: 1st choice, 2nd choice, 3rd choice)
 worker_preferences = {
-    0: [0, 1, 2],  # Worker 0 prefers Mon, Tue, Wed
-    1: [2, 3, 4],  # Worker 1 prefers Wed, Thu, Fri
-    2: [0, 2, 4],  # Worker 2 prefers Mon, Wed, Fri
-    3: [1, 3],     # Worker 3 prefers Tue, Thu
-    4: [0, 1],     # Worker 4 prefers Mon, Tue
-    5: [3, 4]      # Worker 5 prefers Thu, Fri
+    0: ['Monday-Morning', 'Tuesday-Morning', 'Wednesday-Morning'],     # Morning person
+    1: ['Monday-Evening', 'Tuesday-Evening', 'Wednesday-Evening'],     # Prefers evenings
+    2: ['Monday-Morning', 'Wednesday-Morning'],                        # Flexible, fewer preferences
+    3: ['Tuesday-Evening', 'Wednesday-Evening'],                       # Evening only, fewer preferences
+    4: ['Monday-Morning', 'Monday-Evening', 'Tuesday-Morning'],        # Busy early week
+    5: ['Wednesday-Morning', 'Wednesday-Evening']                      # Wednesday preferred
 }
 
-def calculate_satisfaction(schedule, preferences):
-    """
-    Calculate total satisfaction score.
-
-    Args:
-        schedule: 5x6 numpy array (days × workers)
-        preferences: Dictionary mapping worker to list of preferred days
-
-    Returns:
-        tuple: (total_score, individual_scores)
-               total_score: Sum of all worker satisfaction
-               individual_scores: List of satisfaction per worker
-    """
-    individual_scores = []
-
-
-    # For each worker:
-    #   1. Find which days they are scheduled (where schedule[:, worker] == 1)
-    #      Hint: np.where(schedule[:, worker] == 1)[0] gives scheduled days
-    #   2. Count how many scheduled days are in their preferences
-    #      Hint: Use a loop or list comprehension
-    #   3. Add to individual_scores
-    # YOUR CODE HERE (replace pass)
-    pass
-
-def improve_schedule_for_satisfaction(schedule, preferences, iterations=50):
-    """
-    Improve schedule by swapping assignments between workers.
-
-    Strategy: Try swapping a working day from one worker to another worker's off day.
-    Only keep swaps that increase satisfaction while maintaining validity.
-
-    Args:
-        schedule: Initial schedule (5x6 array)
-        preferences: Worker preferences dictionary
-        iterations: Maximum number of swap attempts
-
-    """
-
-    # For iteration in range(iterations):
-    #     Pick two random workers: w1, w2
-    #     Pick a day that w1 works but w2 doesn't
-    #     Pick a day that w2 works but w1 doesn't
-    #     Swap them and check if better
-    # YOUR CODE HERE (replace pass)
-    pass
-
-
-# Calculate initial satisfaction
-# YOUR CODE HERE
-
-# Improve schedule
-# YOUR CODE HERE
-
+# Assignment representation:
+# assignment = [shift_index for each worker]
+# Example: assignment = [0, 1, 2, 3, 4, 5]
+#   Worker 0 gets shift 0 (Monday-Morning)
+#   Worker 1 gets shift 1 (Monday-Evening)
+#   Worker 2 gets shift 2 (Tuesday-Morning)
+#   etc.
 ```
 
-### Task 3: Visualize and Analyze (10%)
+### Task 1: Design Your Greedy Heuristic (15%)
 
-- Create visualizations for both schedules
-- Calculate and compare:
-  - Total satisfaction score (initial vs improved)
-  - Distribution of workload across days
-  - Fairness metric (standard deviation of satisfaction across workers)
+**Challenge:** Create a function that builds an assignment using YOUR OWN greedy strategy.
 
+**Need a starting point?**
+
+Ask yourself:
+
+1. What made SPT different from EDD?
+2. What attributes do workers have?
+3. What attributes do shifts have?
+4. Pick one attribute to prioritize. That's your greedy rule!
 
 ```{python}
-# Visualize both schedules (hint: Use generative AI to help you with the plot)
-# YOUR CODE HERE
+def my_greedy_assignment(worker_preferences, shifts):
+    """
+    Build an assignment using YOUR greedy strategy.
 
-# Analyze and compare
-# Calculate:
-# 1. Total satisfaction (initial vs improved)
-# 2. Workers per day for both schedules
-# 3. Individual satisfaction scores
+    Args:
+        worker_preferences: Dict of worker_id → list of preferred shift names
+        shifts: List of 6 shift names
+
+    Returns:
+        list: assignment where assignment[worker_id] = shift_index
+              Example: [0, 1, 2, 3, 4, 5] means worker 0→shift 0, worker 1→shift 1, etc.
+    """
+    assignment = [-1] * 6  # -1 means unassigned
+    available_shifts = list(range(6))  # Track which shifts are still open
+
+    # YOUR GREEDY STRATEGY HERE
+    # Questions to guide you:
+    # 1. In what order will you process the workers? (0,1,2,3,4,5 or different order?)
+    # 2. For each worker, how do you pick their shift from available ones?
+    # 3. What if their preferred shifts are all taken?
+
+    # YOUR CODE HERE
+
+    return assignment
+
+# Test your greedy heuristic
 # YOUR CODE HERE
 
 ```
 
-**Business Question:** What's the trade-off between operational needs and worker satisfaction? How would you handle a worker who can't work their preferred days? (3-4 sentences)
+**Deliverable:**
+
+1. Working greedy function that produces a valid assignment (all assigned, no duplicate shifts)
+2. Written explanation (3-4 sentences)
+
+```{python}
+"""
+YOUR EXPLANATION HERE:
+My greedy strategy: [describe your rule]
+Reasoning: [why did you choose this approach?]
+"""
+```
+
+### Task 2: Build an Evaluation Function (15%)
+
+**Challenge:** Create a function that measures how GOOD an assignment is.
+
+**Design questions:**
+
+- Should you give more points for 1st choice vs 2nd choice vs 3rd choice?
+- Should all workers count equally, or weight some more?
+- What if a worker gets a shift they didn't list as preferred?
+
+```{python}
+def calculate_satisfaction(assignment, worker_preferences, shifts):
+    """
+    Calculate how good an assignment is.
+
+    Design YOUR OWN scoring system!
+
+    Possible approaches:
+    - 1st choice = 3 pts, 2nd choice = 2 pts, 3rd choice = 1 pt, other = 0 pts
+    - 1st choice = 10 pts, 2nd choice = 5 pts, 3rd choice = 1 pt, other = -5 pts
+    - Binary: preferred shift = 1 pt, non-preferred = 0 pts
+    - Your own scoring!
+
+    Args:
+        assignment: List where assignment[worker_id] = shift_index
+        worker_preferences: Dict of worker_id → list of preferred shift names
+        shifts: List of shift names
+
+    Returns:
+        float or int: Total satisfaction score (higher is better)
+    """
+    # Design your own scoring system!
+    # YOUR EVALUATION LOGIC HERE
+
+
+    return total_satisfaction
+
+# Test your evaluation function
+# YOUR CODE HERE
+
+```
+
+**Deliverable:**
+
+1. Working evaluation function
+2. **Written explanation (2-3 sentences):**
+   - What scoring system did you design?
+   - Why did you choose this approach?
+   - How does it relate to metrics from Lecture 6?
+
+```{python}
+"""
+YOUR EXPLANATION HERE:
+My scoring system: [describe how you calculate satisfaction]
+Reasoning: [why this approach?]
+"""
+```
+
+### Task 3: Improve with Local Search (15%)
+
+**Challenge:** Take your greedy solution and improve it using local search.
+
+**Think about Lecture 7:**
+
+- 2-opt tried **swaps** and kept improvements
+- It kept searching until no improvement was found
+- Can you apply similar logic here?
+
+**Your task:** Implement a local search that tries swapping workers' shifts.
+
+```{python}
+def improve_with_local_search(initial_assignment, worker_preferences, shifts):
+    """
+    Improve an assignment using local search (like 2-opt from Lecture 7).
+    Strategy: Try swapping pairs of workers' shifts, keep if it improves satisfaction.
+
+    Think about:
+    - How do you generate "neighbor" solutions? (swap two workers)
+    - How do you know if a neighbor is better? (use your evaluation function!)
+    - When do you stop? (no improvement found, or max iterations)
+
+    Args:
+        initial_assignment: Starting assignment (from your greedy)
+        worker_preferences: Dict of worker_id → preferred shifts
+        shifts: List of shift names
+
+    Returns:
+        list: improved assignment
+    """
+
+    # YOUR LOCAL SEARCH LOGIC HERE
+
+
+    # YOUR CODE HERE
+
+    return improved_assignment
+
+# Apply local search
+# YOUR CODE HERE
+
+```
+
+**Deliverable:**
+
+1. Working local search function that improves the solution
+2. Visualization showing before/after
+3. **Written explanation (3-4 sentences):**
+   - How does your local search work?
+   - How much did you improve the greedy solution?
+   - Could you improve it further?
+
+```{python}
+"""
+YOUR EXPLANATION HERE:
+Local search method: [describe your approach]
+Results: [how much improvement?]
+Further improvements?: [yes/no and why?]
+"""
+```
+
+### Task 4: Business Reflection (5%)
+
+**Question 1:** Imagine one worker calls in sick at the last minute. How would you quickly reassign the remaining 5 workers to 6 shifts (one shift will be unfilled)? Would your greedy strategy still work? (3-4 sentences)
+
+```{python}
+"""
+YOUR ANSWER HERE:
+"""
+```
+
+**Question 2:** Your manager says "I don't care about worker preferences, just fill all shifts as quickly as possible." How would this change your approach? What would you lose? (2-3 sentences)
 
 ```{python}
 """
@@ -372,14 +428,17 @@ YOUR ANSWER HERE:
 ## Submission Checklist
 
 - [ ] All code cells run without errors
-- [ ] Routes are properly visualized
-- [ ] Schedules meet all constraints
-- [ ] Business questions are answered
-- [ ] Code is commented
+- [ ] Part A: Routes are properly visualized
+- [ ] Part B: Greedy heuristic, evaluation function, and local search all implemented
+- [ ] Written explanations completed for all tasks
+- [ ] Business questions answered
+- [ ] Code is commented and clear
 - [ ] Names added to top of notebook
 
 ## Tips
 
-- Use AI tools to help understand concepts and programm, but make sure you understand the code
-- Start simple - get something working before optimizing
-- Remember: the goal is good solutions, not perfect ones
+- **Use AI tools** to help understand concepts and program, but make sure you understand the code
+- **Start simple** - get something working before optimizing
+- **Experiment!** - there's no single "correct" approach
+- **Focus on reasoning** - I care more about your thinking than perfect code
+- The goal is **good solutions**, not perfect ones

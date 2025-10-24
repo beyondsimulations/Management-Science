@@ -1038,13 +1038,13 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 
 **Technical Requirements:**
 - Multiple skill levels
-- Shift patterns and preferences
-- Labor law compliance
+- Shift patterns
+- Labor law compliance (consecutive days)
 - Fairness metrics
 
 **Deliverables:**
 1. Weekly schedule
-2. Fairness and satisfaction metrics
+2. Fairness metrics
 3. Overtime reduction metrics
 4. What-if analysis (1 or 2 random staff members sick)
 
