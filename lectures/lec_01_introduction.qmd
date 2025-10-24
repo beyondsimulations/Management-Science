@@ -26,6 +26,16 @@ format:
 I really appreciate active participation and interaction!
 :::
 
+## Management Science
+
+[Question: What is Management Science?]
+
+. . .
+
+Management science (or managerial science) is a wide and interdisciplinary study of solving complex problems and making strategic decisions as it pertains to institutions, corporations, governments and other types of organizational entities. It is closely related to management, economics, business, engineering, management consulting, and other fields. It uses various scientific research-based principles, strategies, and analytical methods including mathematical modeling, statistics and numerical algorithms and aims to improve an organization's ability to enact rational and accurate management decisions by arriving at optimal or near optimal solutions to complex decision problems.[^ms]
+
+[^ms]: An Introduction to Management Science: Quantitative Approaches to Decision Making (15 ed.). Boston: Cengage Learning, Inc. 2019. ISBN 978-1-337-40652-9.
+
 ## Course Outline
 
 :::{.incremental}
