@@ -249,21 +249,27 @@ In the final presentations, each best group of the three topics with the best so
   - Create calculated column
   - Sort results
 
-**Hour 3: Interactive Notebook #10 - GroupBy & Aggregations**
-- **GroupBy aggregations** (essential for business analysis):
-  - Basic single aggregation: `df.groupby('category')['sales'].sum()`
-  - Other useful aggregations: `.mean()`, `.count()`, `.max()`, `.min()`
-  - Brief demo of multiple aggregations: `.agg(['sum', 'mean'])` (optional, not required)
-- **Practice examples** (simple, concrete):
-  - Total sales by product category
-  - Average price by region
-  - Count of orders by customer
-- **Hands-on exercise** (guided, 30 min):
-  - Load product sales CSV
-  - Find best-selling category
-  - Calculate average sale per category
-  - Identify top 5 products by revenue
-- **Final 10 min:** Create simple bar chart of results (preview for Hour 4)
+**Hour 3: Interactive Notebook #10 - Data Analysis Practice**
+- **Integrated practice combining all Pandas skills** (45 min guided exercise):
+  - Load a realistic sales dataset (CSV with 500+ rows)
+  - **Task 1: Data exploration** (10 min)
+    - Use `head()`, `info()`, `describe()` to understand the data
+    - Identify data types, ranges, potential issues
+  - **Task 2: Filtering and sorting** (15 min)
+    - Find all sales above €1000
+    - Find products in a specific category
+    - Sort to find top 10 highest sales
+    - Filter for sales in a specific month
+  - **Task 3: Calculated columns** (10 min)
+    - Add profit column: `df['profit'] = df['revenue'] - df['cost']`
+    - Add profit margin: `df['margin'] = df['profit'] / df['revenue']`
+    - Find most profitable products
+  - **Task 4: Basic aggregations** (10 min)
+    - Calculate total revenue: `df['revenue'].sum()`
+    - Average sale: `df['revenue'].mean()`
+    - Count of transactions: `len(df)`
+    - Compare different product categories using filtering
+- **Key takeaway:** Students can answer business questions by combining filter + sort + aggregate
 
 **Hour 4: Interactive Notebook #11 - Visualization & Integration with Copilot**
 - **Copilot Check-In (5 min)**
@@ -283,14 +289,14 @@ In the final presentations, each best group of the three topics with the best so
     - Labels: `plt.xlabel()`, `plt.ylabel()`
 
 - **Integrated exercises WITH Copilot** (30 min):
-  - **Exercise 1:** Load sales CSV, calculate category totals with groupby, create bar chart
+  - **Exercise 1:** Load sales CSV, filter for one category, create bar chart of top 10 products
     - Students write comments, let Copilot suggest code
-    - Focus: Understanding the data pipeline
+    - Focus: Understanding the data pipeline (filter → sort → plot)
   - **Exercise 2:** Simulate 1000 dice rolls (NumPy), plot distribution histogram
     - Practice: Ask Copilot to help with histogram styling
-    - See the bell curve appear!
-  - **Exercise 3:** Find top 10 products by sales, create sorted bar chart
-    - Combine: filtering/sorting + groupby + visualization
+    - See the distribution pattern appear!
+  - **Exercise 3:** Create profit column, find top 10 most profitable products, create sorted bar chart
+    - Combine: calculated columns + filtering/sorting + visualization
 
 - **Copilot Tips for Visualizations** (5 min)
   - "Copilot is GREAT at matplotlib boilerplate"
@@ -744,90 +750,149 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   - **Evaluation**: Each team picks their own weights (must justify)
   - **Winner**: Best solution quality given their stated weights + best justification
 
-### Lecture 9: Escaping the Trap - Simulated Annealing & Metaheuristics
+### Lecture 9: The Metaheuristics Toolkit - Beyond Greedy
 
 **Domain Focus:** Complex Optimization
-**Key Question:** How do we escape local optima and find great solutions?
-**Core Concept:** Simulated Annealing + Metaheuristics Overview
+**Key Question:** What advanced techniques exist when greedy and local search aren't enough?
+**Core Concept:** Survey of Metaheuristics (awareness, not implementation)
 
-**Hour 1: Interactive Lecture - The Temperature of Optimization**
-- **Opening Hook:** "Why Your Phone Gets Hot When Thinking"
-  - Connection between physical annealing and optimization
+**Hour 1: Interactive Lecture - The Optimization Landscape**
 
-- The local optima problem revisited:
-  - "Remember Lecture 7? We got stuck."
-  - Visualization: Lost in the mountains at night
+- **Opening: The Local Optima Trap** (10 min)
+  - "Remember Lecture 7? Our 2-opt improvement got stuck."
+  - Visualization: Lost in the mountains at night with a flashlight
+  - You can see nearby solutions, but the best solution might be far away
+  - Real example: Your delivery route is good, but there's a MUCH better one across town
 
-- **Physical Annealing Process:**
-  - Blacksmith demonstration (video): heating metal makes it flexible
-  - Slow cooling creates perfect crystal structure
-  - Fast cooling creates brittle material
+- **The Three Levels of Optimization** (5 min)
+  ```
+  Level 1: Construction (Greedy) → Get A solution fast
+  Level 2: Improvement (Local Search) → Make it better
+  Level 3: Metaheuristics → Escape traps, explore widely
+  ```
 
-- **Simulated Annealing Algorithm:**
-  - Start "hot": accept bad moves frequently
-  - Cool down slowly: become more selective
-  - End "cold": only accept improvements
-  - The magic: `accept_probability = exp(-delta/temperature)`
+- **Metaheuristic #1: Simulated Annealing** (10 min)
+  - **Metaphor:** Cooling molten metal to form perfect crystals
+  - **Key idea:** Sometimes accept WORSE solutions to escape traps
+  - **The temperature trick:**
+    - Hot (early): "Let's try something crazy!" (accept bad moves often)
+    - Warm (middle): "Getting pickier..." (accept bad moves sometimes)
+    - Cold (late): "Only improvements now" (like hill climbing)
+  - **Live demo video/animation:** Watch SA escape a trap where hill climbing fails
+  - **When to use:** Scheduling, assignment problems, discrete optimization
+  - **GenAI tip:** "ChatGPT/Copilot can write SA code if you describe your problem clearly"
 
-- Live demonstration: SA vs. Hill Climbing
-  - Same problem, watch them run side-by-side
-  - Hill climbing gets stuck quickly
-  - SA explores, finds better solutions
+- **Metaheuristic #2: Genetic Algorithms** (10 min)
+  - **Metaphor:** Evolution and natural selection
+  - **Key idea:** Maintain a POPULATION of solutions, combine the best ones
+  - **The process:**
+    1. Start with 50 random solutions (population)
+    2. Pick the best 10 (selection - "survival of the fittest")
+    3. Combine pairs to create new solutions (crossover - "breeding")
+    4. Randomly change some parts (mutation - "genetic variation")
+    5. Repeat for many generations
+  - **Visual:** Show how solutions "evolve" over 100 generations
+  - **When to use:** Complex problems with many variables, when you have time
+  - **Real examples:** NASA uses GAs for antenna design, engineers for structural optimization
+  - **GenAI tip:** "Copilot knows GA templates - just describe your fitness function"
 
-- **Cooling Schedules:**
-  - Linear: T = T - α
-  - Geometric: T = T × α (most common)
-  - Adaptive: adjust based on acceptance rate
+- **Metaheuristic #3: Tabu Search** (5 min)
+  - **Metaphor:** Exploration with a memory/no-return policy
+  - **Key idea:** Keep a "tabu list" of recent moves - don't repeat them
+  - **Why it works:** Forces exploration of new areas instead of cycling
+  - **When to use:** When your algorithm keeps revisiting the same solutions
+  - **Simple example:** "I just swapped customers A and B, so don't swap them back for 10 iterations"
 
-- When to use SA:
-  - Discrete optimization with local search neighborhoods
-  - When you need good solutions, not perfect ones
-  - When problem has many local optima
+- **Metaheuristic #4: Ant Colony Optimization** (5 min)
+  - **Metaphor:** How ants find shortest paths to food
+  - **Key idea:** Good solutions leave "pheromone trails" that attract future solutions
+  - **The process:** Early ants explore randomly, later ants follow successful trails
+  - **When to use:** Routing problems (TSP, VRP), network design
+  - **Cool fact:** Amazon warehouse robots use ACO-inspired algorithms
 
-- **Quick Tour of Other Metaheuristics:**
+- **Quick mentions** (3 min):
+  - **Particle Swarm:** Birds flocking, good for continuous optimization
+  - **Variable Neighborhood Search:** Try different neighborhoods when stuck
+  - **Many more exist!** Research is ongoing
 
-  **Genetic Algorithms (5 min):**
-  - Population-based, inspired by evolution
-  - Good for: Large search spaces, multiple local optima
-  - When to use: Have time to run, need diverse solutions
+- **Comparison Table - Your Decision Guide:**
+  ```
+  Method              | Speed    | Code Complexity | Best For                    | GenAI Help?
+  --------------------|----------|-----------------|-----------------------------|--------------
+  Greedy              | Fastest  | Simple          | Quick decisions             | Easy
+  Local Search (2-opt)| Fast     | Medium          | Improving solutions         | Easy  
+  Simulated Annealing | Medium   | Medium          | Escaping local optima       | Easy
+  Genetic Algorithm   | Slow     | Complex         | Complex multi-variable      | Medium
+  Tabu Search         | Medium   | Medium          | Preventing cycling          | Medium
+  Ant Colony          | Slow     | Complex         | Routing/path problems       | Hard
+  ```
 
-  **Tabu Search (3 min):**
-  - Local search with memory: "don't go back"
-  - Good for: Intensification and diversification
-  - When to use: Cycling is a problem
+- **Closing message:** (2 min)
+  - "You don't need to memorize implementations"
+  - "Key skill: Knowing WHICH tool to use for WHICH problem"
+  - "With GenAI, you can use these techniques even without deep expertise"
+  - "In today's notebook, you'll see examples and learn how to work WITH AI to apply them"
 
-  **Ant Colony Optimization (3 min):**
-  - Inspired by ant foraging behavior
-  - Good for: Routing problems, combinatorial optimization
-  - When to use: Problem has natural path representation
+**Hour 2: Interactive Notebook - Metaheuristics in Action (Demos + GenAI Integration)**
 
-  **Particle Swarm Optimization (2 min):**
-  - Swarm intelligence
-  - Good for: Continuous optimization
+**NEW APPROACH:** Students don't implement from scratch - they run provided implementations and learn to use GenAI to adapt them
 
-- **Comparison Table:**
-```
-Method          | Complexity | Speed | Solution Quality | Best For
-----------------|-----------|-------|------------------|------------------
-Greedy          | Low       | Fast  | Good             | Quick decisions
-Local Search    | Low       | Fast  | Better           | Improvement
-SA              | Medium    | Medium| Great            | Escaping traps
-GA              | High      | Slow  | Great            | Complex landscapes
-Tabu            | Medium    | Medium| Great            | Cycling problems
-```
+**Part 1: Understanding Through Demos** (20 min)
+- **Pre-built visualization notebooks provided**
+- Students run and observe:
+  ```python
+  # Demo 1: Hill Climbing vs. Simulated Annealing (10 min)
+  # - Same TSP problem, watch both algorithms
+  # - See SA escape local optima
+  # - Adjust temperature schedule, observe impact
+  # Students just RUN code, observe, answer questions:
+  #   Q: "At what iteration did SA escape the trap?"
+  #   Q: "What happens if you cool too fast?"
+  
+  # Demo 2: Genetic Algorithm Evolution (10 min)
+  # - Watch 100 generations evolve
+  # - See best solution improve over time
+  # - Adjust mutation rate, observe impact
+  # Students answer:
+  #   Q: "Which generation found the best solution?"
+  #   Q: "What happened when mutation rate = 0?"
+  ```
 
-**Hour 2: Notebook Session - Mastering Simulated Annealing**
-```python
-# Students will implement a complete but simple SA framework for an easy scheduling problem without any additional constraints
+**Part 2: Working WITH GenAI** (20 min)
+- **Guided exercise: Adapting code with Copilot/ChatGPT**
+  ```python
+  # Provided: Basic SA template for TSP
+  # Task: Adapt it for a simple assignment problem
+  
+  # Step 1: Students describe the problem to Copilot in comments
+  # "I have 10 tasks and 3 workers. Each task takes different time on different workers."
+  # "I want to minimize total completion time."
+  
+  # Step 2: Let Copilot suggest neighborhood moves
+  # Students learn: How to prompt AI, how to verify suggestions
+  
+  # Step 3: Run adapted code, compare to greedy solution
+  ```
 
-# Students compare SA vs Hill Climbing on one problem
-# See how SA consistently finds better solutions
-```
+- **Key learning outcome:** "I can DESCRIBE a problem and USE metaheuristics, even if I don't code them from scratch"
 
-- **Class Discussion (5 min):**
-  - How did SA escape local optima?
-  - What happened when you cooled too fast? Too slow?
-  - Which cooling schedule worked best?
+**Part 3: Decision Framework Practice** (10 min)
+- Students get 3 scenario cards:
+  1. "Schedule 50 nurses across 7 days with complex constraints"
+  2. "Route 100 deliveries across 5 vehicles"
+  3. "Assign 20 projects to 8 teams with skill requirements"
+  
+- **Task:** For each scenario, recommend:
+  - Which metaheuristic to try?
+  - Why that one?
+  - How would you describe it to GenAI to get code?
+
+- **Class discussion:** Share recommendations, instructor validates
+
+**Class Discussion (5 min):**
+- "What surprised you about metaheuristics?"
+- "Which one would you try first for your consulting project?"
+- "How confident do you feel using GenAI to implement these?"
 
 **Hours 3-4: Competition - "The Weekend Restaurant Staffing Challenge"**
 
@@ -885,14 +950,17 @@ Tabu            | Medium    | Medium| Great            | Cycling problems
   - All 18 positions must be filled
 
 - **Approaches Allowed:**
-  - **Greedy heuristic** - Design your own rule-based assignment (good enough for credit!)
-  - **Simulated Annealing** - Explore solution space systematically (likely to win!)
+  - **Greedy heuristic** - Design your own rule-based assignment (perfectly acceptable!)
+  - **Local search improvement** - Start with greedy, then try swaps to improve
+  - **Metaheuristics with GenAI** - Use ChatGPT/Copilot to implement SA, GA, or other methods (optional!)
   - **Random search** - Generate many random solutions, pick best
   - **Your creative approach** - Surprise us!
 
-- **Neighborhood Move for SA (if using SA):**
-  - Swap two servers' shift assignments
-  - Very simple: just exchange their positions
+- **GenAI Usage Encouraged:**
+  - "I have 18 servers (6 experienced at €75/hr, 12 junior at €25/hr) to assign to 6 shifts..."
+  - Ask ChatGPT/Copilot to suggest an approach
+  - You can use metaheuristics WITHOUT coding them from scratch!
+  - Focus on understanding the solution, not implementing the algorithm
 
 - **Deliverables:**
   1. Complete schedule (which servers on which shifts)
@@ -903,25 +971,32 @@ Tabu            | Medium    | Medium| Great            | Cycling problems
 
 - **Competition Format:**
   - **60 minutes development**
-  - **Any approach accepted** - Focus is on understanding trade-offs
-  - Submit: one-slide summary with schedule + costs
+  - **Any approach accepted** - From simple greedy to advanced metaheuristics
+  - **GenAI is your partner** - Use it strategically!
+  - Submit: one-slide summary with schedule + costs + approach description
   - **Evaluation:** Lowest total cost wins
 
 - **Bonus Points:**
   - **Best total cost** (lowest): Standard competition bonus (10/6/3 points)
 
 - **Tips for Students:**
-  - **Greedy approach ideas:**
+  - **If going greedy/simple:**
     - Assign experienced servers to dinner shifts first (prioritize high penalties)
     - Minimize penalties first, then optimize labor cost
     - Try multiple greedy rules, pick best result
+    - Can still win with a smart greedy approach!
 
-  - **SA approach tips:**
-    - Start with random solution or greedy solution
-    - Swap neighborhood is simple and effective
-    - Cooling schedule: T = 0.95 × T works well
-    - Run 1000-3000 iterations
-    - Track cost over time to see improvement
+  - **If using GenAI for metaheuristics:**
+    - Clearly describe the problem in your prompt
+    - Specify constraints explicitly (each shift needs 3, each server works once)
+    - Ask for SA or GA implementation
+    - Verify the code works and makes sense
+    - Understand what the algorithm is doing (you'll need to explain it!)
+    
+  - **Hybrid approach (recommended):**
+    - Start with greedy solution (fast, understandable)
+    - Use GenAI to improve it with local search or SA
+    - Compare results - document the improvement
 
 ## PART III: Consulting Competition (Lectures 10-12)
 *No mini-competitions - focus on final project*
