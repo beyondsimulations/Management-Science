@@ -126,8 +126,8 @@ for i in range(10_000):
 #| output-location: fragment
 # After collecting all_profits...
 # Mean, Std, and simple risk metric
-# all_profits = np.array(all_profits)
-# all_profits.mean(), all_profits.std(), (all_profits < 0).mean()
+all_profits = np.array(all_profits)
+all_profits.mean(), all_profits.std(), (all_profits < 0).mean()
 ```
 :::
 
@@ -159,7 +159,7 @@ returns_cloudai.mean(), returns_cloudai.std()
 
 [Adaptation Tip:] For other lectures, swap the context (e.g., daily demand, processing times). Keep the exact same pattern.
 
-## Interactive Check (Code-Based Question)
+## Interactive Check [Code-Based Question]
 
 [Question]{.question}: What fraction of outcomes are negative (loss)? How would that change if `scale` doubles? [. . .]
 
@@ -203,7 +203,7 @@ risk_of_loss
 > Solve the TechVenture startup problem.
 
 ::: callout-tip
-Your job is to **think**; let Copilot remember the exact syntax.  
+Your job is to **think**; let Copilot remember the exact syntax.
 [Adaptation Tip:] Encourage tool-use prompts that target one function or code idiom at a time.
 :::
 
@@ -219,6 +219,11 @@ Your job is to **think**; let Copilot remember the exact syntax.
 - Enumerate all pairs
 - Aggregate pair returns (e.g., equal-weight average)
 - Compare by mean, probability of loss, and expected shortfall (worst 10%)
+- Check for correlation[^correlation]
+
+[correlation]: Correlation increases tail risk. A pair with the same mean may become less attractive once correlation is considered.
+
+## Example
 
 ```{.python}
 #| eval: false
@@ -229,7 +234,7 @@ means = np.array([0.22, 0.25, 0.28, 0.20])
 stds  = np.array([0.10, 0.15, 0.20, 0.12])
 n = 10_000
 
-# Independent draws (no correlation; see next slide for correlated)
+# Independent draws
 samples = [np.random.normal(m, s, size=n) for m, s in zip(means, stds)]
 
 pairs = [(0,1), (0,2), (0,3), (1,2), (1,3), (2,3)]
@@ -250,36 +255,6 @@ for i, j in pairs:
     })
 # [Adaptation Tip:] Present top-1 and trade-offs (mean vs. tail risk).
 ```
-
-## Adding Correlation (When Risks Move Together)
-
-[Question]{.question}: Why might independent simulations be misleading when market conditions affect all startups? [. . .]
-
-- Use multivariate normals to model correlated shocks
-- Same means/stds but with a covariance matrix
-
-```{.python}
-#| eval: false
-#| echo: true
-# Correlation matrix (example; replace with your estimates)
-corr = np.array([
-    [1.00, 0.30, 0.20, 0.10],
-    [0.30, 1.00, 0.35, 0.15],
-    [0.20, 0.35, 1.00, 0.25],
-    [0.10, 0.15, 0.25, 1.00],
-])
-cov = np.outer(stds, stds) * corr
-
-# Draw correlated samples (mean vector, covariance matrix)
-mv_samples = np.random.multivariate_normal(mean=means, cov=cov, size=n)  # shape: (n, 4)
-
-# Reuse the same pair loop, but now with correlated columns
-# portfolio = 0.5 * mv_samples[:, i] + 0.5 * mv_samples[:, j]
-```
-
-::: callout-important
-[Key Takeaway:] Correlation increases tail risk. A pair with the same mean may become less attractive once correlation is considered.
-:::
 
 ## Choosing a Decision Rule
 
