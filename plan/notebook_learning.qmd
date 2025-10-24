@@ -1,6 +1,10 @@
 ---
 title: "Tutorial X.Y - [Main Concept Name]"
 subtitle: "Management Science"
+code-links:
+   - text: Python
+     href: tut_X_Y_main.py
+     icon: hand-thumbs-up
 ---
 
 # Introduction
@@ -12,129 +16,308 @@ Welcome to this interactive Python tutorial!
 
 [THE ENGAGING HOOK]
 Start with a relatable, real-world problem. This is the most important part for engagement. Frame the concept you're about to teach as a tool to solve this problem.
-Example: "The Secretary Problem" / "The Marriage Problem". It asks: "If you want to find the best possible partner... when should you stop dating and propose?"
-"Imagine you're planning a Mars mission. Every task, from equipment checks to crew training, needs careful scheduling."
+
+Example hooks:
+- "The Secretary Problem" / "The Marriage Problem": If you want to find the best possible partner, when should you stop dating and decide?
+- "Mars Mission Scheduling": Every task, from equipment checks to crew training, needs careful scheduling.
+- "Library System": Managing books, borrowing policies, and popularity tracking.
 
 [STATE THE GOAL]
 In this tutorial, we'll learn about [Concept Name] and use it to help us [solve the problem from the hook].
 
-::: callout-note
-If a cell is marked with YOUR CODE BELOW, you are expected to write your code in that cell.
+::: {.callout-note}
+## How to Use This Tutorial
+Cells marked with "YOUR CODE BELOW" expect you to write your own code.
 :::
+
+---
 
 # Section 1 - [First Sub-Concept]
 
 [EXPLANATION]
-Explain all the required core idea clearly and concisely. Use simple language. Introduce the syntax necessary to solve the exercises later. Make sure you only use concepts students know.
+Explain the core idea clearly and concisely using simple language. Introduce only the syntax necessary for upcoming exercises. Avoid introducing concepts students haven't seen yet.
 
-```{.python}
+```{python}
 #| eval: true
-#
-# [Show a clear, simple code example of the concept in action]
-# [Variable, loop, function, etc.]
+# A clear, minimal example that demonstrates the sub-concept
 print("This is a working example.")
 ```
 
-[PEDAGOGICAL CALLOUT]
-Use callouts to provide extra context. This is a key part of your repo's style.
-
-::: callout-tip
+::: {.callout-tip}
 ## Pro-Tip / Definition / Real-World Analogy
-
-Use this space to define jargon, offer a helpful tip, or connect the concept to a non-programming idea (e.g., "Think of a variable as a labeled box").
+Use this space to define jargon, offer a helpful tip, or connect the concept to a non-programming idea.
+For example: "Think of a variable as a labeled box that can hold a value."
 :::
 
-::: callout-warning
-## Common Mistake / Pitfall
-
-Warn students about common errors. (e.g., "Don't forget the colon : at the end of an if statement!" or "Remember that Python lists are 0-indexed!").
+::: {.callout-warning}
+## Common Mistakes / Pitfalls
+- [Mistake 1] e.g., Forgetting colons : in control structures
+- [Mistake 2] e.g., Off-by-one errors in indexing
+- [Mistake 3] e.g., Misusing assignment (=) vs comparison (==)
 :::
 
 ## Exercise 1.1 - [Specific Task Title]
 
 [INSTRUCTIONS]
-Give a clear, actionable instruction for the exercise. (e.g., "Create a variable named captain and assign it the string value "Picard".").
-```{.python}
+Give a clear, actionable instruction for the exercise.
+For example: Create a variable named `captain` and assign it the string value "Picard".
+
+::: {.callout-note}
+## Before You Start
+- Use descriptive variable names
+- Prefer f-strings for formatting
+- Keep your solution minimal and readable
+:::
+
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 
-# [Provide some hints here on the approach if difficult]
-
+# [Optional: starter hints if the task is difficult]
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
-# [Working solution to the excercise]
+# [Working solution to the exercise]
 
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
-# [THE INTERACTIVE FEEDBACK BLOCK]
-# Test your answer
-assert [variable\_name] == [expected\_value], "Your assert message here: e.g., 'The captain variable is incorrect!'"
-print("Success! You've correctly defined the [concept].")
+# Test your answer (edit the assertion(s) to match the exercise)
+# Example pattern:
+# assert variable_name == expected_value, "Helpful message when the check fails"
+print("Success! You've correctly completed Exercise 1.1.")
 ```
 
 ## Exercise 1.2 - [Another Task]
 
-*(...repeat exercise structure...)*
-
-## Exercise 1.3 - [Another Task] (If required)
-
-*(...repeat exercise structure...)*
-
-# Section 2 - [Second Sub-Concept]
-
-[EXPLANATION]
-Introduce the next concept, building on the previous one. Explain how it relates to the overall "Hook" problem.
-```{.python}
-# [Code example for the second concept]
-```
-
-## Exercise 2.1 - [Task for Second Concept]
-
 [INSTRUCTIONS]
-```{.python}
+```{python}
 #| eval: false
 # YOUR CODE BELOW
 
 ```
 
 ::: {.content-visible when-profile="solutions"}
-```{.python}
+```{python}
 #| eval: false
-# [Working solution to the excercise]
+# [Working solution to the exercise]
 
 ```
 :::
 
-```{.python}
+```{python}
 #| eval: false
 #| code-fold: true
-# [Test block for Exercise 2.1]
-assert [condition], "[Failure message]"
-print("Great job! [Success message]")
+# Test block for Exercise 1.2
+# assert [condition], "[Failure message]"
+print("Great job! Exercise 1.2 passed.")
 ```
 
-*(...Repeat with more sections as needed...)*
+---
+
+# Section 2 - [Second Sub-Concept]
+
+[EXPLANATION]
+Introduce the next concept, building on the previous one.
+Explain how it relates to the overall "Hook" problem.
+
+```{python}
+#| eval: true
+# A concise example demonstrating the second concept
+```
+
+::: {.callout-warning}
+## Common Pitfall
+When combining multiple conditions or operations, use parentheses to make your intent explicit.
+For example:
+# if (a and b) or (c and not d):
+:::
+
+## Exercise 2.1 - [Task for Second Concept]
+
+[INSTRUCTIONS]
+State exactly what to implement and what the function/logic should return or print.
+
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# [Working solution to the exercise]
+
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test block for Exercise 2.1
+# Example:
+# assert my_function(args) == expected, "Explain what's wrong when it fails"
+print("Excellent! Exercise 2.1 checks passed.")
+```
+
+## Exercise 2.2 - [Optional Additional Task]
+
+[INSTRUCTIONS]
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# [Working solution to the exercise]
+
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test block for Exercise 2.2
+print("Nice! Exercise 2.2 checks passed.")
+```
+
+---
+
+# Section 3 - [Third Sub-Concept: Defaults / Parameters]
+
+[EXPLANATION]
+Sometimes you want defaults for parameters to make your code more flexible.
+
+```{python}
+#| eval: true
+def example_with_default(param, flag=True):
+    if flag:
+        return f"Flag is on for {param}"
+    return f"Flag is off for {param}"
+
+print(example_with_default("demo"))
+print(example_with_default("demo", flag=False))
+```
+
+## Exercise 3.1 - [Task Using Defaults]
+
+[INSTRUCTIONS]
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# [Working solution to the exercise]
+
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test block for Exercise 3.1
+print("Great! Exercise 3.1 checks passed.")
+```
+
+---
+
+# Section 4 - [Optional: Methods vs Functions]
+[EXPLANATION]
+Methods are functions that belong to objects. Functions stand alone; methods are called on objects.
+
+```{python}
+#| eval: true
+text = "the great gatsby"
+print(text.title())  # Method on a string object
+```
+
+::: {.callout-tip}
+## Functions vs Methods
+- Function: function_name(arguments)
+- Method: object.method_name(arguments)
+:::
+
+## Exercise 4.1 - [String/List/Data Structure Method Task]
+
+[INSTRUCTIONS]
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# [Working solution to the exercise]
+
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test block for Exercise 4.1
+print("Excellent! Exercise 4.1 checks passed.")
+```
+
+---
 
 # Conclusion
 
 Congratulations! You've successfully learned how to use **[Main Concept Name]**.
 
 [TIE BACK TO THE HOOK]
-Summarize how the concepts learned help solve the initial problem. (e.g., "You now have the tools to apply the 37% rule to our 'dating problem'!" or "You can see how DataFrames help organize our Mars mission tasks to find the earliest deadline.").
+Summarize how the concepts learned help solve the initial problem.
+Examples:
+- "You now have the tools to apply the 37% rule to our 'dating problem'."
+- "You can see how DataFrames help organize our Mars mission tasks to find the earliest deadline."
+- "With functions and simple decision logic, we can model realistic library borrowing policies."
 
 [SUMMARIZE KEY TAKEAWAYS]
 Remember:
 
-* [Key takeaway 1]
-* [Key takeaway 2]
-* [Key takeaway 3]
+- [Key takeaway 1]
+- [Key takeaway 2]
+- [Key takeaway 3]
 
 [NARRATIVE LINK TO NEXT TUTORIAL]
 Continue to the next tutorial to learn about [Next Concept] and how we can [apply it to our problem]!
+
+{{< include ../include/tutorial_end.qmd >}}
+
+---
+
+# Authoring Guidelines (Keep for yourself; remove from student-facing copy)
+
+- Use callouts consistently:
+  - Tip: Real-World Example, Pro-Tip, or Concept vs Concept
+  - Note: Before You Start (exercise prep)
+  - Warning: Common Mistakes/Pitfalls
+- Keep examples minimal and runnable (`#| eval: true`).
+- Keep exercises non-executing by default (`#| eval: false`).
+- Always include:
+  1) Instructions
+  2) Attempt cell (with "YOUR CODE BELOW")
+  3) Hidden solution block (profile="solutions")
+  4) Test block with assertions and a positive success message
+- Prefer f-strings for formatting and clear assertion messages:
+  - `assert condition, "What went wrong and why"`
+- Use parentheses to clarify logical conditions.
+- Use descriptive variable and function names.
+- Keep success messages encouraging and specific
+- Ensure that all relevant informations is given
+- Ensure that students know all concepts we take as granted
