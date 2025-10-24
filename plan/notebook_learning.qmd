@@ -25,7 +25,8 @@ If a cell is marked with YOUR CODE BELOW, you are expected to write your code in
 # Section 1 - [First Sub-Concept]
 
 [EXPLANATION]
-Explain the first core idea clearly and concisely. Use simple language. Introduce the syntax.
+Explain all the required core idea clearly and concisely. Use simple language. Introduce the syntax necessary to solve the exercises later. Make sure you only use concepts students know.
+
 ```{.python}
 #| eval: true
 #
@@ -38,12 +39,14 @@ print("This is a working example.")
 Use callouts to provide extra context. This is a key part of your repo's style.
 
 ::: callout-tip
-Pro-Tip / Definition / Real-World Analogy
+## Pro-Tip / Definition / Real-World Analogy
+
 Use this space to define jargon, offer a helpful tip, or connect the concept to a non-programming idea (e.g., "Think of a variable as a labeled box").
 :::
 
 ::: callout-warning
-Common Mistake / Pitfall
+## Common Mistake / Pitfall
+
 Warn students about common errors. (e.g., "Don't forget the colon : at the end of an if statement!" or "Remember that Python lists are 0-indexed!").
 :::
 
@@ -55,7 +58,17 @@ Give a clear, actionable instruction for the exercise. (e.g., "Create a variable
 #| eval: false
 # YOUR CODE BELOW
 
+# [Provide some hints here on the approach if difficult]
+
 ```
+
+::: {.content-visible when-profile="solutions"}
+```{.python}
+#| eval: false
+# [Working solution to the excercise]
+
+```
+:::
 
 ```{.python}
 #| eval: false
@@ -90,6 +103,14 @@ Introduce the next concept, building on the previous one. Explain how it relates
 # YOUR CODE BELOW
 
 ```
+
+::: {.content-visible when-profile="solutions"}
+```{.python}
+#| eval: false
+# [Working solution to the excercise]
+
+```
+:::
 
 ```{.python}
 #| eval: false
