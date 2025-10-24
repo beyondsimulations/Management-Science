@@ -29,7 +29,7 @@ website:
       - section: "01 Let's Start"
         contents:
           - text: "01-00 Introduction"
-            href: lectures/lec_00_introduction.qmd
+            href: lectures/lec_01_introduction.qmd
           - text: "01-01 - Variables"
             href: tutorials/tut_01_01_variables.qmd
           - text: "01-02 - Comparisons"
