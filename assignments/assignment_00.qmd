@@ -25,11 +25,29 @@ Work is in groups for both assignments. Typical time commitment is 4–6 hours f
 
 ## How You’ll Be Graded
 
-**Across both assignments, the grading is consistent:**
+### Technical Implementation (60% of assignment grade)
 
-- **Technical implementation (50%):** correctness of methods, readable and well-structured code, and reasonable efficiency.
-- **Analysis and insights (30%):** problem understanding, interpretation of results, and quality of recommendations.
-- **Communication (20%):** clarity of writing, visualizations, and overall presentation.
+- **Excellent (90-100%):** Code runs correctly, handles edge cases, well-structured
+- **Good (80-89%):** Code runs with minor issues, mostly well-structured
+- **Satisfactory (70-79%):** Code runs but has some problems, basic structure
+- **Needs Improvement (60-69%):** Code has significant issues but shows understanding
+- **Inadequate (<60%):** Code doesn't run or shows fundamental misunderstanding
+
+### Business Insight (20% of assignment grade)
+
+- **Excellent:** Clear actionable recommendations with quantified impact
+- **Good:** Solid insights with some quantification
+- **Satisfactory:** Basic insights communicated clearly
+- **Needs Improvement:** Insights unclear or not business-relevant
+- **Inadequate:** No meaningful insights provided
+
+### Presentation Quality (20% of assignment grade)
+
+- **Excellent:** Compelling visualizations, clear narrative
+- **Good:** Good visuals, mostly clear communication
+- **Satisfactory:** Basic visualizations, understandable presentation
+- **Needs Improvement:** Poor visuals or unclear communication
+- **Inadequate:** No effective communication of results
 
 ::: callout-important
 Use AI to clarify concepts, explore alternatives, and debug. Please, do not submit code you don’t understand. You’re responsible for every line. If you draw from external sources, cite them briefly in your notebook.

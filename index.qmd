@@ -6,50 +6,105 @@ html: default
 
 # Course Description
 
-In this module, we explore the application of optimization techniques to solve real-world problems. Over the course of the semester, you'll learn about various optimization challenges that have been tackled by the Institute of Logistics, Transport, and Production in collaboration with industry partners.
+Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making. By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.
 
-These practical problems include optimizing the sustainability of parcel delivery companies, ensuring corona-compliant crowd management at stadiums and theaters, and designing efficient district layouts for police authorities – to name just a few examples.
-
-The module is structured around one lecture and one exercise per week. During exercises, you'll work in groups with fellow students to program and solve small-scale problems. Bonus points are available for these exercises, which can contribute to your final exam grade at the end of the semester.
+In this course, you'll build a comprehensive "consultant's toolkit" by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you'll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of "executives."
 
 # Learning Outcomes
 
-You can find our specific outcomes in the module handbook. Our broader goal is to introduce you to how diversified the solution of practical problems can be. We want to enable you to independently apply methods and concepts from optimization, and to get a feeling for abstracting and modeling problems.
+By the end of this course, you will be able to:
 
-Is our module hard? That's a subjective question. We would say it is exciting and doable. If you have a basic interest in logical relationships and mathematics, you are in the right place. If you also have basic knowledge of programming or want to get into the subject with help, our module is perfect for you.
+**Technical Skills:**
 
-Upon completion of the course, you …
+- Implement Management Science solutions in Python
+- Write clean, modular Python code (functions, control flow, data structures)
+- Work effectively with NumPy and Pandas for analysis and modeling
+- Apply Monte Carlo simulation to model uncertainty and risk
+- Build and evaluate forecasting models for demand and time series
+- Design and analyze scheduling solutions (SPT, EDD rules) with key performance metrics
+- Solve routing problems using heuristics and local search improvements (nearest neighbor, 2-opt)
+- Handle multi-objective trade-offs and combine decision criteria meaningfully
+- Understand and apply metaheuristics for complex optimization problems
 
-- can implement solutions to complex optimization problems in Julia
-- know advanced concepts of optimization such as linear and nonlinear optimization
-- know basic concepts of programming and algorithms such as loops, functions
-- will be able to read and write code in Julia
-- will have experience working with Julia libraries such as JuMP and HiGHS
-- will know how to collaborate in a small team to find solutions for problems at hand
+**Professional Skills:**
 
-Please note that this course is **specifically designed for business students**. That is, it is **not required to have any advanced knowledge or experience in programming** to attend this course. The teaching format will make it possible to account for different levels of programming skills such that every student can take the most out of the course.
+- Collaborate effectively in small teams (3-4 students)
+- Communicate technical insights with clear visualizations and compelling narratives
+- Present solutions in a consulting-style format to business stakeholders
+- Approach complex problems with structured analytical thinking
 
-# Course Blocks
-The core content of the course is organized in three blocks:
+**Note:** This course is specifically designed for business students. No prior programming experience required—our teaching format supports different skill levels so every student can progress effectively.
 
-1. **Part I**: Introduction to Julia and Modelling
-2. **Part II**: Applied Optimization with Basic Models
-3. **Part III**: Applied Optimization with Advanced Models
+# Course Structure
 
-You can find more information on the course blocks and the corresponding lectures in the [syllabus](general/syllabus.qmd).
+The course is organized into three distinct parts across 12 lectures:
 
-# Tutorials
-The tutorials accompany the lectures. In the tutorials, you will apply the concepts from the lectures to realistic data sets. You will work in small groups of 3 participants, in which you can work out solutions together. We will help you during the weekly practice sessions by answering your questions or briefly explaining individual issues in case of difficulties. Afterwards, you have the opportunity to submit your jointly developed solution until the next exercise date in order to earn bonus points for the exam. You can earn up to half a bonus point per exercise, up to 6.0 bonus points in total. Important: the bonus points will only be credited to you if you pass the exam with at least a 4.0. Furthermore, we will not award bonus points for exercises in which you have simply copied the results of another group.
+## Part I: Python Foundation (Lectures 1-3)
+*Building your analytical toolkit*
 
-# How to see the slides
-- This course is based on [Quarto](https://quarto.org/)
-- It uses [revealjs](https://revealjs.com/) to render the slides
-- You find the slides for each lecture in the corresponding lecture
-- To see the slides, click on `RevealJS` in the top right side in the lecture
+## Part II: Management Science Tools (Lectures 4-9)
+*Mini-competitions begin - apply algorithms to real business problems*
 
-# Questions
-If you have any questions regarding the course, please contact me under [tobias.vlcek@uni-hamburg.de](mailto:tobias.vlcek@uni-hamburg.de?subject=Applied%20Optimization%3A%20%3CYour%20subject%3E).
+## Part III: Consulting Competition (Lectures 10-12)
+*Client challenges with professional presentations*
+
+# Assignments & Grading
+
+## Assignment Structure
+
+- **Assignment 1: Risk & Forecasting** (Due Lecture 8) - 30%
+- **Assignment 2: Full Optimization Toolkit** (Due Lecture 10) - 30%
+- **Final Competition: Client Project** (Lectures 10-12) - 40%
+
+## Bonus Opportunities
+
+- Win mini-competitions during lectures (Lectures 4-9)
+- Best client project in Part III chosen by peer teams
+
+## Time Expectations
+
+- 4-6 hours per week outside class
+- Assignments take 4-7 hours each
+- Focus on insights over perfect code
+- functional and clear solutions are the goal
+
+# Resources & Support
+
+## Required Tools
+
+- Laptop capable of running Python and Jupyter notebooks
+- Python (installed via uv package manager in class)
+- GitHub Copilot (free with Student Developer Pack)
+- VS Code or similar IDE
+
+## Getting Help
+
+1. **During class:** Ask questions immediately, others likely have the same question
+2. **Team support:** Leverage your group for collaborative problem-solving
+3. **Email:** Response within 48 hours for urgent questions
+
+# Important Dates
+
+| Date | Milestone |
+|------|-----------|
+| Lecture 1 | Course begins, teams formed |
+| Lecture 4 | Mini-competitions begin |
+| Lecture 8 | Assignment 1 due (Risk & Forecasting) |
+| Lecture 10 | Assignment 2 due (Optimization Toolkit) |
+| Lecture 10 | Client project teams formed |
+| Lecture 12 | Final presentations (Consulting Finals) |
+
+# How to Navigate This Course
+
+- **Slides:** Click "RevealJS" in the top right corner of each lecture page
+- **Notebooks:** Interactive exercises accompany each lecture
+
+You can find detailed information about course policies, grading rubrics, and expectations in the [syllabus](general/syllabus.qmd).
+
+# Questions & Contact
+
+If you have any questions regarding the course, please contact me at [vlcek@beyondsimulations.com](mailto:vlcek@beyondsimulations.com?subject=ManagementScience).
 
 # Contributors
 
-Thanks to [Matthes Koch](https://github.com/OpResCodes) and [Justus Bonz](https://github.com/jasdefer), who helped to prepare the lecture materials.
+Thanks to [Asvin Goel](https://github.com/rajgoel), who inspired part of this course.

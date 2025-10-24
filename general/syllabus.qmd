@@ -1,4 +1,152 @@
 ---
-title: "Syllabus"
-subtitle: "This years course structure"
+title: "Course Syllabus"
+subtitle: "Management Science"
 ---
+
+# Course Structure & Schedule
+
+## Part I: Python Foundation (Lectures 1-3)
+*No mini-competitions yet - focus on solid foundations*
+
+### Lecture 1: Welcome to Management Science
+
+- Course introduction
+- Python setup with uv package manager
+- Variables, data types, basic operations
+- Lists and indexing fundamentals
+- Conditionals and basic loops
+
+### Lecture 2: Python Programming Advances
+
+- Functions for code organization
+- Dictionaries for structured data
+- Tuples and multiple return values
+- Sorting and optimization fundamentals
+- GitHub Copilot integration and best practices
+
+### Lecture 3: Data Science Foundation
+
+- NumPy for numerical computing and random simulation
+- Pandas for data manipulation and analysis
+- Data visualization with matplotlib
+- CSV file handling and real dataset exploration
+- Integration practice with business scenarios
+
+## Part II: Management Science Tools (Lectures 4-9)
+*Mini-competitions begin - apply algorithms to business problems*
+
+**Format for Lectures 4-9:**
+
+- **Hour 1:** Interactive lecture on core concepts
+- **Hour 2:** Hands-on notebook practice + class discussion
+- **Hours 3-4:** Mini-competition with real data + solution presentations
+- **Bonus Points:** Best solution teams earn points toward final grade
+
+### Lecture 4: Dealing with Uncertainty - Monte Carlo Simulation
+
+- Probability distributions and random sampling
+- Business risk modeling techniques
+- Portfolio optimization under uncertainty
+- Coffee shop simulation case study
+
+### Lecture 5: Forecasting the Future
+
+- Time series analysis fundamentals
+- Demand forecasting methods
+- Forecast evaluation metrics
+- Seasonal and trend analysis
+
+### Lecture 6: Smart Quick Decisions in Scheduling
+
+- SPT (Shortest Processing Time) rule
+- EDD (Earliest Due Date) rule
+- Gantt chart visualization
+- Performance metrics: makespan, tardiness, flow time
+
+### Lecture 7: Better Routing - Local Search & Improvements
+
+- Nearest neighbor heuristic
+- 2-opt local search improvements
+- Route optimization metrics
+- Real logistics applications
+
+### Lecture 8: Tough Trade-offs - Multi-Objective Optimization
+
+- Weighted scoring methods
+- Pareto efficiency concepts
+- Decision criteria combination
+- Business trade-off analysis
+
+### Lecture 9: The Metaheuristics Toolkit - Beyond Greedy
+
+- When simple heuristics fail
+- Genetic algorithms introduction
+- Simulated annealing basics
+- Algorithm selection strategies
+
+## Part III: Consulting Competition (Lectures 10-12)
+*Real client challenges with professional presentations*
+
+### Lecture 10: Client Briefings
+
+- Three client projects to choose from:
+  - **QuickBite:** Food delivery routing optimization
+  - **NurseNext:** Healthcare staff scheduling
+  - **TechMart:** E-commerce inventory optimization
+- Team formation and data exploration
+- Project scope definition
+
+### Lecture 11: Development Sprint
+
+- Presentation skills training
+- Intensive solution development
+- Peer consultation and feedback
+- Prototype completion milestone
+
+### Lecture 12: The Consulting Finals
+
+- Professional presentation competition
+- "Executive panel evaluation"
+- Solution demonstration and Q&A
+
+# Assessment & Grading
+
+## Grade Composition (100 points total)
+
+| Component | Points | Percentage | Description |
+|-----------|---------|------------|-------------|
+| Assignment 1: Risk & Forecasting | 30 | 30% | Due Lecture 8 |
+| Assignment 2: Optimization Toolkit | 30 | 30% | Due Lecture 10 |
+| Final Competition Project | 40 | 40% | Lectures 10-12 |
+| - Solution Quality | 20 | 20% | Technical implementation |
+| - Presentation | 20 | 20% | Communication effectiveness |
+
+## Bonus Opportunities (Additional points possible)
+
+- Mini-competition victories (Lectures 4-9): up to +10 points
+- Peer-selected best client project: +5 points
+
+# Course Policies
+
+## Team Work Guidelines
+
+- Teams of 3-4 students formed in Lecture 1
+- All team members must contribute meaningfully
+- Peer evaluation forms will be used to assess individual contributions
+- Team conflicts should be reported to instructor immediately
+
+## Late Work Policy
+
+- Assignment 1 & 2: -10% per day late (up to 3 days)
+- Competition project: No late submissions accepted (real consulting deadline!)
+- Extensions granted only for documented emergencies
+
+## Academic Integrity
+
+- Collaboration encouraged within teams, between teams on concepts only
+- GitHub Copilot and AI tools encouraged for learning, not for replacing thinking
+- Copying solutions from internet or other students prohibited
+
+# Course Evolution
+
+This course continuously evolves based on student feedback and industry trends. Your input throughout the semester helps improve the experience for future cohorts.
