@@ -820,7 +820,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   Method              | Speed    | Code Complexity | Best For                    | GenAI Help?
   --------------------|----------|-----------------|-----------------------------|--------------
   Greedy              | Fastest  | Simple          | Quick decisions             | Easy
-  Local Search (2-opt)| Fast     | Medium          | Improving solutions         | Easy  
+  Local Search (2-opt)| Fast     | Medium          | Improving solutions         | Easy
   Simulated Annealing | Medium   | Medium          | Escaping local optima       | Easy
   Genetic Algorithm   | Slow     | Complex         | Complex multi-variable      | Medium
   Tabu Search         | Medium   | Medium          | Preventing cycling          | Medium
@@ -848,7 +848,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   # Students just RUN code, observe, answer questions:
   #   Q: "At what iteration did SA escape the trap?"
   #   Q: "What happens if you cool too fast?"
-  
+
   # Demo 2: Genetic Algorithm Evolution (10 min)
   # - Watch 100 generations evolve
   # - See best solution improve over time
@@ -863,14 +863,14 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   ```python
   # Provided: Basic SA template for TSP
   # Task: Adapt it for a simple assignment problem
-  
+
   # Step 1: Students describe the problem to Copilot in comments
   # "I have 10 tasks and 3 workers. Each task takes different time on different workers."
   # "I want to minimize total completion time."
-  
+
   # Step 2: Let Copilot suggest neighborhood moves
   # Students learn: How to prompt AI, how to verify suggestions
-  
+
   # Step 3: Run adapted code, compare to greedy solution
   ```
 
@@ -881,7 +881,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   1. "Schedule 50 nurses across 7 days with complex constraints"
   2. "Route 100 deliveries across 5 vehicles"
   3. "Assign 20 projects to 8 teams with skill requirements"
-  
+
 - **Task:** For each scenario, recommend:
   - Which metaheuristic to try?
   - Why that one?
@@ -992,7 +992,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
     - Ask for SA or GA implementation
     - Verify the code works and makes sense
     - Understand what the algorithm is doing (you'll need to explain it!)
-    
+
   - **Hybrid approach (recommended):**
     - Start with greedy solution (fast, understandable)
     - Use GenAI to improve it with local search or SA
@@ -1053,7 +1053,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 **COO Persona:** "We have €10M stuck in inventory, yet we're out of stock on bestsellers"
 
 **The Problem:**
-"We sell 100 electronics SKUs online with two warehouses. One fast warehouse for shipping with a low capacity and one large warehouse to store slow-movers. Problem: 20% stockout rate on popular items while slow-movers occupy most of the fast warehouses space. Black Friday is coming - we need smart inventory positioning NOW."
+"We sell 50 electronics SKUs online with two warehouses. One fast warehouse for shipping with a low capacity and one large warehouse to store slow-movers. Problem: 20% stockout rate on popular items while slow-movers occupy most of the fast warehouses space. Black Friday is coming - we need smart inventory positioning NOW."
 
 **The Data:**
 - 2 years sales history
@@ -1062,7 +1062,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 - SKUs must be fully allocated to either warehouse
 
 **Core Techniques Needed:**
-- Demand forecasting with seasonality
+- Demand forecasting
 - Inventory optimization (which SKU in which warehouse)
 - Monte Carlo for simulation of costs
 
