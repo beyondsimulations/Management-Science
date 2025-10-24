@@ -9,6 +9,7 @@ project:
     - general/*.qmd
     - lectures/*.qmd
     - tutorials/*.qmd
+    - assignments/*.qmd
 website:
   title: "Management Science"
   repo-url: https://github.com/beyondsimulations/Management-Science
@@ -62,6 +63,10 @@ website:
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd
+      - section: "Assignments"
+        contents:
+          - text: "Introduction"
+            href: assignments/assignment_00.qmd.qmd
       - text: "Cheatsheet"
         href: general/cheatsheet.qmd
       - text: "FAQs"

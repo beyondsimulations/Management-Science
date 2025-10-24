@@ -107,120 +107,144 @@ In the final presentations, each best group of the three topics with the best so
 ## Course Plan
 
 ### PART I: PYTHON FOUNDATION (Lectures 1-3)
-**No Mini-competitions yet!*
+*No Mini-competitions yet! Focus on building solid Python foundations.*
 
 #### Lecture 1: Welcome to Management Science
 
 **Objectives:**
 - Inspire students about Management Science applications
 - Set up Python development environment with uv
-- Begin Python basics through interactive notebooks
+- Master Python fundamentals: variables, lists, loops, conditionals
 
-**Hour 1: The World of Management Science**
+**Hour 1: Course Introduction + Setup (45 min)**
 - Welcome and course overview (15 min)
 - "From Amazon to Hospitals: Where algorithms make millions"
 - The consultant mindset: "You're junior consultants, not just students"
 - Course structure, assignments, and competition preview
 - Why Python? The language of modern analytics
-
-**Hour 2: Environment Setup & First Steps**
 - Installing Python with uv (modern Python package manager)
 - Setting up Jupyter notebooks
 - Troubleshooting session - ensure everyone is ready
-- Students start working with interactive notebook #1
+- First code: `print()` and basic commands
 
-**Hour 3: Python Fundamentals**
-- Interactive Notebook #2
-- Data types: numbers, strings, lists, dictionaries
-- Control flow: if statements and conditions
-- First loops: for and while
-- Hands-on exercises with immediate feedback
+**Hour 2: Interactive Notebook #1 - Variables & Basic Data Types**
+- Variables as named storage
+- Data types: int, float, string
+- Basic arithmetic operations
+- f-strings for output formatting
 
-**Hour 4: Functions and Problem Solving**
-- Interactive Notebook #3
-- Writing your first functions
-- Parameters and return values
-- Simple optimization example: finding the minimum
-- 10 minute recap and preview of next session's content
+**Hour 3: Interactive Notebook #2 - Lists & Basic Loops**
+- Creating and accessing lists (indexing, slicing)
+- List operations: `append()`, `len()`
+- For loops for iteration
+- Loops with `range()` for indexed access
+- Calculating aggregations (sum, average, count)
+
+**Hour 4: Interactive Notebook #3 - Conditionals & While Loops**
+- If/elif/else statements
+- Comparison operators (==, !=, >, <, >=, <=)
+- Boolean logic (and, or)
+- Conditionals within loops
+- While loops for iterative processes
+- Building filtered lists
+- 10 minute recap and preview of next session
+
+---
 
 #### Lecture 2: Python Programming Advances
 
 **Objectives:**
-- Solidify Python programming concepts
-- Master data structures and control flow
-- Begin thinking algorithmically
+- Master functions for code organization
+- Understand dictionaries and tuples for structured data
+- Learn sorting of structured data
+- Build integrated mini-project
 
-**Hour 1: Review and Advanced Functions**
-- Quick review quiz (10 min warm-up)
-- Interactive Notebook #3
-- List comprehensions - Python's superpower
-- Lambda functions for quick operations
-- Error handling with try/except
+**Hour 1: Interactive Notebook #4 - Functions**
+- Why functions? (code reusability)
+- Function structure: def, parameters, return
+- Functions with business logic
+- Functions calling other functions
+- Returning multiple values with tuples
+- Tuple basics: immutable sequences for function returns
+- Unpacking tuple returns
 
-**Hour 2: Data Structures Deep Dive**
-- Interactive Notebook #4
-- Working with lists: slicing, methods, operations
-- Dictionaries for real-world data
-- Sets and tuples - when to use what
-- Nested structures: lists of dictionaries
-- Practice: Building a simple inventory system
+**Hour 2: Interactive Notebook #5 - Dictionaries**
+- Dictionaries for structured data (key-value pairs)
+- Creating, accessing, and updating dictionaries
+- Lists of dictionaries
+- Looping through structured data
+- Filtering and processing dictionary data
+- Using dictionaries with functions
 
-**Hour 3: Algorithms and Logic**
-- Interactive Notebook #5
-- Nested loops and complexity
-- Searching and sorting basics
-- Building a simple scheduling algorithm
-- Debugging techniques and best practices
-- Code organization and commenting
+**Hour 3: Interactive Notebook #6 - Sorting & Finding Best Options**
+- Sorting simple lists (`sorted()`, `reverse=True`)
+- Finding min/max with built-in functions
+- Sorting by multiple fields
+- Finding min/max in dictionaries
+- Applying to scheduling problems (SPT, EDD rules preview)
 
-**Hour 4: Mini-Project Workshop**
-- Interactive Notebook #6
-- Build a profit/loss calculator
-- Implement break-even analysis
-- Simple demand/supply equilibrium finder
-- 10 minute recap and preview of next session's content
+**Hour 4: Interactive Notebook #7 - Integration Mini-Project**
+- **Complete order management system**
+- Order processing and validation
+- Inventory management (check stock, update inventory)
+- Order prioritization by multiple criteria
+- Delivery scheduling with time calculations
+- Business reporting
+- **Integration of all skills learned in Lectures 1-2**
+- 10 minute recap and preview of data analysis
+
+---
 
 ### Lecture 3: Data Science Foundation - NumPy & Pandas
 
 **Objectives:**
-- Master NumPy for numerical computing
-- Become proficient with Pandas for data manipulation
-- Prepare for Management Science applications
-- Plot Data and Graphs
+- Master NumPy for numerical computing and Monte Carlo
+- Learn Pandas for data manipulation and forecasting prep
+- Create visualizations for business insights
+- Final readiness check before algorithms
 
-**Hour 1: NumPy Essentials**
-- Interactive Notebook #7
-- Arrays vs. lists - why arrays matter
-- Creating and manipulating arrays
-- Mathematical operations and broadcasting
-- Random number generation (preview of Monte Carlo)
+**Hour 1: Interactive Notebook #8 - NumPy Essentials**
+- Why NumPy? Speed vs. Python lists
+- Creating arrays (from lists, zeros, ones, arange, linspace)
+- Vectorized operations (fast element-wise math)
+- Statistical functions: mean, std, min, max, percentiles
+- **Random number generation** (uniform, normal, integers)
+- Simple Monte Carlo simulation example
+- Boolean indexing and filtering
 
-**Hour 2: NumPy for Business Analytics**
-- Interactive Notebook #8
-- Statistical functions: mean, std, percentiles
-- Matrix operations for optimization
-- Practical example: Portfolio calculations
-- Vectorization for speed
-- Risk calculation with correlations
+**Hour 2: Interactive Notebook #9 - Pandas Basics**
+- DataFrames vs arrays (labeled columns)
+- Creating DataFrames from dictionaries
+- Exploring data: `head()`, `info()`, `describe()`, `shape`
+- Selecting columns and rows (`iloc`, column names)
+- Creating new calculated columns
+- **Filtering data** with boolean conditions
+- Sorting with `sort_values()`
+- **Reading CSV files** with `pd.read_csv()`
 
-**Hour 3: Pandas Fundamentals**
-- Interactive Notebook #9
-- DataFrames and Series - Excel in Python
-- Reading data: CSV, Excel files
-- Data selection and filtering
-- GroupBy operations - powerful aggregations
-- Analyzing sales data exercise
+**Hour 3: Interactive Notebook #10 - Pandas for Analysis**
+- **GroupBy aggregations** (sum, mean, count, multiple agg)
+- **Datetime operations** (extract month, week, day_of_week)
+- **Rolling averages** (critical for forecasting)
+- Cumulative calculations (`cumsum`)
+- Pivot tables for cross-tabulation
+- Merging datasets with `merge()`
+- Seasonal analysis patterns
 
-**Hour 4: Pandas for Real-World Data**
-- Interactive Notebook #10
-- Handling missing data
-- Merging and joining datasets
-- Time series basics with datetime
-- Data visualization with pandas plotting
-- Case study: Analyzing delivery times dataset
-- Final readiness check for Management Science
-- 15 minute talk on generative AI and Programming
-- Show students where to apply for Github Education to get Copilot
+**Hour 4: Interactive Notebook #11 - Visualization & Final Integration**
+- Basic plotting with matplotlib (line, bar, histogram, scatter)
+- Creating multi-plot dashboards with subplots
+- Time series visualizations
+- Distribution plots for Monte Carlo results
+- Customizing plots (titles, labels, legends, colors)
+- **Complete analytics project:** delivery startup analysis
+  - Data exploration and cleaning
+  - Time-based analysis (hourly, daily patterns)
+  - Driver performance metrics
+  - Business insights visualization
+- **Final readiness check before algorithms**
+- **15 min:** GitHub Education + Copilot setup guide
+- **AI pair programming best practices**
 
 ## PART II: MANAGEMENT SCIENCE TOOLS (Lectures 4-9)
 *Mini-competitions begin here*
@@ -318,41 +342,6 @@ def forecast_demand(historical_data, method='exponential'):
   - 10 minutes teams receive held-out data to test their algorithm
   - Accuracy comparison (using held-out data)
 - **Bonus Points:** Lowest total forecast error
-
-### Lecture 6: Smart Quick Routing Decisions
-
-**Domain Focus:** Logistics
-**Key Questions:** Can simple rules give us good-enough solutions quickly?
-
-**Hour 1: Interactive Lecture - Greedy Algorithms**
-- "Sometimes good enough is perfect"
-- Introduction to TSP/VRP: The traveling salesman's dilemma
-- Different rules for different goals
-
-**Hour 2: Simple Scheduling (Notebook)**
-```python
-# Students implement:
-def nearest_neighbor_route(locations, start):
-    route = [start]
-    remaining = locations.copy()
-    current = start
-
-    while remaining:
-        nearest = find_nearest(current, remaining)
-        route.append(nearest)
-        remaining.remove(nearest)
-        current = nearest
-
-    return route
-```
-
-**Hours 3-4: Competition - "Friday Rush"**
-- **Scenario:** Restaurant with orders and delivery
-- **Part A:** Schedule 50 food orders in kitchen
-- **Part B:** Plan delivery routes for 25 customers
-- **Challenge:** Minimize total time
-- **Bonus Points:** Best combined solution
-- **Additional Bonus Points:** Best visualization of the results
 
 ### Lecture 6: Smart Quick Decisions in Scheduling
 
@@ -724,7 +713,7 @@ Tabu            | Medium    | Medium| Great            | Cycling problems
 **Hour 1: The Projects**
 
 **The Setup:**
-"Welcome to Management Consulting! Three major clients need your expertise. Each has critical business problems requiring advanced analytics. You have 3 sessions to develop and present your solution."
+"Welcome to Management Consulting! Three major clients need your expertise and each group picks one client. Each has critical business problems requiring advanced analytics. You have 3 sessions to develop and present your solution."
 
 #### Client 1: QuickBite - The Food Delivery Revolution**
 **Industry:** Food Delivery / Logistics
