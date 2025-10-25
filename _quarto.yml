@@ -57,7 +57,7 @@ website:
           - text: "03-03 Plotting"
             href: tutorials/nb_03_03_visualization.qmd
           - text: "03-04 Recap"
-            href: lectures/lec_03_copilot_intro.qmd
+            href: lectures/lec_03_closing.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd
