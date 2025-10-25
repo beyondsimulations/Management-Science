@@ -231,7 +231,43 @@ print(f"Perfect! Price per item: ${price_per_item}, Total: ${total_cost}")
 # %% [markdown]
 # # Section 3 - Conditionals Within Loops
 #
-# Combining loops with conditionals lets us filter and process data
+# Before we combine conditionals with loops, let’s look again on how to
+# work with lists in Python.
+
+# %%
+# Basic list iteration
+products = ["Coffee", "Milk", "Sugar"]
+
+print("Simple iteration:")
+for product in products:
+    print(f"  - {product}")
+
+# %%
+# Using range() for indexed access
+products = ["Coffee", "Milk", "Sugar"]
+prices = [4.50, 2.75, 1.25]
+
+print("\nUsing range() for indices:")
+for i in range(len(products)):
+    print(f"  {products[i]} costs ${prices[i]}")
+
+# %%
+# Using enumerate() to get both index and value
+products = ["Coffee", "Milk", "Sugar"]
+prices = [4.50, 2.75, 1.25]
+
+print("\nUsing enumerate():")
+for i, product in enumerate(products):
+    print(f"  {i}: {product} costs ${prices[i]}")
+
+# %% [markdown]
+# > **List Iteration Patterns**
+# >
+# > 1.  **Simple iteration**: `for item in list:`
+# > 2.  **Indexed access**: `for i in range(len(list)):`
+# > 3.  **Index and value**: `for i, item in enumerate(list):`
+#
+# Now, combining loops with conditionals lets us filter and process data
 # intelligently.
 
 # %%
@@ -250,9 +286,10 @@ for i, sale in enumerate(daily_sales):
 # %% [markdown]
 # > **Tip**
 # >
-# > Instead of just using `range`, we can use `enumerate` to get both
-# > index and value in a loop at once. The `enumerate` function returns
-# > the index (here i) and value (here sale) of each element in the list.
+# > Instead of just using `range`, we can use `enumerate` as we have seen
+# > in the example before to get both index and value in a loop at once.
+# > The `enumerate` function returns the index (here i) and value (here
+# > sale) of each element in the list.
 #
 # > **Common Pattern:**
 # >
@@ -462,13 +499,13 @@ print(f"Total discount offered: ${total_discount:.2f}")
 # -   **Conditionals in Loops** - Filtering and categorizing data
 # -   **While Loops** - Running processes until conditions are met
 #
-# Your Bean Counter inventory system can now:
+# **Your Bean Counter inventory system can now:**
 #
 # -   Alert when supplies run low
 # -   Categorize products by stock level
 # -   Filter products for promotions
 #
-# Remember:
+# **Remember:**
 #
 # -   Always include colons (:) after if/elif/else/while statements
 # -   Proper indentation is crucial in Python

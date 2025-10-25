@@ -191,6 +191,7 @@ print(f"Now tracking {len(coffee_sales)} hours")
 
 # %%
 customer_counts = []
+hours_tracked = 0
 # YOUR CODE BELOW
 
 # %%
@@ -203,7 +204,7 @@ print("Perfect! You can build lists dynamically and check their length!")
 # ## Exercise 2.2 - Combining Lists
 #
 # You have morning and afternoon sales. Combine them into a full day’s
-# record called `full_day` and find the total number of transactions as
+# record called `full_day` and compute the total number of transactions as
 # `total_transactions`.
 #
 # > **Tip**
@@ -402,7 +403,7 @@ print(f"Total: {total_rating}, Count: {rating_count}, Average: {average_rating:.
 # tracking daily performance, finding trends, or calculating key metrics,
 # you have the tools to handle any amount of data efficiently.
 #
-# Remember:
+# **Remember:**
 #
 # -   Lists let you store multiple related values together
 # -   Loops eliminate repetitive code and process data automatically

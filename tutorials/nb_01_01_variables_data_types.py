@@ -43,7 +43,8 @@
 #
 # Variables are like labeled containers that store information. In our
 # coffee shop, we need to keep track of prices, customer names, order
-# quantities, and more.
+# quantities, and more. Variables allow us to store this information in a
+# way that we can easily access and update it later.
 
 # %%
 # Variables are created by giving them a name and a value
@@ -55,6 +56,15 @@ shop_open = True
 print(f"Customer {customer_name} ordered {cups_ordered} coffees at ${coffee_price} each")
 
 # %% [markdown]
+# > **Why Use Variables?**
+# >
+# > -   **Reusability**: Once you store a value in a variable, you can use
+# >     it multiple times without rewriting the value.
+# > -   **Readability**: Variables make your code easier to read and
+# >     understand.
+# > -   **Flexibility**: You can easily update the value of a variable
+# >     without changing the entire code.
+#
 # > **Variable Naming Rules**
 # >
 # > -   Use descriptive names (coffee_price is better than cp)
@@ -124,6 +134,16 @@ print(f"shop_name is a {type(shop_name)}")
 print(f"is_open is a {type(is_open)}")
 
 # %% [markdown]
+# > **Why Different Data Types?**
+# >
+# > -   **Precision**: Different data types allow for different levels of
+# >     precision. For example, floats can represent decimal numbers,
+# >     while integers cannot.
+# > -   **Operations**: Different data types support different operations.
+# >     For example, you can add numbers but concatenate strings.
+# > -   **Memory**: Different data types use different amounts of memory.
+# >     For example, integers use less memory than floats.
+#
 # > **Warning**
 # >
 # > **Common Mistake:** Mixing up numbers and text that looks like
@@ -202,6 +222,12 @@ print(f"Change from $20: ${change}")
 print(f"Price per shot: ${price_per_shot}")
 
 # %% [markdown]
+# > **Common Errors in Arithmetic**
+# >
+# > -   **TypeError**: This occurs when you try to perform an operation on
+# >     incompatible types, like adding a string to a number.
+# > -   **ZeroDivisionError**: This occurs when you try to divide by zero.
+#
 # > **Python Arithmetic Operators**
 # >
 # > -   `+` Addition
@@ -288,6 +314,13 @@ formatted_receipt = f"""
 print(formatted_receipt)
 
 # %% [markdown]
+# > **Common Errors in F-strings**
+# >
+# > -   **SyntaxError**: This occurs when you forget to use an `f` before
+# >     the string or use incorrect syntax within the curly braces.
+# > -   **TypeError**: This occurs when you try to format a value that is
+# >     not compatible with the specified format.
+#
 # > **F-string Formatting:**
 # >
 # > -   `{variable:.2f}` - Show 2 decimal places
@@ -332,7 +365,7 @@ print("Perfect! You've created your first formatted string!")
 # calculating bills and splitting checks to creating professional
 # receipts, you have all the basic tools you need.
 #
-# Remember:
+# **Remember:**
 #
 # -   Variables are named containers for storing data
 # -   Python has different data types (int, float, str) for different
