@@ -38,16 +38,26 @@ website:
             href: tutorials/nb_01_03_conditionals_while.qmd
       - section: "02 Advances"
         contents:
-          - text: "01-01 Functions"
+          - text: "02-01 Functions"
             href: tutorials/nb_02_01_functions.qmd
-          - text: "01-02 Dictionaries"
+          - text: "02-02 Dictionaries"
             href: tutorials/nb_02_02_dictionaries.qmd
-          - text: "01-03 Sorting"
+          - text: "02-03 Sorting"
             href: tutorials/nb_02_03_sorting.qmd
-          - text: "03-04 Recap"
+          - text: "02-04 Recap"
             href: tutorials/nb_02_04_recap.qmd
-          - text: "03-05 AI Programming"
+          - text: "02-05 AI Programming"
             href: lectures/lec_01_copilot_intro.qmd
+      - section: "02 Advances"
+        contents:
+          - text: "03-01 Numpy"
+            href: tutorials/nb_03_01_numpy.qmd
+          - text: "03-02 Pandas"
+            href: tutorials/nb_03_02_pandas.qmd
+          - text: "03-03 Plotting"
+            href: tutorials/nb_03_03_visualization.qmd
+          - text: "03-04 Recap"
+            href: lectures/lec_03_copilot_intro.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd

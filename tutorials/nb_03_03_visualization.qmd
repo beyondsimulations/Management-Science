@@ -25,16 +25,22 @@ Tomorrow morning, you're presenting Bean Counter's annual performance to the boa
 
 In this tutorial, you'll create the visualizations that will secure Bean Counter's future and cement your legacy as CEO.
 
-::: {.callout-note}
+::: {.callout-warning}
 ## How to Use This Tutorial
-Import matplotlib along with pandas and numpy. Create compelling charts for your board presentation!
+Import matplotlib along with pandas and numpy. Remember, we work with `uv`, so just use `uv add matplotlib` in the terminal. Now you can create compelling charts for your board presentation!
+:::
+
+::: {.callout-tip}
+## Start practicing generate AI
+The creation of plots is a perfect opportunity to start practicing generate AI. Usually you need a lot of code for nice visualizations and most of it is repetitive.
 :::
 
 ---
 
 # Section 1 - Bar Charts for Performance Comparison
 
-As CEO, you often need to compare performance across stores, products, or time periods. Bar charts are perfect for this.
+As CEO, you often need to compare performance across stores, products, or time periods.
+Bar charts are perfect for this.
 
 ```{python}
 #| eval: true
@@ -53,6 +59,7 @@ plt.title('Bean Counter Top 5 Store Revenue (Thousands $)', fontsize=16, fontwei
 plt.xlabel('Store Location', fontsize=12)
 plt.ylabel('Revenue ($1000s)', fontsize=12)
 plt.grid(axis='y', alpha=0.3)
+plt.xticks(rotation=45)
 
 # Add value labels on bars
 for i, v in enumerate(revenue):
@@ -65,6 +72,7 @@ plt.show()
 ::: {.callout-tip}
 ## Bar Charts Are Your Best Friend
 As CEO, bar charts will be your most-used visualization:
+
 - Compare stores, products, or departments
 - Show rankings clearly
 - Easy for board members to understand
@@ -91,18 +99,8 @@ products_df = pd.DataFrame({
 products_sorted =
 
 # 2. Create a bar chart
-plt.figure(figsize=(10, 6))
-plt.bar(products_sorted['product'], products_sorted['units_sold'], color='#8B4513')
-plt.title('Bean Counter Product Sales Volume', fontsize=16, fontweight='bold')
-plt.xlabel('Product', fontsize=12)
-plt.ylabel('Units Sold', fontsize=12)
-plt.grid(axis='y', alpha=0.3)
 
-# 3. Rotate x-axis labels for readability
-plt.xticks(rotation=45)
 
-plt.tight_layout()
-plt.show()
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -178,17 +176,7 @@ customers = [145, 152, 158, 165, 174, 182, 195, 208]
 
 # YOUR CODE BELOW
 # Create a line plot showing customer growth
-plt.figure(figsize=(10, 6))
-plt.plot(months, customers, marker='o', linewidth=2, markersize=8, color='#4CAF50')
-plt.title('Bean Counter Customer Growth Trajectory', fontsize=16, fontweight='bold')
-plt.xlabel('Month', fontsize=12)
-plt.ylabel('Customers (Thousands)', fontsize=12)
-plt.grid(True, alpha=0.3)
 
-# Add a trend line or annotation to highlight growth
-
-plt.tight_layout()
-plt.show()
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -230,7 +218,7 @@ satisfaction_scores = np.random.normal(4.3, 0.4, 1000)
 satisfaction_scores = np.clip(satisfaction_scores, 1, 5)
 
 plt.figure(figsize=(10, 6))
-plt.hist(satisfaction_scores, bins=20, color='#9C27B0', alpha=0.7, edgecolor='black')
+plt.hist(satisfaction_scores, bins=20, alpha=0.7, edgecolor='black')
 plt.title('Customer Satisfaction Distribution (n=1000)', fontsize=16, fontweight='bold')
 plt.xlabel('Satisfaction Score', fontsize=12)
 plt.ylabel('Number of Responses', fontsize=12)
@@ -257,18 +245,8 @@ efficiency_scores = np.random.normal(75, 12, 50)  # Mean 75, std 12
 
 # YOUR CODE BELOW
 # Create histogram of efficiency distribution
-plt.figure(figsize=(10, 6))
-plt.hist(efficiency_scores, bins=10, color='#FF9800', alpha=0.7, edgecolor='black')
-plt.title('Store Efficiency Distribution (50 Locations)', fontsize=16, fontweight='bold')
-plt.xlabel('Efficiency Score', fontsize=12)
-plt.ylabel('Number of Stores', fontsize=12)
 
-# Add mean line
-plt.axvline(x=efficiency_scores.mean(), color='red', linestyle='--', linewidth=2)
 
-plt.grid(axis='y', alpha=0.3)
-plt.tight_layout()
-plt.show()
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -341,7 +319,7 @@ plt.show()
 
 ## Exercise 4.1 - Complete CEO Dashboard
 
-Create an integrated dashboard combining NumPy simulation with Pandas analysis and visualization.
+Create an integrated dashboard combining NumPy simulation with Pandas analysis and visualization. Create revenue projections for the company, start at 6M, grow ~2% monthly with some randomness. You can use `np.random.uniform(0.95, 1.05)` for the randomness.
 
 ```{python}
 #| eval: false
@@ -355,7 +333,21 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
           'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 # YOUR CODE BELOW
-# 1. Create revenue projections (start at 6M, grow ~2% monthly with some randomness)
+# 1. Create revenue projections for the company
+
+# 2. Create DataFrame
+
+# 3. Calculate cumulative revenue
+
+# 4. Create visualization with two subplots
+
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+
+# 1. Create revenue projections for the company
 base_revenue = 6.0
 growth = 1.02
 revenue_projection = []
@@ -398,17 +390,6 @@ plt.suptitle('Bean Counter 2025 Financial Projections', fontsize=16, fontweight=
 plt.tight_layout()
 plt.show()
 
-# Print summary statistics
-total_projected = projections_df['revenue'].sum()
-print(f"\nProjected 2025 Revenue: ${total_projected:.1f}M")
-print(f"Average Monthly Revenue: ${projections_df['revenue'].mean():.2f}M")
-print(f"Best Month: {projections_df.loc[projections_df['revenue'].idxmax(), 'month']}")
-```
-
-::: {.content-visible when-profile="solutions"}
-```{python}
-#| eval: false
-# Solution is already provided above in the exercise code
 ```
 :::
 
@@ -416,23 +397,26 @@ print(f"Best Month: {projections_df.loc[projections_df['revenue'].idxmax(), 'mon
 
 # Conclusion
 
-🏆 **Congratulations! You've completed your CEO journey at Bean Counter!** 🏆
+**Congratulations! You've completed your CEO journey at Bean Counter!**
 
 **You've mastered:**
+
 - **Bar Charts** - Comparing performance across stores and products
 - **Line Plots** - Showing growth trends over time
 - **Histograms** - Understanding distributions of key metrics
 - **Integrated Dashboards** - Combining multiple visualizations for comprehensive insights
 - **NumPy + Pandas + Visualization** - The complete data science toolkit
 
-Your Bean Counter CEO visualization toolkit enables you to:
+**Your Bean Counter CEO visualization toolkit enables you to:**
+
 - Present compelling stories to the board of directors
 - Identify trends and patterns at a glance
 - Compare performance across multiple dimensions
 - Make data-driven decisions with confidence
 - Communicate complex insights simply and effectively
 
-Remember:
+**Remember:**
+
 - Bar charts are best for comparisons
 - Line plots show trends over time
 - Histograms reveal distributions
@@ -441,7 +425,9 @@ Remember:
 - Annotations can highlight key insights
 
 **Your Bean Counter Legacy:**
-From Barista Trainee to CEO, you've transformed Bean Counter into a data-driven enterprise:
+
+From Barista Trainee to CEO, you've transformed Bean Counter into a data-driven enterprise.
+
 - Standardized operations with functions
 - Managed complex data with dictionaries
 - Optimized decisions with sorting algorithms
