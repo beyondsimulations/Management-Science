@@ -6,7 +6,7 @@ html: default
 
 # Course Description
 
-**Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making.** By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.
+Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making. By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.
 
 In this course, you'll build a comprehensive toolkit by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you'll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of "executives."
 
@@ -44,18 +44,16 @@ The course is organized into three distinct parts across 12 lectures:
 - **Part II:** Management Science Tools (Lectures 4-9)
 - **Part III:** Consulting Competition (Lectures 10-12)
 
-# Assignments & Grading
-
-## Assignment Structure
+# Grading
 
 - **Assignment 1: Risk & Forecasting** (Due Lecture 8) - 30%
 - **Assignment 2: Full Optimization Toolkit** (Due Lecture 10) - 30%
 - **Final Competition: Client Project** (Lectures 10-12) - 40%
 
-## Bonus Opportunities
-
+::: callout-tip
 - Win mini-competitions during lectures (Lectures 4-9)
 - Best client project in Part III chosen by peer teams
+:::
 
 # Resources & Support
 

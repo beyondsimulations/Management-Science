@@ -5,7 +5,7 @@ author: "Dr. Tobias Vlćek"
 format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_03_closing.qmd)"
-    output-file: lec_03_closing.html
+    output-file: lec_03_closing_presentation.html
 ---
 
 # [Working with AI Assistants]{.flow} {.title}

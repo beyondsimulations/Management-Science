@@ -317,7 +317,7 @@ new_prices = original_prices * 1.15
 prices_with_tax = new_prices * 1.08
 
 # Calculate revenue if we sell 50 of each product
-quantities = np.ones(100) * 50
+quantities = np.ones(10) * 50
 revenues = prices_with_tax * quantities
 
 print(f"\nAfter 15% increase + tax: {prices_with_tax[:5].round(2)}")

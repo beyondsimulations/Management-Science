@@ -47,7 +47,7 @@ website:
           - text: "02-04 Recap"
             href: tutorials/nb_02_04_recap.qmd
           - text: "02-05 Generative"
-            href: lectures/lec_01_copilot_intro.qmd
+            href: lectures/lec_02_copilot_intro.qmd
       - section: "03 Foundation"
         contents:
           - text: "03-01 Numpy"
