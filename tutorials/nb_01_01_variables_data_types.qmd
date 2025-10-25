@@ -93,13 +93,14 @@ print("Perfect! You've created your first variables for the coffee shop!")
 ## Exercise 1.2 - Updating Variables
 
 Variables can change! A customer changed their mind and wants 4 lattes instead of 2.
-Update the `quantity` variable to 4 and create a new variable `total_order` that stores the total price.
+Update the `quantity` variable to 4 and create a new variable `total_order` that stores the total price (latte_price multiplied by quantity).
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
 # Assume latte_price = 5.25 and quantity = 2 from previous exercise
 # Tip: Just overwrite these old values
+# Then calculate: total_order = latte_price * quantity
 
 ```
 
@@ -216,9 +217,9 @@ card_points = "1234"
 ```{python}
 #| eval: false
 # Solution
-card_number = "1234"
-card_number = int(card_number)
-new_points = card_number + 100
+card_points = "1234"
+card_points = int(card_points)
+new_points = card_points + 100
 ```
 :::
 
@@ -282,22 +283,16 @@ A group orders:
 - 2 muffins at $3.50 each
 - 1 sandwich at $8.95
 
-Calculate the `subtotal`, then add 8% tax to get the `total_with_tax`.
+Calculate the `subtotal`, then add 19% tax to get the `total_with_tax`.
+
+::: callout-tip
+To add 19% tax to a value, you can multiply by 1.19.
+:::
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
 
-```
-
-```{python}
-#| eval: false
-#| code-fold: true
-# Test your answer
-import math
-assert math.isclose(subtotal, 30.20, rel_tol=0.01), "Subtotal should be 30.20"
-assert math.isclose(total_with_tax, 32.616, rel_tol=0.01), "Total with tax should be 32.616"
-print("Excellent calculation! You've mastered basic arithmetic!")
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -309,9 +304,19 @@ muffin_total = 2 * 3.50
 sandwich_total = 1 * 8.95
 
 subtotal = cappuccino_total + muffin_total + sandwich_total
-total_with_tax = subtotal * 1.08
+total_with_tax = subtotal * 1.19
 ```
 :::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your answer
+import math
+assert math.isclose(subtotal, 30.20, rel_tol=0.01), "Subtotal should be 30.20"
+assert math.isclose(total_with_tax, 30.20*1.19, rel_tol=0.01), "Total with tax should be 32.616"
+print("Excellent calculation! You've mastered basic arithmetic!")
+```
 
 ## Exercise 3.2 - Splitting the Bill
 
@@ -406,7 +411,11 @@ Create a formatted receipt for a coffee order with these variables:
 - `size = "Large"`
 - `price = 3.75`
 
-Format it as: "Order: [size] [coffee_type] - $[price with 2 decimal places]"
+Create a variable called `receipt` with the format: "Order: [size] [coffee_type] - $[price with 2 decimal places]"
+
+::: callout-tip
+Use an f-string with `{price:.2f}` to format the price with exactly 2 decimal places.
+:::
 
 ```{python}
 #| eval: false

@@ -84,6 +84,10 @@ Note, how the second index is exclusive, meaning it does not include the element
 Create a list called `weekend_sales` with Saturday's sales of $2340.50 and Sunday's sales of $1890.25.
 Then access and store Sunday's sales in a variable called `sunday_total`.
 
+::: callout-tip
+Remember: Lists are indexed starting from 0, so Saturday is index 0 and Sunday is index 1.
+:::
+
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
@@ -290,6 +294,43 @@ for item in list:
 ```
 
 The variable name after `for` can be anything - choose something descriptive!
+:::
+
+## The Accumulation Pattern
+
+One of the most important patterns in programming is **accumulation** - building up a result by repeatedly adding to it. This is essential for calculating totals, averages, and counts.
+
+```{python}
+#| eval: true
+# Example: Calculate total of all sales
+daily_sales = [245.50, 189.25, 312.75, 298.50]
+
+# Start with a total of 0
+total = 0
+
+# Add each sale to the running total
+for sale in daily_sales:
+    total = total + sale  # This is the accumulation step!
+    print(f"  Added ${sale}, running total: ${total}")
+
+print(f"\nFinal total: ${total}")
+
+# We can also count items this way
+count = 0
+for sale in daily_sales:
+    count = count + 1
+
+print(f"Number of sales: {count}")
+```
+
+::: callout-important
+## Accumulation Pattern Steps:
+
+1. **Initialize** a variable to 0 (or empty list) before the loop
+2. **Update** the variable inside the loop (add, append, etc.)
+3. **Use** the final result after the loop completes
+
+This pattern is fundamental to data analysis!
 :::
 
 ## Exercise 3.1 - Calculate Total Sales
