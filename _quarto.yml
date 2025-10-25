@@ -28,14 +28,26 @@ website:
       - text: "***"
       - section: "01 Let's Start"
         contents:
-          - text: "01-00 Introduction"
+          - text: "01-01 Introduction"
             href: lectures/lec_01_introduction.qmd
-          - text: "01-01 Variables"
+          - text: "01-02 Variables"
             href: tutorials/nb_01_01_variables_data_types.qmd
-          - text: "01-02 Lists"
+          - text: "01-03 Lists"
             href: tutorials/nb_01_02_lists_loops.qmd
-          - text: "01-03 Conditions"
+          - text: "01-04 Conditions"
             href: tutorials/nb_01_03_conditionals_while.qmd
+      - section: "02 Advances"
+        contents:
+          - text: "01-01 Functions"
+            href: tutorials/nb_02_01_functions.qmd
+          - text: "01-02 Dictionaries"
+            href: tutorials/nb_02_02_dictionaries.qmd
+          - text: "01-03 Sorting"
+            href: tutorials/nb_02_03_sorting.qmd
+          - text: "03-04 Recap"
+            href: tutorials/nb_02_04_recap.qmd
+          - text: "03-05 AI Programming"
+            href: lectures/lec_01_copilot_intro.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd

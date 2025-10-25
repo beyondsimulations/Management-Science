@@ -9,23 +9,26 @@ code-links:
 
 # Introduction
 
-[This tutorial is designed to take approximately 40 minutes to complete.]
-
 Welcome back to the CEO suite at Bean Counter!
 
-📊 **Your Data Challenge as CEO** 📊
+**Your Data Challenge as CEO**
 
 Now that you've mastered NumPy for numerical analysis, you face a new challenge: Bean Counter's data comes in spreadsheets, CSVs, and databases. You have:
+
 - Sales reports from 50+ locations
 - Product catalogs with thousands of items
 - Customer data with demographics and preferences
 - Supplier information across multiple regions
 
-**The Problem:** This data has labels, categories, dates, and mixed types. NumPy arrays aren't enough - you need something more powerful!
+**The Problem:** This data has labels, categories, dates, and mixed types. NumPy arrays aren't enough, you need something more powerful!
 
-**Your Solution:** **Pandas** - Python's data manipulation powerhouse. Think of it as Excel on steroids, capable of handling millions of rows without breaking a sweat.
+**Your Tool:** **Pandas** - Think of it as Excel but better, capable of handling millions of rows.
 
-In this tutorial, you'll learn to wrangle business data like a Fortune 500 CEO, turning messy spreadsheets into actionable insights.
+In this tutorial, you'll learn to wrangle business data, turning spreadsheets into actionable insights.
+
+::: callout-tip
+Excel cannot have more than 1 million rows!
+:::
 
 ::: {.callout-note}
 ## How to Use This Tutorial
@@ -36,7 +39,8 @@ First import pandas and numpy. Work through exercises marked "YOUR CODE BELOW".
 
 # Section 1 - DataFrames: Your CEO's Digital Spreadsheet
 
-A DataFrame is like a supercharged Excel spreadsheet in Python. Let's create one for Bean Counter's store performance.
+A DataFrame is like a better Excel spreadsheet in Python.
+Let's create one for Bean Counter's store performance.
 
 ```{python}
 #| eval: true
@@ -60,9 +64,10 @@ print(f"\nDataFrame shape: {df.shape} (rows, columns)")
 
 ::: {.callout-tip}
 ## DataFrames vs NumPy Arrays
+
 - **NumPy arrays**: Great for numerical calculations
 - **Pandas DataFrames**: Perfect for labeled, mixed-type data
-- Think of DataFrames as spreadsheets with superpowers!
+- Think of DataFrames as spreadsheets!
 :::
 
 ## Exercise 1.1 - Create Product Catalog DataFrame
@@ -83,10 +88,8 @@ product_data = {
 }
 
 # Create DataFrame
-products_df = 
+products_df =
 
-print("Bean Counter Product Catalog:")
-print(products_df)
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -107,6 +110,8 @@ print(products_df)
 assert products_df.shape == (5, 4), "Should have 5 products and 4 columns"
 assert list(products_df.columns) == ['product_name', 'price', 'cost', 'units_sold_daily']
 assert products_df['price'].sum() == 19.00, "Total price should be 19.00"
+print("Bean Counter Product Catalog:")
+print(products_df)
 print("Perfect! Your product catalog is ready for analysis!")
 ```
 
@@ -161,20 +166,14 @@ performance_df = pd.DataFrame({
 })
 
 # YOUR CODE BELOW
-# 1. Display the first 3 rows
-first_rows = 
+# 1. Display the first 3 rows (print them)
 
-# 2. Get the shape (rows, columns)
-data_shape = 
+# 2. Get the shape (rows, columns) and save it
+data_shape =
 
-# 3. Get summary statistics for numerical columns
-summary_stats = 
+# 3. Get summary statistics for numerical columns (print them)
 
-print("First 3 stores:")
-print(first_rows)
-print(f"\nDataFrame shape: {data_shape}")
-print("\nSummary statistics:")
-print(summary_stats)
+
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -188,6 +187,12 @@ data_shape = performance_df.shape
 
 # 3. Get summary statistics for numerical columns
 summary_stats = performance_df.describe()
+
+print("First 3 stores:")
+print(first_rows)
+print(f"\nDataFrame shape: {data_shape}")
+print("\nSummary statistics:")
+print(summary_stats)
 ```
 :::
 
@@ -196,7 +201,6 @@ summary_stats = performance_df.describe()
 #| code-fold: true
 # Test your exploration
 assert data_shape == (8, 5), "Should have 8 stores and 5 columns"
-assert len(first_rows) == 3, "Should display 3 rows"
 print("Great exploration! You understand your data structure!")
 ```
 
@@ -233,6 +237,7 @@ print(high_performers)
 
 ::: {.callout-warning}
 ## Single vs Double Brackets
+
 - `df['column']` returns a Series (single column)
 - `df[['column']]` returns a DataFrame (even with one column)
 - `df[['col1', 'col2']]` selects multiple columns
@@ -255,19 +260,15 @@ stores_df = pd.DataFrame({
 
 # YOUR CODE BELOW
 # 1. Select only location and monthly_revenue columns
-revenue_report = 
+revenue_report =
 
 # 2. Filter stores with revenue > 100000
-high_revenue_stores = 
+high_revenue_stores =
 
 # 3. Filter stores with positive growth
-growing_stores = 
+growing_stores =
 
-# 4. Filter stores with revenue > 100000 AND growth > 5%
-star_performers = 
 
-print("Star performers (revenue > 100k AND growth > 5%):")
-print(star_performers)
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -282,9 +283,6 @@ high_revenue_stores = stores_df[stores_df['monthly_revenue'] > 100000]
 # 3. Filter stores with positive growth
 growing_stores = stores_df[stores_df['growth_rate'] > 0]
 
-# 4. Filter stores with revenue > 100000 AND growth > 5%
-star_performers = stores_df[(stores_df['monthly_revenue'] > 100000) & 
-                            (stores_df['growth_rate'] > 5)]
 ```
 :::
 
@@ -293,8 +291,6 @@ star_performers = stores_df[(stores_df['monthly_revenue'] > 100000) &
 #| code-fold: true
 # Test your filtering
 assert len(high_revenue_stores) == 5, "Should find 5 high revenue stores"
-assert len(star_performers) == 3, "Should find 3 star performers"
-assert set(star_performers['location'].tolist()) == {'Plaza', 'Airport', 'Downtown'}
 print("Excellent! You've identified your star performers!")
 ```
 
@@ -347,22 +343,20 @@ operations_df = pd.DataFrame({
 
 # YOUR CODE BELOW
 # 1. Calculate profit for each store
-operations_df['profit'] = 
+operations_df['profit'] =
 
 # 2. Calculate profit margin percentage
-operations_df['profit_margin'] = 
+operations_df['profit_margin'] =
 
 # 3. Calculate revenue per customer
-operations_df['revenue_per_customer'] = 
+operations_df['revenue_per_customer'] =
 
 # 4. Calculate customers per staff (efficiency)
-operations_df['efficiency'] = 
+operations_df['efficiency'] =
 
 # 5. Sort by profit (highest to lowest)
-top_performers = 
+top_performers =
 
-print("CEO Dashboard - Top Performers by Profit:")
-print(top_performers[['store', 'profit', 'profit_margin', 'efficiency']])
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -392,7 +386,9 @@ top_performers = operations_df.sort_values('profit', ascending=False)
 assert operations_df['profit'].sum() == 184750, "Total profit should be 184,750"
 assert operations_df['profit_margin'].max() == 35.0, "Highest margin should be 35%"
 assert top_performers.iloc[0]['store'] == 'Airport', "Airport should be most profitable"
-print("Outstanding CEO dashboard! You have complete visibility of performance!")
+print("CEO Dashboard - Top Performers by Profit:")
+print(top_performers[['store', 'profit', 'profit_margin', 'efficiency']])
+print("Great CEO dashboard! You have visibility of performance!")
 ```
 
 ---
@@ -426,6 +422,7 @@ print(df[['location', 'q1_total']])
 
 ::: {.callout-tip}
 ## Reading Different File Types
+
 ```python
 # CSV files
 df = pd.read_csv('sales_data.csv')
@@ -463,20 +460,17 @@ Americano,Coffee,3.00,2100,4.6"""
 sales_df = pd.read_csv(io.StringIO(csv_content))
 
 # 2. Calculate revenue for each product
-sales_df['revenue'] = 
+sales_df['revenue'] =
 
 # 3. Filter for only Coffee products
-coffee_df = 
+coffee_df =
 
 # 4. Sort coffee products by units_sold (highest first)
-coffee_sorted = 
+coffee_sorted =
 
 # 5. Calculate total coffee revenue
-total_coffee_revenue = 
+total_coffee_revenue =
 
-print("Top Coffee Products by Volume:")
-print(coffee_sorted[['product', 'units_sold', 'revenue']])
-print(f"\nTotal Coffee Revenue: ${total_coffee_revenue:,.2f}")
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -505,6 +499,9 @@ total_coffee_revenue = coffee_sorted['revenue'].sum()
 assert len(coffee_df) == 5, "Should have 5 coffee products"
 assert coffee_sorted.iloc[0]['product'] == 'Espresso', "Espresso should be top seller"
 assert total_coffee_revenue == 65750.0, f"Coffee revenue should be 65,750"
+print("Top Coffee Products by Volume:")
+print(coffee_sorted[['product', 'units_sold', 'revenue']])
+print(f"\nTotal Coffee Revenue: ${total_coffee_revenue:,.2f}")
 print("Perfect! You can now load and analyze real business data!")
 ```
 
@@ -512,32 +509,35 @@ print("Perfect! You can now load and analyze real business data!")
 
 # Conclusion
 
-🎯 **Congratulations! You've mastered Pandas for CEO-level data management!** 🎯
+**Congratulations! You've learned the first steps in Pandas for management!**
 
 **You've learned:**
+
 - **DataFrames** - Creating and working with structured business data
 - **Exploration** - Using head(), info(), describe() for quick insights
 - **Selection** - Accessing specific columns and rows of data
 - **Filtering** - Finding data that meets business criteria
 - **Calculated Columns** - Creating new metrics from existing data
 - **Sorting** - Ranking data by any metric
-- **File I/O** - Loading real data from CSV and Excel files
+- **File I/O** - Loading data from CSV and Excel files
 
-Your Bean Counter CEO data toolkit now includes:
+**Your Bean Counter CEO data toolkit now includes:**
+
 - Ability to work with spreadsheet-like data in Python
 - Tools to explore and understand large datasets quickly
 - Skills to filter and find exactly the data you need
 - Power to create custom metrics and KPIs
 - Capability to process data from multiple file formats
 
-Remember:
-- DataFrames are like Excel spreadsheets with superpowers
+**Remember:**
+
+- DataFrames are like Excel spreadsheets, but better
 - Use `df['column']` for single columns, `df[['col1','col2']]` for multiple
 - Filter with boolean conditions: `df[df['revenue'] > 100000]`
 - Create new columns with calculations: `df['profit'] = df['revenue'] - df['cost']`
 - Sort with `sort_values()` to rank your data
 - Load real data with `pd.read_csv()` and `pd.read_excel()`
 
-**What's Next:** In the final tutorial of this lecture, you'll combine NumPy and Pandas with **visualization** to create compelling charts and graphs that will wow the board of directors and drive strategic decisions!
+**What's Next:** In the final session of the Python introduction, you'll combine NumPy and Pandas with **visualization** to create compelling charts and graphs that will wow the board of directors and drive strategic decisions!
 
 {{< include ../include/tutorial_end.qmd >}}
