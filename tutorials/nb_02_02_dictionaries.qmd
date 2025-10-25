@@ -230,7 +230,7 @@ Create a list called `regional_stores` containing 2 Bean Counter locations. Each
 #| eval: false
 # YOUR CODE BELOW
 regional_stores = [
-    # Add 4 store dictionaries here
+    # Add 2 store dictionaries here
 ]
 ```
 
@@ -271,15 +271,28 @@ print("Great work! Your regional network is established!")
 
 # Section 3 - Looping Through Store Data
 
-As Regional Manager, you need to analyze data across all locations. Let's loop through dictionaries to find insights!
+As Regional Manager, you need to analyze data across all locations.
+Let's loop through dictionaries to find insights!
 
 ```{python}
 #| eval: true
 # Analyzing multiple stores
 stores = [
-    {"name": "Downtown", "sales": 4500, "rating": 4.8},
-    {"name": "Airport", "sales": 6200, "rating": 4.5},
-    {"name": "University", "sales": 3800, "rating": 4.9}
+    {
+        "name": "Downtown",
+        "sales": 4500,
+        "rating": 4.8
+    },
+    {
+        "name": "Airport",
+        "sales": 6200,
+        "rating": 4.5
+    },
+    {
+        "name": "University",
+        "sales": 3800,
+        "rating": 4.9
+    }
 ]
 
 # Calculate total sales across all stores
@@ -368,6 +381,9 @@ print(f"Stores serving >500 customers: {busy_stores}")
 assert total_customers == 2620, f"Total customers should be 2620, got {total_customers}"
 assert round(average_satisfaction, 2) == 4.60, f"Average satisfaction should be 4.60, got {round(average_satisfaction, 2)}"
 assert busy_stores == 2, f"Should have 2 busy stores, got {busy_stores}"
+print(f"Total customers: {total_customers}")
+print(f"Average satisfaction: {average_satisfaction}")
+print(f"Stores serving >500 customers: {busy_stores}")
 print("Excellent analysis! You have a clear picture of regional performance!")
 ```
 
@@ -421,10 +437,6 @@ for store in inventory_data:
     # Check if coffee inventory is low (below 20 kg)
 
     # Check if daily revenue is low (below 1000)
-
-
-print(f"Stores needing restock: {restock_needed}")
-print(f"Low performing stores: {low_performers}")
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -453,6 +465,8 @@ print(f"Low performing stores: {low_performers}")
 # Test your filtering
 assert set(restock_needed) == {"Station", "Park", "Beach"}, f"Restock list should be Station, Park, Beach"
 assert set(low_performers) == {"Station", "Beach"}, f"Low performers should be Station and Beach"
+print(f"Stores needing restock: {restock_needed}")
+print(f"Low performing stores: {low_performers}")
 print("Perfect! You've identified the stores that need immediate attention!")
 ```
 
@@ -479,7 +493,11 @@ def calculate_store_bonus(store_data):
     return base_bonus
 
 # Test the function
-store = {"name": "Downtown", "monthly_sales": 120000, "customer_rating": 4.7}
+store = {
+    "name": "Downtown",
+    "monthly_sales": 120000,
+    "customer_rating": 4.7
+}
 bonus = calculate_store_bonus(store)
 print(f"{store['name']} earned a ${bonus} bonus!")
 ```
@@ -492,7 +510,7 @@ The function should:
 
 1. Calculate profit margin: (revenue - costs) / revenue * 100
 2. Determine status: "Excellent" if margin > 30%, "Good" if > 20%, else "Needs Improvement"
-3. Return a formatted string with the store name, margin, and status
+3. Return a **formatted string** with the store name, margin, and status
 
 ```{python}
 #| eval: false
