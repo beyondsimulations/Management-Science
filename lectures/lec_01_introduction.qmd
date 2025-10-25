@@ -1,6 +1,6 @@
 ---
-title: "Welcome to Management Science"
-subtitle: "Lecture 1 - Introduction & Python Setup"
+title: "Lecture 1 - Introduction & Python Setup"
+subtitle: "Management Science"
 author: "Dr. Tobias Vlćek"
 format:
   revealjs:

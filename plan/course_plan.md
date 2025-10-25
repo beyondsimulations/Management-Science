@@ -115,6 +115,7 @@ In the final presentations, each best group of the three topics with the best so
 - Inspire students about Management Science applications
 - Set up Python development environment with uv
 - Master Python fundamentals: variables, lists, loops, conditionals
+- Note, I want the students to rise the ranks of the coffee shop Bean Counter from notebook to notebook until they are the CEO at the end of notebook #11.
 
 **Hour 1: Course Introduction + Setup (45 min)**
 - Welcome and course overview (15 min)
@@ -157,6 +158,7 @@ In the final presentations, each best group of the three topics with the best so
 - Master functions for code organization
 - Understand dictionaries and tuples for structured data
 - Learn sorting of structured data
+- Note, I want the students to rise the ranks of the coffee shop Bean Counter from notebook to notebook until they are the CEO at the end of notebook #11.
 
 **Hour 1: Interactive Notebook #4 - Functions**
 - Why functions? (code reusability)
@@ -210,6 +212,7 @@ In the final presentations, each best group of the three topics with the best so
 - Learn essential Pandas operations for data manipulation
 - Create basic visualizations for business insights
 - Final readiness check before algorithms
+- Note, I want the students to rise the ranks of the coffee shop Bean Counter from notebook to notebook until they are the CEO at the end of notebook #11.
 
 **Hour 1: Interactive Notebook #8 - NumPy Essentials**
 - Why NumPy? Speed vs. Python lists for numerical work
@@ -242,40 +245,11 @@ In the final presentations, each best group of the three topics with the best so
   - Example: Find all products with price > 100
   - Example: Find all sales in January
 - Sorting with `sort_values()`: ascending and descending
-- **Reading CSV files** with `pd.read_csv()` - most important skill!
-- **Practice: Sales data exploration** (guided, 20 min)
-  - Load CSV, explore with head/info/describe
-  - Filter for specific conditions
-  - Create calculated column
-  - Sort results
+- **Reading CSV files** with `pd.read_csv()`
+- Reading excel files into Pandas
+- **Practice exercises integrated throughout** (5-10 min coding each)
 
-**Hour 3: Interactive Notebook #10 - Data Analysis Practice**
-- **Integrated practice combining all Pandas skills** (45 min guided exercise):
-  - Load a realistic sales dataset (CSV with 500+ rows)
-  - **Task 1: Data exploration** (10 min)
-    - Use `head()`, `info()`, `describe()` to understand the data
-    - Identify data types, ranges, potential issues
-  - **Task 2: Filtering and sorting** (15 min)
-    - Find all sales above €1000
-    - Find products in a specific category
-    - Sort to find top 10 highest sales
-    - Filter for sales in a specific month
-  - **Task 3: Calculated columns** (10 min)
-    - Add profit column: `df['profit'] = df['revenue'] - df['cost']`
-    - Add profit margin: `df['margin'] = df['profit'] / df['revenue']`
-    - Find most profitable products
-  - **Task 4: Basic aggregations** (10 min)
-    - Calculate total revenue: `df['revenue'].sum()`
-    - Average sale: `df['revenue'].mean()`
-    - Count of transactions: `len(df)`
-    - Compare different product categories using filtering
-- **Key takeaway:** Students can answer business questions by combining filter + sort + aggregate
-
-**Hour 4: Interactive Notebook #11 - Visualization & Integration with Copilot**
-- **Copilot Check-In (5 min)**
-  - Quick poll: Who has Copilot working?
-  - Troubleshoot common issues
-  - Remind: "Today we'll use Copilot to help with plotting!"
+**Hour 3: Interactive Notebook #10 - Visualization & Integration with Copilot**
 
 - **Visualization Basics** (20 min)
   - Why visualize? "A picture is worth a thousand rows"
@@ -297,6 +271,8 @@ In the final presentations, each best group of the three topics with the best so
     - See the distribution pattern appear!
   - **Exercise 3:** Create profit column, find top 10 most profitable products, create sorted bar chart
     - Combine: calculated columns + filtering/sorting + visualization
+
+**Hour 4: Small Lecture: Recap, Questions and Outlook**
 
 - **Copilot Tips for Visualizations** (5 min)
   - "Copilot is GREAT at matplotlib boilerplate"
