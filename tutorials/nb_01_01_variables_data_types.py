@@ -97,12 +97,14 @@ print("Perfect! You've created your first variables for the coffee shop!")
 #
 # Variables can change! A customer changed their mind and wants 4 lattes
 # instead of 2. Update the `quantity` variable to 4 and create a new
-# variable `total_order` that stores the total price.
+# variable `total_order` that stores the total price (latte_price
+# multiplied by quantity).
 
 # %%
 # YOUR CODE BELOW
 # Assume latte_price = 5.25 and quantity = 2 from previous exercise
 # Tip: Just overwrite these old values
+# Then calculate: total_order = latte_price * quantity
 
 # %%
 # Test your answer
@@ -246,7 +248,11 @@ print(f"Price per shot: ${price_per_shot}")
 # -   2 muffins at \$3.50 each
 # -   1 sandwich at \$8.95
 #
-# Calculate the `subtotal`, then add 8% tax to get the `total_with_tax`.
+# Calculate the `subtotal`, then add 19% tax to get the `total_with_tax`.
+#
+# > **Tip**
+# >
+# > To add 19% tax to a value, you can multiply by 1.19.
 
 # %%
 # YOUR CODE BELOW
@@ -255,7 +261,7 @@ print(f"Price per shot: ${price_per_shot}")
 # Test your answer
 import math
 assert math.isclose(subtotal, 30.20, rel_tol=0.01), "Subtotal should be 30.20"
-assert math.isclose(total_with_tax, 32.616, rel_tol=0.01), "Total with tax should be 32.616"
+assert math.isclose(total_with_tax, 30.20*1.19, rel_tol=0.01), "Total with tax should be 32.616"
 print("Excellent calculation! You've mastered basic arithmetic!")
 
 # %% [markdown]
@@ -337,8 +343,13 @@ print(formatted_receipt)
 # -   `size = "Large"`
 # -   `price = 3.75`
 #
-# Format it as: “Order: \[size\] \[coffee_type\] - \$\[price with 2
-# decimal places\]”
+# Create a variable called `receipt` with the format: “Order: \[size\]
+# \[coffee_type\] - \$\[price with 2 decimal places\]”
+#
+# > **Tip**
+# >
+# > Use an f-string with `{price:.2f}` to format the price with exactly 2
+# > decimal places.
 
 # %%
 # YOUR CODE BELOW

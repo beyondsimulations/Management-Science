@@ -367,9 +367,10 @@ morning_orders = ["latte", "espresso", "cappuccino"]
 print(f"Original orders: {morning_orders}")
 
 # Using list METHODS (with dot notation)
-morning_orders.append("mocha")  # Add to end
+morning_orders.append("mocha")  # Add to end (you learned this in Notebook 1.2)
 print(f"After .append('mocha'): {morning_orders}")
 
+# New method: .remove() removes the first occurrence of a value
 morning_orders.remove("espresso")  # Remove specific item
 print(f"After .remove('espresso'): {morning_orders}")
 
@@ -382,12 +383,16 @@ print(f"Function len(): {len(morning_orders)} drinks")
 # %% [markdown]
 # > **Functions vs Methods Quick Guide**
 # >
-# > **Functions:** - Stand alone: `function_name(arguments)` - Example:
-# > `len(my_list)`, `sum(numbers)`, `print(text)`
+# > **Functions:**
 # >
-# > **Methods:** - Belong to objects: `object.method_name(arguments)` -
-# > Example: `my_list.append(item)`, `my_list.remove(item)`,
-# > `my_list.clear()`
+# > -   Stand alone: `function_name(arguments)`
+# > -   Example: `len(my_list)`, `sum(numbers)`, `print(text)`
+# >
+# > **Methods:**
+# >
+# > -   Belong to objects: `object.method_name(arguments)`
+# > -   Example: `my_list.append(item)`, `my_list.remove(item)`,
+# >     `my_list.clear()`
 # >
 # > Think of it this way: - Functions are like Bean Counter tools anyone
 # > can use - Methods are built into the objects themselves
@@ -533,6 +538,12 @@ print("Excellent analytics! You can now track Bean Counter's performance across 
 # -   “excellent”: avg time \< 90 seconds AND rating \>= 4.5
 # -   “good”: avg time \< 120 seconds AND rating \>= 4.0
 # -   “needs_improvement”: otherwise
+#
+# > **Tip**
+# >
+# > For robustness, it is nice to handle the case where the input lists
+# > might be empty. For example, if empty, return (0, 0,
+# > “needs_improvement”).
 
 # %%
 # YOUR CODE BELOW

@@ -234,9 +234,11 @@ for store in by_rating:
 # %% [markdown]
 # > **The key Parameter**
 # >
-# > `key=lambda x: x["field"]` tells Python what to sort by: - `lambda x:`
-# > means “for each item x in the list” - `x["field"]` is the value to
-# > sort by - Think of it as: “sort by looking at this specific field”
+# > `key=lambda x: x["field"]` tells Python what to sort by:
+# >
+# > -   `lambda x:` means “for each item x in the list”
+# > -   `x["field"]` is the value to sort by
+# > -   Think of it as: “sort by looking at this specific field”
 #
 # ## Exercise 3.1 - Rank Stores by Efficiency
 #
@@ -255,7 +257,7 @@ store_efficiency = [
     {"location": "Station", "customers": 410, "staff": 7}     # 58.6 per staff
 ]
 
-# Calculate efficiency for each store
+# First, we calculate efficiency for each store
 for store in store_efficiency:
     store["efficiency"] = store["customers"] / store["staff"]
 

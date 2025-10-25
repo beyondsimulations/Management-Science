@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="section-1---variables-as-named-storage" class="level1">
 <h1>Section 1 - Variables as Named Storage</h1>
 <p>Variables are like labeled containers that store information. In our coffee shop, we need to keep track of prices, customer names, order quantities, and more. Variables allow us to store this information in a way that we can easily access and update it later.</p>
-<div id="061274b9" class="cell" data-execution_count="1">
+<div id="14f3b3f1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables are created by giving them a name and a value</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>coffee_price <span class="op">=</span> <span class="fl">4.50</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>customer_name <span class="op">=</span> <span class="st">"Alex"</span></span>
@@ -450,10 +450,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>quantity</code> should be 2</li>
 <li><code>shop_closed</code> = False</li>
 </ul>
-<div id="620451b6" class="cell" data-execution_count="2">
+<div id="231cd0a0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="89582405" class="cell" data-execution_count="4">
+<div id="9a732172" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -467,13 +467,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="exercise-1.2---updating-variables" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.2---updating-variables">Exercise 1.2 - Updating Variables</h2>
-<p>Variables can change! A customer changed their mind and wants 4 lattes instead of 2. Update the <code>quantity</code> variable to 4 and create a new variable <code>total_order</code> that stores the total price.</p>
-<div id="fb5e094b" class="cell" data-execution_count="5">
+<p>Variables can change! A customer changed their mind and wants 4 lattes instead of 2. Update the <code>quantity</code> variable to 4 and create a new variable <code>total_order</code> that stores the total price (latte_price multiplied by quantity).</p>
+<div id="fd996221" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume latte_price = 5.25 and quantity = 2 from previous exercise</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tip: Just overwrite these old values</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tip: Just overwrite these old values</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then calculate: total_order = latte_price * quantity</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="938b03ec" class="cell" data-execution_count="7">
+<div id="c84b8918" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -493,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>str</strong> (strings): Text like “coffee”, “Bean Counter”, “Order #123”</li>
 <li><strong>bool</strong> (boolean): True or False</li>
 </ul>
-<div id="5e1c6914" class="cell" data-execution_count="8">
+<div id="d47738fe" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Different data types in our coffee shop</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cups_sold <span class="op">=</span> <span class="dv">150</span>           <span class="co"># int - whole number</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>price <span class="op">=</span> <span class="fl">4.99</span>              <span class="co"># float - decimal number</span></span>
@@ -549,10 +550,10 @@ is_open is a &lt;class 'bool'&gt;</code></pre>
 <li><code>average_tip</code> (float): 2.50 dollars average tip</li>
 <li><code>best_seller</code> (str): “Caramel Macchiato”</li>
 </ul>
-<div id="139cad14" class="cell" data-execution_count="9">
+<div id="e6c11d83" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="45cad7ce" class="cell" data-execution_count="11">
+<div id="ef370100" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -577,11 +578,11 @@ is_open is a &lt;class 'bool'&gt;</code></pre>
 </div>
 </div>
 </div>
-<div id="de104868" class="cell" data-execution_count="12">
+<div id="3d15ed48" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>card_points <span class="op">=</span> <span class="st">"1234"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="df4a3b29" class="cell" data-execution_count="14">
+<div id="f58f54cf" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -595,7 +596,7 @@ is_open is a &lt;class 'bool'&gt;</code></pre>
 <section id="section-3---basic-arithmetic-operations" class="level1">
 <h1>Section 3 - Basic Arithmetic Operations</h1>
 <p>Now let’s use Python’s arithmetic operations to handle coffee shop calculations!</p>
-<div id="e5f4a744" class="cell" data-execution_count="15">
+<div id="3ac4d478" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic arithmetic operations</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>espresso_price <span class="op">=</span> <span class="fl">3.50</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>shots <span class="op">=</span> <span class="dv">2</span></span>
@@ -664,17 +665,27 @@ Price per shot: $3.5</code></pre>
 <li>2 muffins at $3.50 each</li>
 <li>1 sandwich at $8.95</li>
 </ul>
-<p>Calculate the <code>subtotal</code>, then add 8% tax to get the <code>total_with_tax</code>.</p>
-<div id="602b200a" class="cell" data-execution_count="16">
+<p>Calculate the <code>subtotal</code>, then add 19% tax to get the <code>total_with_tax</code>.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>To add 19% tax to a value, you can multiply by 1.19.</p>
+</div>
+</div>
+</div>
+<div id="6ead12a8" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c9be4d15" class="cell" data-execution_count="17">
+<div id="7a4dde66" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> math.isclose(subtotal, <span class="fl">30.20</span>, rel_tol<span class="op">=</span><span class="fl">0.01</span>), <span class="st">"Subtotal should be 30.20"</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> math.isclose(total_with_tax, <span class="fl">32.616</span>, rel_tol<span class="op">=</span><span class="fl">0.01</span>), <span class="st">"Total with tax should be 32.616"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> math.isclose(total_with_tax, <span class="fl">30.20</span><span class="op">*</span><span class="fl">1.19</span>, rel_tol<span class="op">=</span><span class="fl">0.01</span>), <span class="st">"Total with tax should be 32.616"</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Excellent calculation! You've mastered basic arithmetic!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
@@ -696,11 +707,11 @@ Price per shot: $3.5</code></pre>
 </div>
 </div>
 </div>
-<div id="8989a54c" class="cell" data-execution_count="19">
+<div id="b0820fe5" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume total_with_tax = 32.616 from previous exercise</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f35d0850" class="cell" data-execution_count="21">
+<div id="82e15c7c" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -715,7 +726,7 @@ Price per shot: $3.5</code></pre>
 <section id="section-4---f-strings-for-output-formatting" class="level1">
 <h1>Section 4 - F-strings for Output Formatting</h1>
 <p>F-strings make it easy to create formatted output - perfect for receipts and displays!</p>
-<div id="d989282b" class="cell" data-execution_count="22">
+<div id="9d4ddd16" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># F-strings let you embed variables and expressions in text</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>item <span class="op">=</span> <span class="st">"Flat White"</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>price <span class="op">=</span> <span class="fl">4.25</span></span>
@@ -793,11 +804,21 @@ Price per shot: $3.5</code></pre>
 <li><code>size = "Large"</code></li>
 <li><code>price = 3.75</code></li>
 </ul>
-<p>Format it as: “Order: [size] [coffee_type] - $[price with 2 decimal places]”</p>
-<div id="9a7687b4" class="cell" data-execution_count="23">
+<p>Create a variable called <code>receipt</code> with the format: “Order: [size] [coffee_type] - $[price with 2 decimal places]”</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Use an f-string with <code>{price:.2f}</code> to format the price with exactly 2 decimal places.</p>
+</div>
+</div>
+</div>
+<div id="7cba57ca" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b3c3eb0b" class="cell" data-execution_count="25">
+<div id="4d3a0088" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>

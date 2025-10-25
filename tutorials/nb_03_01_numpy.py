@@ -38,8 +38,8 @@
 # you need answers NOW!
 #
 # **Your new Tool:** **NumPy** - a Python library that processes numerical
-# data at lightning speed. What takes minutes with regular Python takes
-# milliseconds with NumPy.
+# data fast. What takes minutes with regular Python takes seconds with
+# NumPy.
 #
 # ------------------------------------------------------------------------
 #
@@ -77,7 +77,9 @@
 # ``` bash
 # # Install NumPy for numerical computing
 # uv add numpy
+# ```
 #
+# ``` bash
 # # While we're at it, let's also install pandas for next session
 # uv add pandas
 # ```
@@ -354,6 +356,9 @@ profits =
 # 2. Calculate profit margin for each store (profit / revenue * 100)
 profit_margins =
 
+# 3. Apply 25% corporate tax to get after-tax profit
+profits_after_tax =
+
 print(f"Total monthly profit (before tax): ${profits.sum():,.2f}")
 print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 
@@ -361,6 +366,9 @@ print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 # Test your calculations
 assert np.isclose(profits.sum(), 2205000), "Total profit before tax should be 2,205,000"
 assert np.isclose(profit_margins.mean(), 35.0), "Average margin should be 35%"
+assert np.isclose(profits_after_tax.sum(), 1653750), "After-tax profit should be 1,653,750"
+print(f"Total monthly profit (before tax): ${profits.sum():,.2f}")
+print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 print("Fantastic! You've learned company-wide financial calculations!")
 
 # %% [markdown]
@@ -390,40 +398,146 @@ highly_satisfied = np.sum(satisfaction_scores >= 4.0)
 print(f"\nHighly satisfied (4+): {highly_satisfied} ({highly_satisfied/10:.1f}%)")
 
 # %% [markdown]
-# > **Tip**
-# >
-# > The `np.random.seed` ensures reproducibility of random number
-# > generation. This means, if you share your code with others, they will
-# > get the same results as you.
-#
 # > **Note**
 # >
 # > Note, how we can use the methods provided by NumPy to calculate
 # > statistics on the satisfaction scores array. These methods are
 # > efficient and concise, making our code more readable and maintainable.
 #
+# ## 2D Arrays
+#
+# So far, we’ve worked with 1D arrays (like a single row or column). As
+# CEO, you often need 2D arrays. Think of them as tables with rows and
+# columns!
+
+# %%
+import numpy as np
+
+# Example: Sales data for 5 stores over 7 days
+# Rows = stores, Columns = days
+sales_table = np.array([
+    [125, 132, 128, 145, 155, 189, 176],  # Store 1
+    [98, 102, 95, 108, 115, 142, 138],    # Store 2
+    [156, 162, 159, 171, 178, 198, 192],  # Store 3
+    [87, 91, 88, 95, 102, 125, 118],      # Store 4
+    [134, 139, 136, 148, 153, 178, 165]   # Store 5
+])
+
+print("Sales Table (5 stores × 7 days):")
+print(sales_table)
+print(f"\nShape: {sales_table.shape} (rows, columns)")
+
+# Calculate statistics along different axes
+total_per_store = np.sum(sales_table, axis=1)  # Sum across columns (days) for each store
+total_per_day = np.sum(sales_table, axis=0)    # Sum across rows (stores) for each day
+
+print(f"\nTotal sales per store: {total_per_store}")
+print(f"Total sales per day: {total_per_day}")
+
+# %% [markdown]
+# > **Understanding axis Parameter**
+# >
+# > In 2D arrays:
+# >
+# > -   `axis=0` operates DOWN the rows (along columns)
+# > -   `axis=1` operates ACROSS the columns (along rows)
+# >
+# > Think of it this way:
+# >
+# > -   `axis=1` gives you one value per row (e.g., average per store)
+# > -   `axis=0` gives you one value per column (e.g., average per day)
+#
+# ## Boolean Filtering and Binary Vectors
+#
+# An important concept: when you filter with a condition, NumPy creates a
+# **boolean (True/False) array**, also called a binary vector!
+
+# %%
+import numpy as np
+
+# Sample satisfaction scores
+scores = np.array([4.8, 3.2, 4.5, 2.8, 4.9, 3.7, 4.2, 5.0])
+
+# When we apply a condition, we get a boolean array (binary vector)
+high_scores_mask = scores >= 4.0
+print(f"Original scores: {scores}")
+print(f"Boolean mask (>= 4.0): {high_scores_mask}")
+print(f"Type: {type(high_scores_mask)}")
+
+# We can use this binary vector in several ways:
+
+# 1. Count True values (treating True=1, False=0)
+count_high = np.sum(high_scores_mask)
+print(f"\nNumber of high scores: {count_high}")
+
+# 2. Filter to get only values that are True
+filtered_scores = scores[high_scores_mask]
+print(f"High scores only: {filtered_scores}")
+
+# 3. Do it all in one line (common pattern)
+count_directly = np.sum(scores >= 4.0)
+print(f"Count directly: {count_directly}")
+
+# %% [markdown]
+# > **Boolean Arrays (Binary Vectors)**
+# >
+# > When you write `array >= value`, NumPy creates a boolean array: -
+# > **True** (=1) where condition is met - **False** (=0) where condition
+# > is not met
+# >
+# > This binary vector can be used to: - **Count**: `np.sum(condition)` -
+# > sums up the 1s and 0s - **Filter**: `array[condition]` - returns only
+# > True values - **Analyze**: Check what percentage meets criteria
+#
+# Let’s see another practical example:
+
+# %%
+import numpy as np
+
+# Daily sales for 10 stores
+daily_sales = np.array([125, 98, 156, 87, 134, 145, 92, 167, 118, 143])
+
+# Find stores exceeding target of 120
+target = 120
+exceeds_target = daily_sales > target
+
+print(f"Sales: {daily_sales}")
+print(f"Exceeds {target}: {exceeds_target}")
+print(f"\nStores meeting target: {np.sum(exceeds_target)}")
+print(f"Percentage meeting target: {np.sum(exceeds_target) / len(daily_sales) * 100:.1f}%")
+print(f"Actual sales above target: {daily_sales[exceeds_target]}")
+
+# %% [markdown]
 # ## Exercise 6.1 - Analyze Company Performance
 #
-# Analyze performance metrics across all Bean Counter locations.
+# Analyze performance metrics across all Bean Counter locations using 2D
+# arrays.
 
 # %%
 import numpy as np
 
 # Daily customer counts for 50 stores over 30 days
+# This creates a 2D array: rows = stores, columns = days
 np.random.seed(100)
 daily_customers = np.random.randint(150, 500, size=(50, 30))  # 50 stores, 30 days
+
+print(f"Data shape: {daily_customers.shape}")
+print(f"First store's first 5 days: {daily_customers[0, :5]}")
 
 # YOUR CODE BELOW
 # 1. Calculate total customers served across all stores in the month
 total_customers =
 
-# 2. Calculate average daily customers per store
+# 2. Calculate average daily customers per store (across all stores and days)
 avg_daily_per_store =
 
 # 3. Find the busiest single day (max customers in one store on one day)
 busiest_day =
 
 # 4. Find stores that averaged over 350 customers per day
+# Hint: Use np.mean(daily_customers, axis=1) to get average per store
+# Then count how many stores have average > 350
+store_averages =
 high_traffic_stores =
 
 # %%

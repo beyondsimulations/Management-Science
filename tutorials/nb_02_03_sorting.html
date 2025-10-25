@@ -410,7 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="section-1---sorting-lists-for-better-decisions" class="level1">
 <h1>Section 1 - Sorting Lists for Better Decisions</h1>
 <p>As Operations Director, you constantly need to rank things: Which stores are performing best? Which products sell fastest? Let’s start with sorting simple lists.</p>
-<div id="2ab9d187" class="cell" data-execution_count="1">
+<div id="3de3f6cb" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorting helps us see patterns and make decisions</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>daily_sales <span class="op">=</span> [<span class="dv">4500</span>, <span class="dv">6200</span>, <span class="dv">3800</span>, <span class="dv">5100</span>, <span class="dv">4900</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -462,12 +462,12 @@ Original: [4500, 6200, 3800, 5100, 4900]</code></pre>
 <li><code>fastest_first</code> - sorted from fastest to slowest</li>
 <li><code>slowest_first</code> - sorted from slowest to fastest</li>
 </ol>
-<div id="bc5287b6" class="cell" data-execution_count="2">
+<div id="ebf43ac2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wait_times <span class="op">=</span> [<span class="dv">95</span>, <span class="dv">120</span>, <span class="dv">85</span>, <span class="dv">150</span>, <span class="dv">110</span>, <span class="dv">90</span>, <span class="dv">135</span>, <span class="dv">88</span>, <span class="dv">125</span>, <span class="dv">105</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="98606cb5" class="cell" data-execution_count="4">
+<div id="8145b887" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your sorting</span></span>
@@ -484,13 +484,13 @@ Original: [4500, 6200, 3800, 5100, 4900]</code></pre>
 <section id="exercise-1.2---alphabetical-store-directory" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.2---alphabetical-store-directory">Exercise 1.2 - Alphabetical Store Directory</h2>
 <p>Create an alphabetically sorted list of store names for the company directory. It should be called <code>alphabetical</code>.</p>
-<div id="8af62c24" class="cell" data-execution_count="5">
+<div id="81605274" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>store_names <span class="op">=</span> [<span class="st">"Plaza"</span>, <span class="st">"Downtown"</span>, <span class="st">"Airport"</span>, <span class="st">"University"</span>, <span class="st">"Beach"</span>, <span class="st">"Station"</span>, <span class="st">"Mall"</span>, <span class="st">"Park"</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort alphabetically (A to Z)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4b6c364d" class="cell" data-execution_count="7">
+<div id="56630800" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your alphabetical sorting</span></span>
@@ -507,7 +507,7 @@ Original: [4500, 6200, 3800, 5100, 4900]</code></pre>
 <section id="section-2---finding-extremes-with-min-and-max" class="level1">
 <h1>Section 2 - Finding Extremes with Min and Max</h1>
 <p>Sometimes you don’t need the full ranking, just the best or worst. Python’s <code>min()</code> and <code>max()</code> functions find extremes instantly!</p>
-<div id="ee3be735" class="cell" data-execution_count="8">
+<div id="fe0012f7" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding the best and worst performers</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>customer_ratings <span class="op">=</span> [<span class="fl">4.5</span>, <span class="fl">4.8</span>, <span class="fl">4.2</span>, <span class="fl">4.9</span>, <span class="fl">4.6</span>, <span class="fl">4.3</span>]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -551,7 +551,7 @@ First alphabetically: Airport</code></pre>
 <li>Fastest and slowest delivery times</li>
 <li>The difference between best and worst sales (the range)</li>
 </ol>
-<div id="590b312c" class="cell" data-execution_count="9">
+<div id="3f155ccf" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>daily_sales <span class="op">=</span> [<span class="dv">4250</span>, <span class="dv">6100</span>, <span class="dv">3900</span>, <span class="dv">5200</span>, <span class="dv">4800</span>, <span class="dv">5500</span>, <span class="dv">4100</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>delivery_times <span class="op">=</span> [<span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">18</span>, <span class="dv">42</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">38</span>]  <span class="co"># in minutes</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -566,7 +566,7 @@ First alphabetically: Airport</code></pre>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>fastest_delivery <span class="op">=</span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>slowest_delivery <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9d1e1ef8" class="cell" data-execution_count="11">
+<div id="cd2efff9" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your extremes</span></span>
@@ -586,7 +586,7 @@ First alphabetically: Airport</code></pre>
 <section id="section-3---sorting-dictionaries-by-any-metric" class="level1">
 <h1>Section 3 - Sorting Dictionaries by Any Metric</h1>
 <p>Real power comes from sorting complex data. As Operations Director, you need to rank stores by different metrics: sales, efficiency, customer satisfaction, etc.</p>
-<div id="b6b7c3bc" class="cell" data-execution_count="12">
+<div id="026a5b35" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stores with multiple metrics</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>stores <span class="op">=</span> [</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Downtown"</span>, <span class="st">"sales"</span>: <span class="dv">4500</span>, <span class="st">"rating"</span>: <span class="fl">4.8</span>},</span>
@@ -627,7 +627,12 @@ By rating:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>key=lambda x: x["field"]</code> tells Python what to sort by: - <code>lambda x:</code> means “for each item x in the list” - <code>x["field"]</code> is the value to sort by - Think of it as: “sort by looking at this specific field”</p>
+<p><code>key=lambda x: x["field"]</code> tells Python what to sort by:</p>
+<ul>
+<li><code>lambda x:</code> means “for each item x in the list”</li>
+<li><code>x["field"]</code> is the value to sort by</li>
+<li>Think of it as: “sort by looking at this specific field”</li>
+</ul>
 </div>
 </div>
 <section id="exercise-3.1---rank-stores-by-efficiency" class="level2">
@@ -637,7 +642,7 @@ By rating:
 <li>Most efficient to least efficient</li>
 <li>Least efficient to most efficient</li>
 </ol>
-<div id="98989a65" class="cell" data-execution_count="13">
+<div id="90e442a2" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>store_efficiency <span class="op">=</span> [</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"location"</span>: <span class="st">"Plaza"</span>, <span class="st">"customers"</span>: <span class="dv">450</span>, <span class="st">"staff"</span>: <span class="dv">6</span>},      <span class="co"># 75 per staff</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"location"</span>: <span class="st">"Airport"</span>, <span class="st">"customers"</span>: <span class="dv">680</span>, <span class="st">"staff"</span>: <span class="dv">12</span>},   <span class="co"># 56.7 per staff</span></span>
@@ -646,7 +651,7 @@ By rating:
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"location"</span>: <span class="st">"Station"</span>, <span class="st">"customers"</span>: <span class="dv">410</span>, <span class="st">"staff"</span>: <span class="dv">7</span>}     <span class="co"># 58.6 per staff</span></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate efficiency for each store</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># First, we calculate efficiency for each store</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> store <span class="kw">in</span> store_efficiency:</span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    store[<span class="st">"efficiency"</span>] <span class="op">=</span> store[<span class="st">"customers"</span>] <span class="op">/</span> store[<span class="st">"staff"</span>]</span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
@@ -658,7 +663,7 @@ By rating:
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by efficiency (least efficient first)</span></span>
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>least_efficient <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="017defd6" class="cell" data-execution_count="15">
+<div id="f3284de6" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your efficiency ranking</span></span>
@@ -677,7 +682,7 @@ By rating:
 <section id="section-4---finding-the-best-option-in-complex-data" class="level1">
 <h1>Section 4 - Finding the Best Option in Complex Data</h1>
 <p>As Operations Director, you often need to find THE best store, THE most urgent task, or THE optimal choice from complex data.</p>
-<div id="e84cae54" class="cell" data-execution_count="16">
+<div id="3ef885e8" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding the best store by different metrics</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>locations <span class="op">=</span> [</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Downtown"</span>, <span class="st">"profit"</span>: <span class="dv">15000</span>, <span class="st">"satisfaction"</span>: <span class="fl">4.8</span>},</span>
@@ -714,7 +719,7 @@ Best satisfaction: Beach (4.9★)</code></pre>
 <li>The store with the lowest current inventory (most urgent need)</li>
 <li>The store with the highest daily bean usage (highest demand)</li>
 </ol>
-<div id="86b4368c" class="cell" data-execution_count="17">
+<div id="788f6b75" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>supply_data <span class="op">=</span> [</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"store"</span>: <span class="st">"Plaza"</span>, <span class="st">"inventory_kg"</span>: <span class="dv">15</span>, <span class="st">"daily_usage"</span>: <span class="dv">8</span>},</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"store"</span>: <span class="st">"Downtown"</span>, <span class="st">"inventory_kg"</span>: <span class="dv">8</span>, <span class="st">"daily_usage"</span>: <span class="dv">12</span>},</span>
@@ -730,7 +735,7 @@ Best satisfaction: Beach (4.9★)</code></pre>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Find store with highest daily usage</span></span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>highest_demand <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3bcf10d9" class="cell" data-execution_count="19">
+<div id="5279368c" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your supply allocation</span></span>
@@ -757,7 +762,7 @@ Best satisfaction: Beach (4.9★)</code></pre>
 <li>Minimizes late deliveries</li>
 <li>Ensures time-sensitive tasks are prioritized</li>
 </ul>
-<div id="02de4a19" class="cell" data-execution_count="20">
+<div id="0116e3c5" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scheduling coffee orders during morning rush</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> [</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"A"</span>, <span class="st">"prep_time"</span>: <span class="dv">3</span>, <span class="st">"deadline"</span>: <span class="dv">10</span>},</span>
@@ -821,7 +826,7 @@ EDD order sequence: ['B', 'A', 'C']</code></pre>
 <li><code>spt_sequence</code> - List of order IDs in SPT order</li>
 <li><code>edd_sequence</code> - List of order IDs in EDD order</li>
 </ol>
-<div id="9ebad934" class="cell" data-execution_count="21">
+<div id="4c287d0e" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>rush_orders <span class="op">=</span> [</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"Latte1"</span>, <span class="st">"prep_time"</span>: <span class="dv">4</span>, <span class="st">"promised_time"</span>: <span class="fl">7.15</span>},</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"id"</span>: <span class="st">"Espresso1"</span>, <span class="st">"prep_time"</span>: <span class="dv">2</span>, <span class="st">"promised_time"</span>: <span class="fl">7.10</span>},</span>
@@ -839,7 +844,7 @@ EDD order sequence: ['B', 'A', 'C']</code></pre>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract just the IDs using list comprehension</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="2a26e5fc" class="cell" data-execution_count="23">
+<div id="4df27561" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your scheduling</span></span>

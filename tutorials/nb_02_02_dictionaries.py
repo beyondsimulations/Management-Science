@@ -40,7 +40,7 @@
 # Using simple variables or lists isn’t enough anymore. You need a better
 # way to organize all this information!
 #
-# **Your Task:** Master **dictionaries** - Python’s way of storing
+# **Your Task:** Understand dictionaries - Python’s way of storing
 # structured data with labels. Think of them as digital filing cabinets
 # where everything has a clear label and is easy to find.
 #
@@ -417,10 +417,11 @@ print(f"{store['name']} earned a ${bonus} bonus!")
 #
 # The function should:
 #
-# 1.  Calculate profit margin: (revenue - costs) / revenue \* 100
-# 2.  Determine status: “Excellent” if margin \> 30%, “Good” if \> 20%,
+# 1.  Calculate profit: revenue - costs
+# 2.  Calculate profit margin: (profit / revenue) \* 100
+# 3.  Determine status: “Excellent” if margin \> 30%, “Good” if \> 20%,
 #     else “Needs Improvement”
-# 3.  Return a **formatted string** with the store name, margin, and
+# 4.  Return a **formatted string** with the store name, margin, and
 #     status
 
 # %%

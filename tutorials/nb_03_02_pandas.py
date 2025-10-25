@@ -162,17 +162,23 @@ performance_df = pd.DataFrame({
 })
 
 # YOUR CODE BELOW
-# 1. Display the first 3 rows (print them)
+# 1. Display the first 3 rows and store in a variable
+first_rows =
 
 # 2. Get the shape (rows, columns) and save it
 data_shape =
 
-# 3. Get summary statistics for numerical columns (print them)
-
+# 3. Get summary statistics for numerical columns and store them
+summary_stats =
 
 # %%
 # Test your exploration
 assert data_shape == (8, 5), "Should have 8 stores and 5 columns"
+assert len(first_rows) == 3, "first_rows should have 3 stores"
+assert isinstance(summary_stats, pd.DataFrame), "summary_stats should be a DataFrame"
+print("First 3 stores:")
+print(first_rows)
+print(f"\nDataFrame shape: {data_shape}")
 print("Great exploration! You understand your data structure!")
 
 # %% [markdown]
@@ -240,6 +246,11 @@ growing_stores =
 # %%
 # Test your filtering
 assert len(high_revenue_stores) == 5, "Should find 5 high revenue stores"
+assert all(high_revenue_stores['monthly_revenue'] > 100000), "All selected stores should have revenue > 100000"
+assert len(growing_stores) == 6, "Should find 6 stores with positive growth"
+assert all(growing_stores['growth_rate'] > 0), "All selected stores should have positive growth"
+print(f"High revenue stores: {list(high_revenue_stores['location'])}")
+print(f"Growing stores: {list(growing_stores['location'])}")
 print("Excellent! You've identified your star performers!")
 
 # %% [markdown]

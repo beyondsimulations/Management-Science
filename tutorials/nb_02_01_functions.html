@@ -412,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Section 1 - Basic Functions for Bean Counter</h1>
 <p>As Assistant Manager, your first task is to standardize how we calculate drink prices. Currently, each barista uses their own mental math, leading to pricing chaos!</p>
 <p><strong>Functions</strong> are like recipe cards - they take ingredients (inputs), follow a set of instructions, and produce a result (output). Once written, anyone can use them to get consistent results.</p>
-<div id="f5160c80" class="cell" data-execution_count="1">
+<div id="bd7e1e0d" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here's how we create a function for Bean Counter</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet_customer(name):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -481,12 +481,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<div id="f4ebcd4c" class="cell" data-execution_count="2">
+<div id="f1917711" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_drink_price(size, drink_type):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Your pricing logic here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="171f994d" class="cell" data-execution_count="4">
+<div id="d48ba28a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your drink pricing function</span></span>
@@ -516,12 +516,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="fefdff53" class="cell" data-execution_count="5">
+<div id="bd65a53a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_loyalty_points(purchase_amount):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate points based on purchase amount</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e4dea642" class="cell" data-execution_count="7">
+<div id="bc52b6f1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your loyalty points calculator</span></span>
@@ -537,7 +537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="section-2---functions-with-bean-counter-business-logic" class="level1">
 <h1>Section 2 - Functions with Bean Counter Business Logic</h1>
 <p>Now let’s add Bean Counter’s specific business rules to our functions. The CEO wants smart functions that can make decisions based on our business policies.</p>
-<div id="59c7f6e8" class="cell" data-execution_count="8">
+<div id="007bc780" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Functions can contain complex business logic</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_happy_hour(hour):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Check if it's happy hour at Bean Counter (3 PM - 5 PM)"""</span></span>
@@ -584,12 +584,12 @@ Is it happy hour at 6 PM? False</code></pre>
 <li>After 21 days, beans must be discarded</li>
 <li>Return: “fresh”, “manager_approval”, or “discard”</li>
 </ul>
-<div id="399225b0" class="cell" data-execution_count="9">
+<div id="23ba026f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_bean_freshness(days_since_roasting):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check freshness and return status as string</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cd989e81" class="cell" data-execution_count="11">
+<div id="fa14a001" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your freshness checker</span></span>
@@ -620,13 +620,13 @@ Is it happy hour at 6 PM? False</code></pre>
 </div>
 </div>
 </div>
-<div id="aa6134e1" class="cell" data-execution_count="12">
+<div id="a8a7b0ad" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_discount(original_price, hour, is_senior, is_student):</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply the best available discount</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tip: Use a variable to keep track of the best discount and start with the lowest</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f591704c" class="cell" data-execution_count="14">
+<div id="e09cd340" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your discount function</span></span>
@@ -643,7 +643,7 @@ Is it happy hour at 6 PM? False</code></pre>
 <section id="section-3---functions-calling-other-functions" class="level1">
 <h1>Section 3 - Functions Calling Other Functions</h1>
 <p>The real power of functions comes when they work together! Just like how making a latte involves grinding beans, pulling espresso, and steaming milk, complex operations can be built from simpler functions.</p>
-<div id="d4cd1567" class="cell" data-execution_count="15">
+<div id="1ac38c19" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Functions can call other functions</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_tax(amount):</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate 8% sales tax"""</span></span>
@@ -704,12 +704,12 @@ Total with tax: $10.8</code></pre>
 <p>You can use the <code>check_bean_freshness()</code> function you created in Exercise 2.1. Just call it inside your new function!</p>
 </div>
 </div>
-<div id="9cfd9ee3" class="cell" data-execution_count="16">
+<div id="e75ffa96" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> validate_order(drink_type, days_since_roasting):</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Validate the order and return can_fulfill</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="5ccba9ed" class="cell" data-execution_count="18">
+<div id="9f02f923" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your validation system</span></span>
@@ -734,7 +734,7 @@ Total with tax: $10.8</code></pre>
 <p><strong>Methods</strong> belong to objects - you call them WITH a dot:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>orders.append(<span class="st">"latte"</span>)  <span class="co"># List method - adds item</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>orders.remove(<span class="st">"espresso"</span>)  <span class="co"># List method - removes item</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="4825024f" class="cell" data-execution_count="19">
+<div id="a526d4fe" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Functions vs Methods in action at Bean Counter</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># FUNCTIONS work on data</span></span>
@@ -747,16 +747,17 @@ Total with tax: $10.8</code></pre>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Original orders: </span><span class="sc">{</span>morning_orders<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Using list METHODS (with dot notation)</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>morning_orders.append(<span class="st">"mocha"</span>)  <span class="co"># Add to end</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>morning_orders.append(<span class="st">"mocha"</span>)  <span class="co"># Add to end (you learned this in Notebook 1.2)</span></span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After .append('mocha'): </span><span class="sc">{</span>morning_orders<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>morning_orders.remove(<span class="st">"espresso"</span>)  <span class="co"># Remove specific item</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After .remove('espresso'): </span><span class="sc">{</span>morning_orders<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Using FUNCTIONS (no dot)</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> count_drinks(morning_orders)</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Function count_drinks(): </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss"> drinks"</span>)</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Function len(): </span><span class="sc">{</span><span class="bu">len</span>(morning_orders)<span class="sc">}</span><span class="ss"> drinks"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># New method: .remove() removes the first occurrence of a value</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>morning_orders.remove(<span class="st">"espresso"</span>)  <span class="co"># Remove specific item</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"After .remove('espresso'): </span><span class="sc">{</span>morning_orders<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Using FUNCTIONS (no dot)</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> count_drinks(morning_orders)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Function count_drinks(): </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss"> drinks"</span>)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Function len(): </span><span class="sc">{</span><span class="bu">len</span>(morning_orders)<span class="sc">}</span><span class="ss"> drinks"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Original orders: ['latte', 'espresso', 'cappuccino']
 After .append('mocha'): ['latte', 'espresso', 'cappuccino', 'mocha']
@@ -775,15 +776,23 @@ Function len(): 3 drinks</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Functions:</strong> - Stand alone: <code>function_name(arguments)</code> - Example: <code>len(my_list)</code>, <code>sum(numbers)</code>, <code>print(text)</code></p>
-<p><strong>Methods:</strong> - Belong to objects: <code>object.method_name(arguments)</code> - Example: <code>my_list.append(item)</code>, <code>my_list.remove(item)</code>, <code>my_list.clear()</code></p>
+<p><strong>Functions:</strong></p>
+<ul>
+<li>Stand alone: <code>function_name(arguments)</code></li>
+<li>Example: <code>len(my_list)</code>, <code>sum(numbers)</code>, <code>print(text)</code></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li>Belong to objects: <code>object.method_name(arguments)</code></li>
+<li>Example: <code>my_list.append(item)</code>, <code>my_list.remove(item)</code>, <code>my_list.clear()</code></li>
+</ul>
 <p>Think of it this way: - Functions are like Bean Counter tools anyone can use - Methods are built into the objects themselves</p>
 </div>
 </div>
 <section id="exercise-4.1---order-queue-manager" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4.1---order-queue-manager">Exercise 4.1 - Order Queue Manager</h2>
 <p>Create a function that manages Bean Counter’s morning rush order queue using list methods.</p>
-<div id="5e42183e" class="cell" data-execution_count="20">
+<div id="3f8f5b10" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> manage_order_queue(current_queue, new_order, completed_order):</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -800,7 +809,7 @@ Function len(): 3 drinks</code></pre>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> queue_length</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="2a9c8b1c" class="cell" data-execution_count="22">
+<div id="ab0e7bb3" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test queue manager</span></span>
@@ -829,7 +838,7 @@ Function len(): 3 drinks</code></pre>
 <h1>Section 5 - Returning Multiple Values with Tuples</h1>
 <p>As Assistant Manager, you often need to report multiple pieces of information at once. Python’s <strong>tuples</strong> let functions return multiple values - perfect for analytics and reporting!</p>
 <p>A tuple is an immutable (unchangeable) sequence of values, perfect for returning multiple related values from a function.</p>
-<div id="70efe967" class="cell" data-execution_count="23">
+<div id="2b8e724f" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Functions can return multiple values using tuples</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_sale(price, cost):</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -893,12 +902,12 @@ Margin: 70.0%</code></pre>
 <li>Average sale amount</li>
 <li>Number of transactions</li>
 </ol>
-<div id="1b9e729c" class="cell" data-execution_count="24">
+<div id="215fcc7b" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> analyze_daily_sales(sales_list):</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate and return (total, average, count) as tuple</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fb409a28" class="cell" data-execution_count="26">
+<div id="ef3ce050" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your sales analytics function</span></span>
@@ -930,12 +939,22 @@ Margin: 70.0%</code></pre>
 <li>“good”: avg time &lt; 120 seconds AND rating &gt;= 4.0</li>
 <li>“needs_improvement”: otherwise</li>
 </ul>
-<div id="6bb47135" class="cell" data-execution_count="27">
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>For robustness, it is nice to handle the case where the input lists might be empty. For example, if empty, return (0, 0, “needs_improvement”).</p>
+</div>
+</div>
+</div>
+<div id="0d993052" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_barista_performance(prep_times, ratings):</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate metrics and determine performance level</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4cea3636" class="cell" data-execution_count="29">
+<div id="04d232e5" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your barista evaluation function</span></span>

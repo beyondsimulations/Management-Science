@@ -89,7 +89,7 @@ print(f"Uncomfortable conditions: {check_condition}")
 # > -   `or` - at least one condition must be True
 # > -   `not` - reverses the condition
 #
-# ## Exercise 2.1 - Coffee Bean Quality Check
+# ## Exercise 1.1 - Coffee Bean Quality Check
 #
 # Check if coffee beans meet quality standards. Beans pass if:
 #
@@ -113,7 +113,7 @@ assert passes_quality == True, "Beans with moisture=11 and defects=3 should pass
 print("Excellent! Your quality check system works correctly!")
 
 # %% [markdown]
-# ## Exercise 2.2 - Special Offer Eligibility
+# ## Exercise 1.2 - Special Offer Eligibility
 #
 # Customers get a special offer if they meet ANY of these conditions:
 #
@@ -121,7 +121,8 @@ print("Excellent! Your quality check system works correctly!")
 # -   OR they’ve spent more than \$100
 # -   OR it’s their birthday (is_birthday = True)
 #
-# Determine if the customer is eligible and print an appropriate message.
+# Determine if the customer is eligible by storing the result in a
+# variable called `eligible_for_offer`.
 
 # %%
 # YOUR CODE BELOW
@@ -131,7 +132,6 @@ is_birthday = False
 
 # Check if customer is eligible for special offer using 'or'
 # Store result in eligible_for_offer
-# Print "Special offer available!" or "No special offers today"
 
 # %%
 # Test your answer
@@ -231,44 +231,52 @@ print(f"Perfect! Price per item: ${price_per_item}, Total: ${total_cost}")
 # %% [markdown]
 # # Section 3 - Conditionals Within Loops
 #
-# Before we combine conditionals with loops, let’s look again on how to
-# work with lists in Python.
+# Combining loops with conditionals lets us filter and process data
+# intelligently. But first, let’s learn a new, cleaner way to work with
+# indices in loops.
+#
+# ## Introducing enumerate()
+#
+# Previously, you learned to use `range(len(list))` to get indices. Python
+# has a more elegant way: **enumerate()**, which gives you both the index
+# AND the value at the same time!
 
 # %%
-# Basic list iteration
-products = ["Coffee", "Milk", "Sugar"]
-
-print("Simple iteration:")
-for product in products:
-    print(f"  - {product}")
-
-# %%
-# Using range() for indexed access
+# The old way - using range() for indexed access
 products = ["Coffee", "Milk", "Sugar"]
 prices = [4.50, 2.75, 1.25]
 
-print("\nUsing range() for indices:")
+print("Using range() - the way you learned before:")
 for i in range(len(products)):
-    print(f"  {products[i]} costs ${prices[i]}")
+    print(f"  Item {i}: {products[i]} costs ${prices[i]}")
 
 # %%
-# Using enumerate() to get both index and value
+# The new way - using enumerate() to get both index and value
 products = ["Coffee", "Milk", "Sugar"]
 prices = [4.50, 2.75, 1.25]
 
-print("\nUsing enumerate():")
+print("\nUsing enumerate() - a cleaner approach:")
 for i, product in enumerate(products):
-    print(f"  {i}: {product} costs ${prices[i]}")
+    print(f"  Item {i}: {product} costs ${prices[i]}")
 
 # %% [markdown]
-# > **List Iteration Patterns**
+# > **When to Use enumerate():**
 # >
-# > 1.  **Simple iteration**: `for item in list:`
-# > 2.  **Indexed access**: `for i in range(len(list)):`
-# > 3.  **Index and value**: `for i, item in enumerate(list):`
+# > Use `enumerate()` when you need **both** the index and the value:
+# >
+# > ``` python
+# > for i, item in enumerate(my_list):
+# >     # i is the index (0, 1, 2, ...)
+# >     # item is the value at that position
+# > ```
+# >
+# > This is cleaner than `for i in range(len(my_list))` and accessing
+# > `my_list[i]`!
 #
-# Now, combining loops with conditionals lets us filter and process data
-# intelligently.
+# ## Filtering Data with Conditionals in Loops
+#
+# Now let’s combine everything - loops, enumerate(), and conditionals - to
+# filter and process data intelligently.
 
 # %%
 # Process a list with conditions
@@ -398,13 +406,18 @@ print(f"\nReorder needed after {days} days!")
 # ## Exercise 4.1 - Customer Queue Simulation
 #
 # Simulate serving customers in a queue. Each minute you can serve 2
-# customers, and 3 new customers arrive. Stop when the queue exceeds 20
-# customers.
+# customers, and 3 new customers arrive. The loop should continue running
+# while the queue size is 20 or less.
 #
 # Track:
 #
-# -   How many minutes it takes
+# -   How many minutes it takes (until queue exceeds 20)
 # -   The final queue size
+#
+# > **Tip**
+# >
+# > Your while loop condition should be `while queue_size <= 20:` - this
+# > means the loop continues as long as the queue hasn’t exceeded 20 yet.
 
 # %%
 queue_size = 5  # Starting queue
@@ -415,7 +428,9 @@ arrival_rate = 3  # New customers per minute
 # YOUR CODE BELOW
 
 # Use a while loop that continues while queue_size <= 20
-# Each iteration: add arrivals, subtract served, increment minutes
+# Each iteration: 
+#   1. Update queue_size: add arrivals, subtract served
+#   2. Increment minutes by 1
 
 
 # %%
@@ -456,6 +471,51 @@ if food_count > 0:
     print(f"Average food price: ${avg_food_price:.2f}")
 
 # %% [markdown]
+# ## Complex Conditions with OR Logic
+#
+# Sometimes you need to combine multiple conditions with OR logic. When
+# mixing AND and OR, use parentheses to make your logic clear:
+
+# %%
+# Example: Find items that meet EITHER of two criteria
+items = ["Coffee", "Tea", "Pastry", "Juice", "Sandwich"]
+prices = [5.00, 2.50, 4.00, 3.50, 7.00]
+is_hot = [True, True, True, False, True]
+
+# Promotion: Hot items over $4 OR cold items over $3
+promotion_items = []
+
+for i in range(len(items)):
+    # Use parentheses to group each condition
+    hot_and_expensive = (is_hot[i] == True and prices[i] >= 4)
+    cold_and_pricy = (is_hot[i] == False and prices[i] >= 3)
+    
+    if hot_and_expensive or cold_and_pricy:
+        promotion_items.append(items[i])
+        print(f"  {items[i]}: ${prices[i]} - Eligible!")
+
+print(f"\nPromotion items: {promotion_items}")
+
+# %% [markdown]
+# You can also write this more compactly in a single condition:
+
+# %%
+# Same logic, written in one line
+promotion_items_compact = []
+
+for i in range(len(items)):
+    if (is_hot[i] and prices[i] >= 4) or (not is_hot[i] and prices[i] >= 3):
+        promotion_items_compact.append(items[i])
+
+print(f"Promotion items (compact): {promotion_items_compact}")
+
+# %% [markdown]
+# > **Complex Boolean Logic:**
+# >
+# > When combining AND and OR: - Use **parentheses** to group related
+# > conditions - Break complex conditions into smaller parts if needed -
+# > Test each part separately first, then combine
+#
 # ## Exercise 5.1 - Smart Promotion Filter
 #
 # Find products eligible for promotion. Products qualify if they are:

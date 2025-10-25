@@ -265,9 +265,19 @@ plt.show()
 # ## Exercise 4.1 - Complete CEO Dashboard
 #
 # Create an integrated dashboard combining NumPy simulation with Pandas
-# analysis and visualization. Create revenue projections for the company,
-# start at 6M, grow ~2% monthly with some randomness. You can use
-# `np.random.uniform(0.95, 1.05)` for the randomness.
+# analysis and visualization. Create revenue projections for the company:
+#
+# -   Start at \$6M in January
+# -   Grow approximately 2% each month
+# -   Add random variation (±5%) to simulate market fluctuations
+#
+# > **Tip**
+# >
+# > To create realistic monthly growth:
+# >
+# > -   Start with base revenue of 6.0M
+# > -   Each month, apply 2% growth: `revenue = previous_revenue * 1.02`
+# > -   Add random variation: multiply by `np.random.uniform(0.95, 1.05)`
 
 # %%
 import pandas as pd
@@ -281,10 +291,18 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 
 # YOUR CODE BELOW
 # 1. Create revenue projections for the company
+# Start with 6.0M, grow each month by 2% with random variation
+revenue_projection = []
+current_revenue = 6.0  # Starting revenue in millions
 
-# 2. Create DataFrame
+# Loop through 12 months
+
+
+# 2. Create DataFrame with months and revenue
+
 
 # 3. Calculate cumulative revenue
+
 
 # 4. Create visualization with two subplots
 
