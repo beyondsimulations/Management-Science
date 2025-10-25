@@ -7,9 +7,10 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.18.1
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
+#     path: /Users/vlcek/Documents/git-teaching/Management-Science/.venv/share/jupyter/kernels/python3
 # ---
 
 # %% [markdown]
@@ -43,18 +44,17 @@
 # Variables are like labeled containers that store information. In our
 # coffee shop, we need to keep track of prices, customer names, order
 # quantities, and more.
-#
-# ``` python
-# #| eval: true
-# # Variables are created by giving them a name and a value
-# coffee_price = 4.50
-# customer_name = "Alex"
-# cups_ordered = 3
-# shop_open = True
-#
-# print(f"Customer {customer_name} ordered {cups_ordered} coffees at ${coffee_price} each")
-# ```
-#
+
+# %%
+# Variables are created by giving them a name and a value
+coffee_price = 4.50
+customer_name = "Alex"
+cups_ordered = 3
+shop_open = True
+
+print(f"Customer {customer_name} ordered {cups_ordered} coffees at ${coffee_price} each")
+
+# %% [markdown]
 # > **Variable Naming Rules**
 # >
 # > -   Use descriptive names (coffee_price is better than cp)
@@ -70,45 +70,37 @@
 # -   `customer` should be “Maria”
 # -   `quantity` should be 2
 # -   `shop_closed` = False
-#
-# ``` python
-# #| eval: false
-# # YOUR CODE BELOW
-# ```
-#
-# ``` python
-# #| eval: false
-# #| code-fold: true
-# # Test your answer
-# assert latte_price == 5.25, "The latte_price should be 5.25"
-# assert customer == "Maria", "The customer should be 'Maria'"
-# assert quantity == 2, "The quantity should be 2"
-# assert shop_closed == False, "The shop should be open"
-# print("Perfect! You've created your first variables for the coffee shop!")
-# ```
-#
+
+# %%
+# YOUR CODE BELOW
+
+# %%
+# Test your answer
+assert latte_price == 5.25, "The latte_price should be 5.25"
+assert customer == "Maria", "The customer should be 'Maria'"
+assert quantity == 2, "The quantity should be 2"
+assert shop_closed == False, "The shop should be open"
+print("Perfect! You've created your first variables for the coffee shop!")
+
+# %% [markdown]
 # ## Exercise 1.2 - Updating Variables
 #
 # Variables can change! A customer changed their mind and wants 4 lattes
 # instead of 2. Update the `quantity` variable to 4 and create a new
 # variable `total_order` that stores the total price.
-#
-# ``` python
-# #| eval: false
-# # YOUR CODE BELOW
-# # Assume latte_price = 5.25 and quantity = 2 from previous exercise
-# # Tip: Just overwrite these old values
-# ```
-#
-# ``` python
-# #| eval: false
-# #| code-fold: true
-# # Test your answer
-# assert quantity == 4, "The quantity should be updated to 4"
-# assert total_order == 21.0, "The total_order should be 21.0 (5.25 * 4)"
-# print("Excellent! You can update variables and create new ones from existing values!")
-# ```
-#
+
+# %%
+# YOUR CODE BELOW
+# Assume latte_price = 5.25 and quantity = 2 from previous exercise
+# Tip: Just overwrite these old values
+
+# %%
+# Test your answer
+assert quantity == 4, "The quantity should be updated to 4"
+assert total_order == 21.0, "The total_order should be 21.0 (5.25 * 4)"
+print("Excellent! You can update variables and create new ones from existing values!")
+
+# %% [markdown]
 # # Section 2 - Data Types: Numbers and Text
 #
 # Python has different types of data. The three most common are:
@@ -117,22 +109,21 @@
 # -   **float** (floating-point): Decimal numbers like 3.14, 2.50, -0.5
 # -   **str** (strings): Text like “coffee”, “Bean Counter”, “Order #123”
 # -   **bool** (boolean): True or False
-#
-# ``` python
-# #| eval: true
-# # Different data types in our coffee shop
-# cups_sold = 150           # int - whole number
-# price = 4.99              # float - decimal number
-# shop_name = "Bean Counter" # str - text
-# is_open = True            # bool - true or false
-#
-# # Python can tell you the type of any variable
-# print(f"cups_sold is a {type(cups_sold)}")
-# print(f"price is a {type(price)}")
-# print(f"shop_name is a {type(shop_name)}")
-# print(f"is_open is a {type(is_open)}")
-# ```
-#
+
+# %%
+# Different data types in our coffee shop
+cups_sold = 150           # int - whole number
+price = 4.99              # float - decimal number
+shop_name = "Bean Counter" # str - text
+is_open = True            # bool - true or false
+
+# Python can tell you the type of any variable
+print(f"cups_sold is a {type(cups_sold)}")
+print(f"price is a {type(price)}")
+print(f"shop_name is a {type(shop_name)}")
+print(f"is_open is a {type(is_open)}")
+
+# %% [markdown]
 # > **Warning**
 # >
 # > **Common Mistake:** Mixing up numbers and text that looks like
@@ -150,22 +141,18 @@
 # -   `daily_customers` (int): 85 customers visited today
 # -   `average_tip` (float): 2.50 dollars average tip
 # -   `best_seller` (str): “Caramel Macchiato”
-#
-# ``` python
-# #| eval: false
-# # YOUR CODE BELOW
-# ```
-#
-# ``` python
-# #| eval: false
-# #| code-fold: true
-# # Test your answer
-# assert daily_customers == 85 and type(daily_customers) == int, "daily_customers should be the integer 85"
-# assert average_tip == 2.50 and type(average_tip) == float, "average_tip should be the float 2.50"
-# assert best_seller == "Caramel Macchiato" and type(best_seller) == str, "best_seller should be the string 'Caramel Macchiato'"
-# print("Great job! You understand the different data types!")
-# ```
-#
+
+# %%
+# YOUR CODE BELOW
+
+# %%
+# Test your answer
+assert daily_customers == 85 and type(daily_customers) == int, "daily_customers should be the integer 85"
+assert average_tip == 2.50 and type(average_tip) == float, "average_tip should be the float 2.50"
+assert best_seller == "Caramel Macchiato" and type(best_seller) == str, "best_seller should be the string 'Caramel Macchiato'"
+print("Great job! You understand the different data types!")
+
+# %% [markdown]
 # ## Exercise 2.2 - Type Conversion
 #
 # Sometimes we need to convert between types. A customer’s loyalty card
@@ -179,47 +166,42 @@
 # >
 # > You can use the `int()` function to convert a string to an integer or
 # > use the `float()` function to convert a string to a float.
-#
-# ``` python
-# #| eval: false
-# # YOUR CODE BELOW
-# card_points = "1234"
-# ```
-#
-# ``` python
-# #| eval: false
-# #| code-fold: true
-# # Test your answer
-# assert card_points == 1234, "card_points should be 1234 as an integer"
-# assert new_points == 1334, "new_points should be 1334 (1234 + 100)"
-# print("Perfect! You can convert between data types!")
-# ```
-#
+
+# %%
+# YOUR CODE BELOW
+card_points = "1234"
+
+# %%
+# Test your answer
+assert card_points == 1234, "card_points should be 1234 as an integer"
+assert new_points == 1334, "new_points should be 1334 (1234 + 100)"
+print("Perfect! You can convert between data types!")
+
+# %% [markdown]
 # # Section 3 - Basic Arithmetic Operations
 #
 # Now let’s use Python’s arithmetic operations to handle coffee shop
 # calculations!
-#
-# ``` python
-# #| eval: true
-# # Basic arithmetic operations
-# espresso_price = 3.50
-# shots = 2
-#
-# # Addition and multiplication
-# double_espresso = espresso_price * shots
-# with_tip = double_espresso + 1.50
-#
-# # Division and subtraction
-# change = 20.00 - with_tip
-# price_per_shot = double_espresso / shots
-#
-# print(f"Double espresso: ${double_espresso}")
-# print(f"With tip: ${with_tip}")
-# print(f"Change from $20: ${change}")
-# print(f"Price per shot: ${price_per_shot}")
-# ```
-#
+
+# %%
+# Basic arithmetic operations
+espresso_price = 3.50
+shots = 2
+
+# Addition and multiplication
+double_espresso = espresso_price * shots
+with_tip = double_espresso + 1.50
+
+# Division and subtraction
+change = 20.00 - with_tip
+price_per_shot = double_espresso / shots
+
+print(f"Double espresso: ${double_espresso}")
+print(f"With tip: ${with_tip}")
+print(f"Change from $20: ${change}")
+print(f"Price per shot: ${price_per_shot}")
+
+# %% [markdown]
 # > **Python Arithmetic Operators**
 # >
 # > -   `+` Addition
@@ -239,22 +221,18 @@
 # -   1 sandwich at \$8.95
 #
 # Calculate the `subtotal`, then add 8% tax to get the `total_with_tax`.
-#
-# ``` python
-# #| eval: false
-# # YOUR CODE BELOW
-# ```
-#
-# ``` python
-# #| eval: false
-# #| code-fold: true
-# # Test your answer
-# import math
-# assert math.isclose(subtotal, 30.20, rel_tol=0.01), "Subtotal should be 30.20"
-# assert math.isclose(total_with_tax, 32.616, rel_tol=0.01), "Total with tax should be 32.616"
-# print("Excellent calculation! You've mastered basic arithmetic!")
-# ```
-#
+
+# %%
+# YOUR CODE BELOW
+
+# %%
+# Test your answer
+import math
+assert math.isclose(subtotal, 30.20, rel_tol=0.01), "Subtotal should be 30.20"
+assert math.isclose(total_with_tax, 32.616, rel_tol=0.01), "Total with tax should be 32.616"
+print("Excellent calculation! You've mastered basic arithmetic!")
+
+# %% [markdown]
 # ## Exercise 3.2 - Splitting the Bill
 #
 # The group wants to split the bill evenly among 4 people. Calculate:
@@ -268,53 +246,48 @@
 # > You could use `//` for floor division and `%` for remainder, but you
 # > don’t need to do that as other solutions are possible. If you want to
 # > round the cents, you can use the `round()` function.
-#
-# ``` python
-# #| eval: false
-# # YOUR CODE BELOW
-# # Assume total_with_tax = 32.616 from previous exercise
-# ```
-#
-# ``` python
-# #| eval: false
-# #| code-fold: true
-# # Test your answer
-# assert math.isclose(per_person, 8.154, rel_tol=0.01), "Each person should pay 8.154"
-# assert dollars == 8, "Each person needs 8 dollars"
-# assert cents == 15, "Each person needs 15 cents (rounded)"
-# print("Great work! You can split bills and handle money calculations!")
-# ```
-#
+
+# %%
+# YOUR CODE BELOW
+# Assume total_with_tax = 32.616 from previous exercise
+
+# %%
+# Test your answer
+assert math.isclose(per_person, 8.154, rel_tol=0.01), "Each person should pay 8.154"
+assert dollars == 8, "Each person needs 8 dollars"
+assert cents == 15, "Each person needs 15 cents (rounded)"
+print("Great work! You can split bills and handle money calculations!")
+
+# %% [markdown]
 # # Section 4 - F-strings for Output Formatting
 #
 # F-strings make it easy to create formatted output - perfect for receipts
 # and displays!
-#
-# ``` python
-# #| eval: true
-# # F-strings let you embed variables and expressions in text
-# item = "Flat White"
-# price = 4.25
-# quantity = 2
-# total = price * quantity
-#
-# # Basic f-string
-# receipt = f"Item: {item}, Quantity: {quantity}, Total: ${total}"
-# print(receipt)
-#
-# # Formatting numbers
-# formatted_receipt = f"""
-# ╔══════════════════════════╗
-# ║     BEAN COUNTER         ║
-# ╠══════════════════════════╣
-# ║ {item:<16} {quantity:2d} ║
-# ║ Price: ${price:>6.2f}    ║
-# ║ Total: ${total:>6.2f}    ║
-# ╚══════════════════════════╝
-# """
-# print(formatted_receipt)
-# ```
-#
+
+# %%
+# F-strings let you embed variables and expressions in text
+item = "Flat White"
+price = 4.25
+quantity = 2
+total = price * quantity
+
+# Basic f-string
+receipt = f"Item: {item}, Quantity: {quantity}, Total: ${total}"
+print(receipt)
+
+# Formatting numbers
+formatted_receipt = f"""
+╔══════════════════════════╗
+║     BEAN COUNTER         ║
+╠══════════════════════════╣
+║ {item:<16} {quantity:2d} ║
+║ Price: ${price:>6.2f}    ║
+║ Total: ${total:>6.2f}    ║
+╚══════════════════════════╝
+"""
+print(formatted_receipt)
+
+# %% [markdown]
 # > **F-string Formatting:**
 # >
 # > -   `{variable:.2f}` - Show 2 decimal places
@@ -333,20 +306,16 @@
 #
 # Format it as: “Order: \[size\] \[coffee_type\] - \$\[price with 2
 # decimal places\]”
-#
-# ``` python
-# #| eval: false
-# # YOUR CODE BELOW
-# ```
-#
-# ``` python
-# #| eval: false
-# #| code-fold: true
-# # Test your answer
-# assert receipt == "Order: Large Americano - $3.75", "Receipt should be 'Order: Large Americano - $3.75'"
-# print("Perfect! You've created your first formatted string!")
-# ```
-#
+
+# %%
+# YOUR CODE BELOW
+
+# %%
+# Test your answer
+assert receipt == "Order: Large Americano - $3.75", "Receipt should be 'Order: Large Americano - $3.75'"
+print("Perfect! You've created your first formatted string!")
+
+# %% [markdown]
 # # Conclusion
 #
 # Congratulations! You’ve successfully learned the fundamentals of Python

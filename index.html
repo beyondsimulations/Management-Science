@@ -218,24 +218,18 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#course-description" id="toc-course-description" class="nav-link active" data-scroll-target="#course-description">Course Description</a></li>
   <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
-  <li><a href="#course-structure" id="toc-course-structure" class="nav-link" data-scroll-target="#course-structure">Course Structure</a>
-  <ul class="collapse">
-  <li><a href="#part-i-python-foundation-lectures-1-3" id="toc-part-i-python-foundation-lectures-1-3" class="nav-link" data-scroll-target="#part-i-python-foundation-lectures-1-3">Part I: Python Foundation (Lectures 1-3)</a></li>
-  <li><a href="#part-ii-management-science-tools-lectures-4-9" id="toc-part-ii-management-science-tools-lectures-4-9" class="nav-link" data-scroll-target="#part-ii-management-science-tools-lectures-4-9">Part II: Management Science Tools (Lectures 4-9)</a></li>
-  <li><a href="#part-iii-consulting-competition-lectures-10-12" id="toc-part-iii-consulting-competition-lectures-10-12" class="nav-link" data-scroll-target="#part-iii-consulting-competition-lectures-10-12">Part III: Consulting Competition (Lectures 10-12)</a></li>
-  </ul></li>
+  <li><a href="#course-structure" id="toc-course-structure" class="nav-link" data-scroll-target="#course-structure">Course Structure</a></li>
   <li><a href="#assignments-grading" id="toc-assignments-grading" class="nav-link" data-scroll-target="#assignments-grading">Assignments &amp; Grading</a>
   <ul class="collapse">
   <li><a href="#assignment-structure" id="toc-assignment-structure" class="nav-link" data-scroll-target="#assignment-structure">Assignment Structure</a></li>
   <li><a href="#bonus-opportunities" id="toc-bonus-opportunities" class="nav-link" data-scroll-target="#bonus-opportunities">Bonus Opportunities</a></li>
-  <li><a href="#time-expectations" id="toc-time-expectations" class="nav-link" data-scroll-target="#time-expectations">Time Expectations</a></li>
   </ul></li>
   <li><a href="#resources-support" id="toc-resources-support" class="nav-link" data-scroll-target="#resources-support">Resources &amp; Support</a>
   <ul class="collapse">
   <li><a href="#required-tools" id="toc-required-tools" class="nav-link" data-scroll-target="#required-tools">Required Tools</a></li>
   <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting Help</a></li>
   </ul></li>
-  <li><a href="#important-dates" id="toc-important-dates" class="nav-link" data-scroll-target="#important-dates">Important Dates</a></li>
+  <li><a href="#ai-policy" id="toc-ai-policy" class="nav-link" data-scroll-target="#ai-policy">AI Policy</a></li>
   <li><a href="#how-to-navigate-this-course" id="toc-how-to-navigate-this-course" class="nav-link" data-scroll-target="#how-to-navigate-this-course">How to Navigate This Course</a></li>
   <li><a href="#questions-contact" id="toc-questions-contact" class="nav-link" data-scroll-target="#questions-contact">Questions &amp; Contact</a></li>
   <li><a href="#contributors" id="toc-contributors" class="nav-link" data-scroll-target="#contributors">Contributors</a></li>
@@ -267,8 +261,8 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="course-description" class="level1">
 <h1>Course Description</h1>
-<p>Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making. By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.</p>
-<p>In this course, you’ll build a comprehensive “consultant’s toolkit” by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you’ll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of “executives.”</p>
+<p><strong>Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making.</strong> By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.</p>
+<p>In this course, you’ll build a comprehensive toolkit by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you’ll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of “executives.”</p>
 </section>
 <section id="learning-outcomes" class="level1">
 <h1>Learning Outcomes</h1>
@@ -276,12 +270,11 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Technical Skills:</strong></p>
 <ul>
 <li>Implement Management Science solutions in Python</li>
-<li>Write clean, modular Python code (functions, control flow, data structures)</li>
 <li>Work effectively with NumPy and Pandas for analysis and modeling</li>
 <li>Apply Monte Carlo simulation to model uncertainty and risk</li>
 <li>Build and evaluate forecasting models for demand and time series</li>
-<li>Design and analyze scheduling solutions (SPT, EDD rules) with key performance metrics</li>
-<li>Solve routing problems using heuristics and local search improvements (nearest neighbor, 2-opt)</li>
+<li>Design and analyze scheduling solutions with key performance metrics</li>
+<li>Solve routing problems using heuristics and local search improvements</li>
 <li>Handle multi-objective trade-offs and combine decision criteria meaningfully</li>
 <li>Understand and apply metaheuristics for complex optimization problems</li>
 </ul>
@@ -292,23 +285,25 @@ ul.task-list li input[type="checkbox"] {
 <li>Present solutions in a consulting-style format to business stakeholders</li>
 <li>Approach complex problems with structured analytical thinking</li>
 </ul>
-<p><strong>Note:</strong> This course is specifically designed for business students. No prior programming experience required—our teaching format supports different skill levels so every student can progress effectively.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This course is specifically designed for business students. No prior programming experience required, the teaching format supports different skill levels so every student can progress effectively.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="course-structure" class="level1">
 <h1>Course Structure</h1>
 <p>The course is organized into three distinct parts across 12 lectures:</p>
-<section id="part-i-python-foundation-lectures-1-3" class="level2">
-<h2 class="anchored" data-anchor-id="part-i-python-foundation-lectures-1-3">Part I: Python Foundation (Lectures 1-3)</h2>
-<p><em>Building your analytical toolkit</em></p>
-</section>
-<section id="part-ii-management-science-tools-lectures-4-9" class="level2">
-<h2 class="anchored" data-anchor-id="part-ii-management-science-tools-lectures-4-9">Part II: Management Science Tools (Lectures 4-9)</h2>
-<p><em>Mini-competitions begin - apply algorithms to real business problems</em></p>
-</section>
-<section id="part-iii-consulting-competition-lectures-10-12" class="level2">
-<h2 class="anchored" data-anchor-id="part-iii-consulting-competition-lectures-10-12">Part III: Consulting Competition (Lectures 10-12)</h2>
-<p><em>Client challenges with professional presentations</em></p>
-</section>
+<ul>
+<li><strong>Part I:</strong> Python Foundation (Lectures 1-3)</li>
+<li><strong>Part II:</strong> Management Science Tools (Lectures 4-9)</li>
+<li><strong>Part III:</strong> Consulting Competition (Lectures 10-12)</li>
+</ul>
 </section>
 <section id="assignments-grading" class="level1">
 <h1>Assignments &amp; Grading</h1>
@@ -325,15 +320,6 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Win mini-competitions during lectures (Lectures 4-9)</li>
 <li>Best client project in Part III chosen by peer teams</li>
-</ul>
-</section>
-<section id="time-expectations" class="level2">
-<h2 class="anchored" data-anchor-id="time-expectations">Time Expectations</h2>
-<ul>
-<li>4-6 hours per week outside class</li>
-<li>Assignments take 4-7 hours each</li>
-<li>Focus on insights over perfect code</li>
-<li>functional and clear solutions are the goal</li>
 </ul>
 </section>
 </section>
@@ -357,42 +343,17 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </section>
 </section>
-<section id="important-dates" class="level1">
-<h1>Important Dates</h1>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Milestone</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Lecture 1</td>
-<td>Course begins, teams formed</td>
-</tr>
-<tr class="even">
-<td>Lecture 4</td>
-<td>Mini-competitions begin</td>
-</tr>
-<tr class="odd">
-<td>Lecture 8</td>
-<td>Assignment 1 due (Risk &amp; Forecasting)</td>
-</tr>
-<tr class="even">
-<td>Lecture 10</td>
-<td>Assignment 2 due (Optimization Toolkit)</td>
-</tr>
-<tr class="odd">
-<td>Lecture 10</td>
-<td>Client project teams formed</td>
-</tr>
-<tr class="even">
-<td>Lecture 12</td>
-<td>Final presentations (Consulting Finals)</td>
-</tr>
-</tbody>
-</table>
+<section id="ai-policy" class="level1">
+<h1>AI Policy</h1>
+<p><em>Level 1: Pause – Use of AI defined by the educator</em></p>
+<p>A course chatbot is available on the learning website for exploratory study. It is designed to guide your problem-solving process rather than provide answers directly. Use it as a learning tool, not a solution generator.</p>
+<p>You may also use external AI tools (e.g., ChatGPT, Claude, Mistral, Gemini). However:</p>
+<ol type="1">
+<li>Please be careful and try to understand the code generated.</li>
+<li>Relying on AI to solve tasks for you weakens your own learning.</li>
+<li>AI should ideally support understanding — not replace practice.</li>
+<li>Using AI without understand the code can lead to security risks.</li>
+</ol>
 </section>
 <section id="how-to-navigate-this-course" class="level1">
 <h1>How to Navigate This Course</h1>
