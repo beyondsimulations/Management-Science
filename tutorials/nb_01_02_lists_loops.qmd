@@ -197,6 +197,7 @@ You can use the `len()` function to find the length of the list.
 ```{python}
 #| eval: false
 customer_counts = []
+hours_tracked = 0
 # YOUR CODE BELOW
 
 ```
@@ -225,7 +226,7 @@ hours_tracked = len(customer_counts)
 
 ## Exercise 2.2 - Combining Lists
 
-You have morning and afternoon sales. Combine them into a full day's record called `full_day` and find the total number of transactions as `total_transactions`.
+You have morning and afternoon sales. Combine them into a full day's record called `full_day` and compute the total number of transactions as `total_transactions`.
 
 ::: callout-tip
 To combine lists, you can simply use the `+` operator.

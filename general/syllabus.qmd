@@ -126,27 +126,8 @@ subtitle: "Management Science"
 - Mini-competition victories (Lectures 4-9): up to +10 points
 - Peer-selected best client project: +5 points
 
-# Course Policies
-
-## Team Work Guidelines
-
-- Teams of 3-4 students formed in Lecture 1
-- All team members must contribute meaningfully
-- Peer evaluation forms will be used to assess individual contributions
-- Team conflicts should be reported to instructor immediately
-
 ## Late Work Policy
 
 - Assignment 1 & 2: -10% per day late (up to 3 days)
 - Competition project: No late submissions accepted (real consulting deadline!)
 - Extensions granted only for documented emergencies
-
-## Academic Integrity
-
-- Collaboration encouraged within teams, between teams on concepts only
-- GitHub Copilot and AI tools encouraged for learning, not for replacing thinking
-- Copying solutions from internet or other students prohibited
-
-# Course Evolution
-
-This course continuously evolves based on student feedback and industry trends. Your input throughout the semester helps improve the experience for future cohorts.
