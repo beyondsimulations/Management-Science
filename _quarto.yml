@@ -46,9 +46,9 @@ website:
             href: tutorials/nb_02_03_sorting.qmd
           - text: "02-04 Recap"
             href: tutorials/nb_02_04_recap.qmd
-          - text: "02-05 AI Programming"
+          - text: "02-05 Generative"
             href: lectures/lec_01_copilot_intro.qmd
-      - section: "02 Advances"
+      - section: "03 Foundation"
         contents:
           - text: "03-01 Numpy"
             href: tutorials/nb_03_01_numpy.qmd
@@ -56,7 +56,7 @@ website:
             href: tutorials/nb_03_02_pandas.qmd
           - text: "03-03 Plotting"
             href: tutorials/nb_03_03_visualization.qmd
-          - text: "03-04 Recap"
+          - text: "03-04 Closing"
             href: lectures/lec_03_closing.qmd
       - text: "***"
       - text: "Installation"

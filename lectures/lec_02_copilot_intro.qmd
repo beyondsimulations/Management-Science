@@ -38,8 +38,6 @@ Models work?
 [Photo by <a href="https://unsplash.com/@tvick">Taylor Vick</a> on Unsplash]{.white}
 :::
 
-
-
 ## Large Language Models (LLMs)
 
 - Think of them like [advanced pattern recognition systems]{.highlight}
@@ -95,11 +93,19 @@ Models work?
 If you use free models, be aware that your prompts are going to be used by the providers and are not private. But for learning and experimenting, this should be no issue.
 :::
 
+## A Great Overview by 3Blue1Brown
+
+- **Greg Sanderson provides an excellent explanation of LLMs**
+- Great starting point to understand LLMs
+- Check out his [YouTube channel, 3Blue1Brown](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw) for more
+
+{{< video https://www.youtube.com/embed/LPZh9BOjkQs >}}
+
 # [AI Coding Partner]{.flow} {.title}
 
 ## What is GitHub Copilot?
 
-[GitHub Copilot]{.highlight} is your AI pair programmer that helps you write code faster and with less effort.
+[GitHub Copilot]{.highlight} is an *AI pair programmer* that helps you write code faster and with less effort.
 
 . . .
 
@@ -112,16 +118,16 @@ If you use free models, be aware that your prompts are going to be used by the p
 . . .
 
 :::{.callout-note}
-Copilot uses AI trained on billions of lines of public code to suggest completions based on what you're typing.
+Copilot uses AI trained on billions of lines of public code to suggest completions.
 :::
 
 . . .
 
 ::: callout-tip
-There are alternative IDEs like Zed or Cursor for AI-Pair Programming, but you can use GitHub Copilot for free as student.
+There are alternative like Zed or Cursor, but you can use Copilot for free as student.
 :::
 
-## Have you used autocomplete before?
+## Used autocomplete before?
 
 . . .
 
@@ -141,17 +147,17 @@ When you type on your phone, it suggests the next word.
 
 ## Why Use Copilot?
 
-**Benefits you while learning and working with Python:**
+[Benefits you while learning and working with Python:]{.highlight}
 
 - **Faster coding:** Less time typing boilerplate code
-- **Learn patterns:** See how experienced programmers structure code
+- **Learn patterns:** See how experienced programmers code
 - **Understand syntax:** Get correct syntax without memorizing
 - **Stay in flow:** Focus on logic, not syntax errors
 
 . . .
 
 :::{.callout-tip}
-Copilot is especially helpful when you know WHAT you want to do but forget HOW to do it in Python.
+Especially helpful when you know **WHAT** you want to do but forget **HOW** to do it.
 :::
 
 ## When should you use Copilot?
@@ -178,7 +184,11 @@ Copilot is especially helpful when you know WHAT you want to do but forget HOW t
 
 . . .
 
-[Rule: Always understand what Copilot suggests before accepting!]{.highlight}
+[Always understand what Copilot suggests before accepting!]{.highlight}
+
+. . .
+
+**But of course I know you will not do that ;)**
 
 # [Live Demo]{.flow} {.title}
 
@@ -188,18 +198,22 @@ Copilot is especially helpful when you know WHAT you want to do but forget HOW t
 
 . . .
 
-**Step 1: Write a comment describing what you want**
+**Step 1: Write a text describing what you want**
 
 ```python
-# Calculate shipping cost based on weight (kg) and distance (km)
-# Base rate: €5, plus €0.10 per kg, plus €0.05 per km
+"""
+Calculate shipping cost based on weight (kg) and distance (km)
+Base rate: €5, plus €0.10 per kg, plus €0.05 per km
+"""
 ```
 
 . . .
 
 **Step 2: Copilot suggests the function**
 
-[Watch how Copilot completes this in the IDE!]{.highlight}
+. . .
+
+[Watch how Copilot solves this in the IDE!]{.highlight}
 
 ## Demo: The Result (hopefully)
 
@@ -220,17 +234,16 @@ def calculate_shipping_cost(weight, distance):
 **What Copilot did:**
 
 - Created function with proper parameters
-- Added descriptive docstring
 - Implemented the calculation logic
 - Used clear variable names
 
 . . .
 
 :::{.callout-tip}
-Notice how the comment guided Copilot to generate exactly what we needed!
+Notice how the text guided Copilot to generate exactly what we needed!
 :::
 
-## What happens if you accept without reading?
+## Accept without reading?
 
 . . .
 
@@ -246,10 +259,11 @@ Notice how the comment guided Copilot to generate exactly what we needed!
 
 ::: callout-warning
 Dangerous code can lead to security vulnerabilities, data loss, or other issues. In the context of this lecture it should be no issue, but in companies it can be one!
+:::
 
-## Just be careful, ok?
+## My take: Just be careful, ok?
 
-[Your responsibility:]{highlight}
+[Your code, your responsibility:]{.highlight}
 
 1. **Read** the suggestion carefully
 2. **Understand** what it does
@@ -270,8 +284,6 @@ Don't accept code blindly, especially later if things are more complicated.
 
 . . .
 
-**How to get it:**
-
 1. Go to [education.github.com/pack](https://education.github.com/pack)
 2. Sign up with your university email
 3. Verify your student status
@@ -286,14 +298,8 @@ You'll need a GitHub account. Create one at [github.com](https://github.com) if 
 
 ## Verifying Copilot is Working
 
-[Quick test:]{.highlight}
-
-. . .
-
-1. Create a new Python file (`.py`)
-2. Type a comment: `# function to add two numbers`
-3. Press Enter
-4. Wait 1-2 seconds
+1. Create a new Python file (`.py`) and type something
+2. Wait 1-2 seconds
 
 . . .
 
@@ -302,6 +308,12 @@ You'll need a GitHub account. Create one at [github.com](https://github.com) if 
 - Gray "ghost text" suggesting code
 - Press `Tab` to accept
 - Press `Esc` to reject
+
+. . .
+
+::: callout-tip
+Try to get copilot running on your own until next session.
+:::
 
 # [Best Practices]{.flow} {.title}
 
@@ -345,54 +357,28 @@ You'll need a GitHub account. Create one at [github.com](https://github.com) if 
 **1. Learning Fundamentals**
 
 - You should understand loops, functions, and data types
-- Practice writing these yourself first
 
 . . .
 
 **2. Skipping Problem-Solving**
 
-- Don't let Copilot think for you
 - Figure out the logic first, then use Copilot for syntax
 
 . . .
 
 **3. Accepting Without Understanding**
 
-- Ask yourself: "Can I explain what this code does?"
-- If no, either learn about it or write simpler code
-
-
-## Tips for This Course I
-
-[Throughout this course, use Copilot to:]{.highlight}
-
-. . .
-
-1. **Remember syntax** - "How do I filter a DataFrame again?"
-2. **Generate visualization code** - "Create a bar chart of sales by month"
-3. **Write function templates** - "Function to calculate distance between points"
-4. **Debug syntax errors** - Copilot often suggests fixes for mistakes
-
-## Tips for This Course II
-
-[But please don't use it to:}{.highlight}[^iknow]
-
-1. Skip the practice notebooks
-2. Copy entire solutions without understanding
-3. Avoid learning the fundamentals
-4. Replace thinking about the problem
-
-[^iknow]: I know that some of you won't follow this advice ;)
+- Ask: "Can I explain what this code does?"
 
 # [Summary]{.flow} {.title}
 
 ## Key Takeaways
 
-1. **GitHub Copilot is a tool** - You still need to learn fundamentals
-2. **Understand before accepting** - Read every suggestion carefully
-3. **Use it strategically** - Syntax help yes, thinking replacement no
-4. **Get free access** - GitHub Student Developer Pack
-5. **Practice makes perfect** - The more you use it, the more helpful it becomes
+1. **GitHub Copilot is a tool:** You still need to learn fundamentals
+2. **Understand before accepting:** Read every suggestion carefully
+3. **Use it strategically:** Syntax help yes, thinking replacement no
+4. **Get free access:** GitHub Student Developer Pack
+5. **Practice:**The more you use it, the more helpful it becomes
 
 . . .
 

@@ -26,11 +26,23 @@ format:
 I really appreciate active participation and interaction!
 :::
 
+## {background-image="https://unsplash.com/photos/rDyXca1ZGRI/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8bmFzYSUyMGNvbnRyb2x8ZW58MHx8fHwxNzYxMzg4MjgxfDA&force=true&w=2400"}
+
+::: {.r-fit-text .white .bold}
+What is
+
+Management
+
+Science?
+
+:::
+
+::: footer
+[Photo by <a href="https://unsplash.com/@patrickkonior?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Patrick Konior</a> on <a href="https://unsplash.com/photos/a-control-panel-in-a-building-at-night-rDyXca1ZGRI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+      ]{.white}
+:::
+
 ## Management Science
-
-[Question: What is Management Science?]{.question}
-
-. . .
 
 Management science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.[^ms]
 

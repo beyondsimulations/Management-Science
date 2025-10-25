@@ -1,6 +1,7 @@
 ---
-title: "Lecture 3 - Closing"
-subtitle: "Data Science Foundations - Recap & Copilot Strategy"
+title: "Lecture 3 - Recap & Copilot Strategy"
+subtitle: "Management Science"
+author: "Dr. Tobias Vlćek"
 format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_03_closing.qmd)"
@@ -11,7 +12,7 @@ format:
 
 ## Context Engineering
 
-Write clear comments describing what you want:
+Write clear descriptions of what you want:
 
 ```python
 # Create subplot with 2 rows, 1 column
@@ -22,10 +23,11 @@ Write clear comments describing what you want:
 . . .
 
 ::: {.callout-tip}
-- **Be specific** in your comments
-- **Review** generated code - understand lines
-- **Test** - might use outdated syntax
-- **Iterate** - refine your comments for better results
+- **Be specific** in your instructions
+- **Review** generated code
+- **Test the code** as it might use old syntax
+- **Iterate** for better results
+- **Force To-Tos** so everything is completed
 :::
 
 ## Watch Out For
@@ -35,48 +37,24 @@ Write clear comments describing what you want:
 - **Wrong assumptions**: Might guess your data structure incorrectly
 - **Over-complexity**: Very often suggests unnecessary features
 
-:::
-
 . . .
 
-[Remember: Generative AI is a tool, not a replacement for understanding!]{.highlight}
+
+[Remember: Generative AI is stochastic!]{.highlight}
 
 # [What We Learned]{.flow} {.title}
 
-## Data Science Foundation Complete!
+## Foundation Complete!
 
-[NumPy: Speed for Numbers]{.highlight}
+[Why This Matters?]{.question}
 
-- Arrays **100x faster** than Python lists
-- Vectorized operations - no loops needed
-- Statistical functions built-in
-- Random number generation for simulations
-
-## Data Science Foundation Complete!
-
-[Pandas: Spreadsheets but better]{.highlight}
-
-- DataFrames for structured data
-- Filtering and selection made easy
-- Reading CSV/Excel files
-- Creating calculated columns
-
-## Data Science Foundation Complete!
-
-[Visualization: Stories from Data]{.highlight}
-
-- Bar charts for comparisons
-- Line plots for trends
-- Histograms for distributions
-- Subplots for comprehensive views
-
-## Why This Matters
+. . .
 
 [You now have a good foundation for data-driven decisions!]{.highlight}
 
 . . .
 
-**Before:**
+**Before this introduction:**
 
 - Excel crashes with large datasets
 - Manual calculations take hours
@@ -85,7 +63,7 @@ Write clear comments describing what you want:
 
 # [What's Next]{.flow} {.title}
 
-## Preview: Lecture 4 - Monte Carlo Simulations
+## Preview: 4 - Monte Carlo
 
 [Next Session: Modeling Business Uncertainty]{.highlight}
 
@@ -93,8 +71,8 @@ Write clear comments describing what you want:
 
 **We'll combine everything you've learned:**
 
-- NumPy for **random number generation**
-- Visualization for **showing probability distributions**
+- NumPy for random number generation
+- Visualization for showing probability distributions
 
 . . .
 
@@ -106,11 +84,10 @@ Write clear comments describing what you want:
 
 ## The End
 
-[That's it for today!]{.highlight}
-
-**Make sure you:**
+[That's it for today!]{.highlight} **Make sure you:**
 
 - [ ] Have completed all the notebooks
+- [ ] Check whether you could follow so far
 - [ ] Set up Copilot
 
 . . .
