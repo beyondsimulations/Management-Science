@@ -219,7 +219,6 @@ Base rate: €5, plus €0.10 per kg, plus €0.05 per km
 
 ```{python}
 #| eval: false
-#| code-line-numbers: "1-6"
 
 def calculate_shipping_cost(weight, distance):
     """Calculate shipping cost based on weight and distance."""

@@ -166,7 +166,7 @@ def calculate_loyalty_points(purchase_amount):
     if purchase_amount > 20:
         return base_points * 2
     elif purchase_amount > 10:
-        return int(base_points * 1.5)
+        return base_points * 1.5  # Will be 1.5x the integer base
     else:
         return base_points
 ```
@@ -442,9 +442,10 @@ morning_orders = ["latte", "espresso", "cappuccino"]
 print(f"Original orders: {morning_orders}")
 
 # Using list METHODS (with dot notation)
-morning_orders.append("mocha")  # Add to end
+morning_orders.append("mocha")  # Add to end (you learned this in Notebook 1.2)
 print(f"After .append('mocha'): {morning_orders}")
 
+# New method: .remove() removes the first occurrence of a value
 morning_orders.remove("espresso")  # Remove specific item
 print(f"After .remove('espresso'): {morning_orders}")
 
@@ -457,10 +458,12 @@ print(f"Function len(): {len(morning_orders)} drinks")
 ::: {.callout-tip}
 ## Functions vs Methods Quick Guide
 **Functions:**
+
 - Stand alone: `function_name(arguments)`
 - Example: `len(my_list)`, `sum(numbers)`, `print(text)`
 
 **Methods:**
+
 - Belong to objects: `object.method_name(arguments)`
 - Example: `my_list.append(item)`, `my_list.remove(item)`, `my_list.clear()`
 
@@ -645,6 +648,11 @@ Performance levels:
 - "excellent": avg time < 90 seconds AND rating >= 4.5
 - "good": avg time < 120 seconds AND rating >= 4.0
 - "needs_improvement": otherwise
+
+::: callout-tip
+For robustness, it is nice to handle the case where the input lists might be empty.
+For example, if empty, return (0, 0, "needs_improvement").
+:::
 
 ```{python}
 #| eval: false

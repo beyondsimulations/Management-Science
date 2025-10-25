@@ -319,7 +319,19 @@ plt.show()
 
 ## Exercise 4.1 - Complete CEO Dashboard
 
-Create an integrated dashboard combining NumPy simulation with Pandas analysis and visualization. Create revenue projections for the company, start at 6M, grow ~2% monthly with some randomness. You can use `np.random.uniform(0.95, 1.05)` for the randomness.
+Create an integrated dashboard combining NumPy simulation with Pandas analysis and visualization. Create revenue projections for the company:
+
+- Start at $6M in January
+- Grow approximately 2% each month
+- Add random variation (±5%) to simulate market fluctuations
+
+::: callout-tip
+To create realistic monthly growth:
+
+- Start with base revenue of 6.0M
+- Each month, apply 2% growth: `revenue = previous_revenue * 1.02`
+- Add random variation: multiply by `np.random.uniform(0.95, 1.05)`
+:::
 
 ```{python}
 #| eval: false
@@ -334,10 +346,18 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 
 # YOUR CODE BELOW
 # 1. Create revenue projections for the company
+# Start with 6.0M, grow each month by 2% with random variation
+revenue_projection = []
+current_revenue = 6.0  # Starting revenue in millions
 
-# 2. Create DataFrame
+# Loop through 12 months
+
+
+# 2. Create DataFrame with months and revenue
+
 
 # 3. Calculate cumulative revenue
+
 
 # 4. Create visualization with two subplots
 
@@ -348,12 +368,15 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 #| eval: false
 
 # 1. Create revenue projections for the company
-base_revenue = 6.0
-growth = 1.02
 revenue_projection = []
+current_revenue = 6.0  # Starting revenue in millions
+
 for i in range(12):
-    revenue = base_revenue * (growth ** i) * np.random.uniform(0.95, 1.05)
-    revenue_projection.append(revenue)
+    # Apply 2% growth and random variation
+    monthly_revenue = current_revenue * np.random.uniform(0.95, 1.05)
+    revenue_projection.append(monthly_revenue)
+    # Update current revenue with 2% growth for next month
+    current_revenue = current_revenue * 1.02
 
 # 2. Create DataFrame
 projections_df = pd.DataFrame({
@@ -367,11 +390,11 @@ projections_df['cumulative'] = projections_df['revenue'].cumsum()
 # 4. Create visualization with two subplots
 fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
-# Monthly revenue bars
+# Monthly revenue bars (first 6 months as "Actual", rest as "Projected")
 axes[0].bar(projections_df['month'][:6], projections_df['revenue'][:6],
-           color='#2E7D32', alpha=0.7, label='Actual')
+           color='#2E7D32', alpha=0.7, label='H1 Actual')
 axes[0].bar(projections_df['month'][6:], projections_df['revenue'][6:],
-           color='#FFA726', alpha=0.7, label='Projected')
+           color='#FFA726', alpha=0.7, label='H2 Projected')
 axes[0].set_title('2025 Revenue Projections', fontsize=14, fontweight='bold')
 axes[0].set_ylabel('Revenue ($M)', fontsize=11)
 axes[0].legend()
@@ -390,6 +413,8 @@ plt.suptitle('Bean Counter 2025 Financial Projections', fontsize=16, fontweight=
 plt.tight_layout()
 plt.show()
 
+print(f"\nYear-end projection: ${projections_df['cumulative'].iloc[-1]:.2f}M")
+print(f"Average monthly revenue: ${projections_df['revenue'].mean():.2f}M")
 ```
 :::
 
