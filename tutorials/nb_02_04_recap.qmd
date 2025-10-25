@@ -1,0 +1,356 @@
+---
+title: "Tutorial 2.4 - Integration Challenge"
+subtitle: "Management Science - Preparing for CEO at Bean Counter!"
+code-links:
+   - text: Python
+     href: nb_02_04_recap.py
+     icon: hand-thumbs-up
+---
+
+# Introduction
+
+You've climbed the ranks:
+
+- **Assistant Manager** → Mastered functions for standardized operations
+- **Regional Manager** → Conquered dictionaries for data management
+- **Operations Director** → Optimized with sorting and selection
+
+Now the CEO wants to see if you can integrate all these skills. This is your chance to make an impression before potentially taking over as CEO of Bean Counter!
+
+**Today's Challenge:** Build an integrated system that uses functions, dictionaries, and sorting together to solve real business problems.
+
+::: {.callout-note}
+## How to Use This Tutorial
+This is a shorter recap session. Each exercise integrates multiple concepts you've learned.
+:::
+
+---
+
+# Section 1 - Warm-Up: Functions Meet Dictionaries
+
+Let's start by combining functions with dictionaries - the foundation of business logic and data management.
+
+```{python}
+#| eval: true
+# Combining what you've learned
+def calculate_store_score(store):
+    """Calculate a performance score for a store"""
+    # Weight different metrics
+    sales_score = store["daily_sales"] / 100  # Scale to reasonable number
+    rating_score = store["rating"] * 20  # Rating is 1-5, scale to 20-100
+    efficiency_score = store["customers_per_staff"] * 2
+
+    total_score = sales_score + rating_score + efficiency_score
+    return round(total_score, 1)
+
+# Test with a store
+test_store = {
+    "name": "Downtown",
+    "daily_sales": 4500,
+    "rating": 4.7,
+    "customers_per_staff": 65
+}
+
+score = calculate_store_score(test_store)
+print(f"{test_store['name']} score: {score}")
+```
+
+## Exercise 1.1 - Performance Calculator
+
+Create a function `evaluate_store` that:
+
+1. Takes a store dictionary as input (see above)
+2. Calculates if the store is meeting targets
+3. Returns a tuple: (is_successful, performance_message)
+
+Success criteria:
+
+- Daily sales > 4000 AND
+- Customer rating >= 4.5 AND
+- Staff efficiency > 50 customers/staff
+
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+def evaluate_store(store):
+    """Evaluate if a store meets Bean Counter standards"""
+    # Check all three criteria
+
+    # Return (success_boolean, message)
+
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+def evaluate_store(store):
+    """Evaluate if a store meets Bean Counter standards"""
+    # Check all three criteria
+    sales_ok = store["daily_sales"] > 4000
+    rating_ok = store["rating"] >= 4.5
+    efficiency_ok = store["customers_per_staff"] > 50
+
+    # All must be true for success
+    is_successful = sales_ok and rating_ok and efficiency_ok
+
+    # Create appropriate message
+    if is_successful:
+        message = f"{store['name']} is meeting all targets!"
+    else:
+        message = f"{store['name']} needs improvement"
+
+    return (is_successful, message)
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your evaluation function
+store1 = {"name": "Plaza", "daily_sales": 5000, "rating": 4.8, "customers_per_staff": 75}
+success1, msg1 = evaluate_store(store1)
+assert success1 == True, "Plaza should be successful"
+
+store2 = {"name": "Beach", "daily_sales": 3500, "rating": 4.6, "customers_per_staff": 60}
+success2, msg2 = evaluate_store(store2)
+assert success2 == False, "Beach should not be successful (low sales)"
+
+print("Great! Your evaluation function works perfectly!")
+```
+
+---
+
+# Section 2 - The Power of Integration
+
+Now let's combine all three concepts: functions process the data, dictionaries store it, and sorting helps us make decisions.
+
+```{python}
+#| eval: true
+# Integration example: Finding top performers
+def calculate_efficiency(store):
+    """Calculate operational efficiency"""
+    return store["revenue"] / store["costs"]
+
+# Sample stores
+stores = [
+    {"name": "Airport", "revenue": 50000, "costs": 35000},
+    {"name": "Downtown", "revenue": 45000, "costs": 28000},
+    {"name": "Beach", "revenue": 30000, "costs": 22000}
+]
+
+# Add efficiency to each store
+for store in stores:
+    store["efficiency"] = calculate_efficiency(store)
+
+# Sort by efficiency
+ranked = sorted(stores, key=lambda x: x["efficiency"], reverse=True)
+
+print("Efficiency Rankings:")
+for i, store in enumerate(ranked, 1):
+    print(f"{i}. {store['name']}: {store['efficiency']:.2f}")
+```
+
+## Exercise 2.1 - Complete Store Ranking System
+
+Build a system that:
+1. Calculates a composite score for each store using a function
+2. Adds this score to each store dictionary
+3. Ranks stores from best to worst
+4. Returns the name of the best store
+
+Composite score = (revenue/1000) + (rating * 10) - (complaints * 2)
+
+```{python}
+#| eval: false
+def calculate_composite_score(store):
+    """Calculate composite score for ranking"""
+    # YOUR CODE BELOW
+
+    return score
+
+def find_best_store(stores_list):
+    """Find the best store based on composite score"""
+    # YOUR CODE BELOW
+    # 1. Add composite score to each store
+
+    # 2. Sort by composite score (highest first)
+
+    # 3. Return the name of the best store
+
+    return best_store_name
+
+# Test data
+stores = [
+    {"name": "Plaza", "revenue": 45000, "rating": 4.7, "complaints": 5},
+    {"name": "Station", "revenue": 38000, "rating": 4.9, "complaints": 2},
+    {"name": "Airport", "revenue": 52000, "rating": 4.4, "complaints": 12}
+]
+
+best = find_best_store(stores)
+print(f"The best performing store is: {best}")
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+def calculate_composite_score(store):
+    """Calculate composite score for ranking"""
+    score = (store["revenue"]/1000) + (store["rating"] * 10) - (store["complaints"] * 2)
+    return round(score, 1)
+
+def find_best_store(stores_list):
+    """Find the best store based on composite score"""
+    # 1. Add composite score to each store
+    for store in stores_list:
+        store["composite_score"] = calculate_composite_score(store)
+
+    # 2. Sort by composite score (highest first)
+    ranked = sorted(stores_list, key=lambda x: x["composite_score"], reverse=True)
+
+    # 3. Return the name of the best store
+    best_store_name = ranked[0]["name"]
+
+    return best_store_name
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your ranking system
+assert best == "Plaza", f"Best store should be Plaza, got {best}"
+
+# Verify scores were calculated correctly
+for store in stores:
+    if store["name"] == "Plaza":
+        assert store["composite_score"] == 82.0, "Plaza score incorrect"
+    elif store["name"] == "Station":
+        assert store["composite_score"] == 85.0, "Station score incorrect"
+
+print("Excellent! Your integrated ranking system works perfectly!")
+```
+
+---
+
+# Section 3 - Final CEO Challenge
+
+As your final test, solve this complex operational problem using everything you've learned.
+
+## Exercise 3.1 - Delivery Route Optimizer
+
+Bean Counter needs to optimize delivery routes. Create a system that:
+1. Calculates delivery priority based on urgency and value
+2. Sorts deliveries by priority
+3. Returns an optimized delivery schedule
+
+Priority score = (order_value / 100) + (10 - hours_until_needed) * 2
+
+```{python}
+#| eval: false
+def calculate_priority(delivery):
+    """Calculate delivery priority score"""
+    # YOUR CODE BELOW
+
+    return priority
+
+def optimize_delivery_schedule(deliveries):
+    """
+    Create optimized delivery schedule
+    Returns list of location names in delivery order
+    """
+    # YOUR CODE BELOW
+    # 1. Add priority score to each delivery
+
+    # 2. Sort by priority (highest first)
+
+    # 3. Extract and return list of locations in order
+
+    return schedule
+
+# Morning delivery requests
+deliveries = [
+    {"location": "Airport", "order_value": 850, "hours_until_needed": 2},
+    {"location": "Downtown", "order_value": 620, "hours_until_needed": 5},
+    {"location": "University", "order_value": 450, "hours_until_needed": 1},
+    {"location": "Beach", "order_value": 380, "hours_until_needed": 4},
+    {"location": "Mall", "order_value": 720, "hours_until_needed": 2}
+]
+
+schedule = optimize_delivery_schedule(deliveries)
+print(f"Optimized delivery route: {' → '.join(schedule)}")
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+def calculate_priority(delivery):
+    """Calculate delivery priority score"""
+    priority = (delivery["order_value"] / 100) + (10 - delivery["hours_until_needed"]) * 2
+    return priority
+
+def optimize_delivery_schedule(deliveries):
+    """
+    Create optimized delivery schedule
+    Returns list of location names in delivery order
+    """
+    # 1. Add priority score to each delivery
+    for delivery in deliveries:
+        delivery["priority"] = calculate_priority(delivery)
+
+    # 2. Sort by priority (highest first)
+    sorted_deliveries = sorted(deliveries, key=lambda x: x["priority"], reverse=True)
+
+    # 3. Extract and return list of locations in order
+    schedule = [d["location"] for d in sorted_deliveries]
+
+    return schedule
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your delivery optimizer
+assert schedule[0] == "University", "University should be first (most urgent + decent value)"
+assert schedule[1] == "Airport", "Airport should be second"
+assert schedule[-1] == "Downtown", "Downtown should be last (least urgent)"
+assert len(schedule) == 5, "Should have all 5 deliveries"
+
+print("🎉 Outstanding! You've mastered the integration of all concepts!")
+print("You're ready to become the CEO of Bean Counter!")
+```
+
+---
+
+# Conclusion
+
+🏆 **Congratulations! You're ready to become CEO of Bean Counter!** 🏆
+
+**You've successfully integrated:**
+- **Functions** - For calculations and business logic
+- **Dictionaries** - For structured data management
+- **Sorting** - For optimization and decision-making
+- **All Together** - Creating powerful business solutions
+
+Your complete toolkit demonstrates:
+- Evaluating store performance with custom metrics
+- Ranking and comparing complex business entities
+- Optimizing operational decisions with data
+- Building integrated systems that solve real problems
+
+Remember:
+- Functions make your code reusable and maintainable
+- Dictionaries organize complex business data effectively
+- Sorting and selection help you make optimal choices
+- Combining these tools creates powerful business solutions
+
+**Your Bean Counter Journey:**
+From Barista Trainee to Operations Director, you've built systems that:
+- Standardized operations across all locations
+- Managed complex data for 10+ stores
+- Optimized scheduling and resource allocation
+- Made data-driven decisions that improved efficiency by 25%
+
+**What's Next:** You've completed the Python foundations! In Lecture 3, you'll explore advanced data science tools with NumPy and Pandas. These powerful libraries will help you analyze massive datasets and tackle even more complex management science challenges. The CEO role at Bean Counter awaits!
+
+{{< include ../include/tutorial_end.qmd >}}

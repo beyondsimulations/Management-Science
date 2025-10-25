@@ -1,0 +1,506 @@
+---
+title: "Tutorial 3.1 - NumPy for CEO Analytics"
+subtitle: "Management Science - Welcome to the CEO Suite!"
+code-links:
+   - text: Python
+     href: nb_03_01_numpy.py
+     icon: hand-thumbs-up
+---
+
+# Introduction
+
+[This tutorial is designed to take approximately 40 minutes to complete.]
+
+Welcome to your role as CEO of Bean Counter!
+
+🎉 **Congratulations, Chief Executive Officer!** 🎉
+
+After your outstanding performance as Operations Director, the board has unanimously appointed you as **CEO of Bean Counter**! You now lead a coffee empire with:
+- 50+ locations across the country
+- 1,000+ employees
+- Millions of transactions per month
+- Thousands of products and suppliers
+
+**The Challenge:** As CEO, you're drowning in data. Your Python lists take minutes to process sales reports. Board meetings are tomorrow, and you need answers NOW!
+
+**Your Secret Weapon:** **NumPy** - a Python library that processes numerical data at lightning speed. What takes minutes with regular Python takes milliseconds with NumPy.
+
+In this tutorial, you'll master NumPy to make data-driven CEO decisions at the speed of business.
+
+::: {.callout-note}
+## How to Use This Tutorial
+First, import NumPy at the beginning. Then work through exercises marked "YOUR CODE BELOW".
+:::
+
+---
+
+# Section 1 - Why NumPy? The CEO's Speed Advantage
+
+Let's see why CEOs of data-driven companies rely on NumPy.
+
+```{python}
+#| eval: true
+import numpy as np
+import time
+
+# Comparing Python lists vs NumPy for 1 million sales transactions
+size = 1000000
+
+# Python list approach (slow)
+python_sales = list(range(1, size + 1))
+start = time.time()
+python_result = [x * 1.08 for x in python_sales]  # Add 8% tax
+python_time = time.time() - start
+
+# NumPy approach (fast!)
+numpy_sales = np.arange(1, size + 1)
+start = time.time()
+numpy_result = numpy_sales * 1.08  # Add 8% tax to ALL at once!
+numpy_time = time.time() - start
+
+print(f"Processing {size:,} transactions:")
+print(f"Python list: {python_time:.4f} seconds")
+print(f"NumPy array: {numpy_time:.4f} seconds")
+print(f"NumPy is {python_time/numpy_time:.1f}x faster!")
+```
+
+::: {.callout-tip}
+## NumPy Arrays vs Python Lists
+- **Python lists**: Flexible but slow for math operations
+- **NumPy arrays**: Specialized for numbers, blazing fast
+- Rule of thumb: Use NumPy when doing math on many numbers at once
+:::
+
+## Exercise 1.1 - Your First CEO Analysis
+
+Create a NumPy array of this week's daily revenues and calculate the total.
+
+```{python}
+#| eval: false
+import numpy as np
+
+# Daily revenues for the week (in thousands)
+daily_revenues = [125.5, 132.8, 118.9, 145.2, 155.7, 189.3, 176.4]
+
+# YOUR CODE BELOW
+# Convert to NumPy array
+revenues_array = 
+
+# Calculate total weekly revenue
+total_revenue = 
+
+print(f"Weekly revenue: ${total_revenue:.1f}k")
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# Convert to NumPy array
+revenues_array = np.array(daily_revenues)
+
+# Calculate total weekly revenue
+total_revenue = np.sum(revenues_array)
+
+print(f"Weekly revenue: ${total_revenue:.1f}k")
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your revenue calculation
+import numpy as np
+daily_revenues = [125.5, 132.8, 118.9, 145.2, 155.7, 189.3, 176.4]
+revenues_array = np.array(daily_revenues)
+total_revenue = np.sum(revenues_array)
+
+assert isinstance(revenues_array, np.ndarray), "Should be a NumPy array"
+assert total_revenue == 1043.8, f"Total should be 1043.8, got {total_revenue}"
+print("Excellent! You've made your first CEO-level analysis with NumPy!")
+```
+
+---
+
+# Section 2 - Creating Arrays for Business Data
+
+As CEO, you need different ways to create and initialize data arrays.
+
+```{python}
+#| eval: true
+import numpy as np
+
+# Different ways to create arrays for business scenarios
+
+# From a list - actual data
+quarterly_sales = np.array([1250000, 1380000, 1420000, 1510000])
+
+# Zeros - initialize budget tracking
+budget_tracking = np.zeros(12)  # 12 months, all start at 0
+
+# Ones - initialize satisfaction scores
+initial_ratings = np.ones(10) * 4.5  # 10 stores, all start at 4.5
+
+# Range - sequential IDs or time periods
+store_ids = np.arange(1, 51)  # Store IDs from 1 to 50
+months = np.arange(1, 13)  # Months 1-12
+
+print(f"Q1 Sales: ${quarterly_sales[0]:,}")
+print(f"Number of stores: {len(store_ids)}")
+print(f"Initial ratings: {initial_ratings[:3]}...")  # First 3 stores
+```
+
+## Exercise 2.1 - Initialize Company Metrics
+
+As CEO, set up arrays for tracking various company metrics.
+
+```{python}
+#| eval: false
+import numpy as np
+
+# YOUR CODE BELOW
+# 1. Create an array of 50 zeros for tracking store profits
+store_profits = 
+
+# 2. Create an array with store IDs from 101 to 150 (50 stores)
+store_codes = 
+
+# 3. Create an array of 12 months, each starting with budget of 100000
+monthly_budgets = 
+
+print(f"Profit tracking shape: {store_profits.shape}")
+print(f"First 5 store codes: {store_codes[:5]}")
+print(f"Q1 budget total: ${np.sum(monthly_budgets[:3]):,}")
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# 1. Create an array of 50 zeros for tracking store profits
+store_profits = np.zeros(50)
+
+# 2. Create an array with store IDs from 101 to 150 (50 stores)
+store_codes = np.arange(101, 151)
+
+# 3. Create an array of 12 months, each starting with budget of 100000
+monthly_budgets = np.ones(12) * 100000
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your arrays
+assert store_profits.shape == (50,), "Should have 50 stores"
+assert store_codes[0] == 101 and store_codes[-1] == 150, "Store codes should be 101-150"
+assert np.sum(monthly_budgets[:3]) == 300000, "Q1 budget should be 300000"
+print("Perfect! Your metric tracking system is initialized!")
+```
+
+---
+
+# Section 3 - Vectorized Operations for Mass Updates
+
+As CEO, you need to update prices, apply taxes, and calculate profits across thousands of products instantly.
+
+```{python}
+#| eval: true
+import numpy as np
+
+# Prices for 100 products
+original_prices = np.random.uniform(2.50, 25.00, 100)
+print(f"Sample original prices: {original_prices[:5].round(2)}")
+
+# CEO Decision: 15% price increase across the board
+new_prices = original_prices * 1.15
+
+# Add 8% sales tax to all prices
+prices_with_tax = new_prices * 1.08
+
+# Calculate revenue if we sell 50 of each product
+quantities = np.ones(100) * 50
+revenues = prices_with_tax * quantities
+
+print(f"\nAfter 15% increase + tax: {prices_with_tax[:5].round(2)}")
+print(f"Total potential revenue: ${revenues.sum():,.2f}")
+```
+
+::: {.callout-warning}
+## No Loops Needed!
+With NumPy, avoid writing loops for mathematical operations:
+```python
+# Don't do this:
+for i in range(len(prices)):
+    prices[i] = prices[i] * 1.15
+
+# Do this instead:
+prices = prices * 1.15
+```
+:::
+
+## Exercise 3.1 - Company-Wide Financial Calculations
+
+Perform mass calculations across all Bean Counter stores.
+
+```{python}
+#| eval: false
+import numpy as np
+
+# Monthly data for 50 stores
+revenues = np.array([125000, 98000, 145000, 87000, 156000, 134000, 92000, 167000,
+                    118000, 143000, 99000, 175000, 132000, 89000, 154000, 121000,
+                    138000, 95000, 162000, 108000, 147000, 131000, 88000, 159000,
+                    126000, 141000, 93000, 168000, 115000, 152000, 128000, 86000,
+                    144000, 119000, 137000, 96000, 171000, 113000, 149000, 124000,
+                    135000, 91000, 164000, 107000, 146000, 129000, 85000, 158000,
+                    122000, 140000])
+
+# Cost is 65% of revenue for each store
+costs = revenues * 0.65
+
+# YOUR CODE BELOW
+# 1. Calculate profit for each store (revenue - costs)
+profits = 
+
+# 2. Calculate profit margin for each store (profit / revenue * 100)
+profit_margins = 
+
+# 3. Apply 12% corporate tax to all profits
+profits_after_tax = 
+
+print(f"Total monthly profit (before tax): ${profits.sum():,.2f}")
+print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
+print(f"Average profit margin: {profit_margins.mean():.1f}%")
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# 1. Calculate profit for each store (revenue - costs)
+profits = revenues - costs
+
+# 2. Calculate profit margin for each store (profit / revenue * 100)
+profit_margins = (profits / revenues) * 100
+
+# 3. Apply 12% corporate tax to all profits
+profits_after_tax = profits * 0.88  # Keep 88% after 12% tax
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your calculations
+assert np.isclose(profits.sum(), 2205000), "Total profit before tax should be 2,205,000"
+assert np.isclose(profits_after_tax.sum(), 1940400), "Total profit after tax should be 1,940,400"
+assert np.isclose(profit_margins.mean(), 35.0), "Average margin should be 35%"
+print("Outstanding! You've mastered company-wide financial calculations!")
+```
+
+---
+
+# Section 4 - Statistical Analysis for CEO Insights
+
+CEOs need quick statistical insights to make strategic decisions.
+
+```{python}
+#| eval: true
+import numpy as np
+
+# Customer satisfaction scores from 1000 surveys
+np.random.seed(42)  # For reproducible results
+satisfaction_scores = np.random.normal(4.2, 0.5, 1000)  # Mean 4.2, std 0.5
+satisfaction_scores = np.clip(satisfaction_scores, 1, 5)  # Keep between 1-5
+
+print(f"Survey Analysis (n=1000):")
+print(f"Average satisfaction: {satisfaction_scores.mean():.2f}")
+print(f"Standard deviation: {satisfaction_scores.std():.2f}")
+print(f"Lowest score: {satisfaction_scores.min():.2f}")
+print(f"Highest score: {satisfaction_scores.max():.2f}")
+print(f"Median score: {np.median(satisfaction_scores):.2f}")
+
+# How many customers gave 4+ stars?
+highly_satisfied = np.sum(satisfaction_scores >= 4.0)
+print(f"\nHighly satisfied (4+): {highly_satisfied} ({highly_satisfied/10:.1f}%)")
+```
+
+## Exercise 4.1 - Analyze Company Performance
+
+Analyze performance metrics across all Bean Counter locations.
+
+```{python}
+#| eval: false
+import numpy as np
+
+# Daily customer counts for 50 stores over 30 days
+np.random.seed(100)
+daily_customers = np.random.randint(150, 500, size=(50, 30))  # 50 stores, 30 days
+
+# YOUR CODE BELOW
+# 1. Calculate total customers served across all stores in the month
+total_customers = 
+
+# 2. Calculate average daily customers per store
+avg_daily_per_store = 
+
+# 3. Find the busiest single day (max customers in one store on one day)
+busiest_day = 
+
+# 4. Find stores that averaged over 350 customers per day
+high_traffic_stores = 
+
+print(f"Total customers served: {total_customers:,}")
+print(f"Average daily customers per store: {avg_daily_per_store:.1f}")
+print(f"Busiest single day: {busiest_day} customers")
+print(f"High-traffic stores (>350/day): {high_traffic_stores}")
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# 1. Calculate total customers served across all stores in the month
+total_customers = np.sum(daily_customers)
+
+# 2. Calculate average daily customers per store
+avg_daily_per_store = np.mean(daily_customers)
+
+# 3. Find the busiest single day (max customers in one store on one day)
+busiest_day = np.max(daily_customers)
+
+# 4. Find stores that averaged over 350 customers per day
+store_averages = np.mean(daily_customers, axis=1)  # Average for each store
+high_traffic_stores = np.sum(store_averages > 350)
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your analysis
+assert total_customers == 472594, f"Total should be 472,594, got {total_customers}"
+assert np.isclose(avg_daily_per_store, 315.06, atol=0.1), f"Average should be ~315.1"
+assert busiest_day == 499, f"Busiest day should be 499, got {busiest_day}"
+print("Excellent CEO-level analysis! You understand your company's traffic patterns!")
+```
+
+---
+
+# Section 5 - Random Numbers for Business Simulation
+
+As CEO, you need to simulate scenarios for strategic planning. NumPy's random functions help model uncertainty.
+
+```{python}
+#| eval: true
+import numpy as np
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Simulate dice rolls (discrete uniform)
+dice_rolls = np.random.randint(1, 7, size=100)  # 100 rolls of a 6-sided die
+print(f"100 dice rolls average: {dice_rolls.mean():.2f} (expected: 3.5)")
+
+# Simulate daily sales (continuous uniform)
+daily_sales = np.random.uniform(80000, 120000, size=7)  # Week of sales
+print(f"\nWeek's sales: ${daily_sales.sum():,.0f}")
+
+# Simulate customer wait times (normal distribution)
+wait_times = np.random.normal(90, 15, size=1000)  # Mean 90 sec, std 15 sec
+print(f"\nWait time analysis:")
+print(f"Average: {wait_times.mean():.1f} seconds")
+print(f"% under 2 minutes: {(wait_times < 120).sum() / 10:.1f}%")
+```
+
+::: {.callout-tip}
+## Random Number Distributions
+- `randint(low, high)` - Integers between low and high-1
+- `uniform(low, high)` - Decimal numbers evenly distributed
+- `normal(mean, std)` - Bell curve distribution (most common in nature/business)
+:::
+
+## Exercise 5.1 - Simulate Future Scenarios
+
+Use random numbers to simulate business scenarios for strategic planning.
+
+```{python}
+#| eval: false
+import numpy as np
+np.random.seed(200)  # For consistent results
+
+# YOUR CODE BELOW
+# 1. Simulate 1000 dice rolls and calculate the average
+dice_outcomes = 
+average_roll = 
+
+# 2. Simulate next quarter sales (90 days) between $100k and $150k per day
+quarter_sales = 
+total_quarter = 
+
+# 3. Simulate customer ratings (normal distribution: mean=4.3, std=0.4)
+# Generate 500 ratings, then clip to keep between 1 and 5
+ratings = 
+ratings = np.clip(ratings, 1, 5)  # Keep in valid range
+percent_satisfied = 
+
+print(f"Dice simulation (1000 rolls): {average_roll:.2f}")
+print(f"Projected quarterly revenue: ${total_quarter:,.0f}")
+print(f"Customer satisfaction (4+ stars): {percent_satisfied:.1f}%")
+```
+
+::: {.content-visible when-profile="solutions"}
+```{python}
+#| eval: false
+# 1. Simulate 1000 dice rolls and calculate the average
+dice_outcomes = np.random.randint(1, 7, size=1000)
+average_roll = np.mean(dice_outcomes)
+
+# 2. Simulate next quarter sales (90 days) between $100k and $150k per day
+quarter_sales = np.random.uniform(100000, 150000, size=90)
+total_quarter = np.sum(quarter_sales)
+
+# 3. Simulate customer ratings (normal distribution: mean=4.3, std=0.4)
+ratings = np.random.normal(4.3, 0.4, size=500)
+ratings = np.clip(ratings, 1, 5)  # Keep in valid range
+percent_satisfied = (np.sum(ratings >= 4.0) / len(ratings)) * 100
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your simulations
+assert 3.3 < average_roll < 3.7, f"Dice average should be near 3.5, got {average_roll}"
+assert 11000000 < total_quarter < 12000000, f"Quarter sales should be ~11.5M"
+assert 70 < percent_satisfied < 80, f"Satisfaction should be ~75%"
+print("Perfect! You can now simulate future scenarios for strategic planning!")
+```
+
+---
+
+# Conclusion
+
+🏆 **Congratulations! You've mastered NumPy for CEO-level analytics!** 🏆
+
+**You've learned:**
+- **Array Creation** - Initialize data structures for company-wide metrics
+- **Vectorized Operations** - Update thousands of prices/costs instantly
+- **Statistical Analysis** - Get insights from massive datasets in milliseconds
+- **Random Simulation** - Model uncertainty for strategic planning
+- **Speed Advantage** - Process millions of data points in seconds
+
+Your Bean Counter CEO toolkit now includes:
+- Lightning-fast analysis of millions of transactions
+- Company-wide financial calculations in seconds
+- Statistical insights for board presentations
+- Simulation capabilities for strategic planning
+- The ability to handle big data that would crash Excel
+
+Remember:
+- NumPy arrays are specialized for numerical operations
+- Vectorized operations eliminate the need for loops
+- Use `np.mean()`, `np.sum()`, `np.std()` for quick statistics
+- Random functions help simulate business scenarios
+- Always consider using NumPy when dealing with large numerical datasets
+
+**What's Next:** In the next tutorial, you'll learn **Pandas** - the ultimate tool for working with structured business data. You'll import real sales data, filter it, group it, and uncover insights that will transform Bean Counter's strategy!
+
+{{< include ../include/tutorial_end.qmd >}}
