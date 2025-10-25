@@ -1,0 +1,146 @@
+---
+title: "Lecture 3 - Closing"
+subtitle: "Data Science Foundations - Recap & Copilot Strategy"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_03_closing.qmd)"
+    output-file: lec_03_closing.html
+---
+
+# [Working with AI Assistants]{.flow} {.title}
+
+## Context Engineering
+
+Write clear comments describing what you want:
+
+```python
+# Create subplot with 2 rows, 1 column
+# Top: line plot of revenue over time
+# Bottom: bar chart of profit by quarter
+```
+
+. . .
+
+::: {.callout-tip}
+- **Be specific** in your comments
+- **Review** generated code - understand lines
+- **Test** - might use outdated syntax
+- **Iterate** - refine your comments for better results
+:::
+
+## Watch Out For
+
+- **Deprecated methods**: `plt.subplot()` vs `plt.subplots()`
+- **Missing imports**: Always verify imports are included
+- **Wrong assumptions**: Might guess your data structure incorrectly
+- **Over-complexity**: Very often suggests unnecessary features
+
+:::
+
+. . .
+
+[Remember: Generative AI is a tool, not a replacement for understanding!]{.highlight}
+
+# [What We Learned]{.flow} {.title}
+
+## Data Science Foundation Complete!
+
+[NumPy: Speed for Numbers]{.highlight}
+
+- Arrays **100x faster** than Python lists
+- Vectorized operations - no loops needed
+- Statistical functions built-in
+- Random number generation for simulations
+
+## Data Science Foundation Complete!
+
+[Pandas: Spreadsheets but better]{.highlight}
+
+- DataFrames for structured data
+- Filtering and selection made easy
+- Reading CSV/Excel files
+- Creating calculated columns
+
+## Data Science Foundation Complete!
+
+[Visualization: Stories from Data]{.highlight}
+
+- Bar charts for comparisons
+- Line plots for trends
+- Histograms for distributions
+- Subplots for comprehensive views
+
+## Why This Matters
+
+[You now have a good foundation for data-driven decisions!]{.highlight}
+
+. . .
+
+**Before:**
+
+- Excel crashes with large datasets
+- Manual calculations take hours
+- Limited to basic charts
+- No way to simulate scenarios
+
+# [What's Next]{.flow} {.title}
+
+## Preview: Lecture 4 - Monte Carlo Simulations
+
+[Next Session: Modeling Business Uncertainty]{.highlight}
+
+. . .
+
+**We'll combine everything you've learned:**
+
+- NumPy for **random number generation**
+- Visualization for **showing probability distributions**
+
+. . .
+
+**Real applications:**
+
+- Predict project completion times
+- Estimate financial risks
+- Make decisions under uncertainty
+
+## The End
+
+[That's it for today!]{.highlight}
+
+**Make sure you:**
+
+- [ ] Have completed all the notebooks
+- [ ] Set up Copilot
+
+. . .
+
+::: {.callout-tip}
+Every line of code you write makes you a better programmer.
+Every concept you understand makes you a better decision-maker.
+[Keep practicing and keep learning!]{.highlight}
+:::
+
+# [Literature]{.flow} {.title}
+
+## Interesting Literature on Algorithms
+
+- Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^4]
+- Ferguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.
+
+[^4]: A great inspiration to learn more about Algorithms!
+
+## Books on Programming
+
+- Downey, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O’Reilly. [Here](https://greenteapress.com/wp/think-python-3rd-edition/)
+- Elter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.
+
+. . .
+
+::: {.callout-note}
+Think Python is a great book to start with. It's available online for free. Schrödinger Programmiert Python is a great alternative for German students, as it is a very playful introduction to programming with lots of examples.
+:::
+
+## More Literature
+
+For more interesting literature, take a look at the [literature list](../general/literature.qmd) of this course.
