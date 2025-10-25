@@ -447,7 +447,7 @@ Congratulations! You've successfully learned the fundamentals of Python programm
 
 You can now handle any calculation at Bean Counter coffee shop! From calculating bills and splitting checks to creating professional receipts, you have all the basic tools you need.
 
-Remember:
+**Remember:**
 
 - Variables are named containers for storing data
 - Python has different data types (int, float, str) for different kinds of information

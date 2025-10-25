@@ -653,13 +653,13 @@ Congratulations! You've successfully built a smart inventory management system!
 - **Conditionals in Loops** - Filtering and categorizing data
 - **While Loops** - Running processes until conditions are met
 
-Your Bean Counter inventory system can now:
+**Your Bean Counter inventory system can now:**
 
 - Alert when supplies run low
 - Categorize products by stock level
 - Filter products for promotions
 
-Remember:
+**Remember:**
 
 - Always include colons (:) after if/elif/else/while statements
 - Proper indentation is crucial in Python

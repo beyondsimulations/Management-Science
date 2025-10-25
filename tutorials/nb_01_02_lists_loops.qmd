@@ -501,7 +501,7 @@ Congratulations! You've successfully learned how to work with collections of dat
 
 You can now analyze Bean Counter's sales data like a pro! Whether it's tracking daily performance, finding trends, or calculating key metrics, you have the tools to handle any amount of data efficiently.
 
-Remember:
+**Remember:**
 
 - Lists let you store multiple related values together
 - Loops eliminate repetitive code and process data automatically

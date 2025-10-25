@@ -9,8 +9,6 @@ code-links:
 
 # Introduction
 
-[This tutorial is designed to take approximately 40 minutes to complete.]
-
 Welcome to your role as Operations Director at Bean Counter!
 
 **Congratulations on becoming Operations Director!**
@@ -24,9 +22,10 @@ Your regional management skills were so impressive that the CEO has promoted you
 - Which locations need emergency support?
 - How do we schedule deliveries efficiently?
 
-Making the wrong choice costs time, money, and customer satisfaction. You need systematic ways to find the best options!
+Making the wrong choice costs time, money, and customer satisfaction.
+You need systematic ways to find the best options!
 
-**Your Mission:** Master **sorting and optimization** - Python's tools for finding the best (or worst) options among many choices. You'll learn to rank, prioritize, and optimize like a true operations expert.
+**Your Mission:** Understand **sorting and optimization** - Python's tools for finding the best (or worst) options among many choices. You'll learn to rank, prioritize, and optimize.
 
 In this tutorial, we'll explore how to make data-driven decisions that optimize Bean Counter's entire operation.
 
@@ -70,6 +69,7 @@ Key points about `sorted()`:
 
 - `sorted(list)` - Creates a new sorted list, original unchanged
 - `list.sort()` - Sorts the list in place, modifying the original
+
 Use `sorted()` when you want to keep the original order available!
 
 :::
@@ -88,11 +88,7 @@ Create two lists:
 wait_times = [95, 120, 85, 150, 110, 90, 135, 88, 125, 105]
 
 # YOUR CODE BELOW
-fastest_first =
-slowest_first =
 
-print(f"Fastest to slowest: {fastest_first}")
-print(f"Slowest to fastest: {slowest_first}")
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -114,12 +110,14 @@ assert fastest_first[0] == 85, "Fastest time should be 85 seconds"
 assert fastest_first[-1] == 150, "Last in fastest_first should be 150"
 assert slowest_first[0] == 150, "First in slowest_first should be 150"
 assert slowest_first[-1] == 85, "Last in slowest_first should be 85"
+print(f"Fastest to slowest: {fastest_first}")
+print(f"Slowest to fastest: {slowest_first}")
 print("Perfect! You can now identify which stores need operational improvements!")
 ```
 
 ## Exercise 1.2 - Alphabetical Store Directory
 
-Create an alphabetically sorted list of store names for the company directory.
+Create an alphabetically sorted list of store names for the company directory. It should be called `alphabetical`.
 
 ```{python}
 #| eval: false
@@ -127,9 +125,7 @@ store_names = ["Plaza", "Downtown", "Airport", "University", "Beach", "Station",
 
 # YOUR CODE BELOW
 # Sort alphabetically (A to Z)
-alphabetical =
 
-print(f"Store directory: {alphabetical}")
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -148,6 +144,7 @@ print(f"Store directory: {alphabetical}")
 assert alphabetical[0] == "Airport", "First store should be Airport"
 assert alphabetical[-1] == "University", "Last store should be University"
 assert len(alphabetical) == 8, "Should still have 8 stores"
+print(f"Store directory: {alphabetical}")
 print("Great! Your store directory is professionally organized!")
 ```
 
@@ -155,7 +152,7 @@ print("Great! Your store directory is professionally organized!")
 
 # Section 2 - Finding Extremes with Min and Max
 
-Sometimes you don't need the full ranking - just the best or worst. Python's `min()` and `max()` functions find extremes instantly!
+Sometimes you don't need the full ranking, just the best or worst. Python's `min()` and `max()` functions find extremes instantly!
 
 ```{python}
 #| eval: true
@@ -176,8 +173,10 @@ print(f"First alphabetically: {first_alphabetically}")
 
 ::: {.callout-warning}
 ## Empty Lists
+
 Be careful! Calling `min()` or `max()` on an empty list causes an error.
 Always check if a list has items before using these functions:
+
 ```python
 if sales_list:  # True if list has items
     best = max(sales_list)
@@ -187,6 +186,7 @@ if sales_list:  # True if list has items
 ## Exercise 2.1 - Daily Operations Extremes
 
 Find the operational extremes for Bean Counter's daily metrics:
+
 1. Highest and lowest sales figures
 2. Fastest and slowest delivery times
 3. The difference between best and worst sales (the range)
@@ -197,6 +197,7 @@ daily_sales = [4250, 6100, 3900, 5200, 4800, 5500, 4100]
 delivery_times = [25, 35, 18, 42, 30, 28, 38]  # in minutes
 
 # YOUR CODE BELOW
+
 # Find sales extremes
 highest_sales =
 lowest_sales =
@@ -206,8 +207,6 @@ sales_range =
 fastest_delivery =
 slowest_delivery =
 
-print(f"Sales: ${lowest_sales} to ${highest_sales} (range: ${sales_range})")
-print(f"Delivery: {fastest_delivery} to {slowest_delivery} minutes")
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -236,6 +235,8 @@ assert lowest_sales == 3900, "Lowest sales should be 3900"
 assert sales_range == 2200, "Sales range should be 2200"
 assert fastest_delivery == 18, "Fastest delivery should be 18 minutes"
 assert slowest_delivery == 42, "Slowest delivery should be 42 minutes"
+print(f"Sales: ${lowest_sales} to ${highest_sales} (range: ${sales_range})")
+print(f"Delivery: {fastest_delivery} to {slowest_delivery} minutes")
 print("Excellent! You can quickly identify operational extremes for decision-making!")
 ```
 
@@ -269,6 +270,7 @@ for store in by_rating:
 
 ::: {.callout-tip}
 ## The key Parameter
+
 `key=lambda x: x["field"]` tells Python what to sort by:
 - `lambda x:` means "for each item x in the list"
 - `x["field"]` is the value to sort by
@@ -277,7 +279,9 @@ for store in by_rating:
 
 ## Exercise 3.1 - Rank Stores by Efficiency
 
-Sort Bean Counter stores by efficiency (customers served per staff member). Create two rankings:
+Sort Bean Counter stores by efficiency (customers served per staff member).
+Create two rankings:
+
 1. Most efficient to least efficient
 2. Least efficient to most efficient
 
@@ -291,10 +295,11 @@ store_efficiency = [
     {"location": "Station", "customers": 410, "staff": 7}     # 58.6 per staff
 ]
 
-# YOUR CODE BELOW
-# Calculate efficiency for each store first
+# Calculate efficiency for each store
 for store in store_efficiency:
     store["efficiency"] = store["customers"] / store["staff"]
+
+# YOUR CODE BELOW
 
 # Sort by efficiency (most efficient first)
 most_efficient =
@@ -302,9 +307,7 @@ most_efficient =
 # Sort by efficiency (least efficient first)
 least_efficient =
 
-print("Most to least efficient:")
-for store in most_efficient:
-    print(f"  {store['location']}: {store['efficiency']:.1f} customers/staff")
+
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -333,6 +336,9 @@ for store in most_efficient:
 assert most_efficient[0]["location"] == "Plaza", "Plaza should be most efficient"
 assert most_efficient[-1]["location"] == "Airport", "Airport should be least efficient"
 assert least_efficient[0]["location"] == "Airport", "Airport should be first in least efficient"
+print("Most to least efficient:")
+for store in most_efficient:
+    print(f"  {store['location']}: {store['efficiency']:.1f} customers/staff")
 print("Perfect! You can now identify which stores operate most efficiently!")
 ```
 
@@ -360,13 +366,16 @@ best_satisfaction = max(locations, key=lambda x: x["satisfaction"])
 print(f"Best satisfaction: {best_satisfaction['name']} ({best_satisfaction['satisfaction']}★)")
 ```
 
+::: callout-tip
+Looks nearly as the previous example, doesn't it?
+:::
+
 ## Exercise 4.1 - Critical Supply Allocation
 
 Bean Counter has limited specialty coffee beans. Find which store should receive them based on different criteria:
 
 1. The store with the lowest current inventory (most urgent need)
 2. The store with the highest daily bean usage (highest demand)
-3. The store with the best efficiency ratio (usage/inventory)
 
 ```{python}
 #| eval: false
@@ -385,15 +394,7 @@ most_urgent =
 # Find store with highest daily usage
 highest_demand =
 
-# Calculate days_remaining for each store, then find most critical
-for store in supply_data:
-    store["days_remaining"] = store["inventory_kg"] / store["daily_usage"]
 
-most_critical =
-
-print(f"Most urgent (lowest inventory): {most_urgent['store']}")
-print(f"Highest demand: {highest_demand['store']}")
-print(f"Most critical (fewest days left): {most_critical['store']}")
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -405,15 +406,8 @@ most_urgent = min(supply_data, key=lambda x: x["inventory_kg"])
 # Find store with highest daily usage
 highest_demand = max(supply_data, key=lambda x: x["daily_usage"])
 
-# Calculate days_remaining for each store, then find most critical
-for store in supply_data:
-    store["days_remaining"] = store["inventory_kg"] / store["daily_usage"]
-
-most_critical = min(supply_data, key=lambda x: x["days_remaining"])
-
 print(f"Most urgent (lowest inventory): {most_urgent['store']}")
 print(f"Highest demand: {highest_demand['store']}")
-print(f"Most critical (fewest days left): {most_critical['store']}")
 ```
 :::
 
@@ -423,7 +417,8 @@ print(f"Most critical (fewest days left): {most_critical['store']}")
 # Test your supply allocation
 assert most_urgent["store"] == "Beach", "Beach has lowest inventory"
 assert highest_demand["store"] == "Airport", "Airport has highest daily usage"
-assert most_critical["store"] == "Downtown", "Downtown has fewest days remaining"
+print(f"Most urgent (lowest inventory): {most_urgent['store']}")
+print(f"Highest demand: {highest_demand['store']}")
 print("Excellent decision-making! You've allocated supplies optimally!")
 ```
 
@@ -434,10 +429,12 @@ print("Excellent decision-making! You've allocated supplies optimally!")
 As Operations Director, you'll face scheduling challenges daily. Let's preview two fundamental scheduling rules used in operations management.
 
 **SPT (Shortest Processing Time)**: Do the quickest tasks first
+
 - Minimizes average waiting time
 - Reduces work-in-progress
 
 **EDD (Earliest Due Date)**: Do tasks with earliest deadlines first
+
 - Minimizes late deliveries
 - Ensures time-sensitive tasks are prioritized
 
@@ -456,18 +453,36 @@ print("SPT Schedule (fastest first):")
 for order in spt_schedule:
     print(f"  Order {order['id']}: {order['prep_time']} min prep")
 
+# Extract just the IDs using list comprehension
+# This compact syntax: [item["field"] for item in list]
+# Creates a new list with just the IDs
+spt_ids = [order["id"] for order in spt_schedule]
+print(f"SPT order sequence: {spt_ids}")
+
 # EDD: Sort by deadline
 edd_schedule = sorted(orders, key=lambda x: x["deadline"])
 print("\nEDD Schedule (earliest deadline first):")
 for order in edd_schedule:
     print(f"  Order {order['id']}: deadline at minute {order['deadline']}")
+
+# Again, extract just the IDs using list comprehension
+edd_ids = [order["id"] for order in edd_schedule]
+print(f"EDD order sequence: {edd_ids}")
 ```
+
+::: {.callout-tip}
+## List Comprehension
+
+The syntax `[order["id"] for order in spt_schedule]` is called **list comprehension**. It is a compact way to create a new list by extracting or transforming elements from an existing list. It's much cleaner than writing a loop to append items one by one!
+:::
 
 ## Exercise 5.1 - Morning Rush Scheduling
 
-It's 7 AM at Bean Counter Plaza, and you have multiple drink orders to schedule. Apply both SPT and EDD rules to determine the order sequence.
+It's 7 AM at Bean Counter Plaza, and you have multiple drink orders to schedule.
+Apply both SPT and EDD rules to determine the order sequence.
 
 Create:
+
 1. `spt_sequence` - List of order IDs in SPT order
 2. `edd_sequence` - List of order IDs in EDD order
 
@@ -483,15 +498,13 @@ rush_orders = [
 
 # YOUR CODE BELOW
 # Apply SPT rule (sort by prep_time)
-spt_sorted =
-spt_sequence = [order["id"] for order in spt_sorted]
+
+# Extract just the IDs using list comprehension
 
 # Apply EDD rule (sort by promised_time)
-edd_sorted =
-edd_sequence = [order["id"] for order in edd_sorted]
 
-print(f"SPT sequence: {spt_sequence}")
-print(f"EDD sequence: {edd_sequence}")
+# Extract just the IDs using list comprehension
+
 ```
 
 ::: {.content-visible when-profile="solutions"}
@@ -518,6 +531,8 @@ assert spt_sequence[0] == "Espresso1", "Espresso1 should be first in SPT"
 assert spt_sequence[-1] == "Cappuccino1", "Cappuccino1 should be last in SPT"
 assert edd_sequence[0] == "Espresso1", "Espresso1 should be first in EDD"
 assert edd_sequence[1] == "Americano1", "Americano1 should be second in EDD"
+print(f"SPT sequence: {spt_sequence}")
+print(f"EDD sequence: {edd_sequence}")
 print("Outstanding! You've mastered basic scheduling optimization!")
 ```
 
@@ -525,23 +540,26 @@ print("Outstanding! You've mastered basic scheduling optimization!")
 
 # Conclusion
 
-🎊 **Congratulations! You've built an optimization toolkit for Bean Counter's operations!** 🎊
+**Congratulations! You've built an optimization toolkit for Bean Counter's operations!**
 
 **You've learned:**
+
 - **Sorting Lists** - Ranking data from best to worst (or vice versa)
 - **Finding Min/Max** - Quickly identifying extremes in your data
 - **Sorting Dictionaries** - Ranking complex data by any metric
 - **Finding Best Options** - Selecting optimal choices from dictionaries
 - **Scheduling Rules** - SPT and EDD for operational efficiency
 
-Your Bean Counter optimization system can now:
+**Your Bean Counter optimization system can now:**
+
 - Rank stores by any performance metric
 - Identify the best and worst performers instantly
 - Allocate resources to the most critical locations
 - Schedule tasks for maximum efficiency
 - Make data-driven operational decisions
 
-Remember:
+**Remember:**
+
 - `sorted()` creates a new list; the original stays unchanged
 - `reverse=True` sorts from highest to lowest
 - `min()` and `max()` find extremes quickly
@@ -549,6 +567,6 @@ Remember:
 - SPT minimizes wait times; EDD minimizes late orders
 - Always consider what metric to optimize for your specific goal
 
-**What's Next:** The CEO is preparing you for the ultimate challenge! In the next tutorial, you'll integrate everything you've learned - functions, dictionaries, and sorting - in a comprehensive recap that solidifies your mastery of Python for business operations!
+**What's Next:** The CEO is preparing you for the a challenge! In the next tutorial, you'll integrate everything you've learned - functions, dictionaries, and sorting.
 
 {{< include ../include/tutorial_end.qmd >}}

@@ -703,32 +703,35 @@ print("Great job! You can now evaluate and coach baristas across all Bean Counte
 
 # Conclusion
 
-Congratulations! You've successfully started as assistant manager!
-
-You've successfully standardized operations across all Bean Counter locations!
+**Congratulations! You've successfully standardized Bean Counter's operations as Assistant Manager!**
 
 **You've learned:**
 
-- reusable functions to standardize pricing across all stores
-- smart business logic for discounts and quality control
-- modular systems where functions work together seamlessly
-- returning multiple values for comprehensive reporting
+- **Functions** - Reusable code blocks that standardize operations
+- **Parameters & Return** - How to pass data in and get results back
+- **Business Logic** - Adding smart decision-making to functions
+- **Functions Calling Functions** - Building complex operations from simple parts
+- **Methods vs Functions** - Understanding the difference and when to use each
+- **Tuples** - Returning multiple values from a single function
 
+**Your Bean Counter standardization system can now:**
 
-Remember the chaos we started with? Different prices at each store, inconsistent discounts, and frustrated customers? Functions have solved all of that! Now:
+- Calculate consistent prices across all locations
+- Apply discounts fairly and automatically
+- Check quality standards for coffee beans
+- Validate orders before processing
+- Analyze daily performance metrics
+- Evaluate barista performance objectively
 
-- Every customer gets consistent pricing
-- Discounts are applied fairly and automatically
-- Quality standards are maintained across all locations
-- New baristas can be trained quickly using your standardized functions
+**Remember:**
 
-**Key Takeaways:**
+- Use `def` to create functions with descriptive names
+- Functions make code reusable - write once, use many times
+- Parameters let functions work with different data
+- `return` sends results back for other code to use
+- Methods belong to objects (with dots), functions stand alone
+- Tuples let you return multiple values at once
 
-1. **Functions create consistency** - Like recipe cards, they ensure everyone does things the same way
-2. **Functions are composable** - Simple functions can be combined to handle complex operations
-3. **Tuples enable rich returns** - Functions can return multiple pieces of information at once
-4. **Business logic belongs in functions** - This makes policies easy to update and maintain
-
-The CEO is impressed with your work! In the next tutorial, you'll be promoted to **Regional Manager**, where you'll use **dictionaries** to manage data across all Bean Counter locations. You'll track inventory, analyze performance metrics, and optimize operations across the entire chain!
+**What's Next:** The CEO is impressed with your work! In the next tutorial, you'll be promoted to **Regional Manager**, where you'll use **dictionaries** to manage data across all Bean Counter locations. You'll track inventory, analyze performance metrics, and optimize operations across the entire chain!
 
 {{< include ../include/tutorial_end.qmd >}}

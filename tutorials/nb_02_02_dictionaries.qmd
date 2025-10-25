@@ -578,14 +578,14 @@ print("Fantastic! Your reporting system gives clear insights into store performa
 - **Filtering Dictionary Data** - Finding stores that meet specific criteria
 - **Functions with Dictionaries** - Creating powerful analysis and reporting tools
 
-Your Bean Counter regional management system can now:
+**Your Bean Counter regional management system can now:**
 
 - Track detailed information for each location
 - Analyze performance across all stores
 - Identify locations needing supplies or support
 - Generate automated performance reports
 
-Remember:
+**Remember:**
 
 - Use curly braces `{}` to create dictionaries
 - Access values with square brackets and keys: `dict['key']`
