@@ -65,7 +65,7 @@ website:
           - text: "04-02 Notebook"
             href: tutorials/nb_04_01_monte_carlo.qmd
           - text: "04-03 Competition"
-            href: competitions/competition_04_techventure.qmd
+            href: tutorials/competition_04_techventure.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd
