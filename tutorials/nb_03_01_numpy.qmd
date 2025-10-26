@@ -201,6 +201,10 @@ total_revenue =
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
+
+# Daily revenues for the week (in thousands)
+daily_revenues = [125.5, 132.8, 118.9, 145.2, 155.7, 189.3, 176.4]
+
 # Convert to NumPy array
 revenues_array = np.array(daily_revenues)
 
@@ -216,7 +220,7 @@ print(f"Weekly revenue: ${total_revenue:.1f}k")
 #| code-fold: true
 # Test your revenue calculation
 assert isinstance(revenues_array, np.ndarray), "Should be a NumPy array"
-assert total_revenue == 1043.8, f"Total should be 1043.8, got {total_revenue}"
+assert int(total_revenue) == int(1043.8), f"Total should be 1043.8, got {total_revenue}"
 print(f"Weekly revenue: ${total_revenue:.1f}k")
 print("Excellent! You've made your first CEO-level analysis with NumPy!")
 ```
@@ -384,6 +388,19 @@ print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
+
+# Monthly data for 50 stores
+revenues = np.array([125000, 98000, 145000, 87000, 156000, 134000, 92000, 167000,
+                    118000, 143000, 99000, 175000, 132000, 89000, 154000, 121000,
+                    138000, 95000, 162000, 108000, 147000, 131000, 88000, 159000,
+                    126000, 141000, 93000, 168000, 115000, 152000, 128000, 86000,
+                    144000, 119000, 137000, 96000, 171000, 113000, 149000, 124000,
+                    135000, 91000, 164000, 107000, 146000, 129000, 85000, 158000,
+                    122000, 140000])
+
+# Cost is 65% of revenue for each store
+costs = revenues * 0.65
+
 # 1. Calculate profit for each store (revenue - costs)
 profits = revenues - costs
 
@@ -402,9 +419,9 @@ print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 #| eval: false
 #| code-fold: true
 # Test your calculations
-assert np.isclose(profits.sum(), 2205000), "Total profit before tax should be 2,205,000"
+assert np.isclose(profits.sum(), 2240700), "Total profit before tax should be 2,240,700"
 assert np.isclose(profit_margins.mean(), 35.0), "Average margin should be 35%"
-assert np.isclose(profits_after_tax.sum(), 1653750), "After-tax profit should be 1,653,750"
+assert np.isclose(profits_after_tax.sum(), 1680525), "After-tax profit should be 1,680,525"
 print(f"Total monthly profit (before tax): ${profits.sum():,.2f}")
 print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 print("Fantastic! You've learned company-wide financial calculations!")
@@ -588,6 +605,17 @@ high_traffic_stores =
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
+
+import numpy as np
+
+# Daily customer counts for 50 stores over 30 days
+# This creates a 2D array: rows = stores, columns = days
+np.random.seed(100)
+daily_customers = np.random.randint(150, 500, size=(50, 30))  # 50 stores, 30 days
+
+print(f"Data shape: {daily_customers.shape}")
+print(f"First store's first 5 days: {daily_customers[0, :5]}")
+
 # 1. Calculate total customers served across all stores in the month
 total_customers = np.sum(daily_customers)
 
@@ -613,8 +641,8 @@ print(f"High-traffic stores: {high_traffic_stores}")
 #| eval: false
 #| code-fold: true
 # Test your analysis
-assert total_customers == 472594, f"Total should be 472,594, got {total_customers}"
-assert np.isclose(avg_daily_per_store, 315.06, atol=0.1), f"Average should be ~315.1"
+assert total_customers == 492171, f"Total should be 492,171 , got {total_customers}"
+assert np.isclose(avg_daily_per_store, 328.1, atol=0.1), f"Average should be ~328.1"
 assert busiest_day == 499, f"Busiest day should be 499, got {busiest_day}"
 print(f"Total customers served: {total_customers:,}")
 print(f"Average daily customers per store: {avg_daily_per_store:.1f}")

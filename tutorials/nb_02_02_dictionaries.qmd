@@ -350,6 +350,14 @@ for store in performance_data:
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
+
+performance_data = [
+    {"store": "Downtown", "customers": 450, "satisfaction": 4.7},
+    {"store": "Airport", "customers": 680, "satisfaction": 4.4},
+    {"store": "University", "customers": 520, "satisfaction": 4.8},
+    {"store": "Mall", "customers": 380, "satisfaction": 4.6},
+    {"store": "Station", "customers": 590, "satisfaction": 4.5}
+]
 total_customers = 0
 total_satisfaction = 0
 busy_stores = 0  # Stores with >500 customers
@@ -380,7 +388,7 @@ print(f"Stores serving >500 customers: {busy_stores}")
 # Test your analysis
 assert total_customers == 2620, f"Total customers should be 2620, got {total_customers}"
 assert round(average_satisfaction, 2) == 4.60, f"Average satisfaction should be 4.60, got {round(average_satisfaction, 2)}"
-assert busy_stores == 2, f"Should have 2 busy stores, got {busy_stores}"
+assert busy_stores == 3, f"Should have 3 busy stores, got {busy_stores}"
 print(f"Total customers: {total_customers}")
 print(f"Average satisfaction: {average_satisfaction}")
 print(f"Stores serving >500 customers: {busy_stores}")
@@ -442,6 +450,15 @@ for store in inventory_data:
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
+
+inventory_data = [
+    {"name": "Plaza", "coffee_kg": 45, "milk_liters": 30, "daily_revenue": 1850},
+    {"name": "Station", "coffee_kg": 12, "milk_liters": 8, "daily_revenue": 920},
+    {"name": "Park", "coffee_kg": 18, "milk_liters": 15, "daily_revenue": 1100},
+    {"name": "Beach", "coffee_kg": 7, "milk_liters": 22, "daily_revenue": 780},
+    {"name": "Downtown", "coffee_kg": 35, "milk_liters": 18, "daily_revenue": 2200}
+]
+
 restock_needed = []
 low_performers = []
 

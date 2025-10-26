@@ -206,15 +206,6 @@ hours_tracked = 0
 
 ```
 
-```{python}
-#| eval: false
-#| code-fold: true
-# Test your answer
-assert customer_counts == [15, 32, 28, 41], "customer_counts should be [15, 32, 28, 41]"
-assert hours_tracked == 4, "hours_tracked should be 4"
-print("Perfect! You can build lists dynamically and check their length!")
-```
-
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
@@ -227,6 +218,15 @@ customer_counts.append(41)
 hours_tracked = len(customer_counts)
 ```
 :::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your answer
+assert customer_counts == [15, 32, 28, 41], "customer_counts should be [15, 32, 28, 41]"
+assert hours_tracked == 4, "hours_tracked should be 4"
+print("Perfect! You can build lists dynamically and check their length!")
+```
 
 ## Exercise 2.2 - Combining Lists
 
@@ -500,17 +500,6 @@ rating_count = 0
 
 ```
 
-```{python}
-#| eval: false
-#| code-fold: true
-# Test your answer
-assert total_rating == 62, "total_rating should be 62"
-assert rating_count == 15, "rating_count should be 15"
-assert abs(average_rating - 4.13) < 0.01, "average_rating should be approximately 4.13"
-print("✓ Perfect! You've mastered aggregation calculations!")
-print(f"Total: {total_rating}, Count: {rating_count}, Average: {average_rating:.2f} stars")
-```
-
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
@@ -527,6 +516,17 @@ for rating in ratings:
 average_rating = total_rating / rating_count
 ```
 :::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Test your answer
+assert total_rating == 62, "total_rating should be 62"
+assert rating_count == 15, "rating_count should be 15"
+assert abs(average_rating - 4.13) < 0.01, "average_rating should be approximately 4.13"
+print("✓ Perfect! You've mastered aggregation calculations!")
+print(f"Total: {total_rating}, Count: {rating_count}, Average: {average_rating:.2f} stars")
+```
 
 # Conclusion
 

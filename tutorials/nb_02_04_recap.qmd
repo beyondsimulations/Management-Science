@@ -217,6 +217,16 @@ def find_best_store(stores_list):
     best_store_name = ranked[0]["name"]
 
     return best_store_name
+
+# Test data
+stores = [
+    {"name": "Plaza", "revenue": 45000, "rating": 4.7, "complaints": 5},
+    {"name": "Station", "revenue": 38000, "rating": 4.9, "complaints": 2},
+    {"name": "Airport", "revenue": 52000, "rating": 4.4, "complaints": 12}
+]
+
+best = find_best_store(stores)
+print(f"The best performing store is: {best}")
 ```
 :::
 
@@ -231,7 +241,7 @@ for store in stores:
     if store["name"] == "Plaza":
         assert store["composite_score"] == 82.0, "Plaza score incorrect"
     elif store["name"] == "Station":
-        assert store["composite_score"] == 85.0, "Station score incorrect (should be highest)"
+        assert store["composite_score"] == 83.0, "Station score incorrect (should be highest)"
     elif store["name"] == "Airport":
         assert store["composite_score"] == 72.0, "Airport score incorrect"
 

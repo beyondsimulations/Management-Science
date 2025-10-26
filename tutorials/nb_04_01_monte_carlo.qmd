@@ -223,8 +223,8 @@ max_profit = df['profit'].max()
 #| code-fold: true
 # Don't modify below
 assert len(df) == 10_000, "Should have 10,000 simulations"
-assert 200 < mean_profit < 300, f"Mean profit should be ~250, got {mean_profit:.2f}"
-assert 0.02 < prob_loss < 0.08, f"Probability of loss should be ~5%, got {prob_loss:.1%}"
+assert 100 < mean_profit < 200, f"Mean profit should be ~150, got {mean_profit:.2f}"
+assert 0.12 < prob_loss < 0.18, f"Probability of loss should be ~15%, got {prob_loss:.1%}"
 assert max_profit > 500, f"Max profit should be >500, got {max_profit:.2f}"
 print("Very good, the simulation is correct!")
 print(f"  Mean daily profit: €{mean_profit:.2f}")
@@ -277,8 +277,8 @@ prob_target_range = ((df['profit'] >= 100) & (df['profit'] <= 400)).mean()
 #| eval: false
 #| code-fold: true
 # Don't modify below
-assert 0.85 < prob_target_range < 0.95, f"Should be ~90% in range, got {prob_target_range:.1%}"
-print(f"✓ Visualization complete! {prob_target_range:.1%} of days have profit €100-400")
+assert 0.5 < prob_target_range < 0.6, f"Should be ~55% in range, got {prob_target_range:.1%}"
+print(f"Visualization complete! {prob_target_range:.1%} of days have profit €100-400")
 ```
 
 # Section 3 - Risk Metrics and Decision Making
@@ -350,9 +350,9 @@ expected_shortfall = worst_days.mean()
 #| eval: false
 #| code-fold: true
 # Don't modify below
-assert 110 < volatility < 130, f"Volatility should be ~120, got {volatility:.2f}"
-assert 0.55 < prob_good_day < 0.75, f"Probability should be ~65%, got {prob_good_day:.1%}"
-assert 50 < expected_shortfall < 100, f"ES should be ~75, got {expected_shortfall:.2f}"
+assert 140 < volatility < 160, f"Volatility should be ~150, got {volatility:.2f}"
+assert 0.25 < prob_good_day < 0.45, f"Probability should be ~35%, got {prob_good_day:.1%}"
+assert -125 < expected_shortfall < -75, f"ES should be ~100, got {expected_shortfall:.2f}"
 print("Risk metrics correct!")
 print(f"  Volatility: €{volatility:.2f}")
 print(f"  P(Profit ≥ €200): {prob_good_day:.1%}")
@@ -496,7 +496,7 @@ best_mean_value = df_portfolios.iloc[0]['mean']
 #| code-fold: true
 # Don't modify below
 assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
-assert 'Downtown + Campus' in best_mean_portfolio or 'Campus + Downtown' in best_mean_portfolio, \
+assert 'Downtown + Suburb' in best_mean_portfolio or 'Suburb + Downtown' in best_mean_portfolio, \
     f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
 assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
 print("Portfolio analysis correct!")

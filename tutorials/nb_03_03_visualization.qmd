@@ -54,7 +54,7 @@ revenue = [620, 450, 510, 485, 380]
 
 # Create bar chart
 plt.figure(figsize=(10, 6))
-plt.bar(stores, revenue, color='#2E7D32')
+plt.bar(stores, revenue, color='#F6B265')
 plt.title('Bean Counter Top 5 Store Revenue (Thousands $)', fontsize=16, fontweight='bold')
 plt.xlabel('Store Location', fontsize=12)
 plt.ylabel('Revenue ($1000s)', fontsize=12)
@@ -106,12 +106,18 @@ products_sorted =
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
+# Product sales data
+products_df = pd.DataFrame({
+    'product': ['Latte', 'Espresso', 'Cappuccino', 'Americano', 'Mocha', 'Macchiato'],
+    'units_sold': [3200, 4500, 2800, 2100, 1900, 1500]
+})
+
 # 1. Sort products by units_sold (highest first)
 products_sorted = products_df.sort_values('units_sold', ascending=False)
 
 # 2. Create a bar chart
 plt.figure(figsize=(10, 6))
-plt.bar(products_sorted['product'], products_sorted['units_sold'], color='#8B4513')
+plt.bar(products_sorted['product'], products_sorted['units_sold'], color='#363D45')
 plt.title('Bean Counter Product Sales Volume', fontsize=16, fontweight='bold')
 plt.xlabel('Product', fontsize=12)
 plt.ylabel('Units Sold', fontsize=12)
@@ -141,7 +147,7 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
 revenue = [4.2, 4.5, 4.8, 5.1, 5.4, 5.8]
 
 plt.figure(figsize=(10, 6))
-plt.plot(months, revenue, marker='o', linewidth=2, markersize=8, color='#1976D2')
+plt.plot(months, revenue, marker='o', linewidth=2, markersize=8, color='#537E8F')
 plt.title('Bean Counter Revenue Growth - H1 2024', fontsize=16, fontweight='bold')
 plt.xlabel('Month', fontsize=12)
 plt.ylabel('Revenue ($ Millions)', fontsize=12)
@@ -150,11 +156,6 @@ plt.grid(True, alpha=0.3)
 # Add value labels
 for i, v in enumerate(revenue):
     plt.text(i, v + 0.1, f'${v}M', ha='center')
-
-# Add trend annotation
-plt.annotate('38% Growth!', xy=(5, 5.8), xytext=(4, 5.5),
-            arrowprops=dict(arrowstyle='->', color='green', lw=2),
-            fontsize=12, color='green', fontweight='bold')
 
 plt.tight_layout()
 plt.show()
@@ -183,18 +184,11 @@ customers = [145, 152, 158, 165, 174, 182, 195, 208]
 ```{python}
 #| eval: false
 plt.figure(figsize=(10, 6))
-plt.plot(months, customers, marker='o', linewidth=2, markersize=8, color='#4CAF50')
+plt.plot(months, customers, marker='o', linewidth=2, markersize=8, color='#EBADAD')
 plt.title('Bean Counter Customer Growth Trajectory', fontsize=16, fontweight='bold')
 plt.xlabel('Month', fontsize=12)
 plt.ylabel('Customers (Thousands)', fontsize=12)
 plt.grid(True, alpha=0.3)
-
-# Add a trend line or annotation to highlight growth
-growth_pct = ((customers[-1] - customers[0]) / customers[0]) * 100
-plt.annotate(f'+{growth_pct:.0f}% Growth!',
-            xy=(7, 208), xytext=(5.5, 200),
-            arrowprops=dict(arrowstyle='->', color='green', lw=2),
-            fontsize=12, color='green', fontweight='bold')
 
 plt.tight_layout()
 plt.show()
@@ -252,8 +246,12 @@ efficiency_scores = np.random.normal(75, 12, 50)  # Mean 75, std 12
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: false
+# Simulate efficiency scores for 50 stores
+np.random.seed(100)
+efficiency_scores = np.random.normal(75, 12, 50)  # Mean 75, std 12
+
 plt.figure(figsize=(10, 6))
-plt.hist(efficiency_scores, bins=10, color='#FF9800', alpha=0.7, edgecolor='black')
+plt.hist(efficiency_scores, bins=10, color='#A7C7C6', alpha=0.7, edgecolor='black')
 plt.title('Store Efficiency Distribution (50 Locations)', fontsize=16, fontweight='bold')
 plt.xlabel('Efficiency Score', fontsize=12)
 plt.ylabel('Number of Stores', fontsize=12)
@@ -323,14 +321,14 @@ Create an integrated dashboard combining NumPy simulation with Pandas analysis a
 
 - Start at $6M in January
 - Grow approximately 2% each month
-- Add random variation (±5%) to simulate market fluctuations
+- Add random variation (±25%) to simulate market fluctuations
 
 ::: callout-tip
 To create realistic monthly growth:
 
 - Start with base revenue of 6.0M
 - Each month, apply 2% growth: `revenue = previous_revenue * 1.02`
-- Add random variation: multiply by `np.random.uniform(0.95, 1.05)`
+- Add random variation: multiply by `np.random.uniform(0.75, 1.25)`
 :::
 
 ```{python}
@@ -367,13 +365,22 @@ current_revenue = 6.0  # Starting revenue in millions
 ```{python}
 #| eval: false
 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate next year's projections
+np.random.seed(42)
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
 # 1. Create revenue projections for the company
 revenue_projection = []
 current_revenue = 6.0  # Starting revenue in millions
 
 for i in range(12):
     # Apply 2% growth and random variation
-    monthly_revenue = current_revenue * np.random.uniform(0.95, 1.05)
+    monthly_revenue = current_revenue * np.random.uniform(0.75, 1.25)
     revenue_projection.append(monthly_revenue)
     # Update current revenue with 2% growth for next month
     current_revenue = current_revenue * 1.02
