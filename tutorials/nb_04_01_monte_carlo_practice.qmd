@@ -31,17 +31,6 @@ np.random.seed(42)
 print("Libraries loaded! Let's analyze Bean Counter expansion opportunities ☕")
 ```
 
-## How to Use This Tutorial
-
-This notebook is structured to progressively build your skills:
-1. **Section 1:** Model single uncertain variables
-2. **Section 2:** Combine uncertainties in one business
-3. **Section 3:** Analyze risk metrics
-4. **Section 4:** Compare portfolio combinations (key for competition!)
-5. **Section 5:** Make strategic recommendations
-
-Each exercise includes assertions to check your work. Green checks (✓) mean you're on track!
-
 # Section 1 - Modeling Uncertainty with Distributions
 
 Let's start by modeling uncertain business variables using probability distributions.
@@ -80,6 +69,11 @@ mean_purchase =
 min_purchase =
 max_purchase =
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below - these test your solution
 assert len(purchase_amounts) == 10_000, "Should have 10,000 simulations"
 assert 9.9 < mean_purchase < 10.1, f"Mean should be ~10, got {mean_purchase:.2f}"
@@ -125,6 +119,11 @@ prob_low =
 # Probability of being within one std dev of mean (80-120)
 prob_normal =
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below
 assert 0.10 < prob_high < 0.20, f"High probability should be ~0.16, got {prob_high:.3f}"
 assert 0.10 < prob_low < 0.20, f"Low probability should be ~0.16, got {prob_low:.3f}"
@@ -214,6 +213,11 @@ mean_profit =
 prob_loss =
 max_profit =
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below
 assert len(df) == 10_000, "Should have 10,000 simulations"
 assert 200 < mean_profit < 300, f"Mean profit should be ~250, got {mean_profit:.2f}"
@@ -270,7 +274,7 @@ plt.figure(figsize=(10, 6))
 # Add labels and title
 plt.xlabel('Daily Profit (€)')
 plt.ylabel('Frequency')
-plt.title('Coffee Shop Daily Profit Distribution (10,000 simulations)')
+plt.title('Bean Counter Daily Profit Distribution (10,000 simulations)')
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.show()
@@ -278,6 +282,11 @@ plt.show()
 # Calculate what percentage of profits are between €100 and €400
 prob_target_range =
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below
 assert 0.85 < prob_target_range < 0.95, f"Should be ~90% in range, got {prob_target_range:.1%}"
 print(f"✓ Visualization complete! {prob_target_range:.1%} of days have profit €100-400")
@@ -355,6 +364,11 @@ expected_shortfall =
 risk_free = 50
 sharpe_ratio =
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below
 assert 110 < volatility < 130, f"Volatility should be ~120, got {volatility:.2f}"
 assert 0.55 < prob_good_day < 0.75, f"Probability should be ~65%, got {prob_good_day:.1%}"
@@ -490,6 +504,11 @@ df_portfolios = df_portfolios.sort_values('mean', ascending=False)
 best_mean_portfolio =
 best_mean_value =
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below
 assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
 assert 'Downtown + Campus' in best_mean_portfolio or 'Campus + Downtown' in best_mean_portfolio, \
@@ -566,6 +585,11 @@ best_sharpe_value =
 safest_portfolio =
 safest_prob_loss =
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below
 assert best_sharpe_value > 2.0, f"Best Sharpe should be >2.0, got {best_sharpe_value:.2f}"
 assert safest_prob_loss < 0.01, f"Safest should have <1% loss probability, got {safest_prob_loss:.3f}"
@@ -616,7 +640,7 @@ plt.figure(figsize=(10, 6))
 
 for _, row in df_portfolios.iterrows():
     plt.scatter(row['std'], row['mean'], s=100, alpha=0.7)
-    plt.annotate(row['pair'], (row['std'], row['mean']), 
+    plt.annotate(row['pair'], (row['std'], row['mean']),
                 fontsize=9, xytext=(5, 5), textcoords='offset points')
 
 plt.xlabel('Risk (Standard Deviation)')
@@ -659,6 +683,11 @@ def score_portfolio(pair_name):
 
 recommendation_score = score_portfolio(final_recommendation)
 
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
 # Don't modify below
 assert final_recommendation in df_portfolios['pair'].values, "Must choose an actual portfolio"
 assert recommendation_score > 60, f"Your choice scores {recommendation_score:.1f}/100 - try a different portfolio"
@@ -726,13 +755,11 @@ print("=" * 60)
 
 **Outstanding work, CEO!** You've successfully applied Monte Carlo simulation to Bean Counter's expansion strategy and mastered the key skills needed for the TechVenture competition:
 
-✅ **Simulating uncertain returns** using probability distributions
-✅ **Running thousands of scenarios** with Monte Carlo
-✅ **Calculating risk metrics** (VaR, Expected Shortfall, Sharpe Ratio)
-✅ **Comparing portfolio combinations** systematically
-✅ **Making data-driven recommendations** with clear justification
-
-## Your CEO Toolkit for the Competition
+- **Simulating uncertain returns** using probability distributions
+- **Running thousands of scenarios** with Monte Carlo
+- **Calculating risk metrics** (VaR, Expected Shortfall, Sharpe Ratio)
+- **Comparing portfolio combinations** systematically
+- **Making data-driven recommendations** with clear justification
 
 When you tackle the TechVenture challenge, apply what you've learned at Bean Counter:
 
@@ -745,6 +772,7 @@ When you tackle the TechVenture challenge, apply what you've learned at Bean Cou
 ## Key Differences for Competition
 
 The competition uses:
+
 - **Investment returns** instead of daily profits
 - **Different distributions** (some normal, one uniform)
 - **Larger scale** (€1M investments vs daily operations)
@@ -752,8 +780,7 @@ The competition uses:
 But the approach is identical! Apply what you've learned here.
 
 :::{.callout-tip}
-## Final CEO Wisdom
 Just as you've optimized Bean Counter's expansion, use scoring functions in the competition to make objective decisions when multiple factors matter. Your journey from Barista Trainee to CEO has prepared you for this!
 :::
 
-Good luck in the TechVenture Investment Challenge, CEO! 🚀☕
+Good luck in the TechVenture Investment Challenge, CEO!
