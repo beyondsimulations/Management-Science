@@ -1,10 +1,10 @@
 ---
-title: "Competition - TechVenture Investment Challenge"
-subtitle: "Lecture 4 - Management Science"
-format:
-  html:
-    code-fold: true
-    code-tools: true
+title: "Competition 01 - TechVenture Investment Challenge"
+subtitle: "Management Science"
+code-links:
+  - text: Python
+    href: nb_01_03_conditionals_while.py
+    icon: hand-thumbs-up
 ---
 
 # Client Briefing: TechVenture Innovation Fund

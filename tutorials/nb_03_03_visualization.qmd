@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 3.3 - Visualization & Integration"
+title: "Notebook 3.3 - Visualization & Integration"
 subtitle: "Management Science - CEO Presentations That Wow!"
 code-links:
    - text: Python

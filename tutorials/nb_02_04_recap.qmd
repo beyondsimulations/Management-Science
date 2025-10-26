@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 2.4 - Integration Challenge"
+title: "Notebook 2.4 - Integration Challenge"
 subtitle: "Management Science - Preparing for CEO at Bean Counter!"
 code-links:
    - text: Python

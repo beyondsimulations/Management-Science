@@ -17,7 +17,7 @@ You’re encouraged to use AI tools responsibly. Treat them like a smart pair-pr
 
 You’ll simulate investment outcomes to understand risk and then forecast demand using simple time-series techniques. Expect to implement Monte Carlo simulations, moving averages, and exponential smoothing, then compare methods and justify a recommendation.
 
-**Assignment 2: Optimization in Practice (Due at the start of Lecture 10, weight 20%)**
+**Assignment 2: Optimization in Practice (Due at the start of Lecture 10, weight 30%)**
 
 You’ll build and improve delivery routes and construct valid staff schedules under constraints, then iterate to improve quality and satisfaction. Expect to implement heuristics, evaluate improvements, visualize routes/schedules, and discuss trade-offs.
 

@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 2.3 - Sorting & Finding Best Options"
+title: "Notebook 2.3 - Sorting & Finding Best Options"
 subtitle: "Management Science - Operations Director at Bean Counter!"
 code-links:
    - text: Python

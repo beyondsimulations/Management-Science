@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 1.3 - Conditionals & While Loops"
+title: "Notebook 1.3 - Conditionals & While Loops"
 subtitle: "Management Science"
 code-links:
   - text: Python

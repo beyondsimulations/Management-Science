@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 3.1 - NumPy for CEO Analytics"
+title: "Notebook 3.1 - NumPy for CEO Analytics"
 subtitle: "Management Science - Welcome to the CEO Suite!"
 code-links:
    - text: Python

@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 3.2 - Pandas for CEO Data Management"
+title: "Notebook 3.2 - Pandas for CEO Data Management"
 subtitle: "Management Science - Mastering Business Data"
 code-links:
    - text: Python

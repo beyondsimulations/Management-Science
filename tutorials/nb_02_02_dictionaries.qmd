@@ -1,5 +1,5 @@
 ---
-title: "Tutorial 2.2 - Dictionaries at Bean Counter"
+title: "Notebook 2.2 - Dictionaries at Bean Counter"
 subtitle: "Management Science - Regional Manager of Multiple Locations!"
 code-links:
    - text: Python
