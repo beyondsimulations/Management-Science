@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 2.1 - Functions at Bean Counter
+# # Notebook 2.1 - Functions at Bean Counter
 #
 # Management Science - Your Promotion to Assistant Manager!
 #

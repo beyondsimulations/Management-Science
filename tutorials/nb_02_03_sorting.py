@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 2.3 - Sorting & Finding Best Options
+# # Notebook 2.3 - Sorting & Finding Best Options
 #
 # Management Science - Operations Director at Bean Counter!
 #

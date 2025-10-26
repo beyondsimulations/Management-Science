@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 3.1 - NumPy for CEO Analytics
+# # Notebook 3.1 - NumPy for CEO Analytics
 #
 # Management Science - Welcome to the CEO Suite!
 #

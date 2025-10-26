@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 3.2 - Pandas for CEO Data Management
+# # Notebook 3.2 - Pandas for CEO Data Management
 #
 # Management Science - Mastering Business Data
 #

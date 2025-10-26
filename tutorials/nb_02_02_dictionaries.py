@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 2.2 - Dictionaries at Bean Counter
+# # Notebook 2.2 - Dictionaries at Bean Counter
 #
 # Management Science - Regional Manager of Multiple Locations!
 #

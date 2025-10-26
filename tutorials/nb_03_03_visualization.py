@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 3.3 - Visualization & Integration
+# # Notebook 3.3 - Visualization & Integration
 #
 # Management Science - CEO Presentations That Wow!
 #

@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 2.4 - Integration Challenge
+# # Notebook 2.4 - Integration Challenge
 #
 # Management Science - Preparing for CEO at Bean Counter!
 #

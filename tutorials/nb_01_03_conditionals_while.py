@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Tutorial 1.3 - Conditionals & While Loops
+# # Notebook 1.3 - Conditionals & While Loops
 #
 # Management Science
 #
