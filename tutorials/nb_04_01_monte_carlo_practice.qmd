@@ -7,149 +7,173 @@ code-links:
     icon: hand-thumbs-up
 ---
 
-## Introduction: From Uncertainty to Insight
+# Introduction
 
-Welcome back, consultant! In the lecture, we saw how Monte Carlo simulation helps us make decisions when the future is uncertain. Now it's time to build your own simulations.
+Welcome back to Bean Counter, CEO! In the lecture, we saw how Monte Carlo simulation helps us make decisions when the future is uncertain. Now it's time to apply these techniques to expand your coffee empire and prepare for the TechVenture competition.
 
-**Your Client Today:** CoffeeHub - a chain considering opening a new location
+**Your CEO Challenge:** Bean Counter Expansion - analyzing single locations and portfolios for strategic growth
 
-**The Question:** Should they open the new coffee shop? What's the risk?
+**Key Skills for Competition:**
+- Simulating uncertain returns
+- Analyzing risk metrics
+- Comparing portfolio combinations
+- Making data-driven recommendations
 
 ```{python}
 #| eval: true
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from itertools import combinations
 
 # Set seed for reproducibility
 np.random.seed(42)
-print("Libraries loaded! Let's simulate the future of CoffeeHub ☕")
+print("Libraries loaded! Let's analyze Bean Counter expansion opportunities ☕")
 ```
 
-## Section 1: Modeling Single Variables (15 min)
+## How to Use This Tutorial
 
-### Understanding Uncertainty
+This notebook is structured to progressively build your skills:
+1. **Section 1:** Model single uncertain variables
+2. **Section 2:** Combine uncertainties in one business
+3. **Section 3:** Analyze risk metrics
+4. **Section 4:** Compare portfolio combinations (key for competition!)
+5. **Section 5:** Make strategic recommendations
 
-Every business variable has uncertainty. Let's model daily customer traffic:
+Each exercise includes assertions to check your work. Green checks (✓) mean you're on track!
+
+# Section 1 - Modeling Uncertainty with Distributions
+
+Let's start by modeling uncertain business variables using probability distributions.
+
+## Understanding np.random
 
 ```{python}
 #| eval: true
-# Historical data shows:
-# - Average: 100 customers per day
-# - Standard deviation: 20 customers
-# - Roughly follows normal distribution
+# Example: Daily customer traffic follows a normal distribution
+# Historical data shows: mean = 100, std = 20
 
-# Simulate one possible day
-one_day = np.random.normal(loc=100, scale=20)
-print(f"Tomorrow we might have {one_day:.0f} customers")
+# Simulate one day
+one_day_customers = np.random.normal(100, 20)
+print(f"One random day: {one_day_customers:.0f} customers")
 
-# But one day doesn't tell us much. Let's simulate a whole year!
-year_of_days = np.random.normal(loc=100, scale=20, size=365)
-print(f"\nYear simulation:")
-print(f"  Average: {year_of_days.mean():.1f} customers/day")
-print(f"  Best day: {year_of_days.max():.0f} customers")
-print(f"  Worst day: {year_of_days.min():.0f} customers")
+# Simulate many days to see the pattern
+many_days = np.random.normal(100, 20, size=1000)
+print(f"\n1000 days simulation:")
+print(f"  Mean: {many_days.mean():.1f} (expected: 100)")
+print(f"  Std Dev: {many_days.std():.1f} (expected: 20)")
+print(f"  Min: {many_days.min():.0f}, Max: {many_days.max():.0f}")
 ```
 
-:::{.callout-note}
-## Key Concept
-`np.random.normal(loc, scale, size)` generates random numbers from a normal (bell curve) distribution:
-- `loc`: The center (mean/average)
-- `scale`: The spread (standard deviation)
-- `size`: How many numbers to generate
-:::
+## Exercise 1.1 - Simulate Purchase Amounts
 
-### Exercise 1.1: Model Average Purchase Amount
-
-The average purchase per customer also varies. Historical data shows:
-- Mean: €10
-- But it ranges uniformly between €8 and €12
+Average purchase per customer varies uniformly between €8 and €12. Simulate 10,000 purchase amounts.
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Simulate 365 days of average purchase amounts using uniform distribution
-avg_purchases = 
+# Simulate 10,000 purchase amounts uniformly distributed between 8 and 12
+purchase_amounts =
 
 # Calculate statistics
-print(f"Purchase amount statistics:")
-print(f"  Mean: €{}")
-print(f"  Min: €{}")
-print(f"  Max: €{}")
+mean_purchase =
+min_purchase =
+max_purchase =
+
+# Don't modify below - these test your solution
+assert len(purchase_amounts) == 10_000, "Should have 10,000 simulations"
+assert 9.9 < mean_purchase < 10.1, f"Mean should be ~10, got {mean_purchase:.2f}"
+assert 8 <= min_purchase < 9, f"Min should be ~8, got {min_purchase:.2f}"
+assert 11 < max_purchase <= 12, f"Max should be ~12, got {max_purchase:.2f}"
+print("✓ Purchase simulation correct!")
 ```
 
 :::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
 # SOLUTION
-avg_purchases = np.random.uniform(8, 12, size=365)
+purchase_amounts = np.random.uniform(8, 12, size=10_000)
 
-print(f"Purchase amount statistics:")
-print(f"  Mean: €{avg_purchases.mean():.2f}")
-print(f"  Min: €{avg_purchases.min():.2f}")
-print(f"  Max: €{avg_purchases.max():.2f}")
+mean_purchase = purchase_amounts.mean()
+min_purchase = purchase_amounts.min()
+max_purchase = purchase_amounts.max()
+
+assert len(purchase_amounts) == 10_000, "Should have 10,000 simulations"
+assert 9.9 < mean_purchase < 10.1, f"Mean should be ~10, got {mean_purchase:.2f}"
+assert 8 <= min_purchase < 9, f"Min should be ~8, got {min_purchase:.2f}"
+assert 11 < max_purchase <= 12, f"Max should be ~12, got {max_purchase:.2f}"
+print("✓ Purchase simulation correct!")
 ```
 :::
 
-### Exercise 1.2: Visualize the Uncertainty
+## Exercise 1.2 - Calculate Probabilities
 
-Create a histogram to visualize the distribution of daily customers:
+Using your simulated data, calculate key probabilities.
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Create a histogram of year_of_days with 30 bins
-plt.figure(figsize=(10, 5))
+# Using the many_days array from above (1000 days of customer data)
+# Calculate the probability of different scenarios
 
-plt.xlabel('Number of Customers')
-plt.ylabel('Frequency (Days)')
-plt.title('Distribution of Daily Customers Over One Year')
-plt.grid(True, alpha=0.3)
-plt.show()
+# Probability of getting more than 120 customers
+prob_high =
+
+# Probability of getting fewer than 80 customers
+prob_low =
+
+# Probability of being within one std dev of mean (80-120)
+prob_normal =
+
+# Don't modify below
+assert 0.10 < prob_high < 0.20, f"High probability should be ~0.16, got {prob_high:.3f}"
+assert 0.10 < prob_low < 0.20, f"Low probability should be ~0.16, got {prob_low:.3f}"
+assert 0.65 < prob_normal < 0.72, f"Normal range probability should be ~0.68, got {prob_normal:.3f}"
+print("✓ Probability calculations correct!")
+print(f"  P(>120): {prob_high:.1%}")
+print(f"  P(<80): {prob_low:.1%}")
+print(f"  P(80-120): {prob_normal:.1%}")
 ```
 
 :::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
 # SOLUTION
-plt.figure(figsize=(10, 5))
-plt.hist(year_of_days, bins=30, edgecolor='black', alpha=0.7)
-plt.axvline(year_of_days.mean(), color='red', linestyle='--', 
-            label=f'Mean: {year_of_days.mean():.1f}')
-plt.xlabel('Number of Customers')
-plt.ylabel('Frequency (Days)')
-plt.title('Distribution of Daily Customers Over One Year')
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.show()
+prob_high = (many_days > 120).mean()
+prob_low = (many_days < 80).mean()
+prob_normal = ((many_days >= 80) & (many_days <= 120)).mean()
+
+assert 0.10 < prob_high < 0.20, f"High probability should be ~0.16, got {prob_high:.3f}"
+assert 0.10 < prob_low < 0.20, f"Low probability should be ~0.16, got {prob_low:.3f}"
+assert 0.65 < prob_normal < 0.72, f"Normal range probability should be ~0.68, got {prob_normal:.3f}"
+print("✓ Probability calculations correct!")
+print(f"  P(>120): {prob_high:.1%}")
+print(f"  P(<80): {prob_low:.1%}")
+print(f"  P(80-120): {prob_normal:.1%}")
 ```
 :::
 
-## Section 2: Building a Business Simulation (15 min)
+# Section 2 - Building a Complete Business Simulation
 
-### Combining Multiple Uncertainties
+Now let's combine multiple uncertain variables to simulate an entire business.
 
-Real businesses have many uncertain variables. Let's build a complete coffee shop simulator:
+## The Bean Counter Store Model
 
 ```{python}
 #| eval: true
-def simulate_coffee_shop_day():
-    """Simulate one day of coffee shop operations"""
+def simulate_bean_counter_day(mean_customers=100, std_customers=20,
+                            min_purchase=8, max_purchase=12,
+                            fixed_costs=500, variable_cost_rate=0.35):
+    """Simulate one day of Bean Counter store operations"""
     # Uncertain variables
-    customers = np.random.normal(100, 20)  # Number of customers
-    avg_purchase = np.random.uniform(8, 12)  # Average purchase amount
-    
-    # Calculate revenue
+    customers = np.random.normal(mean_customers, std_customers)
+    avg_purchase = np.random.uniform(min_purchase, max_purchase)
+
+    # Business calculations
     revenue = customers * avg_purchase
-    
-    # Fixed and variable costs
-    fixed_costs = 500  # Rent, salaries, etc.
-    variable_cost_rate = 0.35  # 35% of revenue
     variable_costs = variable_cost_rate * revenue
-    
-    # Calculate profit
     profit = revenue - fixed_costs - variable_costs
-    
+
     return {
         'customers': customers,
         'avg_purchase': avg_purchase,
@@ -157,355 +181,579 @@ def simulate_coffee_shop_day():
         'profit': profit
     }
 
-# Test one day
-one_day_result = simulate_coffee_shop_day()
-print("One day simulation:")
-for key, value in one_day_result.items():
-    if key == 'customers':
-        print(f"  {key}: {value:.0f}")
-    else:
-        print(f"  {key}: €{value:.2f}")
+# Test one simulation
+one_day = simulate_bean_counter_day()
+print(f"One day at Bean Counter:")
+print(f"  Customers: {one_day['customers']:.0f}")
+print(f"  Avg purchase: €{one_day['avg_purchase']:.2f}")
+print(f"  Revenue: €{one_day['revenue']:.2f}")
+print(f"  Profit: €{one_day['profit']:.2f}")
 ```
 
-### Exercise 2.1: Simulate Many Days
+## Exercise 2.1 - Run Multiple Simulations
 
-Now simulate 1,000 days to understand the range of outcomes:
+Simulate 10,000 days of Bean Counter operations and analyze the results.
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Run simulation for 1000 days and collect results
-n_simulations = 1000
+# Run 10,000 simulations of Bean Counter store
+n_simulations = 10_000
 results = []
 
 for i in range(n_simulations):
-    # Simulate one day and append to results
-    
-    
-# Convert to DataFrame for analysis
-df_results = pd.DataFrame(results)
+    # Simulate one day and add to results
+
+
+
+# Convert to DataFrame
+df = pd.DataFrame(results)
 
 # Calculate key metrics
-print(f"1,000 Day Simulation Results:")
-print(f"  Average daily profit: €{}")
-print(f"  Probability of loss: {}%")
-print(f"  Best day profit: €{}")
-print(f"  Worst day profit: €{}")
+mean_profit =
+prob_loss =
+max_profit =
+
+# Don't modify below
+assert len(df) == 10_000, "Should have 10,000 simulations"
+assert 200 < mean_profit < 300, f"Mean profit should be ~250, got {mean_profit:.2f}"
+assert 0.02 < prob_loss < 0.08, f"Probability of loss should be ~5%, got {prob_loss:.1%}"
+assert max_profit > 500, f"Max profit should be >500, got {max_profit:.2f}"
+print("✓ Simulation correct!")
+print(f"  Mean daily profit: €{mean_profit:.2f}")
+print(f"  Probability of loss: {prob_loss:.1%}")
 ```
 
 :::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
 # SOLUTION
-n_simulations = 1000
+n_simulations = 10_000
 results = []
 
 for i in range(n_simulations):
-    day_result = simulate_coffee_shop_day()
+    day_result = simulate_bean_counter_day()
     results.append(day_result)
 
-df_results = pd.DataFrame(results)
+df = pd.DataFrame(results)
 
-print(f"1,000 Day Simulation Results:")
-print(f"  Average daily profit: €{df_results['profit'].mean():.2f}")
-print(f"  Probability of loss: {(df_results['profit'] < 0).mean()*100:.1f}%")
-print(f"  Best day profit: €{df_results['profit'].max():.2f}")
-print(f"  Worst day profit: €{df_results['profit'].min():.2f}")
+mean_profit = df['profit'].mean()
+prob_loss = (df['profit'] < 0).mean()
+max_profit = df['profit'].max()
+
+assert len(df) == 10_000, "Should have 10,000 simulations"
+assert 200 < mean_profit < 300, f"Mean profit should be ~250, got {mean_profit:.2f}"
+assert 0.02 < prob_loss < 0.08, f"Probability of loss should be ~5%, got {prob_loss:.1%}"
+assert max_profit > 500, f"Max profit should be >500, got {max_profit:.2f}"
+print("✓ Simulation correct!")
+print(f"  Mean daily profit: €{mean_profit:.2f}")
+print(f"  Probability of loss: {prob_loss:.1%}")
 ```
 :::
 
-### Exercise 2.2: Risk Analysis
+## Exercise 2.2 - Visualize the Distribution
 
-Calculate the Value at Risk (VaR) - what's the profit threshold for the worst 5% of days?
+Create a histogram of profit distribution with key markers.
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Calculate the 5th percentile of profit
-var_5 = 
+# Create a histogram of the profit distribution
+plt.figure(figsize=(10, 6))
 
-print(f"Value at Risk (5%): €{}")
-print(f"Interpretation: There's a 5% chance of daily profit being below €{}")
+# Create histogram (use 50 bins)
 
-# How many days out of 1000 had losses?
-loss_days = 
-print(f"\nDays with losses: {} out of {n_simulations}")
-```
 
-:::{.content-visible when-profile="solutions"}
-```{python}
-#| eval: true
-# SOLUTION
-var_5 = np.percentile(df_results['profit'], 5)
+# Add vertical lines for mean (green) and break-even (red)
 
-print(f"Value at Risk (5%): €{var_5:.2f}")
-print(f"Interpretation: There's a 5% chance of daily profit being below €{var_5:.2f}")
 
-loss_days = (df_results['profit'] < 0).sum()
-print(f"\nDays with losses: {loss_days} out of {n_simulations}")
-```
-:::
-
-### Visualizing Results
-
-```{python}
-#| eval: true
-# Create a comprehensive visualization
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# Profit distribution
-axes[0].hist(df_results['profit'], bins=50, edgecolor='black', alpha=0.7)
-axes[0].axvline(df_results['profit'].mean(), color='green', linestyle='--', 
-                label=f"Mean: €{df_results['profit'].mean():.0f}")
-axes[0].axvline(0, color='red', linestyle='-', linewidth=2, label='Break-even')
-axes[0].axvline(var_5, color='orange', linestyle='--', label=f'VaR 5%: €{var_5:.0f}')
-axes[0].set_xlabel('Daily Profit (€)')
-axes[0].set_ylabel('Frequency')
-axes[0].set_title('Distribution of Daily Profits (1,000 simulations)')
-axes[0].legend()
-axes[0].grid(True, alpha=0.3)
-
-# Revenue vs Customers scatter
-axes[1].scatter(df_results['customers'], df_results['revenue'], alpha=0.5)
-axes[1].set_xlabel('Number of Customers')
-axes[1].set_ylabel('Revenue (€)')
-axes[1].set_title('Revenue vs Customer Count')
-axes[1].grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.show()
-```
-
-## Section 3: Advanced Analysis - Monthly Performance (15 min)
-
-### From Daily to Monthly
-
-Management wants to know monthly performance, not daily. Let's aggregate:
-
-```{python}
-#| eval: true
-def simulate_month(days=30):
-    """Simulate one month of operations"""
-    daily_profits = []
-    
-    for day in range(days):
-        result = simulate_coffee_shop_day()
-        daily_profits.append(result['profit'])
-    
-    return {
-        'total_profit': sum(daily_profits),
-        'avg_daily_profit': np.mean(daily_profits),
-        'worst_day': min(daily_profits),
-        'best_day': max(daily_profits),
-        'profitable_days': sum(p > 0 for p in daily_profits)
-    }
-
-# Test one month
-month_result = simulate_month()
-print("One month simulation:")
-for key, value in month_result.items():
-    if key == 'profitable_days':
-        print(f"  {key}: {value} out of 30")
-    else:
-        print(f"  {key}: €{value:.2f}")
-```
-
-### Exercise 3.1: Annual Projection
-
-Simulate 12 months to project annual performance:
-
-```{python}
-#| eval: false
-# YOUR CODE BELOW
-# Simulate 12 months
-monthly_results = []
-
-for month in range(12):
-    # Simulate each month
-    
-    
-# Calculate annual metrics
-annual_profit = 
-profitable_months = 
-
-print(f"Annual Projection:")
-print(f"  Total profit: €{}")
-print(f"  Profitable months: {} out of 12")
-print(f"  Average monthly profit: €{}")
-```
-
-:::{.content-visible when-profile="solutions"}
-```{python}
-#| eval: true
-# SOLUTION
-monthly_results = []
-
-for month in range(12):
-    month_result = simulate_month()
-    monthly_results.append(month_result['total_profit'])
-
-annual_profit = sum(monthly_results)
-profitable_months = sum(p > 0 for p in monthly_results)
-
-print(f"Annual Projection:")
-print(f"  Total profit: €{annual_profit:.2f}")
-print(f"  Profitable months: {profitable_months} out of 12")
-print(f"  Average monthly profit: €{np.mean(monthly_results):.2f}")
-```
-:::
-
-### Exercise 3.2: Scenario Analysis
-
-What if we could increase average purchase by €1 through upselling?
-
-```{python}
-#| eval: false
-# YOUR CODE BELOW
-def simulate_improved_shop_day():
-    """Simulate with €1 higher average purchase"""
-    customers = np.random.normal(100, 20)
-    # Increase the average purchase range by €1
-    avg_purchase = 
-    
-    revenue = customers * avg_purchase
-    fixed_costs = 500
-    variable_costs = 0.35 * revenue
-    profit = revenue - fixed_costs - variable_costs
-    
-    return profit
-
-# Run 1000 simulations with improvement
-improved_profits = []
-for i in range(1000):
-    
-    
-# Compare to original
-print(f"Original average profit: €{df_results['profit'].mean():.2f}")
-print(f"Improved average profit: €{}")
-print(f"Profit increase: €{}")
-```
-
-:::{.content-visible when-profile="solutions"}
-```{python}
-#| eval: true
-# SOLUTION
-def simulate_improved_shop_day():
-    """Simulate with €1 higher average purchase"""
-    customers = np.random.normal(100, 20)
-    avg_purchase = np.random.uniform(9, 13)  # Increased by €1
-    
-    revenue = customers * avg_purchase
-    fixed_costs = 500
-    variable_costs = 0.35 * revenue
-    profit = revenue - fixed_costs - variable_costs
-    
-    return profit
-
-improved_profits = []
-for i in range(1000):
-    improved_profits.append(simulate_improved_shop_day())
-
-improved_profits = np.array(improved_profits)
-
-print(f"Original average profit: €{df_results['profit'].mean():.2f}")
-print(f"Improved average profit: €{improved_profits.mean():.2f}")
-print(f"Profit increase: €{improved_profits.mean() - df_results['profit'].mean():.2f}")
-```
-:::
-
-### Challenge Exercise: Break-even Analysis
-
-At what customer level does the shop break even on average?
-
-```{python}
-#| eval: false
-# YOUR CODE BELOW
-# Test different customer levels
-customer_levels = range(50, 150, 10)
-avg_profits = []
-
-for level in customer_levels:
-    # Simulate with this customer level
-    day_profits = []
-    for _ in range(100):
-        customers = np.random.normal(level, 20)
-        avg_purchase = np.random.uniform(8, 12)
-        revenue = customers * avg_purchase
-        profit = revenue - 500 - 0.35 * revenue
-        day_profits.append(profit)
-    
-    avg_profits.append(np.mean(day_profits))
-
-# Find break-even point
-# YOUR CODE TO FIND AND PRINT THE BREAK-EVEN CUSTOMER LEVEL
-
-# Visualize
-plt.figure(figsize=(10, 5))
-# YOUR PLOTTING CODE
-```
-
-:::{.content-visible when-profile="solutions"}
-```{python}
-#| eval: true
-# SOLUTION
-customer_levels = range(50, 150, 10)
-avg_profits = []
-
-for level in customer_levels:
-    day_profits = []
-    for _ in range(100):
-        customers = np.random.normal(level, 20)
-        avg_purchase = np.random.uniform(8, 12)
-        revenue = customers * avg_purchase
-        profit = revenue - 500 - 0.35 * revenue
-        day_profits.append(profit)
-    
-    avg_profits.append(np.mean(day_profits))
-
-# Find break-even point
-for i, profit in enumerate(avg_profits):
-    if profit > 0:
-        print(f"Break-even at approximately {customer_levels[i]} customers per day")
-        break
-
-# Visualize
-plt.figure(figsize=(10, 5))
-plt.plot(customer_levels, avg_profits, marker='o')
-plt.axhline(y=0, color='red', linestyle='--', label='Break-even')
-plt.xlabel('Average Customers per Day')
-plt.ylabel('Average Profit (€)')
-plt.title('Profit vs Customer Volume')
-plt.grid(True, alpha=0.3)
+# Add labels and title
+plt.xlabel('Daily Profit (€)')
+plt.ylabel('Frequency')
+plt.title('Coffee Shop Daily Profit Distribution (10,000 simulations)')
 plt.legend()
+plt.grid(True, alpha=0.3)
 plt.show()
+
+# Calculate what percentage of profits are between €100 and €400
+prob_target_range =
+
+# Don't modify below
+assert 0.85 < prob_target_range < 0.95, f"Should be ~90% in range, got {prob_target_range:.1%}"
+print(f"✓ Visualization complete! {prob_target_range:.1%} of days have profit €100-400")
+```
+
+:::{.content-visible when-profile="solutions"}
+```{python}
+#| eval: true
+# SOLUTION
+plt.figure(figsize=(10, 6))
+
+plt.hist(df['profit'], bins=50, edgecolor='black', alpha=0.7)
+plt.axvline(df['profit'].mean(), color='green', linestyle='--', linewidth=2,
+            label=f"Mean: €{df['profit'].mean():.0f}")
+plt.axvline(0, color='red', linestyle='-', linewidth=2, label='Break-even')
+
+plt.xlabel('Daily Profit (€)')
+plt.ylabel('Frequency')
+plt.title('Bean Counter Daily Profit Distribution (10,000 simulations)')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+
+prob_target_range = ((df['profit'] >= 100) & (df['profit'] <= 400)).mean()
+
+assert 0.85 < prob_target_range < 0.95, f"Should be ~90% in range, got {prob_target_range:.1%}"
+print(f"✓ Visualization complete! {prob_target_range:.1%} of days have profit €100-400")
 ```
 :::
 
-## Summary & Reflection
+# Section 3 - Risk Metrics and Decision Making
 
-Congratulations! You've built a complete Monte Carlo simulation for business decision-making.
+Learn to calculate key risk metrics that investors care about.
 
-**Key Skills You've Developed:**
-1. ✅ Modeling uncertainty with probability distributions
-2. ✅ Combining multiple uncertain variables
-3. ✅ Running thousands of simulations
-4. ✅ Calculating risk metrics (VaR, probability of loss)
-5. ✅ Scenario analysis and sensitivity testing
+## Value at Risk (VaR)
 
-:::{.callout-important}
-## Remember
-Monte Carlo simulation doesn't predict the future - it shows you all possible futures and their probabilities. This helps you make informed decisions under uncertainty.
+```{python}
+#| eval: true
+# Value at Risk: "What's the worst-case scenario in X% of cases?"
+profits_array = df['profit'].values
+
+# 5% VaR: The profit level that we'll exceed 95% of the time
+var_5 = np.percentile(profits_array, 5)
+print(f"Value at Risk (5%): €{var_5:.2f}")
+print(f"Interpretation: There's a 5% chance of daily profit below €{var_5:.2f}")
+
+# 1% VaR: More extreme scenario
+var_1 = np.percentile(profits_array, 1)
+print(f"\nValue at Risk (1%): €{var_1:.2f}")
+print(f"Interpretation: There's a 1% chance of daily profit below €{var_1:.2f}")
+```
+
+## Exercise 3.1 - Calculate Risk Metrics
+
+Calculate comprehensive risk metrics for the coffee shop.
+
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+# Calculate various risk metrics
+
+# Standard deviation (volatility)
+volatility =
+
+# Probability of making at least €200 profit
+prob_good_day =
+
+# Expected Shortfall: average profit in worst 10% of days
+worst_10_pct_threshold = np.percentile(profits_array, 10)
+worst_days = profits_array[profits_array <= worst_10_pct_threshold]
+expected_shortfall =
+
+# Sharpe Ratio: (mean - risk_free) / std
+# Assume risk-free rate is €50 (alternative investment)
+risk_free = 50
+sharpe_ratio =
+
+# Don't modify below
+assert 110 < volatility < 130, f"Volatility should be ~120, got {volatility:.2f}"
+assert 0.55 < prob_good_day < 0.75, f"Probability should be ~65%, got {prob_good_day:.1%}"
+assert 50 < expected_shortfall < 100, f"ES should be ~75, got {expected_shortfall:.2f}"
+assert 1.5 < sharpe_ratio < 2.5, f"Sharpe ratio should be ~2.0, got {sharpe_ratio:.2f}"
+print("✓ Risk metrics correct!")
+print(f"  Volatility: €{volatility:.2f}")
+print(f"  P(Profit ≥ €200): {prob_good_day:.1%}")
+print(f"  Expected Shortfall (10%): €{expected_shortfall:.2f}")
+print(f"  Sharpe Ratio: {sharpe_ratio:.2f}")
+```
+
+:::{.content-visible when-profile="solutions"}
+```{python}
+#| eval: true
+# SOLUTION
+volatility = profits_array.std()
+prob_good_day = (profits_array >= 200).mean()
+
+worst_10_pct_threshold = np.percentile(profits_array, 10)
+worst_days = profits_array[profits_array <= worst_10_pct_threshold]
+expected_shortfall = worst_days.mean()
+
+risk_free = 50
+sharpe_ratio = (profits_array.mean() - risk_free) / volatility
+
+assert 110 < volatility < 130, f"Volatility should be ~120, got {volatility:.2f}"
+assert 0.55 < prob_good_day < 0.75, f"Probability should be ~65%, got {prob_good_day:.1%}"
+assert 50 < expected_shortfall < 100, f"ES should be ~75, got {expected_shortfall:.2f}"
+assert 1.5 < sharpe_ratio < 2.5, f"Sharpe ratio should be ~2.0, got {sharpe_ratio:.2f}"
+print("✓ Risk metrics correct!")
+print(f"  Volatility: €{volatility:.2f}")
+print(f"  P(Profit ≥ €200): {prob_good_day:.1%}")
+print(f"  Expected Shortfall (10%): €{expected_shortfall:.2f}")
+print(f"  Sharpe Ratio: {sharpe_ratio:.2f}")
+```
 :::
 
-**Reflection Questions:**
-1. Would you recommend opening the coffee shop based on your analysis?
-2. What additional uncertainties might we want to model?
-3. How would seasonal variation affect our simulation?
+# Section 4 - Portfolio Analysis (Competition Training!)
+
+Now we'll analyze portfolios of coffee shops - directly applicable to the TechVenture competition!
+
+## Simulating Multiple Locations
+
+```{python}
+#| eval: true
+# Bean Counter is considering 4 different expansion locations with different characteristics
+def simulate_location(location_params, n_days=10_000):
+    """Simulate n_days for a specific location"""
+    profits = []
+    for _ in range(n_days):
+        customers = np.random.normal(location_params['mean_customers'],
+                                    location_params['std_customers'])
+        avg_purchase = np.random.uniform(location_params['min_purchase'],
+                                        location_params['max_purchase'])
+        revenue = customers * avg_purchase
+        variable_costs = location_params['variable_rate'] * revenue
+        profit = revenue - location_params['fixed_costs'] - variable_costs
+        profits.append(profit)
+    return np.array(profits)
+
+# Define 4 different Bean Counter expansion locations
+locations = {
+    'Downtown': {
+        'mean_customers': 150, 'std_customers': 30,
+        'min_purchase': 10, 'max_purchase': 15,
+        'fixed_costs': 800, 'variable_rate': 0.35
+    },
+    'Campus': {
+        'mean_customers': 200, 'std_customers': 60,
+        'min_purchase': 6, 'max_purchase': 10,
+        'fixed_costs': 600, 'variable_rate': 0.40
+    },
+    'Suburb': {
+        'mean_customers': 80, 'std_customers': 15,
+        'min_purchase': 12, 'max_purchase': 18,
+        'fixed_costs': 400, 'variable_rate': 0.30
+    },
+    'Airport': {
+        'mean_customers': 120, 'std_customers': 40,
+        'min_purchase': 15, 'max_purchase': 25,
+        'fixed_costs': 1200, 'variable_rate': 0.45
+    }
+}
+
+# Simulate all locations
+print("Simulating 4 locations...")
+location_profits = {}
+for name, params in locations.items():
+    location_profits[name] = simulate_location(params)
+    print(f"  {name}: Mean profit €{location_profits[name].mean():.2f}")
+```
+
+## Exercise 4.1 - Analyze All Portfolio Combinations
+
+Bean Counter can afford to open exactly 2 new locations. Which pair should they choose for maximum profitability?
+
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+# Analyze all possible pairs of locations
+
+# Get all combinations of 2 locations
+location_names = list(locations.keys())
+pairs = list(combinations(location_names, 2))
+
+# Analyze each portfolio
+portfolio_results = []
+
+for pair in pairs:
+    # Get profits for each location in the pair
+    profits_1 = location_profits[pair[0]]
+    profits_2 = location_profits[pair[1]]
+
+    # Portfolio assumes equal investment (50/50 split)
+    portfolio_profit =
+
+    # Calculate metrics
+    result = {
+        'pair': f"{pair[0]} + {pair[1]}",
+        'mean': ,
+        'std': ,
+        'prob_loss': ,
+        'var_5':
+    }
+    portfolio_results.append(result)
+
+# Convert to DataFrame and sort by mean profit
+df_portfolios = pd.DataFrame(portfolio_results)
+df_portfolios = df_portfolios.sort_values('mean', ascending=False)
+
+# Find best portfolio by mean return
+best_mean_portfolio =
+best_mean_value =
+
+# Don't modify below
+assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
+assert 'Downtown + Campus' in best_mean_portfolio or 'Campus + Downtown' in best_mean_portfolio, \
+    f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
+assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
+print("✓ Portfolio analysis correct!")
+print("\nAll Portfolio Combinations:")
+print(df_portfolios.to_string(index=False))
+```
+
+:::{.content-visible when-profile="solutions"}
+```{python}
+#| eval: true
+# SOLUTION
+location_names = list(locations.keys())
+pairs = list(combinations(location_names, 2))
+
+portfolio_results = []
+
+for pair in pairs:
+    profits_1 = location_profits[pair[0]]
+    profits_2 = location_profits[pair[1]]
+
+    portfolio_profit = 0.5 * profits_1 + 0.5 * profits_2
+
+    result = {
+        'pair': f"{pair[0]} + {pair[1]}",
+        'mean': portfolio_profit.mean(),
+        'std': portfolio_profit.std(),
+        'prob_loss': (portfolio_profit < 0).mean(),
+        'var_5': np.percentile(portfolio_profit, 5)
+    }
+    portfolio_results.append(result)
+
+df_portfolios = pd.DataFrame(portfolio_results)
+df_portfolios = df_portfolios.sort_values('mean', ascending=False)
+
+best_mean_portfolio = df_portfolios.iloc[0]['pair']
+best_mean_value = df_portfolios.iloc[0]['mean']
+
+assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
+assert 'Downtown + Campus' in best_mean_portfolio or 'Campus + Downtown' in best_mean_portfolio, \
+    f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
+assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
+print("✓ Portfolio analysis correct!")
+print("\nAll Portfolio Combinations:")
+print(df_portfolios.to_string(index=False))
+```
+:::
+
+## Exercise 4.2 - Risk-Adjusted Selection
+
+The best mean return isn't always the best choice. Find the best risk-adjusted portfolio.
+
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+# Calculate Sharpe ratio for each portfolio (assuming risk-free = €100)
+risk_free_rate = 100
+
+sharpe_ratios = []
+for _, row in df_portfolios.iterrows():
+    sharpe =
+    sharpe_ratios.append(sharpe)
+
+df_portfolios['sharpe'] = sharpe_ratios
+
+# Find best Sharpe ratio portfolio
+df_portfolios_sharpe = df_portfolios.sort_values('sharpe', ascending=False)
+best_sharpe_portfolio =
+best_sharpe_value =
+
+# Also find the safest portfolio (lowest probability of loss)
+safest_portfolio =
+safest_prob_loss =
+
+# Don't modify below
+assert best_sharpe_value > 2.0, f"Best Sharpe should be >2.0, got {best_sharpe_value:.2f}"
+assert safest_prob_loss < 0.01, f"Safest should have <1% loss probability, got {safest_prob_loss:.3f}"
+print("✓ Risk-adjusted analysis correct!")
+print(f"\nBest Sharpe Ratio: {best_sharpe_portfolio} (Sharpe: {best_sharpe_value:.2f})")
+print(f"Safest Portfolio: {safest_portfolio} (P(Loss): {safest_prob_loss:.1%})")
+```
+
+:::{.content-visible when-profile="solutions"}
+```{python}
+#| eval: true
+# SOLUTION
+risk_free_rate = 100
+
+sharpe_ratios = []
+for _, row in df_portfolios.iterrows():
+    sharpe = (row['mean'] - risk_free_rate) / row['std']
+    sharpe_ratios.append(sharpe)
+
+df_portfolios['sharpe'] = sharpe_ratios
+
+df_portfolios_sharpe = df_portfolios.sort_values('sharpe', ascending=False)
+best_sharpe_portfolio = df_portfolios_sharpe.iloc[0]['pair']
+best_sharpe_value = df_portfolios_sharpe.iloc[0]['sharpe']
+
+df_portfolios_safe = df_portfolios.sort_values('prob_loss')
+safest_portfolio = df_portfolios_safe.iloc[0]['pair']
+safest_prob_loss = df_portfolios_safe.iloc[0]['prob_loss']
+
+assert best_sharpe_value > 2.0, f"Best Sharpe should be >2.0, got {best_sharpe_value:.2f}"
+assert safest_prob_loss < 0.01, f"Safest should have <1% loss probability, got {safest_prob_loss:.3f}"
+print("✓ Risk-adjusted analysis correct!")
+print(f"\nBest Sharpe Ratio: {best_sharpe_portfolio} (Sharpe: {best_sharpe_value:.2f})")
+print(f"Safest Portfolio: {safest_portfolio} (P(Loss): {safest_prob_loss:.1%})")
+```
+:::
+
+# Section 5 - Making Strategic Recommendations
+
+Now let's visualize and make a final recommendation - just like in the competition!
+
+## Visualizing Risk-Return Tradeoffs
+
+```{python}
+#| eval: true
+# Create risk-return scatter plot for Bean Counter expansion
+plt.figure(figsize=(10, 6))
+
+for _, row in df_portfolios.iterrows():
+    plt.scatter(row['std'], row['mean'], s=100, alpha=0.7)
+    plt.annotate(row['pair'], (row['std'], row['mean']), 
+                fontsize=9, xytext=(5, 5), textcoords='offset points')
+
+plt.xlabel('Risk (Standard Deviation)')
+plt.ylabel('Expected Daily Profit (€)')
+plt.title('Risk-Return Profile of Bean Counter Portfolio Options')
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+## Exercise 5.1 - Final CEO Recommendation
+
+Based on your analysis, make a strategic expansion recommendation for Bean Counter.
+
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+# Create a recommendation dictionary with your analysis
+
+# Which portfolio maximizes expected profit?
+max_profit_portfolio =
+
+# Which portfolio minimizes risk (lowest std)?
+min_risk_portfolio =
+
+# Which portfolio has the best risk-adjusted return (Sharpe)?
+best_balanced_portfolio =
+
+# Your final recommendation (choose one)
+final_recommendation = # Choose the portfolio you would recommend
+
+# Justification score (0-100) based on multiple criteria
+# Higher score = better choice
+def score_portfolio(pair_name):
+    row = df_portfolios[df_portfolios['pair'] == pair_name].iloc[0]
+    score = 0
+    score += min(40, row['mean'] / 10)  # Up to 40 points for profit
+    score += min(30, (1 - row['prob_loss']) * 30)  # Up to 30 points for low loss probability
+    score += min(30, row['sharpe'] * 10)  # Up to 30 points for Sharpe ratio
+    return score
+
+recommendation_score = score_portfolio(final_recommendation)
+
+# Don't modify below
+assert final_recommendation in df_portfolios['pair'].values, "Must choose an actual portfolio"
+assert recommendation_score > 60, f"Your choice scores {recommendation_score:.1f}/100 - try a different portfolio"
+print("✓ Recommendation accepted!")
+print(f"\nYour Recommendation: {final_recommendation}")
+print(f"Score: {recommendation_score:.1f}/100")
+print("\nJustification: This portfolio balances profit potential with acceptable risk.")
+```
+
+:::{.content-visible when-profile="solutions"}
+```{python}
+#| eval: true
+# SOLUTION
+max_profit_portfolio = df_portfolios.iloc[0]['pair']
+min_risk_portfolio = df_portfolios.sort_values('std').iloc[0]['pair']
+best_balanced_portfolio = df_portfolios_sharpe.iloc[0]['pair']
+
+# Choose the balanced option
+final_recommendation = best_balanced_portfolio
+
+def score_portfolio(pair_name):
+    row = df_portfolios[df_portfolios['pair'] == pair_name].iloc[0]
+    score = 0
+    score += min(40, row['mean'] / 10)
+    score += min(30, (1 - row['prob_loss']) * 30)
+    score += min(30, row['sharpe'] * 10)
+    return score
+
+recommendation_score = score_portfolio(final_recommendation)
+
+assert final_recommendation in df_portfolios['pair'].values, "Must choose an actual portfolio"
+assert recommendation_score > 60, f"Your choice scores {recommendation_score:.1f}/100 - try a different portfolio"
+print("✓ Recommendation accepted!")
+print(f"\nYour Recommendation: {final_recommendation}")
+print(f"Score: {recommendation_score:.1f}/100")
+print("\nJustification: This portfolio balances profit potential with acceptable risk.")
+```
+:::
+
+## Creating Your One-Slide Summary
+
+```{python}
+#| eval: true
+# Generate summary statistics for the recommended portfolio
+recommended = df_portfolios[df_portfolios['pair'] == best_balanced_portfolio].iloc[0]
+
+print("=" * 60)
+print(" ONE-SLIDE RECOMMENDATION: BEAN COUNTER EXPANSION STRATEGY")
+print("=" * 60)
+print(f"\n➤ RECOMMENDATION: Open {recommended['pair']}")
+print(f"\n➤ KEY METRICS:")
+print(f"   • Expected Daily Profit: €{recommended['mean']:.2f}")
+print(f"   • Risk (Std Dev): €{recommended['std']:.2f}")
+print(f"   • Probability of Loss: {recommended['prob_loss']:.1%}")
+print(f"   • Value at Risk (5%): €{recommended['var_5']:.2f}")
+print(f"   • Sharpe Ratio: {recommended['sharpe']:.2f}")
+print(f"\n➤ JUSTIFICATION:")
+print(f"   • Strong risk-adjusted returns (Sharpe > 2.0)")
+print(f"   • Minimal downside risk (<1% chance of loss)")
+print(f"   • Diversified customer base reduces volatility")
+print("=" * 60)
+```
+
+# Conclusion
+
+**Outstanding work, CEO!** You've successfully applied Monte Carlo simulation to Bean Counter's expansion strategy and mastered the key skills needed for the TechVenture competition:
+
+✅ **Simulating uncertain returns** using probability distributions
+✅ **Running thousands of scenarios** with Monte Carlo
+✅ **Calculating risk metrics** (VaR, Expected Shortfall, Sharpe Ratio)
+✅ **Comparing portfolio combinations** systematically
+✅ **Making data-driven recommendations** with clear justification
+
+## Your CEO Toolkit for the Competition
+
+When you tackle the TechVenture challenge, apply what you've learned at Bean Counter:
+
+1. **Start Simple:** Get one startup simulation working first
+2. **Verify Distributions:** Plot histograms to check your simulations
+3. **Calculate All Metrics:** Don't just look at mean returns
+4. **Compare Systematically:** Analyze all 6 pairs
+5. **Justify Clearly:** Explain WHY your choice is best
+
+## Key Differences for Competition
+
+The competition uses:
+- **Investment returns** instead of daily profits
+- **Different distributions** (some normal, one uniform)
+- **Larger scale** (€1M investments vs daily operations)
+
+But the approach is identical! Apply what you've learned here.
 
 :::{.callout-tip}
-## Next Up: Competition
-Use these techniques to tackle the TechVenture investment challenge. Remember:
-- Each startup has different risk-return characteristics
-- Portfolio combinations can reduce or amplify risk
-- Look beyond average returns to the full distribution
+## Final CEO Wisdom
+Just as you've optimized Bean Counter's expansion, use scoring functions in the competition to make objective decisions when multiple factors matter. Your journey from Barista Trainee to CEO has prepared you for this!
 :::
+
+Good luck in the TechVenture Investment Challenge, CEO! 🚀☕

@@ -17,6 +17,8 @@ format:
     code-copy: true
     code-link: true
     preview-links: auto
+    fig-width: 12
+    fig-height: 5
 
 format-links:
   - html
