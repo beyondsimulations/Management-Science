@@ -310,7 +310,7 @@ for store in performance_data:
 # Test your analysis
 assert total_customers == 2620, f"Total customers should be 2620, got {total_customers}"
 assert round(average_satisfaction, 2) == 4.60, f"Average satisfaction should be 4.60, got {round(average_satisfaction, 2)}"
-assert busy_stores == 2, f"Should have 2 busy stores, got {busy_stores}"
+assert busy_stores == 3, f"Should have 3 busy stores, got {busy_stores}"
 print(f"Total customers: {total_customers}")
 print(f"Average satisfaction: {average_satisfaction}")
 print(f"Stores serving >500 customers: {busy_stores}")

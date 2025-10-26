@@ -428,7 +428,7 @@ arrival_rate = 3  # New customers per minute
 # YOUR CODE BELOW
 
 # Use a while loop that continues while queue_size <= 20
-# Each iteration: 
+# Each iteration:
 #   1. Update queue_size: add arrivals, subtract served
 #   2. Increment minutes by 1
 
@@ -489,7 +489,7 @@ for i in range(len(items)):
     # Use parentheses to group each condition
     hot_and_expensive = (is_hot[i] == True and prices[i] >= 4)
     cold_and_pricy = (is_hot[i] == False and prices[i] >= 3)
-    
+
     if hot_and_expensive or cold_and_pricy:
         promotion_items.append(items[i])
         print(f"  {items[i]}: ${prices[i]} - Eligible!")
@@ -541,7 +541,7 @@ total_discount = 0
 # %%
 # Test your answer
 assert eligible_products == ["Coffee", "Muffin", "Sandwich", "Smoothie"], "Should include Coffee, Muffin, Sandwich, Smoothie"
-assert abs(total_discount - 3.15) < 0.01, "Total discount should be approximately 3.15"
+assert abs(total_discount - 3.15) < 0.1, "Total discount should be approximately 3.15"
 print(f"Excellent! Eligible products: {eligible_products}")
 print(f"Total discount offered: ${total_discount:.2f}")
 

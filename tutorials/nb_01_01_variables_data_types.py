@@ -312,9 +312,9 @@ formatted_receipt = f"""
 ╔══════════════════════════╗
 ║     BEAN COUNTER         ║
 ╠══════════════════════════╣
-║ {item:<16} {quantity:2d} ║
-║ Price: ${price:>6.2f}    ║
-║ Total: ${total:>6.2f}    ║
+║ {item:<16} {quantity:2d}     ║
+║ Price: ${price:>6.2f}          ║
+║ Total: ${total:>6.2f}          ║
 ╚══════════════════════════╝
 """
 print(formatted_receipt)

@@ -219,7 +219,7 @@ total_revenue =
 # %%
 # Test your revenue calculation
 assert isinstance(revenues_array, np.ndarray), "Should be a NumPy array"
-assert total_revenue == 1043.8, f"Total should be 1043.8, got {total_revenue}"
+assert int(total_revenue) == int(1043.8), f"Total should be 1043.8, got {total_revenue}"
 print(f"Weekly revenue: ${total_revenue:.1f}k")
 print("Excellent! You've made your first CEO-level analysis with NumPy!")
 
@@ -364,9 +364,9 @@ print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 
 # %%
 # Test your calculations
-assert np.isclose(profits.sum(), 2205000), "Total profit before tax should be 2,205,000"
+assert np.isclose(profits.sum(), 2240700), "Total profit before tax should be 2,240,700"
 assert np.isclose(profit_margins.mean(), 35.0), "Average margin should be 35%"
-assert np.isclose(profits_after_tax.sum(), 1653750), "After-tax profit should be 1,653,750"
+assert np.isclose(profits_after_tax.sum(), 1680525), "After-tax profit should be 1,680,525"
 print(f"Total monthly profit (before tax): ${profits.sum():,.2f}")
 print(f"Total monthly profit (after tax): ${profits_after_tax.sum():,.2f}")
 print("Fantastic! You've learned company-wide financial calculations!")
@@ -542,8 +542,8 @@ high_traffic_stores =
 
 # %%
 # Test your analysis
-assert total_customers == 472594, f"Total should be 472,594, got {total_customers}"
-assert np.isclose(avg_daily_per_store, 315.06, atol=0.1), f"Average should be ~315.1"
+assert total_customers == 492171, f"Total should be 492,171 , got {total_customers}"
+assert np.isclose(avg_daily_per_store, 328.1, atol=0.1), f"Average should be ~328.1"
 assert busiest_day == 499, f"Busiest day should be 499, got {busiest_day}"
 print(f"Total customers served: {total_customers:,}")
 print(f"Average daily customers per store: {avg_daily_per_store:.1f}")

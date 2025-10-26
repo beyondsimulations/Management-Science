@@ -273,6 +273,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">04 Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_04_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-01 Concepts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_01_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-02 Notebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../competitions/competition_04_techventure.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-03 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
  <span class="menu-text">***</span>
   </li>
@@ -284,13 +313,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignments/assignment_00.html" class="sidebar-item-text sidebar-link">
@@ -418,7 +447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="section-1---dataframes-your-ceos-digital-spreadsheet" class="level1">
 <h1>Section 1 - DataFrames: Your CEO’s Digital Spreadsheet</h1>
 <p>A DataFrame is like a better Excel spreadsheet in Python. Let’s create one for Bean Counter’s store performance.</p>
-<div id="7f338ea9" class="cell" data-execution_count="1">
+<div id="740b92d9" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -467,22 +496,23 @@ DataFrame shape: (5, 5) (rows, columns)</code></pre>
 <section id="exercise-1.1---create-product-catalog-dataframe" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.1---create-product-catalog-dataframe">Exercise 1.1 - Create Product Catalog DataFrame</h2>
 <p>Build a DataFrame for Bean Counter’s top products.</p>
-<div id="1fe5ae00" class="cell" data-execution_count="2">
+<div id="efb75331" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dictionary with product data</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>product_data <span class="op">=</span> {</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'product_name'</span>: [<span class="st">'Espresso'</span>, <span class="st">'Latte'</span>, <span class="st">'Cappuccino'</span>, <span class="st">'Americano'</span>, <span class="st">'Mocha'</span>],</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'price'</span>: [<span class="fl">2.50</span>, <span class="fl">4.50</span>, <span class="fl">4.00</span>, <span class="fl">3.00</span>, <span class="fl">5.00</span>],</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'cost'</span>: [<span class="fl">0.75</span>, <span class="fl">1.50</span>, <span class="fl">1.25</span>, <span class="fl">0.90</span>, <span class="fl">1.80</span>],</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units_sold_daily'</span>: [<span class="dv">450</span>, <span class="dv">320</span>, <span class="dv">280</span>, <span class="dv">210</span>, <span class="dv">190</span>]</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>products_df <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dictionary with product data</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>product_data <span class="op">=</span> {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'product_name'</span>: [<span class="st">'Espresso'</span>, <span class="st">'Latte'</span>, <span class="st">'Cappuccino'</span>, <span class="st">'Americano'</span>, <span class="st">'Mocha'</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'price'</span>: [<span class="fl">2.50</span>, <span class="fl">4.50</span>, <span class="fl">4.00</span>, <span class="fl">3.00</span>, <span class="fl">5.00</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'cost'</span>: [<span class="fl">0.75</span>, <span class="fl">1.50</span>, <span class="fl">1.25</span>, <span class="fl">0.90</span>, <span class="fl">1.80</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units_sold_daily'</span>: [<span class="dv">450</span>, <span class="dv">320</span>, <span class="dv">280</span>, <span class="dv">210</span>, <span class="dv">190</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>products_df <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e39b776e" class="cell" data-execution_count="4">
+<div id="67a4d2ed" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your DataFrame</span></span>
@@ -500,7 +530,7 @@ DataFrame shape: (5, 5) (rows, columns)</code></pre>
 <section id="section-2---exploring-your-business-data" class="level1">
 <h1>Section 2 - Exploring Your Business Data</h1>
 <p>As CEO, you need to quickly understand your data. Pandas provides powerful exploration tools.</p>
-<div id="7d55817a" class="cell" data-execution_count="5">
+<div id="8e6e1fa2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -564,7 +594,7 @@ std                    NaN      1.40        1899.23      85.48        6.08</code
 <section id="exercise-2.1---explore-store-performance" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2.1---explore-store-performance">Exercise 2.1 - Explore Store Performance</h2>
 <p>Use pandas exploration methods to understand store performance data.</p>
-<div id="d286abc7" class="cell" data-execution_count="6">
+<div id="349178b1" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -587,7 +617,7 @@ std                    NaN      1.40        1899.23      85.48        6.08</code
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Get summary statistics for numerical columns and store them</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="73fed46d" class="cell" data-execution_count="8">
+<div id="40f1de33" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your exploration</span></span>
@@ -606,7 +636,7 @@ std                    NaN      1.40        1899.23      85.48        6.08</code
 <section id="section-3---selecting-and-filtering-ceo-reports" class="level1">
 <h1>Section 3 - Selecting and Filtering CEO Reports</h1>
 <p>As CEO, you need to slice and dice data to answer specific questions.</p>
-<div id="f474d64f" class="cell" data-execution_count="9">
+<div id="98d4861b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample store data</span></span>
@@ -674,7 +704,7 @@ High performers (revenue &gt; 400k):
 <section id="exercise-3.1---filter-strategic-locations" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3.1---filter-strategic-locations">Exercise 3.1 - Filter Strategic Locations</h2>
 <p>Identify stores meeting specific CEO criteria.</p>
-<div id="409d3421" class="cell" data-execution_count="10">
+<div id="4ab7d523" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>stores_df <span class="op">=</span> pd.DataFrame({</span>
@@ -694,11 +724,11 @@ High performers (revenue &gt; 400k):
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Filter stores with positive growth</span></span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>growing_stores <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="40033501" class="cell" data-execution_count="12">
+<div id="5c9822e0" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your filtering</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(high_revenue_stores) <span class="op">==</span> <span class="dv">5</span>, <span class="st">"Should find 5 high revenue stores"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(high_revenue_stores) <span class="op">==</span> <span class="dv">4</span>, <span class="st">"Should find 4 high revenue stores"</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(high_revenue_stores[<span class="st">'monthly_revenue'</span>] <span class="op">&gt;</span> <span class="dv">100000</span>), <span class="st">"All selected stores should have revenue &gt; 100000"</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(growing_stores) <span class="op">==</span> <span class="dv">6</span>, <span class="st">"Should find 6 stores with positive growth"</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(growing_stores[<span class="st">'growth_rate'</span>] <span class="op">&gt;</span> <span class="dv">0</span>), <span class="st">"All selected stores should have positive growth"</span></span>
@@ -713,7 +743,7 @@ High performers (revenue &gt; 400k):
 <section id="section-4---creating-strategic-insights" class="level1">
 <h1>Section 4 - Creating Strategic Insights</h1>
 <p>As CEO, you need to create new metrics and sort data for decision-making.</p>
-<div id="e2d6ac3d" class="cell" data-execution_count="13">
+<div id="9316e0e2" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Product performance data</span></span>
@@ -747,7 +777,7 @@ High performers (revenue &gt; 400k):
 <section id="exercise-4.1---ceo-performance-dashboard" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4.1---ceo-performance-dashboard">Exercise 4.1 - CEO Performance Dashboard</h2>
 <p>Create a comprehensive performance analysis with calculated metrics.</p>
-<div id="26a2994b" class="cell" data-execution_count="14">
+<div id="6509ea51" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Store operational data</span></span>
@@ -775,7 +805,7 @@ High performers (revenue &gt; 400k):
 <span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Sort by profit (highest to lowest)</span></span>
 <span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>top_performers <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0649cb85" class="cell" data-execution_count="16">
+<div id="3e4559b1" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your dashboard</span></span>
@@ -793,7 +823,7 @@ High performers (revenue &gt; 400k):
 <section id="section-5---reading-real-business-data" class="level1">
 <h1>Section 5 - Reading Real Business Data</h1>
 <p>As CEO, you’ll work with data from various sources. Let’s load real files!</p>
-<div id="ddc2490d" class="cell" data-execution_count="17">
+<div id="7ac4948f" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -854,7 +884,7 @@ With Q1 Totals:
 <section id="exercise-5.1---load-and-analyze-sales-data" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-5.1---load-and-analyze-sales-data">Exercise 5.1 - Load and Analyze Sales Data</h2>
 <p>Process a CSV file containing Bean Counter’s sales data.</p>
-<div id="1c06c2b3" class="cell" data-execution_count="18">
+<div id="309c31e2" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> io</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -885,13 +915,13 @@ With Q1 Totals:
 <span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Calculate total coffee revenue</span></span>
 <span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>total_coffee_revenue <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c322b310" class="cell" data-execution_count="20">
+<div id="3405270e" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your data loading and analysis</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(coffee_df) <span class="op">==</span> <span class="dv">5</span>, <span class="st">"Should have 5 coffee products"</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> coffee_sorted.iloc[<span class="dv">0</span>][<span class="st">'product'</span>] <span class="op">==</span> <span class="st">'Espresso'</span>, <span class="st">"Espresso should be top seller"</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> total_coffee_revenue <span class="op">==</span> <span class="fl">65750.0</span>, <span class="ss">f"Coffee revenue should be 65,750"</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> total_coffee_revenue <span class="op">==</span> <span class="fl">52650.0</span>, <span class="ss">f"Coffee revenue should be 52,650"</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top Coffee Products by Volume:"</span>)</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(coffee_sorted[[<span class="st">'product'</span>, <span class="st">'units_sold'</span>, <span class="st">'revenue'</span>]])</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total Coffee Revenue: $</span><span class="sc">{</span>total_coffee_revenue<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>

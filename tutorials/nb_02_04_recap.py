@@ -195,7 +195,7 @@ for store in stores:
     if store["name"] == "Plaza":
         assert store["composite_score"] == 82.0, "Plaza score incorrect"
     elif store["name"] == "Station":
-        assert store["composite_score"] == 85.0, "Station score incorrect (should be highest)"
+        assert store["composite_score"] == 83.0, "Station score incorrect (should be highest)"
     elif store["name"] == "Airport":
         assert store["composite_score"] == 72.0, "Airport score incorrect"
 

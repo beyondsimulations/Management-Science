@@ -10,15 +10,15 @@
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_03_03_visualization.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <lastmod>2025-10-26T14:17:12.723Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_03_01_numpy.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <lastmod>2025-10-26T13:55:54.400Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_02_03_sorting.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <lastmod>2025-10-26T13:47:59.573Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_02_01_functions.html</loc>
@@ -26,83 +26,91 @@
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_01_02_lists_loops.html</loc>
-    <lastmod>2025-10-25T12:13:37.230Z</lastmod>
+    <lastmod>2025-10-26T13:41:28.240Z</lastmod>
   </url>
   <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_03_closing_presentation.html</loc>
-    <lastmod>2025-10-25T12:00:21.976Z</lastmod>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_04_presentation.html</loc>
+    <lastmod>2025-10-26T14:21:20.777Z</lastmod>
   </url>
   <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_03_closing.html</loc>
-    <lastmod>2025-10-25T12:00:21.976Z</lastmod>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_04_monte_carlo.html</loc>
+    <lastmod>2025-10-26T14:21:20.777Z</lastmod>
   </url>
   <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_01_presentation.html</loc>
-    <lastmod>2025-10-25T10:32:22.577Z</lastmod>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_02_presentation.html</loc>
+    <lastmod>2025-10-26T14:23:33.825Z</lastmod>
   </url>
   <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_01_introduction.html</loc>
-    <lastmod>2025-10-25T10:32:22.577Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/general/syllabus.html</loc>
-    <lastmod>2025-10-25T04:00:54.666Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/general/literature.html</loc>
-    <lastmod>2025-10-24T22:46:00.656Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/general/cheatsheet.html</loc>
-    <lastmod>2025-10-24T22:53:28.082Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/index.html</loc>
-    <lastmod>2025-10-25T12:00:21.976Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/general/faq.html</loc>
-    <lastmod>2025-10-25T05:53:13.716Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/general/privacy.html</loc>
-    <lastmod>2025-10-24T22:46:00.656Z</lastmod>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_02_copilot_intro.html</loc>
+    <lastmod>2025-10-26T14:23:33.825Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/general/uv.html</loc>
     <lastmod>2025-10-24T22:46:00.656Z</lastmod>
   </url>
   <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_02_copilot_intro.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <loc>https://beyondsimulations.github.io/Management-Science/general/privacy.html</loc>
+    <lastmod>2025-10-24T22:46:00.656Z</lastmod>
   </url>
   <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_02_copilot_presentation.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <loc>https://beyondsimulations.github.io/Management-Science/general/faq.html</loc>
+    <lastmod>2025-10-25T05:53:13.716Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/index.html</loc>
+    <lastmod>2025-10-25T12:00:21.976Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/general/cheatsheet.html</loc>
+    <lastmod>2025-10-26T14:19:49.347Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/general/literature.html</loc>
+    <lastmod>2025-10-24T22:46:00.656Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/general/syllabus.html</loc>
+    <lastmod>2025-10-26T07:07:28.756Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_01_introduction.html</loc>
+    <lastmod>2025-10-25T10:32:22.577Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_01_presentation.html</loc>
+    <lastmod>2025-10-25T10:32:22.577Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_03_closing.html</loc>
+    <lastmod>2025-10-26T14:23:25.764Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beyondsimulations.github.io/Management-Science/lectures/lec_03_presentation.html</loc>
+    <lastmod>2025-10-26T14:23:25.764Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_01_01_variables_data_types.html</loc>
-    <lastmod>2025-10-25T12:13:37.230Z</lastmod>
+    <lastmod>2025-10-26T13:39:47.797Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_01_03_conditionals_while.html</loc>
-    <lastmod>2025-10-25T12:13:37.230Z</lastmod>
+    <lastmod>2025-10-26T13:42:26.286Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_02_02_dictionaries.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <lastmod>2025-10-26T13:46:02.496Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_02_04_recap.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <lastmod>2025-10-26T13:50:25.530Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_03_02_pandas.html</loc>
-    <lastmod>2025-10-25T15:17:25.771Z</lastmod>
+    <lastmod>2025-10-26T14:01:01.720Z</lastmod>
   </url>
   <url>
-    <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_04_monte_carlo.html</loc>
-    <lastmod>2025-10-25T09:06:38.753Z</lastmod>
+    <loc>https://beyondsimulations.github.io/Management-Science/tutorials/nb_04_01_monte_carlo.html</loc>
+    <lastmod>2025-10-26T14:23:00.497Z</lastmod>
   </url>
   <url>
     <loc>https://beyondsimulations.github.io/Management-Science/assignments/assignment_01.html</loc>

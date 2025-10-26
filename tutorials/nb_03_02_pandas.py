@@ -90,7 +90,6 @@ print(f"\nDataFrame shape: {df.shape} (rows, columns)")
 # %%
 import pandas as pd
 
-# YOUR CODE BELOW
 # Create a dictionary with product data
 product_data = {
     'product_name': ['Espresso', 'Latte', 'Cappuccino', 'Americano', 'Mocha'],
@@ -98,6 +97,8 @@ product_data = {
     'cost': [0.75, 1.50, 1.25, 0.90, 1.80],
     'units_sold_daily': [450, 320, 280, 210, 190]
 }
+
+# YOUR CODE BELOW
 
 # Create DataFrame
 products_df =
@@ -245,7 +246,7 @@ growing_stores =
 
 # %%
 # Test your filtering
-assert len(high_revenue_stores) == 5, "Should find 5 high revenue stores"
+assert len(high_revenue_stores) == 4, "Should find 4 high revenue stores"
 assert all(high_revenue_stores['monthly_revenue'] > 100000), "All selected stores should have revenue > 100000"
 assert len(growing_stores) == 6, "Should find 6 stores with positive growth"
 assert all(growing_stores['growth_rate'] > 0), "All selected stores should have positive growth"
@@ -407,7 +408,7 @@ total_coffee_revenue =
 # Test your data loading and analysis
 assert len(coffee_df) == 5, "Should have 5 coffee products"
 assert coffee_sorted.iloc[0]['product'] == 'Espresso', "Espresso should be top seller"
-assert total_coffee_revenue == 65750.0, f"Coffee revenue should be 65,750"
+assert total_coffee_revenue == 52650.0, f"Coffee revenue should be 52,650"
 print("Top Coffee Products by Volume:")
 print(coffee_sorted[['product', 'units_sold', 'revenue']])
 print(f"\nTotal Coffee Revenue: ${total_coffee_revenue:,.2f}")

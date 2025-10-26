@@ -71,7 +71,7 @@ revenue = [620, 450, 510, 485, 380]
 
 # Create bar chart
 plt.figure(figsize=(10, 6))
-plt.bar(stores, revenue, color='#2E7D32')
+plt.bar(stores, revenue, color='#F6B265')
 plt.title('Bean Counter Top 5 Store Revenue (Thousands $)', fontsize=16, fontweight='bold')
 plt.xlabel('Store Location', fontsize=12)
 plt.ylabel('Revenue ($1000s)', fontsize=12)
@@ -134,7 +134,7 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
 revenue = [4.2, 4.5, 4.8, 5.1, 5.4, 5.8]
 
 plt.figure(figsize=(10, 6))
-plt.plot(months, revenue, marker='o', linewidth=2, markersize=8, color='#1976D2')
+plt.plot(months, revenue, marker='o', linewidth=2, markersize=8, color='#537E8F')
 plt.title('Bean Counter Revenue Growth - H1 2024', fontsize=16, fontweight='bold')
 plt.xlabel('Month', fontsize=12)
 plt.ylabel('Revenue ($ Millions)', fontsize=12)
@@ -143,11 +143,6 @@ plt.grid(True, alpha=0.3)
 # Add value labels
 for i, v in enumerate(revenue):
     plt.text(i, v + 0.1, f'${v}M', ha='center')
-
-# Add trend annotation
-plt.annotate('38% Growth!', xy=(5, 5.8), xytext=(4, 5.5),
-            arrowprops=dict(arrowstyle='->', color='green', lw=2),
-            fontsize=12, color='green', fontweight='bold')
 
 plt.tight_layout()
 plt.show()
@@ -269,7 +264,7 @@ plt.show()
 #
 # -   Start at \$6M in January
 # -   Grow approximately 2% each month
-# -   Add random variation (±5%) to simulate market fluctuations
+# -   Add random variation (±25%) to simulate market fluctuations
 #
 # > **Tip**
 # >
@@ -277,7 +272,7 @@ plt.show()
 # >
 # > -   Start with base revenue of 6.0M
 # > -   Each month, apply 2% growth: `revenue = previous_revenue * 1.02`
-# > -   Add random variation: multiply by `np.random.uniform(0.95, 1.05)`
+# > -   Add random variation: multiply by `np.random.uniform(0.75, 1.25)`
 
 # %%
 import pandas as pd
