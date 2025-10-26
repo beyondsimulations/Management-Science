@@ -197,7 +197,7 @@ print("Helper functions loaded and ready to use!")
 
 ### 1. One-Slide Recommendation
 
-Create 2-3 slides (PDF) containing:
+Create one-slide (PDF) containing:
 
 - **Recommendation:** Which 2 startups to invest in (clearly stated)
 - **Expected Return:** Total expected return in € and %
@@ -235,7 +235,8 @@ Be ready to present your recommendation in **3 minutes**:
 
 # Good Luck!
 
-Remember: There may be multiple "correct" answers depending on risk preferences.The key is to:
+Remember: There may be multiple "correct" answers depending on risk preferences.
+The key is to:
 
 1. Simulate accurately
 2. Analyze thoroughly
