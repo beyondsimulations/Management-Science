@@ -201,10 +201,7 @@ Create one-slide (PDF) containing:
 
 - **Recommendation:** Which 2 startups to invest in (clearly stated)
 - **Expected Return:** Total expected return in € and %
-- **Risk Assessment:**
-  - Probability of loss
-  - Standard deviation
-  - Worst-case scenario (bottom 10%)
+- **Risk Assessment:** Your personal risk assessment
 - **Justification:** 2-3 bullet points explaining why this pair
 - **Visual:** One chart comparing the 6 portfolio options (optional but recommended)
 

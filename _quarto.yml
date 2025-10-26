@@ -58,6 +58,14 @@ website:
             href: tutorials/nb_03_03_visualization.qmd
           - text: "03-04 Closing"
             href: lectures/lec_03_closing.qmd
+      - section: "04 Monte Carlo"
+        contents:
+          - text: "04-01 Concepts"
+            href: lectures/lec_04_monte_carlo.qmd
+          - text: "04-02 Notebook"
+            href: tutorials/nb_04_01_monte_carlo.qmd
+          - text: "04-03 Competition"
+            href: competitions/competition_04_techventure.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd
