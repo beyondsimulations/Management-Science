@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notebook 2.4 - Integration Challenge – Management Science</title>
+<title>Competition 01 - TechVenture Investment Challenge – Management Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/nb_02_01_functions.html">02 Advances</a></li><li class="breadcrumb-item"><a href="../tutorials/nb_02_04_recap.html">02-04 Recap</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_04_monte_carlo.html">04 Monte Carlo</a></li><li class="breadcrumb-item"><a href="../tutorials/competition_04_techventure.html">04-03 Competition</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -199,13 +199,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">02 Advances</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../tutorials/nb_02_01_functions.html" class="sidebar-item-text sidebar-link">
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/nb_02_04_recap.html" class="sidebar-item-text sidebar-link active">
+  <a href="../tutorials/nb_02_04_recap.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">02-04 Recap</span></a>
   </div>
 </li>
@@ -275,13 +275,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">04 Monte Carlo</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_04_monte_carlo.html" class="sidebar-item-text sidebar-link">
@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/competition_04_techventure.html" class="sidebar-item-text sidebar-link">
+  <a href="../tutorials/competition_04_techventure.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">04-03 Competition</span></a>
   </div>
 </li>
@@ -356,27 +356,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#section-1---warm-up-functions-meet-dictionaries" id="toc-section-1---warm-up-functions-meet-dictionaries" class="nav-link" data-scroll-target="#section-1---warm-up-functions-meet-dictionaries">Section 1 - Warm-Up: Functions Meet Dictionaries</a>
+  <li><a href="#client-briefing-techventure-innovation-fund" id="toc-client-briefing-techventure-innovation-fund" class="nav-link active" data-scroll-target="#client-briefing-techventure-innovation-fund">Client Briefing: TechVenture Innovation Fund</a>
   <ul class="collapse">
-  <li><a href="#exercise-1.1---performance-calculator" id="toc-exercise-1.1---performance-calculator" class="nav-link" data-scroll-target="#exercise-1.1---performance-calculator">Exercise 1.1 - Performance Calculator</a></li>
-  </ul></li>
-  <li><a href="#section-2---the-power-of-integration" id="toc-section-2---the-power-of-integration" class="nav-link" data-scroll-target="#section-2---the-power-of-integration">Section 2 - The Power of Integration</a>
+  <li><a href="#company-background" id="toc-company-background" class="nav-link" data-scroll-target="#company-background">Company Background</a></li>
+  <li><a href="#the-investment-opportunity" id="toc-the-investment-opportunity" class="nav-link" data-scroll-target="#the-investment-opportunity">The Investment Opportunity</a>
   <ul class="collapse">
-  <li><a href="#exercise-2.1---complete-store-ranking-system" id="toc-exercise-2.1---complete-store-ranking-system" class="nav-link" data-scroll-target="#exercise-2.1---complete-store-ranking-system">Exercise 2.1 - Complete Store Ranking System</a></li>
+  <li><a href="#the-four-candidates" id="toc-the-four-candidates" class="nav-link" data-scroll-target="#the-four-candidates">The Four Candidates</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a></li>
+  <li><a href="#success-metrics" id="toc-success-metrics" class="nav-link" data-scroll-target="#success-metrics">Success Metrics</a></li>
+  <li><a href="#constraints-and-requirements" id="toc-constraints-and-requirements" class="nav-link" data-scroll-target="#constraints-and-requirements">Constraints and Requirements</a></li>
+  </ul></li>
+  <li><a href="#the-challenge" id="toc-the-challenge" class="nav-link" data-scroll-target="#the-challenge">The Challenge</a>
+  <ul class="collapse">
+  <li><a href="#your-mission" id="toc-your-mission" class="nav-link" data-scroll-target="#your-mission">Your Mission</a></li>
+  <li><a href="#evaluation-criteria" id="toc-evaluation-criteria" class="nav-link" data-scroll-target="#evaluation-criteria">Evaluation Criteria</a></li>
+  <li><a href="#time-limit" id="toc-time-limit" class="nav-link" data-scroll-target="#time-limit">Time Limit</a></li>
+  </ul></li>
+  <li><a href="#data-access-starter-code" id="toc-data-access-starter-code" class="nav-link" data-scroll-target="#data-access-starter-code">Data Access &amp; Starter Code</a>
+  <ul class="collapse">
+  <li><a href="#helpful-functions-optional-use" id="toc-helpful-functions-optional-use" class="nav-link" data-scroll-target="#helpful-functions-optional-use">Helpful Functions (Optional Use)</a></li>
+  </ul></li>
+  <li><a href="#submission-requirements" id="toc-submission-requirements" class="nav-link" data-scroll-target="#submission-requirements">Submission Requirements</a>
+  <ul class="collapse">
+  <li><a href="#required-deliverables" id="toc-required-deliverables" class="nav-link" data-scroll-target="#required-deliverables">Required Deliverables</a>
+  <ul class="collapse">
+  <li><a href="#one-slide-recommendation" id="toc-one-slide-recommendation" class="nav-link" data-scroll-target="#one-slide-recommendation">1. One-Slide Recommendation</a></li>
+  <li><a href="#presentation-preparation" id="toc-presentation-preparation" class="nav-link" data-scroll-target="#presentation-preparation">2. Presentation Preparation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#tips-for-success" id="toc-tips-for-success" class="nav-link" data-scroll-target="#tips-for-success">Tips for Success</a>
+  <ul class="collapse">
+  <li><a href="#strategy-suggestions" id="toc-strategy-suggestions" class="nav-link" data-scroll-target="#strategy-suggestions">Strategy Suggestions</a></li>
+  <li><a href="#common-pitfalls-to-avoid" id="toc-common-pitfalls-to-avoid" class="nav-link" data-scroll-target="#common-pitfalls-to-avoid">Common Pitfalls to Avoid</a></li>
+  </ul></li>
+  <li><a href="#good-luck" id="toc-good-luck" class="nav-link" data-scroll-target="#good-luck">Good Luck!</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="nb_02_04_recap.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="nb_02_04_recap.py"><i class="bi bi-hand-thumbs-up"></i>Python</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="competition_04_techventure.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="nb_01_03_conditionals_while.py"><i class="bi bi-hand-thumbs-up"></i>Python</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/nb_02_01_functions.html">02 Advances</a></li><li class="breadcrumb-item"><a href="../tutorials/nb_02_04_recap.html">02-04 Recap</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_04_monte_carlo.html">04 Monte Carlo</a></li><li class="breadcrumb-item"><a href="../tutorials/competition_04_techventure.html">04-03 Competition</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Notebook 2.4 - Integration Challenge</h1>
-<p class="subtitle lead">Management Science - Preparing for CEO at Bean Counter!</p>
+<h1 class="title">Competition 01 - TechVenture Investment Challenge</h1>
+<p class="subtitle lead">Management Science</p>
 </div>
 
 
@@ -393,232 +416,273 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>You’ve climbed the ranks:</p>
-<ul>
-<li><strong>Assistant Manager</strong> → Mastered functions for standardized operations</li>
-<li><strong>Regional Manager</strong> → Conquered dictionaries for data management</li>
-<li><strong>Operations Director</strong> → Optimized with sorting and selection</li>
-</ul>
-<p>Now the CEO wants to see if you can integrate all these skills. This is your chance to make an impression before potentially taking over as CEO of Bean Counter!</p>
-<p><strong>Today’s Challenge:</strong> Build an integrated system that uses functions, dictionaries, and sorting together to solve real business problems.</p>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>How to Use This Tutorial
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This is a shorter recap session. Each exercise integrates multiple concepts you’ve learned.</p>
-</div>
-</div>
-<hr>
+<section id="client-briefing-techventure-innovation-fund" class="level1">
+<h1>Client Briefing: TechVenture Innovation Fund</h1>
+<section id="company-background" class="level2">
+<h2 class="anchored" data-anchor-id="company-background">Company Background</h2>
+<p><strong>TechVenture Innovation Fund</strong> is a venture capital firm specializing in early-stage technology investments. Founded in 2018, the fund has successfully backed 23 startups with an average return of 32% per year. The partners pride themselves on data-driven decision making and sophisticated risk analysis.</p>
+<p><strong>Your Role:</strong> You’ve been hired as consultants to analyze their latest investment opportunity.</p>
 </section>
-<section id="section-1---warm-up-functions-meet-dictionaries" class="level1">
-<h1>Section 1 - Warm-Up: Functions Meet Dictionaries</h1>
-<p>Let’s start by combining functions with dictionaries, the foundation of business logic and data management.</p>
-<div id="fec5b52e" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining what you've learned</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_store_score(store):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate a performance score for a store"""</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Weight different metrics</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    sales_score <span class="op">=</span> store[<span class="st">"daily_sales"</span>] <span class="op">/</span> <span class="dv">100</span>  <span class="co"># Scale to reasonable number</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    rating_score <span class="op">=</span> store[<span class="st">"rating"</span>] <span class="op">*</span> <span class="dv">20</span>  <span class="co"># Rating is 1-5, scale to 20-100</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    efficiency_score <span class="op">=</span> store[<span class="st">"customers_per_staff"</span>] <span class="op">*</span> <span class="dv">2</span></span>
+<section id="the-investment-opportunity" class="level2">
+<h2 class="anchored" data-anchor-id="the-investment-opportunity">The Investment Opportunity</h2>
+<p>TechVenture has <strong>€2 million</strong> available for immediate deployment. After extensive due diligence, they’ve narrowed their options to <strong>four promising startups</strong>. Due to diversification requirements and partnership agreements, they must invest in <strong>exactly two startups</strong>, allocating <strong>€1 million to each</strong>.</p>
+<section id="the-four-candidates" class="level3">
+<h3 class="anchored" data-anchor-id="the-four-candidates">The Four Candidates</h3>
+<section id="cloudai-solutions" class="level4">
+<h4 class="anchored" data-anchor-id="cloudai-solutions">1. CloudAI Solutions</h4>
+<ul>
+<li><strong>Industry:</strong> Enterprise AI/SaaS</li>
+<li><strong>Product:</strong> AI-powered business intelligence platform</li>
+<li><strong>Market Size:</strong> €45B growing at 25% annually</li>
+<li><strong>Competition:</strong> Moderate (established players but room for innovation)</li>
+<li><strong>Return Distribution:</strong> Normal distribution
+<ul>
+<li>Mean return: 25% per year</li>
+<li>Standard deviation: 15%</li>
+</ul></li>
+<li><strong>Key Risk:</strong> Technology adoption speed, enterprise sales cycles</li>
+</ul>
+</section>
+<section id="greengrid-energy" class="level4">
+<h4 class="anchored" data-anchor-id="greengrid-energy">2. GreenGrid Energy</h4>
+<ul>
+<li><strong>Industry:</strong> Renewable Energy Technology</li>
+<li><strong>Product:</strong> Next-generation solar panel storage systems</li>
+<li><strong>Market Size:</strong> €30B growing at 18% annually</li>
+<li><strong>Competition:</strong> High (many players, commoditization risk)</li>
+<li><strong>Return Distribution:</strong> Normal distribution
+<ul>
+<li>Mean return: 18% per year</li>
+<li>Standard deviation: 8%</li>
+</ul></li>
+<li><strong>Key Risk:</strong> Regulatory changes, commodity price fluctuations</li>
+</ul>
+</section>
+<section id="healthtrack-pro" class="level4">
+<h4 class="anchored" data-anchor-id="healthtrack-pro">3. HealthTrack Pro</h4>
+<ul>
+<li><strong>Industry:</strong> Medical Devices / Wearables</li>
+<li><strong>Product:</strong> FDA-approved continuous health monitoring wearable</li>
+<li><strong>Market Size:</strong> €20B growing at 35% annually</li>
+<li><strong>Competition:</strong> Low (first-mover in specific medical conditions)</li>
+<li><strong>Return Distribution:</strong> Normal distribution
+<ul>
+<li>Mean return: 30% per year</li>
+<li>Standard deviation: 25%</li>
+</ul></li>
+<li><strong>Key Risk:</strong> Regulatory approval delays, clinical trial outcomes</li>
+</ul>
+</section>
+<section id="finflow" class="level4">
+<h4 class="anchored" data-anchor-id="finflow">4. FinFlow</h4>
+<ul>
+<li><strong>Industry:</strong> B2B Fintech</li>
+<li><strong>Product:</strong> Automated payment reconciliation for enterprises</li>
+<li><strong>Market Size:</strong> €15B growing at 20% annually</li>
+<li><strong>Competition:</strong> Moderate (fragmented market)</li>
+<li><strong>Return Distribution:</strong> Uniform distribution
+<ul>
+<li>Minimum return: 10% per year</li>
+<li>Maximum return: 35% per year</li>
+</ul></li>
+<li><strong>Key Risk:</strong> Customer acquisition cost, banking partnerships</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="success-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="success-metrics">Success Metrics</h2>
+<p>The fund evaluates investments based on multiple criteria:</p>
+<ol type="1">
+<li><strong>Expected Total Return:</strong> The mean return across all scenarios</li>
+<li><strong>Risk-Adjusted Return:</strong> Return relative to volatility</li>
+<li><strong>Downside Protection:</strong> Probability of loss (return &lt; 0%)</li>
+<li><strong>Upside Potential:</strong> Probability of exceptional returns (&gt;50% total)</li>
+<li><strong>Worst-Case Scenario:</strong> Expected shortfall in bottom 10% of outcomes</li>
+</ol>
+</section>
+<section id="constraints-and-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="constraints-and-requirements">Constraints and Requirements</h2>
+<ul>
+<li>Must select exactly <strong>2 startups</strong></li>
+<li>Must invest <strong>€1 million in each</strong> selected startup</li>
+<li>Cannot invest in more or fewer than 2 startups</li>
+<li>Investment horizon is <strong>1 year</strong> for this analysis</li>
+<li>Assume startups’ returns are <strong>independent</strong> (no correlation)</li>
+</ul>
+</section>
+</section>
+<section id="the-challenge" class="level1">
+<h1>The Challenge</h1>
+<section id="your-mission" class="level2">
+<h2 class="anchored" data-anchor-id="your-mission">Your Mission</h2>
+<p>Use Monte Carlo simulation to determine which pair of startups TechVenture should invest in. Your analysis should:</p>
+<ol type="1">
+<li><strong>Simulate</strong> at least 10,000 scenarios for each startup</li>
+<li><strong>Evaluate</strong> all possible pairs (there are 6 combinations)</li>
+<li><strong>Compare</strong> portfolios using multiple risk metrics</li>
+<li><strong>Recommend</strong> the optimal investment pair</li>
+<li><strong>Justify</strong> your recommendation with data</li>
+</ol>
+</section>
+<section id="evaluation-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-criteria">Evaluation Criteria</h2>
+<p>Your presentation will be evaluated on:</p>
+<ul>
+<li><strong>Correctness (50%):</strong> Accurate simulation and calculations</li>
+<li><strong>Business Reasoning (25%):</strong> Clear justification aligned with fund goals</li>
+<li><strong>Presentation (25%):</strong> Clear, professional one-slide summary</li>
+</ul>
+</section>
+<section id="time-limit" class="level2">
+<h2 class="anchored" data-anchor-id="time-limit">Time Limit</h2>
+<p>You have until <strong>next session</strong> to complete your analysis and prepare your presentation.</p>
+</section>
+</section>
+<section id="data-access-starter-code" class="level1">
+<h1>Data Access &amp; Starter Code</h1>
+<div id="0cb1b3fd" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for consistency across teams (optional - you may change)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    total_score <span class="op">=</span> sales_score <span class="op">+</span> rating_score <span class="op">+</span> efficiency_score</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">round</span>(total_score, <span class="dv">1</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Test with a store</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>test_store <span class="op">=</span> {</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: <span class="st">"Downtown"</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"daily_sales"</span>: <span class="dv">4500</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rating"</span>: <span class="fl">4.7</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"customers_per_staff"</span>: <span class="dv">65</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> calculate_store_score(test_store)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>test_store[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss"> score: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulation parameters</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>investment_per_startup <span class="op">=</span> <span class="dv">1_000_000</span>  <span class="co"># €1M each</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Startup return distributions (annual returns as decimals)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: 0.25 = 25% return</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># CloudAI: Normal(mean=25%, std=15%)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># GreenGrid: Normal(mean=18%, std=8%)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># HealthTrack: Normal(mean=30%, std=25%)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># FinFlow: Uniform(min=10%, max=35%)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Starter code loaded. Begin your analysis!"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Investment per startup: €</span><span class="sc">{</span>investment_per_startup<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of simulations: </span><span class="sc">{</span>n_simulations<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Downtown score: 269.0</code></pre>
+<pre><code>Starter code loaded. Begin your analysis!
+Investment per startup: €1,000,000
+Number of simulations: 10,000</code></pre>
 </div>
 </div>
-<section id="exercise-1.1---performance-calculator" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1.1---performance-calculator">Exercise 1.1 - Performance Calculator</h2>
-<p>Create a function <code>evaluate_store</code> that:</p>
-<ol type="1">
-<li>Takes a store dictionary as input (see above)</li>
-<li>Calculates if the store is meeting targets</li>
-<li>Returns a tuple: <code>(is_successful, performance_message)</code></li>
-</ol>
-<p><strong>Success criteria:</strong></p>
-<ul>
-<li>Daily sales &gt; 4000 AND</li>
-<li>Customer rating &gt;= 4.5 AND</li>
-<li>Staff efficiency &gt; 50 customers/staff</li>
-</ul>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>The returned <code>is_successful</code> is just a boolean (True or False), while the performance message should be a string with feedback for the store.</p>
-</div>
-</div>
-</div>
-<div id="51b35a20" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_store(store):</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Evaluate if a store meets Bean Counter standards"""</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check all three criteria</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return (success_boolean, message)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="abd01c89" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your evaluation function</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>store1 <span class="op">=</span> {<span class="st">"name"</span>: <span class="st">"Plaza"</span>, <span class="st">"daily_sales"</span>: <span class="dv">5000</span>, <span class="st">"rating"</span>: <span class="fl">4.8</span>, <span class="st">"customers_per_staff"</span>: <span class="dv">75</span>}</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>success1, msg1 <span class="op">=</span> evaluate_store(store1)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> success1 <span class="op">==</span> <span class="va">True</span>, <span class="st">"Plaza should be successful"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>store2 <span class="op">=</span> {<span class="st">"name"</span>: <span class="st">"Beach"</span>, <span class="st">"daily_sales"</span>: <span class="dv">3500</span>, <span class="st">"rating"</span>: <span class="fl">4.6</span>, <span class="st">"customers_per_staff"</span>: <span class="dv">60</span>}</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>success2, msg2 <span class="op">=</span> evaluate_store(store2)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> success2 <span class="op">==</span> <span class="va">False</span>, <span class="st">"Beach should not be successful (low sales)"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Great! Your evaluation function works perfectly!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<hr>
-</section>
-</section>
-<section id="section-2---the-power-of-integration" class="level1">
-<h1>Section 2 - The Power of Integration</h1>
-<p>Now let’s combine all three concepts: functions process the data, dictionaries store it, and sorting helps us make decisions.</p>
-<div id="10cd0910" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Integration example: Finding top performers</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_efficiency(store):</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate operational efficiency"""</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> store[<span class="st">"revenue"</span>] <span class="op">/</span> store[<span class="st">"costs"</span>]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample stores</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>stores <span class="op">=</span> [</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Airport"</span>, <span class="st">"revenue"</span>: <span class="dv">50000</span>, <span class="st">"costs"</span>: <span class="dv">35000</span>},</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Downtown"</span>, <span class="st">"revenue"</span>: <span class="dv">45000</span>, <span class="st">"costs"</span>: <span class="dv">28000</span>},</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Beach"</span>, <span class="st">"revenue"</span>: <span class="dv">30000</span>, <span class="st">"costs"</span>: <span class="dv">22000</span>}</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add efficiency to each store</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> store <span class="kw">in</span> stores:</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    store[<span class="st">"efficiency"</span>] <span class="op">=</span> calculate_efficiency(store)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by efficiency</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>ranked <span class="op">=</span> <span class="bu">sorted</span>(stores, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"efficiency"</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Efficiency Rankings:"</span>)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, store <span class="kw">in</span> <span class="bu">enumerate</span>(ranked, <span class="dv">1</span>):</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>store[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>store[<span class="st">'efficiency'</span>]<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="helpful-functions-optional-use" class="level2">
+<h2 class="anchored" data-anchor-id="helpful-functions-optional-use">Helpful Functions (Optional Use)</h2>
+<div id="05a6fb10" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_portfolio_metrics(returns_1, returns_2, investment<span class="op">=</span><span class="dv">1_000_000</span>):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate metrics for a portfolio of two startups</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - returns_1: array of returns for startup 1 (as decimals, e.g., 0.25 for 25%)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">    - returns_2: array of returns for startup 2</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">    - investment: amount invested in each startup</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">    - Dictionary with portfolio metrics</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Portfolio returns (equal weight)</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    portfolio_returns <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> returns_1 <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> returns_2</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate absolute returns in euros</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    absolute_returns <span class="op">=</span> portfolio_returns <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> investment</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    metrics <span class="op">=</span> {</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'mean_return'</span>: portfolio_returns.mean(),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'std_dev'</span>: portfolio_returns.std(),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'prob_loss'</span>: (portfolio_returns <span class="op">&lt;</span> <span class="dv">0</span>).mean(),</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'prob_high_return'</span>: (portfolio_returns <span class="op">&gt;</span> <span class="fl">0.5</span>).mean(),</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'var_5'</span>: np.percentile(portfolio_returns, <span class="dv">5</span>),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'expected_profit'</span>: absolute_returns.mean()</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> metrics</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_shortfall(returns, percentile<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate the expected shortfall (conditional VaR)</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">    - returns: array of returns</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">    - percentile: percentile for worst-case scenarios</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">    - Average return in the worst X% of scenarios</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> np.percentile(returns, percentile)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    worst_returns <span class="op">=</span> returns[returns <span class="op">&lt;=</span> threshold]</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> worst_returns.mean() <span class="cf">if</span> <span class="bu">len</span>(worst_returns) <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage (delete or modify as needed):</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Helper functions loaded and ready to use!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Efficiency Rankings:
-1. Downtown: 1.61
-2. Airport: 1.43
-3. Beach: 1.36</code></pre>
+<pre><code>Helper functions loaded and ready to use!</code></pre>
 </div>
 </div>
-<section id="exercise-2.1---complete-store-ranking-system" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2.1---complete-store-ranking-system">Exercise 2.1 - Complete Store Ranking System</h2>
-<p>Build a system that:</p>
+</section>
+</section>
+<section id="submission-requirements" class="level1">
+<h1>Submission Requirements</h1>
+<section id="required-deliverables" class="level2">
+<h2 class="anchored" data-anchor-id="required-deliverables">Required Deliverables</h2>
+<section id="one-slide-recommendation" class="level3">
+<h3 class="anchored" data-anchor-id="one-slide-recommendation">1. One-Slide Recommendation</h3>
+<p>Create one-slide (PDF) containing:</p>
+<ul>
+<li><strong>Recommendation:</strong> Which 2 startups to invest in (clearly stated)</li>
+<li><strong>Expected Return:</strong> Total expected return in € and %</li>
+<li><strong>Risk Assessment:</strong> Your personal risk assessment</li>
+<li><strong>Justification:</strong> 2-3 bullet points explaining why this pair</li>
+<li><strong>Visual:</strong> One chart comparing the 6 portfolio options (optional but recommended)</li>
+</ul>
+</section>
+<section id="presentation-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="presentation-preparation">2. Presentation Preparation</h3>
+<p>Be ready to present your recommendation in <strong>3 minutes</strong>:</p>
+<ul>
+<li>1 minute: State recommendation and key metrics</li>
+<li>1 minute: Explain your analysis approach</li>
+<li>1 minute: Justify why this is the best choice for TechVenture</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="tips-for-success" class="level1">
+<h1>Tips for Success</h1>
+<section id="strategy-suggestions" class="level2">
+<h2 class="anchored" data-anchor-id="strategy-suggestions">Strategy Suggestions</h2>
 <ol type="1">
-<li>Calculates a composite score for each store using a function</li>
-<li>Adds this score to each store dictionary</li>
-<li>Ranks stores from best to worst</li>
-<li>Returns the name of the best store</li>
+<li><strong>Start Simple:</strong> Get one startup simulation working before scaling</li>
+<li><strong>Verify Distributions:</strong> Plot histograms to check your simulations look correct</li>
+<li><strong>Think Like an Investor:</strong> Consider both return AND risk</li>
+<li><strong>Use Vectorization:</strong> NumPy operations are faster than loops</li>
+<li><strong>Document Assumptions:</strong> Be clear about any choices you make</li>
 </ol>
-<p>Composite score = (revenue/1000) + (rating * 10) - (complaints * 2)</p>
-<div id="c676492b" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_composite_score(store):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate composite score for ranking"""</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> score</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_best_store(stores_list):</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Find the best store based on composite score"""</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Add composite score to each store</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Sort by composite score (highest first)</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Return the name of the best store</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_store_name</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Test data</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>stores <span class="op">=</span> [</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Plaza"</span>, <span class="st">"revenue"</span>: <span class="dv">45000</span>, <span class="st">"rating"</span>: <span class="fl">4.7</span>, <span class="st">"complaints"</span>: <span class="dv">5</span>},</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Station"</span>, <span class="st">"revenue"</span>: <span class="dv">38000</span>, <span class="st">"rating"</span>: <span class="fl">4.9</span>, <span class="st">"complaints"</span>: <span class="dv">2</span>},</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"Airport"</span>, <span class="st">"revenue"</span>: <span class="dv">52000</span>, <span class="st">"rating"</span>: <span class="fl">4.4</span>, <span class="st">"complaints"</span>: <span class="dv">12</span>}</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>best <span class="op">=</span> find_best_store(stores)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The best performing store is: </span><span class="sc">{</span>best<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="c40e868c" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your ranking system</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> best <span class="op">==</span> <span class="st">"Station"</span>, <span class="ss">f"Best store should be Station, got </span><span class="sc">{</span>best<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify scores were calculated correctly</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> store <span class="kw">in</span> stores:</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> store[<span class="st">"name"</span>] <span class="op">==</span> <span class="st">"Plaza"</span>:</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> store[<span class="st">"composite_score"</span>] <span class="op">==</span> <span class="fl">82.0</span>, <span class="st">"Plaza score incorrect"</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> store[<span class="st">"name"</span>] <span class="op">==</span> <span class="st">"Station"</span>:</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> store[<span class="st">"composite_score"</span>] <span class="op">==</span> <span class="fl">83.0</span>, <span class="st">"Station score incorrect (should be highest)"</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> store[<span class="st">"name"</span>] <span class="op">==</span> <span class="st">"Airport"</span>:</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> store[<span class="st">"composite_score"</span>] <span class="op">==</span> <span class="fl">72.0</span>, <span class="st">"Airport score incorrect"</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Excellent! Your integrated ranking system works perfectly!"</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Station wins with the best composite score!"</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"You're ready to become the CEO of Bean Counter!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<hr>
+</section>
+<section id="common-pitfalls-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="common-pitfalls-to-avoid">Common Pitfalls to Avoid</h2>
+<ul>
+<li>Don’t forget to convert percentages to decimals (25% = 0.25)</li>
+<li>Remember you’re investing €2M total (€1M each in 2 startups)</li>
+<li>Check that your uniform distribution is implemented correctly</li>
+<li>Consider that high return often comes with high risk</li>
+</ul>
 </section>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p><strong>Congratulations! You’re ready to become CEO of Bean Counter!</strong></p>
-<p><strong>You’ve successfully integrated:</strong></p>
-<ul>
-<li><strong>Functions</strong> - For calculations and business logic</li>
-<li><strong>Dictionaries</strong> - For structured data management</li>
-<li><strong>Sorting</strong> - For optimization and decision-making</li>
-</ul>
-<p><strong>Your complete toolkit demonstrates:</strong></p>
-<ul>
-<li>Evaluating store performance with custom metrics</li>
-<li>Ranking and comparing complex business entities</li>
-<li>Optimizing operational decisions with data</li>
-</ul>
-<p><strong>Remember:</strong></p>
-<ul>
-<li>Functions make your code reusable and maintainable</li>
-<li>Dictionaries organize complex business data effectively</li>
-<li>Sorting and selection help you make optimal choices</li>
-<li>Combining these tools creates powerful business solutions</li>
-</ul>
-<p><strong>What’s Next:</strong> You’ve completed the Python foundations! In Lecture 3, you’ll explore advanced data science tools with NumPy and Pandas. These powerful libraries will help you analyze larger datasets and tackle even more complex management science challenges.</p>
-</section>
-<section id="solutions" class="level1">
-<h1>Solutions</h1>
-<p>You will likely find solutions to most exercises online. However, I strongly encourage you to work on these exercises independently without searching explicitly for the exact answers to the exercises. Understanding someone else’s solution is very different from developing your own. Use the lecture notes and try to solve the exercises on your own. This approach will significantly enhance your learning and problem-solving skills.</p>
-<p>Remember, the goal is not just to complete the exercises, but to understand the concepts and improve your programming abilities. If you encounter difficulties, review the lecture materials, experiment with different approaches, and don’t hesitate to ask for clarification during class discussions.</p>
+<section id="good-luck" class="level1">
+<h1>Good Luck!</h1>
+<p>Remember: There may be multiple “correct” answers depending on risk preferences. The key is to:</p>
+<ol type="1">
+<li>Simulate accurately</li>
+<li>Analyze thoroughly</li>
+<li>Recommend clearly</li>
+<li>Justify convincingly</li>
+</ol>
 
 
 </section>

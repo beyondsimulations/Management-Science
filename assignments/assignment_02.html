@@ -296,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../competitions/competition_04_techventure.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../tutorials/competition_04_techventure.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">04-03 Competition</span></a>
   </div>
 </li>
@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="consultants" class="level2">
 <h2 class="anchored" data-anchor-id="consultants">Consultants</h2>
 <p>Who is part of your group?</p>
-<div id="8145e82a" class="cell" data-execution_count="1">
+<div id="31333506" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR ANSWER HERE:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -424,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="4ffcd99d" class="cell" data-execution_count="2">
+<div id="fda2e80d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -441,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-data" class="level3">
 <h3 class="anchored" data-anchor-id="the-data">The Data</h3>
-<div id="e3e9b92d" class="cell" data-execution_count="3">
+<div id="23f72d05" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Location coordinates (in km from origin)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>locations <span class="op">=</span> {</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>: (<span class="dv">10</span>, <span class="dv">10</span>),   <span class="co"># Depot</span></span>
@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-1-build-a-basic-route-20" class="level3">
 <h3 class="anchored" data-anchor-id="task-1-build-a-basic-route-20">Task 1: Build a Basic Route (20%)</h3>
-<div id="c72baf16" class="cell" data-execution_count="4">
+<div id="21ba53db" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_distance(loc1, loc2):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate Euclidean distance between two locations."""</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    x1, y1 <span class="op">=</span> loc1</span>
@@ -514,7 +514,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>If the new route is better, keep it as your new best</li>
 <li>Repeat until no improvement is found</li>
 </ol>
-<div id="54adc7ff" class="cell" data-execution_count="5">
+<div id="401e873d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> try_swap_improvement(route, locations):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Try all possible 2-opt swaps and return the best improvement found.</span></span>
@@ -565,7 +565,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>Estimated cost savings (€2 per km)</li>
 </ul></li>
 </ul>
-<div id="95ffea43" class="cell" data-execution_count="6">
+<div id="d5c1bd25" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize both routes</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -573,7 +573,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Business Question:</strong> If CityExpress has 50 deliveries per day, how much could they save per month with route optimization? (3-4 sentences)</p>
-<div id="bb316fce" class="cell" data-execution_count="7">
+<div id="44b4d9c5" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR ANSWER HERE:</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -601,7 +601,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 </section>
 <section id="the-data-1" class="level3">
 <h3 class="anchored" data-anchor-id="the-data-1">The Data</h3>
-<div id="ca22e153" class="cell" data-execution_count="8">
+<div id="26cd9326" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 shifts available this week</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>shifts <span class="op">=</span> [</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Monday-Morning'</span>,</span>
@@ -642,7 +642,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>What attributes do shifts have?</li>
 <li>Pick one attribute to prioritize. That’s your greedy rule!</li>
 </ol>
-<div id="66cb3bfa" class="cell" data-execution_count="9">
+<div id="b7b231b4" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_greedy_assignment(worker_preferences, shifts):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Build an assignment using YOUR greedy strategy.</span></span>
@@ -676,7 +676,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>Working greedy function that produces a valid assignment (all assigned, no duplicate shifts)</li>
 <li>Written explanation (3-4 sentences)</li>
 </ol>
-<div id="37ab977a" class="cell" data-execution_count="10">
+<div id="37c8b05d" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">My greedy strategy: [describe your rule]</span></span>
@@ -696,7 +696,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>Should all workers count equally, or weight some more?</li>
 <li>What if a worker gets a shift they didn’t list as preferred?</li>
 </ul>
-<div id="af599021" class="cell" data-execution_count="11">
+<div id="ae3ee111" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_satisfaction(assignment, worker_preferences, shifts):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate how good an assignment is.</span></span>
@@ -736,7 +736,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>How does it relate to metrics from Lecture 6?</li>
 </ul></li>
 </ol>
-<div id="f3497172" class="cell" data-execution_count="12">
+<div id="3e4177b3" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">My scoring system: [describe how you calculate satisfaction]</span></span>
@@ -757,7 +757,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>Can you apply similar logic here?</li>
 </ul>
 <p><strong>Your task:</strong> Implement a local search that tries swapping workers’ shifts.</p>
-<div id="ed3a3c7a" class="cell" data-execution_count="13">
+<div id="c5b9a296" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> improve_with_local_search(initial_assignment, worker_preferences, shifts):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Improve an assignment using local search (like 2-opt from Lecture 7).</span></span>
@@ -798,7 +798,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <li>Could you improve it further?</li>
 </ul></li>
 </ol>
-<div id="13afc6d4" class="cell" data-execution_count="14">
+<div id="eb3c664d" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">Local search method: [describe your approach]</span></span>
@@ -813,7 +813,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 <section id="task-4-business-reflection-5" class="level3">
 <h3 class="anchored" data-anchor-id="task-4-business-reflection-5">Task 4: Business Reflection (5%)</h3>
 <p><strong>Question 1:</strong> Imagine one worker calls in sick at the last minute. How would you quickly reassign the remaining 5 workers to 6 shifts (one shift will be unfilled)? Would your greedy strategy still work? (3-4 sentences)</p>
-<div id="ff98e164" class="cell" data-execution_count="15">
+<div id="e54cc7e6" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR ANSWER HERE:</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -822,7 +822,7 @@ After:   A → C → B → D → A  (reversed the B→C segment)</code></pre>
 </div>
 </div>
 <p><strong>Question 2:</strong> Your manager says “I don’t care about worker preferences, just fill all shifts as quickly as possible.” How would this change your approach? What would you lose? (2-3 sentences)</p>
-<div id="3c284707" class="cell" data-execution_count="16">
+<div id="76cbeaa9" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR ANSWER HERE:</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
