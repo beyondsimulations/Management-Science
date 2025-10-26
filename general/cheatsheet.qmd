@@ -454,3 +454,211 @@ print(random_number)
 ```{bash}
 uv add package_name
 ```
+
+# Probability Distributions
+
+## Normal Distribution
+
+- **When to Use**: Most common in business and nature; symmetric outcomes around a mean
+- **Characteristics**: 
+  - Bell-shaped, symmetric curve
+  - Most values cluster around the mean
+  - Rare extreme values in tails
+- **Examples**: 
+  - Investment returns
+  - Manufacturing variations
+  - Employee performance scores
+  - Measurement errors
+
+**Python Syntax:**
+
+```{python}
+import numpy as np
+
+# Generate normal distribution
+returns = np.random.normal(loc=mean, scale=std_dev, size=n_samples)
+
+# Example: Stock returns with 10% mean, 15% volatility
+stock_returns = np.random.normal(loc=0.10, scale=0.15, size=10000)
+```
+
+**Parameters:**
+
+- `loc`: The mean (center) of the distribution
+- `scale`: The standard deviation (spread)
+- `size`: Number of samples to generate
+
+## Uniform Distribution
+
+- **When to Use**: Complete uncertainty within a range; all outcomes equally likely
+- **Characteristics**:
+  - Flat distribution
+  - All values equally likely
+  - Hard boundaries (min/max)
+  - No clustering around any value
+- **Examples**:
+  - Random wait times
+  - Initial demand estimates with only min/max known
+  - Random sampling from a range
+
+**Python Syntax:**
+
+```{python}
+# Generate uniform distribution
+values = np.random.uniform(low=minimum, high=maximum, size=n_samples)
+
+# Example: Demand between 1000 and 5000 units
+demand = np.random.uniform(low=1000, high=5000, size=10000)
+```
+
+**Parameters:**
+
+- `low`: Minimum value (inclusive)
+- `high`: Maximum value (exclusive)
+- `size`: Number of samples to generate
+
+## Exponential Distribution
+
+- **When to Use**: Time between events; waiting times
+- **Characteristics**:
+  - Many small values, few large ones
+  - Always positive
+  - Memoryless property
+  - Right-skewed (long tail)
+- **Examples**:
+  - Time between customer arrivals
+  - Equipment failure times
+  - Time until next sale
+  - Duration of phone calls
+
+**Python Syntax:**
+
+```{python}
+# Generate exponential distribution
+wait_times = np.random.exponential(scale=average_time, size=n_samples)
+
+# Example: Time between customers (avg 5 minutes)
+arrivals = np.random.exponential(scale=5, size=10000)
+```
+
+**Parameters:**
+
+- `scale`: The average (mean) time between events
+- `size`: Number of samples to generate
+
+## Binomial Distribution
+
+- **When to Use**: Fixed number of independent yes/no trials
+- **Characteristics**:
+  - Discrete outcomes (counts)
+  - Fixed number of trials
+  - Each trial has same probability
+  - Trials are independent
+- **Examples**:
+  - Number of defective items in a batch
+  - Number of successful sales calls
+  - Number of customers who convert
+  - Number of loans that default
+
+**Python Syntax:**
+
+```{python}
+# Generate binomial distribution
+successes = np.random.binomial(n=n_trials, p=prob_success, size=n_samples)
+
+# Example: 100 sales calls with 20% conversion rate
+conversions = np.random.binomial(n=100, p=0.20, size=10000)
+```
+
+**Parameters:**
+
+- `n`: Number of trials
+- `p`: Probability of success on each trial
+- `size`: Number of experiments to simulate
+
+## Generating Correlated Random Variables
+
+- **When to Use**: When multiple uncertain variables influence each other
+- **Characteristics**:
+  - Variables move together (positively correlated)
+  - Variables move opposite (negatively correlated)
+  - Correlation coefficient: -1 to +1
+- **Examples**:
+  - Returns of stocks in same industry
+  - Sales of related products
+  - Costs that depend on same commodity price
+
+**Python Syntax:**
+
+```{python}
+# Generate correlated variables using multivariate normal
+mean = [mean1, mean2]  # Means of two variables
+cov_matrix = [[var1, cov12],  # Covariance matrix
+              [cov12, var2]]
+
+# Generate correlated samples
+samples = np.random.multivariate_normal(mean, cov_matrix, size=n_samples)
+var1_samples = samples[:, 0]
+var2_samples = samples[:, 1]
+
+# Example: Two correlated stock returns
+mean = [0.10, 0.12]  # 10% and 12% expected returns
+# Correlation = 0.6, std devs = 0.15 and 0.20
+cov_matrix = [[0.15**2, 0.6*0.15*0.20],
+              [0.6*0.15*0.20, 0.20**2]]
+returns = np.random.multivariate_normal(mean, cov_matrix, 10000)
+stock_A = returns[:, 0]
+stock_B = returns[:, 1]
+```
+
+**Parameters:**
+
+- `mean`: List of means for each variable
+- `cov`: Covariance matrix (includes variances and covariances)
+- `size`: Number of samples to generate
+
+**Note:** To calculate covariance from correlation:
+
+```{python}
+# Covariance = correlation × std_dev1 × std_dev2
+correlation = 0.8
+std1 = 0.15
+std2 = 0.20
+covariance = correlation * std1 * std2
+```
+
+## Quick Reference Table
+
+| Distribution | Use Case | Python Function | Key Parameters |
+|--------------|----------|-----------------|----------------|
+| **Normal** | Symmetric outcomes around mean | `np.random.normal()` | `loc` (mean), `scale` (std) |
+| **Uniform** | Equal probability in range | `np.random.uniform()` | `low` (min), `high` (max) |
+| **Exponential** | Time between events | `np.random.exponential()` | `scale` (average time) |
+| **Binomial** | Count of successes in trials | `np.random.binomial()` | `n` (trials), `p` (probability) |
+| **Multivariate Normal** | Correlated variables | `np.random.multivariate_normal()` | `mean` (list), `cov` (matrix) |
+
+## Common Risk Metrics
+
+**Calculate from simulated results:**
+
+```{python}
+# Basic statistics
+mean_return = results.mean()
+std_dev = results.std()
+min_value = results.min()
+max_value = results.max()
+
+# Percentiles (Value at Risk)
+var_5 = np.percentile(results, 5)  # 5th percentile (worst 5%)
+var_95 = np.percentile(results, 95)  # 95th percentile (best 5%)
+
+# Probability of loss
+prob_loss = (results < 0).mean()
+
+# Expected shortfall (average of worst 5%)
+worst_5_percent = results[results <= var_5]
+expected_shortfall = worst_5_percent.mean()
+
+# Correlation between two variables
+correlation = np.corrcoef(returns1, returns2)[0, 1]
+```

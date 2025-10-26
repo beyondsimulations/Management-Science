@@ -191,6 +191,24 @@ $$\text{As } n \to \infty, \quad \bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \to \mu
 This is WHY simulations works. More simulations = better estimates!
 :::
 
+## The Central Limit Theorem
+
+[Another Fundamental Principle:]{.highlight} **The sum of many random variables tends toward a normal distribution**
+
+. . .
+
+**What it means:**
+
+- Even if individual returns are [NOT]{.highlight} normally distributed...
+- The portfolio of many assets [WILL]{.highlight} be approximately normal
+- The average of many simulations [WILL]{.highlight} be approximately normal
+
+. . .
+
+:::{.callout-tip}
+**For Business:** This is why we can use normal distributions to model portfolio returns, even when individual assets have skewed or unusual distributions!
+:::
+
 ## Why This Matters for Business
 
 [Question]{.question}: How many simulations do we need for reliable results?
@@ -349,7 +367,7 @@ With 6 % chance of loss, AI-Growth is relatively safe. Easy for one startup, rig
 
 ## Different Distributions
 
-[Not everything follows a normal distribution!]{.highlight}
+[Attention: Not everything follows a normal distribution!]{.highlight}
 
 ```{python}
 #| eval: true
@@ -408,7 +426,11 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Normal Distribution
+## Overview
+
+::: {.panel-tabset}
+
+## Normal
 
 ```{python}
 #| eval: false
@@ -425,10 +447,9 @@ cloudai = np.random.normal(0.25, 0.15, 10000)  # 25% ± 15%
 
 - Symmetric bell curve
 - Most values cluster around mean
-- Rare extreme values in tails
 - Common in nature and business
 
-## Uniform Distribution
+## Uniform
 
 ```{python}
 #| eval: false
@@ -443,12 +464,11 @@ finflow = np.random.uniform(0.10, 0.35, 10000)  # 10-35% equally likely
 
 **Main Characteristics:**
 
-- Flat distribution
 - All values equally likely
 - Hard boundaries (min/max)
 - Good for modeling complete uncertainty within range
 
-## Exponential Distribution
+## Exponential
 
 ```{python}
 #| eval: false
@@ -465,8 +485,32 @@ arrivals = np.random.exponential(5, 10000)  # Average 5 minutes
 
 - Many small values, few large ones
 - Always positive
-- Memoryless property
 - Common for waiting times and rare events
+
+:::
+
+## When NOT to Use Monte Carlo
+
+[Monte Carlo is powerful, but not always the right tool:]{.highlight}
+
+. . .
+
+::: incremental
+- **You have a simple analytical solution**
+  - Use math directly: no need for 10,000 simulations!
+
+- **You can't reasonably estimate input distributions**
+  - Garbage in = garbage out, need basis for assumptions
+
+- **The problem is deterministic (no uncertainty)**
+  - Simulation adds complexity without value
+:::
+
+. . .
+
+:::{.callout-warning}
+Simulation is a tool for managing uncertainty, not creating false precision!
+:::
 
 # [Portfolios]{.flow} {.title}
 
@@ -623,6 +667,250 @@ No metric tells the whole story. Investors consider multiple dimensions of risk 
 A portfolio with higher average returns might have catastrophic tail risk. Always look at the extremes!
 :::
 
+# [Correlation & Dependence]{.flow} {.title}
+
+## The Independence Assumption
+
+[So far, we've assumed startups succeed or fail independently.]{.highlight}
+
+. . .
+
+**Independent Events:**
+
+- CloudAI's success doesn't affect GreenGrid's success
+- Each startup faces separate, unrelated risks
+- Portfolio risk = Average of individual risks
+
+. . .
+
+[Question]{.question}: Is this realistic in the real world?
+
+. . .
+
+:::{.callout-warning}
+**Reality Check:** Many business risks are correlated! Economic downturns, market trends, and technology shifts affect multiple companies simultaneously.
+:::
+
+## What is Correlation?
+
+[Correlation measures how two variables move together.]{.highlight}
+
+$$\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} \quad \text{where } -1 \leq \rho \leq 1$$
+
+. . .
+
+**Interpreting Correlation:**
+
+- **ρ = +1:** Perfect positive correlation (move together)
+- **ρ = 0:** No correlation (independent)
+- **ρ = -1:** Perfect negative correlation (move opposite)
+
+## Correlation in Practice
+
+```{python}
+#| eval: true
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4
+# Create three scenarios showing different correlations
+np.random.seed(42)
+n = 1000
+
+# Generate correlated returns
+x = np.random.normal(0.25, 0.15, n)
+
+# Positive correlation
+y_positive = 0.8 * x + 0.2 * np.random.normal(0.25, 0.15, n)
+
+# No correlation
+y_independent = np.random.normal(0.25, 0.15, n)
+
+# Negative correlation
+y_negative = -0.8 * x + 0.5 + 0.2 * np.random.normal(0, 0.15, n)
+
+# Create scatter plots
+setup_clean_style()
+fig, axes = plt.subplots(1, 3)
+
+# Positive correlation
+axes[0].scatter(x, y_positive, alpha=0.5, s=20, color=BRAND_COLORS["twoDark"])
+axes[0].set_xlabel('Startup A Return', fontsize=11)
+axes[0].set_ylabel('Startup B Return', fontsize=11)
+axes[0].set_title(f'Positive Correlation\nρ = {np.corrcoef(x, y_positive)[0,1]:.2f}',
+                  fontsize=12, fontweight='bold')
+axes[0].grid(True, alpha=0.2)
+axes[0].axhline(0, color='black', linestyle='-', linewidth=1, alpha=0.3)
+axes[0].axvline(0, color='black', linestyle='-', linewidth=1, alpha=0.3)
+
+# Independent
+axes[1].scatter(x, y_independent, alpha=0.5, s=20, color=BRAND_COLORS["oneDark"])
+axes[1].set_xlabel('Startup A Return', fontsize=11)
+axes[1].set_ylabel('Startup B Return', fontsize=11)
+axes[1].set_title(f'No Correlation\nρ = {np.corrcoef(x, y_independent)[0,1]:.2f}',
+                  fontsize=12, fontweight='bold')
+axes[1].grid(True, alpha=0.2)
+axes[1].axhline(0, color='black', linestyle='-', linewidth=1, alpha=0.3)
+axes[1].axvline(0, color='black', linestyle='-', linewidth=1, alpha=0.3)
+
+# Negative correlation
+axes[2].scatter(x, y_negative, alpha=0.5, s=20, color=BRAND_COLORS["twoLight"])
+axes[2].set_xlabel('Startup A Return', fontsize=11)
+axes[2].set_ylabel('Startup B Return', fontsize=11)
+axes[2].set_title(f'Negative Correlation\nρ = {np.corrcoef(x, y_negative)[0,1]:.2f}',
+                  fontsize=12, fontweight='bold')
+axes[2].grid(True, alpha=0.2)
+axes[2].axhline(0, color='black', linestyle='-', linewidth=1, alpha=0.3)
+axes[2].axvline(0, color='black', linestyle='-', linewidth=1, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-tip}
+In Python: `np.corrcoef(returns1, returns2)` calculates correlation
+:::
+
+## Why Correlation Matters
+
+[Two AI startups in your portfolio:]{.highlight}
+
+**Scenario 1: Independent (ρ = 0)**
+
+- One fails due to technical issues, other succeeds
+- Risk is averaged out
+
+**Scenario 2: Positively Correlated (ρ = 0.8)**
+
+- Both rely on same AI infrastructure provider - risk is amplified!
+
+. . .
+
+:::{.callout-warning}
+Diversification only reduces risk when investments are not highly correlated!
+:::
+
+## Impact on Portfolio Risk
+
+```{python}
+#| eval: true
+#| echo: false
+# Compare portfolios with different correlations
+np.random.seed(42)
+n_sims = 10_000
+
+correlations = [0.0, 0.5, 0.9]
+portfolio_results = {}
+
+for rho in correlations:
+    # Generate correlated returns
+    cov_matrix = [[0.15**2, rho*0.15*0.20],
+                  [rho*0.15*0.20, 0.20**2]]
+    returns = np.random.multivariate_normal([0.25, 0.30], cov_matrix, n_sims)
+
+    # Calculate portfolio returns (50-50 split)
+    portfolio = 0.5 * returns[:, 0] + 0.5 * returns[:, 1]
+    portfolio_results[rho] = portfolio
+
+# Visualize the impact
+setup_clean_style()
+fig, ax = plt.subplots(figsize=(10, 5))
+
+colors = [BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], BRAND_COLORS["threeDark"]]
+for i, (rho, portfolio) in enumerate(portfolio_results.items()):
+    ax.hist(portfolio, bins=50, alpha=0.5, label=f'ρ = {rho:.1f}',
+            color=colors[i], edgecolor='black', linewidth=0.5)
+
+ax.set_xlabel('Portfolio Return', fontsize=12)
+ax.set_ylabel('Frequency', fontsize=12)
+ax.set_title('Portfolio Risk Increases with Correlation', fontsize=14, fontweight='bold')
+ax.legend(fontsize=11)
+ax.grid(True, alpha=0.2)
+ax.axvline(0, color='black', linestyle='-', linewidth=2, alpha=0.3, label='Break-even')
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-important}
+Higher correlation = Wider distribution = More risk!
+:::
+
+## Real-World Correlation Examples
+
+[Common sources of correlation in business:]{.highlight}
+
+::: incremental
+- **Industry-specific:** All tech startups affected by downturn
+- **Geographic:** All European companies affected by EU regulations
+- **Supply chain:** Multiple companies relying on same supplier
+- **Macroeconomic:** Interest rates, inflation affect most businesses
+:::
+
+. . .
+
+:::{.callout-tip}
+**Diversification:** Choose investments with LOW correlation to reduce portfolio risk!
+:::
+
+## When Diversification Fails
+
+```{python}
+#| eval: true
+#| echo: false
+# Show that diversification fails with high correlation
+np.random.seed(42)
+n_sims = 10_000
+n_assets_range = range(1, 21)
+
+correlation_scenarios = [0.0, 0.5, 0.9]
+scenario_results = {}
+
+for rho in correlation_scenarios:
+    portfolio_stds = []
+
+    for n_assets in n_assets_range:
+        # Generate correlated returns using common factor model
+        # Returns = common_factor + idiosyncratic
+        common_factor = np.random.normal(0.25, 0.20, n_sims)
+
+        returns = []
+        for _ in range(n_assets):
+            idiosyncratic = np.random.normal(0, 0.20 * np.sqrt(1 - rho**2), n_sims)
+            asset_return = rho * common_factor + (1 - rho) * idiosyncratic
+            returns.append(asset_return)
+
+        returns = np.column_stack(returns)
+        portfolio = returns.mean(axis=1)
+        portfolio_stds.append(portfolio.std())
+
+    scenario_results[rho] = portfolio_stds
+
+# Plot all scenarios
+setup_clean_style()
+fig, ax = plt.subplots(figsize=(10, 5))
+
+colors = [BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], BRAND_COLORS["threeDark"]]
+for i, (rho, stds) in enumerate(scenario_results.items()):
+    ax.plot(list(n_assets_range), stds, marker='o', linewidth=2.5,
+            markersize=5, color=colors[i], label=f'ρ = {rho:.1f}', alpha=0.8)
+
+ax.set_xlabel('Number of Assets in Portfolio', fontsize=12)
+ax.set_ylabel('Portfolio Volatility', fontsize=12)
+ax.set_title('Diversification Effect Decreases with Correlation', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.2)
+ax.legend(fontsize=11)
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-warning}
+**2008 Financial Crisis:** Many "diversified" portfolios collapsed due to correlations!
+:::
 
 # [Making Smart Decisions]{.flow} {.title}
 
@@ -638,8 +926,6 @@ A portfolio with higher average returns might have catastrophic tail risk. Alway
 
 3. [Scenario Test]{.highlight}
    - What if distributions change or a company fails?
-
-# [Your Mission Today]{.flow} {.title}
 
 ## The Plan for the Day
 
@@ -717,11 +1003,11 @@ Consider multiple risk metrics and prepare a clear justification!
 ::: {.column width="50%"}
 **Concepts**
 
-- Monte Carlo
-- Distributions models
+- Monte Carlo simulation
+- Probability distributions
 - Risk has multiple dimensions
-- Portfolios can reduce or amplify risk
-- Correlation matters!
+- Expected Value vs. Variance
+- Correlation and dependence
 :::
 
 ::: {.column width="50%"}
@@ -731,14 +1017,14 @@ Consider multiple risk metrics and prepare a clear justification!
 - Calculating risk metrics
 - Visualizing uncertainty
 - Comparing portfolios
-- Making decisions under uncertainty
+- Understanding correlation
 :::
 ::::
 
 . . .
 
-:::{.callout-important}
-**Remember:** Monte Carlo doesn't predict THE future - it shows possible futures!
+:::{.callout-warning}
+Monte Carlo doesn't predict [THE]{.highlight} future - it shows possible futures! And correlation can amplify or reduce risk!
 :::
 
 ## Next Week
