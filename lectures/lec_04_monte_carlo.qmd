@@ -1,0 +1,714 @@
+---
+title: "Dealing with Uncertainty"
+subtitle: "Lecture 4 - Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_04_monte_carlo.qmd)"
+    output-file: lec_04_presentation.html
+---
+
+
+# [Introduction]{.flow} {.title}
+
+## **[Client Briefing: TechVenture Innovation Fund]{.invert-font}** {background-image="https://unsplash.com/photos/K5DY18hy5JQ/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYxNDU4NjYzfA&force=true&w=2400" background-size="cover"}
+
+. . .
+
+[CEO's Dilemma:]{.invert-font}
+
+["We have €2M to invest in [2 of 4 startups]{.highlight}. Each promises great returns, but the future is uncertain. How do we make the best choice without just gambling?"]{.invert-font .fragment}
+
+## Business: Valuing Uncertainty
+
+[Question]{.question}: [Why can't we just pick the two startups with the highest average returns?]{.highlight}
+
+. . .
+
+::: incremental
+- **Hidden Risk:** A startup with 30% average return but 50% chance of failure might be worse than 20% return with 5% failure chance
+- **Portfolio Effects:** Two risky startups together might amplify risk beyond acceptable levels
+- **Tail Events:** The worst-case scenario can matter as much as the average case
+:::
+
+. . .
+
+:::{.callout-warning}
+**Common Pitfall:** Optimizing on averages ignores the distribution of outcomes.
+:::
+
+## Real-World Examples
+
+[Where uncertainty modeling is critical:]{.highlight}
+
+::: columns
+::: {.column width="50%"}
+**Netflix Series Decisions**
+
+- Will a show hit 10M viewers?
+- Range: 500K to 50M
+- Investment: €20M per season
+:::
+
+::: {.column width="50%"}
+**Pharmaceutical R&D**
+
+- Will the drug pass trials?
+- Success rate: 10-20%
+- Investment: €1B over 10 years
+:::
+:::
+
+. . .
+
+::: callout-important
+When decisions are expensive and outcomes are uncertain, **Monte Carlo simulation** can be helpful to **reduce risk** and **maximize value**!
+:::
+
+# [Core Concepts]{.flow} {.title}
+
+## Rolling the Dice 10,000 Times I
+
+[Question]{.question}: [If you roll two dice, what's the probability of getting exactly 7 as result?]{.highlight}
+
+. . .
+
+**Method 1: Math**
+
+- Count combinations: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1)
+- Probability = 6/36 = 16.67%
+
+## Rolling the Dice 10,000 Times II
+
+[Question]{.question}: [If you roll two dice, what's the probability of getting exactly 7 as result?]{.highlight}
+
+. . .
+
+
+**Method 2: Monte Carlo Simulation**
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+import numpy as np
+np.random.seed(42)
+
+# Roll two dice 10,000 times
+dice1 = np.random.randint(1, 7, size=10_000)
+dice2 = np.random.randint(1, 7, size=10_000)
+total = dice1 + dice2
+
+# What fraction equals 7?
+probability = (total == 7).mean()
+print(f"Probability of rolling 7: {probability:.1%}")
+```
+
+## How Probability Converges
+
+[Creating the animation...]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+import sys
+sys.path.append('../helpers')
+from plot_utils import BRAND_COLORS, setup_clean_style
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import pathlib
+
+setup_clean_style()
+
+DIR = pathlib.Path(".").resolve()
+output_dir = DIR / '../animations'
+output_dir.mkdir(exist_ok=True)
+
+# Setup the figure with brand styling
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+
+# Setup first subplot - rolling history
+ax1.set_xlim(0, 200)
+ax1.set_ylim(0, 0.3)
+ax1.set_title('Evolution of Probability Estimate', fontsize=14, weight='bold')
+ax1.set_xlabel('Number of Rolls')
+ax1.set_ylabel('Estimated Probability of Rolling 7')
+ax1.grid(True, alpha=0.15)
+ax1.axhline(y=1/6, color=BRAND_COLORS["threeDark"], linestyle='--',
+            linewidth=2, label=f'True Probability: {1/6:.3f}', alpha=0.8)
+
+# Setup second subplot - current distribution
+dice_sums = np.arange(2, 13)
+theoretical_probs = np.array([1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]) / 36
+ax2.set_xlim(1.5, 12.5)
+ax2.set_ylim(0, 0.20)
+ax2.set_title('Distribution of Dice Sums', fontsize=14, weight='bold')
+ax2.set_xlabel('Sum of Two Dice')
+ax2.set_ylabel('Probability')
+ax2.set_xticks(dice_sums)
+ax2.grid(True, alpha=0.15)
+
+# Plot theoretical distribution
+ax2.plot(dice_sums, theoretical_probs, color=BRAND_COLORS["threeDark"],
+         linestyle='--', linewidth=2, label='Theoretical', marker='o', markersize=6)
+
+# Initialize data containers
+prob_history = []
+roll_counts = []
+observed_line, = ax1.plot([], [], color=BRAND_COLORS["twoDark"],
+                          linewidth=2.5, label='Observed Probability')
+observed_bars = ax2.bar(dice_sums, np.zeros_like(dice_sums, dtype=float),
+                       width=0.6, alpha=0.7, color=BRAND_COLORS["twoLight"],
+                       label='Observed', edgecolor=BRAND_COLORS["twoDark"], linewidth=1.5)
+
+ax1.legend(loc='upper right')
+ax2.legend(loc='upper right')
+
+# Pre-generate all rolls for consistency
+np.random.seed(42)
+all_dice1 = np.random.randint(1, 7, size=200)
+all_dice2 = np.random.randint(1, 7, size=200)
+all_sums = all_dice1 + all_dice2
+
+def update(frame):
+    current_sums = all_sums[:frame+1]
+
+    # Update probability of rolling 7
+    prob_seven = (current_sums == 7).mean()
+    prob_history.append(prob_seven)
+    roll_counts.append(frame + 1)
+
+    # Update line plot
+    observed_line.set_data(roll_counts, prob_history)
+
+    # Update distribution bars
+    if frame > 0:
+        counts = np.bincount(current_sums, minlength=13)[2:13]
+        observed_probs = counts / len(current_sums)
+        for bar, prob in zip(observed_bars, observed_probs):
+            bar.set_height(prob)
+
+    return (observed_line, *observed_bars)
+
+# Create and save animation
+anim = FuncAnimation(fig, update, frames=200, interval=50, blit=True)
+anim.save(output_dir / 'dice_convergence.gif', writer='pillow', fps=20)
+plt.close()
+
+print("Animation created successfully!")
+```
+
+## Watching Monte Carlo in Action
+
+![](../animations/dice_convergence.gif){fig-align="center" width="90%"}
+
+[Notice:]{.highlight} As we roll more dice, the estimated probability converges to the true value (16.7%)
+
+## The Law of Large Numbers
+
+[Fundamental Principle:]{.highlight} As sample size increases, sample average converges to the true expected value
+
+. . .
+
+**Mathematical Statement:**
+
+If $X_1, X_2, \ldots, X_n$ are independent random samples from the same distribution with mean $\mu$:
+
+$$\text{As } n \to \infty, \quad \bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \to \mu$$
+
+. . .
+
+:::{.callout-note}
+This is WHY Monte Carlo simulation works - more simulations = better estimates!
+:::
+
+## Why This Matters for Business
+
+[Question]{.question}: How many simulations do we need for reliable results?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+import sys
+sys.path.append('../helpers')
+from plot_utils import BRAND_COLORS, setup_clean_style
+import matplotlib.pyplot as plt
+
+setup_clean_style()
+
+# Test convergence with different sample sizes
+np.random.seed(42)
+sample_sizes = [10, 50, 100, 500, 1000, 5000, 10000]
+estimates = []
+
+for n in sample_sizes:
+    dice1 = np.random.randint(1, 7, size=n)
+    dice2 = np.random.randint(1, 7, size=n)
+    total = dice1 + dice2
+    prob = (total == 7).mean()
+    estimates.append(prob)
+    print(f"n={n:5d}: Estimated probability = {prob:.4f}")
+
+true_prob = 1/6
+print(f"\nTrue probability: {true_prob:.4f}")
+```
+
+## Convergence Visualization
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+fig, ax = plt.subplots(figsize=(10, 5))
+
+ax.plot(sample_sizes, estimates, 'o-', color=BRAND_COLORS["twoDark"],
+        linewidth=2.5, markersize=8, label='Estimated Probability')
+ax.axhline(y=1/6, color=BRAND_COLORS["threeDark"], linestyle='--',
+          linewidth=2, label='True Probability')
+
+# Shade confidence region (gets narrower with more samples)
+upper_bound = [1/6 + 1.96 * np.sqrt((1/6)*(5/6)/n) for n in sample_sizes]
+lower_bound = [1/6 - 1.96 * np.sqrt((1/6)*(5/6)/n) for n in sample_sizes]
+ax.fill_between(sample_sizes, lower_bound, upper_bound,
+                alpha=0.2, color=BRAND_COLORS["twoLight"],
+                label='95% Confidence Interval')
+
+ax.set_xlabel('Number of Simulations')
+ax.set_ylabel('Estimated Probability')
+ax.set_title('Convergence to True Probability', fontsize=14, weight='bold')
+ax.set_xscale('log')
+ax.grid(True, alpha=0.15)
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+## Practical Guidelines
+
+[How many simulations should you run?]{.highlight}
+
+::: incremental
+- **Quick exploration:** 1,000 simulations
+  - Good for initial insights, prototyping
+- **Business decisions:** 10,000 simulations
+  - Standard for most management science applications
+- **Critical decisions:** 100,000+ simulations
+  - Financial risk models, regulatory compliance
+- **When to stop:** When adding more simulations doesn't change your conclusion
+:::
+
+. . .
+
+:::{.callout-tip}
+**Rule of thumb:** If your decision changes with 10x more simulations, you didn't run enough!
+:::
+
+## The Monte Carlo Method
+
+[Three Simple Steps:]{.highlight}
+
+::: incremental
+1. **Model the Uncertainty:**
+   - Define probability distributions for unknown variables
+2. **Simulate Many Scenarios:**
+   - Generate thousands of possible outcomes
+3. **Analyze the Results:**
+   - Calculate statistics from the simulation
+:::
+
+. . .
+
+:::{.callout-note}
+Named after the Monte Carlo Casino in Monaco - where games of chance inspired the method's development in the 1940s.
+:::
+
+## Step 1: Model the Uncertainty
+
+[Key Function:]{.highlight} `np.random.normal(loc, scale, size)`
+
+- **loc**: The center (mean/average)
+- **scale**: The spread (standard deviation)
+- **size**: How many samples to generate
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# CloudAI startup: average 25% return, ±15% volatility
+returns = np.random.normal(loc=0.25, scale=0.15, size=10_000)
+
+print(f"Mean return: {returns.mean():.1%}")
+print(f"Std deviation: {returns.std():.1%}")
+print(f"Minimum: {returns.min():.1%}")
+print(f"Maximum: {returns.max():.1%}")
+```
+
+## Understanding the Distribution
+
+[Question]{.question}: Before we plot, what shape do you expect for `np.random.normal()`?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 5))
+plt.hist(returns, bins=50, edgecolor='black', alpha=0.7)
+plt.axvline(returns.mean(), color='red', linestyle='--', label=f'Mean: {returns.mean():.1%}')
+plt.axvline(0, color='black', linestyle='-', linewidth=2, label='Break-even')
+plt.xlabel('Return Rate')
+plt.ylabel('Frequency')
+plt.title('CloudAI: 10,000 Simulated Return Scenarios')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+## Risk Analysis
+
+[Question]{.question}: What's the probability that CloudAI loses money (return < 0)?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Calculate risk metrics
+prob_loss = (returns < 0).mean()
+prob_double = (returns > 1.0).mean()  # More than 100% return
+
+print(f"Probability of loss: {prob_loss:.1%}")
+print(f"Probability of doubling money: {prob_double:.1%}")
+```
+
+. . .
+
+:::{.callout-important}
+With 4.7% chance of loss, CloudAI is relatively safe. But what about combining multiple startups?
+:::
+
+## Different Distributions
+
+Not everything follows a normal distribution:
+
+::: panel-tabset
+
+### Normal Distribution
+```{python}
+#| eval: false
+#| echo: true
+# Most common in nature/business
+# Bell-shaped, symmetric
+returns = np.random.normal(mean, std, size)
+```
+
+### Uniform Distribution
+```{python}
+#| eval: false
+#| echo: true
+# Equal probability across range
+# Example: FinFlow returns between 10-35%
+returns = np.random.uniform(0.10, 0.35, size)
+```
+
+### Exponential Distribution
+```{python}
+#| eval: false
+#| echo: true
+# Time between events
+# Example: Customer arrivals
+times = np.random.exponential(scale, size)
+```
+:::
+
+## Portfolio Simulation: Combining Startups
+
+[Question]{.question}: If we must pick 2 of 4 startups, how many unique pairs exist?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+from itertools import combinations
+
+startups = ['CloudAI', 'GreenGrid', 'HealthTrack', 'FinFlow']
+pairs = list(combinations(startups, 2))
+
+for i, pair in enumerate(pairs, 1):
+    print(f"{i}. {pair[0]} + {pair[1]}")
+```
+
+. . .
+
+[Answer:]{.highlight} 6 unique pairs. Now let's simulate all of them!
+
+# [Advanced Techniques]{.flow} {.title}
+
+## Simulating All Four Startups
+
+```{python}
+#| eval: true
+#| echo: true
+# Define return distributions for each startup
+n_sims = 10_000
+
+# Each startup has different risk-return profile
+cloudai_returns = np.random.normal(0.25, 0.15, n_sims)     # 25% ± 15%
+greengrid_returns = np.random.normal(0.18, 0.08, n_sims)   # 18% ± 8%
+healthtrack_returns = np.random.normal(0.30, 0.25, n_sims) # 30% ± 25%
+finflow_returns = np.random.uniform(0.10, 0.35, n_sims)    # 10-35% uniform
+
+# Store in a dictionary for easy access
+startup_returns = {
+    'CloudAI': cloudai_returns,
+    'GreenGrid': greengrid_returns,
+    'HealthTrack': healthtrack_returns,
+    'FinFlow': finflow_returns
+}
+
+print("Expected returns by startup:")
+for name, returns in startup_returns.items():
+    print(f"{name:12} Mean: {returns.mean():.1%}, Risk (std): {returns.std():.1%}")
+```
+
+## Comparing Portfolio Combinations
+
+[Question]{.question}: Which metric should guide our decision: mean return, probability of loss, or something else?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Analyze each possible pair
+results = []
+
+for pair in combinations(startups, 2):
+    # Equal weight portfolio (€1M each)
+    portfolio_returns = 0.5 * startup_returns[pair[0]] + 0.5 * startup_returns[pair[1]]
+
+    results.append({
+        'Pair': f"{pair[0]} + {pair[1]}",
+        'Mean Return': portfolio_returns.mean(),
+        'Std Dev': portfolio_returns.std(),
+        'P(Loss)': (portfolio_returns < 0).mean(),
+        'P(>50%)': (portfolio_returns > 0.50).mean()
+    })
+
+# Create DataFrame for easy comparison
+import pandas as pd
+df_results = pd.DataFrame(results)
+df_results = df_results.sort_values('Mean Return', ascending=False)
+print(df_results.to_string(index=False))
+```
+
+## Risk-Return Tradeoff
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+plt.figure(figsize=(10, 6))
+
+for i, row in df_results.iterrows():
+    plt.scatter(row['Std Dev'], row['Mean Return'], s=100)
+    plt.annotate(row['Pair'], (row['Std Dev'], row['Mean Return']),
+                fontsize=9, ha='left', xytext=(5, 0), textcoords='offset points')
+
+plt.xlabel('Risk (Standard Deviation)')
+plt.ylabel('Expected Return')
+plt.title('Risk-Return Profile of Portfolio Combinations')
+plt.grid(True, alpha=0.3)
+plt.axhline(y=0, color='red', linestyle='--', alpha=0.5, label='Break-even')
+plt.legend()
+plt.show()
+```
+
+## Expected Shortfall: Measuring Tail Risk
+
+[Question]{.question}: What's the average loss in the worst 10% of scenarios?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+def expected_shortfall(returns, percentile=10):
+    """Calculate average return in worst X% of scenarios"""
+    threshold = np.percentile(returns, percentile)
+    worst_scenarios = returns[returns <= threshold]
+    return worst_scenarios.mean()
+
+# Calculate for each portfolio
+for pair in [('CloudAI', 'HealthTrack'), ('CloudAI', 'GreenGrid')]:
+    portfolio = 0.5 * startup_returns[pair[0]] + 0.5 * startup_returns[pair[1]]
+    es = expected_shortfall(portfolio)
+    print(f"{pair[0]} + {pair[1]}: Worst 10% average = {es:.1%}")
+```
+
+. . .
+
+:::{.callout-warning}
+High-return portfolios often have severe downside risk. Always check the tails!
+:::
+
+## Correlation Effects
+
+```{python}
+#| eval: true
+#| echo: true
+# What if startups are correlated? (tech bubble scenario)
+correlation_matrix = np.array([[1.0, 0.6, 0.4, 0.5],
+                               [0.6, 1.0, 0.3, 0.2],
+                               [0.4, 0.3, 1.0, 0.4],
+                               [0.5, 0.2, 0.4, 1.0]])
+
+# Generate correlated returns
+from numpy.random import multivariate_normal
+
+means = [0.25, 0.18, 0.30, 0.225]  # Average returns
+stds = [0.15, 0.08, 0.25, 0.0625]  # Standard deviations
+
+# Convert correlation to covariance
+cov_matrix = np.outer(stds, stds) * correlation_matrix
+
+# Simulate correlated returns
+correlated_returns = multivariate_normal(means, cov_matrix, size=10_000)
+
+print("With correlation, CloudAI + HealthTrack portfolio:")
+portfolio_corr = 0.5 * correlated_returns[:, 0] + 0.5 * correlated_returns[:, 2]
+print(f"Mean: {portfolio_corr.mean():.1%}")
+print(f"P(Loss): {(portfolio_corr < 0).mean():.1%}")
+```
+
+# [Using GenAI Effectively]{.flow} {.title}
+
+## Good vs Bad Prompts
+
+:::: columns
+::: {.column width="50%"}
+[Good Prompt]{.highlight}
+
+> "I have returns that follow normal(0.25, 0.15). Write numpy code to simulate 10,000 scenarios and calculate the 95% confidence interval."
+
+*You define the strategy, AI helps with syntax*
+:::
+
+::: {.column width="50%"}
+[Bad Prompt]{.highlight}
+
+> "Solve the TechVenture investment problem for me."
+
+*AI becomes the strategist - you learn nothing*
+:::
+::::
+
+. . .
+
+:::{.callout-tip}
+Use Copilot as your **syntax assistant**, not your **strategy consultant**.
+:::
+
+## Effective Copilot Patterns
+
+```{python}
+#| eval: false
+#| echo: true
+# Pattern 1: Ask for specific functions
+# "Generate 1000 samples from exponential distribution with mean 5"
+
+# Pattern 2: Ask for visualization
+# "Create histogram with vertical line at mean"
+
+# Pattern 3: Ask for metrics
+# "Calculate Value at Risk at 95% confidence level"
+```
+
+# [Your Mission Today]{.flow} {.title}
+
+## Hour 2: Interactive Notebook (45 min)
+
+**Goal:** Master Monte Carlo simulation basics
+
+**You'll build:**
+1. Simple coffee shop revenue simulator
+2. Add multiple uncertainty sources
+3. Visualize outcome distributions
+4. Calculate business metrics
+
+. . .
+
+[Key Skill:]{.highlight} Transform business problems into probability distributions
+
+## Hours 3-4: The Competition (90 min)
+
+**The TechVenture Challenge**
+
+- **Budget:** €2M (€1M per startup)
+- **Choose:** 2 out of 4 startups
+- **Optimize:** Risk-adjusted returns
+- **Deliverable:** One-slide recommendation
+
+. . .
+
+**Evaluation Criteria:**
+- Solution quality (40%)
+- Risk analysis depth (30%)
+- Business justification (20%)
+- Presentation clarity (10%)
+
+. . .
+
+[Bonus Points:]{.highlight} **10 / 6 / 3** for top three teams!
+
+# [Summary]{.flow} {.title}
+
+## Key Takeaways
+
+:::{.callout-important}
+**Today's Learning:**
+
+1. **Monte Carlo Simulation** = Model uncertainty → Simulate thousands of scenarios → Analyze the distribution
+
+2. **Risk Metrics that Matter:**
+   - Expected return (mean)
+   - Volatility (standard deviation)
+   - Probability of loss
+   - Expected shortfall (tail risk)
+
+3. **Portfolio Effects:** Combining assets changes risk profile - sometimes dramatically
+
+4. **Decision Making:** Look beyond averages - consider the full distribution of outcomes
+:::
+
+## Resources
+
+- [NumPy Random Sampling](https://numpy.org/doc/stable/reference/random/index.html)
+- [Monte Carlo Methods (Wikipedia)](https://en.wikipedia.org/wiki/Monte_Carlo_method)
+- [Portfolio Theory Basics](https://www.investopedia.com/terms/m/modernportfoliotheory.asp)
+- [Value at Risk Explained](https://www.investopedia.com/terms/v/var.asp)
+
+## Next Week Preview
+
+**Lecture 5: Forecasting the Future**
+
+- Time series analysis
+- Moving averages and trends
+- Seasonal patterns
+- Forecast accuracy metrics
+
+. . .
+
+[Let's open the notebook and start simulating!]{.highlight}

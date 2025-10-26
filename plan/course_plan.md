@@ -65,6 +65,7 @@ Students earn points in the course and the total number of points achieved lead 
 - Executive summary
 
 #### Bonus Points
+
 During lectures 4-9 students can earn bonus points if they have the best, second-best or third best solution in the competition challenge. The best solution receives 10 bonus points, the second group receives 6 bonus points and the third best group receives 3 bonus points for all group members.
 In the final presentations, each best group of the three topics with the best solution gets 10 bonus points on top (based on voting) of best solution per client and best presentation.
 
@@ -367,9 +368,10 @@ Use Monte Carlo simulation to:
 - Optional (but nice histogram or box plot comparing return distributions)
 
 **Competition Format:**
-- **60 minutes development**
-- **Submit:** one-slide PDF
-- **20 minutes:** Top 3 teams present their recommendation (2 min each + Q&A)
+- **60-70 minutes development in class**
+- **Students can continue development till next session**
+- **Present:** 2-3 slide PDF (at the start of next session)
+- **20 at start of next lecture:** Each teams present their recommendation (2 min each + Q&A)
 
 **Starter Code Provided:**
 ```python
@@ -392,24 +394,23 @@ investment_per_startup = 1_000_000  # €1M
 - Use loops or lists to avoid repetitive code
 - Copilot can help with visualization code
 
-**Assignment 1 Introduction (Last 10 min):**
-- "The Risk & Forecast Analyzer" - Due Lecture 8
-- Part A: Portfolio optimization
-- Part B: Demand forecasting implementation
-
 ### Lecture 5: Forecasting the Future
 
 **Domain Focus:** Retail & Marketing
 **Key Questions:** How can we predict future demand from historical patterns?
 
-**Hour 1: Interactive Lecture - Patterns in Data**
+**Hour 1: Student Presentations - Competition Lecture 4**
+- Students present their solutions to the last competition in short 2-3 minute pitches
+- Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
+
+**Hour 2: Interactive Lecture - Patterns in Data**
 - Show sales data: Can you spot the pattern?
 - Trend, seasonality, and residuals explained
 - The forecasting toolkit: MA, exponential smoothing, seasonal models
 - Cost of forecast errors
 - Simple methods often win
 
-**Hour 2: Notebook Session - Time Series & Forecasting Methods**
+**Hour 3: Notebook Session - Time Series & Forecasting Methods**
 
 ```python
 # Part 1: Working with Time Series Data (20 min)
@@ -436,17 +437,21 @@ def forecast_demand(historical_data, method='exponential'):
 ```
 **Discussion (last 5 minutes):** What do the results tell us? Share insights, debugging tips, interpretation challenges.
 
-**Hours 3-4: Competition - "The Predictor"**
+**Hours 4: Competition - "The Predictor"**
 - **Scenario:** Major retailer needs inventory planning for four christmas weeks
 - **Data Provided:**
   - 2 years of weekly sales for 3 products
 - **Task:**  December demand forecast per product
 - **Competition Format:**
-  - 60 minutes development
-  - 10 minutes teams receive held-out data to test their algorithm
-  - Accuracy comparison (using held-out data)
+  - 60 minutes development (in class), rest at home
   - Visualization of results
+  - Comparison to real values (known by lecturer) in next session
 - **Bonus Points:** Lowest total forecast error
+
+**Assignment 1 Introduction (Last 10 min):**
+- "The Risk & Forecast Analyzer" - Due Lecture 8
+- Part A: Portfolio optimization
+- Part B: Demand forecasting implementation
 
 ### Lecture 6: Smart Quick Decisions in Scheduling
 
@@ -454,7 +459,11 @@ def forecast_demand(historical_data, method='exponential'):
 **Key Question:** Can simple rules solve complex scheduling problems quickly?
 **Core Concept:** Greedy/Constructive Heuristics
 
-**Hour 1: Interactive Lecture - The Power of Simple Rules**
+**Hour 1: Student Presentations - Competition Lecture 5**
+- Students present their solutions to the last competition in short 2-3 minute pitches
+- Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
+
+**Hour 2: Interactive Lecture - The Power of Simple Rules**
 - The job shop scheduling problem: Why it's NP-hard (brief!!)
 - Live demonstration: "The Pizza Kitchen Crisis"
   - 5 pizzas, 3 ovens, different cooking times
@@ -466,7 +475,7 @@ def forecast_demand(historical_data, method='exponential'):
 - Real-world impact: How Toyota uses these rules
 - When greedy works (and when it fails spectacularly)
 
-**Hour 2: Notebook Session - Building Schedulers**
+**Hour 3: Notebook Session - Building Schedulers**
 *Interactive Notebook: job_shop_greedy.ipynb*
 ```python
 # Students will implement:
@@ -501,7 +510,7 @@ def calculate_metrics(self, schedule):
   - Can you think of scenarios where each would win?
   - What if we combined rules?
 
-**Hours 3-4: Competition - "The Bike Factory Friday Crisis"**
+**Hours 4: Competition - "The Bike Factory Friday Crisis"**
 - **Scenario:** Custom bicycle factory, Friday afternoon chaos
   - "We just got 8 rush orders for Monday delivery!"
   - 16 total jobs for weekend production
@@ -517,11 +526,10 @@ def calculate_metrics(self, schedule):
 - **Task:** Minimize total cost (overtime)
 
 - **Competition Format:**
-  - 60 minutes development
+  - 60 minutes development in class, continue at home
   - Can use any greedy rule or combination
   - Submit schedule + cost calculation
   - Comparisons of total cost
-  - Winner presents their rule and explains why it worked
 
 - **Bonus Points:** Lowest total cost
 
@@ -535,7 +543,11 @@ def calculate_metrics(self, schedule):
 **Key Question:** How do we systematically improve solutions?
 **Core Concept:** Local Search and 2-Opt
 
-**Hour 1: Interactive Lecture - The Traveling Salesman Problem**
+**Hour 1: Student Presentations - Competition Lecture 6**
+- Students present their solutions to the last competition in short 2-3 minute pitches
+- Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
+
+**Hour 2: Interactive Lecture - The Traveling Salesman Problem**
 - What is TSP? Real-world examples (delivery, drilling, genome sequencing)
 - Why is it hard? (Factorial growth: 10! = 3.6M routes)
 - Construction heuristics: Nearest neighbor (greedy)
@@ -547,7 +559,7 @@ def calculate_metrics(self, schedule):
   - Swap: exchange customers between routes
   - Relocate: move one customer to different position
 
-**Hour 2: Notebook Session - Building a TSP solver**
+**Hour 3: Notebook Session - Building a TSP solver**
 ```python
 # Provided to students:
 - Distance calculation function
@@ -584,7 +596,7 @@ def improve_route(route, distances):
   - Why does it eventually stop improving?
   - Ideas for escaping local optima?
 
-**Hours 3-4: Competition - "The Bakery Delivery Route"**
+**Hours 4: Competition - "The Bakery Delivery Route"**
 - **Scenario:** Artisan bakery delivers to 12 cafes each morning
   - "We promise fresh bread every morning!"
   - Must visit all cafes exactly once
@@ -615,7 +627,11 @@ def improve_route(route, distances):
 **Key Question:** What do you do when you can't have it all?
 **Core Concept:** Multi-Objective Optimization & Pareto Frontiers
 
-**Hour 1: Interactive Lecture - The Balance Challenge**
+**Hour 1: Student Presentations - Competition Lecture 7**
+- Students present their solutions to the last competition in short 2-3 minute pitches
+- Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
+
+**Hour 2: Interactive Lecture - The Balance Challenge**
 - **Opening Hook:** "The Tesla Dilemma"
   - Making electric cars (performance vs. range vs. cost)
   - "You can't maximize everything - every design is a trade-off"
@@ -650,7 +666,7 @@ def improve_route(route, distances):
   - Amazon: "Fast shipping costs more, so we offer Prime vs. Standard"
   - Airlines: "We balance on-time vs. fuel cost with buffer time"
 
-**Hour 2: Notebook Session - Weighted Sum in Action**
+**Hour 3: Notebook Session - Weighted Sum in Action**
 *Students implement a simple delivery assignment problem with two objectives*
 
 ```python
@@ -691,7 +707,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   - How would you present these trade-offs to a CEO?
   - What if the CEO says "I want low cost AND low emissions"?
 
-**Hours 3-4: Competition - "The Green Logistics Challenge"**
+**Hours 4: Competition - "The Green Logistics Challenge"**
 
 - **Scenario:** Logistics company facing new EU regulations
   - "We must cut carbon 40% by 2030 while staying profitable and maintaining service"
@@ -720,9 +736,9 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   4. Brief justification (1-2 sentences): Why these weights?
 
 - **Competition Format:**
-  - **60 minutes development**
+  - **60 minutes development in classe, continue at home**
   - Students can use greedy assignment (from Lecture 6) with weighted sum
-  - Submit: metrics + one visualization slide
+  - Present: metrics + 2-3 visualization slides
   - **Evaluation**: Each team picks their own weights (must justify)
   - **Winner**: Best solution quality given their stated weights + best justification
 
@@ -732,7 +748,11 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 **Key Question:** What advanced techniques exist when greedy and local search aren't enough?
 **Core Concept:** Survey of Metaheuristics (awareness, not implementation)
 
-**Hour 1: Interactive Lecture - The Optimization Landscape**
+**Hour 1: Student Presentations - Competition Lecture 8**
+- Students present their solutions to the last competition in short 2-3 minute pitches
+- Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
+
+**Hour 2: Interactive Lecture - The Optimization Landscape**
 
 - **Opening: The Local Optima Trap** (10 min)
   - "Remember Lecture 7? Our 2-opt improvement got stuck."
@@ -809,7 +829,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   - "With GenAI, you can use these techniques even without deep expertise"
   - "In today's notebook, you'll see examples and learn how to work WITH AI to apply them"
 
-**Hour 2: Interactive Notebook - Metaheuristics in Action (Demos + GenAI Integration)**
+**Hour 3: Interactive Notebook - Metaheuristics in Action (Demos + GenAI Integration)**
 
 **NEW APPROACH:** Students don't implement from scratch - they run provided implementations and learn to use GenAI to adapt them
 
@@ -870,7 +890,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 - "Which one would you try first for your consulting project?"
 - "How confident do you feel using GenAI to implement these?"
 
-**Hours 3-4: Competition - "The Weekend Restaurant Staffing Challenge"**
+**Hours 4: Competition - "The Weekend Restaurant Staffing Challenge"**
 
 - **Scenario:** A three Michelin star restaurant weekend scheduling crisis
   - "I need to schedule my 18 servers across 6 shifts this weekend"
@@ -946,7 +966,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   5. Brief explanation (2-3 sentences): What was your approach?
 
 - **Competition Format:**
-  - **60 minutes development**
+  - 60 minutes development in class, rest at home
   - **Any approach accepted** - From simple greedy to advanced metaheuristics
   - **GenAI is your partner** - Use it strategically!
   - Submit: one-slide summary with schedule + costs + approach description
@@ -980,7 +1000,11 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 
 ### Lecture 9: Client Briefings
 
-**Hour 1: The Projects**
+**Hour 1: Student Presentations - Competition Lecture 9**
+- Students present their solutions to the last competition in short 2-3 minute pitches
+- Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
+
+**Hour 2: The Projects**
 
 **The Setup:**
 "Welcome to Management Consulting! Three major clients need your expertise and each group picks one client. Each has critical business problems requiring advanced analytics. You have 3 sessions to develop and present your solution."
@@ -1048,7 +1072,7 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 3. Small simulation to show the forecasted deliveries
 4. Cost saving estimation due to better allocation
 
-**Hour 2: Data Release & Exploration**
+**Data Release & Exploration**
 
 - Each package contains:
   - Comprehensive data files
