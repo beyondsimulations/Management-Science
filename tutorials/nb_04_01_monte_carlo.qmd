@@ -459,7 +459,7 @@ best_mean_value = # Your task!
 
 ```
 
-::{.content-visible when-profile="solutions"}
+:::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
 # SOLUTION
@@ -503,8 +503,6 @@ print("Portfolio analysis correct!")
 print("\nAll Portfolio Combinations:")
 print(df_portfolios.to_string(index=False))
 ```
-
-:
 
 # Section 5 - Making Strategic Recommendations
 

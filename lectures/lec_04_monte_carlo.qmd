@@ -558,7 +558,6 @@ startup_returns = {
 ```{python}
 #| eval: true
 #| echo: false
-#| output-location: fragment
 # Visualize all four startup distributions
 setup_clean_style()
 fig, axes = plt.subplots(2, 2)

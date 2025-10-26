@@ -460,11 +460,11 @@ uv add package_name
 ## Normal Distribution
 
 - **When to Use**: Most common in business and nature; symmetric outcomes around a mean
-- **Characteristics**: 
+- **Characteristics**:
   - Bell-shaped, symmetric curve
   - Most values cluster around the mean
   - Rare extreme values in tails
-- **Examples**: 
+- **Examples**:
   - Investment returns
   - Manufacturing variations
   - Employee performance scores
@@ -473,6 +473,7 @@ uv add package_name
 **Python Syntax:**
 
 ```{python}
+#| eval: false
 import numpy as np
 
 # Generate normal distribution
@@ -504,6 +505,7 @@ stock_returns = np.random.normal(loc=0.10, scale=0.15, size=10000)
 **Python Syntax:**
 
 ```{python}
+#| eval: false
 # Generate uniform distribution
 values = np.random.uniform(low=minimum, high=maximum, size=n_samples)
 
@@ -534,6 +536,7 @@ demand = np.random.uniform(low=1000, high=5000, size=10000)
 **Python Syntax:**
 
 ```{python}
+#| eval: false
 # Generate exponential distribution
 wait_times = np.random.exponential(scale=average_time, size=n_samples)
 
@@ -563,6 +566,7 @@ arrivals = np.random.exponential(scale=5, size=10000)
 **Python Syntax:**
 
 ```{python}
+#| eval: false
 # Generate binomial distribution
 successes = np.random.binomial(n=n_trials, p=prob_success, size=n_samples)
 
@@ -576,72 +580,13 @@ conversions = np.random.binomial(n=100, p=0.20, size=10000)
 - `p`: Probability of success on each trial
 - `size`: Number of experiments to simulate
 
-## Generating Correlated Random Variables
-
-- **When to Use**: When multiple uncertain variables influence each other
-- **Characteristics**:
-  - Variables move together (positively correlated)
-  - Variables move opposite (negatively correlated)
-  - Correlation coefficient: -1 to +1
-- **Examples**:
-  - Returns of stocks in same industry
-  - Sales of related products
-  - Costs that depend on same commodity price
-
-**Python Syntax:**
-
-```{python}
-# Generate correlated variables using multivariate normal
-mean = [mean1, mean2]  # Means of two variables
-cov_matrix = [[var1, cov12],  # Covariance matrix
-              [cov12, var2]]
-
-# Generate correlated samples
-samples = np.random.multivariate_normal(mean, cov_matrix, size=n_samples)
-var1_samples = samples[:, 0]
-var2_samples = samples[:, 1]
-
-# Example: Two correlated stock returns
-mean = [0.10, 0.12]  # 10% and 12% expected returns
-# Correlation = 0.6, std devs = 0.15 and 0.20
-cov_matrix = [[0.15**2, 0.6*0.15*0.20],
-              [0.6*0.15*0.20, 0.20**2]]
-returns = np.random.multivariate_normal(mean, cov_matrix, 10000)
-stock_A = returns[:, 0]
-stock_B = returns[:, 1]
-```
-
-**Parameters:**
-
-- `mean`: List of means for each variable
-- `cov`: Covariance matrix (includes variances and covariances)
-- `size`: Number of samples to generate
-
-**Note:** To calculate covariance from correlation:
-
-```{python}
-# Covariance = correlation × std_dev1 × std_dev2
-correlation = 0.8
-std1 = 0.15
-std2 = 0.20
-covariance = correlation * std1 * std2
-```
-
-## Quick Reference Table
-
-| Distribution | Use Case | Python Function | Key Parameters |
-|--------------|----------|-----------------|----------------|
-| **Normal** | Symmetric outcomes around mean | `np.random.normal()` | `loc` (mean), `scale` (std) |
-| **Uniform** | Equal probability in range | `np.random.uniform()` | `low` (min), `high` (max) |
-| **Exponential** | Time between events | `np.random.exponential()` | `scale` (average time) |
-| **Binomial** | Count of successes in trials | `np.random.binomial()` | `n` (trials), `p` (probability) |
-| **Multivariate Normal** | Correlated variables | `np.random.multivariate_normal()` | `mean` (list), `cov` (matrix) |
-
 ## Common Risk Metrics
 
 **Calculate from simulated results:**
 
 ```{python}
+#| eval: false
+
 # Basic statistics
 mean_return = results.mean()
 std_dev = results.std()
