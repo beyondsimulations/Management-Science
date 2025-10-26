@@ -14,6 +14,7 @@ Welcome back to Bean Counter, CEO! In the lecture, we saw how Monte Carlo simula
 **Your CEO Challenge:** Bean Counter Expansion - analyzing single locations and portfolios for strategic growth
 
 **Key Skills for Competition:**
+
 - Simulating uncertain returns
 - Analyzing risk metrics
 - Comparing portfolio combinations
@@ -24,7 +25,7 @@ Welcome back to Bean Counter, CEO! In the lecture, we saw how Monte Carlo simula
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from itertools import combinations
+from itertools import combinations # Allows us to generate all portfolio combinations
 
 # Set seed for reproducibility
 np.random.seed(42)
@@ -71,17 +72,6 @@ max_purchase =
 
 ```
 
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below - these test your solution
-assert len(purchase_amounts) == 10_000, "Should have 10,000 simulations"
-assert 9.9 < mean_purchase < 10.1, f"Mean should be ~10, got {mean_purchase:.2f}"
-assert 8 <= min_purchase < 9, f"Min should be ~8, got {min_purchase:.2f}"
-assert 11 < max_purchase <= 12, f"Max should be ~12, got {max_purchase:.2f}"
-print("✓ Purchase simulation correct!")
-```
-
 :::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
@@ -91,18 +81,23 @@ purchase_amounts = np.random.uniform(8, 12, size=10_000)
 mean_purchase = purchase_amounts.mean()
 min_purchase = purchase_amounts.min()
 max_purchase = purchase_amounts.max()
+```
+:::
 
+```{python}
+#| eval: false
+#| code-fold: true
+# Don't modify below - these test your solution
 assert len(purchase_amounts) == 10_000, "Should have 10,000 simulations"
 assert 9.9 < mean_purchase < 10.1, f"Mean should be ~10, got {mean_purchase:.2f}"
 assert 8 <= min_purchase < 9, f"Min should be ~8, got {min_purchase:.2f}"
 assert 11 < max_purchase <= 12, f"Max should be ~12, got {max_purchase:.2f}"
-print("✓ Purchase simulation correct!")
+print("Great, the purchase simulation is correct!")
 ```
-:::
 
 ## Exercise 1.2 - Calculate Probabilities
 
-Using your simulated data, calculate key probabilities.
+Using your simulated data from the previous task, calculate key probabilities.
 
 ```{python}
 #| eval: false
@@ -121,19 +116,6 @@ prob_normal =
 
 ```
 
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below
-assert 0.10 < prob_high < 0.20, f"High probability should be ~0.16, got {prob_high:.3f}"
-assert 0.10 < prob_low < 0.20, f"Low probability should be ~0.16, got {prob_low:.3f}"
-assert 0.65 < prob_normal < 0.72, f"Normal range probability should be ~0.68, got {prob_normal:.3f}"
-print("✓ Probability calculations correct!")
-print(f"  P(>120): {prob_high:.1%}")
-print(f"  P(<80): {prob_low:.1%}")
-print(f"  P(80-120): {prob_normal:.1%}")
-```
-
 :::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
@@ -142,15 +124,22 @@ prob_high = (many_days > 120).mean()
 prob_low = (many_days < 80).mean()
 prob_normal = ((many_days >= 80) & (many_days <= 120)).mean()
 
+```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Don't modify below
 assert 0.10 < prob_high < 0.20, f"High probability should be ~0.16, got {prob_high:.3f}"
 assert 0.10 < prob_low < 0.20, f"Low probability should be ~0.16, got {prob_low:.3f}"
 assert 0.65 < prob_normal < 0.72, f"Normal range probability should be ~0.68, got {prob_normal:.3f}"
-print("✓ Probability calculations correct!")
 print(f"  P(>120): {prob_high:.1%}")
 print(f"  P(<80): {prob_low:.1%}")
 print(f"  P(80-120): {prob_normal:.1%}")
+print("Wonderful, probability calculations correct!")
 ```
-:::
+
 
 # Section 2 - Building a Complete Business Simulation
 
@@ -203,29 +192,10 @@ results = []
 for i in range(n_simulations):
     # Simulate one day and add to results
 
-
-
-# Convert to DataFrame
-df = pd.DataFrame(results)
-
-# Calculate key metrics
+# Calculate key metrics (Tip: a DataFrame could help here!)
 mean_profit =
 prob_loss =
 max_profit =
-
-```
-
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below
-assert len(df) == 10_000, "Should have 10,000 simulations"
-assert 200 < mean_profit < 300, f"Mean profit should be ~250, got {mean_profit:.2f}"
-assert 0.02 < prob_loss < 0.08, f"Probability of loss should be ~5%, got {prob_loss:.1%}"
-assert max_profit > 500, f"Max profit should be >500, got {max_profit:.2f}"
-print("✓ Simulation correct!")
-print(f"  Mean daily profit: €{mean_profit:.2f}")
-print(f"  Probability of loss: {prob_loss:.1%}")
 ```
 
 :::{.content-visible when-profile="solutions"}
@@ -245,51 +215,38 @@ mean_profit = df['profit'].mean()
 prob_loss = (df['profit'] < 0).mean()
 max_profit = df['profit'].max()
 
-assert len(df) == 10_000, "Should have 10,000 simulations"
-assert 200 < mean_profit < 300, f"Mean profit should be ~250, got {mean_profit:.2f}"
-assert 0.02 < prob_loss < 0.08, f"Probability of loss should be ~5%, got {prob_loss:.1%}"
-assert max_profit > 500, f"Max profit should be >500, got {max_profit:.2f}"
-print("✓ Simulation correct!")
-print(f"  Mean daily profit: €{mean_profit:.2f}")
-print(f"  Probability of loss: {prob_loss:.1%}")
 ```
 :::
-
-## Exercise 2.2 - Visualize the Distribution
-
-Create a histogram of profit distribution with key markers.
-
-```{python}
-#| eval: false
-# YOUR CODE BELOW
-# Create a histogram of the profit distribution
-plt.figure(figsize=(10, 6))
-
-# Create histogram (use 50 bins)
-
-
-# Add vertical lines for mean (green) and break-even (red)
-
-
-# Add labels and title
-plt.xlabel('Daily Profit (€)')
-plt.ylabel('Frequency')
-plt.title('Bean Counter Daily Profit Distribution (10,000 simulations)')
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.show()
-
-# Calculate what percentage of profits are between €100 and €400
-prob_target_range =
-
-```
 
 ```{python}
 #| eval: false
 #| code-fold: true
 # Don't modify below
-assert 0.85 < prob_target_range < 0.95, f"Should be ~90% in range, got {prob_target_range:.1%}"
-print(f"✓ Visualization complete! {prob_target_range:.1%} of days have profit €100-400")
+assert len(df) == 10_000, "Should have 10,000 simulations"
+assert 200 < mean_profit < 300, f"Mean profit should be ~250, got {mean_profit:.2f}"
+assert 0.02 < prob_loss < 0.08, f"Probability of loss should be ~5%, got {prob_loss:.1%}"
+assert max_profit > 500, f"Max profit should be >500, got {max_profit:.2f}"
+print("Very good, the simulation is correct!")
+print(f"  Mean daily profit: €{mean_profit:.2f}")
+print(f"  Probability of loss: {prob_loss:.1%}")
+```
+
+
+## Exercise 2.2 - Visualize the Distribution
+
+Create a histogram of profit distribution and the percentage of profits between 100 and 400 Euro with key markers based on the results before.
+
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+
+# Calculate what percentage of profits are between €100 and €400
+prob_target_range =
+
+
+# Create a histogram of the profit distribution with 50 bins
+
+
 ```
 
 :::{.content-visible when-profile="solutions"}
@@ -312,10 +269,17 @@ plt.show()
 
 prob_target_range = ((df['profit'] >= 100) & (df['profit'] <= 400)).mean()
 
+```
+:::
+
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Don't modify below
 assert 0.85 < prob_target_range < 0.95, f"Should be ~90% in range, got {prob_target_range:.1%}"
 print(f"✓ Visualization complete! {prob_target_range:.1%} of days have profit €100-400")
 ```
-:::
 
 # Section 3 - Risk Metrics and Decision Making
 
@@ -337,6 +301,12 @@ print(f"Interpretation: There's a 5% chance of daily profit below €{var_5:.2f}
 var_1 = np.percentile(profits_array, 1)
 print(f"\nValue at Risk (1%): €{var_1:.2f}")
 print(f"Interpretation: There's a 1% chance of daily profit below €{var_1:.2f}")
+
+# Standard deviation
+std_dev = np.std(profits_array)
+print(f"\nStandard deviation: €{std_dev:.2f}")
+print(f"Interpretation: Daily profit typically varies by €{std_dev:.2f} from the mean")
+#
 ```
 
 ## Exercise 3.1 - Calculate Risk Metrics
@@ -359,26 +329,7 @@ worst_10_pct_threshold = np.percentile(profits_array, 10)
 worst_days = profits_array[profits_array <= worst_10_pct_threshold]
 expected_shortfall =
 
-# Sharpe Ratio: (mean - risk_free) / std
-# Assume risk-free rate is €50 (alternative investment)
-risk_free = 50
-sharpe_ratio =
 
-```
-
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below
-assert 110 < volatility < 130, f"Volatility should be ~120, got {volatility:.2f}"
-assert 0.55 < prob_good_day < 0.75, f"Probability should be ~65%, got {prob_good_day:.1%}"
-assert 50 < expected_shortfall < 100, f"ES should be ~75, got {expected_shortfall:.2f}"
-assert 1.5 < sharpe_ratio < 2.5, f"Sharpe ratio should be ~2.0, got {sharpe_ratio:.2f}"
-print("✓ Risk metrics correct!")
-print(f"  Volatility: €{volatility:.2f}")
-print(f"  P(Profit ≥ €200): {prob_good_day:.1%}")
-print(f"  Expected Shortfall (10%): €{expected_shortfall:.2f}")
-print(f"  Sharpe Ratio: {sharpe_ratio:.2f}")
 ```
 
 :::{.content-visible when-profile="solutions"}
@@ -392,24 +343,25 @@ worst_10_pct_threshold = np.percentile(profits_array, 10)
 worst_days = profits_array[profits_array <= worst_10_pct_threshold]
 expected_shortfall = worst_days.mean()
 
-risk_free = 50
-sharpe_ratio = (profits_array.mean() - risk_free) / volatility
-
-assert 110 < volatility < 130, f"Volatility should be ~120, got {volatility:.2f}"
-assert 0.55 < prob_good_day < 0.75, f"Probability should be ~65%, got {prob_good_day:.1%}"
-assert 50 < expected_shortfall < 100, f"ES should be ~75, got {expected_shortfall:.2f}"
-assert 1.5 < sharpe_ratio < 2.5, f"Sharpe ratio should be ~2.0, got {sharpe_ratio:.2f}"
-print("✓ Risk metrics correct!")
-print(f"  Volatility: €{volatility:.2f}")
-print(f"  P(Profit ≥ €200): {prob_good_day:.1%}")
-print(f"  Expected Shortfall (10%): €{expected_shortfall:.2f}")
-print(f"  Sharpe Ratio: {sharpe_ratio:.2f}")
 ```
 :::
 
-# Section 4 - Portfolio Analysis (Competition Training!)
+```{python}
+#| eval: false
+#| code-fold: true
+# Don't modify below
+assert 110 < volatility < 130, f"Volatility should be ~120, got {volatility:.2f}"
+assert 0.55 < prob_good_day < 0.75, f"Probability should be ~65%, got {prob_good_day:.1%}"
+assert 50 < expected_shortfall < 100, f"ES should be ~75, got {expected_shortfall:.2f}"
+print("Risk metrics correct!")
+print(f"  Volatility: €{volatility:.2f}")
+print(f"  P(Profit ≥ €200): {prob_good_day:.1%}")
+print(f"  Expected Shortfall (10%): €{expected_shortfall:.2f}")
+```
 
-Now we'll analyze portfolios of coffee shops - directly applicable to the TechVenture competition!
+# Section 4 - Portfolio Analysis
+
+Now we'll analyze portfolios of coffee shops!
 
 ## Simulating Multiple Locations
 
@@ -464,16 +416,17 @@ for name, params in locations.items():
 
 ## Exercise 4.1 - Analyze All Portfolio Combinations
 
-Bean Counter can afford to open exactly 2 new locations. Which pair should they choose for maximum profitability?
+Bean Counter can afford to open exactly 2 new locations.
+Which pair should they choose for maximum profitability?
 
 ```{python}
 #| eval: false
-# YOUR CODE BELOW
 # Analyze all possible pairs of locations
-
 # Get all combinations of 2 locations
 location_names = list(locations.keys())
 pairs = list(combinations(location_names, 2))
+
+# YOUR CODE BELOW
 
 # Analyze each portfolio
 portfolio_results = []
@@ -484,15 +437,15 @@ for pair in pairs:
     profits_2 = location_profits[pair[1]]
 
     # Portfolio assumes equal investment (50/50 split)
-    portfolio_profit =
+    portfolio_profit = # Your task!
 
     # Calculate metrics
     result = {
         'pair': f"{pair[0]} + {pair[1]}",
-        'mean': ,
-        'std': ,
-        'prob_loss': ,
-        'var_5':
+        'mean': , # Your task!
+        'std': , # Your task!
+        'prob_loss': , # Your task!
+        'var_5': # Your task!
     }
     portfolio_results.append(result)
 
@@ -501,25 +454,12 @@ df_portfolios = pd.DataFrame(portfolio_results)
 df_portfolios = df_portfolios.sort_values('mean', ascending=False)
 
 # Find best portfolio by mean return
-best_mean_portfolio =
-best_mean_value =
+best_mean_portfolio = # Your task!
+best_mean_value = # Your task!
 
 ```
 
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below
-assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
-assert 'Downtown + Campus' in best_mean_portfolio or 'Campus + Downtown' in best_mean_portfolio, \
-    f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
-assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
-print("✓ Portfolio analysis correct!")
-print("\nAll Portfolio Combinations:")
-print(df_portfolios.to_string(index=False))
-```
-
-:::{.content-visible when-profile="solutions"}
+::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
 # SOLUTION
@@ -548,88 +488,27 @@ df_portfolios = df_portfolios.sort_values('mean', ascending=False)
 
 best_mean_portfolio = df_portfolios.iloc[0]['pair']
 best_mean_value = df_portfolios.iloc[0]['mean']
-
-assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
-assert 'Downtown + Campus' in best_mean_portfolio or 'Campus + Downtown' in best_mean_portfolio, \
-    f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
-assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
-print("✓ Portfolio analysis correct!")
-print("\nAll Portfolio Combinations:")
-print(df_portfolios.to_string(index=False))
 ```
 :::
-
-## Exercise 4.2 - Risk-Adjusted Selection
-
-The best mean return isn't always the best choice. Find the best risk-adjusted portfolio.
-
-```{python}
-#| eval: false
-# YOUR CODE BELOW
-# Calculate Sharpe ratio for each portfolio (assuming risk-free = €100)
-risk_free_rate = 100
-
-sharpe_ratios = []
-for _, row in df_portfolios.iterrows():
-    sharpe =
-    sharpe_ratios.append(sharpe)
-
-df_portfolios['sharpe'] = sharpe_ratios
-
-# Find best Sharpe ratio portfolio
-df_portfolios_sharpe = df_portfolios.sort_values('sharpe', ascending=False)
-best_sharpe_portfolio =
-best_sharpe_value =
-
-# Also find the safest portfolio (lowest probability of loss)
-safest_portfolio =
-safest_prob_loss =
-
-```
 
 ```{python}
 #| eval: false
 #| code-fold: true
 # Don't modify below
-assert best_sharpe_value > 2.0, f"Best Sharpe should be >2.0, got {best_sharpe_value:.2f}"
-assert safest_prob_loss < 0.01, f"Safest should have <1% loss probability, got {safest_prob_loss:.3f}"
-print("✓ Risk-adjusted analysis correct!")
-print(f"\nBest Sharpe Ratio: {best_sharpe_portfolio} (Sharpe: {best_sharpe_value:.2f})")
-print(f"Safest Portfolio: {safest_portfolio} (P(Loss): {safest_prob_loss:.1%})")
+assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
+assert 'Downtown + Campus' in best_mean_portfolio or 'Campus + Downtown' in best_mean_portfolio, \
+    f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
+assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
+print("Portfolio analysis correct!")
+print("\nAll Portfolio Combinations:")
+print(df_portfolios.to_string(index=False))
 ```
 
-:::{.content-visible when-profile="solutions"}
-```{python}
-#| eval: true
-# SOLUTION
-risk_free_rate = 100
-
-sharpe_ratios = []
-for _, row in df_portfolios.iterrows():
-    sharpe = (row['mean'] - risk_free_rate) / row['std']
-    sharpe_ratios.append(sharpe)
-
-df_portfolios['sharpe'] = sharpe_ratios
-
-df_portfolios_sharpe = df_portfolios.sort_values('sharpe', ascending=False)
-best_sharpe_portfolio = df_portfolios_sharpe.iloc[0]['pair']
-best_sharpe_value = df_portfolios_sharpe.iloc[0]['sharpe']
-
-df_portfolios_safe = df_portfolios.sort_values('prob_loss')
-safest_portfolio = df_portfolios_safe.iloc[0]['pair']
-safest_prob_loss = df_portfolios_safe.iloc[0]['prob_loss']
-
-assert best_sharpe_value > 2.0, f"Best Sharpe should be >2.0, got {best_sharpe_value:.2f}"
-assert safest_prob_loss < 0.01, f"Safest should have <1% loss probability, got {safest_prob_loss:.3f}"
-print("✓ Risk-adjusted analysis correct!")
-print(f"\nBest Sharpe Ratio: {best_sharpe_portfolio} (Sharpe: {best_sharpe_value:.2f})")
-print(f"Safest Portfolio: {safest_portfolio} (P(Loss): {safest_prob_loss:.1%})")
-```
-:::
+:
 
 # Section 5 - Making Strategic Recommendations
 
-Now let's visualize and make a final recommendation - just like in the competition!
+Now let's visualize and make a final recommendation!
 
 ## Visualizing Risk-Return Tradeoffs
 
@@ -665,36 +544,8 @@ max_profit_portfolio =
 # Which portfolio minimizes risk (lowest std)?
 min_risk_portfolio =
 
-# Which portfolio has the best risk-adjusted return (Sharpe)?
-best_balanced_portfolio =
-
 # Your final recommendation (choose one)
 final_recommendation = # Choose the portfolio you would recommend
-
-# Justification score (0-100) based on multiple criteria
-# Higher score = better choice
-def score_portfolio(pair_name):
-    row = df_portfolios[df_portfolios['pair'] == pair_name].iloc[0]
-    score = 0
-    score += min(40, row['mean'] / 10)  # Up to 40 points for profit
-    score += min(30, (1 - row['prob_loss']) * 30)  # Up to 30 points for low loss probability
-    score += min(30, row['sharpe'] * 10)  # Up to 30 points for Sharpe ratio
-    return score
-
-recommendation_score = score_portfolio(final_recommendation)
-
-```
-
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below
-assert final_recommendation in df_portfolios['pair'].values, "Must choose an actual portfolio"
-assert recommendation_score > 60, f"Your choice scores {recommendation_score:.1f}/100 - try a different portfolio"
-print("✓ Recommendation accepted!")
-print(f"\nYour Recommendation: {final_recommendation}")
-print(f"Score: {recommendation_score:.1f}/100")
-print("\nJustification: This portfolio balances profit potential with acceptable risk.")
 ```
 
 :::{.content-visible when-profile="solutions"}
@@ -719,36 +570,17 @@ def score_portfolio(pair_name):
 recommendation_score = score_portfolio(final_recommendation)
 
 assert final_recommendation in df_portfolios['pair'].values, "Must choose an actual portfolio"
-assert recommendation_score > 60, f"Your choice scores {recommendation_score:.1f}/100 - try a different portfolio"
-print("✓ Recommendation accepted!")
 print(f"\nYour Recommendation: {final_recommendation}")
 print(f"Score: {recommendation_score:.1f}/100")
-print("\nJustification: This portfolio balances profit potential with acceptable risk.")
 ```
 :::
 
-## Creating Your One-Slide Summary
-
 ```{python}
-#| eval: true
-# Generate summary statistics for the recommended portfolio
-recommended = df_portfolios[df_portfolios['pair'] == best_balanced_portfolio].iloc[0]
-
-print("=" * 60)
-print(" ONE-SLIDE RECOMMENDATION: BEAN COUNTER EXPANSION STRATEGY")
-print("=" * 60)
-print(f"\n➤ RECOMMENDATION: Open {recommended['pair']}")
-print(f"\n➤ KEY METRICS:")
-print(f"   • Expected Daily Profit: €{recommended['mean']:.2f}")
-print(f"   • Risk (Std Dev): €{recommended['std']:.2f}")
-print(f"   • Probability of Loss: {recommended['prob_loss']:.1%}")
-print(f"   • Value at Risk (5%): €{recommended['var_5']:.2f}")
-print(f"   • Sharpe Ratio: {recommended['sharpe']:.2f}")
-print(f"\n➤ JUSTIFICATION:")
-print(f"   • Strong risk-adjusted returns (Sharpe > 2.0)")
-print(f"   • Minimal downside risk (<1% chance of loss)")
-print(f"   • Diversified customer base reduces volatility")
-print("=" * 60)
+#| eval: false
+#| code-fold: true
+# Don't modify below
+assert final_recommendation in df_portfolios['pair'].values, "Must choose an actual portfolio"
+print(f"\nYour Recommendation: {final_recommendation}")
 ```
 
 # Conclusion
@@ -757,7 +589,7 @@ print("=" * 60)
 
 - **Simulating uncertain returns** using probability distributions
 - **Running thousands of scenarios** with Monte Carlo
-- **Calculating risk metrics** (VaR, Expected Shortfall, Sharpe Ratio)
+- **Calculating risk metrics** (VaR, Expected Shortfall)
 - **Comparing portfolio combinations** systematically
 - **Making data-driven recommendations** with clear justification
 
