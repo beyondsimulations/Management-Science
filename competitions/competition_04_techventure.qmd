@@ -1,10 +1,6 @@
 ---
 title: "Competition - TechVenture Investment Challenge"
 subtitle: "Lecture 4 - Management Science"
-format:
-  html:
-    code-fold: true
-    code-tools: true
 ---
 
 # Client Briefing: TechVenture Innovation Fund
