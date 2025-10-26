@@ -37,9 +37,10 @@ subtitle: "Management Science"
 
 **Format for Lectures 4-9:**
 
-- **Hour 1:** Interactive lecture on core concepts
-- **Hour 2:** Hands-on notebook practice + class discussion
-- **Hours 3-4:** Mini-competition with real data + solution presentations
+- **Hour 1:** Solution presentations of previous competition
+- **Hour 2:** Interactive lecture on core concepts
+- **Hour 3:** Hands-on notebook practice + class discussion
+- **Hour 4:** Mini-competition with real data
 - **Bonus Points:** Best solution teams earn points toward final grade
 
 ### Lecture 4: Dealing with Uncertainty - Monte Carlo Simulation
