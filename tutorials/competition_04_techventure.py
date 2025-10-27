@@ -255,11 +255,3 @@ print("Helper functions loaded and ready to use!")
 # -   Consider that high return often comes with high risk
 #
 # # Good Luck!
-#
-# Remember: There may be multiple “correct” answers depending on risk
-# preferences. The key is to:
-#
-# 1.  Simulate accurately
-# 2.  Analyze thoroughly
-# 3.  Recommend clearly
-# 4.  Justify convincingly
