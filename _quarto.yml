@@ -109,6 +109,9 @@ format:
     code-overflow: wrap
     fig-width: 7
     fig-height: 4
+    reference-location: margin
+    citation-location: margin
+    cap-location: margin
     html-math-method:
       method: mathjax
       url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
@@ -116,11 +119,11 @@ format:
       - general/header.html
     include-after-body:
       text: |
-        <script src="https://cdn.jsdelivr.net/gh/beyondsimulations/web-embedded-chat@main/floating-chat.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/beyondsimulations/web-embedded-chat@latest/floating-chat.js"></script>
         <script>
             new UniversalChatWidget({
                 title: "Course Assistant",
-                apiEndpoint: "https://model-proxy.vlcek-4b4.workers.dev",
+                apiEndpoint: "https://model-proxy.vlcek-4b4.workers.dev/api",
                 model: "management-science",
                 userMessageOpacity: 0.5,
                 assistantMessageOpacity: 0.5,

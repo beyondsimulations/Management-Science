@@ -34,7 +34,7 @@ No! Think of it more like using a calculator. It is allowed and encouraged, but 
 
 If you don't learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better then just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.
 
-## What if Copilot suggests wrong code?**
+## What if Copilot suggests wrong code?
 
 Copilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.[^illusion] That's why humans are still very important in the loop.
 
