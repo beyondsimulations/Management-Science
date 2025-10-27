@@ -842,7 +842,7 @@
     "href": "lectures/lec_03_closing.html#interesting-literature-on-algorithms",
     "title": "Lecture 3 - Recap & Copilot Strategy",
     "section": "Interesting Literature on Algorithms",
-    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.",
+    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.\n\n1 A great inspiration to learn more about Algorithms!",
     "crumbs": [
       "03 Foundation",
       "03-04 Closing"
@@ -865,17 +865,6 @@
     "title": "Lecture 3 - Recap & Copilot Strategy",
     "section": "More Literature",
     "text": "More Literature\nFor more interesting literature, take a look at the literature list of this course.",
-    "crumbs": [
-      "03 Foundation",
-      "03-04 Closing"
-    ]
-  },
-  {
-    "objectID": "lectures/lec_03_closing.html#footnotes",
-    "href": "lectures/lec_03_closing.html#footnotes",
-    "title": "Lecture 3 - Recap & Copilot Strategy",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nA great inspiration to learn more about Algorithms!↩︎",
     "crumbs": [
       "03 Foundation",
       "03-04 Closing"
@@ -1082,7 +1071,7 @@
     "href": "lectures/lec_01_introduction.html",
     "title": "Lecture 1 - Introduction & Python Setup",
     "section": "",
-    "text": "Field: Optimizing and simulating complex systems\nLanguages: of choice: Julia, Python and Rust\nInterest: Modelling, Simulations, Machine Learning\nTeaching: OR, Algorithms, and Programming\nContact: vlcek@beyondsimulations.com\n\n\n. . .\n\n\n\n\n\n\nI really appreciate active participation and interaction!\n\n\n\n\n\n\n\nWhat is\nManagement\nScience?\n\n\nPhoto by Patrick Konior on Unsplash\n\n\n\n\nManagement science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.1\n. . .\nIt is not the science of management!\n\n\n\n\n\nPart I: Python Foundation (Lectures 1-3)\n\nVariables, loops, functions, data science tools\n\nPart II: Management Science Tools (Lectures 4-9)\n\nMonte Carlo, Scheduling, Routing, Metaheuristics\n\nPart III: Consulting Competition (Lectures 10-12)\n\nClient briefings, development, final presentations\n\n\n\n. . .\n\n\n\n\n\n\nYou’re now consultants learning to solve real business problems!\n\n\n\n\n\n\nWhere Algorithms Make Millions\n\n\nAmazon: Routing algorithms save millions in delivery costs\nUber: Real-time matching algorithms connect drivers and riders\nHospitals: Scheduling algorithms optimize shifts and OR usage\nAirlines: Revenue algorithms price tickets dynamically\nManufacturing: Production scheduling reduces waste and delays\n\n\n. . .\nManagement Science is everywhere!\n\n\n\nThe Consultant Mindset\n\n\nYou’ll work on business problems\nLearn to communicate solutions to non-technical clients\nBuild practical tools that solve actual challenges\nCompete in a consulting competition with real scenarios\n\n\n. . .\n\n\n\n\n\n\nThink like a consultant: What value does my solution bring to the business?\n\n\n\n\n\n\n\n\n12 lectures of intensive learning\n3 hours per lecture (with breaks!)\nInteractive format:\n\nConcepts & Setup\nHands-on Python notebooks\nConsulting Competition\n\nFinal competition: Apply everything you’ve learned\n\n\n. . .\nEach lecture builds on the previous - attendance is important!\n\n\n\nGrade Composition:\n\nCourse has 100 points, 50 needed to pass\n2 Assignments: 30 points each\nFinal Consulting Project: 40 points\n\n. . .\n\n\n\n\n\n\nWe will have several competitions including our final competition, where you will have the chance to earn bonus points!\n\n\n\n\n\n\nAssignment Strategy:\n\nStart with easy warm-ups in tutorials\nProgress to real-world problems\nAll assignments have clear rubrics\nBonus points for creative solutions!\n\n. . .\n\n\n\n\n\n\nLate submissions: -10% per day (max 3 days)\n\n\n\n\n\n\n\nIn my experience, the best way to learn is by doing!\nHere, we will focus on decision algorithms\nYou will start to learn Python by doing the tutorials\n\n. . .\n\n\n\n\n\n\nDon’t worry, I will help you out if you have any questions!\n\n\n\n\n\n\n\n\nNo prior programming required - we start from zero!\nBut experience is helpful!\nFast-paced but with lots of support\nPractical focus - less theory, more doing\nMistakes are welcome - they’re how we learn\n\n\n. . .\n\n\n\n\n\n\nThe course gets easier after week 3 - the hardest part is getting started!\n\n\n\n\n\n\nBy the end, you will be able to:\n\n\nWrite Python code to solve business problems\nApply algorithms for scheduling, routing, and optimization\nSimulate uncertainty using Monte Carlo methods\nPresent solutions like a management consultant\nBuild tools that create business value\n\n\n. . .\nYou’ll leave with a portfolio of ideas to work on real solutions!\n\n\n\n\nOrigins: Conceived in late 1980s as a teaching and scripting language\nSimple Syntax: Python’s syntax is mostly straightforward and very easy to learn\nVersatility: Used in web development, data analysis, artificial intelligence, and more\nCommunity Support: A large community of users worldwide and extensive documentation\n\n\n\n\n\nYou are allowed to use AI in the course\nI use it as well (e.g., Claude, ChatGPT, Gemini, …)\nThese tools are great for learning Python!\nCan help you a lot to get started with programming\nI will also teach you how to use it effectively\n\n. . .\n\n\n\n\n\n\nBut you should not simply use them to replace your learning.",
+    "text": "Field: Optimizing and simulating complex systems\nLanguages: of choice: Julia, Python and Rust\nInterest: Modelling, Simulations, Machine Learning\nTeaching: OR, Algorithms, and Programming\nContact: vlcek@beyondsimulations.com\n\n\n. . .\n\n\n\n\n\n\nI really appreciate active participation and interaction!\n\n\n\n\n\n\n\nWhat is\nManagement\nScience?\n\n\nPhoto by Patrick Konior on Unsplash\n\n\n\n\nManagement science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.1\n1 An Introduction to Management Science: Quantitative Approaches to Decision Making (15 ed.). Boston: Cengage Learning, Inc. 2019. ISBN 978-1-337-40652-9.. . .\nIt is not the science of management!\n\n\n\n\n\nPart I: Python Foundation (Lectures 1-3)\n\nVariables, loops, functions, data science tools\n\nPart II: Management Science Tools (Lectures 4-9)\n\nMonte Carlo, Scheduling, Routing, Metaheuristics\n\nPart III: Consulting Competition (Lectures 10-12)\n\nClient briefings, development, final presentations\n\n\n\n. . .\n\n\n\n\n\n\nYou’re now consultants learning to solve real business problems!\n\n\n\n\n\n\nWhere Algorithms Make Millions\n\n\nAmazon: Routing algorithms save millions in delivery costs\nUber: Real-time matching algorithms connect drivers and riders\nHospitals: Scheduling algorithms optimize shifts and OR usage\nAirlines: Revenue algorithms price tickets dynamically\nManufacturing: Production scheduling reduces waste and delays\n\n\n. . .\nManagement Science is everywhere!\n\n\n\nThe Consultant Mindset\n\n\nYou’ll work on business problems\nLearn to communicate solutions to non-technical clients\nBuild practical tools that solve actual challenges\nCompete in a consulting competition with real scenarios\n\n\n. . .\n\n\n\n\n\n\nThink like a consultant: What value does my solution bring to the business?\n\n\n\n\n\n\n\n\n12 lectures of intensive learning\n3 hours per lecture (with breaks!)\nInteractive format:\n\nConcepts & Setup\nHands-on Python notebooks\nConsulting Competition\n\nFinal competition: Apply everything you’ve learned\n\n\n. . .\nEach lecture builds on the previous - attendance is important!\n\n\n\nGrade Composition:\n\nCourse has 100 points, 50 needed to pass\n2 Assignments: 30 points each\nFinal Consulting Project: 40 points\n\n. . .\n\n\n\n\n\n\nWe will have several competitions including our final competition, where you will have the chance to earn bonus points!\n\n\n\n\n\n\nAssignment Strategy:\n\nStart with easy warm-ups in tutorials\nProgress to real-world problems\nAll assignments have clear rubrics\nBonus points for creative solutions!\n\n. . .\n\n\n\n\n\n\nLate submissions: -10% per day (max 3 days)\n\n\n\n\n\n\n\nIn my experience, the best way to learn is by doing!\nHere, we will focus on decision algorithms\nYou will start to learn Python by doing the tutorials\n\n. . .\n\n\n\n\n\n\nDon’t worry, I will help you out if you have any questions!\n\n\n\n\n\n\n\n\nNo prior programming required - we start from zero!\nBut experience is helpful!\nFast-paced but with lots of support\nPractical focus - less theory, more doing\nMistakes are welcome - they’re how we learn\n\n\n. . .\n\n\n\n\n\n\nThe course gets easier after week 3 - the hardest part is getting started!\n\n\n\n\n\n\nBy the end, you will be able to:\n\n\nWrite Python code to solve business problems\nApply algorithms for scheduling, routing, and optimization\nSimulate uncertainty using Monte Carlo methods\nPresent solutions like a management consultant\nBuild tools that create business value\n\n\n. . .\nYou’ll leave with a portfolio of ideas to work on real solutions!\n\n\n\n\nOrigins: Conceived in late 1980s as a teaching and scripting language\nSimple Syntax: Python’s syntax is mostly straightforward and very easy to learn\nVersatility: Used in web development, data analysis, artificial intelligence, and more\nCommunity Support: A large community of users worldwide and extensive documentation\n\n\n\n\n\nYou are allowed to use AI in the course\nI use it as well (e.g., Claude, ChatGPT, Gemini, …)\nThese tools are great for learning Python!\nCan help you a lot to get started with programming\nI will also teach you how to use it effectively\n\n. . .\n\n\n\n\n\n\nBut you should not simply use them to replace your learning.",
     "crumbs": [
       "01 Let's Start",
       "01-01 Introduction"
@@ -1115,7 +1104,7 @@
     "href": "lectures/lec_01_introduction.html#management-science",
     "title": "Lecture 1 - Introduction & Python Setup",
     "section": "",
-    "text": "Management science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.1\n. . .\nIt is not the science of management!",
+    "text": "Management science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.1\n1 An Introduction to Management Science: Quantitative Approaches to Decision Making (15 ed.). Boston: Cengage Learning, Inc. 2019. ISBN 978-1-337-40652-9.. . .\nIt is not the science of management!",
     "crumbs": [
       "01 Let's Start",
       "01-01 Introduction"
@@ -1368,7 +1357,7 @@
     "href": "lectures/lec_01_introduction.html#interesting-literature-on-algorithms",
     "title": "Lecture 1 - Introduction & Python Setup",
     "section": "Interesting Literature on Algorithms",
-    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.2\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.",
+    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.2\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.\n\n2 A great inspiration to learn more about Algorithms!",
     "crumbs": [
       "01 Let's Start",
       "01-01 Introduction"
@@ -1391,17 +1380,6 @@
     "title": "Lecture 1 - Introduction & Python Setup",
     "section": "More Literature",
     "text": "More Literature\nFor more interesting literature, take a look at the literature list of this course.",
-    "crumbs": [
-      "01 Let's Start",
-      "01-01 Introduction"
-    ]
-  },
-  {
-    "objectID": "lectures/lec_01_introduction.html#footnotes",
-    "href": "lectures/lec_01_introduction.html#footnotes",
-    "title": "Lecture 1 - Introduction & Python Setup",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nAn Introduction to Management Science: Quantitative Approaches to Decision Making (15 ed.). Boston: Cengage Learning, Inc. 2019. ISBN 978-1-337-40652-9.↩︎\nA great inspiration to learn more about Algorithms!↩︎",
     "crumbs": [
       "01 Let's Start",
       "01-01 Introduction"
@@ -1961,18 +1939,8 @@
     "objectID": "general/faq.html#what-if-copilot-suggests-wrong-code",
     "href": "general/faq.html#what-if-copilot-suggests-wrong-code",
     "title": "Frequently Asked Questions",
-    "section": "What if Copilot suggests wrong code?**",
-    "text": "What if Copilot suggests wrong code?**\nCopilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.1 That’s why humans are still very important in the loop.",
-    "crumbs": [
-      "FAQs"
-    ]
-  },
-  {
-    "objectID": "general/faq.html#footnotes",
-    "href": "general/faq.html#footnotes",
-    "title": "Frequently Asked Questions",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://machinelearning.apple.com/research/illusion-of-thinking↩︎",
+    "section": "What if Copilot suggests wrong code?",
+    "text": "What if Copilot suggests wrong code?\nCopilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.1 That’s why humans are still very important in the loop.\n\n\n1 https://machinelearning.apple.com/research/illusion-of-thinking",
     "crumbs": [
       "FAQs"
     ]
