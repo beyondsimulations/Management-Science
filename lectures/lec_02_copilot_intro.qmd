@@ -54,6 +54,12 @@ Models work?
 - During training, these **weights are adjusted**
 - Once trained, **applying** them takes much less ressources
 
+. . .
+
+::: callout-tip
+Using a trained model is called **inference**.
+:::
+
 ## Pattern Recognition
 
 - [Not like a search engine!]{.highlight}
@@ -62,6 +68,12 @@ Models work?
 - It can find **patterns between concepts** and your question
 - Knows only limited text at once (**context window**)
 
+. . .
+
+::: callout-warning
+Managing **context windows** is crucial!
+:::
+
 ## Probability based responses
 
 - After each written token, it predicts ["what should come next?"]{.highlight}
@@ -69,13 +81,20 @@ Models work?
 - Chooses the **most likely next token** based on training
 - [But can't actually "think" or "understand" like humans]{.highlight}
 
+
+
 ## Limitations
 
-- **No true understanding** of cause and effect
+- **No true understanding** of cause and effect[^claude]
 - Sometimes **makes mistakes or "hallucinates"**
-- Mostly only knows what it **was trained on**
-- Can **reflect biases** present in training data
-- No emotional understanding (but [can simulate responses!]{.highlight})
+- Mostly only knows what it **was trained on**[^internet] and can **reflect biases**
+- No emotional understanding (but [can simulate responses!]{.highlight})[^attachment]
+
+[^claude]:[https://www.anthropic.com/research/tracing-thoughts-language-model](https://www.anthropic.com/research/tracing-thoughts-language-model)
+
+[^internet]: This can partially be improved by using context from the internet.
+
+[^attachment]: [User can get attached to talking to models](https://openai.com/index/strengthening-chatgpt-responses-in-sensitive-conversations/)
 
 ## Impact on Jobs
 
