@@ -261,7 +261,7 @@ print(f"Price per shot: ${price_per_shot}")
 # Test your answer
 import math
 assert math.isclose(subtotal, 30.20, rel_tol=0.01), "Subtotal should be 30.20"
-assert math.isclose(total_with_tax, 30.20*1.19, rel_tol=0.01), "Total with tax should be 32.616"
+assert math.isclose(total_with_tax, 30.20*1.19, rel_tol=0.01), "Total with tax should be 35.94"
 print("Excellent calculation! You've mastered basic arithmetic!")
 
 # %% [markdown]
@@ -312,9 +312,9 @@ formatted_receipt = f"""
 ╔══════════════════════════╗
 ║     BEAN COUNTER         ║
 ╠══════════════════════════╣
-║ {item:<16} {quantity:2d}     ║
-║ Price: ${price:>6.2f}          ║
-║ Total: ${total:>6.2f}          ║
+║ {item:<16} {quantity:2d}      ║
+║ Price: ${price:>6.2f}           ║
+║ Total: ${total:>6.2f}           ║
 ╚══════════════════════════╝
 """
 print(formatted_receipt)
