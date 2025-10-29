@@ -28,44 +28,45 @@ website:
       - text: "***"
       - section: "01 Let's Start"
         contents:
-          - text: "01-01 Introduction"
+          - text: "01 Introduction"
             href: lectures/lec_01_introduction.qmd
-          - text: "01-02 Variables"
+          - text: "NB-01-02 Variables"
             href: tutorials/nb_01_01_variables_data_types.qmd
-          - text: "01-03 Lists"
+          - text: "NB-01-02 Lists"
             href: tutorials/nb_01_02_lists_loops.qmd
-          - text: "01-04 Conditions"
+          - text: "NB-01-03 Conditions"
             href: tutorials/nb_01_03_conditionals_while.qmd
       - section: "02 Advances"
         contents:
-          - text: "02-01 Functions"
-            href: tutorials/nb_02_01_functions.qmd
-          - text: "02-02 Dictionaries"
-            href: tutorials/nb_02_02_dictionaries.qmd
-          - text: "02-03 Sorting"
-            href: tutorials/nb_02_03_sorting.qmd
-          - text: "02-04 Recap"
-            href: tutorials/nb_02_04_recap.qmd
-          - text: "02-05 Generative"
+          - text: "02 Generative AI"
             href: lectures/lec_02_copilot_intro.qmd
+          - text: "NB-02-01 Functions"
+            href: tutorials/nb_02_01_functions.qmd
+          - text: "NB-02-02 Dictionaries"
+            href: tutorials/nb_02_02_dictionaries.qmd
+          - text: "NB-02-03 Sorting"
+            href: tutorials/nb_02_03_sorting.qmd
+          - text: "NB-02-04 Recap"
+            href: tutorials/nb_02_04_recap.qmd
+
       - section: "03 Foundation"
         contents:
-          - text: "03-01 Numpy"
-            href: tutorials/nb_03_01_numpy.qmd
-          - text: "03-02 Pandas"
-            href: tutorials/nb_03_02_pandas.qmd
-          - text: "03-03 Plotting"
-            href: tutorials/nb_03_03_visualization.qmd
-          - text: "03-04 Closing"
+          - text: "03 Closing"
             href: lectures/lec_03_closing.qmd
+          - text: "NB-03-01 Numpy"
+            href: tutorials/nb_03_01_numpy.qmd
+          - text: "NB-03-02 Pandas"
+            href: tutorials/nb_03_02_pandas.qmd
+          - text: "NB-03-03 Plotting"
+            href: tutorials/nb_03_03_visualization.qmd
       - section: "04 Monte Carlo"
         contents:
-          - text: "04-01 Concepts"
+          - text: "04 Concepts"
             href: lectures/lec_04_monte_carlo.qmd
-          - text: "04-02 Notebook"
+          - text: "NB-04-01 Monte Carlo"
             href: tutorials/nb_04_01_monte_carlo.qmd
-          - text: "04-03 Competition"
-            href: tutorials/competition_04_techventure.qmd
+          - text: "NB-04-02 Competition"
+            href: tutorials/nb_04_02_techventure.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd

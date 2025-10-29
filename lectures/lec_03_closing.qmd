@@ -52,15 +52,6 @@ Write clear descriptions of what you want:
 
 [You now have a good foundation for data-driven decisions!]{.highlight}
 
-. . .
-
-**Before this introduction:**
-
-- Excel crashes with large datasets
-- Manual calculations take hours
-- Limited to basic charts
-- No way to simulate scenarios
-
 # [What's Next]{.flow} {.title}
 
 ## Preview: 4 - Monte Carlo
