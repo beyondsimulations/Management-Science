@@ -2119,7 +2119,7 @@
     "href": "lectures/lec_02_copilot_intro.html",
     "title": "Lecture 2 - AI Programming",
     "section": "",
-    "text": "Coding by hand is not the only way to generate code\nMost likely, a lot of you have already used ChatGPT\n\n. . .\n\n\n\n\n\n\n\n\n\nHow do\nLarge Language\nModels work?\n\n\nPhoto by Taylor Vick on Unsplash\n\n\n\n\n\nThink of them like advanced pattern recognition systems\nThey have “read” massive amounts of text\nBooks, websites, articles, code, and more\nText is broken into tokens, parts of words or punctuation\nBased on patterns, they can generate new text\n\n\n\n\n\nImagine learning a language by reading millions of books\nLearns patterns in how words and ideas connect via tokens\nInterconnected nodes with weights representing patterns\nDuring training, these weights are adjusted\nOnce trained, applying them takes much less ressources\n\n\n\n\n\nNot like a search engine!\nWhen asked, it looks for relevant patterns it learned\nLike having a huge library in its “memory” to draw from\nIt can find patterns between concepts and your question\nKnows only limited text at once (context window)\n\n\n\n\n\nAfter each written token, it predicts “what should come next?”\nLike a advanced version of the word prediction on your phone\nChooses the most likely next token based on training\nBut can’t actually “think” or “understand” like humans\n\n\n\n\n\nNo true understanding of cause and effect\nSometimes makes mistakes or “hallucinates”\nMostly only knows what it was trained on\nCan reflect biases present in training data\nNo emotional understanding (but can simulate responses!)\n\n\n\n\n\n\nQuestion: What do you think about their impact on jobs?\nQuestion: What are the implications for us?\nQuestion: Can we use them to our advantage?\n\n\n. . .\n\n\n\n\n\n\nIf you use free models, be aware that your prompts are going to be used by the providers and are not private. But for learning and experimenting, this should be no issue.\n\n\n\n\n\n\n\nGreg Sanderson provides an excellent explanation of LLMs\nGreat starting point to understand LLMs\nCheck out his YouTube channel, 3Blue1Brown for more",
+    "text": "Coding by hand is not the only way to generate code\nMost likely, a lot of you have already used ChatGPT\n\n. . .\n\n\n\n\n\n\n\n\n\nHow do\nLarge Language\nModels work?\n\n\nPhoto by Taylor Vick on Unsplash\n\n\n\n\n\nThink of them like advanced pattern recognition systems\nThey have “read” massive amounts of text\nBooks, websites, articles, code, and more\nText is broken into tokens, parts of words or punctuation\nBased on patterns, they can generate new text\n\n\n\n\n\nImagine learning a language by reading millions of books\nLearns patterns in how words and ideas connect via tokens\nInterconnected nodes with weights representing patterns\nDuring training, these weights are adjusted\nOnce trained, applying them takes much less ressources\n\n. . .\n\n\n\n\n\n\nUsing a trained model is called inference.\n\n\n\n\n\n\n\nNot like a search engine!\nWhen asked, it looks for relevant patterns it learned\nLike having a huge library in its “memory” to draw from\nIt can find patterns between concepts and your question\nKnows only limited text at once (context window)\n\n. . .\n\n\n\n\n\n\nManaging context windows is crucial!\n\n\n\n\n\n\n\nAfter each written token, it predicts “what should come next?”\nLike a advanced version of the word prediction on your phone\nChooses the most likely next token based on training\nBut can’t actually “think” or “understand” like humans\n\n\n\n\n\nNo true understanding of cause and effect1\nSometimes makes mistakes or “hallucinates”\nMostly only knows what it was trained on2 and can reflect biases\nNo emotional understanding (but can simulate responses!)3\n\n\n\n\n\n\nQuestion: What do you think about their impact on jobs?\nQuestion: What are the implications for us?\nQuestion: Can we use them to our advantage?\n\n\n. . .\n\n\n\n\n\n\nIf you use free models, be aware that your prompts are going to be used by the providers and are not private. But for learning and experimenting, this should be no issue.\n\n\n\n\n\n\n\nGreg Sanderson provides an excellent explanation of LLMs\nGreat starting point to understand LLMs\nCheck out his YouTube channel, 3Blue1Brown for more",
     "crumbs": [
       "02 Advances",
       "02 Generative AI"
@@ -2163,7 +2163,7 @@
     "href": "lectures/lec_02_copilot_intro.html#training-llms",
     "title": "Lecture 2 - AI Programming",
     "section": "",
-    "text": "Imagine learning a language by reading millions of books\nLearns patterns in how words and ideas connect via tokens\nInterconnected nodes with weights representing patterns\nDuring training, these weights are adjusted\nOnce trained, applying them takes much less ressources",
+    "text": "Imagine learning a language by reading millions of books\nLearns patterns in how words and ideas connect via tokens\nInterconnected nodes with weights representing patterns\nDuring training, these weights are adjusted\nOnce trained, applying them takes much less ressources\n\n. . .\n\n\n\n\n\n\nUsing a trained model is called inference.",
     "crumbs": [
       "02 Advances",
       "02 Generative AI"
@@ -2174,7 +2174,7 @@
     "href": "lectures/lec_02_copilot_intro.html#pattern-recognition",
     "title": "Lecture 2 - AI Programming",
     "section": "",
-    "text": "Not like a search engine!\nWhen asked, it looks for relevant patterns it learned\nLike having a huge library in its “memory” to draw from\nIt can find patterns between concepts and your question\nKnows only limited text at once (context window)",
+    "text": "Not like a search engine!\nWhen asked, it looks for relevant patterns it learned\nLike having a huge library in its “memory” to draw from\nIt can find patterns between concepts and your question\nKnows only limited text at once (context window)\n\n. . .\n\n\n\n\n\n\nManaging context windows is crucial!",
     "crumbs": [
       "02 Advances",
       "02 Generative AI"
@@ -2196,7 +2196,7 @@
     "href": "lectures/lec_02_copilot_intro.html#limitations",
     "title": "Lecture 2 - AI Programming",
     "section": "",
-    "text": "No true understanding of cause and effect\nSometimes makes mistakes or “hallucinates”\nMostly only knows what it was trained on\nCan reflect biases present in training data\nNo emotional understanding (but can simulate responses!)",
+    "text": "No true understanding of cause and effect1\nSometimes makes mistakes or “hallucinates”\nMostly only knows what it was trained on2 and can reflect biases\nNo emotional understanding (but can simulate responses!)3",
     "crumbs": [
       "02 Advances",
       "02 Generative AI"
@@ -2379,6 +2379,17 @@
     ]
   },
   {
+    "objectID": "lectures/lec_02_copilot_intro.html#footnotes",
+    "href": "lectures/lec_02_copilot_intro.html#footnotes",
+    "title": "Lecture 2 - AI Programming",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://www.anthropic.com/research/tracing-thoughts-language-model↩︎\nThis can partially be improved by using context from the internet.↩︎\nUser can get attached to talking to models↩︎",
+    "crumbs": [
+      "02 Advances",
+      "02 Generative AI"
+    ]
+  },
+  {
     "objectID": "lectures/lec_02_presentation.html#using-ai-to-generate-code",
     "href": "lectures/lec_02_presentation.html#using-ai-to-generate-code",
     "title": "Lecture 2 - AI Programming",
@@ -2404,14 +2415,14 @@
     "href": "lectures/lec_02_presentation.html#training-llms",
     "title": "Lecture 2 - AI Programming",
     "section": "Training LLMs",
-    "text": "Training LLMs\n\nImagine learning a language by reading millions of books\nLearns patterns in how words and ideas connect via tokens\nInterconnected nodes with weights representing patterns\nDuring training, these weights are adjusted\nOnce trained, applying them takes much less ressources"
+    "text": "Training LLMs\n\nImagine learning a language by reading millions of books\nLearns patterns in how words and ideas connect via tokens\nInterconnected nodes with weights representing patterns\nDuring training, these weights are adjusted\nOnce trained, applying them takes much less ressources\n\n\n\n\n\n\n\n\nUsing a trained model is called inference."
   },
   {
     "objectID": "lectures/lec_02_presentation.html#pattern-recognition",
     "href": "lectures/lec_02_presentation.html#pattern-recognition",
     "title": "Lecture 2 - AI Programming",
     "section": "Pattern Recognition",
-    "text": "Pattern Recognition\n\nNot like a search engine!\nWhen asked, it looks for relevant patterns it learned\nLike having a huge library in its “memory” to draw from\nIt can find patterns between concepts and your question\nKnows only limited text at once (context window)"
+    "text": "Pattern Recognition\n\nNot like a search engine!\nWhen asked, it looks for relevant patterns it learned\nLike having a huge library in its “memory” to draw from\nIt can find patterns between concepts and your question\nKnows only limited text at once (context window)\n\n\n\n\n\n\n\n\nManaging context windows is crucial!"
   },
   {
     "objectID": "lectures/lec_02_presentation.html#probability-based-responses",
@@ -2425,7 +2436,7 @@
     "href": "lectures/lec_02_presentation.html#limitations",
     "title": "Lecture 2 - AI Programming",
     "section": "Limitations",
-    "text": "Limitations\n\nNo true understanding of cause and effect\nSometimes makes mistakes or “hallucinates”\nMostly only knows what it was trained on\nCan reflect biases present in training data\nNo emotional understanding (but can simulate responses!)"
+    "text": "Limitations\n\nNo true understanding of cause and effect1\nSometimes makes mistakes or “hallucinates”\nMostly only knows what it was trained on2 and can reflect biases\nNo emotional understanding (but can simulate responses!)3\n\nhttps://www.anthropic.com/research/tracing-thoughts-language-modelThis can partially be improved by using context from the internet.User can get attached to talking to models"
   },
   {
     "objectID": "lectures/lec_02_presentation.html#impact-on-jobs",

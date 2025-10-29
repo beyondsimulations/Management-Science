@@ -254,6 +254,18 @@ Dr.&nbsp;Tobias Vlćek
 <li>During training, these <strong>weights are adjusted</strong></li>
 <li>Once trained, <strong>applying</strong> them takes much less ressources</li>
 </ul>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Using a trained model is called <strong>inference</strong>.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="pattern-recognition" class="slide level2">
 <h2>Pattern Recognition</h2>
@@ -264,6 +276,18 @@ Dr.&nbsp;Tobias Vlćek
 <li>It can find <strong>patterns between concepts</strong> and your question</li>
 <li>Knows only limited text at once (<strong>context window</strong>)</li>
 </ul>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Managing <strong>context windows</strong> is crucial!</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="probability-based-responses" class="slide level2">
 <h2>Probability based responses</h2>
@@ -277,13 +301,12 @@ Dr.&nbsp;Tobias Vlćek
 <section id="limitations" class="slide level2">
 <h2>Limitations</h2>
 <ul>
-<li><strong>No true understanding</strong> of cause and effect</li>
+<li><strong>No true understanding</strong> of cause and effect<sup>1</sup></li>
 <li>Sometimes <strong>makes mistakes or “hallucinates”</strong></li>
-<li>Mostly only knows what it <strong>was trained on</strong></li>
-<li>Can <strong>reflect biases</strong> present in training data</li>
-<li>No emotional understanding (but <span class="highlight">can simulate responses!</span>)</li>
+<li>Mostly only knows what it <strong>was trained on</strong><sup>2</sup> and can <strong>reflect biases</strong></li>
+<li>No emotional understanding (but <span class="highlight">can simulate responses!</span>)<sup>3</sup></li>
 </ul>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p><a href="https://www.anthropic.com/research/tracing-thoughts-language-model">https://www.anthropic.com/research/tracing-thoughts-language-model</a></p></li><li id="fn2"><p>This can partially be improved by using context from the internet.</p></li><li id="fn3"><p><a href="https://openai.com/index/strengthening-chatgpt-responses-in-sensitive-conversations/">User can get attached to talking to models</a></p></li></ol></aside></section>
 <section id="impact-on-jobs" class="slide level2">
 <h2>Impact on Jobs</h2>
 <ul>
@@ -447,7 +470,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="demo-the-result-hopefully" class="slide level2">
 <h2>Demo: The Result (hopefully)</h2>
-<div id="41bac5fe" class="cell" data-execution_count="1">
+<div id="817ee318" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> calculate_shipping_cost(weight, distance):</span>
 <span id="cb2-2"><a></a>    <span class="co">"""Calculate shipping cost based on weight and distance."""</span></span>
 <span id="cb2-3"><a></a>    base_rate <span class="op">=</span> <span class="fl">5.0</span></span>
@@ -667,6 +690,7 @@ Dr.&nbsp;Tobias Vlćek
 
 </div>
 </section></section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

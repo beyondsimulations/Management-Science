@@ -475,6 +475,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>During training, these <strong>weights are adjusted</strong></li>
 <li>Once trained, <strong>applying</strong> them takes much less ressources</li>
 </ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Using a trained model is called <strong>inference</strong>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="pattern-recognition" class="level2">
 <h2 class="anchored" data-anchor-id="pattern-recognition">Pattern Recognition</h2>
@@ -485,6 +496,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It can find <strong>patterns between concepts</strong> and your question</li>
 <li>Knows only limited text at once (<strong>context window</strong>)</li>
 </ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Managing <strong>context windows</strong> is crucial!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="probability-based-responses" class="level2">
 <h2 class="anchored" data-anchor-id="probability-based-responses">Probability based responses</h2>
@@ -498,11 +520,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="limitations" class="level2">
 <h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
 <ul>
-<li><strong>No true understanding</strong> of cause and effect</li>
+<li><strong>No true understanding</strong> of cause and effect<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 <li>Sometimes <strong>makes mistakes or “hallucinates”</strong></li>
-<li>Mostly only knows what it <strong>was trained on</strong></li>
-<li>Can <strong>reflect biases</strong> present in training data</li>
-<li>No emotional understanding (but <span class="highlight">can simulate responses!</span>)</li>
+<li>Mostly only knows what it <strong>was trained on</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and can <strong>reflect biases</strong></li>
+<li>No emotional understanding (but <span class="highlight">can simulate responses!</span>)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
 </ul>
 </section>
 <section id="impact-on-jobs" class="level2">
@@ -651,7 +672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="demo-the-result-hopefully" class="level2">
 <h2 class="anchored" data-anchor-id="demo-the-result-hopefully">Demo: The Result (hopefully)</h2>
-<div id="41bac5fe" class="cell" data-execution_count="1">
+<div id="817ee318" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_shipping_cost(weight, distance):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate shipping cost based on weight and distance."""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    base_rate <span class="op">=</span> <span class="fl">5.0</span></span>
@@ -850,7 +871,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.anthropic.com/research/tracing-thoughts-language-model">https://www.anthropic.com/research/tracing-thoughts-language-model</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This can partially be improved by using context from the internet.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://openai.com/index/strengthening-chatgpt-responses-in-sensitive-conversations/">User can get attached to talking to models</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
