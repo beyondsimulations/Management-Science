@@ -5,10 +5,18 @@ subtitle: "Management Science"
 
 ## Welcome
 
-This course uses two practical assignments to help you learn how to think like an optimization-minded analyst. Your focus throughout should be: understand the problem, design a sensible algorithmic approach, interpret results, and translate findings into clear business recommendations. Perfect code is not the goal—insight is.
+This course uses two practical assignments to help you learn how to think like an optimization-minded analyst. Your focus throughout should be: understand the problem, design a sensible algorithmic approach, interpret results, and translate findings into clear business recommendations. Perfect code is not the goal, insight is.
 
 ::: callout-tip
-You’re encouraged to use AI tools responsibly. Treat them like a smart pair-programmer that helps you learn and debug, but make sure you understand all code you submit and can explain it.
+You’re encouraged to use AI tools responsibly. Treat them like a smart pair-programmer that helps you learn and debug, but make sure you understand all code you submit and can explain it. You are fully responsible for the correctness and originality of submitted work, regardless of gAI use.
+:::
+
+::: {.callout-warning}
+Do not include gAI-generated meta-comments describing what gAI changed. Thus, keep comments focused on explaining the code itself. If I find instances of such gAI meta-comments, you will loose points for the technical implementation. Keep your comments clean and relevant.
+:::
+
+::: {.callout-warning}
+gAI may hallucinate additional features that are not required. Be careful here!
 :::
 
 ## The Two Assignments
