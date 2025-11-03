@@ -246,17 +246,17 @@ print("Excellent! Quality control is now standardized!")
 
 # %%
 # YOUR CODE BELOW
-def apply_discount(original_price, hour, is_senior, is_student):
+def apply_discount(original_price, hour, senior_age, is_student):
     # Apply the best available discount
     # Tip: Use a variable to keep track of the best discount and start with the lowest
 
 
 # %%
 # Test your discount function
-assert apply_discount(10.00, 16, False, False) == 8.50, "Happy hour should give 15% off"
-assert apply_discount(10.00, 12, True, False) == 9.00, "Senior discount should give 10% off"
-assert apply_discount(10.00, 16, True, False) == 8.50, "Should apply best discount (happy hour 15%)"
-assert apply_discount(10.00, 12, False, False) == 10.00, "No discount applies"
+assert apply_discount(10.00, 16, 18, False) == 8.50, "Happy hour should give 15% off"
+assert apply_discount(10.00, 12, 80, False) == 9.00, "Senior discount should give 10% off"
+assert apply_discount(10.00, 16, 23, False) == 8.50, "Should apply best discount (happy hour 15%)"
+assert apply_discount(10.00, 12, 42, False) == 10.00, "No discount applies"
 print("Great work! Your discount system is working perfectly!")
 
 
@@ -312,7 +312,9 @@ print(f"Total with tax: ${calculate_total_with_tax(price)}")
 # > **Using Previous Functions**
 # >
 # > You can use the `check_bean_freshness()` function you created in
-# > Exercise 2.1. Just call it inside your new function!
+# > Exercise 2.1. Just call it inside your new function! Note, that you
+# > will have to check what it returns to determine if the order can be
+# > fulfilled.
 
 # %%
 # YOUR CODE BELOW
