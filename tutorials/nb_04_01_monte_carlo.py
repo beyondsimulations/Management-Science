@@ -460,7 +460,7 @@ best_mean_value = # Your task!
 assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
 assert 'Downtown + Suburb' in best_mean_portfolio or 'Suburb + Downtown' in best_mean_portfolio, \
     f"Best mean portfolio should include Downtown + Suburb, got {best_mean_portfolio}"
-assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
+assert 700 < best_mean_value < 900, f"Best mean should be ~800, got {best_mean_value:.2f}"
 print("Portfolio analysis correct!")
 print("\nAll Portfolio Combinations:")
 print(df_portfolios.to_string(index=False))
