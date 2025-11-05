@@ -178,6 +178,94 @@ print(f"  Revenue: €{one_day['revenue']:.2f}")
 print(f"  Profit: €{one_day['profit']:.2f}")
 ```
 
+::: {.callout-tip}
+The function returns a dictionary. If you create a list of dictionaries and then use `pd.DataFrame` on that list, you will get a perfectly structured dataframe.
+:::
+
+## Working with DataFrames for Simulation Results
+
+When we run multiple simulations, we need to collect and analyze the results efficiently. Pandas DataFrames are perfect for this task.
+
+### Creating DataFrames from Simulation Results
+
+```{python}
+#| eval: true
+# Example: Create a DataFrame from a few simulations
+sample_results = []
+for i in range(5):
+    day_result = simulate_bean_counter_day()
+    sample_results.append(day_result)
+
+# Convert list of dictionaries to DataFrame
+sample_df = pd.DataFrame(sample_results)
+print("Sample DataFrame structure:")
+print(sample_df)
+print(f"\nDataFrame shape: {sample_df.shape}")
+print(f"Columns: {list(sample_df.columns)}")
+```
+
+### Computing Statistics with DataFrames
+
+```{python}
+#| eval: true
+# Specific calculations
+print(f"\nMean profit: €{sample_df['profit'].mean():.2f}")
+print(f"Standard deviation of profit: €{sample_df['profit'].std():.2f}")
+print(f"Minimum profit: €{sample_df['profit'].min():.2f}")
+print(f"Maximum profit: €{sample_df['profit'].max():.2f}")
+
+# Conditional analysis
+loss_days = sample_df['profit'] < 0
+print(f"Number of loss days: {loss_days.sum()}")
+print(f"Probability of loss: {loss_days.mean():.1%}")
+
+# Range analysis
+profit_range = (sample_df['profit'] >= 100) & (sample_df['profit'] <= 200)
+print(f"Days with profit €100-200: {profit_range.sum()}")
+print(f"Percentage in range: {profit_range.mean():.1%}")
+```
+
+### Accessing Specific Rows with iloc
+
+```{python}
+#| eval: true
+# iloc uses integer positions to access rows and columns
+print("Using iloc to access specific simulation results:")
+
+# Access first simulation (row 0)
+print(f"First simulation: {sample_df.iloc[0]}")
+
+# Access last simulation
+print(f"\nLast simulation profit: €{sample_df.iloc[-1]['profit']:.2f}")
+
+# Access multiple rows (first 3 simulations)
+print(f"\nFirst 3 simulations:")
+print(sample_df.iloc[0:3])
+
+# Access specific rows and columns
+print(f"\nProfit from simulations 1, 3, and 4:")
+print(sample_df.iloc[[1, 3, 4]]['profit'])
+
+# Random sample using iloc
+import random
+random_indices = random.sample(range(len(sample_df)), 2)
+print(f"\nTwo random simulations (indices {random_indices}):")
+print(sample_df.iloc[random_indices][['customers', 'profit']])
+```
+
+::: {.callout-note}
+## Key DataFrame Operations for Simulations
+
+- `df['column'].mean()` - Calculate average
+- `df['column'].std()` - Calculate standard deviation
+- `df['column'].min()` / `df['column'].max()` - Find extremes
+- `(df['column'] < value).mean()` - Calculate probability
+- `(df['column'] >= low) & (df['column'] <= high)` - Range conditions
+- `df.iloc[i]` - Access row i by position
+- `df.iloc[start:end]` - Access rows from start to end
+- `df.iloc[[list]]` - Access specific rows by list of indices
+:::
+
 ## Exercise 2.1 - Run Multiple Simulations
 
 Simulate 10,000 days of Bean Counter operations and analyze the results.
@@ -192,7 +280,9 @@ results = []
 for i in range(n_simulations):
     # Simulate one day and add to results
 
+
 # Calculate key metrics (Tip: a DataFrame could help here!)
+df =
 mean_profit =
 prob_loss =
 max_profit =
@@ -453,7 +543,7 @@ for pair in pairs:
 df_portfolios = pd.DataFrame(portfolio_results)
 df_portfolios = df_portfolios.sort_values('mean', ascending=False)
 
-# Find best portfolio by mean return
+# Find best portfolio by mean return (include only the variable name and the value!)
 best_mean_portfolio = # Your task!
 best_mean_value = # Your task!
 
@@ -497,7 +587,7 @@ best_mean_value = df_portfolios.iloc[0]['mean']
 # Don't modify below
 assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
 assert 'Downtown + Suburb' in best_mean_portfolio or 'Suburb + Downtown' in best_mean_portfolio, \
-    f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
+    f"Best mean portfolio should include Downtown + Suburb, got {best_mean_portfolio}"
 assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
 print("Portfolio analysis correct!")
 print("\nAll Portfolio Combinations:")
