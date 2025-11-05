@@ -3,7 +3,7 @@ title: "Notebook 4.1 - Monte Carlo Simulation Practice"
 subtitle: "Management Science - Building Your Crystal Ball"
 code-links:
   - text: Python
-    href: nb_04_01_monte_carlo_practice.py
+    href: nb_04_01_monte_carlo.py
     icon: hand-thumbs-up
 ---
 
