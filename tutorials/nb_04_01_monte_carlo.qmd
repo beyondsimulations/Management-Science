@@ -526,7 +526,7 @@ for pair in pairs:
     profits_1 = location_profits[pair[0]]
     profits_2 = location_profits[pair[1]]
 
-    # Portfolio assumes equal investment (50/50 split)
+    # Portfolio assumes you open two locations
     portfolio_profit = # Your task!
 
     # Calculate metrics
@@ -562,7 +562,7 @@ for pair in pairs:
     profits_1 = location_profits[pair[0]]
     profits_2 = location_profits[pair[1]]
 
-    portfolio_profit = 0.5 * profits_1 + 0.5 * profits_2
+    portfolio_profit = profits_1 + profits_2
 
     result = {
         'pair': f"{pair[0]} + {pair[1]}",
