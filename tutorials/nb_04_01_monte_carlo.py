@@ -209,7 +209,34 @@ print(f"Days with profit €100-200: {profit_range.sum()}")
 print(f"Percentage in range: {profit_range.mean():.1%}")
 
 # %% [markdown]
-# > **Note**
+# ### Accessing Specific Rows with iloc
+
+# %%
+# iloc uses integer positions to access rows and columns
+print("Using iloc to access specific simulation results:")
+
+# Access first simulation (row 0)
+print(f"First simulation: {sample_df.iloc[0]}")
+
+# Access last simulation
+print(f"\nLast simulation profit: €{sample_df.iloc[-1]['profit']:.2f}")
+
+# Access multiple rows (first 3 simulations)
+print(f"\nFirst 3 simulations:")
+print(sample_df.iloc[0:3])
+
+# Access specific rows and columns
+print(f"\nProfit from simulations 1, 3, and 4:")
+print(sample_df.iloc[[1, 3, 4]]['profit'])
+
+# Random sample using iloc
+import random
+random_indices = random.sample(range(len(sample_df)), 2)
+print(f"\nTwo random simulations (indices {random_indices}):")
+print(sample_df.iloc[random_indices][['customers', 'profit']])
+
+# %% [markdown]
+# > **Key DataFrame Operations for Simulations**
 # >
 # > -   `df['column'].mean()` - Calculate average
 # > -   `df['column'].std()` - Calculate standard deviation
@@ -217,6 +244,9 @@ print(f"Percentage in range: {profit_range.mean():.1%}")
 # > -   `(df['column'] < value).mean()` - Calculate probability
 # > -   `(df['column'] >= low) & (df['column'] <= high)` - Range
 # >     conditions
+# > -   `df.iloc[i]` - Access row i by position
+# > -   `df.iloc[start:end]` - Access rows from start to end
+# > -   `df.iloc[[list]]` - Access specific rows by list of indices
 #
 # ## Exercise 2.1 - Run Multiple Simulations
 #
@@ -421,7 +451,7 @@ for pair in pairs:
 df_portfolios = pd.DataFrame(portfolio_results)
 df_portfolios = df_portfolios.sort_values('mean', ascending=False)
 
-# Find best portfolio by mean return
+# Find best portfolio by mean return (include only the variable name and the value!)
 best_mean_portfolio = # Your task!
 best_mean_value = # Your task!
 
@@ -429,7 +459,7 @@ best_mean_value = # Your task!
 # Don't modify below
 assert len(portfolio_results) == 6, "Should have 6 portfolio combinations"
 assert 'Downtown + Suburb' in best_mean_portfolio or 'Suburb + Downtown' in best_mean_portfolio, \
-    f"Best mean portfolio should include Downtown and Campus, got {best_mean_portfolio}"
+    f"Best mean portfolio should include Downtown + Suburb, got {best_mean_portfolio}"
 assert 350 < best_mean_value < 450, f"Best mean should be ~400, got {best_mean_value:.2f}"
 print("Portfolio analysis correct!")
 print("\nAll Portfolio Combinations:")
