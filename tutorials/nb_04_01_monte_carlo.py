@@ -161,6 +161,63 @@ print(f"  Revenue: €{one_day['revenue']:.2f}")
 print(f"  Profit: €{one_day['profit']:.2f}")
 
 # %% [markdown]
+# > **Tip**
+# >
+# > The function returns a dictionary. If you create a list of
+# > dictionaries and then use `pd.DataFrame` on that list, you will get a
+# > perfectly structured dataframe.
+#
+# ## Working with DataFrames for Simulation Results
+#
+# When we run multiple simulations, we need to collect and analyze the
+# results efficiently. Pandas DataFrames are perfect for this task.
+#
+# ### Creating DataFrames from Simulation Results
+
+# %%
+# Example: Create a DataFrame from a few simulations
+sample_results = []
+for i in range(5):
+    day_result = simulate_bean_counter_day()
+    sample_results.append(day_result)
+
+# Convert list of dictionaries to DataFrame
+sample_df = pd.DataFrame(sample_results)
+print("Sample DataFrame structure:")
+print(sample_df)
+print(f"\nDataFrame shape: {sample_df.shape}")
+print(f"Columns: {list(sample_df.columns)}")
+
+# %% [markdown]
+# ### Computing Statistics with DataFrames
+
+# %%
+# Specific calculations
+print(f"\nMean profit: €{sample_df['profit'].mean():.2f}")
+print(f"Standard deviation of profit: €{sample_df['profit'].std():.2f}")
+print(f"Minimum profit: €{sample_df['profit'].min():.2f}")
+print(f"Maximum profit: €{sample_df['profit'].max():.2f}")
+
+# Conditional analysis
+loss_days = sample_df['profit'] < 0
+print(f"Number of loss days: {loss_days.sum()}")
+print(f"Probability of loss: {loss_days.mean():.1%}")
+
+# Range analysis
+profit_range = (sample_df['profit'] >= 100) & (sample_df['profit'] <= 200)
+print(f"Days with profit €100-200: {profit_range.sum()}")
+print(f"Percentage in range: {profit_range.mean():.1%}")
+
+# %% [markdown]
+# > **Note**
+# >
+# > -   `df['column'].mean()` - Calculate average
+# > -   `df['column'].std()` - Calculate standard deviation
+# > -   `df['column'].min()` / `df['column'].max()` - Find extremes
+# > -   `(df['column'] < value).mean()` - Calculate probability
+# > -   `(df['column'] >= low) & (df['column'] <= high)` - Range
+# >     conditions
+#
 # ## Exercise 2.1 - Run Multiple Simulations
 #
 # Simulate 10,000 days of Bean Counter operations and analyze the results.
@@ -174,7 +231,9 @@ results = []
 for i in range(n_simulations):
     # Simulate one day and add to results
 
+
 # Calculate key metrics (Tip: a DataFrame could help here!)
+df =
 mean_profit =
 prob_loss =
 max_profit =
