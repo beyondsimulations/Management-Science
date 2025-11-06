@@ -179,7 +179,14 @@ print(f"  Profit: €{one_day['profit']:.2f}")
 ```
 
 ::: {.callout-tip}
-The function returns a dictionary. If you create a list of dictionaries and then use `pd.DataFrame` on that list, you will get a perfectly structured dataframe.
+When running simulations, we can typically:
+
+1. Create an **empty list** to store results: `results = []`
+2. Run simulations in a **loop**, each time calling the simulation function
+3. **Append** each result (dictionary) to the list: `results.append(day_result)`
+4. Convert the **list of dictionaries** to a DataFrame: `pd.DataFrame(results)`
+
+This pattern is a common way to collect multiple simulation outcomes!
 :::
 
 ## Working with DataFrames for Simulation Results
@@ -380,6 +387,7 @@ Learn to calculate key risk metrics that investors care about.
 ```{python}
 #| eval: true
 # Value at Risk: "What's the worst-case scenario in X% of cases?"
+# Convert DataFrame column to NumPy array for statistical calculations
 profits_array = df['profit'].values
 
 # 5% VaR: The profit level that we'll exceed 95% of the time
@@ -624,12 +632,10 @@ Based on your analysis, make a strategic expansion recommendation for Bean Count
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Create a recommendation dictionary with your analysis
-
-# Which portfolio maximizes expected profit?
+# Which portfolio maximizes expected profit? (Only the name)
 max_profit_portfolio =
 
-# Which portfolio minimizes risk (lowest std)?
+# Which portfolio minimizes risk (lowest std)? (Only the name)
 min_risk_portfolio =
 
 # Your final recommendation (choose one)
