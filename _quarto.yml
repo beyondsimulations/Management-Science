@@ -67,6 +67,14 @@ website:
             href: tutorials/nb_04_01_monte_carlo.qmd
           - text: "NB-04-02 Competition"
             href: tutorials/nb_04_02_techventure.qmd
+      - section: "05 Forecasting"
+        contents:
+          - text: "05 Forecasting"
+            href: lectures/lec_05_forecasting.qmd
+          - text: "NB-05-01 Time Series"
+            href: tutorials/nb_05_01_time_series.qmd
+          - text: "NB-05-02 Competition"
+            href: tutorials/nb_05_02_predictor.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd

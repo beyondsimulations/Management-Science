@@ -69,7 +69,9 @@ The build automatically runs two post-render scripts (configured in `_quarto.yml
 - `_quarto.yml` - Main Quarto configuration with website structure, sidebar navigation, and format settings
 - `_brand.yml` - Brand configuration for colors, typography, and fonts (Gelasio, Reddit Sans, Google Sans Code)
 - `pyproject.toml` - Python dependencies (jupyter, jupytext, matplotlib, numpy, pandas)
+- `Literature.bib` - Bibliography file for academic citations
 - `styles.scss` - Custom SCSS styles for the website
+- `_metadata.yml` - Directory-level metadata files (found in tutorials/, lectures/, etc.) that set default options for all files in that directory
 
 ### Content Formats
 
@@ -121,6 +123,7 @@ Core dependencies (from `pyproject.toml`):
 
 Dev dependencies:
 - `ipykernel` - IPython kernel for Jupyter
+- `imageio` - Image I/O library for reading and writing images
 
 ## Quarto Execution Model
 
@@ -143,10 +146,20 @@ When modifying tutorial code blocks, the cached results in `_freeze/` will be in
 ### Adding a New Tutorial
 
 1. Create `tutorials/nb_XX_YY_topic.qmd` following the numbering convention
-2. Add YAML frontmatter with title, subtitle, and code-links
+2. Add YAML frontmatter with title, subtitle, and code-links:
+   ```yaml
+   ---
+   title: "Notebook X.Y - Topic Name"
+   subtitle: "Management Science"
+   code-links:
+     - text: Python
+       href: nb_XX_YY_topic.py
+       icon: hand-thumbs-up
+   ---
+   ```
 3. Include Python code blocks with `{python}` syntax
 4. Add to `_quarto.yml` sidebar navigation under appropriate section
-5. Run `quarto render` to build
+5. Run `quarto render` to build (the post-render script will automatically generate the `.py` file)
 
 ### Adding a New Lecture
 

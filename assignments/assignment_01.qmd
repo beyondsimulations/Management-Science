@@ -14,7 +14,7 @@ code-links:
 **Expected Time:** 4-6 hours
 **Work:** Groups
 
-You're a a group of junior analyst at a consulting firm. A client needs help with:
+You're a group of junior analysts at a consulting firm. A client needs help with:
 
 1. Understanding investment risk using simulation
 2. Forecasting product demand
@@ -35,13 +35,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Sets a random seed for reproducibility (no need to adjust this for you)
-np.random.seed(42)
+# Sets a random seed for reproducibility (don't change this!)
+np.random.seed(2025)
 ```
 
 ## Part A: Investment Risk Simulation (50%)
 
 ### Scenario
+
 Your client wants to invest €100,000 in a new product launch. They need to understand the risk.
 
 **Given Information:**
@@ -49,67 +50,88 @@ Your client wants to invest €100,000 in a new product launch. They need to und
 - Best case: €300,000 return (20% probability)
 - Most likely: €150,000 return (60% probability)
 - Worst case: €50,000 return (20% probability)
+- At least 100 simulations
 
 ### Task 1: Simple Monte Carlo Simulation (15%)
 
+Create a function that:
+1. Takes the number of simulations as input
+2. For each simulation, randomly selects one outcome (€300,000, €150,000, or €50,000) based on the given probabilities (20%, 60%, 20%)
+3. Returns an array of all simulated returns
+
+::: callout-tip
+You could use `np.random.choice()` with the `p` parameter for probabilities.
+:::
+
 ```{python}
 # Create a function that runs simulations and randomly picks outcomes
-def simulate_investment(n_simulations=100):
-    """
-    Run Monte Carlo simulation for investment returns.
-
-    Returns:
-        array: Simulation results
-    """
-    # Define possible outcomes and their probabilities
-    outcomes = [300000, 150000, 50000]
-    probabilities = [0.2, 0.6, 0.2]
-
-    # Hint: use np.random.choice() with probabilities
-    # YOUR CODE HERE
-
-
-    return results
-
-# Run simulation
 # YOUR CODE HERE
+
+
+# Run your simulation with at least 100 simulations
+# Store results in a variable called 'simple_returns'
+# YOUR CODE HERE
+
 ```
 
 ### Task 2: Add Uncertainty to Probabilities (15%)
 
+Unfortunately, it is not as easy as assumed before and we have to simulate the investment into the product launch with uncertain probabilities. The data based on previous launches of similar products were distributed as stated below.
+
+For each simulation, sample new probabilities:
+
+- Best case probability: 10% to 30% (uniform distribution)
+- Worst case probability: 10% to 30% (uniform distribution)
+- Most likely probability: remainder to sum to 100%
+
+::: callout-important
+The probabilities must sum to 100% in each simulation. After randomly sampling the best and worst case probabilities, calculate the most likely probability based on the remaining percentage.
+:::
+
+Create a function that:
+
+1. For each simulation, first sample random probabilities for best and worst cases
+2. Calculate the most likely probability as the remainder
+3. Use these probabilities to select an outcome for that simulation
+4. Return an array of all simulated returns
+
+::: callout-tip
+Use `np.random.uniform(low, high)` to sample probabilities.
+:::
+
 ```{python}
-def simulate_with_uncertainty(n_simulations=100):
-    """
-    Simulate investment with uncertain probabilities.
-    - Best case probability: 10% to 30% (uniform)
-    - Worst case probability: 10% to 30% (uniform)
-    - Most likely probability: remainder to sum to 100%
-    """
-    outcomes = [300000, 150000, 50000]
-    results = []
-
-    return results
-
-# Run simulation with uncertainty
+# Create a new function that runs simulations and picks outcomes under uncertainty
 # YOUR CODE HERE
+
+# Run simulation with uncertainty (at least 1000 simulations)
+# Store results in a variable called 'uncertain_returns'
+# YOUR CODE HERE
+
 ```
 
 ### Task 3: Analysis & Visualization (20%)
 
+Use the results from Task 2 (uncertain probabilities simulation) for this analysis.
+
 ```{python}
-# Create histogram of returns
+# Create histogram of returns from uncertain_returns
+# Add labels, title, and show the initial investment line (€100,000)
 # YOUR CODE HERE
 
-# Calculate key metrics
-# 1. Probability of losing money (return < €100,000)
-# 2. 95% Value at Risk (5th percentile)
-# 3. Expected profit
+# Calculate key metrics from uncertain_returns:
+# 1. Probability of losing money (proportion where return < €100,000)
+# 2. 95% Value at Risk (5th percentile of returns - worst case in 95% scenarios)
+# 3. Expected return (mean of all simulated returns)
+# 4. Expected profit (expected return - initial investment of €100,000)
+# YOUR CODE HERE
+
+# Print all metrics clearly
 # YOUR CODE HERE
 
 ```
 
 **Business Question:**
-Should the client make this investment? Write 3-4 sentences explaining your recommendation.
+Should the client make this investment? Write 3-4 sentences explaining your recommendation based on the metrics above (probability of loss, VaR, expected profit).
 
 ```{python}
 """
@@ -120,11 +142,13 @@ YOUR ANSWER HERE:
 ## Part B: Demand Forecasting (50%)
 
 ### Scenario
+
 A retail client needs to forecast demand for the next 3 months to plan inventory.
 
 ### The Data
 
 ```{python}
+# DON'T CHANGE ANYTHING BELOW!
 # 24 months of sales data
 sales_data = {
     'month': list(range(1, 25)),
@@ -138,50 +162,50 @@ sales_data = {
     ]
 }
 
-# Convert to pandas DataFrame for easier handling
+# Convert to pandas DataFrame
 df = pd.DataFrame(sales_data)
 print(df.head())
 print(f"\nTotal months: {len(df)}")
 print(f"Average sales: {df['sales_units'].mean():.1f}")
+# DON'T CHANGE ANYTHING ABOVE!
 ```
 
 ### Task 1: Moving Average Forecast (15%)
 
+Help the client to implement a function that calculates the moving average forecast for the next period based on a flexible window size.
+
+**What the function should do:**
+
+- Take historical sales data and a window size as inputs
+- Calculate the average of the last N periods (where N = window size)
+- Return the forecast for the next period
+
 ```{python}
-def moving_average_forecast(data, window_size=3):
-    """
-    Calculate moving average forecast for next period.
+# Implement a moving average forecast function
+# Function should take: data (array/list) and window (int)
+# Function should return: forecast for next period (float)
+# YOUR CODE HERE
 
-    Args:
-        data: List or array of historical values
-        window_size: Number of periods to average
-
-    Returns:
-        float: Forecast for next period
-    """
-    # YOUR CODE HERE
-    # Take the average of the last 'window_size' periods
-
-    return forecast
-
-# Test different window sizes and print the results
+# Test different window sizes: 3, 6, and 12 months
+# For each, calculate and print the forecast for month 25
+# Use the full 24 months of data
 # YOUR CODE HERE
 
 ```
 
 ### Task 2: Exponential Smoothing (15%)
 
-**Understanding Exponential Smoothing:**
+You and the client both think that a simple moving average forecast might not be sufficient and you are thus tasked to test exponential smoothing, which gives more weight to recent observations while still considering historical data.
 
-Exponential smoothing gives more weight to recent observations while still considering historical data. The formula is:
+The formula is:
 
-$$F_t = α × A_(t-1) + (1 - α) × F_(t-1)$$
+$$F_t = α \times A_{t-1} + (1 - α) \times F_{t-1}$$
 
 Where:
 
 - $F_t$ = Forecast for period $t$
-- $A_(t-1)$ = Actual value in previous period
-- $F_(t-1)$ = Forecast for previous period
+- $A_{t-1}$ = Actual value in previous period
+- $F_{t-1}$ = Forecast for previous period
 - $α$ = Smoothing parameter between 0 and 1
 
 **How it works:**
@@ -199,67 +223,77 @@ Where:
 - And so on...
 
 ```{python}
-def exponential_smoothing(data, alpha=0.3):
-    """
-    Calculate exponential smoothing forecast for next period.
+# Implement exponential smoothing function
+# Function should take: data (array/list) and alpha (float between 0 and 1)
+# Function should return: forecast for next period (float)
+# Remember: Start with F_1 = A_1, then apply formula for subsequent periods
+# YOUR CODE HERE
 
-    Args:
-        data: Historical values (list or array)
-        alpha: Smoothing parameter (0-1)
-               Higher alpha = more weight on recent data
-
-    Returns:
-        float: Forecast for next period
-    """
-    # Initialize forecast with first actual value
-    forecast = data[0]
-
-    # YOUR CODE HERE
-    # Loop through data starting from index 1
-    # For each actual value, update forecast using the formula:
-    #   forecast = alpha * actual + (1 - alpha) * forecast
-
-    # Return the final forecast (which predicts the next period)
-    return forecast
-
-# Test different alpha values and print the results
-# Try alpha = 0.1 (smooth), 0.3 (balanced), 0.7 (responsive)
+# Test different alpha values: 0.1 (smooth), 0.3 (balanced), 0.7 (responsive)
+# For each, calculate and print the forecast for month 25
+# Use the full 24 months of data
 # YOUR CODE HERE
 
 ```
 
 ### Task 3: Evaluate and Compare Methods (20%)
 
+Now compare the two forecasting methods using a proper train/test split.
+
+**Approach:**
+
+- Use first 20 months for initial training
+- Forecast months 21-24 one at a time
+- After each forecast, **add the actual value to your training data** before forecasting the next month!
+- Calculate forecast accuracy using Mean Absolute Error (MAE)
+
+::: callout-tip
+This is called "rolling forecast".
+:::
+
+**For this task, use:**
+
+- Moving Average with window=3
+- Exponential Smoothing with alpha=0.3
+
 ```{python}
 # Split data: first 20 months for training, last 4 for testing
-train_data = df['sales_units'].values[:20]
+train_data = df['sales_units'].values[:20].copy()
 test_data = df['sales_units'].values[20:]
 
-# Generate forecasts for test period
+print(f"Training on months 1-20, testing on months 21-24")
+print(f"Test data: {test_data}")
+
+# Generate rolling forecasts for test period (months 21-24)
 ma_forecasts = []
 es_forecasts = []
 
-# For each test month:
-# 1. Use training data to forecast
-# 2. Add actual value to training for next forecast
+# For each test month (4 iterations):
+# 1. Use current training data to generate forecast
+# 2. Store the forecast
+# 3. Add the actual value to training data for next iteration
 # YOUR CODE HERE
 
-# Calculate Mean Absolute Error (MAE)
+# Calculate Mean Absolute Error (MAE) for both methods
+# MAE = average of |actual - forecast|
+# YOUR CODE HERE
+
+# Print results
 # YOUR CODE HERE
 
 ```
 
 ```{python}
-# Visualization
-# Add lines for:
-# - Moving average forecasts
-# - Exponential smoothing forecasts
-# Mark the train/test split
+# Visualization: Plot actual sales with forecasts
+# Create a plot showing:
+# 1. All 24 months of actual sales
+# 2. Forecasts for months 21-24 from both methods
+# 3. Legend identifying each line
 # YOUR CODE HERE
 
 ```
 
-**Business Question:** Which forecasting method would you recommend and why? How much safety stock should they hold (based on your assumption)? (3-4 sentences)
+**Business Question:** Which forecasting method would you recommend and why? Consider the MAE values you calculated. (2-3 sentences)
 
 ```{python}
 """
@@ -277,6 +311,6 @@ YOUR ANSWER HERE:
 
 ## Tips
 
-- Use AI tools to help understand concepts and programm, but make sure you understand the code
-- Start simple - get something working before optimizing
+- Use AI tools to help understand concepts and program, but make sure you understand the code
+- Start simple and get something working before optimizing
 - Remember: the goal is good solutions, not perfect ones

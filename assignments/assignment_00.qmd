@@ -21,7 +21,7 @@ gAI may hallucinate additional features that are not required. Be careful here!
 
 ## The Two Assignments
 
-**Assignment 1: Risk Analysis & Forecasting (Due at the start of Lecture 7, weight 30%)**
+**Assignment 1: Risk Analysis & Forecasting (Due at the start of Lecture 8, weight 30%)**
 
 You’ll simulate investment outcomes to understand risk and then forecast demand using simple time-series techniques. Expect to implement Monte Carlo simulations, moving averages, and exponential smoothing, then compare methods and justify a recommendation.
 
