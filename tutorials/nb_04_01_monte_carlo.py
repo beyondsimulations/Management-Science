@@ -163,9 +163,17 @@ print(f"  Profit: €{one_day['profit']:.2f}")
 # %% [markdown]
 # > **Tip**
 # >
-# > The function returns a dictionary. If you create a list of
-# > dictionaries and then use `pd.DataFrame` on that list, you will get a
-# > perfectly structured dataframe.
+# > When running simulations, we can typically:
+# >
+# > 1.  Create an **empty list** to store results: `results = []`
+# > 2.  Run simulations in a **loop**, each time calling the simulation
+# >     function
+# > 3.  **Append** each result (dictionary) to the list:
+# >     `results.append(day_result)`
+# > 4.  Convert the **list of dictionaries** to a DataFrame:
+# >     `pd.DataFrame(results)`
+# >
+# > This pattern is a common way to collect multiple simulation outcomes!
 #
 # ## Working with DataFrames for Simulation Results
 #
@@ -308,6 +316,7 @@ print(f"Visualization complete! {prob_target_range:.1%} of days have profit €1
 
 # %%
 # Value at Risk: "What's the worst-case scenario in X% of cases?"
+# Convert DataFrame column to NumPy array for statistical calculations
 profits_array = df['profit'].values
 
 # 5% VaR: The profit level that we'll exceed 95% of the time
@@ -434,7 +443,7 @@ for pair in pairs:
     profits_1 = location_profits[pair[0]]
     profits_2 = location_profits[pair[1]]
 
-    # Portfolio assumes equal investment (50/50 split)
+    # Portfolio assumes you open two locations
     portfolio_profit = # Your task!
 
     # Calculate metrics
@@ -495,12 +504,10 @@ plt.show()
 
 # %%
 # YOUR CODE BELOW
-# Create a recommendation dictionary with your analysis
-
-# Which portfolio maximizes expected profit?
+# Which portfolio maximizes expected profit? (Only the name)
 max_profit_portfolio =
 
-# Which portfolio minimizes risk (lowest std)?
+# Which portfolio minimizes risk (lowest std)? (Only the name)
 min_risk_portfolio =
 
 # Your final recommendation (choose one)
