@@ -376,9 +376,7 @@ YOUR ANSWER HERE:
 
 The client's inventory manager says: *"Great analysis! Let's use your recommended method to order inventory for the next 6 months."*
 
-Before approving this plan, you review your visualization showing months 1-24. You notice something concerning about the data pattern.
-
-Write a brief warning to the client (4-5 sentences) explaining why they should NOT rely solely on these methods for their 6-month planning horizon, despite the good MAE performance on months 21-24.
+Before approving this plan, you review your visualization showing months 1-24. You notice something about the data pattern. Write a brief message to the client (4-5 sentences) explaining why they should NOT rely solely on these methods for their 6-month planning horizon, despite the good MAE performance on months 21-24.
 
 ```{python}
 """
