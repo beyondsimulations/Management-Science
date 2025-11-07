@@ -208,6 +208,11 @@ forecast_template = pd.DataFrame({
 
 print("\nForecast template (you'll fill this):")
 print(forecast_template)
+
+print("\nExample: How to fill your forecasts:")
+print("  forecast_template.loc[0, 'techpod_pro'] = your_week1_forecast")
+print("  forecast_template.loc[1, 'techpod_pro'] = your_week2_forecast")
+print("  ... and so on for all products and weeks")
 ```
 
 # Starter Code & Helper Functions
