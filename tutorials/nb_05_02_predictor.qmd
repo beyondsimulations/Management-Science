@@ -29,7 +29,7 @@ code-links:
 
 ### Your Mission
 
-Forecast December 2024 sales (weeks 1-4) for three key products using 2 years of historical weekly data.
+Forecast December 2025 sales (weeks 1-4) for three key products using 3 years of historical weekly data.
 
 ### The Three Products
 
@@ -91,8 +91,8 @@ from datetime import datetime, timedelta
 # Random seed for consistency
 np.random.seed(2025)
 
-# Generate 2 years of realistic weekly sales data
-weeks = pd.date_range(start='2023-01-03', end='2024-12-01', freq='W-MON')
+# Generate 3 years of realistic weekly sales data
+weeks = pd.date_range(start='2023-01-03', end='2025-12-01', freq='W-MON')
 
 def generate_product_sales(trend, seasonality_type, volatility, base=100):
     """Generate realistic sales patterns"""
@@ -100,11 +100,11 @@ def generate_product_sales(trend, seasonality_type, volatility, base=100):
 
     # Base trend
     if trend == 'growing':
-        trend_component = np.linspace(base, base * 1.5, n_weeks)
+        trend_component = np.linspace(base, base * 1.7, n_weeks)
     elif trend == 'stable':
         trend_component = np.ones(n_weeks) * base
     else:  # declining
-        trend_component = np.linspace(base, base * 0.7, n_weeks)
+        trend_component = np.linspace(base, base * 0.6, n_weeks)
 
     # Seasonality
     if seasonality_type == 'christmas':
@@ -112,9 +112,9 @@ def generate_product_sales(trend, seasonality_type, volatility, base=100):
         seasonal = 1 + 0.5 * np.sin(2 * np.pi * (np.arange(n_weeks) - 45) / 52)
     elif seasonality_type == 'newyear':
         # Peak in January and December
-        seasonal = 1 + 0.3 * np.cos(2 * np.pi * np.arange(n_weeks) / 52)
+        seasonal = 1 + 0.25 * np.cos(2 * np.pi * np.arange(n_weeks) / 52)
     else:  # moderate
-        seasonal = 1 + 0.2 * np.sin(2 * np.pi * np.arange(n_weeks) / 52)
+        seasonal = 1 + 0.05 * np.sin(2 * np.pi * np.arange(n_weeks) / 52)
 
     # Combine with noise
     noise = np.random.normal(1, volatility, n_weeks)
@@ -126,9 +126,9 @@ def generate_product_sales(trend, seasonality_type, volatility, base=100):
     return sales.astype(int)
 
 # Generate sales for each product
-techpod_sales = generate_product_sales('growing', 'moderate', 0.15, base=250)
+techpod_sales = generate_product_sales('growing', 'moderate', 0.1, base=250)
 fitband_sales = generate_product_sales('stable', 'newyear', 0.25, base=180)
-cozythrow_sales = generate_product_sales('stable', 'christmas', 0.20, base=120)
+cozythrow_sales = generate_product_sales('stable', 'christmas', 0.15, base=120)
 
 # Create the historical data DataFrame
 historical_data = pd.DataFrame({
@@ -175,7 +175,7 @@ for idx, (product, color) in enumerate(zip(products, colors)):
     axes[idx].plot(historical_data['week'], historical_data[product],
                    color=color, linewidth=1.5, alpha=0.8)
     axes[idx].set_ylabel('Weekly Sales')
-    axes[idx].set_title(f'{product.replace("_", " ").title()} - 2 Year History')
+    axes[idx].set_title(f'{product.replace("_", " ").title()} - 3 Year History')
     axes[idx].grid(True, alpha=0.2)
     axes[idx].axvline(x=pd.Timestamp('2023-12-01'), color='red',
                       linestyle='--', alpha=0.5, label='December Start')
@@ -191,9 +191,9 @@ plt.show()
 
 ```{python}
 #| eval: true
-# Define the December 2024 weeks we need to forecast
-december_weeks = pd.date_range(start='2024-12-02', end='2024-12-23', freq='W-MON')
-print("December 2024 weeks to forecast:")
+# Define the December 2025 weeks we need to forecast (exactly 4 weeks)
+december_weeks = pd.date_range(start='2025-12-01', periods=4, freq='W-MON')
+print("December 2025 weeks to forecast:")
 for i, week in enumerate(december_weeks, 1):
     print(f"  Week {i}: {week.date()} (Monday start)")
 
