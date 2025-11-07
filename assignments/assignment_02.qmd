@@ -1,6 +1,7 @@
 ---
 title: "Assignment 2: Optimization in Practice"
 subtitle: "Management Science"
+format: ipynb
 code-links:
   - text: Python
     href: assignment_02.py
@@ -10,13 +11,14 @@ code-links:
 ## Assignment Overview
 
 **Due:** Start of Lecture 10
-**Weight:** 20% of final grade
+**Weight:** 30% of final grade
 **Expected Time:** 5-7 hours
 **Work:** Groups
 
-Your consulting firm has been hired by "CityExpress," a local delivery company. They need help with:
-1. Optimizing delivery routes to reduce costs
-2. Creating efficient shift assignments that balance operational needs and worker preferences
+Your consulting firm has landed a major contract with **CityExpress**, a rapidly growing local delivery company. The CEO is concerned about rising operational costs and worker turnover. Your team has been tasked with:
+
+1. **Route Optimization**: Reduce fuel costs by finding better delivery routes
+2. **Workforce Satisfaction**: Improve worker retention by creating shift schedules that respect preferences
 
 ## Consultants
 Who is part of your group?
@@ -33,154 +35,149 @@ YOUR ANSWER HERE:
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import math
 
-# Sets a random seed for reproducibility (no need to adjust this for you)
-np.random.seed(42)
+# Sets a random seed for reproducibility (CHANGE THIS HERE!!!)
+group_name = "[THE NAMES OF YOUR GROUP MEMBERS HERE]"
+# Convert string to integer for seeding
+seed = hash(group_name) % (2**31)
+np.random.seed(seed)
 ```
 
-## Part A: Smart Delivery Routes (50%)
+::: callout-warning
+Fill in the names of all the members of your group in `group_name` instead of `[THE NAMES OF YOUR GROUP MEMBERS HERE]`. If you don't do so, you will maximally receive half of the points.
+:::
 
-### Scenario
-CityExpress has 12 customer orders to deliver tomorrow. They need an efficient route starting and ending at their depot.
+## Part A: Route Optimization (50%)
+
+### The Challenge
+
+CityExpress currently plans routes manually. A driver mentioned: *"I feel like I'm driving in circles sometimes."* The operations manager suspects they're wasting 15-20% on inefficient routing.
+
+Tomorrow's schedule has **20 customer deliveries**. Your job: build a route that minimizes total distance, starting and ending at the depot.
+
+**Impact**: If successful, this approach will be rolled out to all 50 daily routes.
 
 ### The Data
 
+::: callout-note
+**Unique Data Per Group**: The customer locations below are randomly generated based on your group's seed. Each group will get different customer coordinates within a 20km × 20km service area.
+:::
+
 ```{python}
-# Location coordinates (in km from origin)
-locations = {
-    0: (10, 10),   # Depot
-    1: (8, 15),    # Customer 1
-    2: (14, 18),   # Customer 2
-    3: (5, 12),    # Customer 3
-    4: (18, 8),    # Customer 4
-    5: (12, 5),    # Customer 5
-    6: (3, 7),     # Customer 6
-    7: (16, 14),   # Customer 7
-    8: (7, 3),     # Customer 8
-    9: (15, 6),    # Customer 9
-    10: (11, 17),  # Customer 10
-    11: (4, 16),   # Customer 11
-    12: (19, 12)   # Customer 12
-}
+# DON'T CHANGE ANYTHING BELOW!
+# Generate customer locations based on your group's seed
+# Each group gets unique locations within a 20km × 20km area
+
+# Depot is always at the center
+locations = {0: (10, 10)}
+
+# Generate 20 customer locations randomly
+for i in range(1, 21):
+    x = np.random.uniform(2, 18)  # Between 2-18 km
+    y = np.random.uniform(2, 18)  # Between 2-18 km
+    locations[i] = (x, y)
+
+print("=" * 60)
+print("YOUR GROUP'S UNIQUE CUSTOMER LOCATIONS")
+print("=" * 60)
+print(f"Depot: {locations[0]}")
+print(f"\nCustomer locations (x, y in km):")
+for i in range(1, 21):
+    print(f"  Customer {i:2d}: ({locations[i][0]:5.2f}, {locations[i][1]:5.2f})")
+print("=" * 60)
+# DON'T CHANGE ANYTHING ABOVE!
 ```
 
-### Task 1: Build a Basic Route (20%)
+### Task 1: Build an Initial Route (20%)
+
+Use the **nearest neighbor heuristic** to create a baseline route.
+
+**The approach:**
+
+- Start at the depot
+- At each step, visit the nearest unvisited customer
+- Return to depot when all customers are visited
+
+**Your deliverable:**
+
+- Implement functions to calculate distances and build the route
+- Print the route and its total distance
+
+::: callout-tip
+The Euclidean distance formula is: $\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+:::
 
 ```{python}
-def calculate_distance(loc1, loc2):
-    """Calculate Euclidean distance between two locations."""
-    x1, y1 = loc1
-    x2, y2 = loc2
-    # YOUR CODE HERE
-
-    return distance
-
-def calculate_total_distance(route, locations):
-    """Calculate total distance for a route."""
-    total = 0
-    # YOUR CODE HERE
-
-    # Sum distances between consecutive locations
-    return total
-
-def nearest_neighbor_route(depot, locations):
-    """
-    Build route using nearest neighbor heuristic.
-    Always visit the nearest unvisited customer next.
-    """
-    route = [depot] # Start with depot
-    # YOUR CODE HERE
-
-    route.append(depot)  # End with depot
-    return route
-
-# Build your route
+# Build your nearest neighbor route here
+# You'll need functions to:
+# 1. Calculate distance between two locations
+# 2. Calculate total route distance
+# 3. Build the route using nearest neighbor logic
 # YOUR CODE HERE
 
 ```
 
-### Task 2: Improve Your Route (20%)
+### Task 2: Improve the Route (20%)
 
-**Understanding 2-Opt Improvement:**
+The nearest neighbor heuristic is fast but rarely optimal. Use **2-opt local search** to improve your route.
 
-The 2-opt algorithm improves a route by removing two edges and reconnecting them in a different way. This is like "uncrossing" routes that cross over themselves.
-
-**Visual Example:**
+**How 2-opt works:**
+The algorithm removes two edges from your route and reconnects them in a different way, potentially "uncrossing" the route.
 
 ```
-Before:  A → B → C → D → A
-If we take edges (A→B) and (C→D) and swap them:
-After:   A → C → B → D → A  (reversed the B→C segment)
+Before:  Depot → A → B → C → D → Depot
+After reversing segment between positions 1 and 3:
+After:   Depot → C → B → A → D → Depot
 ```
 
-**The Algorithm:**
+**The approach:**
 
-1. Start with your current best route and its distance
-2. Try swapping every possible pair of edges:
-   - Take positions i and j in the route (where i < j)
-   - Reverse the segment between i and j
-   - Calculate the new distance
-3. If the new route is better, keep it as your new best
-4. Repeat until no improvement is found
+1. Try all possible ways to reverse segments of your route
+2. If a reversal improves the distance, keep it
+3. Repeat until no improvement is possible
+
+**Your deliverable:**
+
+- Implement 2-opt improvement
+- Show the improved route and distance
+- Report how many iterations it took to converge
+
+::: callout-important
+Keep the depot fixed at the start and end! Only reverse segments between customers.
+:::
 
 ```{python}
-def try_swap_improvement(route, locations):
-    """
-    Try all possible 2-opt swaps and return the best improvement found.
-
-    Args:
-        route: Current route (list of location indices)
-        locations: Dictionary of location coordinates
-
-    Returns:
-        tuple: (best_route, best_distance) or (None, None) if no improvement
-    """
-    # YOUR CODE HERE (replace pass)
-
-    pass
-
-def improve_route(initial_route, locations, max_iterations=50):
-    """
-    Repeatedly apply 2-opt improvements until no improvement is found.
-
-    Args:
-        initial_route: Starting route
-        locations: Dictionary of location coordinates
-        max_iterations: Maximum number of improvement attempts
-
-    """
-    # Loop while iteration < max_iterations:
-    #   1. Call try_swap_improvement on current_route
-    #   2. If no improvement found, break
-    #   3. Otherwise, update current_route and current_distance
-    #   4. Increment iteration counter
-    # YOUR CODE HERE (replace pass)
-
-    pass
-
-# Improve your route
+# Implement 2-opt improvement here
 # YOUR CODE HERE
 
 ```
 
-### Task 3: Visualize and Analyze (10%)
+### Task 3: Visualize and Quantify Impact (10%)
 
-- Visualize both routes (before and after improvement)
-- Calculate and compare:
-  - Original route distance
-  - Improved route distance
-  - Percentage improvement
-  - Estimated cost savings (€2 per km)
+The CEO wants to see the difference visually and understand the cost savings.
+
+**Your deliverable:**
+
+1. **Visualization**: Plot both routes (before and after optimization) showing:
+   - Customer locations
+   - Route paths
+   - Clear labels for depot and customers
+
+2. **Business metrics**:
+   - Original distance vs. improved distance
+   - Percentage improvement
+   - Cost savings per delivery (assume €2/km fuel cost)
+   - Projected monthly savings if applied to all 50 daily routes
 
 ```{python}
-# Visualize both routes
+# Create visualizations and calculate business impact
 # YOUR CODE HERE
 
-# Calculate metrics
-# YOUR CODE HERE
 ```
 
-**Business Question:** If CityExpress has 50 deliveries per day, how much could they save per month with route optimization? (3-4 sentences)
+**Business Question:**
+Based on your analysis, write a brief recommendation (3-4 sentences) to the CEO about whether to invest in route optimization software. Consider the monthly savings potential and any limitations of your approach.
 
 ```{python}
 """
@@ -188,233 +185,181 @@ YOUR ANSWER HERE:
 """
 ```
 
-## Part B: Smart Shift Assignment (50%)
+## Part B: Worker Shift Scheduling (50%)
 
-### Scenario
-CityExpress warehouse needs to assign 6 workers to 6 different shifts this week. Each worker works exactly one shift. Your job: maximize worker satisfaction by matching them to their preferred shifts.
+### The Challenge
 
-### Connection to Lecture 6
+CityExpress warehouse operates with 6 workers across 6 shifts per week. Recently, worker turnover has been high. Exit interviews reveal: *"They never give me the shifts I want."*
 
-Remember **greedy heuristics** from job shop scheduling (SPT, EDD)? You'll design similar rules here—but for workers and shifts instead of jobs and machines.
+The warehouse manager manually assigns shifts each week, often just assigning workers in order without considering preferences. Your job: **create a better assignment system that maximizes worker satisfaction**.
 
-**Think about:**
-
-- SPT prioritized **shortest** jobs first
-- EDD prioritized jobs with **earliest deadlines** first
-- What should **you** prioritize for shift assignment?
+**Impact**: Higher satisfaction could reduce the 30% annual turnover rate, saving thousands in recruiting and training costs.
 
 ### The Data
 
+::: callout-note
+**Unique Data Per Group**: Worker shift preferences below are randomly generated based on your group's seed. Each group will get different preference patterns while maintaining similar complexity (varying numbers of preferences per worker, overlapping demands).
+:::
+
 ```{python}
-# 6 shifts available this week
+# DON'T CHANGE ANYTHING BELOW!
+# Available shifts for the week (14 shifts across 7 days, 2 per day)
 shifts = [
-    'Monday-Morning',
-    'Monday-Evening',
-    'Tuesday-Morning',
-    'Tuesday-Evening',
-    'Wednesday-Morning',
-    'Wednesday-Evening'
+    'Monday-Morning', 'Monday-Evening',
+    'Tuesday-Morning', 'Tuesday-Evening',
+    'Wednesday-Morning', 'Wednesday-Evening',
+    'Thursday-Morning', 'Thursday-Evening',
+    'Friday-Morning', 'Friday-Evening',
+    'Saturday-Morning', 'Saturday-Evening',
+    'Sunday-Morning', 'Sunday-Evening'
 ]
 
-# Worker shift preferences (in order of preference: 1st choice, 2nd choice, 3rd choice)
-worker_preferences = {
-    0: ['Monday-Morning', 'Tuesday-Morning', 'Wednesday-Morning'],     # Morning person
-    1: ['Monday-Evening', 'Tuesday-Evening', 'Wednesday-Evening'],     # Prefers evenings
-    2: ['Monday-Morning', 'Wednesday-Morning'],                        # Flexible, fewer preferences
-    3: ['Tuesday-Evening', 'Wednesday-Evening'],                       # Evening only, fewer preferences
-    4: ['Monday-Morning', 'Monday-Evening', 'Tuesday-Morning'],        # Busy early week
-    5: ['Wednesday-Morning', 'Wednesday-Evening']                      # Wednesday preferred
-}
+# Generate worker preferences randomly for your group
+worker_preferences = {}
+for worker_id in range(14):
+    # Each worker gets 2-4 preferred shifts
+    num_prefs = np.random.randint(2, 5)
+    # Randomly select preferred shifts (without replacement)
+    preferred_indices = np.random.choice(14, size=num_prefs, replace=False)
+    worker_preferences[worker_id] = [shifts[i] for i in sorted(preferred_indices)]
 
-# Assignment representation:
-# assignment = [shift_index for each worker]
-# Example: assignment = [0, 1, 2, 3, 4, 5]
-#   Worker 0 gets shift 0 (Monday-Morning)
-#   Worker 1 gets shift 1 (Monday-Evening)
-#   Worker 2 gets shift 2 (Tuesday-Morning)
-#   etc.
+print("=" * 70)
+print("YOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES")
+print("=" * 70)
+for worker_id, prefs in worker_preferences.items():
+    print(f"Worker {worker_id:2d}: {prefs}")
+print(f"\nTotal preferences across all workers: {sum(len(p) for p in worker_preferences.values())}")
+print(f"Average preferences per worker: {sum(len(p) for p in worker_preferences.values()) / 14:.1f}")
+print("=" * 70)
+
+# Each worker works exactly ONE shift
+# Each shift must have exactly ONE worker
+# DON'T CHANGE ANYTHING ABOVE!
 ```
 
-### Task 1: Design Your Greedy Heuristic (15%)
+::: callout-note
+**Assignment representation**: Use a list where `assignment[worker_id] = shift_index`
 
-**Challenge:** Create a function that builds an assignment using YOUR OWN greedy strategy.
+Example: `[0, 3, 1, 13, 2, 5, ...]` means:
 
-**Need a starting point?**
+- Worker 0 → shift 0 (Monday-Morning)
+- Worker 1 → shift 3 (Tuesday-Evening)
+- Worker 2 → shift 1 (Monday-Evening)
+- Worker 3 → shift 13 (Sunday-Evening)
+- etc.
+:::
 
-Ask yourself:
+### Task 1: Design a Greedy Assignment Strategy (15%)
 
-1. What made SPT different from EDD?
-2. What attributes do workers have?
-3. What attributes do shifts have?
-4. Pick one attribute to prioritize. That's your greedy rule!
+Remember **greedy heuristics** from Lecture 6 (SPT, EDD)? Design your own greedy rule for shift assignment.
+
+**Think about:**
+- SPT prioritized shortest jobs
+- EDD prioritized earliest deadlines
+- What should YOU prioritize? Worker flexibility? Number of preferences? Something else?
+
+**Your deliverable:**
+1. Implement a function that creates a valid assignment using YOUR greedy strategy
+2. Print the assignment (who gets which shift)
+3. Write 3-4 sentences explaining:
+   - What attribute you chose to prioritize
+   - Why this makes sense
+   - How it relates to scheduling heuristics from Lecture 6
 
 ```{python}
-def my_greedy_assignment(worker_preferences, shifts):
-    """
-    Build an assignment using YOUR greedy strategy.
-
-    Args:
-        worker_preferences: Dict of worker_id → list of preferred shift names
-        shifts: List of 6 shift names
-
-    Returns:
-        list: assignment where assignment[worker_id] = shift_index
-              Example: [0, 1, 2, 3, 4, 5] means worker 0→shift 0, worker 1→shift 1, etc.
-    """
-    assignment = [-1] * 6  # -1 means unassigned
-    available_shifts = list(range(6))  # Track which shifts are still open
-
-    # YOUR GREEDY STRATEGY HERE
-    # Questions to guide you:
-    # 1. In what order will you process the workers? (0,1,2,3,4,5 or different order?)
-    # 2. For each worker, how do you pick their shift from available ones?
-    # 3. What if their preferred shifts are all taken?
-
-    # YOUR CODE HERE
-
-    return assignment
-
-# Test your greedy heuristic
+# Implement your greedy assignment strategy
+# Must produce a valid assignment (all workers assigned, no duplicate shifts)
 # YOUR CODE HERE
 
 ```
 
-**Deliverable:**
-
-1. Working greedy function that produces a valid assignment (all assigned, no duplicate shifts)
-2. Written explanation (3-4 sentences)
-
 ```{python}
 """
 YOUR EXPLANATION HERE:
-My greedy strategy: [describe your rule]
-Reasoning: [why did you choose this approach?]
+My greedy strategy: [what did you prioritize?]
+Reasoning: [why does this make sense?]
+Connection to Lecture 6: [how does this relate to SPT/EDD/other heuristics?]
 """
 ```
 
-### Task 2: Build an Evaluation Function (15%)
+### Task 2: Measure Assignment Quality (15%)
 
-**Challenge:** Create a function that measures how GOOD an assignment is.
+You need a way to measure how "good" an assignment is. Design a **satisfaction scoring system**.
 
 **Design questions:**
 
-- Should you give more points for 1st choice vs 2nd choice vs 3rd choice?
-- Should all workers count equally, or weight some more?
-- What if a worker gets a shift they didn't list as preferred?
+- Should 1st choice be worth more than 2nd choice? How much more?
+- What if a worker gets a shift they didn't list?
+- Should some workers count more than others?
+
+**Your deliverable:**
+
+1. Implement a satisfaction calculation function
+2. Calculate the satisfaction score for your greedy assignment
+3. Write 2-3 sentences explaining:
+   - Your scoring system design
+   - Why you chose this approach
+
 
 ```{python}
-def calculate_satisfaction(assignment, worker_preferences, shifts):
-    """
-    Calculate how good an assignment is.
-
-    Design YOUR OWN scoring system!
-
-    Possible approaches:
-    - 1st choice = 3 pts, 2nd choice = 2 pts, 3rd choice = 1 pt, other = 0 pts
-    - 1st choice = 10 pts, 2nd choice = 5 pts, 3rd choice = 1 pt, other = -5 pts
-    - Binary: preferred shift = 1 pt, non-preferred = 0 pts
-    - Your own scoring!
-
-    Args:
-        assignment: List where assignment[worker_id] = shift_index
-        worker_preferences: Dict of worker_id → list of preferred shift names
-        shifts: List of shift names
-
-    Returns:
-        float or int: Total satisfaction score (higher is better)
-    """
-    # Design your own scoring system!
-    # YOUR EVALUATION LOGIC HERE
-
-
-    return total_satisfaction
-
-# Test your evaluation function
+# Implement satisfaction calculation
 # YOUR CODE HERE
 
 ```
 
-**Deliverable:**
-
-1. Working evaluation function
-2. **Written explanation (2-3 sentences):**
-   - What scoring system did you design?
-   - Why did you choose this approach?
-   - How does it relate to metrics from Lecture 6?
-
 ```{python}
 """
 YOUR EXPLANATION HERE:
-My scoring system: [describe how you calculate satisfaction]
+My scoring system: [how do you calculate satisfaction?]
 Reasoning: [why this approach?]
 """
 ```
 
 ### Task 3: Improve with Local Search (15%)
 
-**Challenge:** Take your greedy solution and improve it using local search.
+Your greedy solution is probably not optimal. Use **local search** (like 2-opt from Part A) to improve it.
 
-**Think about Lecture 7:**
+**The approach:**
 
-- 2-opt tried **swaps** and kept improvements
-- It kept searching until no improvement was found
-- Can you apply similar logic here?
+- Try swapping shifts between pairs of workers
+- If a swap improves satisfaction, keep it
+- Repeat until no improvement is found
 
-**Your task:** Implement a local search that tries swapping workers' shifts.
+**Your deliverable:**
+
+1. Implement local search improvement
+2. Show before/after satisfaction scores
+3. Create a visualization comparing the solutions (table or chart)
+4. Write 3-4 sentences explaining:
+   - How much you improved the greedy solution
+   - Whether you think you found the optimal solution
+   - What limitations local search might have
 
 ```{python}
-def improve_with_local_search(initial_assignment, worker_preferences, shifts):
-    """
-    Improve an assignment using local search (like 2-opt from Lecture 7).
-    Strategy: Try swapping pairs of workers' shifts, keep if it improves satisfaction.
-
-    Think about:
-    - How do you generate "neighbor" solutions? (swap two workers)
-    - How do you know if a neighbor is better? (use your evaluation function!)
-    - When do you stop? (no improvement found, or max iterations)
-
-    Args:
-        initial_assignment: Starting assignment (from your greedy)
-        worker_preferences: Dict of worker_id → preferred shifts
-        shifts: List of shift names
-
-    Returns:
-        list: improved assignment
-    """
-
-    # YOUR LOCAL SEARCH LOGIC HERE
-
-
-    # YOUR CODE HERE
-
-    return improved_assignment
-
-# Apply local search
+# Implement local search improvement
 # YOUR CODE HERE
 
 ```
 
-**Deliverable:**
+```{python}
+# Visualize the improvement
+# YOUR CODE HERE
 
-1. Working local search function that improves the solution
-2. Visualization showing before/after
-3. **Written explanation (3-4 sentences):**
-   - How does your local search work?
-   - How much did you improve the greedy solution?
-   - Could you improve it further?
+```
 
 ```{python}
 """
 YOUR EXPLANATION HERE:
-Local search method: [describe your approach]
 Results: [how much improvement?]
-Further improvements?: [yes/no and why?]
+Optimality: [did you reach the best possible solution? how do you know?]
+Limitations: [what are the downsides of local search?]
 """
 ```
 
-### Task 4: Business Reflection (5%)
+### Task 4: Business Insights (5%)
 
-**Question 1:** Imagine one worker calls in sick at the last minute. How would you quickly reassign the remaining 5 workers to 6 shifts (one shift will be unfilled)? Would your greedy strategy still work? (3-4 sentences)
+**Business Question 1:**
+Worker 2 calls in sick 10 minutes before their shift. How would you reassign the remaining 5 workers to 6 shifts (leaving one unfilled)? Which shift would you leave empty and why? Would your greedy strategy need modification? (3-4 sentences)
 
 ```{python}
 """
@@ -422,7 +367,8 @@ YOUR ANSWER HERE:
 """
 ```
 
-**Question 2:** Your manager says "I don't care about worker preferences, just fill all shifts as quickly as possible." How would this change your approach? What would you lose? (2-3 sentences)
+**Business Question 2:**
+The warehouse manager says: *"This is too complicated. I just need bodies in shifts. I don't care about preferences."* How would this change your approach? What would the company lose? What would they gain? (3-4 sentences)
 
 ```{python}
 """
@@ -433,17 +379,16 @@ YOUR ANSWER HERE:
 ## Submission Checklist
 
 - [ ] All code cells run without errors
-- [ ] Part A: Routes are properly visualized
-- [ ] Part B: Greedy heuristic, evaluation function, and local search all implemented
-- [ ] Written explanations completed for all tasks
-- [ ] Business questions answered
-- [ ] Code is commented and clear
-- [ ] Names added to top of notebook
+- [ ] Part A: Routes visualized and business impact calculated
+- [ ] Part B: All three methods implemented (greedy, evaluation, local search)
+- [ ] All written explanations completed with business context
+- [ ] Code is clean and understandable
+- [ ] Group member names listed at top
 
 ## Tips
 
-- **Use AI tools** to help understand concepts and program, but make sure you understand the code
-- **Start simple** - get something working before optimizing
-- **Experiment!** - there's no single "correct" approach
-- **Focus on reasoning** - I care more about your thinking than perfect code
-- The goal is **good solutions**, not perfect ones
+- **Use AI tools** to help you understand concepts and write code, but make sure YOU understand the logic
+- **Start simple** - get a basic version working before adding complexity
+- **Test incrementally** - don't write all functions at once
+- **Experiment** - there's no single "correct" greedy strategy or scoring system
+- **Think like a consultant** - your audience is business stakeholders, not just programmers

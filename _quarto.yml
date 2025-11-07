@@ -82,6 +82,10 @@ website:
         contents:
           - text: "Introduction"
             href: assignments/assignment_00.qmd
+          - text: "Assignment 01"
+            href: assignments/assignment_01.qmd
+          - text: "Assignment 02"
+            href: assignments/assignment_02.qmd
       - text: "Cheatsheet"
         href: general/cheatsheet.qmd
       - text: "FAQs"
