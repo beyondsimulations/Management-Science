@@ -159,12 +159,11 @@ print(f"Daily average: {mean_sales:.0f} drinks")
 
 ## Exercise 1.3 - Visualize Sales Patterns
 
-Use matplotlib to understand the data in depth
+Create a plot to visualize Bean Counter's sales over time and spot patterns visually.
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Plot the data using a line plot
 
 ```
 
@@ -172,7 +171,13 @@ Use matplotlib to understand the data in depth
 ```{python}
 #| eval: true
 # SOLUTION
-
+plt.figure(figsize=(12, 5))
+plt.plot(df['date'][:90], df['sales'][:90], linewidth=1.5, alpha=0.8)
+plt.xlabel('Date')
+plt.ylabel('Sales (drinks)')
+plt.title('Bean Counter Daily Sales - First 90 Days')
+plt.grid(True, alpha=0.3)
+plt.show()
 ```
 :::
 
@@ -414,6 +419,38 @@ print(f"  Forecast: {result[0]:.1f} for next 2 periods")
 1. **Level** - Where are we right now?
 2. **Trend** - How fast are we growing per period?
 
+## Understanding Time Series Aggregation
+
+Before applying Holt's method, we need to learn how to convert daily data to weekly data using `resample()`.
+
+**The `resample()` Function:**
+
+```python
+df.set_index('date').resample('W')['sales'].mean()
+```
+
+**Breaking it down:**
+
+1. `set_index('date')` - Makes the date column the index (required for resample)
+2. `resample('W')` - Groups data by week ('W' = week, 'M' = month, 'D' = day)
+3. `['sales']` - Selects the sales column
+4. `.mean()` - Calculates the average for each week
+
+**Example:**
+```{python}
+#| eval: true
+# Convert daily Bean Counter sales to weekly averages
+weekly_sales = df.set_index('date').resample('W')['sales'].mean()
+print(f"Daily data: {len(df)} observations")
+print(f"Weekly data: {len(weekly_sales)} observations")
+print(f"\nFirst 3 weeks:")
+print(weekly_sales.head(3))
+```
+
+::: {.callout-tip}
+Aggregating to weekly data reduces noise and makes trends easier to see!
+:::
+
 ## Understanding Holt's Method
 
 **The Math (simplified):**
@@ -545,59 +582,7 @@ print(forecast_hw)
 print("\nNotice: Seasonal pattern continues (Jan is low, summer will be high)")
 ```
 
-## Exercise 5.1 - Bean Counter's Seasonality
-
-Before applying Holt-Winters, let's confirm Bean Counter has seasonal patterns.
-
-```{python}
-#| eval: false
-# YOUR CODE BELOW
-# Calculate average sales by month
-df['month'] = df['date'].dt.month
-monthly_avg =   # Group by month and calculate mean sales
-
-# Find peak and low seasons
-peak_month =   # Month with highest average sales (1-12)
-low_month =    # Month with lowest average sales (1-12)
-
-# Calculate seasonal strength
-seasonal_range =   # Difference between peak and low month averages
-overall_mean = df['sales'].mean()
-seasonal_strength =   # seasonal_range / overall_mean (as percentage)
-```
-
-:::{.content-visible when-profile="solutions"}
-```{python}
-#| eval: true
-# SOLUTION
-df['month'] = df['date'].dt.month
-monthly_avg = df.groupby('month')['sales'].mean()
-
-peak_month = monthly_avg.idxmax()
-low_month = monthly_avg.idxmin()
-
-seasonal_range = monthly_avg.max() - monthly_avg.min()
-overall_mean = df['sales'].mean()
-seasonal_strength = seasonal_range / overall_mean
-```
-:::
-
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below
-month_names = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-               'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-assert 5 <= peak_month <= 8, f"Peak should be summer, got month {peak_month}"
-assert low_month in [1, 2, 12], f"Low should be winter, got month {low_month}"
-assert seasonal_strength > 0.15, "Should have noticeable seasonality (>15%)"
-print(f"✓ Seasonality detected!")
-print(f"  Peak: {month_names[peak_month]} ({monthly_avg[peak_month]:.0f} drinks)")
-print(f"  Low: {month_names[low_month]} ({monthly_avg[low_month]:.0f} drinks)")
-print(f"  Seasonal strength: {seasonal_strength:.1%}")
-```
-
-## Exercise 5.2 - Apply Holt-Winters
+## Exercise 5.1 - Apply Holt-Winters
 
 Now use Holt-Winters to capture both trend and seasonality in Bean Counter's weekly sales.
 
