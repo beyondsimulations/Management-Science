@@ -1,0 +1,1483 @@
+---
+title: "Forecasting the Future"
+subtitle: "Lecture 5 - Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_05_forecasting.qmd)"
+    output-file: lec_05_presentation.html
+---
+
+# [Introduction]{.flow} {.title}
+
+## **[Client Briefing: MegaMart Retail Chain]{.invert-font}** {background-image="https://unsplash.com/photos/pnmaLfF0U6w/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyNDUzNTAzfA&force=true&w=2400" background-size="cover"}
+
+. . .
+
+[Operations Director's Crisis:]{.invert-font}
+
+["Last Christmas, we ran out of PlayStation 5s but had [500 unsold fitness trackers]{.highlight}. We lost €2M in missed sales and clearance losses. How do we predict what customers will actually buy?"]{.invert-font .fragment}
+
+## Business: The Unknown Future
+
+[Question]{.question}: Why can't we just order the same as last year?
+
+::: incremental
+- **Market:** New products, competition
+- **Seasonal Shifts:** Weather, holidays, economic conditions
+- **Trend Changes:** Changing preferences, new technologies
+- **Randomness:** Viral TikToks, supply chain disruptions, pandemics
+:::
+
+. . .
+
+:::{.callout-warning}
+**Reality:** Large retailers process several thousand orders per hour. Each stockout basically means [lost revenue + unhappy customers]{.highlight}.
+:::
+
+## Hidden Patterns in Data
+
+Look at this daily sales data. [What patterns do you see?]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+import numpy as np
+import pandas as pd
+import sys
+sys.path.append('../helpers')
+from plot_utils import BRAND_COLORS, setup_clean_style
+import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
+import scipy.stats as stats
+
+setup_clean_style()
+
+# Generate realistic sales data with trend and seasonality
+np.random.seed(42)
+days = 365
+dates = pd.date_range(start='2023-01-01', periods=days)
+
+# Components
+trend = np.linspace(100, 150, days)
+seasonal = 30 * np.sin(2 * np.pi * np.arange(days) / 7)  # Weekly pattern
+noise = np.random.normal(0, 10, days)
+sales = trend + seasonal + noise
+
+# Plot
+fig, ax = plt.subplots()
+ax.plot(dates, sales, color=BRAND_COLORS["threeDark"], linewidth=1, alpha=0.7)
+ax.set_xlabel('Date', fontsize=11)
+ax.set_ylabel('Daily Sales (units)', fontsize=11)
+ax.set_title('One Year of Product Sales Data', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+# [Core Concepts]{.flow} {.title}
+
+## Decomposing Time Series
+
+[Time series can often be decomposed:]{.highlight}
+
+. . .
+
+$$Y_t = T_t + S_t + R_t$$
+
+. . .
+
+Where:
+
+- $Y_t$ = Observed value at time t
+- $T_t$ = Trend component
+- $S_t$ = Seasonal component
+- $R_t$ = Random/Residual component
+
+## Additive vs Multiplicative Models
+
+[How do the components combine?]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Additive Model**
+$$Y_t = T_t + S_t + R_t$$
+
+- Seasonal fluctuations are constant
+- "We always sell 200 extra in December"
+- Good: Stable, mature products
+:::
+
+::: {.column width="50%"}
+**Multiplicative Model**
+$$Y_t = T_t \times S_t \times R_t$$
+
+- Seasonal fluctuations scale with trend
+- "December sales are 40% higher"
+- Good: Growing businesses
+:::
+:::
+
+## Visual Decomposition
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, axes = plt.subplots(4, 1)
+
+# Original series
+axes[0].plot(dates[:90], sales[:90], color=BRAND_COLORS["twoDark"], linewidth=1.5)
+axes[0].set_title('Original Sales Data (3 months)', fontweight='bold')
+axes[0].set_ylabel('Sales')
+axes[0].grid(True, alpha=0.2)
+
+# Trend component
+axes[1].plot(dates[:90], trend[:90], color=BRAND_COLORS["oneDark"], linewidth=2.5)
+axes[1].set_title('Trend Component', fontweight='bold')
+axes[1].set_ylabel('Trend')
+axes[1].grid(True, alpha=0.2)
+
+# Seasonal component
+axes[2].plot(dates[:90], seasonal[:90], color=BRAND_COLORS["threeDark"], linewidth=1.5)
+axes[2].set_title('Seasonal Component (Weekly Pattern)', fontweight='bold')
+axes[2].set_ylabel('Seasonality')
+axes[2].grid(True, alpha=0.2)
+
+# Random component
+axes[3].plot(dates[:90], noise[:90], color=BRAND_COLORS["twoLight"], linewidth=1, alpha=0.7)
+axes[3].set_title('Random Component (Noise)', fontweight='bold')
+axes[3].set_ylabel('Noise')
+axes[3].set_xlabel('Date')
+axes[3].grid(True, alpha=0.2)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-tip}
+[Here: Sales = Trend + Seasonality + Random Noise]{.highlight}
+:::
+
+## Moving Average
+
+[Question]{.question}: How do we separate signal from noise?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, ax = plt.subplots()
+
+# Show original and moving average
+window = 7
+ma = pd.Series(sales[:60]).rolling(window=window, center=True).mean()
+
+ax.plot(dates[:60], sales[:60], color=BRAND_COLORS["twoLight"], linewidth=1, alpha=0.5, label='Daily Sales')
+ax.plot(dates[:60], ma, color=BRAND_COLORS["threeDark"], linewidth=2.5, label=f'{window}-Day Moving Average')
+ax.set_xlabel('Date', fontsize=11)
+ax.set_ylabel('Sales (units)', fontsize=11)
+ax.set_title('Smoothing with Moving Averages', fontsize=14, fontweight='bold')
+ax.legend()
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+## Simple vs Weighted Averages
+
+[Which forecast would you trust more?]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Simple Moving Average**
+
+- All days equally important
+- We just take the average
+- [14, 15, 16, 14, 15, 16, 17]
+- Forecast: [15.3]{.highlight}
+:::
+
+::: {.column width="50%"}
+**Weighted Moving Average**
+
+- Recent days matter more
+- Days closer are weighted more
+- [0.05, 0.05, 0.1, 0.1, 0.2, 0.2, 0.3]
+- Forecast: [15.9]{.highlight}
+:::
+:::
+
+. . .
+
+:::{.callout-important}
+Recent data often predicts the future better than old data!
+:::
+
+# [Exponential Smoothing Methods]{.flow} {.title}
+
+## Simple Exponential Smoothing
+
+[Not too simple, not too complex]{.highlight}
+
+. . .
+
+$$\text{Forecast}_{t+1} = \alpha \times \text{Actual}_t + (1-\alpha) \times \text{Forecast}_t$$
+
+. . .
+
+::: incremental
+- **α (alpha) = smoothing parameter** (0 to 1)
+- **α = 0.9:** Trust recent data (reactive)
+- **α = 0.1:** Trust historical patterns (stable)
+- **α = 0.3:** Balanced approach (common default)
+:::
+
+. . .
+
+:::{.callout-tip}
+Think of $\alpha$ like: How much do you trust the latest data point?
+:::
+
+## When Simple Smoothing Fails
+
+[Simple smoothing assumes the data is flat. What if it's not?]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+from statsmodels.tsa.holtwinters import SimpleExpSmoothing
+
+setup_clean_style()
+fig, axes = plt.subplots(1, 2)
+
+# Generate data with and without trend
+np.random.seed(42)
+t = np.arange(20)
+
+# Flat data (good for simple ES)
+flat_data = 100 + np.random.normal(0, 5, 20)
+flat_series = pd.Series(flat_data)
+flat_es = SimpleExpSmoothing(flat_series).fit(smoothing_level=0.3)
+flat_fitted = flat_es.fittedvalues
+
+axes[0].plot(t, flat_data, 'o-', color=BRAND_COLORS["twoDark"], alpha=0.7, linewidth=1.5, markersize=5, label='Actual Sales')
+axes[0].plot(t, flat_fitted, color=BRAND_COLORS["threeDark"], linestyle='--', linewidth=2.5, alpha=0.8, label='Simple ES (tracks well!)')
+axes[0].set_title('Stable Sales: Simple ES is Perfect', fontweight='bold')
+axes[0].set_xlabel('Week')
+axes[0].set_ylabel('Sales')
+axes[0].legend()
+axes[0].grid(True, alpha=0.2)
+
+# Trending data (needs Holt's method)
+trend_data = 100 + 3*t + np.random.normal(0, 5, 20)
+trend_series = pd.Series(trend_data)
+trend_es = SimpleExpSmoothing(trend_series).fit(smoothing_level=0.3)
+trend_fitted = trend_es.fittedvalues
+
+axes[1].plot(t, trend_data, 'o-', color=BRAND_COLORS["oneDark"], alpha=0.7, linewidth=1.5, markersize=5, label='Actual Sales')
+axes[1].plot(t, trend_fitted, color=BRAND_COLORS["threeDark"], linestyle='--', linewidth=2.5, alpha=0.8, label='Simple ES (always behind!)')
+axes[1].plot(t, 100 + 3*t, color=BRAND_COLORS["twoDark"], linestyle='--', linewidth=2.5, alpha=0.7, label='True trend')
+axes[1].set_title('Growing Sales: Simple ES Falls Behind', fontweight='bold')
+axes[1].set_xlabel('Week')
+axes[1].set_ylabel('Sales')
+axes[1].legend()
+axes[1].grid(True, alpha=0.2)
+
+plt.tight_layout()
+plt.show()
+```
+
+# [Adding Trend]{.flow} {.title}
+
+## Holt's Method: The Idea
+
+[Track TWO things separately: Level and Trend]{.highlight}
+
+::: incremental
+1. **Level (L):** Where are we right now? (like simple ES)
+2. **Trend (b):** How fast are we growing/declining per period?
+3. **Forecast:** Combine both: Level + (Trend × periods ahead)
+:::
+
+. . .
+
+**Why This Works:**
+
+- Simple ES only tracks level (current position)
+- Holt's also tracks the slope (direction and speed)
+
+. . .
+
+:::{.callout-note}
+Think of driving a car: Simple ES only knows your position. Holt's also knows your speed!
+:::
+
+## Holt's Method: The Math I
+
+[The formulas (simplified for intuition):]{.highlight}
+
+. . .
+
+**Level Equation:**
+$$L_t = \alpha \times Y_t + (1-\alpha) \times (L_{t-1} + b_{t-1})$$
+
+**Trend Equation:**
+$$b_t = \beta \times (L_t - L_{t-1}) + (1-\beta) \times b_{t-1}$$
+
+**Forecast Equation:**
+$$\hat{Y}_{t+h} = L_t + h \times b_t$$
+
+## Holt's Method: The Math II
+
+[In plain English]{.highlight}
+
+- **Level:** "Smooth current observation with previous forecast"
+- **Trend:** "Smooth the change in level with our previous trend"
+- **Forecast:** "Start at current, add trend for each period ahead"
+
+. . .
+
+::: callout-note
+Not too complicated, right?
+:::
+
+## Step-by-Step I
+
+[Let's walk through 6 periods manually to build intuition]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Sample data with clear upward trend
+sales_data = np.array([100, 105, 112, 118, 124, 130])
+
+# Parameters
+alpha = 0.3  # Level smoothing
+beta = 0.2   # Trend smoothing
+
+# Initialize
+level = sales_data[0]  # Start at first observation
+trend = sales_data[1] - sales_data[0]  # Initial trend estimate
+
+print(f"Period 1: Level={level:.1f}, Trend={trend:.1f}")
+
+# Store level and trend history for visualization
+level_history = [level]
+trend_history = [trend]
+```
+
+## Step-by-Step II
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Apply Holt's method for periods 2-6
+for t in range(1, len(sales_data)):
+    # Update level
+    prev_level = level
+    level = alpha * sales_data[t] + (1 - alpha) * (prev_level + trend)
+
+    # Update trend
+    trend = beta * (level - prev_level) + (1 - beta) * trend
+
+    # Store for visualization
+    level_history.append(level)
+    trend_history.append(trend)
+
+    print(f"Period {t+1}: Sales={sales_data[t]}, Level={level:.1f}, Trend={trend:.1f}")
+```
+
+## Step-by-Step III
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Forecast next 3 periods
+print(f"\nForecasts:")
+forecast_values = []
+for h in range(1, 4):
+    forecast = level + h * trend
+    forecast_values.append(forecast)
+    print(f"  Period {len(sales_data)+h}: {forecast:.1f} units")
+```
+
+## Holt's Method: Visual Comparison
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, ax = plt.subplots(figsize=(12, 6))
+
+# Use the actual data from our step-by-step example
+t_historical = np.arange(len(sales_data))
+t_forecast = np.arange(len(sales_data), len(sales_data) + 3)
+
+# Plot historical data
+ax.scatter(t_historical, sales_data, color=BRAND_COLORS["twoDark"], s=100, alpha=0.7,
+           label='Historical Data', zorder=3, edgecolor='black', linewidth=1)
+
+# Plot level component (from our manual calculation)
+ax.plot(t_historical, level_history, color=BRAND_COLORS["oneDark"], linewidth=2.5,
+        alpha=0.8, label='Level Component (smoothed)')
+
+# Plot forecast
+ax.plot(t_forecast, forecast_values, 'o-', color=BRAND_COLORS["threeDark"],
+        linestyle='--', linewidth=2.5, markersize=10, label='Forecast (Level + Trend)',
+        alpha=0.8)
+
+# Annotations
+ax.annotate(f'Final Level: {level:.1f}',
+            xy=(t_historical[-1], level_history[-1]),
+            xytext=(t_historical[-1] - 1.5, level_history[-1] + 10),
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["oneDark"], lw=2),
+            fontsize=11, fontweight='bold')
+ax.annotate(f'Trend: +{trend:.1f} per period',
+            xy=(t_forecast[1], forecast_values[1]),
+            xytext=(t_forecast[1] + 0.3, forecast_values[1] + 10),
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["threeDark"], lw=2),
+            fontsize=11, fontweight='bold')
+
+# Add vertical line separating history from forecast
+ax.axvline(x=t_historical[-1] + 0.5, color='gray', linestyle=':', linewidth=2, alpha=0.5)
+ax.text(t_historical[-1] + 0.5, ax.get_ylim()[0] + 5, 'Forecast →',
+        fontsize=10, ha='left', style='italic')
+
+ax.set_xlabel('Time Period', fontsize=12)
+ax.set_ylabel('Sales (units)', fontsize=12)
+ax.legend(loc='upper left', fontsize=11)
+ax.grid(True, alpha=0.2)
+ax.set_xlim(-0.5, t_forecast[-1] + 0.5)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Choosing Alpha and Beta
+
+[How do you pick the right smoothing parameters?]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Alpha (Level Smoothing)**
+
+- **High α (0.7-0.9):** Responsive
+  - Use: Volatile markets
+- **Low α (0.1-0.3):** Stable
+  - Use: Steady business
+:::
+
+::: {.column width="50%"}
+**Beta (Trend Smoothing)**
+
+- **High β (0.5-0.8):** Quickly
+  - Use: Dynamic growth/decline
+- **Low β (0.1-0.3):** Stable trend
+  - Use: Consistent growth
+:::
+:::
+
+. . .
+
+**Best Practice:** Let the algorithm optimize parameters automatically!
+
+. . .
+
+:::{.callout-tip}
+You can implement Holt's method using Python's `statsmodels` library!
+:::
+
+## When to Use
+
+[Question:]{.question} When should you use Holt's method?
+
+. . .
+
+- Clear upward or downward trend
+- No seasonal patterns
+
+. . .
+
+[Question:]{.question} When should you use [NOT]{.highlight} Holt's method?
+
+- Data is flat (use simple ES instead)
+- Strong seasonality present
+- Trend direction changes frequently
+
+# [Adding Seasonality]{.flow} {.title}
+
+## The Problem: Trend + Seasonality
+
+[What if your data has BOTH trend AND seasonality?]{.highlight}
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, ax = plt.subplots()
+
+# Generate data with both trend and seasonality
+np.random.seed(42)
+months = pd.date_range(start='2023-01-01', periods=36, freq='M')
+base_trend = np.linspace(100, 200, 36)
+seasonality = 40 * np.sin(2 * np.pi * np.arange(36) / 12)
+data_combined = base_trend + seasonality + np.random.normal(0, 8, 36)
+
+ax.plot(months, data_combined, 'o-', color=BRAND_COLORS["twoDark"],
+        linewidth=2, markersize=6, alpha=0.8, label='Actual Sales')
+ax.plot(months, base_trend, '--', color=BRAND_COLORS["oneDark"],
+        linewidth=2.5, alpha=0.7, label='Underlying Trend')
+
+ax.set_xlabel('Month', fontsize=12)
+ax.set_ylabel('Sales (units)', fontsize=12)
+ax.legend(loc='upper left')
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+## Holt-Winters: Three Components
+
+[Track THREE things separately: Level, Trend, AND Seasonality]{.highlight}
+
+::: incremental
+1. **Level (L):** Current baseline demand (deseasonalized)
+2. **Trend (b):** Growth rate per period
+3. **Seasonal Indices (s):** Multipliers for each season
+:::
+
+## Holt-Winters Visualized
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, axes = plt.subplots(1, 3)
+
+# Use the same data from previous slide
+t = np.arange(36)
+
+# Component 1: Level (the base_trend is the deseasonalized level)
+axes[0].plot(t, data_combined, 'o', alpha=0.3, markersize=4, color='gray', label='Actual Data')
+axes[0].plot(t, base_trend, '-', linewidth=2.5, color=BRAND_COLORS["twoDark"], label='Level Component')
+axes[0].set_title('Level: "Where are we?"', fontweight='bold', fontsize=12)
+axes[0].set_xlabel('Month')
+axes[0].set_ylabel('Sales')
+axes[0].legend()
+axes[0].grid(True, alpha=0.2)
+
+# Component 2: Trend (constant growth from 100 to 200 over 36 months)
+trend_val = (200 - 100) / 36  # Growth per month ≈ 2.78
+trend_vals = np.ones(36) * trend_val
+axes[1].bar(range(36), trend_vals, color=BRAND_COLORS["oneDark"], alpha=0.7)
+axes[1].axhline(y=0, color='black', linestyle='-', linewidth=0.5)
+axes[1].set_title(f'Trend: "Growing by {trend_val:.1f} units/month"', fontweight='bold', fontsize=12)
+axes[1].set_xlabel('Month')
+axes[1].set_ylabel('Trend Rate')
+axes[1].set_ylim(-1, 4)
+axes[1].grid(True, alpha=0.2)
+
+# Component 3: Seasonal pattern (the seasonality from previous slide)
+month_indices = np.arange(12)
+seasonal_cycle = seasonality[:12]  # First year's seasonal pattern
+axes[2].plot(month_indices, seasonal_cycle, 'o-', linewidth=2.5, markersize=8,
+            color=BRAND_COLORS["threeDark"])
+axes[2].set_title('Seasonality: "Summer peak pattern"', fontweight='bold', fontsize=12)
+axes[2].set_xlabel('Month of Year')
+axes[2].set_ylabel('Seasonal Effect')
+axes[2].set_xticks(range(12))
+axes[2].set_xticklabels(['J','F','M','A','M','J','J','A','S','O','N','D'])
+axes[2].axhline(y=0, color='black', linestyle='--', linewidth=1, alpha=0.5)
+axes[2].grid(True, alpha=0.2)
+
+plt.suptitle('Holt-Winters Decomposes Your Data Into Three Parts',
+            fontsize=14, fontweight='bold', y=1.02)
+plt.tight_layout()
+plt.show()
+```
+
+## Seasonality
+
+[How does seasonality combine with the level?]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Additive Model**
+$$Y_t = L_t + b_t + s_t$$
+
+- Seasonal variation is constant
+- "We sell +50 units every December"
+- Pattern: ±constant amount
+:::
+
+::: {.column width="50%"}
+**Multiplicative Model**
+$$Y_t = L_t \times b_t \times s_t$$
+
+- Seasonal variation scales with level
+- "December is 1.5× normal sales"
+- Pattern: ×percentage change
+:::
+:::
+
+## Holt-Winters: The Math I
+
+[The formulas (don't panic - Python does this for you!)]{.highlight}
+
+. . .
+
+**Additive Model:**
+
+$$L_t = \alpha(Y_t - s_{t-m}) + (1-\alpha)(L_{t-1} + b_{t-1})$$
+$$b_t = \beta(L_t - L_{t-1}) + (1-\beta)b_{t-1}$$
+$$s_t = \gamma(Y_t - L_t) + (1-\gamma)s_{t-m}$$
+$$\hat{Y}_{t+h} = L_t + hb_t + s_{t+h-m}$$
+
+## Holt-Winters: The Math II
+
+[In plain English]{.highlight}
+
+- **Level:** Remove seasonality from observation, then smooth
+- **Trend:** Same as Holt's method
+- **Seasonal:** Update the seasonal index for this period
+- **Forecast:** Level + trend + seasonal adjustment
+
+. . .
+
+**Parameters:**
+
+$\alpha$ (level), $\beta$ (trend), $\gamma$ (seasonal), m (seasonal period length)
+
+## Holt-Winters: Intuition I
+
+[Understanding seasonal patterns with quarterly sales]{.highlight}
+
+. . .
+
+**Quarterly Sales Pattern:**
+
+- **Q1:** Low season (after holidays) → Factor: 0.85
+- **Q2:** Spring pickup → Factor: 0.95
+- **Q3:** Summer growth → Factor: 1.05
+- **Q4:** Holiday peak! → Factor: 1.15
+
+## Holt-Winters: Intuition I
+
+[How Holt-Winters Works]{.highlight}
+
+1. **Deseasonalize** the data (remove seasonal effect)
+2. **Calculate trend** from deseasonalized data
+3. **Update seasonal indices** based on actual vs. expected
+4. **Forecast** by combining level + trend + seasonal pattern
+
+. . .
+
+:::{.callout-tip}
+Q4 is typically 35% higher than Q1 in retail! Holt-Winters captures this automatically.
+:::
+
+## Holt-Winters: Visual
+
+```{python}
+#| eval: true
+#| echo: false
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+
+# Create monthly data with trend and seasonality
+np.random.seed(42)
+months = pd.date_range('2022-01-01', periods=24, freq='M')
+trend = np.linspace(100, 150, 24)
+seasonal = 30 * np.sin(2 * np.pi * np.arange(24) / 12)
+monthly_sales = trend + seasonal + np.random.normal(0, 5, 24)
+ts_data = pd.Series(monthly_sales, index=months)
+
+# Fit Holt-Winters model
+model = ExponentialSmoothing(ts_data, trend='add', seasonal='add', seasonal_periods=12)
+fitted_model = model.fit()
+forecast = fitted_model.forecast(steps=6)
+
+# Visualization
+setup_clean_style()
+fig, ax = plt.subplots()
+
+historical_dates = ts_data.index
+forecast_dates = pd.date_range(historical_dates[-1] + pd.DateOffset(months=1),
+                               periods=6, freq='M')
+
+ax.plot(historical_dates, ts_data, 'o-', color=BRAND_COLORS["twoDark"],
+        linewidth=2, markersize=5, label='Historical Sales', alpha=0.8)
+
+fitted_values = fitted_model.fittedvalues
+ax.plot(historical_dates, fitted_values, '--', color=BRAND_COLORS["oneDark"],
+        linewidth=2, alpha=0.7, label='Fitted Values')
+
+ax.plot(forecast_dates, forecast, 'o-', color=BRAND_COLORS["threeDark"],
+        linewidth=2.5, markersize=6, label='Forecast', alpha=0.8)
+
+ax.axvspan(forecast_dates[0], forecast_dates[-1], alpha=0.1,
+          color=BRAND_COLORS["threeDark"], label='Forecast Period')
+
+ax.set_xlabel('Date', fontsize=12)
+ax.set_ylabel('Sales (units)', fontsize=12)
+ax.set_title('Holt-Winters Forecast: Captures Both Trend and Seasonality',
+            fontsize=14, fontweight='bold')
+ax.legend(loc='upper left')
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-note}
+Notice how the forecast continues the seasonal pattern while following the trend!
+:::
+
+## When to Use Holt-Winters
+
+[Question:]{.question} When should you use Holt-Winters method?
+
+. . .
+
+- Data with trend AND seasonality
+- At least 1 full seasonal cycle (2 are better!)
+- Regular, repeating patterns
+
+. . .
+
+[Question:]{.question} When should you [AVOID]{.higlight} Holt-Winters method?
+
+. . .
+
+- Irregular or changing seasonal patterns
+- Flat data with no trend
+- Seasonal pattern length unknown
+
+
+# [Method Selection & Validation]{.flow} {.title}
+
+## Measuring Forecast Accuracy
+
+[How wrong were we?]{.highlight}
+
+. . .
+
+**Mean Absolute Error (MAE):** Average size of mistakes
+$$\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |Actual_i - Forecast_i|$$
+
+. . .
+
+**Root Mean Squared Error (RMSE):** Penalizes large errors more
+$$\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (Actual_i - Forecast_i)^2}$$
+
+## Forecast Accuracy
+
+[Easy with Python]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Example: Compare two forecasting methods
+actual = np.array([100, 105, 110, 108, 112])
+forecast_a = np.array([98, 107, 109, 110, 111])
+forecast_b = np.array([102, 103, 112, 106, 113])
+
+mae_a = np.mean(np.abs(actual - forecast_a))
+mae_b = np.mean(np.abs(actual - forecast_b))
+
+print(f"Method A - MAE: {mae_a:.2f} units")
+print(f"Method B - MAE: {mae_b:.2f} units")
+print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
+```
+
+## When to Use Which Method?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, ax = plt.subplots()
+
+# Decision tree structure
+methods = {
+    'Simple ES': (1, 2, BRAND_COLORS["twoLight"], 'Flat data\nNo trend, no season'),
+    "Holt's Method": (3, 2, BRAND_COLORS["oneDark"], 'Trending data\nNo seasonality'),
+    'Holt-Winters': (5, 2, BRAND_COLORS["threeDark"], 'Trend + Seasonality\n1+ years data'),
+    'Moving Average': (7, 2, BRAND_COLORS["twoLight"], 'Very stable\nShort-term only'),
+}
+
+# Plot method boxes
+for method, (x, y, color, description) in methods.items():
+    # Method box
+    rect = plt.Rectangle((x-0.55, y-0.45), 1.1, 0.9,
+                         facecolor=color, alpha=0.7, edgecolor='black', linewidth=2)
+    ax.add_patch(rect)
+    ax.text(x, y+0.1, method, ha='center', va='center',
+           fontweight='bold', fontsize=11)
+    ax.text(x, y-0.15, description, ha='center', va='center',
+           fontsize=9, style='italic')
+
+# Add characteristics at top
+characteristics = [
+    (1, 3.5, 'Variance\nonly'),
+    (3, 3.5, 'Trend\npresent'),
+    (5, 3.5, 'Seasonality\npresent'),
+    (7, 3.5, 'Simplicity\nneeded'),
+]
+
+for x, y, text in characteristics:
+    ax.text(x, y, text, ha='center', va='center', fontsize=10,
+           bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
+
+# Title and styling
+ax.set_xlim(0, 8)
+ax.set_ylim(1, 4)
+ax.axis('off')
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-tip}
+**Start simple:** Try moving average first as baseline, then add complexity only if needed!
+:::
+
+## The Real Cost of Being Wrong
+
+[Not all forecast errors are equal!]{.highlight}
+
+. . .
+
+**Example: Winter Coats**
+
+- Cost: €50, Selling Price: €150, Margin: €100
+- Storage cost: €5/month
+- Clearance markdown: 70% off
+
+. . .
+
+[Question:]{.question} What is your intuition here?
+
+## Under and Overforecasting
+
+[Sometimes it's cheaper to overstock than to miss sales!]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Underforecast by 100 units:**
+
+- Lost profit: 100 × €100
+  - **€10,000**
+- Customer disappointment
+- Competitor gains market share
+:::
+
+::: {.column width="50%"}
+**Overforecast by 100 units:**
+
+- Storage: 100 × €5 × 3 months
+  - **€1,500**
+- Clearance loss: 100 × €70
+  - **€7,000**
+:::
+:::
+
+. . .
+
+:::{.callout-important}
+The "best" forecast depends on your business context.
+:::
+
+# [Method Implementation]{.flow} {.title}
+
+## Your Python Practice Notebook
+
+[All the hands-on coding happens in the interactive tutorial!]{.highlight}
+
+. . .
+
+::: incremental
+1. **Working with dates in Pandas**
+2. **Implementing moving averages**
+3. **Building forecast functions**
+4. **Applying Holt's method**
+5. **Using Holt-Winters**
+6. **Measuring accuracy**
+:::
+
+. . .
+
+:::{.callout-note}
+The notebook guides you step-by-step through Bean Counter's seasonal demand forecasting challenge!
+:::
+
+# [AI & Machine Learning Forecasting]{.flow} {.title}
+
+## The Promise of AI
+
+[Can machines predict better than classical methods?]{.highlight}
+
+**What AI/ML brings to forecasting:**
+
+::: incremental
+- Handle hundreds of variables simultaneously
+- Detect complex non-linear patterns
+- Learn from massive datasets
+- Adapt automatically to changes
+:::
+
+. . .
+
+:::{.callout-note}
+AI doesn't replace human judgment, it augments it when you have enough data!
+:::
+
+## Common AI/ML Forecasting
+
+[Overview of popular techniques]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Traditional ML:**
+
+- **Random Forest:** Ensemble of decision trees
+- **XGBoost:** Gradient boosting (very popular)
+- **Support Vector Machines:** Pattern recognition
+
+:::
+
+::: {.column width="50%"}
+**Deep Learning:**
+
+- **LSTM (Long Short-Term Memory):** For sequences
+- **Prophet (Facebook):** Automated forecasting
+- **Neural Networks:** Complex patterns
+
+:::
+:::
+
+. . .
+
+:::{.callout-warning}
+More complex ≠ Better! Simple methods often win in forecasting.
+:::
+
+## The Issue: Overfitting
+
+[Question]{.question}: What happens when we train an AI on all our data and use it to predict... the same data?
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+
+# Generate example of overfitting
+np.random.seed(123)
+x = np.linspace(0, 10, 20)
+y_true = 2 * x + 5
+y_noisy = y_true + np.random.normal(0, 3, 20)
+
+# Simple model (good)
+simple_fit = np.polyfit(x, y_noisy, 1)
+y_simple = np.polyval(simple_fit, x)
+
+# Complex model (overfit)
+complex_fit = np.polyfit(x, y_noisy, 15)
+x_dense = np.linspace(0, 10, 200)
+y_complex = np.polyval(complex_fit, x_dense)
+
+fig, axes = plt.subplots(1, 2)
+
+# Simple model
+axes[0].scatter(x, y_noisy, alpha=0.6, s=80, color=BRAND_COLORS["twoDark"])
+axes[0].plot(x, y_simple, color=BRAND_COLORS["threeDark"], linewidth=2.5, label='Simple Model')
+axes[0].set_title('Good Model: Captures Pattern', fontweight='bold', fontsize=12)
+axes[0].set_xlabel('Time')
+axes[0].set_ylabel('Sales')
+axes[0].legend()
+axes[0].grid(True, alpha=0.2)
+
+# Complex model
+axes[1].scatter(x, y_noisy, alpha=0.6, s=80, color=BRAND_COLORS["twoDark"])
+axes[1].plot(x_dense, y_complex, color=BRAND_COLORS["threeDark"], linewidth=2.5, label='Complex Model')
+axes[1].set_title('Overfit Model: Memorizes Noise', fontweight='bold', fontsize=12)
+axes[1].set_xlabel('Time')
+axes[1].set_ylabel('Sales')
+axes[1].set_ylim(axes[0].get_ylim())
+axes[1].legend()
+axes[1].grid(True, alpha=0.2)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Training vs Test Data
+
+[Never judge a complex model on the data it learned from!]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, ax = plt.subplots(figsize=(12, 3))
+
+# Create timeline visualization
+timeline = np.arange(0, 24)
+colors = [BRAND_COLORS["twoDark"]] * 18 + [BRAND_COLORS["oneDark"]] * 4 + [BRAND_COLORS["threeDark"]] * 2
+
+bars = ax.bar(timeline, [1]*24, color=colors, edgecolor='black', linewidth=1)
+
+# Annotations
+ax.annotate('Train your model here', xy=(9, 1), xytext=(9, 1.3),
+            arrowprops=dict(arrowstyle='->', color='black', lw=2),
+            ha='center', fontsize=11, fontweight='bold')
+ax.annotate('Tune parameters here', xy=(19, 1), xytext=(19, 1.2),
+            arrowprops=dict(arrowstyle='->', color='black', lw=2),
+            ha='center', fontsize=11, fontweight='bold')
+ax.annotate('Final evaluation only!', xy=(22.5, 1), xytext=(22.5, 1.4),
+            arrowprops=dict(arrowstyle='->', color='black', lw=2),
+            ha='center', fontsize=11, fontweight='bold')
+
+ax.set_xlim(-0.5, 23.5)
+ax.set_ylim(0, 1.5)
+ax.set_xlabel('Months of Historical Data', fontsize=12)
+ax.set_title('The Split: Never Mix Training and Test Data', fontsize=14, fontweight='bold')
+ax.set_yticks([])
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False)
+
+plt.tight_layout()
+plt.show()
+```
+
+::: incremental
+- **Training Data:** Where the model learns patterns (70-80%)
+- **Validation Data:** Where you tune hyperparameters (10-15%)
+- **Test Data:** The "future", only once for final evaluation (10-15%)
+:::
+
+## Data Leakage: The Silent Problem
+
+[When future information sneaks into your training data]{.highlight}
+
+. . .
+
+::: incremental
+1. **Target leakage**
+   - Wrong: Including "total_sales" when predicting "monthly_sales"
+   - Right: Only use information available at prediction time
+
+3. **Temporal leakage**
+   - Wrong: Random split for time series (mixes past and future)
+   - Right: Always split chronologically
+:::
+
+. . .
+
+:::{.callout-important}
+Data leakage can make a terrible model look amazing... until it fails in production!
+:::
+
+## Time Series Cross-Validation
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, ax = plt.subplots()
+
+# Create cross-validation visualization
+n_splits = 5
+train_color = BRAND_COLORS["twoDark"]
+test_color = BRAND_COLORS["threeDark"]
+
+for i in range(n_splits):
+    # Training period gets longer each time
+    train_end = 12 + i * 2
+    test_start = train_end
+    test_end = test_start + 2
+
+    # Plot training period
+    ax.barh(i, train_end, left=0, height=0.8, color=train_color, alpha=0.7, edgecolor='black')
+    # Plot test period
+    ax.barh(i, test_end - test_start, left=test_start, height=0.8, color=test_color, alpha=0.7, edgecolor='black')
+
+    # Labels
+    ax.text(train_end/2, i, f'Train', ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+    ax.text((test_start + test_end)/2, i, f'Test', ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
+ax.set_ylim(-0.5, n_splits - 0.5)
+ax.set_xlim(0, 22)
+ax.set_xlabel('Time Period (Months)', fontsize=12)
+ax.set_ylabel('Cross-Validation Fold', fontsize=12)
+ax.set_title('Time Series Cross-Validation: Always Respect Time Order!', fontsize=14, fontweight='bold')
+ax.set_yticks(range(n_splits))
+ax.set_yticklabels([f'Fold {i+1}' for i in range(n_splits)])
+ax.grid(True, alpha=0.2, axis='x')
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-note}
+Unlike regular cross-validation, we NEVER use future data to predict the past!
+:::
+
+## When to Use AI/ML Forecasting I
+
+[Use AI when you have:]{.highlight}
+
+. . .
+
+- Sufficient historical data (2+ years)
+- Rich feature data (weather, promotions, events)
+- Non-linear patterns
+- Resources for training/maintenance
+
+. . .
+
+**Examples:**
+
+- Large retailers (Amazon, Walmart)
+- Demand forecasting with many variables
+
+## When to Use AI/ML Forecasting II
+
+[Don't use AI when you have:]{.highlight}
+
+. . .
+
+- Limited historical data
+- High noise, low signal
+- Need explainable forecasts
+- Limited expertise
+
+. . .
+
+**Examples:**
+
+- New products (no history)
+- Regulatory environments
+
+# [Advanced Topics]{.flow} {.title}
+
+## Forecast Horizons
+
+[How far into the future can we predict?]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+
+horizons = [1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24]
+accuracy = [95, 92, 88, 85, 82, 79, 76, 73, 65, 58, 52, 48]
+
+fig, ax = plt.subplots()
+
+# Create the main line
+ax.plot(horizons, accuracy, 'o-', color=BRAND_COLORS["twoDark"], linewidth=2.5, markersize=10)
+
+# Add zones
+ax.axhspan(80, 100, alpha=0.1, color='green', label='High Confidence')
+ax.axhspan(60, 80, alpha=0.1, color='yellow', label='Moderate Confidence')
+ax.axhspan(0, 60, alpha=0.1, color='red', label='Low Confidence')
+
+ax.set_xlabel('Forecast Horizon (weeks ahead)', fontsize=12)
+ax.set_ylabel('Forecast Accuracy (%)', fontsize=12)
+ax.set_title('The Forecast Accuracy Degradation Curve', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.2)
+ax.set_ylim(40, 105)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Confidence Intervals
+
+[A forecast without confidence intervals is incomplete!]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+
+# Generate forecast with confidence intervals
+np.random.seed(42)
+weeks_ahead = np.arange(1, 13)
+forecast_mean = 1000 + weeks_ahead * 10  # Slight upward trend
+std_error = 50 + weeks_ahead * 5  # Uncertainty grows
+
+fig, ax = plt.subplots()
+
+# Plot forecast line
+ax.plot(weeks_ahead, forecast_mean, color=BRAND_COLORS["twoDark"], linewidth=2.5, label='Point Forecast')
+
+# Add confidence intervals
+for confidence, alpha, color in [(95, 0.15, BRAND_COLORS["twoLight"]),
+                                  (80, 0.25, BRAND_COLORS["oneDark"]),
+                                  (50, 0.35, BRAND_COLORS["twoDark"])]:
+    z_score = {50: 0.67, 80: 1.28, 95: 1.96}[confidence]
+    upper = forecast_mean + z_score * std_error
+    lower = forecast_mean - z_score * std_error
+    ax.fill_between(weeks_ahead, lower, upper, alpha=alpha, color=color,
+                     label=f'{confidence}% Confidence Interval')
+
+# Add actual outcome examples
+actuals = [1010, 1025, 1015, 1045, 1080, 1055, 1070, 1100, 1095, 1120, 1150, 1180]
+ax.scatter(weeks_ahead, actuals, color=BRAND_COLORS["threeDark"], s=60, zorder=5,
+          label='Actual (example)', edgecolor='black', linewidth=1)
+
+ax.set_xlabel('Weeks Ahead', fontsize=12)
+ax.set_ylabel('Forecasted Sales (units)', fontsize=12)
+ax.set_title('Forecast with Confidence Intervals', fontsize=14, fontweight='bold')
+ax.legend(loc='upper left', fontsize=10)
+ax.grid(True, alpha=0.2)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Forecast Combination
+
+[Why choose one method when you can combine several?]{.highlight}
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Example: Combining multiple forecasts
+ma_forecast = 120      # Moving average prediction
+exp_forecast = 125     # Exponential smoothing prediction
+seasonal_forecast = 135 # Seasonal model prediction
+
+# Simple average (equal weights)
+simple_combo = (ma_forecast + exp_forecast + seasonal_forecast) / 3
+print(f"Simple combination: {simple_combo:.0f} units")
+
+# Weighted average (based on historical accuracy)
+weights = [0.3, 0.5, 0.2]  # Exp smoothing was most accurate historically
+weighted_combo = (ma_forecast * weights[0] +
+                  exp_forecast * weights[1] +
+                  seasonal_forecast * weights[2])
+print(f"Weighted combination: {weighted_combo:.0f} units")
+```
+
+## Lead Times and Safety Stock
+
+```{python}
+#| eval: true
+#| echo: false
+setup_clean_style()
+fig, ax = plt.subplots()
+
+# Timeline visualization
+timeline = np.arange(0, 12)
+
+# Different lead times from competition
+products_lead = {
+    'TechPod (3 weeks)': (0, 3, BRAND_COLORS["twoDark"]),
+    'FitBand (4 weeks)': (0, 4, BRAND_COLORS["oneDark"]),
+    'CozyThrow (6 weeks)': (0, 6, BRAND_COLORS["threeDark"])
+}
+
+y_positions = [3, 2, 1]
+
+for (product, (start, duration, color)), y_pos in zip(products_lead.items(), y_positions):
+    # Order period
+    ax.barh(y_pos, duration, left=start, height=0.3, color=color, alpha=0.7,
+            edgecolor='black', linewidth=2)
+
+    # Selling period (December = weeks 8-11)
+    ax.barh(y_pos, 4, left=8, height=0.3, color=color, alpha=0.3,
+            edgecolor='black', linewidth=2, linestyle='--')
+
+    # Lead time arrow
+    ax.annotate('', xy=(duration, y_pos), xytext=(0, y_pos),
+                arrowprops=dict(arrowstyle='<->', lw=2, color=color))
+    ax.text(duration/2, y_pos + 0.2, 'Lead Time', ha='center', fontsize=9, fontweight='bold')
+
+# December highlight
+ax.axvspan(8, 12, alpha=0.15, color='green')
+ax.text(10, 3.8, 'December Sales Period', ha='center', fontsize=12,
+        fontweight='bold', color='darkgreen')
+
+ax.set_xlim(-1, 12)
+ax.set_ylim(0.5, 4.2)
+ax.set_xticks(timeline)
+ax.set_xlabel('Weeks from Now', fontsize=12)
+ax.set_title('Lead Times Force Early Decisions', fontsize=14, fontweight='bold')
+ax.set_yticks([])
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-important}
+Long lead times = Forecasting further out = Less accuracy = More safety stock!
+:::
+
+## Safety Stock Calculation
+
+[How much buffer do you need?]{.highlight}
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Safety stock formula
+import scipy.stats as stats
+
+avg_weekly_demand = 300; std_weekly_demand = 40; lead_time_weeks = 3
+service_level = 0.95  # Want 95% availability
+
+# Z-score for 95% service level
+z_score = stats.norm.ppf(service_level)
+
+# Safety stock calculation
+safety_stock = z_score * std_weekly_demand * np.sqrt(lead_time_weeks)
+reorder_point = (avg_weekly_demand * lead_time_weeks) + safety_stock
+
+print(f"Average demand during lead time: {avg_weekly_demand * lead_time_weeks} units")
+print(f"Safety stock needed: {safety_stock:.0f} units")
+print(f"Reorder point: {reorder_point:.0f} units")
+```
+
+# [Today's Tasks]{.flow} {.title}
+
+## Today
+
+:::: columns
+::: {.column width="33%"}
+**Hour 2: This Lecture**
+
+- Patterns & decomposition
+- Simple ES, Holt's, Holt-Winters
+- Method selection
+- Practical pandas
+:::
+
+::: {.column width="33%"}
+**Hour 3: Notebook**
+
+- Bean Counter CEO
+- Daily and weekly aggregation
+- Implement methods
+- Compare accuracy
+:::
+
+::: {.column width="33%"}
+**Hour 4: Competition**
+
+- MegaMart challenge
+- 3 real products
+- 4-week forecast
+- €10K per error unit!
+:::
+::::
+
+## The Competition Challenge
+
+[**"The Christmas Predictor"**]{.highlight}
+
+. . .
+
+1. **Analyze** 2 years of weekly sales for 3 products
+2. **Identify** patterns (trend, seasonality, volatility)
+3. **Forecast** 4 December weeks for each product
+4. **Minimize** Mean Absolute Error across all 12 predictions
+
+# [Key Takeaways]{.flow} {.title}
+
+## Remember This!
+
+[The Rules of  Forecasting]{.highlight}
+
+::: incremental
+1. **Always plot first** - Your eyes catch patterns algorithms miss
+2. **Start simple** - Complexity is not your friend
+3. **Recent matters more** - Weight recent data higher
+4. **Match method to pattern** - Trend? Seasonality? Match!
+5. **Validate on holdout** - Never test on training data
+6. **Add confidence intervals** - Uncertainty is information
+7. **Consider business context** - Cost of errors matters
+:::
+
+## Final Thought
+
+[Forecasting is both art and science]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**The Science:**
+
+- Statistical methods
+- AI based forecasting
+- Error metrics (MAE, RMSE)
+- Confidence intervals
+- Systematic validation
+:::
+
+::: {.column width="50%"}
+**The Art:**
+
+- Choosing the right method
+- Balancing complexity vs simplicity
+- Interpreting context
+- Communicating uncertainty
+:::
+:::
+
+. . .
+
+:::{.callout-important}
+Make better decisions, not perfect predictions!
+:::
+
+## Break!
+
+[Take 20 minutes, then we start the practice notebook]{.highlight}
+
+**Next up:** You'll become Bean Counter's forecasting expert, preparing for seasonal demand!
+
+**Then:** The MegaMart Christmas Challenge!

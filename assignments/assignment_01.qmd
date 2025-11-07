@@ -47,7 +47,7 @@ np.random.seed(seed)
 Fill in the names of all the members of your group in `group_name` instead of `[THE NAMES OF YOUR GROUP MEMBERS HERE]`. If you don't do so, you will maximally receive half of the points.
 :::
 
-## Part A: Investment Risk Simulation (50%)
+## Part A: Investment Risk Simulation (40%)
 
 ### Scenario
 
@@ -58,7 +58,7 @@ Your client is considering investing €100,000 in a new product launch. Based o
 - Most likely: €140,000 return (60% probability)
 - Worst case: €90,000 return (20% probability)
 
-### Task 1: Simple Monte Carlo Simulation (15%)
+### Task 1: Simple Monte Carlo Simulation (10%)
 
 Create a Monte Carlo simulation with the probabilities above to understand the basic risk profile.
 
@@ -80,7 +80,7 @@ Use `np.random.choice()` with the `p` parameter for probabilities.
 
 ```
 
-### Task 2: Comparing Alternative Investment Opportunities (20%)
+### Task 2: Comparing Alternative Investment Opportunities (15%)
 
 After presenting your initial analysis, the client mentions they're also considering **two other investment opportunities** with the same €100,000 initial investment. They want you to compare all three options.
 
@@ -183,11 +183,11 @@ Re: Investment Analysis & Recommendation
 """
 ```
 
-## Part B: Demand Forecasting (50%)
+## Part B: Demand Forecasting (60%)
 
 ### Scenario
 
-A retail client is experiencing growth and needs to forecast demand for the next 3 months to plan inventory. They've noticed sales have been generally increasing over the past 2 years, with some minor fluctuations.
+A retail client is experiencing growth and needs to forecast demand for the next 3 months to plan inventory. They've provided 24 months of historical sales data and want your team to recommend the best forecasting approach. The senior partner has asked you to start with standard forecasting methods, evaluate their performance, and then propose an improved approach if needed.
 
 ### The Data
 
@@ -202,8 +202,8 @@ A retail client is experiencing growth and needs to forecast demand for the next
 
 # Generate group-specific parameters (slightly different for each group)
 base_sales = np.random.uniform(95, 105)  # Between 95-105
-trend = np.random.uniform(2.0, 3.0)      # Between 2.0-3.0 units/month
-seasonal_amplitude = np.random.uniform(6, 10)  # Between 6-10
+trend = np.random.uniform(2.0, 5.0)      # Between 2.0-5.0 units/month
+seasonal_amplitude = np.random.uniform(6, 24)  # Between 6-24
 noise_level = np.random.uniform(4, 6)    # Between 4-6
 
 # Generate data
@@ -238,94 +238,57 @@ print("=" * 60)
 # DON'T CHANGE ANYTHING ABOVE!
 ```
 
-### Task 1: Moving Average Forecast (15%)
+### Task 1: Implement Baseline Forecasting Methods (15%)
 
-First, visualize the sales data to understand what you're working with:
+The client wants to start with two proven forecasting approaches. As junior analysts, your first task is to implement these methods to establish baseline forecasts.
+
+**First, visualize the sales data:**
 
 ```{python}
-# This will help you see the pattern in the data
+# Create a line plot showing all 24 months of sales data
+# Include axis labels, title, and grid for readability
 # YOUR CODE HERE
 
 ```
 
-Now implement the moving average forecast:
+**Implement Moving Average:**
 
-**What the function should do:**
-
-- Take historical sales data and a window size as inputs
-- Calculate the average of the last N periods (where N = window size)
-- Return the forecast for the next period
+Create a function that calculates moving average forecasts.
 
 ```{python}
-# Implement a moving average forecast function
-# YOUR CODE HERE
-
-# Test different window sizes: 3, 6, and 12 months
-# For each, calculate and print the forecast for month 25
-# Use the full 24 months of data
+# Implement moving average forecast function
 # YOUR CODE HERE
 
 ```
 
-### Task 2: Exponential Smoothing (15%)
+**Implement Exponential Smoothing:**
 
-You and the client both think that a simple moving average forecast might not be sufficient and you are thus tasked to test exponential smoothing, which gives more weight to recent observations while still considering historical data.
-
-The formula is:
-
-$$F_t = α \times A_{t-1} + (1 - α) \times F_{t-1}$$
-
-Where:
-
-- $F_t$ = Forecast for period $t$
-- $A_{t-1}$ = Actual value in previous period
-- $F_{t-1}$ = Forecast for previous period
-- $α$ = Smoothing parameter between 0 and 1
-
-**How it works:**
-
-- Start with the first actual value as your initial forecast: $F_1 = A_1$
-- For each subsequent period, update the forecast using the formula above
-- Higher α (e.g., 0.7) = more weight on recent data (responsive to changes)
-- Lower α (e.g., 0.1) = more weight on historical pattern (smooth, stable)
-
-**Example with α = 0.3:**
-
-- Month 1: Actual = 120, Forecast = 120 (initial)
-- Month 2: Actual = 135, Forecast = 0.3 × 120 + 0.7 × 120 = 120
-- Month 3: Actual = 155, Forecast = 0.3 × 135 + 0.7 × 120 = 124.5
-- And so on...
+Create a function that calculates exponential smoothing forecasts.
 
 ```{python}
-# Implement exponential smoothing function
-# YOUR CODE HERE
-
-# Test different alpha values: 0.1 (smooth), 0.3 (balanced), 0.7 (responsive)
-# For each, calculate and print the forecast for month 25
-# Use the full 24 months of data
+# Implement exponential smoothing forecast function
 # YOUR CODE HERE
 
 ```
 
-### Task 3: Evaluate and Compare Methods (20%)
+### Task 2: Test Baseline Methods & Prepare Analysis (15%)
 
-Now compare the two forecasting methods using a proper train/test split.
+After presenting your implementation to the client, they ask: *"Which method should we use, and how accurate will it be?"* You need to properly test both methods on recent data before making a recommendation.
 
-**Approach:**
+**Testing Approach:**
 
-- Use first 20 months for initial training
-- Forecast months 21-24 one at a time
-- After each forecast, **add the actual value to your training data** before forecasting the next month!
-- Calculate forecast accuracy using Mean Absolute Error (MAE)
+- Split data: **first 20 months for training**, **last 4 months (21-24) for testing**
+- Use **rolling forecasts** on the test period:
+  - Forecast month 21 using months 1-20
+  - Forecast month 22 using months 1-21 (add actual month 21 to training)
+  - Forecast month 23 using months 1-22 (add actual month 22 to training)
+  - Forecast month 24 using months 1-23 (add actual month 23 to training)
+- Calculate Mean Absolute Error (MAE) for both methods
 
-::: callout-tip
-This is called "rolling forecast".
-:::
+**Parameters to use:**
 
-**For this task, use:**
-
-- Moving Average with window=3
-- Exponential Smoothing with alpha=0.3
+- Moving Average: window = 3
+- Exponential Smoothing: alpha = 0.3
 
 ```{python}
 # Split data: first 20 months for training, last 4 for testing
@@ -336,67 +299,170 @@ print(f"Training on months 1-20, testing on months 21-24")
 print(f"Test data: {test_data}")
 
 # Generate rolling forecasts for test period (months 21-24)
-ma_forecasts = []
-es_forecasts = []
-
-# For each test month (4 iterations):
-# 1. Use current training data to generate forecast
-# 2. Store the forecast
-# 3. Add the actual value to training data for next iteration
 # YOUR CODE HERE
 
 # Calculate Mean Absolute Error (MAE) for both methods
 # MAE = average of |actual - forecast|
 # YOUR CODE HERE
 
-# Print results
+# Print MAE comparison
 # YOUR CODE HERE
 
 ```
 
+**Create visualizations for your client presentation:**
+
 ```{python}
-# Visualization: Plot actual sales with forecasts
-# Create a plot showing:
-# 1. All 24 months of actual sales
-# 2. Forecasts for months 21-24 from both methods
-# 3. Legend identifying each line
+# Create TWO plots:
+
+# Plot 1: Full time series with test forecasts
+# YOUR CODE HERE
+
+# Plot 2: Forecast errors for test period
 # YOUR CODE HERE
 
 ```
 
-**Business Question 1:** Which forecasting method performed better based on MAE? (2-3 sentences)
+**Analysis for Internal Team Discussion:**
+
+Before meeting with the client, your team needs to align on what the testing reveals. Prepare answers to these questions:
+
+**(a) Performance Summary:** Which method has lower MAE on the test period? (1-2 sentences)
 
 ```{python}
 """
-YOUR ANSWER HERE:
+YOUR ANSWER:
 """
 ```
 
-**Business Question 2:**
-
-The client's inventory manager says: *"Great analysis! Let's use your recommended method to order inventory for the next 6 months."*
-
-Before approving this plan, you review your visualization showing months 1-24. You notice something about the data pattern. Write a brief message to the client (4-5 sentences) explaining why they should NOT rely solely on these methods for their 6-month planning horizon, despite the good MAE performance on months 21-24.
+**(b) Error Pattern Analysis:** Looking at your error plot, are the errors randomly scattered around zero, or is there a systematic bias? Are both methods consistently over-forecasting (predicting too high) or under-forecasting (predicting too low)? (2-3 sentences)
 
 ```{python}
 """
-YOUR CONSULTANT WARNING:
+YOUR ANSWER:
+"""
+```
 
-To: Inventory Manager
+**(c) Data Pattern Identification:** Looking at the full 24-month sales history, what patterns or characteristics do you observe? Consider whether the data appears flat, trending upward/downward, seasonal, or purely random. (2-3 sentences)
+
+```{python}
+"""
+YOUR ANSWER:
+"""
+```
+
+### Task 3: Propose & Implement Improved Forecast (20%)
+
+After reviewing your analysis, the senior partner calls your team into a meeting: *"Good work on the baseline analysis. But I'm concerned we're not giving the client the best possible forecast. I need you to come back with something better for months 21-24. Use whatever method you think will work—just make sure you can explain why it's an improvement and prove it with the numbers."*
+
+Your task is to develop, implement, and validate an improved forecasting approach.
+
+**Your Deliverables:**
+
+**Part 1: Proposed Method & Justification**
+
+Based on your analysis in Task 2, propose a forecasting method that addresses the limitations you identified.
+
+```{python}
+"""
+MEMO: Proposed Forecasting Approach
+
+To: Senior Partner
 From: [Your Team]
-Re: CAUTION - Limitations of Current Forecasting Approach
+Re: Improved Forecasting Method for Client
 
-[Your warning here - explain the pattern, the limitation, the risk, and what to do instead]
+Method Proposed: [Name your method]
+
+Why This Method: [3-4 sentences explaining why this method should perform better
+than Moving Average and Exponential Smoothing for this specific data. Reference
+the patterns and limitations you identified in Task 2.]
+
+Implementation Approach: [2-3 sentences describing how you'll implement this -
+will you build it from scratch, use a Python library, or combine approaches?]
+"""
+```
+
+**Part 2: Implementation**
+
+Implement your proposed method. You may:
+
+- Build the method from scratch using NumPy/Pandas
+- Use external forecasting libraries (statsmodels, scikit-learn, etc.)
+- Combine multiple approaches
+
+```{python}
+# Implement your improved forecasting method here
+# Include comments explaining key steps
+# YOUR CODE HERE
+
+```
+
+**Part 3: Testing & Validation**
+
+Test your method on the same test period (months 21-24) using rolling forecasts, just like Task 2.
+
+```{python}
+# Generate rolling forecasts for months 21-24 with your improved method
+# YOUR CODE HERE
+
+# Calculate MAE for your method
+# YOUR CODE HERE
+
+# Print comparison of all three methods
+# YOUR CODE HERE
+
+```
+
+### Task 4: Client Presentation (10%)
+
+**Part 1: Visualization & Comparison**
+
+Create a visualization comparing all three methods.
+
+```{python}
+# Create a plot showing:
+# - All 24 months of actual sales
+# - Vertical line marking train/test split at month 20
+# - Test forecasts (months 21-24) from all THREE methods
+# - Clear legend, labels, and title
+# YOUR CODE HERE
+
+```
+
+**Part 2: Client Recommendation**
+
+Write your final recommendation to the client for forecasting months 25, 26, and 27.
+
+```{python}
+"""
+FINAL RECOMMENDATION TO CLIENT
+
+To: Retail Client
+From: [Your Team]
+Re: Recommended Forecasting Approach for Inventory Planning
+
+Recommended Method: [Which method?]
+
+Performance Summary: [2-3 sentences comparing the MAE results and explaining
+why your method performed better or worse than expected]
+
+Why We Recommend This Approach: [3-4 sentences explaining why this method is
+most appropriate for their business needs going forward. Consider accuracy,
+simplicity, reliability, and any limitations they should be aware of.]
+
+Next Steps: [1-2 sentences on what the client should do - e.g., use this
+method for months 25-27, monitor performance, collect more data, etc.]
 """
 ```
 
 ## Submission Checklist
 
+Before submitting, verify:
+
 - [ ] All code cells run without errors
-- [ ] Functions are commented
-- [ ] Visualizations are clear and labeled
-- [ ] Business questions are answered
-- [ ] Names added to top of notebook
+- [ ] Group member names filled in at top
+- [ ] All visualizations have clear labels, titles, and legends
+- [ ] Functions include comments explaining logic
 
 ## Tips
 
