@@ -1,0 +1,564 @@
+---
+title: "Smart Quick Decisions"
+subtitle: "Lecture 6 - Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_06_greedy_algorithms.qmd)"
+    output-file: lec_06_presentation.html
+---
+
+# [Introduction]{.flow} {.title}
+
+## **[Client Briefing: Custom Cycles Manufacturing]{.invert-font}** {background-image="https://unsplash.com/photos/XwZKcZes8xo/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8Y3VzdG9tJTIwY3ljbGVzfGVufDB8fHx8MTc2MjU5OTU4NXww&force=true&w=2400" background-size="cover"}
+
+. . .
+
+[Operations Manager's Friday Crisis:]{.invert-font}
+
+["It's Friday 2 PM. We just received [16 custom bicycle orders]{.highlight} that must be completed by Monday. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Saturday 8 PM. How do we schedule production to minimize costs?"]{.invert-font .fragment}
+
+## The Manufacturing Challenge
+
+[Custom Cycles faces multiple scheduling decisions:]{.highlight}
+
+::: incremental
+- **Order Sequencing:** Which bike to build first?
+- **Workstation Management:** Assembly must finish before painting
+- **Deadline Pressure:** Rush orders have steep penalties (€150 each)
+- **Cost Control:** Overtime at €100/hour after Saturday 8 PM
+:::
+
+. . .
+
+:::{.callout-important}
+**The Stakes:** With 16 orders totaling 13+ hours of work, wrong scheduling could mean [€1000+ in overtime and penalties]{.highlight}!
+:::
+
+## Why Can't We Just Try Everything?
+
+[Question]{.question}: With 16 bicycle orders to sequence, how many possible schedules exist?
+
+. . .
+
+**16! = 20,922,789,888,000 possible schedules**
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Number of Orders**
+
+- 5 bikes
+- 10 bikes
+- 16 bikes
+:::
+
+::: {.column width="50%"}
+**Possible Schedules**
+
+- 120
+- 3.6 million
+- 20.9 trillion
+:::
+:::
+
+. . .
+
+:::{.callout-warning}
+Testing all 20.9 trillion possibilities for 16 bikes would take [thousands of years]{.highlight} on a modern computer!
+:::
+
+# [Core Concepts]{.flow} {.title}
+
+## What Are Greedy Algorithms?
+
+[Greedy algorithms make the locally optimal choice at each step.]{.highlight}
+
+. . .
+
+**The Idea:** "Take what looks best right now, don't look back"
+
+::: incremental
+- **Fast:** O(n log n) vs O(n!) for exhaustive search
+- **Simple:** Easy to implement and explain
+- **Good Enough:** Often near-optimal for many problems
+- **But:** No guarantee of global optimality
+:::
+
+. . .
+
+:::{.callout-tip}
+Think of it like scheduling job interviews when multiple companies want to meet you: You pick the earliest ending interview each time to maximize total interviews. Once you commit to an interview slot, you can't go back and reschedule.
+:::
+
+
+## Three Classic Scheduling Rules
+
+[We'll explore three greedy approaches that manufacturing uses:]{.highlight}
+
+::: incremental
+1. **FIFO (First In, First Out)** - The fairness rule
+2. **SPT (Shortest Processing Time)** - The efficiency rule
+3. **EDD (Earliest Due Date)** - The deadline rule
+:::
+
+. . .
+
+[Question]{.question}: Which rule would you use for the bike factory with penalties and overtime costs?
+
+## Rule 1: FIFO (First In, First Out)
+
+[Process jobs in the order they arrive, no prioritization.]{.highlight}
+
+. . .
+
+::: incremental
+- **When it's good:** Ensures fairness and prevents "customer favoritism"
+- **When it's optimal:** When all jobs have equal importance and no deadlines
+- **Real-world use:** Bank queues, ticket counters, help desk systems
+:::
+
+. . .
+
+:::{.callout-tip}
+Like scheduling job interviews when all candidates applied at different times: You interview in application order to be fair, even if some candidates are stronger.
+:::
+
+## Example: Hospital Check-In
+
+```{python}
+#| eval: true
+#| echo: false
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import sys
+sys.path.append('../helpers')
+from plot_utils import BRAND_COLORS, setup_clean_style
+
+setup_clean_style()
+
+# Hospital check-in scenario - FIFO makes sense here (triage happens after check-in)
+patients = ['Patient A', 'Patient B', 'Patient C', 'Patient D']
+checkin_times = [5, 3, 4, 6]  # minutes per patient
+arrival_order = [0, 1, 2, 3]  # They arrived in this order
+
+fig, ax = plt.subplots(1, 1)
+
+# FIFO Schedule
+start_times_fifo = [0, 5, 8, 12]
+for i, (patient, start, duration) in enumerate(zip(patients, start_times_fifo, checkin_times)):
+    ax.barh(i, duration, left=start, height=0.8,
+            color=BRAND_COLORS["twoDark"], alpha=0.7, edgecolor='black')
+    ax.text(start + duration/2, i, f'{duration} min',
+            ha='center', va='center', fontweight='bold', color='white')
+
+ax.set_yticks(range(len(patients)))
+ax.set_yticklabels(patients)
+ax.set_xlabel('Time (minutes)')
+ax.set_title('FIFO: Hospital Check-In (Arrival Order)', fontweight='bold')
+ax.set_xlim(0, 20)
+ax.grid(axis='x', alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-tip
+See the pattern? We just do patient A, then patient B, then patient C, then patient D.
+:::
+
+## 2: SPT (Shortest Processing Time)
+
+[The Idea: Process quickest job next to maximize throughput.]{.highlight}
+
+. . .
+
+::: incremental
+- **When it's good:** Minimizes average waiting time for customers
+- **When it's optimal:** [Proven optimal]{.highlight} for minimizing mean completion time
+- **Real-world use:** Express checkout lanes, quick service repairs, email triage
+:::
+
+. . .
+
+:::{.callout-tip}
+Like answering emails: Respond to quick 1-minute replies first, then tackle the complex ones requiring research so more people get helped faster.
+:::
+
+## Example: Coffee Shop Orders
+
+```{python}
+#| eval: true
+#| echo: false
+fig, ax = plt.subplots(1, 1)
+
+# Coffee shop scenario - SPT minimizes average wait time
+orders = ['Black Coffee', 'Espresso', 'Cappuccino', 'Frappuccino']
+prep_times = [1, 1, 3, 5]  # minutes
+
+# Sort by processing time for SPT
+spt_order = np.argsort(prep_times)
+spt_labels = [orders[i] for i in spt_order]
+spt_times = [prep_times[i] for i in spt_order]
+
+start_times_spt = [0]
+for i in range(len(spt_times)-1):
+    start_times_spt.append(start_times_spt[-1] + spt_times[i])
+
+for i, (order, start, duration) in enumerate(zip(spt_labels, start_times_spt, spt_times)):
+    ax.barh(i, duration, left=start, height=0.8,
+            color=BRAND_COLORS["oneDark"], alpha=0.7, edgecolor='black')
+    ax.text(start + duration/2, i, f'{duration} min',
+            ha='center', va='center', fontweight='bold', color='white')
+
+ax.set_yticks(range(len(spt_labels)))
+ax.set_yticklabels(spt_labels)
+ax.set_xlabel('Time (minutes)')
+ax.set_title('SPT: Coffee Shop (Shortest First)', fontweight='bold')
+ax.set_xlim(0, 12)
+ax.grid(axis='x', alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-warning
+However, not all customers might be willing to wait longer for their orders!
+:::
+
+## Rule 3: EDD (Earliest Due Date)
+
+[The Idea: Jobs by deadline order to tackle urgent work first.]{.highlight}
+
+. . .
+
+::: incremental
+- **When it's good:** Minimizes number of late jobs (tardiness)
+- **When it's optimal:** [Proven optimal]{.highlight} for minimizing maximum lateness
+- **Real-world use:** Project deadlines, delivery logistics, exam grading
+:::
+
+. . .
+
+:::{.callout-tip}
+Like grading assignments: Grade the papers due back tomorrow before the ones due next week so students get feedback when promised.
+:::
+
+## Example: Package Delivery
+
+```{python}
+#| eval: true
+#| echo: false
+fig, ax = plt.subplots(1, 1)
+
+# Delivery scenario - EDD minimizes late deliveries
+packages = ['Pkg A', 'Pkg B', 'Pkg C', 'Pkg D']
+delivery_times = [30, 20, 25, 15]  # minutes
+due_times = [40, 50, 60, 70]  # promised delivery times
+
+# Sort by due date for EDD
+edd_order = np.argsort(due_times)
+edd_labels = [packages[i] for i in edd_order]
+edd_times = [delivery_times[i] for i in edd_order]
+edd_dues = [due_times[i] for i in edd_order]
+
+start_times_edd = [0]
+for i in range(len(edd_times)-1):
+    start_times_edd.append(start_times_edd[-1] + edd_times[i])
+
+for i, (pkg, start, duration, due) in enumerate(zip(edd_labels, start_times_edd, edd_times, edd_dues)):
+    completion = start + duration
+    color = BRAND_COLORS["threeDark"] if completion > due else BRAND_COLORS["twoDark"]
+    ax.barh(i, duration, left=start, height=0.8,
+            color=color, alpha=0.7, edgecolor='black')
+    ax.text(start + duration/2, i, f'{duration} min',
+            ha='center', va='center', fontweight='bold', color='white')
+    # Draw due date line
+    ax.axvline(x=due, ymin=i/len(packages), ymax=(i+1)/len(packages),
+               color='red', linestyle='--', alpha=0.5, linewidth=2)
+
+ax.set_yticks(range(len(edd_labels)))
+ax.set_yticklabels(edd_labels)
+ax.set_xlabel('Time (minutes)')
+ax.set_title('EDD: Package Delivery (Due Date Order, red lines = deadlines)', fontweight='bold')
+ax.set_xlim(0, 100)
+ax.grid(axis='x', alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-warning
+Note, that we only minimize maximal lateness here!
+:::
+
+## Comparing All Three
+
+[Now let's compare all three rules on the **same dataset**]{.highlight}
+
+. . .
+
+**Scenario:** 4 rush bike orders arrive with conflicting priorities
+
+. . .
+
+| Order | Arrival | Processing | Due | Penalty |
+|-------|---------------|----------------|----------|-----------------|
+| B12   | 1st           | 90 min         | 180 min  | €150           |
+| B08   | 2nd           | 45 min         | 280 min  | €150           |
+| B15   | 3rd           | 75 min         | 220 min  | €150           |
+| B03   | 4th           | 30 min         | 300 min  | €150           |
+
+. . .
+
+[Question:]{.question} How would we schedule for each rule?
+
+## All Schedules Compared
+
+```{python}
+#| eval: true
+#| echo: false
+fig, axes = plt.subplots(3, 1)
+
+# Bike orders in arrival order (FIFO)
+orders = ['B12', 'B08', 'B15', 'B03']
+process_times = [90, 45, 75, 30]
+due_dates = [180, 280, 220, 300]
+
+# Calculate metrics for each approach
+def calc_metrics(schedule_orders, schedule_times, schedule_dues):
+    start_times = [0]
+    for i in range(len(schedule_times)-1):
+        start_times.append(start_times[-1] + schedule_times[i])
+
+    late_count = 0
+    total_penalty = 0
+    total_completion = 0
+    max_lateness = 0
+
+    for start, duration, due in zip(start_times, schedule_times, schedule_dues):
+        completion = start + duration
+        total_completion += completion
+        if completion > due:
+            late_count += 1
+            total_penalty += 150
+            lateness = completion - due
+            max_lateness = max(max_lateness, lateness)
+
+    avg_completion = total_completion / len(schedule_times)
+    return late_count, total_penalty, avg_completion, max_lateness, start_times
+
+# Prepare data for all three schedules
+data = list(zip(orders, process_times, due_dates))
+spt_data = sorted(data, key=lambda x: x[1])
+edd_data = sorted(data, key=lambda x: x[2])
+
+schedules = [
+    ('FIFO (Arrival Order)', orders, process_times, due_dates, BRAND_COLORS["oneLight"]),
+    ('SPT (Shortest First)', [d[0] for d in spt_data], [d[1] for d in spt_data], [d[2] for d in spt_data], BRAND_COLORS["oneLight"]),
+    ('EDD (Due Date Order)', [d[0] for d in edd_data], [d[1] for d in edd_data], [d[2] for d in edd_data], BRAND_COLORS["oneLight"])
+]
+
+for idx, (title, sched_orders, sched_times, sched_dues, base_color) in enumerate(schedules):
+    ax = axes[idx]
+
+    late, penalty, avg_comp, max_late, start_times = calc_metrics(sched_orders, sched_times, sched_dues)
+
+    # Draw Gantt chart
+    for i, (order, start, duration, due) in enumerate(zip(sched_orders, start_times, sched_times, sched_dues)):
+        completion = start + duration
+        color = BRAND_COLORS["threeDark"] if completion > due else base_color
+        ax.barh(i, duration, left=start, height=0.6,
+                color=color, alpha=0.7, edgecolor='black', linewidth=1.5)
+        ax.text(start + duration/2, i, f'{duration}m',
+                ha='center', va='center', fontweight='bold', color='black', fontsize=8)
+
+        # Due date line
+        ax.axvline(x=due, ymin=(i-0.3)/4, ymax=(i+0.7)/4,
+                   color='red', linestyle='--', alpha=0.6, linewidth=1)
+
+        # Show lateness
+        if completion > due:
+            ax.text(completion + 5, i, f'+{completion-due}m late',
+                    fontsize=8, va='center', color='red', fontweight='bold')
+
+    ax.set_yticks(range(len(sched_orders)))
+    ax.set_yticklabels(sched_orders, fontsize=10)
+    ax.set_xlim(0, 320)
+    ax.grid(axis='x', alpha=0.3)
+
+    # Title with metrics
+    title_text = f'{title}  |  {late} late  |  €{penalty} penalty  |  Avg: {avg_comp:.0f}m'
+    title_color = 'black'
+    ax.set_title(title_text, fontweight='bold', fontsize=11, color=title_color, pad=8)
+
+    # Only show x-label on bottom chart
+    if idx == 2:
+        ax.set_xlabel('Time (minutes)', fontsize=11)
+    else:
+        ax.set_xticklabels([])
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-important}
+**No single rule is always best!** The right choice depends on your objectives, which might include fairness, throughput, deadlines and much more.
+:::
+
+## Key Takeaways
+
+::: incremental
+- **FIFO:** Simple and fair, but ignores job characteristics
+- **SPT:** Minimizes average completion time
+- **EDD:** Minimizes maximum lateness
+:::
+
+. . .
+
+[Question]{.question}: What if we have [multiple objectives]{.highlight} (e.g., minimize both lateness AND completion time)?
+
+# [Performance Metrics]{.flow} {.title}
+
+## How Do We Measure Success?
+
+[Different metrics matter for different businesses:]{.highlight}
+
+::: incremental
+- **Makespan:** Total time to complete all orders
+- **Average Flow Time:** Average time orders spend in the system
+- **Total/Average Tardiness:** How late are we?
+- **Maximum Tardiness:** Worst-case lateness
+- **Number of Late Orders:** Customer satisfaction metric
+:::
+
+. . .
+
+:::{.callout-tip}
+Choose your metric based on your business goals. A hospital might optimize differently than a coffee shop!
+:::
+
+## Beyond Simple Rules
+
+[A lot of businesses combine rules:]{.highlight}
+
+::: incremental
+- **Priority Classes:** Rush orders → EDD, Regular orders → SPT
+- **Time Windows:** Morning rush → SPT, Afternoon → FIFO
+- **Dynamic Switching:** Start EDD, switch to SPT when caught up
+:::
+
+. . .
+
+:::{.callout-tip}
+Many successful businesses use hybrid approaches!
+:::
+
+# [Today's Tasks]{.flow} {.title}
+
+## Today
+
+:::: columns
+::: {.column width="33%"}
+**Hour 2: This Lecture**
+
+- Greedy algorithms
+- FIFO, SPT, EDD rules
+- Trade-offs
+- Gantt charts
+:::
+
+::: {.column width="33%"}
+**Hour 3: Notebook**
+
+- Bean Counter CEO
+- Implement rules
+- Visualizations
+- Analyze orders
+:::
+
+::: {.column width="33%"}
+**Hour 4: Competition**
+
+- Bike Factory Crisis
+- 16 bicycle orders
+- Two-stage process
+- Minimize total costs!
+:::
+::::
+
+## The Competition Challenge
+
+[The Bike Factory Crisis]{.highlight}
+
+. . .
+
+1. **Schedule** 16 custom bicycle orders across 2 workstations
+2. **Optimize** Assembly → Painting workflow
+3. **Balance** overtime costs vs. late delivery penalties
+4. **Minimize** total cost (overtime + penalties)
+
+:::{.callout-important}
+Choose the right trade-off for the business context!
+:::
+
+# [Key Takeaways]{.flow} {.title}
+
+## Remember This!
+
+[The Rules of Greedy Scheduling]{.highlight}
+
+::: incremental
+1. **Know your objective** - Fairness, speed, or deadlines?
+2. **FIFO for fairness** - Simple, transparent, no favoritism
+3. **SPT for throughput** - Minimizes average completion time
+4. **EDD for deadlines** - Minimizes maximum lateness
+5. **No single winner** - Each rule optimizes different metrics
+6. **Context matters** - Match the rule to your business goal
+7. **Two-stage is harder** - Assembly → Painting adds complexity
+:::
+
+## Final Thought
+
+[Greedy algorithms are about smart trade-offs]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**The Advantage:**
+
+- Fast O(n log n)
+- Easy to implement
+- Explainable decisions
+- Often near-optimal
+- Practical for real-time scheduling
+:::
+
+::: {.column width="50%"}
+**The Challenge:**
+
+- No global optimality guarantee
+- Different rules, different results
+- Two-stage problems are complex
+- May need hybrid approaches
+:::
+:::
+
+## Break!
+
+[Take 20 minutes, then we start the practice notebook]{.highlight}
+
+**Next up:** You'll become Bean Counter's scheduler!
+
+**Then:** The Bike Factory Crisis competition!

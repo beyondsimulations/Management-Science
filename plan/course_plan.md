@@ -16,13 +16,26 @@ Actual format depends on course section and academic hours are each 45 minutes l
 - **Lectures 1-3:** Python Foundation
   1. **Hour 1-4:** Learning Programming with interactive Notebooks
 - **Lectures 4-9:** Algorithmic Foundations
-  1. **Hour 1:** Interactive lecture explaining core concepts
-  2. **Hour 2:** Interactive notebook work (45 min) + class discussion (15 min)
-  3. **Hours 3-4:** Competition challenge with real data (no notebook) + solution presentations
-  4. **Bonus Points:** Best solution team gets bonus points toward final grade
+  1. **Hour 1:** Competition presentations from previous week (student solutions)
+  2. **Hour 2:** Interactive lecture explaining core concepts using **competition scenario**
+  3. **Hour 3:** Interactive notebook with **Bean Counter narrative** for practice
+  4. **Hour 4:** Competition challenge (same scenario as lecture) + development time
+  5. **Bonus Points:** Best solution team gets bonus points toward final grade
 - **Lectures 10-12:** Consulting Project
   1. **Hour 1:** Introduction of new concept/ presentation training
   2. **Hour 3-4:** Students work in groups on their project and lecturer checks progress/helps
+
+### Content Structure for Lectures 4-9
+**Important Pedagogical Approach:**
+- **Lecture (Hour 2):** Focus on the **competition client/scenario** to preview the challenge
+- **Notebook (Hour 3):** Use **Bean Counter narrative** consistently for practice
+- **Competition (Hour 4):** Apply skills to the **same scenario from the lecture**
+
+This structure ensures:
+1. Students see the competition context during the lecture
+2. Practice safely with familiar Bean Counter scenarios
+3. Apply their skills to the previewed challenge
+4. No direct copying possible (different contexts for practice vs. competition)
 
 ### Expectations
 - Students spend 4-6 hours/week outside class
@@ -300,34 +313,39 @@ In the final presentations, each best group of the three topics with the best so
 **Domain Focus:** Finance & Investment Decisions
 **Key Questions:** How do we make decisions when we can't predict the future?
 
-**Hour 1: Interactive Lecture - Welcome to Uncertainty**
-- Interactive demonstration: "The Casino Game"
-- Real-world examples: Netflix series decisions, pharmaceutical R&D
-- Probability distributions and their business meaning
+**Hour 1: Student Presentations** - Competition results from Lecture 3
+
+**Hour 2: Interactive Lecture - Welcome to Uncertainty**
+- **Focus on TechVenture Innovation Fund scenario** (the competition)
+- Interactive demonstration: Investment portfolio risk
+- Probability distributions in investment returns
 - The mathematics of risk: expected value, variance, percentiles
 - When and why Monte Carlo beats analytical methods
+- Show example with 2 of 4 startups selection
 
-**Hour 2: Building Crystal Ball Simulations (Notebook)**
+**Hour 3: Building Simulations (Notebook with Bean Counter)**
 ```python
+# Bean Counter CEO scenario:
+# Should we open a new Bean Counter location?
 # Students will implement:
-# 1. Simple investment return simulation
-# 2. Adding uncertainty to multiple variables
-# 3. Correlation between risks
+# 1. Simple revenue simulation for new store
+# 2. Adding uncertainty to costs and demand
+# 3. Correlation between variables
 # 4. Confidence interval calculation
-# 5. Visualization of results
+# 5. ROI visualization
 
-def simulate_coffee_shop(n_simulations=10000):
-    """Should we open a new coffee shop?"""
-    # Students code along
+def simulate_bean_counter_expansion(n_simulations=10000):
+    """Should Bean Counter expand to a new location?"""
+    # Students code along with Bean Counter context
     daily_customers = np.random.normal(100, 20, n_simulations)
     avg_purchase = np.random.uniform(8, 12, n_simulations)
     # Build up complexity gradually...
 ```
 **Discussion (last 5 minutes):** What do the results tell us? Share insights, debugging tips, interpretation challenges.
 
-**Hours 3-4: Competition - "The Startup Investment Challenge"**
+**Hour 4: Competition - "The Startup Investment Challenge"**
 
-**Scenario:**
+**Scenario (same as lecture):**
 TechVenture Innovation Fund has €2M to invest. You must select **exactly 2 startups** out of 4 candidates to invest €1M each. Which combination gives the best expected total return?
 
 **Data Provided for Each Startup:**
@@ -400,53 +418,59 @@ investment_per_startup = 1_000_000  # €1M
 **Key Questions:** How can we predict future demand from historical patterns?
 
 **Hour 1: Student Presentations - Competition Lecture 4**
-- Students present their solutions to the last competition in short 2-3 minute pitches
+- Students present their solutions to the startup investment competition
 - Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
 
 **Hour 2: Interactive Lecture - Patterns in Data**
-- Show sales data: Can you spot the pattern?
-- Trend, seasonality, and residuals explained
-- The forecasting toolkit: MA, exponential smoothing, seasonal models
-- Cost of forecast errors
+- **Focus on MegaMart Christmas Challenge scenario** (the competition)
+- Show MegaMart's historical sales: Can you spot the pattern?
+- Trend, seasonality, and residuals in retail data
+- The forecasting toolkit: MA, exponential smoothing, Holt-Winters
+- Cost of forecast errors for MegaMart inventory
 - Simple methods often win
 
-**Hour 3: Notebook Session - Time Series & Forecasting Methods**
+**Hour 3: Notebook Session - Bean Counter's Seasonal Forecasting**
 
 ```python
-# Part 1: Working with Time Series Data (20 min)
-# Students will learn:
-# - Converting strings to dates: pd.to_datetime()
-# - Extracting date components: .dt.month, .dt.day_of_week, .dt.year
-# - Sorting by date
+# Bean Counter CEO scenario:
+# Predicting demand for seasonal drinks
+# - Iced Coffee (summer)
+# - Pumpkin Spice Latte (fall)
+# - Peppermint Hot Chocolate (winter)
 
-# Part 2: Moving Averages (15 min)
+# Part 1: Working with Bean Counter's Time Series (20 min)
+# - Converting order timestamps to dates
+# - Extracting patterns from 2 years of data
+# - Identifying seasonal peaks
+
+# Part 2: Moving Averages for Coffee Sales (15 min)
 # - Simple moving average: df['sales'].rolling(window=7).mean()
-# - Why we use rolling averages (smoothing noise)
-# - Visualizing original vs. smoothed data
+# - Smoothing daily fluctuations
+# - Visualizing Bean Counter trends
 
-# Part 3: Forecasting Methods (25 min)
+# Part 3: Forecasting Methods for Bean Counter (25 min)
 # Students will implement:
-# 1. Simple moving average forecast
-# 2. Weighted moving average (recent data matters more)
-# 3. Exponential smoothing (introduction)
-# 4. Forecast accuracy metrics (MAE, RMSE)
+# 1. Simple MA for steady products
+# 2. Weighted MA for trending items
+# 3. Exponential smoothing
+# 4. Accuracy metrics for Bean Counter
 
-def forecast_demand(historical_data, method='exponential'):
-    """Students build multiple forecasting methods"""
-    # Guided implementation with starter code
+def forecast_bean_counter_demand(historical_data, method='exponential'):
+    """Predict next month's coffee demand"""
+    # Implementation with Bean Counter context
 ```
-**Discussion (last 5 minutes):** What do the results tell us? Share insights, debugging tips, interpretation challenges.
+**Discussion (last 5 minutes):** How to handle seasonal products at Bean Counter?
 
-**Hours 4: Competition - "The Predictor"**
-- **Scenario:** Major retailer needs inventory planning for four christmas weeks
+**Hour 4: Competition - "MegaMart's Christmas Challenge"**
+- **Scenario (same as lecture):** MegaMart needs December inventory planning
 - **Data Provided:**
   - 2 years of weekly sales for 3 products
-- **Task:**  December demand forecast per product
+- **Task:** Forecast 4 weeks of December demand per product
 - **Competition Format:**
   - 60 minutes development (in class), rest at home
-  - Visualization of results
-  - Comparison to real values (known by lecturer) in next session
-- **Bonus Points:** Lowest total forecast error
+  - Visualization of forecasts
+  - Comparison to actual values in next session
+- **Bonus Points:** Lowest total forecast error (MAE)
 
 **Assignment 1 Introduction (Last 10 min):**
 - "The Risk & Forecast Analyzer" - Due Lecture 8
@@ -460,63 +484,64 @@ def forecast_demand(historical_data, method='exponential'):
 **Core Concept:** Greedy/Constructive Heuristics
 
 **Hour 1: Student Presentations - Competition Lecture 5**
-- Students present their solutions to the last competition in short 2-3 minute pitches
+- Students present their MegaMart forecasting solutions
 - Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
 
 **Hour 2: Interactive Lecture - The Power of Simple Rules**
-- The job shop scheduling problem: Why it's NP-hard (brief!!)
-- Live demonstration: "The Pizza Kitchen Crisis"
-  - 5 pizzas, 3 ovens, different cooking times
+- **Focus on Custom Cycles bike factory scenario** (the competition)
+- The two-stage scheduling problem: Assembly → Painting
+- Live demonstration: "The Bike Factory Friday Crisis"
+  - 16 bikes, 2 workstations, overtime costs
   - Students suggest rules → test them live
-- Classic greedy rules explained:
-  - SPT (Shortest Processing Time): Get quick wins
-  - EDD (Earliest Due Date): Keep customers happy
-  - FIFO: When in doubt, be fair
-- Real-world impact: How Toyota uses these rules
-- When greedy works (and when it fails spectacularly)
+- Classic greedy rules for bike production:
+  - SPT: Complete quick bikes first
+  - EDD: Meet Rush order deadlines
+  - FIFO: Fair processing order
+- Cost analysis: Overtime (€100/hr) vs. penalties (€50-150)
+- When greedy works (and when hybrids win)
 
-**Hour 3: Notebook Session - Building Schedulers**
-*Interactive Notebook: job_shop_greedy.ipynb*
+**Hour 3: Notebook Session - Bean Counter's Scheduling Mastery**
+*Bean Counter CEO manages Friday rush*
 ```python
+# Bean Counter CEO scenario:
+# 47 coffee orders on Friday morning
+# 3 espresso machines
+# Various customer deadlines
+
 # Students will implement:
-def schedule_SPT(self):
-    """Shortest Processing Time First"""
-    # Sort by processing time, assign to machines
-    # Calculate completion times and tardiness
+def schedule_bean_counter_spt(orders):
+    """Quick orders first at Bean Counter"""
+    # Sort by processing time
+    # Calculate wait times
 
-def schedule_EDD(self):
-    """Earliest Due Date First"""
-    # Sort by due date, assign to machines
+def schedule_bean_counter_edd(orders):
+    """Meeting coffee deadlines"""
+    # Sort by customer pickup time
+    # Minimize late orders
 
-def visualize_gantt(self, schedule):
-    """Create Gantt chart visualization"""
-    # Beautiful timeline chart (code given!)
+def visualize_coffee_gantt(schedule):
+    """Bean Counter's schedule visualization"""
+    # Timeline of coffee production
 
-def calculate_metrics(self, schedule):
-    """Calculate tardiness, makespan, utilization"""
+def calculate_bean_counter_metrics(schedule):
+    """Bean Counter performance metrics"""
     return {
-        'total_tardiness': ...,
-        'max_tardiness': ...,
-        'makespan': ...,
-        'machine_utilization': ...
+        'avg_wait_time': ...,
+        'late_orders': ...,
+        'customer_satisfaction': ...
     }
 
-# Compare all three rules on same dataset
-# Which rule wins? Why?
+# Test on 47 real Friday orders
+# CEO decision: which rule for Bean Counter?
 ```
-**Discussion (last 5 minutes):**
-- What do the results tell us?
-  - Which rule worked best?
-  - Can you think of scenarios where each would win?
-  - What if we combined rules?
+**Discussion (last 5 minutes):** Which rule maximizes Bean Counter customer satisfaction?
 
-**Hours 4: Competition - "The Bike Factory Friday Crisis"**
-- **Scenario:** Custom bicycle factory, Friday afternoon chaos
-  - "We just got 8 rush orders for Monday delivery!"
-  - 16 total jobs for weekend production
-  - 2 different workstations (paint, assembly)
-  - Each job needs to be painterd first and then assembled
-  - Overtime costs €100/hour after 8pm
+**Hour 4: Competition - "The Bike Factory Friday Crisis"**
+- **Scenario (same as lecture):** Custom Cycles Manufacturing
+  - 16 bicycle orders (Standard, Rush, Custom)
+  - 2 workstations: Assembly → Painting
+  - Overtime costs €100/hour after Saturday 8pm
+  - Rush penalties €150, Standard €50
 
 - **Data Provided:**
   - Job details: processing times on both workstations
@@ -544,64 +569,57 @@ def calculate_metrics(self, schedule):
 **Core Concept:** Local Search and 2-Opt
 
 **Hour 1: Student Presentations - Competition Lecture 6**
-- Students present their solutions to the last competition in short 2-3 minute pitches
+- Students present their bike factory scheduling solutions
 - Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
 
-**Hour 2: Interactive Lecture - The Traveling Salesman Problem**
-- What is TSP? Real-world examples (delivery, drilling, genome sequencing)
-- Why is it hard? (Factorial growth: 10! = 3.6M routes)
-- Construction heuristics: Nearest neighbor (greedy)
-- Improvement: 2-opt swap explained visually
-- When to stop improving? (no improvement found)
-- The local optima trap: Why we get stuck
-- Mention other neighborhood structures without too much detail:
-  - 2-opt: swap edges
-  - Swap: exchange customers between routes
-  - Relocate: move one customer to different position
+**Hour 2: Interactive Lecture - The Bakery Delivery Challenge**
+- **Focus on Artisan Bakery scenario** (the competition)
+- The morning bread delivery problem: 12 cafes, fresh bread promise
+- TSP complexity: 12! = 479 million possible routes
+- Construction: Nearest neighbor for bakery routes
+- Improvement: 2-opt swaps to reduce driving distance
+- Live demo with bakery's actual cafe locations
+- When local search gets stuck: The bakery's dilemma
+- Time windows add complexity (some cafes open early)
 
-**Hour 3: Notebook Session - Building a TSP solver**
+**Hour 3: Notebook Session - Bean Counter's Delivery Optimization**
+*Bean Counter CEO optimizes coffee bean deliveries*
 ```python
+# Bean Counter CEO scenario:
+# Delivering coffee beans to 10 franchise locations
+# Single delivery truck, minimize fuel costs
+
 # Provided to students:
-- Distance calculation function
-- Route visualization function
-- Starting template
+- Bean Counter location coordinates
+- Franchise distances
+- Visualization functions
 
-# Students implement:
-def nearest_neighbor_route(start, cities, distances):
-    """Build route by always going to nearest unvisited city"""
-    # Students fill in
+# Students implement for Bean Counter:
+def bean_counter_nearest_neighbor(start, franchises, distances):
+    """Build delivery route for Bean Counter franchises"""
+    # Students implement
 
-def calculate_route_distance(route, distances):
-    """Calculate total distance of route"""
-    # Students fill in
+def calculate_bean_route_distance(route, distances):
+    """Total distance for coffee delivery route"""
+    # Students implement
 
-def two_opt_swap(route, i, j):
-    """Reverse segment of route between i and j"""
-    return route[:i] + route[i:j+1][::-1] + route[j+1:]
+def improve_bean_route(route, distances):
+    """2-opt improvement for Bean Counter deliveries"""
+    # Use 2-opt swaps to optimize
+    # Track improvement metrics
 
-def improve_route(route, distances):
-    """Keep trying 2-opt swaps until no improvement"""
-    # Students fill in
-    improved = True
-    while improved:
-        improved = False
-        for i in range(len(route)-1):
-            for j in range(i+2, len(route)):
-                # Try swap, keep if better
-                pass
+# Test on real Bean Counter franchise data
+# How much fuel cost saved?
 ```
 
-- **Class Discussion (5 min):**
-  - How much improvement did 2-opt give?
-  - Why does it eventually stop improving?
-  - Ideas for escaping local optima?
+- **Discussion (5 min):** How much did 2-opt save Bean Counter on delivery costs?
 
-**Hours 4: Competition - "The Bakery Delivery Route"**
-- **Scenario:** Artisan bakery delivers to 12 cafes each morning
-  - "We promise fresh bread every morning!"
+**Hour 4: Competition - "The Artisan Bakery Delivery Route"**
+- **Scenario (same as lecture):** Morning bread delivery optimization
+  - 12 cafes requiring fresh bread
   - Must visit all cafes exactly once
   - Return to bakery at the end
-  - Some cafes have time windows
+  - 3 cafes have early time windows
 
 - **Data Provided:**
   - 12 cafe locations (x, y coordinates)
@@ -628,86 +646,56 @@ def improve_route(route, distances):
 **Core Concept:** Multi-Objective Optimization & Pareto Frontiers
 
 **Hour 1: Student Presentations - Competition Lecture 7**
-- Students present their solutions to the last competition in short 2-3 minute pitches
+- Students present their bakery delivery route solutions
 - Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
 
-**Hour 2: Interactive Lecture - The Balance Challenge**
-- **Opening Hook:** "The Tesla Dilemma"
-  - Making electric cars (performance vs. range vs. cost)
-  - "You can't maximize everything - every design is a trade-off"
+**Hour 2: Interactive Lecture - The Green Logistics Challenge**
+- **Focus on logistics company's EU regulation challenge** (the competition)
+- The trade-off: Cut carbon 40% while staying profitable
+- 12 customers, 3 distribution centers, conflicting objectives
+- One center has electric vehicles (low emissions, high cost)
+- Visualizing the Pareto frontier: Cost vs. Emissions
+- Weighted sum approach: `score = w1 × cost + w2 × emissions`
+- Live demo: Adjusting weights shifts optimal assignments
+- Real logistics decisions: Amazon's Prime vs. Standard trade-off
 
-- **Real-world conflicts** (keep it simple):
-  - Fast delivery vs. Low cost vs. Low emissions
-  - Product quality vs. Manufacturing speed
-  - Profit vs. Environmental impact
-
-- **Simple Transportation Problem Example:**
-  - Assigning deliveries to warehouses
-  - Warehouse A: Close (low cost) but small (limited capacity)
-  - Warehouse B: Far (high cost) but large (high capacity)
-  - Different assignments = different trade-offs
-
-- **Pareto Frontier Explained Visually:**
-  - Dominated vs. non-dominated solutions
-  - "You can only improve one thing by making something else worse"
-  - **Focus on 2D visualization only** (cost vs. emissions)
-  - Interactive demo: plot 5-6 solution points, identify dominated ones
-
-- **The Weighted Sum Approach** (primary method):
-  - Combine multiple objectives into single score
-  - `total_score = w1 × cost + w2 × emissions`
-  - Adjusting weights = shifting priorities
-  - Live demo: change weights, watch optimal solution shift
-  - Simple and practical for business decisions
-
-- **Brief mention** (5 min): Other approaches exist (ε-constraint, goal programming) but weighted sum is most practical for consultants
-
-- **Real examples:**
-  - Amazon: "Fast shipping costs more, so we offer Prime vs. Standard"
-  - Airlines: "We balance on-time vs. fuel cost with buffer time"
-
-**Hour 3: Notebook Session - Weighted Sum in Action**
-*Students implement a simple delivery assignment problem with two objectives*
-
+**Hour 3: Notebook Session - Bean Counter's Sustainability Decisions**
+*Bean Counter CEO balances profit and environment*
 ```python
-# Simplified notebook with pre-built functions for students
+# Bean Counter CEO scenario:
+# Opening new locations: Downtown (profitable, high emissions)
+# vs. Suburban (less profit, green building)
+# Supplier choice: Local (expensive, low carbon)
+# vs. International (cheap, high carbon)
 
-# Part 1: Understanding the Problem (10 min)
-# - Given: 10 deliveries, 2 warehouses (A: close/small, B: far/large)
-# - Objective 1: Minimize cost (distance-based)
-# - Objective 2: Minimize carbon emissions (truck type matters)
-# - Students calculate cost and emissions for a given assignment
+# Part 1: Bean Counter's Dilemma (10 min)
+# - 8 potential new locations for Bean Counter
+# - 2 objectives: Maximize profit, Minimize carbon footprint
+# - Calculate both metrics for each location
 
-# Part 2: Weighted Sum Function (15 min)
-def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
-    """Calculate combined score using weights"""
-    cost = calculate_cost(assignment)
-    emissions = calculate_emissions(assignment)
-    return w_cost * cost + w_emissions * emissions
+# Part 2: Weighted Decision Making (15 min)
+def bean_counter_score(location, w_profit=0.5, w_carbon=0.5):
+    """Score potential Bean Counter locations"""
+    profit = calculate_location_profit(location)
+    carbon = calculate_carbon_impact(location)
+    return w_profit * profit - w_carbon * carbon
 
-# Students implement this function
-# Test with different assignments
+# Part 3: Bean Counter Trade-offs (15 min)
+# Test different corporate strategies:
+# - Profit-first (w_profit=0.9)
+# - Green-first (w_carbon=0.9)
+# - Balanced (w_profit=0.5)
+# What's best for Bean Counter's brand?
 
-# Part 3: Exploring Trade-offs (15 min)
-# Students try different weight combinations:
-# - w_cost=1.0, w_emissions=0.0 (only care about cost)
-# - w_cost=0.0, w_emissions=1.0 (only care about emissions)
-# - w_cost=0.5, w_emissions=0.5 (balanced)
-# - w_cost=0.7, w_emissions=0.3 (cost-focused)
-
-# Part 4: Visualizing the Pareto Frontier (15 min)
-# Pre-built plotting function provided
-# Students generate 5-10 different solutions (using greedy heuristics from Lecture 6)
-# Plot them on cost vs. emissions chart
-# Identify which solutions are dominated
+# Part 4: Presenting to Bean Counter Board (15 min)
+# Create Pareto frontier visualization
+# Identify dominated location options
+# Prepare CEO recommendation
 ```
 
-- **Class Discussion (5 min):**
-  - Which weight combination would you recommend? Why?
-  - How would you present these trade-offs to a CEO?
-  - What if the CEO says "I want low cost AND low emissions"?
+- **Discussion (5 min):** What weights align with Bean Counter's values?
 
-**Hours 4: Competition - "The Green Logistics Challenge"**
+**Hour 4: Competition - "The Green Logistics Challenge"**
 
 - **Scenario:** Logistics company facing new EU regulations
   - "We must cut carbon 40% by 2030 while staying profitable and maintaining service"
@@ -749,22 +737,25 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
 **Core Concept:** Survey of Metaheuristics (awareness, not implementation)
 
 **Hour 1: Student Presentations - Competition Lecture 8**
-- Students present their solutions to the last competition in short 2-3 minute pitches
+- Students present their green logistics solutions
 - Best student group receives 10 BP, second receives 6 BP and third receives 3 BP.
 
-**Hour 2: Interactive Lecture - The Optimization Landscape**
+**Hour 2: Interactive Lecture - Restaurant Staffing Optimization**
+- **Focus on three-star restaurant staffing challenge** (the competition)
+- The weekend crisis: 18 servers, 6 shifts, skill requirements
+- Problem: Only 6 experienced servers but need 8 (impossible!)
+- Trade-offs: Labor costs vs. service quality penalties
 
-- **Opening: The Local Optima Trap** (10 min)
-  - "Remember Lecture 7? Our 2-opt improvement got stuck."
-  - Visualization: Lost in the mountains at night with a flashlight
-  - You can see nearby solutions, but the best solution might be far away
-  - Real example: Your delivery route is good, but there's a MUCH better one across town
+- **Why Simple Methods Fail:**
+  - Greedy gets stuck (can't escape bad assignments)
+  - 2-opt doesn't help (different problem structure)
+  - Need smarter exploration of solution space
 
-- **The Three Levels of Optimization** (5 min)
+- **The Three Levels Applied to Restaurant:**
   ```
-  Level 1: Construction (Greedy) → Get A solution fast
-  Level 2: Improvement (Local Search) → Make it better
-  Level 3: Metaheuristics → Escape traps, explore widely
+  Level 1: Greedy assignment → Quick but suboptimal
+  Level 2: Local swaps → Minor improvements
+  Level 3: Metaheuristics → Smart exploration
   ```
 
 - **Metaheuristic #1: Simulated Annealing** (10 min)
@@ -829,68 +820,62 @@ def calculate_weighted_score(assignment, w_cost=0.5, w_emissions=0.5):
   - "With GenAI, you can use these techniques even without deep expertise"
   - "In today's notebook, you'll see examples and learn how to work WITH AI to apply them"
 
-**Hour 3: Interactive Notebook - Metaheuristics in Action (Demos + GenAI Integration)**
+**Hour 3: Notebook - Bean Counter's Advanced Optimization**
+*Bean Counter CEO tackles complex scheduling with metaheuristics*
 
-**NEW APPROACH:** Students don't implement from scratch - they run provided implementations and learn to use GenAI to adapt them
-
-**Part 1: Understanding Through Demos** (20 min)
-- **Pre-built visualization notebooks provided**
-- Students run and observe:
+**Part 1: Bean Counter's Staffing Challenge** (20 min)
+- **Pre-built demos for Bean Counter scenarios:**
   ```python
-  # Demo 1: Hill Climbing vs. Simulated Annealing (10 min)
-  # - Same TSP problem, watch both algorithms
-  # - See SA escape local optima
-  # - Adjust temperature schedule, observe impact
-  # Students just RUN code, observe, answer questions:
-  #   Q: "At what iteration did SA escape the trap?"
-  #   Q: "What happens if you cool too fast?"
+  # Demo 1: Bean Counter barista scheduling
+  # - 20 baristas, different skill levels
+  # - Watch greedy vs. simulated annealing
+  # - SA escapes local optima in staff assignments
+  # Students observe and answer:
+  #   Q: "When did SA find better schedule?"
+  #   Q: "How much cost saved vs greedy?"
 
-  # Demo 2: Genetic Algorithm Evolution (10 min)
-  # - Watch 100 generations evolve
-  # - See best solution improve over time
-  # - Adjust mutation rate, observe impact
-  # Students answer:
-  #   Q: "Which generation found the best solution?"
-  #   Q: "What happened when mutation rate = 0?"
+  # Demo 2: Bean Counter expansion planning
+  # - Genetic algorithm for location selection
+  # - 50 potential sites, choose best 10
+  # - Watch solutions evolve
+  # Students analyze:
+  #   Q: "Which generation found best locations?"
+  #   Q: "How diverse were final solutions?"
   ```
 
-**Part 2: Working WITH GenAI** (20 min)
-- **Guided exercise: Adapting code with Copilot/ChatGPT**
+**Part 2: Adapting for Bean Counter with GenAI** (20 min)
+- **Bean Counter-specific problems:**
   ```python
-  # Provided: Basic SA template for TSP
-  # Task: Adapt it for a simple assignment problem
+  # Provided: SA template for scheduling
+  # Task: Adapt for Bean Counter's holiday staffing
 
-  # Step 1: Students describe the problem to Copilot in comments
-  # "I have 10 tasks and 3 workers. Each task takes different time on different workers."
-  # "I want to minimize total completion time."
+  # Step 1: Describe Bean Counter's problem to Copilot
+  # "Bean Counter needs to schedule 30 baristas across
+  # Christmas week with varying demand and skills"
 
-  # Step 2: Let Copilot suggest neighborhood moves
-  # Students learn: How to prompt AI, how to verify suggestions
+  # Step 2: Let Copilot suggest Bean Counter-specific moves
+  # - Swap shifts between baristas
+  # - Move experienced staff to rush hours
 
-  # Step 3: Run adapted code, compare to greedy solution
+  # Step 3: Compare to Bean Counter's current manual approach
   ```
 
-- **Key learning outcome:** "I can DESCRIBE a problem and USE metaheuristics, even if I don't code them from scratch"
+**Part 3: Bean Counter Decision Framework** (10 min)
+- Bean Counter scenarios for metaheuristic selection:
+  1. "Holiday week scheduling with 50 staff"
+  2. "Delivery routing for 20 franchises"
+  3. "Menu optimization across 15 locations"
 
-**Part 3: Decision Framework Practice** (10 min)
-- Students get 3 scenario cards:
-  1. "Schedule 50 nurses across 7 days with complex constraints"
-  2. "Route 100 deliveries across 5 vehicles"
-  3. "Assign 20 projects to 8 teams with skill requirements"
-
-- **Task:** For each scenario, recommend:
-  - Which metaheuristic to try?
-  - Why that one?
-  - How would you describe it to GenAI to get code?
+- **CEO Decision:** Which technique for each Bean Counter challenge?
 
 - **Class discussion:** Share recommendations, instructor validates
 
 **Class Discussion (5 min):**
 - "What surprised you about metaheuristics?"
-- "Which one would you try first for your consulting project?"
+- "Which would Bean Counter benefit from most?"
 - "How confident do you feel using GenAI to implement these?"
 
-**Hours 4: Competition - "The Weekend Restaurant Staffing Challenge"**
+**Hour 4: Competition - "The Three-Star Restaurant Staffing Challenge"**
 
 - **Scenario:** A three Michelin star restaurant weekend scheduling crisis
   - "I need to schedule my 18 servers across 6 shifts this weekend"

@@ -27,11 +27,25 @@ The course follows a three-part structure:
 - **Interactive learning** through hands-on coding and competitions
 - **Business context** in every example to maintain relevance
 
-### Class Structure (4 Academic Hours)
+### Class Structure (4 Academic Hours) - Lectures 4-9
 - **Hour 1:** Competition presentations from previous week (not generated)
-- **Hour 2:** Interactive lecture introducing concepts
-- **Hour 3:** Hands-on practice notebook
-- **Hour 4:** New competition challenge
+- **Hour 2:** Interactive lecture introducing concepts **using competition scenario**
+- **Hour 3:** Hands-on practice notebook **using Bean Counter narrative**
+- **Hour 4:** New competition challenge **same scenario as lecture**
+
+### Content Structure for Management Science Lectures
+**CRITICAL:** For Lectures 4-9, maintain this separation:
+- **Lecture (Hour 2):** Focus entirely on the **competition client/scenario**
+  - Preview the competition challenge
+  - Use competition data/examples
+  - Prepare students for what they'll face
+- **Notebook (Hour 3):** Use **Bean Counter narrative** consistently
+  - Students are CEO of Bean Counter coffee chain
+  - Practice same concepts in different context
+  - Prevents direct copying between practice and competition
+- **Competition (Hour 4):** Apply to **same scenario from lecture**
+  - Students tackle the previewed challenge
+  - Different from notebook to ensure skill transfer
 
 ### Student Profile
 - Bachelor business students (not CS majors)
@@ -66,7 +80,7 @@ You MUST only use concepts students have learned in previous lectures:
 
 ## **File 1: Lecture Presentation (lec_XX_[topic].qmd)**
 
-**Purpose:** Teach concepts with minimal code, maximum understanding through visualization and interaction.
+**Purpose:** Teach concepts with minimal code, maximum understanding through visualization and interaction. **Must focus on competition scenario, NOT Bean Counter.**
 
 ### YAML Header Template
 ```yaml
@@ -81,15 +95,15 @@ format:
 ---
 ```
 
-### Case Template
+### Case Template (Competition Client, NOT Bean Counter)
 
-## **[Client Briefing: TechVenture Innovation Fund]{.invert-font}** {background-image="https://unsplash.com/photos/K5DY18hy5JQ/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYxNDU4NjYzfA&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: [Competition Company Name]]{.invert-font}** {background-image="[relevant-unsplash-url]" background-size="cover"}
 
 . . .
 
-[CEO's Dilemma:]{.invert-font}
+[Client's Role's Dilemma:]{.invert-font}
 
-["We have €2M to invest in [2 of 4 startups]{.highlight}. Each promises great returns, but the future is uncertain. How do we make the best choice without just gambling?"]{.invert-font .fragment}
+["[Competition-specific challenge that students will face in Hour 4]"]{.invert-font .fragment}
 
 
 ### Required Structure (45 minutes total)
@@ -137,13 +151,13 @@ format:
 
 ## **File 2: Interactive Notebook (nb_XX_01_[topic].qmd)**
 
-**Purpose:** Hands-on practice that prepares students for the competition using a related but different case.
+**Purpose:** Hands-on practice that prepares students for the competition. **Must use Bean Counter narrative consistently - students are CEO of Bean Counter coffee chain.**
 
 ### YAML Header Template
 ```yaml
 ---
 title: "Notebook X.1 - [Topic]"
-subtitle: "Management Science"
+subtitle: "Management Science - [Bean Counter Role/Challenge]"
 code-links:
   - text: Python
     href: nb_XX_01_[topic].py
@@ -153,8 +167,8 @@ code-links:
 
 ### Required Structure (45 minutes total)
 1. **Introduction**
-   - Brief context setting
-   - Connection to lecture concepts
+   - Set Bean Counter CEO context
+   - Connect to lecture concepts (but different scenario)
    - "How to Use This Tutorial" section
 
 2. **Section 1 - Basic Concepts** (10 min)
@@ -203,15 +217,15 @@ print("✓ Exercise correct!")
 - Different domain but same techniques
 - Include scoring/evaluation functions
 
-## **File 3: Competition Challenge (competition_XX_[topic].qmd)**
+## **File 3: Competition Challenge (competition_XX_[topic].qmd or nb_XX_02_[topic].qmd)**
 
-**Purpose:** Team-based challenge applying all concepts learned.
+**Purpose:** Team-based challenge applying all concepts learned. **Must use the SAME scenario/company as the lecture (NOT Bean Counter).**
 
 ### YAML Header Template
 ```yaml
 ---
 title: "Competition - [Challenge Name]"
-subtitle: "Lecture XX - Management Science"
+subtitle: "Management Science - [Competition Company]"
 format:
   html:
     code-fold: true
@@ -221,8 +235,8 @@ format:
 
 ### Required Structure
 1. **Client Briefing**
-   - Company background and context
-   - Current problem/pain points
+   - Same company as lecture presentation
+   - Specific problem/pain points
    - Why this matters (business impact)
 
 2. **The Challenge**
@@ -306,14 +320,18 @@ from plot_utils import create_plot, BRAND_COLORS, setup_clean_style
 # **QUALITY CHECKLIST**
 
 ## Lecture File
+- [ ] Focuses on **competition scenario** (NOT Bean Counter)
 - [ ] Concepts explained visually, not through code
 - [ ] Maximum 3-4 code blocks total
 - [ ] Questions engage students before revealing answers
 - [ ] Visualizations use brand colors
+- [ ] Examples use competition data/context
 - [ ] Timing realistic for 45 minutes
 - [ ] Clear transition to notebook/competition
 
 ## Notebook File
+- [ ] Uses **Bean Counter narrative** consistently
+- [ ] Students are CEO of Bean Counter coffee chain
 - [ ] Every exercise has assert statements
 - [ ] Progressive difficulty from simple to complex
 - [ ] Final section mirrors competition structure
@@ -322,6 +340,7 @@ from plot_utils import create_plot, BRAND_COLORS, setup_clean_style
 - [ ] Success messages with ✓
 
 ## Competition File
+- [ ] Uses **same scenario as lecture** (NOT Bean Counter)
 - [ ] Problem scope fits 60 minutes
 - [ ] Starter code provided
 - [ ] Clear evaluation criteria
@@ -331,23 +350,31 @@ from plot_utils import create_plot, BRAND_COLORS, setup_clean_style
 
 # **COMMON PITFALLS TO AVOID**
 
+## Scenario Confusion
+- ❌ Using Bean Counter in lectures (lectures focus on competition)
+- ❌ Using competition scenario in notebooks (notebooks use Bean Counter)
+- ❌ Mixing narratives within a single file
+
 ## In Lectures
 - ❌ Too much code (save for notebook)
 - ❌ Complex implementations (conceptual only)
 - ❌ Missing visualizations (plots > code)
 - ❌ No interaction (add questions)
+- ❌ Using Bean Counter examples (use competition scenario)
 
 ## In Notebooks
 - ❌ Missing assertions (every exercise needs them)
 - ❌ Huge difficulty jumps (build gradually)
 - ❌ No competition prep (final section must prepare)
 - ❌ Unclear instructions (be specific)
+- ❌ Not using Bean Counter narrative (must be consistent)
 
 ## In Competitions
 - ❌ Ambiguous requirements (be crystal clear)
 - ❌ Too complex for 60 minutes (test scope)
 - ❌ No starter code (always provide structure)
 - ❌ Missing rubric (clear evaluation needed)
+- ❌ Different scenario from lecture (must match)
 
 # **GENERATION PROCESS**
 
