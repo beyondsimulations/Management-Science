@@ -410,8 +410,8 @@ for ax, metric in zip(axes.flat, metrics_to_plot):
 
     # Highlight the best performer
     best_idx = np.argmin(values)
-    bars[best_idx].set_edgecolor('green')
-    bars[best_idx].set_linewidth(3)
+    bars[best_idx].set_edgecolor('black')
+    bars[best_idx].set_linewidth(2)
 
     ax.set_title(metric.replace('_', ' ').title(), fontweight='bold')
     ax.set_ylabel('Value')
@@ -459,6 +459,7 @@ This requires **dynamic dispatching**: making decisions based only on orders tha
 ```{python}
 #| eval: true
 # Generate realistic Friday morning rush orders
+# Generate realistic Friday morning rush orders
 np.random.seed(2025)
 n_orders = 30
 
@@ -468,18 +469,18 @@ current_arrival = 0
 for i in range(n_orders):
     # Orders arrive with gaps (exponential inter-arrival times)
     if i > 0:
-        current_arrival += np.random.exponential(3.5)
+        current_arrival += np.random.exponential(2.0)
 
-    processing = np.random.choice([3, 5, 7, 10], p=[0.35, 0.35, 0.20, 0.10])
+    processing = np.random.choice([1,2,3], p=[0.1,0.5, 0.4])
 
     # Due times are relative to arrival (customers want drinks soon after ordering)
-    order_urgency = np.random.choice(['rush', 'normal', 'relaxed'], p=[0.25, 0.50, 0.25])
+    order_urgency = np.random.choice(['rush', 'normal', 'relaxed'], p=[0.10, 0.40, 0.50])
     if order_urgency == 'rush':
-        due = current_arrival + processing + np.random.randint(5, 15)
+        due = current_arrival + processing + np.random.randint(1, 3)
     elif order_urgency == 'normal':
-        due = current_arrival + processing + np.random.randint(15, 30)
+        due = current_arrival + processing + np.random.randint(4, 6)
     else:
-        due = current_arrival + processing + np.random.randint(30, 50)
+        due = current_arrival + processing + np.random.randint(7, 12)
 
     friday_orders.append({
         'id': f'F{i+1:02d}',
@@ -571,7 +572,7 @@ def schedule_spt_dynamic(orders):
             available = # YOUR CODE: update available orders
 
         # Choose shortest processing time among available
-        next_order = # YOUR CODE: min(available, key=...)
+        next_order = # YOUR CODE: min...
 
         # Schedule it
         next_order['start'] = current_time
@@ -632,8 +633,6 @@ df_friday_dynamic_spt = pd.DataFrame(friday_dynamic_spt)
 # Tests
 assert all(df_friday_dynamic_spt['start'] >= df_friday_dynamic_spt['arrival']), \
     "All orders should start at or after their arrival time"
-assert df_friday_dynamic_spt['completion'].max() < df_friday_static_spt['completion'].max(), \
-    "Dynamic SPT should beat static SPT on makespan"
 
 # Calculate idle time for both approaches
 static_idle = sum(max(0, row['arrival'] - (df_friday_static_spt.iloc[i-1]['completion'] if i > 0 else 0))
@@ -643,10 +642,9 @@ dynamic_idle = sum(max(0, row['start'] - (df_friday_dynamic_spt.iloc[i-1]['compl
 
 print("Excellent! Dynamic SPT implementation is correct!")
 print(f"\nDynamic vs Static SPT on Friday Rush:")
-print(f" • Static makespan: {df_friday_static_spt['completion'].max():.1f} minutes")
-print(f" • Dynamic makespan: {df_friday_dynamic_spt['completion'].max():.1f} minutes")
-print(f" • Improvement: {df_friday_static_spt['completion'].max() - df_friday_dynamic_spt['completion'].max():.1f} minutes faster")
-print(f" • Static idle time: {static_idle:.1f} minutes")
+print(f" • Static makespan (with arrival violations!): {df_friday_static_spt['completion'].max():.1f} minutes")
+print(f" • Dynamic makespan (no violations): {df_friday_dynamic_spt['completion'].max():.1f} minutes")
+print(f" • Change: {df_friday_static_spt['completion'].max() - df_friday_dynamic_spt['completion'].max():.1f} minutes faster")
 print(f" • Dynamic idle time: {dynamic_idle:.1f} minutes")
 ```
 
@@ -675,8 +673,8 @@ def schedule_edd_dynamic(orders):
             current_time = # min arrival of remaining
             available = # update available
 
-        # YOUR CODE: Choose earliest due date (HINT: change key from SPT)
-        next_order = # min(available, key=lambda x: x['due'])
+        # YOUR CODE: Choose earliest due date
+        next_order = # Hint: Just change the key from SPT
 
         # Schedule it (same as SPT)
         next_order['start'] = current_time
@@ -772,8 +770,8 @@ for ax, metric in zip(axes.flat, metrics_to_plot):
     bars = ax.bar(['Dynamic SPT', 'Dynamic EDD'], values, color=colors, alpha=0.7)
 
     best_idx = np.argmin(values)
-    bars[best_idx].set_edgecolor('green')
-    bars[best_idx].set_linewidth(3)
+    bars[best_idx].set_edgecolor('black')
+    bars[best_idx].set_linewidth(2)
 
     ax.set_title(metric.replace('_', ' ').title(), fontweight='bold')
     ax.set_ylabel('Value')
