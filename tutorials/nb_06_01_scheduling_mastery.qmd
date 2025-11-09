@@ -166,8 +166,7 @@ def schedule_fifo(orders):
     Schedule orders using First In, First Out (FIFO)
     Process orders in the order they arrived
     """
-    # Sort by arrival time
-    # The lambda function tells sorted() to sort by the 'arrival' value in each order
+    # FIFO is straightforward: sort by arrival and process in that order
     scheduled = sorted(orders, key=lambda x: x['arrival'])
 
     # Calculate completion times
@@ -202,7 +201,7 @@ print(df_fifo[['id', 'arrival', 'start', 'completion', 'due']])
 
 ## Exercise 2.1 - Implement SPT (Shortest Processing Time)
 
-Now implement SPT to always process the shortest available job next.
+Now implement SPT to always process the shortest job next. To make it easier for now, we'll use **static list scheduling**: sort all orders upfront, then process them in that order. We thus ignore the arrivals for now.
 
 ::: {.callout-tip}
 The structure is IDENTICAL to FIFO! You only need to change one thing!
@@ -263,9 +262,9 @@ df_spt = pd.DataFrame(spt_schedule)
 # Don't modify below - these test your solution
 assert df_spt.iloc[0]['id'] == 'C', "First order in SPT should be C (3 min processing)"
 assert df_spt.iloc[1]['id'] == 'E', "Second order in SPT should be E (4 min processing)"
-assert df_spt['completion'].max() == 29, f"Makespan should be 29, got {df_spt['completion'].max()}"
-print("✓ Excellent! SPT implementation is correct!")
-print("\nSPT Schedule:")
+assert df_spt['completion'].max() == 34, f"Makespan should be 34, got {df_spt['completion'].max()}"
+print("Excellent! SPT implementation is correct!")
+print("\nSPT Schedule (static - sorted by processing time):")
 print(df_spt[['id', 'processing', 'start', 'completion']])
 ```
 
@@ -353,7 +352,7 @@ A picture is worth a thousand schedules! Let's create Gantt charts to visualize 
 
 # Section 4 - Performance Comparison
 
-Now let's compare how each rule performs on key metrics.
+Now let's compare how each rule performs on key metrics. Remember, we're using static scheduling for simplicity. We'll explore more realistic dynamic dispatching in Section 6 of this notebook.
 
 ## Exercise 4.1 - Calculate and Compare Metrics
 
@@ -595,111 +594,183 @@ print(f"Analysis complete! Your CEO recommendation: {best_rule}")
 print("\nKey insights from NYC flagship Friday data:")
 print(f" - SPT reduces avg wait by {(1-friday_metrics.loc['SPT','avg_flow_time']/friday_metrics.loc['FIFO','avg_flow_time'])*100:.1f}%")
 print(f" - EDD reduces late orders by {friday_metrics.loc['FIFO','late_orders'] - friday_metrics.loc['EDD','late_orders']:.0f}")
-print(f" - Trade-off: Fast service (SPT) vs. meeting deadlines (EDD)")
-print(f"\nCEO Decision: Deploy {best_rule} to all global locations!")
 ```
 
-## CEO's Global Rollout Decision Dashboard
+# Section 6 - Dynamic Dispatching
 
-This dashboard shows what will happen when you deploy your chosen scheduling rule to all 1,247 Bean Counter locations worldwide.
+So far, Bean Counter used **static scheduling**: we sorted all orders upfront, then processed them in that fixed sequence. This is simple to understand and code, but there's a problem...
+
+At Bean Counter at 6 AM, you can't schedule orders that haven't been placed yet! When customer A arrives at 6:00 and customer B arrives at 6:10, you must decide what to do at 6:00 *without knowing about customer B yet*.
+
+**Dynamic dispatching** solves this: at each decision point, we only consider orders that have **already arrived**.
+
+::: {.callout-important}
+## Static vs Dynamic
+Imagine these orders:
+
+- Order A: arrives at 0, takes 10 minutes
+- Order C: arrives at 4, takes 3 minutes
+
+**Static SPT**: Sorts all orders → [C(3min), A(10min)] → tries to do C first
+
+- But C hasn't arrived yet when we start at time 0!
+- We wait idle from 0→4, then do C from 4→7
+- Result: Wasted 4 minutes of machine time
+
+**Dynamic SPT**: At time 0, only A is available → do A immediately
+
+- Do A from 0→10 (no idle time)
+- C arrives at 4, but we're busy until 10
+- Do C from 10→13
+- Result: No wasted time, better utilization!
+:::
+
+## Exercise 6.1 - Implement Dynamic SPT
+
+Now implement the realistic version of SPT using dynamic dispatching. The key difference: make decisions **one at a time** as the machine becomes free.
+
+1. Keep a list of `remaining` unscheduled orders
+2. Start with `current_time = 0` and empty `scheduled` list
+3. **While there are remaining orders:**
+   - **Step A**: Find which orders have `arrival <= current_time` (the "available" orders)
+   - **Step B**: If no orders available, jump forward: `current_time = min(arrival of remaining orders)`
+   - **Step C**: Among available orders, choose based on your rule (SPT = shortest processing)
+   - **Step D**: Schedule that order, update `current_time`, move it from `remaining` to `scheduled`
+4. Return the `scheduled` list
+
+::: callout-important
+We're simulating time moving forward, making decisions only with current information!
+:::
+
+::: callout-tip
+- Use a `while remaining:` loop instead of a `for` loop
+- `available = [o for o in remaining if o['arrival'] <= current_time]` (list comprehension!)
+- `if not available:` checks if the list is empty
+- `next_order = min(available, key=lambda x: x['processing'])` picks shortest
+- `remaining.remove(next_order)` removes the order from the list
+- Don't forget to make copies of dictionaries when moving them between lists!
+:::
 
 ```{python}
-#| eval: true
-# Create executive dashboard for CEO decision
-# It should include the average wait time, late orders and total tardiness
+#| eval: false
 # YOUR CODE BELOW
+def schedule_spt_dynamic(orders):
+    """
+    Schedule orders using DYNAMIC Shortest Processing Time
+    At each decision point, choose shortest job among those that have arrived
+    """
+    scheduled = []
+    remaining = orders.copy()  # Don't modify the original list
+    current_time = 0
 
+    while remaining:
+        # Step A: Find available orders (already arrived)
+        available = # YOUR CODE: filter remaining orders where arrival <= current_time
+
+        # Step B: If nothing available, jump to next arrival
+        if not available:
+            current_time = # YOUR CODE: minimum arrival time among remaining orders
+            available = # YOUR CODE: update available orders
+
+        # Step C: Choose shortest processing time among available
+        next_order = # YOUR CODE: find order with minimum processing time
+
+        # Step D: Schedule it
+        next_order['start'] = current_time
+        next_order['completion'] = current_time + next_order['processing']
+        current_time = next_order['completion']
+
+        # Move from remaining to scheduled
+        scheduled.append(next_order)
+        remaining.remove(next_order)
+
+    return scheduled
+
+# Test on the original 5 orders
+dynamic_spt_schedule = schedule_spt_dynamic(orders.copy())
+df_dynamic_spt = pd.DataFrame(dynamic_spt_schedule)
 ```
 
 :::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
 # SOLUTION
-# Create executive dashboard for CEO decision
-fig = plt.figure(figsize=(14, 8))
-gs = fig.add_gridspec(2, 3, hspace=0.3, wspace=0.3)
+def schedule_spt_dynamic(orders):
+    """Schedule orders using DYNAMIC Shortest Processing Time"""
+    scheduled = []
+    remaining = orders.copy()
+    current_time = 0
 
-# Average wait time
-ax1 = fig.add_subplot(gs[0, 0])
-wait_times = [friday_metrics.loc[r, 'avg_flow_time'] for r in ['FIFO', 'SPT', 'EDD']]
-bars1 = ax1.bar(['FIFO', 'SPT', 'EDD'], wait_times, color='#537E8F', alpha=0.7)
-ax1.set_title('Average Wait Time', fontweight='bold')
-ax1.set_ylabel('Minutes')
-bars1[np.argmin(wait_times)].set_edgecolor('green')
-bars1[np.argmin(wait_times)].set_linewidth(3)
+    while remaining:
+        # Find available orders
+        available = [o for o in remaining if o['arrival'] <= current_time]
 
-# Late orders
-ax2 = fig.add_subplot(gs[0, 1])
-late = [friday_metrics.loc[r, 'late_orders'] for r in ['FIFO', 'SPT', 'EDD']]
-bars2 = ax2.bar(['FIFO', 'SPT', 'EDD'], late, color='#DB6B6B', alpha=0.7)
-ax2.set_title('Number of Late Orders', fontweight='bold')
-ax2.set_ylabel('Count')
-bars2[np.argmin(late)].set_edgecolor('green')
-bars2[np.argmin(late)].set_linewidth(3)
+        # If nothing available, jump to next arrival
+        if not available:
+            current_time = min(o['arrival'] for o in remaining)
+            available = [o for o in remaining if o['arrival'] <= current_time]
 
-# Total tardiness
-ax3 = fig.add_subplot(gs[0, 2])
-tard = [friday_metrics.loc[r, 'total_tardiness'] for r in ['FIFO', 'SPT', 'EDD']]
-bars3 = ax3.bar(['FIFO', 'SPT', 'EDD'], tard, color='#F6B265', alpha=0.7)
-ax3.set_title('Total Tardiness', fontweight='bold')
-ax3.set_ylabel('Minutes')
-bars3[np.argmin(tard)].set_edgecolor('green')
-bars3[np.argmin(tard)].set_linewidth(3)
+        # Choose shortest processing time
+        next_order = min(available, key=lambda x: x['processing'])
 
-# Customer satisfaction estimate
-ax4 = fig.add_subplot(gs[1, :])
-satisfaction = [100 - (late[i]/n_orders)*100 for i in range(3)]
-bars4 = ax4.bar(['FIFO', 'SPT', 'EDD'], satisfaction, color='#6BA66B', alpha=0.7)
-ax4.set_title('Estimated Customer Satisfaction (% On-Time)', fontweight='bold')
-ax4.set_ylabel('Percentage')
-ax4.set_ylim(0, 100)
-bars4[np.argmax(satisfaction)].set_edgecolor('green')
-bars4[np.argmax(satisfaction)].set_linewidth(3)
+        # Schedule it
+        next_order['start'] = current_time
+        next_order['completion'] = current_time + next_order['processing']
+        current_time = next_order['completion']
 
-# Add value labels
-for ax, values in [(ax1, wait_times), (ax2, late), (ax3, tard), (ax4, satisfaction)]:
-    for bar, val in zip(ax.patches, values):
-        height = bar.get_height()
-        format_str = f'{val:.0f}' if ax != ax1 else f'{val:.1f}'
-        if ax == ax4:
-            format_str = f'{val:.1f}%'
-        ax.text(bar.get_x() + bar.get_width()/2., height,
-                format_str, ha='center', va='bottom', fontweight='bold')
+        scheduled.append(next_order)
+        remaining.remove(next_order)
 
-plt.suptitle('Bean Counter NYC Flagship - CEO Global Rollout Dashboard', fontsize=16, fontweight='bold')
-plt.show()
+    return scheduled
+
+dynamic_spt_schedule = schedule_spt_dynamic(orders.copy())
+df_dynamic_spt = pd.DataFrame(dynamic_spt_schedule)
 ```
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Don't modify below - these test your solution
+assert df_dynamic_spt.iloc[0]['id'] == 'A', "First order should be A (only one available at time 0)"
+assert df_dynamic_spt['completion'].max() == 29, f"Dynamic SPT makespan should be 29, got {df_dynamic_spt['completion'].max()}"
+assert df_dynamic_spt['completion'].max() < df_spt['completion'].max(), \
+    f"Dynamic SPT ({df_dynamic_spt['completion'].max()}) should beat static SPT ({df_spt['completion'].max()})"
+print("✓ Excellent! Dynamic SPT implementation is correct!")
+print(f"\nDynamic SPT improves makespan: {df_spt['completion'].max()} → {df_dynamic_spt['completion'].max()} minutes")
+print("\nDynamic SPT Schedule:")
+print(df_dynamic_spt[['id', 'arrival', 'processing', 'start', 'completion']])
+```
+
+::: {.callout-note}
+**Dynamic is better when:**
+
+- Orders arrive over time (not all at once)
+- You want to avoid idle time waiting for future orders
+- Real-time responsiveness matters
+
+**Static is acceptable when:**
+
+- All orders are known upfront (batch processing)
+- Simplicity and predictability are valued
 :::
 
 # Conclusion
 
-**Great work, CEO!** You've mastered the fundamental scheduling algorithms that power operations worldwide. More importantly, you've tested them on **real flagship store data** and can now confidently make a strategic decision.
-
-## Your Global Impact
-
-By solving the scheduling problem at your NYC flagship store, you've created a system that will:
-
-::: {.callout-important}
-## Bean Counter Global Rollout Impact
-- **Thousand stores** worldwide will implement your chosen algorithm
-- **Millions of customers** annually will benefit from optimized service
-- **Operational costs** reduced through better resource utilization
-- **Customer satisfaction** improved through predictable service times
-- **Competitive advantage** through data-driven operations management
-:::
+**Great work, CEO!** You've mastered the fundamental scheduling algorithms that power operations worldwide. For Bean Counter's Friday rush the orders arrive continuously over 2 hours, so dynamic dispatching would provide real improvements.
 
 ## Key Takeaways
 
 1. **FIFO** - When fairness matters most
-2. **SPT** - To minimize average wait times
+2. **SPT** - To minimize average wait times (even better with dynamic dispatching!)
 3. **EDD** - To meet critical deadlines
-4. **Hybrid approaches** - Combine rules for complex scenarios
+4. **Static vs Dynamic** - Static is simpler; dynamic is more realistic and efficient
 5. **Visualization** - Gantt charts reveal bottlenecks
 6. **Metrics matter** - Choose based on your business goals
 
 ## What's Next?
 
-Your greedy algorithms work well, but can we do even better? In the next notebook, you'll tackle the **Bike Factory Competition** where you'll apply these scheduling techniques to a real two-stage manufacturing problem.
+You've now mastered both static and dynamic scheduling approaches! In the next notebook, you'll tackle the **Bike Factory Competition** where you'll apply these scheduling techniques to a real two-stage manufacturing problem.
 
 In the following lectures, you'll then learn advanced techniques like **local search** and **metaheuristics** that can improve even the best greedy solutions by intelligently exploring schedule variations.
 
