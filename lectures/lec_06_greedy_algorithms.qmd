@@ -69,6 +69,29 @@ format:
 Testing all 20.9 trillion possibilities for 16 bikes would take [thousands of years]{.highlight} on a modern computer!
 :::
 
+## Can You Spot the Pattern?
+
+[Look at these 4 bicycle orders. Which should we build first?]{.highlight}
+
+. . .
+
+| Order | Arrival | Processing | Due | Penalty |
+|-------|---------------|----------------|----------|-----------------|
+| B12   | 1st           | 90 min         | 180 min  | €150           |
+| B08   | 2nd           | 45 min         | 280 min  | €150           |
+| B15   | 3rd           | 75 min         | 220 min  | €150           |
+| B03   | 4th           | 30 min         | 300 min  | €150           |
+
+. . .
+
+[Question]{.question}: How would you proceed here?
+
+. . .
+
+:::{.callout-note}
+This is the **greedy choice problem**: Which local decision leads to the best global outcome?
+:::
+
 # [Core Concepts]{.flow} {.title}
 
 ## What Are Greedy Algorithms?
@@ -80,18 +103,106 @@ Testing all 20.9 trillion possibilities for 16 bikes would take [thousands of ye
 **The Idea:** "Take what looks best right now, don't look back"
 
 ::: incremental
-- **Fast:** O(n log n) vs O(n!) for exhaustive search
+- **Fast:** O(n log n)^[Why n log n? Greedy algorithms typically: (1) Sort the jobs by some criterion = O(n log n), and (2) Process each job once = O(n). The sorting dominates, so overall O(n log n).] vs O(n!) for exhaustive search
 - **Simple:** Easy to implement and explain
 - **Good Enough:** Often near-optimal for many problems
 - **But:** No guarantee of global optimality
 :::
 
+## When Greedy Works vs. Fails
+
+[Not all greedy algorithms are optimal]{.highlight}
+
 . . .
 
-:::{.callout-tip}
-Think of it like scheduling job interviews when multiple companies want to meet you: You pick the earliest ending interview each time to maximize total interviews. Once you commit to an interview slot, you can't go back and reschedule.
+**Greedy IS Optimal:**
+
+::: incremental
+- Prim's/Kruskal's algorithms (minimum spanning tree)
+- SPT scheduling (minimizes average flow time)
+- EDD scheduling (minimizes maximum lateness)
 :::
 
+. . .
+
+**Greedy FAILS:**
+
+::: incremental
+- Traveling salesman problem (nearest neighbor is worse)
+- 0/1 Knapsack (greedy by value/weight ratio fails)
+:::
+
+## The Two Key Properties
+
+[For greedy to be optimal, we need:]{.highlight}
+
+. . .
+
+**1. Greedy Choice Property**
+
+- Locally optimal choice leads to globally optimal solution
+- Can make choice without considering future consequences
+
+. . .
+
+**2. Optimal Substructure**
+
+- Optimal solution contains optimal solutions to subproblems
+- After making greedy choice, remaining problem is similar
+
+## Complexity: Why Greedy is Fast
+
+```{python}
+#| eval: true
+#| echo: false
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+import sys
+sys.path.append('../helpers')
+from plot_utils import BRAND_COLORS, setup_clean_style
+
+setup_clean_style()
+
+fig, ax = plt.subplots(1, 1)
+
+n = np.arange(1, 21)
+factorial = np.array([math.factorial(i) if i <= 12 else np.nan for i in n])
+nlogn = n * np.log2(n)
+linear = n
+
+ax.semilogy(n, factorial, 'o-', color=BRAND_COLORS["threeDark"], linewidth=2,
+            label='Exhaustive: O(n!) - Infeasible for n>12', markersize=6)
+ax.semilogy(n, nlogn, 's-', color=BRAND_COLORS["oneDark"], linewidth=2,
+            label='Greedy: O(n log n) - Fast even for large n', markersize=6)
+ax.semilogy(n, linear, '^-', color=BRAND_COLORS["twoDark"], linewidth=2,
+            label='Optimal: O(n) - Best case', markersize=6)
+
+ax.set_xlabel('Number of Jobs (n)', fontsize=12, fontweight='bold')
+ax.set_ylabel('Operations (log scale)', fontsize=12, fontweight='bold')
+ax.set_title('Algorithm Complexity Comparison', fontsize=14, fontweight='bold')
+ax.legend(fontsize=11, loc='upper left')
+ax.grid(True, alpha=0.3)
+ax.set_xlim(1, 20)
+ax.set_ylim(1, 1e10)
+
+# Add annotations
+ax.annotate('16 jobs:\n20 trillion ops!', xy=(16, 1e13), xytext=(13, 1e9),
+            fontsize=10, color=BRAND_COLORS["threeDark"], fontweight='bold',
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["threeDark"], lw=2))
+ax.annotate('16 jobs:\n~64 ops', xy=(16, 64), xytext=(17, 1e3),
+            fontsize=10, color=BRAND_COLORS["oneDark"], fontweight='bold',
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["oneDark"], lw=2))
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-important}
+For 16 bikes: Exhaustive = 20 trillion operations, Greedy = 64 operations!
+:::
 
 ## Three Classic Scheduling Rules
 
@@ -110,8 +221,6 @@ Think of it like scheduling job interviews when multiple companies want to meet 
 ## Rule 1: FIFO (First In, First Out)
 
 [Process jobs in the order they arrive, no prioritization.]{.highlight}
-
-. . .
 
 ::: incremental
 - **When it's good:** Ensures fairness and prevents "customer favoritism"
@@ -175,8 +284,6 @@ See the pattern? We just do patient A, then patient B, then patient C, then pati
 
 [The Idea: Process quickest job next to maximize throughput.]{.highlight}
 
-. . .
-
 ::: incremental
 - **When it's good:** Minimizes average waiting time for customers
 - **When it's optimal:** [Proven optimal]{.highlight} for minimizing mean completion time
@@ -235,8 +342,6 @@ However, not all customers might be willing to wait longer for their orders!
 ## Rule 3: EDD (Earliest Due Date)
 
 [The Idea: Jobs by deadline order to tackle urgent work first.]{.highlight}
-
-. . .
 
 ::: incremental
 - **When it's good:** Minimizes number of late jobs (tardiness)
@@ -300,9 +405,140 @@ plt.show()
 Note, that we only minimize maximal lateness here!
 :::
 
+## Quick Reference & Decision Guide
+
+[Choose your rule based on business priority]{.highlight}
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: false
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+sys.path.append('../helpers')
+from plot_utils import BRAND_COLORS, setup_clean_style
+
+setup_clean_style()
+
+fig, ax = plt.subplots()
+
+# Decision tree structure
+decisions = [
+    (6, 4, "What's your\nprimary goal?", 'wheat'),
+    (2, 2.5, "Fairness\n& Trust", BRAND_COLORS["twoLight"]),
+    (6, 2.5, "Efficiency\n& Speed", BRAND_COLORS["oneDark"]),
+    (10, 2.5, "Meet\nDeadlines", BRAND_COLORS["threeDark"]),
+    (2, 1, "→ FIFO", BRAND_COLORS["twoLight"]),
+    (6, 1, "→ SPT", BRAND_COLORS["oneDark"]),
+    (10, 1, "→ EDD", BRAND_COLORS["threeDark"]),
+]
+
+for x, y, text, color in decisions:
+    if "→" in text:
+        # Final recommendation boxes
+        rect = plt.Rectangle((x-0.6, y-0.3), 1.2, 0.6,
+                            facecolor=color, alpha=0.8, edgecolor='black', linewidth=3)
+        ax.add_patch(rect)
+        ax.text(x, y, text, ha='center', va='center',
+               fontweight='bold', fontsize=14, color='white')
+    else:
+        # Decision nodes
+        rect = plt.Rectangle((x-0.9, y-0.35), 1.8, 0.7,
+                            facecolor=color, alpha=0.6, edgecolor='black', linewidth=2)
+        ax.add_patch(rect)
+        ax.text(x, y, text, ha='center', va='center',
+               fontweight='bold', fontsize=11)
+
+# Draw arrows
+arrows = [(6, 3.6, 2, 2.8), (6, 3.6, 6, 2.8), (6, 3.6, 10, 2.8),
+          (2, 2.2, 2, 1.3), (6, 2.2, 6, 1.3), (10, 2.2, 10, 1.3)]
+for x1, y1, x2, y2 in arrows:
+    ax.annotate('', xy=(x2, y2), xytext=(x1, y1),
+                arrowprops=dict(arrowstyle='->', lw=2, color='black'))
+
+ax.set_xlim(0, 12)
+ax.set_ylim(0, 5)
+ax.set_title('Scheduling Decision Tree', fontsize=14, fontweight='bold')
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```
+
+## Implementing SPT in Python I
+
+[Let's code it together - it's remarkably simple!]{.highlight}
+
+Let's assume we want to make some pizzas under deadlines.
+
+```{python}
+#| eval: true
+#| echo: true
+# Pizza data
+pizzas = [
+    {'id': 'P1', 'time': 10, 'due': 20},
+    {'id': 'P2', 'time': 8, 'due': 15},
+    {'id': 'P3', 'time': 6, 'due': 25},
+    {'id': 'P4', 'time': 15, 'due': 20},
+    {'id': 'P5', 'time': 12, 'due': 30},
+]
+```
+
+. . .
+
+[Question:]{.question} How should we proceed for SPT?
+
+
+## Implementing SPT in Python II
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# SPT Rule: Sort by processing time
+spt_order = sorted(pizzas, key=lambda p: p['time'])
+
+print("SPT Schedule:")
+current_time = 0
+for pizza in spt_order:
+    current_time += pizza['time']
+    print(f"  {pizza['id']}: due {pizza['due']}, done {current_time}")
+```
+
+. . .
+
+:::{.callout-tip}
+Easy, right? Just **one line of Python!** `sorted()` with a key function. Greedy algorithms are often simple to implement.
+:::
+
+## Implementing EDD in Python
+
+[EDD is just as simple - change the sorting key!]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+
+# EDD Rule: Sort by due date
+edd_order = sorted(pizzas, key=lambda p: p['due'])
+
+print("EDD Schedule:")
+current_time = 0
+for pizza in edd_order:
+    current_time += pizza['time']
+    print(f"  {pizza['id']}: due {pizza['due']}, done {current_time}")
+
+```
+
+. . .
+
+[Question]{.question}: Can you modify this to implement FIFO?
+
 ## Comparing All Three
 
-[Now let's compare all three rules on the **same dataset**]{.highlight}
+[Now let's compare all three rules on the same dataset]{.highlight}
 
 . . .
 
@@ -426,42 +662,618 @@ plt.show()
 
 . . .
 
-[Question]{.question}: What if we have [multiple objectives]{.highlight} (e.g., minimize both lateness AND completion time)?
+[Question]{.question}: Any questions up until here?
+
+# [Applications]{.flow} {.title}
+
+## Professional Applications I
+
+[Where scheduling algorithms appear in practice]{.highlight}
+
+. . .
+
+**Project Management:**
+
+- Task dependencies and precedence constraints
+- Resource allocation across teams
+
+. . .
+
+**Software Development:**
+
+- CPU process scheduling (operating systems)
+- Thread management and concurrency
+
+## Professional Applications II
+
+**Operations & Manufacturing:**
+
+- Production line scheduling and supply chain optimization
+- Warehouse picking routes and maintenance scheduling
+
+. . .
+
+**Transportation & Logistics:**
+
+- Vehicle routing problems
+- Crew scheduling and maintenance window planning
+
+. . .
+
+**Healthcare:**
+
+- Patient appointment scheduling and staff shift scheduling
 
 # [Performance Metrics]{.flow} {.title}
 
-## How Do We Measure Success?
+## Metric Definitions
 
-[Different metrics matter for different businesses:]{.highlight}
+[If we formalize these:]{.highlight}
 
 ::: incremental
-- **Makespan:** Total time to complete all orders
-- **Average Flow Time:** Average time orders spend in the system
-- **Total/Average Tardiness:** How late are we?
-- **Maximum Tardiness:** Worst-case lateness
-- **Number of Late Orders:** Customer satisfaction metric
+- **Completion Time ($C_i$):** When job $i$ finishes
+- **Flow Time ($F_i$):** Time job spends in system = $C_i - \text{arrival}_i$
+- **Lateness ($L_i$):** $C_i - \text{due}_i$ (can be negative = early)
+- **Tardiness ($T_i$):** $\max(0, L_i)$ (only counts late jobs)
+:::
+
+## Aggregate Metric Definitions
+
+[If we look at several of these:]{.highlight}
+
+::: incremental
+- **Makespan ($C_{\max}$):** $\max(C_i)$ - when all jobs done
+- **Average Flow Time:** $\sum F_i / n$
+- **Total Tardiness:** $\sum T_i$
+- **Maximum Lateness:** $\max(L_i)$
 :::
 
 . . .
 
-:::{.callout-tip}
-Choose your metric based on your business goals. A hospital might optimize differently than a coffee shop!
-:::
+[Question:]{.question} In which context would you use each metric?
 
-## Beyond Simple Rules
+## Why Metrics Matter
 
-[A lot of businesses combine rules:]{.highlight}
+[Different objectives require different metrics]{.highlight}
+
+. . .
+
+**Business Context Matters:**
 
 ::: incremental
-- **Priority Classes:** Rush orders → EDD, Regular orders → SPT
-- **Time Windows:** Morning rush → SPT, Afternoon → FIFO
-- **Dynamic Switching:** Start EDD, switch to SPT when caught up
+- **Manufacturing:** Minimize total production time (makespan)
+- **Service:** Minimize average customer wait (flow time)
+- **Delivery:** Minimize late deliveries (tardiness)
+- **Contracts:** Minimize worst-case lateness (maximum lateness)
+- **Customer satisfaction:** Minimize number of late jobs
 :::
 
 . . .
 
-:::{.callout-tip}
-Many successful businesses use hybrid approaches!
+:::{.callout-important}
+You can't optimize what you don't measure! Choose metrics that align with business goals.
+:::
+
+## Which Metric When?
+
+[Matching metrics to business context]{.highlight}
+
+| Business Goal | Metric to Optimize | Best Rule |
+|---------------|-------------------|-----------|
+| Reduce customer wait time | Avg Flow Time | **SPT** |
+| Meet all deadlines | Max Lateness | **EDD** |
+| Minimize contract penalties | Total Tardiness | **EDD** |
+| Maximize throughput | Makespan | Any (same!) |
+| Customer satisfaction | Number Late | **EDD** |
+| Fairness/transparency | (none) | **FIFO** |
+
+# [Two-Stage Scheduling]{.flow} {.title}
+
+## The Real Challenge: Flow Shops
+
+[Most manufacturing involves multiple stages]{.highlight}
+
+. . .
+
+**Flow Shop:** Jobs must visit machines in the **same order**
+
+::: incremental
+- Car manufacturing: Welding → Painting → Assembly
+- Bicycle factory: Assembly → Painting
+- Electronics: Circuit board → Component placement → Testing
+- Restaurant: Cooking → Plating → Service
+:::
+
+. . .
+
+:::{.callout-important}
+**Key difference from single-machine:** Machine 2 must wait for Machine 1 to finish each job. This creates **idle time** and **blocking**.
+:::
+
+## Two-Stage Example Setup
+
+[3 Bicycles through Assembly → Painting]{.highlight}
+
+| Bike | Assembly Time | Painting Time | Total |
+|------|---------------|---------------|-------|
+| X    | 30 min        | 20 min        | 50    |
+| Y    | 20 min        | 30 min        | 50    |
+| Z    | 15 min        | 15 min        | 30    |
+
+. . .
+
+[Question]{.question}: If we process in order X → Y → Z, what happens?
+
+## FIFO: X → Y → Z
+
+```{python}
+#| eval: true
+#| echo: false
+fig, axes = plt.subplots(2, 1)
+
+# FIFO schedule: X, Y, Z
+bikes = ['X', 'Y', 'Z']
+assembly = [30, 20, 15]
+painting = [20, 30, 15]
+
+# Assembly station
+ax = axes[0]
+assembly_starts = [0, 30, 50]
+for i, (bike, start, duration) in enumerate(zip(bikes, assembly_starts, assembly)):
+    ax.barh(0, duration, left=start, height=0.6,
+            color=BRAND_COLORS["oneDark"], alpha=0.7, edgecolor='black', linewidth=1.5)
+    ax.text(start + duration/2, 0, f'{bike}\n{duration}m',
+            ha='center', va='center', fontweight='bold', color='white', fontsize=10)
+
+ax.set_ylim(-0.5, 0.5)
+ax.set_xlim(0, 110)
+ax.set_yticks([0])
+ax.set_yticklabels(['Assembly'])
+ax.set_title('Assembly Station', fontweight='bold', fontsize=11)
+ax.grid(axis='x', alpha=0.3)
+
+# Painting station (must wait for assembly to finish)
+ax = axes[1]
+painting_starts = [30, 50, 80]  # Can't start until assembly done
+for i, (bike, start, duration) in enumerate(zip(bikes, painting_starts, painting)):
+    ax.barh(0, duration, left=start, height=0.6,
+            color=BRAND_COLORS["twoDark"], alpha=0.7, edgecolor='black', linewidth=1.5)
+    ax.text(start + duration/2, 0, f'{bike}\n{duration}m',
+            ha='center', va='center', fontweight='bold', color='white', fontsize=10)
+
+    # Show idle time
+    if i == 0 and start > 0:
+        ax.barh(0, start, left=0, height=0.6,
+                color='gray', alpha=0.3, edgecolor='black', linewidth=1, linestyle='--')
+        ax.text(start/2, 0, 'IDLE', ha='center', va='center', fontsize=8, style='italic')
+
+# Show initial idle time
+ax.barh(0, 30, left=0, height=0.6,
+        color='red', alpha=0.3, edgecolor='black', linewidth=1, linestyle='--')
+
+ax.set_ylim(-0.5, 0.5)
+ax.set_xlim(0, 110)
+ax.set_yticks([0])
+ax.set_yticklabels(['Painting'])
+ax.set_xlabel('Time (minutes)', fontsize=11)
+ax.set_title('Painting Station', fontweight='bold', fontsize=11)
+ax.grid(axis='x', alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-warning
+Painting station waits 30 minutes for first bike! Total time = **95 minutes**
+:::
+
+## Why Simple Rules Struggle
+
+[Each rule has ambiguities in two-stage problems]{.highlight}
+
+. . .
+
+**SPT - Shortest Processing Time:**
+
+- Sort by assembly time? → Favors Z (15 min)
+- Sort by painting time? → Favors X (20 min)
+- Sort by total time? → All tied (50, 50, 30)
+
+. . .
+
+**EDD - Earliest Due Date:** Doesn't minimize idle time or makespan
+
+. . .
+
+**FIFO:** Arbitrary order, no optimization
+
+. . .
+
+[Question]{.question}: Is there a better approach for minimizing makespan?
+
+## Johnson's Algorithm: The Intuition
+
+[Why does Johnson's work? Let's understand the logic first]{.highlight}
+
+. . .
+
+**Think about bottlenecks in a two-stage flow:**
+
+::: incremental
+- **Machine 2** sits idle waiting for Machine 1 to finish
+- **Goal:** Minimize that idle time
+:::
+
+. . .
+
+**Key Observation:**
+
+::: incremental
+- If a job is **quick on Machine 1** → Do it **early** (Machine 1 finishes fast, Machine 2 starts sooner!)
+- If a job is **quick on Machine 2** → Do it **late** (Machine 2 can finish quickly at the end, no wasted capacity)
+:::
+
+## Johnson's Algorithm: The Rule
+
+[Four simple steps to optimal scheduling]{.highlight}
+
+. . .
+
+::: incremental
+1. **Find minimum time** across both machines for all remaining jobs
+2. **If minimum is on M1:** Schedule this job at **earliest** open position
+3. **If minimum is on M2:** Schedule this job at **latest** open position
+4. **Repeat** until all jobs scheduled
+:::
+
+. . .
+
+:::{.callout-note}
+Johnson proved this **greedy choice property** guarantees global optimum for makespan in 2-machine flow shops!
+:::
+
+. . .
+
+[Let's apply this to our 3 bikes...]{.highlight}
+
+## Applying Johnson's Algorithm
+
+| Bike | Assembly | Painting | Min Time |
+|------|----------|----------|----------|
+| X    | 30       | 20       | 20 (P)   |
+| Y    | 20       | 30       | 20 (A)   |
+| Z    | 15       | 15       | 15 (A/P) |
+
+::: incremental
+1. Min time = 15 (Z, assembly) → **Schedule Z first**
+2. Min time = 20 (Y, assembly) → **Schedule Y second**
+3. Min time = 20 (X, painting) → **Schedule X last**
+:::
+
+. . .
+
+::: callout-tip
+Easy, right?
+:::
+
+## Johnson's Schedule: Z → Y → X
+
+```{python}
+#| eval: true
+#| echo: false
+fig, axes = plt.subplots(2, 1)
+
+# Johnson's schedule: Z, Y, X
+bikes_j = ['Z', 'Y', 'X']
+assembly_j = [15, 20, 30]
+painting_j = [15, 30, 20]
+
+# Assembly station
+ax = axes[0]
+assembly_starts_j = [0, 15, 35]
+for i, (bike, start, duration) in enumerate(zip(bikes_j, assembly_starts_j, assembly_j)):
+    ax.barh(0, duration, left=start, height=0.6,
+            color=BRAND_COLORS["oneDark"], alpha=0.7, edgecolor='black', linewidth=1.5)
+    ax.text(start + duration/2, 0, f'{bike}\n{duration}m',
+            ha='center', va='center', fontweight='bold', color='white', fontsize=10)
+
+ax.set_ylim(-0.5, 0.5)
+ax.set_xlim(0, 110)
+ax.set_yticks([0])
+ax.set_yticklabels(['Assembly'])
+ax.set_title('Assembly Station', fontweight='bold', fontsize=11)
+ax.grid(axis='x', alpha=0.3)
+
+# Painting station
+ax = axes[1]
+painting_starts_j = [15, 30, 65]  # Optimized waiting
+for i, (bike, start, duration) in enumerate(zip(bikes_j, painting_starts_j, painting_j)):
+    ax.barh(0, duration, left=start, height=0.6,
+            color=BRAND_COLORS["twoDark"], alpha=0.7, edgecolor='black', linewidth=1.5)
+    ax.text(start + duration/2, 0, f'{bike}\n{duration}m',
+            ha='center', va='center', fontweight='bold', color='white', fontsize=10)
+
+# Show reduced idle time
+ax.barh(0, 15, left=0, height=0.6,
+        color='red', alpha=0.3, edgecolor='black', linewidth=1, linestyle='--')
+ax.text(7.5, 0, 'IDLE', ha='center', va='center', fontsize=8, style='italic')
+# Small gap between Y and X
+ax.barh(0, 5, left=60, height=0.6,
+        color='red', alpha=0.3, edgecolor='black', linewidth=1, linestyle='--')
+
+ax.set_ylim(-0.5, 0.5)
+ax.set_xlim(0, 110)
+ax.set_yticks([0])
+ax.set_yticklabels(['Painting'])
+ax.set_xlabel('Time (minutes)', fontsize=11)
+ax.set_title('Painting Station', fontweight='bold', fontsize=11)
+ax.grid(axis='x', alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-tip
+**10-minute improvement!** (85 vs 95) - 10.5% faster with optimal ordering
+:::
+
+## Beyond Two Machines
+
+[What about 3+ machines?]{.highlight}
+
+. . .
+
+**Bad news:**
+
+- 3+ machine flow shop is **NP-hard**
+- No polynomial optimal algorithm known
+
+. . .
+
+**Good news:**
+
+- Heuristics work well in practice
+- Simulated annealing, genetic algorithms
+
+# [Weighted Scheduling]{.flow} {.title}
+
+## Revenue-Based: Consulting Firm
+
+[5 consulting projects with different durations and revenues]{.highlight}
+
+| Project | Duration | Revenue | Revenue/Hour |
+|---------|----------|---------|--------------|
+| C       | 55h      | €11,000 | €200         |
+| A       | 25h      | €6,000  | €240         |
+| E       | 55h      | €4,950  | €90          |
+| D       | 45h      | €5,400  | €120         |
+| B       | 35h      | €7,000  | €200         |
+
+. . .
+
+**Goal: Maximize revenue during limited consulting time**
+
+. . .
+
+[Question:]{.question} **Sort by total revenue? Duration? Or something else?**
+
+## Revenue/Hour Rule
+
+[Rule: Sort by revenue per hour (descending)]{.highlight}
+
+. . .
+
+**Sorted by Revenue/Hour:**
+
+| Project | Duration | Revenue | Revenue/Hour | Schedule |
+|---------|----------|---------|--------------|----------|
+| A       | 25h      | €6,000  | **€240**     | 1st      |
+| B       | 35h      | €7,000  | **€200**     | 2nd      |
+| C       | 55h      | €11,000 | **€200**     | 3rd      |
+| D       | 45h      | €5,400  | €120         | 4th      |
+| E       | 55h      | €4,950  | €90          | 5th      |
+
+. . .
+
+**Optimal order: A → B → C → D → E**
+
+## Why Revenue/Hour Works
+
+[Maximizing early revenue in capacity-constrained situations]{.highlight}
+
+. . .
+
+**Scenario: 120 hours of consulting capacity this quarter**
+
+::: incremental
+- **Revenue/hour approach:** A+B+C = 115h → **€24,000 revenue**
+- **Wrong order (E+D+C):** E+D+C = 155h → Doesn't fit!
+- **Only E+D = 100h** → **€10,350 revenue**
+- **Worst case:** Start with low-revenue/hour projects, waste capacity
+:::
+
+. . .
+
+:::{.callout-important}
+This is [Smith's Rule]{.highlight} in action: Sort by (value / time) to maximize weighted completion!
+:::
+
+# [Advanced]{.flow} {.title}
+
+## Dynamic vs Static Scheduling
+
+[How scheduling changes with job arrivals]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Static (Offline):**
+
+- All jobs known upfront
+- Schedule computed once
+- Can often use optimal algorithms
+:::
+
+::: {.column width="50%"}
+**Dynamic (Online):**
+
+- Most real-world scenarios
+- Jobs arrive over time
+- Must make decisions without future knowledge
+
+:::
+:::
+
+. . .
+
+[Question:]{.question} Any ideas about complications in dynamic environments?
+
+. . .
+
+[Question:]{.question} Any other [real world]{.highlight} considerations?
+
+## Real-World Considerations
+
+- **Setup Times:**
+  - Changing requires tool adjustments or cleaning
+  - Sequence-dependent scheduling (TSP-like)
+
+. . .
+
+- **Resource Constraints:**
+  - Limited ressources, specialized tools, material shortages
+  - Worker skill levels and availability
+
+. . .
+
+- **Uncertainty:**
+  - Processing times, break downs, and other unforeseen events
+
+## Hybrid Scheduling Strategies
+
+**1. Priority Classes:**
+```
+IF order.type == "Rush":
+    schedule using EDD
+ELSE:
+    schedule using SPT
+```
+
+. . .
+
+**2. Time-Based Switching:**
+```
+IF current_time < 3pm:
+    use SPT (maximize throughput)
+ELSE:
+    use EDD (meet end-of-day deadlines)
+```
+
+. . .
+
+**3. Threshold Rules:**
+```
+IF (due_date - current_time) < 30 minutes:
+    prioritize this order (emergency mode)
+ELSE:
+    use normal SPT rule
+```
+
+## Common Scheduling Mistakes I
+
+[Learn from others' errors - avoid these pitfalls!]{.highlight}
+
+. . .
+
+[Question:]{.question} Any idea what could be common mistakes?
+
+. . .
+
+**Mistake #1: Ignoring Setup Times**
+
+::: incremental
+- **Problem:** Changing from between tasks requires adjustments
+- **Impact:** Your "optimal" SPT schedule wastes 3 hours on setups
+- **Fix:** Batch similar tasks together (hybrid rule: SPT within batches)
+:::
+
+## Common Scheduling Mistakes II
+
+[Learn from others' errors - avoid these pitfalls!]{.highlight}
+
+**Mistake #2: Static Scheduling with Dynamic Arrivals**
+
+::: incremental
+- **Problem:** Using Johnson's algorithm at 2 PM, never adjusting when urgent orders arrive at 4 PM
+- **Impact:** New rush order sits idle while finishing low-priority work
+- **Fix:** Re-optimize periodically or use priority thresholds
+:::
+
+## Common Scheduling Mistakes III
+
+[Learn from others' errors - avoid these pitfalls!]{.highlight}
+
+**Mistake #3: Optimizing the Wrong Metric**
+
+::: incremental
+- **Problem:** Minimizing makespan when penalty costs dominate
+- **Impact:** You "win" on time but lose €400 on penalties
+- **Fix:** Always align algorithm choice with **total cost function**
+:::
+
+# [Personal Schedules]{.flow} {.title}
+
+## Thrashing
+
+[When scheduling breaks down completely]{.highlight}
+
+. . .
+
+**What is Thrashing?**
+
+- Excessive **context switching** between tasks
+- Organization overhead exceeds actual productivity
+- **Maximum activity, minimum output**
+
+. . .
+
+[Question:]{.question} Do you know this from your personally?
+
+## Thrashing Warning Signs
+
+[How to recognize when you're thrashing]{.highlight}
+
+. . .
+
+**Individual Level:**
+
+::: incremental
+- Constant task switching (< 15 minutes per task)
+- Nothing getting completed despite being "busy"
+- Increasing stress and anxiety
+- Declining quality of work
+- Feeling overwhelmed despite working hard
+:::
+
+## Preventing Thrashing
+
+[Strategic approaches to maintain productivity]{.highlight}
+
+. . .
+
+**Strategic Solutions:**
+
+::: incremental
+1. **Task rejection threshold:** Say no to new tasks when queue exceeds capacity
+2. **Minimum work periods:** Minimum focus time per task
+3. **Batching:** Group similar tasks (all emails at once, all calls at once)
+4. **Buffer times:** Schedule gaps between major tasks
+5. **Reduced reactivity:** Check email at set times, not constantly
 :::
 
 # [Today's Tasks]{.flow} {.title}
@@ -508,6 +1320,8 @@ Many successful businesses use hybrid approaches!
 3. **Balance** overtime costs vs. late delivery penalties
 4. **Minimize** total cost (overtime + penalties)
 
+. . .
+
 :::{.callout-important}
 Choose the right trade-off for the business context!
 :::
@@ -542,7 +1356,7 @@ Choose the right trade-off for the business context!
 - Easy to implement
 - Explainable decisions
 - Often near-optimal
-- Practical for real-time scheduling
+- Practical for real-time
 :::
 
 ::: {.column width="50%"}
@@ -550,7 +1364,7 @@ Choose the right trade-off for the business context!
 
 - No global optimality guarantee
 - Different rules, different results
-- Two-stage problems are complex
+- Three-stage problems are complex
 - May need hybrid approaches
 :::
 :::
@@ -559,6 +1373,6 @@ Choose the right trade-off for the business context!
 
 [Take 20 minutes, then we start the practice notebook]{.highlight}
 
-**Next up:** You'll become Bean Counter's scheduler!
+**Next up:** You'll become Bean Counter's scheduler
 
-**Then:** The Bike Factory Crisis competition!
+**Then:** The Bike Factory Crisis competition
