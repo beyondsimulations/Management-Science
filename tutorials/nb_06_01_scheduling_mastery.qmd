@@ -1,6 +1,6 @@
 ---
 title: "Notebook 6.1 - Scheduling Mastery"
-subtitle: "Management Science - CEO's Strategic Scheduling at Bean Counter"
+subtitle: "Management Science - From Corporate Events to Rush Hours"
 code-links:
   - text: Python
     href: nb_06_01_scheduling_mastery.py
@@ -9,20 +9,17 @@ code-links:
 
 # Introduction
 
-Welcome to your role as **Bean Counter's CEO**! You've built a global coffee empire, but you've noticed a critical problem: **scheduling chaos** in your stores is costing you customers and revenue.
+Welcome to your role as **Bean Counter's Operations Manager**! You've been tasked with solving two critical scheduling challenges that will determine the efficiency of your coffee empire:
 
-**Your Strategic Vision:** You've decided to solve this problem scientifically, starting with your **flagship store in New York City**. If you can perfect the scheduling system here, you'll roll it out to all Bean Counter locations worldwide.
+**Challenge 1: The Corporate Event (Sections 1-4)**
 
-**The Friday Morning Crisis at the Flagship:** It's 6 AM on your busiest day. The flagship store has:
+A major tech company just ordered **20 specialty coffee drinks** for their board meeting. All orders are known upfront with specific deadlines. This is a **batch scheduling problem**, you have complete information and need to sequence the orders optimally before starting work.
 
-- **47 coffee orders** already queued (and more arriving every minute)
-- **3 espresso machines** available but underutilized
-- **Customers** ranging from rushed Wall Street traders to patient students
-- **Your global reputation** on the line - if you fail here, the whole expansion is at risk
+**Challenge 2: The Friday Morning Rush (Sections 5-6)**
 
-Every scheduling decision impacts wait times, customer satisfaction, and your bottom line. Today, you'll master the art of scheduling by implementing and comparing three fundamental approaches that successful businesses worldwide use.
+Every Friday, your flagship store faces a continuous stream of orders arriving throughout the morning. You can't see future orders and thus you must make real-time decisions. This is an **online scheduling problem** where orders reveal themselves over time.
 
-**Your Mission:** Build scheduling algorithms from scratch, test them on real flagship store data, visualize their performance, and make the critical CEO decision about which approach Bean Counter should adopt globally.
+These two scenarios represent fundamentally different scheduling paradigms you'll master today!
 
 ::: {.callout-note}
 ## How to Use This Tutorial
@@ -43,79 +40,105 @@ np.random.seed(2025)
 print("Libraries loaded! Ready to optimize Bean Counter's operations.")
 ```
 
-# Section 1 - Understanding the Scheduling Problem
+# Section 1 - The Corporate Event Problem
 
-Before diving into algorithms, let's understand what we're optimizing. As CEO, you need to track multiple metrics for each scheduling decision.
+## The Scenario
 
-## The Order Data Structure
+TechCorp's board meeting starts in 90 minutes. They've pre-ordered 20 specialty drinks with specific requirements. You have:
 
-Each coffee order at Bean Counter contains:
+- **Complete information**: All 20 orders known upfront
+- **One machine**: Must sequence orders optimally
+- **Varying complexity**: From simple espressos (3 min) to complex mochas (12 min)
+- **Deadlines**: Some executives need drinks early (rushed board members), others can wait (relaxed attendees)
 
-- **Order ID**: Unique identifier
-- **Arrival Time**: When the order was placed
+This is **static scheduling** - you can plan the entire sequence before starting.
+
+## The Data Structure
+
+Each order contains:
+
+- **Order ID**: Customer identifier
 - **Processing Time**: How long it takes to make
-- **Due Time**: When the customer needs it (optional)
+- **Due Time**: When the customer needs it (measured from start of your shift)
+
+**Note**: No arrival times! All orders are available at time 0.
 
 ```{python}
 #| eval: true
-# Example: Your first 5 orders of the morning
-orders = [
-    {'id': 'A', 'arrival': 0, 'processing': 10, 'due': 25},
-    {'id': 'B', 'arrival': 2, 'processing': 5, 'due': 20},
-    {'id': 'C', 'arrival': 4, 'processing': 3, 'due': 15},
-    {'id': 'D', 'arrival': 6, 'processing': 7, 'due': 30},
-    {'id': 'E', 'arrival': 8, 'processing': 4, 'due': 18}
-]
+# TechCorp Corporate Event - 20 pre-orders
+# All available at start (time 0)
+np.random.seed(2025)
 
-# Convert to DataFrame for easier analysis
-df_orders = pd.DataFrame(orders)
-print("First 5 orders of your Friday morning:")
-print(df_orders)
-print(f"\nTotal processing time needed: {df_orders['processing'].sum()} minutes")
-print(f"Tightest deadline: Order {df_orders.loc[df_orders['due'].idxmin(), 'id']} due at minute {df_orders['due'].min()}")
+corporate_orders = []
+for i in range(20):
+    processing = np.random.choice([3, 5, 7, 10, 12], p=[0.25, 0.30, 0.25, 0.15, 0.05])
+
+    # 30% tight (15-30 min), 40% medium (30-60 min), 30% relaxed (60-90 min)
+    deadline_type = np.random.choice(['tight', 'medium', 'relaxed'], p=[0.3, 0.4, 0.3])
+    if deadline_type == 'tight':
+        due = np.random.randint(15, 30)
+    elif deadline_type == 'medium':
+        due = np.random.randint(30, 60)
+    else:
+        due = np.random.randint(60, 90)
+
+    corporate_orders.append({
+        'id': f'C{i+1:02d}',
+        'processing': processing,
+        'due': due
+    })
+
+df_corporate = pd.DataFrame(corporate_orders)
+
+print("TechCorp Corporate Event Orders:")
+print(f"Total orders: {len(corporate_orders)}")
+print(f"Total processing time needed: {df_corporate['processing'].sum()} minutes")
+print(f"Event window: 90 minutes")
+print(f"Tightest deadline: {df_corporate['due'].min()} minutes")
+print(f"Latest deadline: {df_corporate['due'].max()} minutes")
+print(f"\nFirst 10 orders:")
+print(df_corporate.head(10)[['id', 'processing', 'due']])
 ```
 
 ## Key Performance Metrics
 
-As CEO, you track these metrics:
-
 ```{python}
 #| eval: true
 def calculate_metrics(schedule_df):
-    """Calculate key performance metrics for a schedule"""
+    """
+    Calculate key performance metrics for a schedule
+
+    - Makespan: Total time to complete all orders
+    - Avg Flow Time: Average time from start until completion
+    - Total Tardiness: Sum of delays beyond due times
+    - Late Orders: Count of orders completed after deadline
+    """
     metrics = {
         'makespan': schedule_df['completion'].max(),
-        'avg_flow_time': (schedule_df['completion'] - schedule_df['arrival']).mean(),
+        'avg_flow_time': schedule_df['completion'].mean(),
         'total_tardiness': np.maximum(0, schedule_df['completion'] - schedule_df['due']).sum(),
         'late_orders': (schedule_df['completion'] > schedule_df['due']).sum()
     }
     return metrics
 
-# We'll use this function to compare our scheduling approaches
-print("Metrics function ready. You'll use this to evaluate each scheduling rule.")
+print("Metrics function ready for comparing scheduling rules!")
 ```
 
 ## Exercise 1.1 - Calculate Order Slack
 
-**Slack** tells us how much flexibility we have before an order becomes late. Calculate the slack for each order assuming we start processing immediately.
+**Slack** tells you how much scheduling flexibility exists for each order. It's the time buffer before an order becomes late.
 
-**Formula:** Slack = Due Time - (Current Time + Processing Time)
+**Formula:** Slack = Due Time - Processing Time
 
-::: {.callout-tip}
-- You can do math on entire DataFrame columns at once!
-- `df_orders['due']` gets all due times as a column
-- `df_orders['due'] - df_orders['processing']` subtracts processing from due for ALL rows
-- To find the minimum slack row, use: `df_orders['slack'].idxmin()` (finds the index of minimum)
-- To get the order ID at that index: `df_orders.loc[index, 'id']`
-:::
+Why? If an order takes 5 minutes and is due at 20 minutes, you have 15 minutes of slack (can start anytime from 0 to 15).
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Calculate slack for each order assuming current time = 0
-# Add a 'slack' column to df_orders
+# Calculate slack for each order
+# Add a 'slack' column to df_corporate
 
-df_orders['slack'] = # Calculate slack here
+df_corporate['slack'] = # Calculate: due - processing
 
 # Find the most urgent order (minimum slack)
 most_urgent = # Find the order ID with minimum slack
@@ -125,183 +148,135 @@ most_urgent = # Find the order ID with minimum slack
 ```{python}
 #| eval: true
 # SOLUTION
-df_orders['slack'] = df_orders['due'] - (0 + df_orders['processing'])
-most_urgent = df_orders.loc[df_orders['slack'].idxmin(), 'id']
+df_corporate['slack'] = df_corporate['due'] - df_corporate['processing']
+most_urgent = df_corporate.loc[df_corporate['slack'].idxmin(), 'id']
 ```
 :::
 
 ```{python}
 #| eval: false
 #| code-fold: true
-# Don't modify below - these test your solution
-assert 'slack' in df_orders.columns, "Add a 'slack' column to df_orders"
-assert df_orders['slack'].iloc[0] == 15, f"Order A slack should be 15, got {df_orders['slack'].iloc[0]}"
-assert df_orders['slack'].iloc[2] == 8, f"Order C slack should be 8, got {df_orders['slack'].iloc[2]}"
-assert most_urgent == 'C', f"Most urgent order should be C, got {most_urgent}"
-print(f"✓ Perfect! Order {most_urgent} is most urgent with slack of {df_orders['slack'].min()} minutes")
-print("\nOrder urgency ranking:")
-print(df_orders[['id', 'processing', 'due', 'slack']].sort_values('slack'))
+# Tests
+assert 'slack' in df_corporate.columns, "Add a 'slack' column to df_corporate"
+assert len(df_corporate['slack']) == 20, "Should calculate slack for all 20 orders"
+assert (df_corporate['slack'] == df_corporate['due'] - df_corporate['processing']).all(), \
+    "Slack formula: due - processing"
+print(f"Perfect! Most urgent order: {most_urgent} with {df_corporate['slack'].min()} minutes slack")
+print("\nTop 5 most urgent orders:")
+print(df_corporate.nsmallest(5, 'slack')[['id', 'processing', 'due', 'slack']])
 ```
 
-# Section 2 - Implementing Scheduling Rules
+# Section 2 - Implementing Static Scheduling Rules
 
-Now let's implement the three fundamental scheduling rules. You'll code each from scratch to understand how they work.
+Now implement three fundamental scheduling rules. For static scheduling, we:
+
+1. Sort all orders by the rule's criterion
+2. Process them sequentially from time 0
+3. Each order starts immediately after the previous one finishes
 
 ## Rule 1: FIFO (First In, First Out)
 
-The simplest approach - process orders in arrival sequence.
+Process orders in their original sequence (order ID order).
 
 ::: {.callout-tip}
-- **`sorted()` function**: Sorts a list based on a criterion
-- **`lambda` functions**: A shorthand way to write small functions
-  - `lambda x: x['arrival']` means "for each order x, look at its arrival time"
-  - This is the same as writing: `def get_arrival(x): return x['arrival']`
-- `order['key']` gets the value for 'key' from the order dictionary
+- `sorted()` function sorts a list based on a criterion
+- `lambda x: x['id']` is a mini-function that is used in `sorted()` saying "sort by the 'id' field"
 :::
 
 ```{python}
 #| eval: true
-def schedule_fifo(orders):
+def schedule_fifo_static(orders):
     """
     Schedule orders using First In, First Out (FIFO)
-    Process orders in the order they arrived
+    Process in original order
     """
-    # FIFO is straightforward: sort by arrival and process in that order
-    scheduled = sorted(orders, key=lambda x: x['arrival'])
+    # Sort by ID to maintain original order
+    scheduled = sorted(orders, key=lambda x: x['id'])
 
     # Calculate completion times
-    current_time = 0  # Track when the machine becomes free
+    current_time = 0
     for order in scheduled:
-        # Start time is max of current time and arrival time
-        # Why? The machine might be busy (current_time) OR the order hasn't arrived yet (arrival)
-        # We start whichever comes LATER
-        start_time = max(current_time, order['arrival'])
-
-        # Add the start time to this order's information
-        order['start'] = start_time
-
-        # Completion time = when we start + how long it takes
-        order['completion'] = start_time + order['processing']
-
-        # Update current_time: machine is now busy until this order completes
+        # In static scheduling, all orders are available at time 0
+        # So we just start immediately after the previous order
+        order['start'] = current_time
+        order['completion'] = current_time + order['processing']
         current_time = order['completion']
 
     return scheduled
 
-# Test FIFO on our orders
+# Test FIFO
 # Why .copy()? We don't want to modify the original 'orders' list
 # Each scheduling function will modify the orders, so we give it a copy
-fifo_schedule = schedule_fifo(orders.copy())
-
-# Convert the list of orders to a DataFrame for easier viewing
+fifo_schedule = schedule_fifo_static(corporate_orders.copy())
 df_fifo = pd.DataFrame(fifo_schedule)
-print("FIFO Schedule:")
-print(df_fifo[['id', 'arrival', 'start', 'completion', 'due']])
+
+print("FIFO Schedule (first 10 orders):")
+print(df_fifo.head(10)[['id', 'processing', 'start', 'completion', 'due']])
+print(f"\nTotal makespan: {df_fifo['completion'].max()} minutes")
 ```
 
-## Exercise 2.1 - Implement SPT (Shortest Processing Time)
+## Rule 2: SPT (Shortest Processing Time)
 
-Now implement SPT to always process the shortest job next. To make it easier for now, we'll use **static list scheduling**: sort all orders upfront, then process them in that order. We thus ignore the arrivals for now.
-
-::: {.callout-tip}
-The structure is IDENTICAL to FIFO! You only need to change one thing!
-Everything else (the for loop, the calculations) stays exactly the same!
-:::
+Now we implement SPT to always process the shortest job next and to process the quickest orders first to minimize average wait times.
 
 ```{python}
-#| eval: false
-# YOUR CODE BELOW
-def schedule_spt(orders):
+#| eval: true
+def schedule_spt_static(orders):
     """
     Schedule orders using Shortest Processing Time (SPT)
-    Always process the quickest order next
+    Process shortest jobs first
     """
     # Sort by processing time (shortest first)
-    scheduled = # Sort orders by processing time
+    scheduled = sorted(orders, key=lambda x: x['processing'])
 
     # Calculate completion times
     current_time = 0
     for order in scheduled:
-        start_time = # Calculate start time
-        order['start'] = start_time
-        order['completion'] = # Calculate completion time
-        current_time = # Update current time
-
-    return scheduled
-
-# Test your SPT implementation
-spt_schedule = schedule_spt(orders.copy())
-df_spt = pd.DataFrame(spt_schedule)
-```
-
-:::{.content-visible when-profile="solutions"}
-```{python}
-#| eval: true
-# SOLUTION
-def schedule_spt(orders):
-    """Schedule orders using Shortest Processing Time (SPT)"""
-    scheduled = sorted(orders, key=lambda x: x['processing'])
-
-    current_time = 0
-    for order in scheduled:
-        start_time = max(current_time, order['arrival'])
-        order['start'] = start_time
-        order['completion'] = start_time + order['processing']
+        order['start'] = current_time
+        order['completion'] = current_time + order['processing']
         current_time = order['completion']
 
     return scheduled
 
-spt_schedule = schedule_spt(orders.copy())
+# Test SPT
+spt_schedule = schedule_spt_static(corporate_orders.copy())
 df_spt = pd.DataFrame(spt_schedule)
-```
-:::
 
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below - these test your solution
-assert df_spt.iloc[0]['id'] == 'C', "First order in SPT should be C (3 min processing)"
-assert df_spt.iloc[1]['id'] == 'E', "Second order in SPT should be E (4 min processing)"
-assert df_spt['completion'].max() == 34, f"Makespan should be 34, got {df_spt['completion'].max()}"
-print("Excellent! SPT implementation is correct!")
-print("\nSPT Schedule (static - sorted by processing time):")
-print(df_spt[['id', 'processing', 'start', 'completion']])
+print("SPT Schedule (first 10 orders - sorted by processing time):")
+print(df_spt.head(10)[['id', 'processing', 'start', 'completion', 'due']])
+print(f"\nTotal makespan: {df_spt['completion'].max()} minutes")
 ```
 
-## Exercise 2.2 - Implement EDD (Earliest Due Date)
+## Exercise 2.1 - Implement EDD (Earliest Due Date)
 
-Finally, implement EDD to process orders by their due date.
+Implement EDD to minimize tardiness by processing urgent orders first.
 
 ::: {.callout-tip}
-Same pattern again, except for one difference.
+**Structure is identical to SPT!** Just change what you sort by.
 :::
 
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-def schedule_edd(orders):
+def schedule_edd_static(orders):
     """
     Schedule orders using Earliest Due Date (EDD)
     Process orders with earliest deadlines first
     """
-    # Sort by due date
-    # HINT: Same as SPT, but sort by 'due' instead of 'processing'
-    scheduled = # Sort orders by due date
+    # Sort by due date (earliest first)
+    scheduled = # YOUR CODE
 
-    # Calculate completion times (SAME AS FIFO AND SPT)
+    # Calculate completion times
     current_time = 0
     for order in scheduled:
-        # YOUR CODE: Calculate start and completion times
-        # HINT: Copy the 4 lines from FIFO or SPT - they're identical!
-        start_time = # max(current_time, order['arrival'])
-        order['start'] = # start_time
-        order['completion'] = # start_time + order['processing']
-        current_time = # order['completion']
+        order['start'] = # YOUR CODE
+        order['completion'] = # YOUR CODE
+        current_time = # YOUR CODE
 
     return scheduled
 
 # Test your EDD implementation
-edd_schedule = schedule_edd(orders.copy())
+edd_schedule = schedule_edd_static(corporate_orders.copy())
 df_edd = pd.DataFrame(edd_schedule)
 ```
 
@@ -309,20 +284,19 @@ df_edd = pd.DataFrame(edd_schedule)
 ```{python}
 #| eval: true
 # SOLUTION
-def schedule_edd(orders):
+def schedule_edd_static(orders):
     """Schedule orders using Earliest Due Date (EDD)"""
     scheduled = sorted(orders, key=lambda x: x['due'])
 
     current_time = 0
     for order in scheduled:
-        start_time = max(current_time, order['arrival'])
-        order['start'] = start_time
-        order['completion'] = start_time + order['processing']
+        order['start'] = current_time
+        order['completion'] = current_time + order['processing']
         current_time = order['completion']
 
     return scheduled
 
-edd_schedule = schedule_edd(orders.copy())
+edd_schedule = schedule_edd_static(corporate_orders.copy())
 df_edd = pd.DataFrame(edd_schedule)
 ```
 :::
@@ -330,17 +304,17 @@ df_edd = pd.DataFrame(edd_schedule)
 ```{python}
 #| eval: false
 #| code-fold: true
-# Don't modify below - these test your solution
-assert df_edd.iloc[0]['id'] == 'C', "First order in EDD should be C (due at 15)"
-assert df_edd.iloc[1]['id'] == 'E', "Second order in EDD should be E (due at 18)"
+# Tests
+assert df_edd.iloc[0]['due'] <= df_edd.iloc[1]['due'], "First order should have earliest due date"
+assert df_edd['completion'].max() == df_fifo['completion'].max(), "All schedules have same makespan"
 total_tardiness = np.maximum(0, df_edd['completion'] - df_edd['due']).sum()
-assert total_tardiness == 0, f"EDD should have 0 total tardiness, got {total_tardiness}"
-print("Perfect! EDD minimizes tardiness as expected!")
-print("\nEDD Schedule with zero tardiness:")
-print(df_edd[['id', 'due', 'start', 'completion']])
+print(f"EDD implementation correct!")
+print(f"\nEDD Schedule (first 10 orders - sorted by due date):")
+print(df_edd.head(10)[['id', 'due', 'processing', 'start', 'completion']])
+print(f"Total tardiness: {total_tardiness:.0f} minutes")
 ```
 
-# Section 3 - Visualizing Schedules with Gantt Charts
+# Section 3 - Visualizing Schedules
 
 A picture is worth a thousand schedules! Let's create Gantt charts to visualize how each rule performs. Try to use generate AI to come up with the code to create a beautiful Gantt chart here based on the results of your schedule.
 
@@ -352,16 +326,13 @@ A picture is worth a thousand schedules! Let's create Gantt charts to visualize 
 
 # Section 4 - Performance Comparison
 
-Now let's compare how each rule performs on key metrics. Remember, we're using static scheduling for simplicity. We'll explore more realistic dynamic dispatching in Section 6 of this notebook.
+## Exercise 4.1 - Compare Scheduling Rules
 
-## Exercise 4.1 - Calculate and Compare Metrics
-
-Calculate performance metrics for all three scheduling rules.
+Calculate metrics for all three rules to see which performs best.
 
 ::: {.callout-tip}
 ## Coding Hints
 - The `calculate_metrics()` function is already defined - you just call it!
-- Call it like this: `calculate_metrics(df_fifo)`
 - It returns a dictionary with metrics like `{'makespan': 29, 'avg_flow_time': 15.2, ...}`
 - To create a DataFrame from dictionaries, use: `pd.DataFrame([DICTIONARY])`
 :::
@@ -369,16 +340,11 @@ Calculate performance metrics for all three scheduling rules.
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
-# Calculate metrics for each schedule using the calculate_metrics function
+# Calculate metrics for each schedule
 
-# Calculate metrics for FIFO
-metrics_fifo = # Calculate FIFO metrics
-
-# Calculate metrics for SPT
-metrics_spt = # Calculate SPT metrics
-
-# Calculate metrics for EDD
-metrics_edd = # Calculate EDD metrics
+metrics_fifo = # YOUR CODE
+metrics_spt = # YOUR CODE
+metrics_edd = # YOUR CODE
 
 # Create comparison DataFrame
 comparison = pd.DataFrame({
@@ -387,7 +353,7 @@ comparison = pd.DataFrame({
     'EDD': metrics_edd
 }).T
 
-print("Performance Comparison:")
+print("Performance Comparison - Corporate Event:")
 print(comparison.round(2))
 ```
 
@@ -405,7 +371,7 @@ comparison = pd.DataFrame({
     'EDD': metrics_edd
 }).T
 
-print("Performance Comparison:")
+print("Performance Comparison - Corporate Event:")
 print(comparison.round(2))
 ```
 :::
@@ -413,17 +379,19 @@ print(comparison.round(2))
 ```{python}
 #| eval: false
 #| code-fold: true
-# Don't modify below - these test your solution
-assert comparison.loc['SPT', 'avg_flow_time'] < comparison.loc['FIFO', 'avg_flow_time'], \
-    "SPT should have lower average flow time than FIFO"
-assert comparison.loc['EDD', 'total_tardiness'] == 0, \
-    "EDD should have zero tardiness"
-assert comparison.loc['SPT', 'avg_flow_time'] == comparison['avg_flow_time'].min(), \
-    "SPT should minimize average flow time"
-print("Excellent analysis! Key insights:")
-print(f" - SPT reduces avg flow time by {(1 - comparison.loc['SPT', 'avg_flow_time']/comparison.loc['FIFO', 'avg_flow_time'])*100:.1f}% vs FIFO")
-print(f" - EDD eliminates all tardiness ({comparison.loc['EDD', 'late_orders']:.0f} late orders)")
-print(f" - All methods have same makespan: {comparison['makespan'].iloc[0]:.0f} minutes")
+# Tests
+assert comparison.loc['SPT', 'avg_flow_time'] <= comparison.loc['FIFO', 'avg_flow_time'], \
+    "SPT should have best average flow time"
+assert comparison.loc['EDD', 'total_tardiness'] <= comparison.loc['FIFO', 'total_tardiness'], \
+    "EDD should minimize tardiness"
+assert comparison.loc['EDD', 'total_tardiness'] <= comparison.loc['SPT', 'total_tardiness'], \
+    "EDD should beat SPT on tardiness"
+print("✓ Excellent analysis!")
+print(f"\nKey Insights:")
+print(f" SPT reduces avg flow time by {(1 - comparison.loc['SPT', 'avg_flow_time']/comparison.loc['FIFO', 'avg_flow_time'])*100:.1f}% vs FIFO")
+print(f" EDD reduces tardiness by {comparison.loc['FIFO', 'total_tardiness'] - comparison.loc['EDD', 'total_tardiness']:.0f} minutes vs FIFO")
+print(f" EDD reduces late orders from {comparison.loc['FIFO', 'late_orders']:.0f} to {comparison.loc['EDD', 'late_orders']:.0f}")
+print(f" All methods have same makespan: {comparison['makespan'].iloc[0]:.0f} minutes (sum of all processing times)")
 ```
 
 ## Visualizing the Trade-offs
@@ -454,201 +422,131 @@ for ax, metric in zip(axes.flat, metrics_to_plot):
         ax.text(bar.get_x() + bar.get_width()/2., height,
                 f'{val:.1f}', ha='center', va='bottom')
 
-plt.suptitle('Scheduling Rules Performance Comparison', fontsize=14, fontweight='bold')
+plt.suptitle('Corporate Event: Static Scheduling Performance', fontsize=14, fontweight='bold')
 plt.tight_layout()
 plt.show()
 ```
 
-# Section 5 - Real Flagship Store Friday Data
+**Why these results?**
 
-Now let's test on realistic Friday morning data from your **NYC flagship store** with 47 orders! This is the real test. If your algorithms work here, you can confidently deploy them across all global locations.
+- **SPT minimizes avg flow time**: Short jobs finish quickly, reducing overall wait
+- **EDD minimizes tardiness**: Processing by deadline directly optimizes late penalties
+- **FIFO is neutral**: No optimization, just processes in arbitrary order
+- **Same makespan**: All schedules do the same work, just in different orders
 
-::: {.callout-note}
-## Understanding the Data Generation Code
-Don't worry if you don't understand all the code below, it is just generating realistic data for you! Here's what it does:
+# Section 5 - The Friday Morning Rush Problem
 
-- **`np.random.seed(2025)`**: Ensures everyone gets the same "random" data (reproducibility)
-- **`np.random.exponential(2.5)`**: Models realistic arrival patterns (some orders cluster, some spread out)
-- **`np.random.choice()`**: Randomly picks processing times and order types based on realistic probabilities
-- **Order types**: 20% rush (Wall Street traders), 60% normal, 20% relaxed (students)
+## Why Static Scheduling Isn't Enough
 
-This mimics your **real flagship store data** from last Friday!
-:::
+The corporate event was a **batch problem**, all orders known upfront. But most real operations face **online problems** where:
+
+- Orders arrive over time
+- You can't see future orders
+- You must make decisions with partial information
+
+**Friday morning at Bean Counter** is this type of problem!
+
+## The Friday Scenario
+
+It's 6 AM Friday. Your flagship store faces:
+
+- **Orders arriving continuously** over 2 hours
+- **No future visibility** - can't see orders that haven't been placed yet
+- **Real-time decisions** - when the machine is free, which available order should you process?
+
+This requires **dynamic dispatching**: making decisions based only on orders that have already arrived.
 
 ```{python}
 #| eval: true
-# DON'T MODIFY THIS DATA - These are your orders!
-# Generate realistic Friday morning orders from NYC flagship store
-np.random.seed(2025)  # Same data for everyone
-n_orders = 47
+# Generate realistic Friday morning rush orders
+np.random.seed(2025)
+n_orders = 30
 
-# Create orders arriving over first 2 hours (120 minutes)
 friday_orders = []
+current_arrival = 0
+
 for i in range(n_orders):
-    order = {
-        'id': f'F{i+1:02d}',  # F01, F02, F03, etc.
-        # Orders arrive randomly (exponential distribution models real arrival patterns)
-        'arrival': np.random.exponential(2.5) if i == 0 else friday_orders[-1]['arrival'] + np.random.exponential(2.5),
-        # Processing times: 30% quick (3min), 30% medium (5min), 20% long (7min), etc.
-        'processing': np.random.choice([3, 5, 7, 10, 12], p=[0.3, 0.3, 0.2, 0.15, 0.05]),
-        'due': 0  # Will set based on order type below
-    }
+    # Orders arrive with gaps (exponential inter-arrival times)
+    if i > 0:
+        current_arrival += np.random.exponential(3.5)
 
-    # 20% rush orders (tight deadline), 60% normal, 20% relaxed
-    order_type = np.random.choice(['rush', 'normal', 'relaxed'], p=[0.2, 0.6, 0.2])
-    if order_type == 'rush':
-        # Rush: due soon after processing (5-15 min buffer)
-        order['due'] = order['arrival'] + order['processing'] + np.random.randint(5, 15)
-    elif order_type == 'normal':
-        # Normal: reasonable buffer (15-30 min)
-        order['due'] = order['arrival'] + order['processing'] + np.random.randint(15, 30)
+    processing = np.random.choice([3, 5, 7, 10], p=[0.35, 0.35, 0.20, 0.10])
+
+    # Due times are relative to arrival (customers want drinks soon after ordering)
+    order_urgency = np.random.choice(['rush', 'normal', 'relaxed'], p=[0.25, 0.50, 0.25])
+    if order_urgency == 'rush':
+        due = current_arrival + processing + np.random.randint(5, 15)
+    elif order_urgency == 'normal':
+        due = current_arrival + processing + np.random.randint(15, 30)
     else:
-        # Relaxed: plenty of time (30-60 min buffer)
-        order['due'] = order['arrival'] + order['processing'] + np.random.randint(30, 60)
+        due = current_arrival + processing + np.random.randint(30, 50)
 
-    friday_orders.append(order)
+    friday_orders.append({
+        'id': f'F{i+1:02d}',
+        'arrival': round(current_arrival, 1),
+        'processing': processing,
+        'due': round(due, 1)
+    })
 
 df_friday = pd.DataFrame(friday_orders)
-print(f"NYC Flagship - Friday Morning Rush: {len(friday_orders)} orders")
+
+print("Friday Morning Rush - Flagship Store")
+print(f"Total orders: {len(friday_orders)}")
 print(f"Arrival span: {df_friday['arrival'].min():.1f} to {df_friday['arrival'].max():.1f} minutes")
-print(f"Processing times: {df_friday['processing'].min()} to {df_friday['processing'].max()} minutes")
 print(f"Total processing needed: {df_friday['processing'].sum()} minutes")
-print(f"\nOrder mix:")
-print(df_friday['processing'].value_counts().sort_index())
-# DON'T MODIFY THIS DATA - These are your orders!
+print(f"\nFirst 10 orders:")
+print(df_friday.head(10)[['id', 'arrival', 'processing', 'due']])
 ```
 
-## Exercise 5.1 - Find the Best Rule for Bean Counter's Global Rollout
+## What Happens If We Use Static Scheduling?
 
-Apply all three rules to the flagship Friday data and determine which is best for your **global business strategy**.
+Let's see what goes wrong if we apply static SPT to this dynamic problem:
 
-::: {.callout-tip}
-**Remember**: Use `.copy()` so each function gets a fresh copy of the orders!
-:::
-
-```{python}
-#| eval: false
-# YOUR CODE BELOW
-# Apply all three scheduling rules to Friday orders
-
-# Schedule with each rule
-friday_fifo = # APPLY FIFO
-friday_spt = # Apply SPT
-friday_edd = # Apply EDD
-
-# Convert to DataFrames
-df_friday_fifo = # Convert FIFO to DataFrame
-df_friday_spt = # Convert SPT to DataFrame
-df_friday_edd = # Convert EDD to DataFrame
-
-# Calculate metrics
-friday_metrics = pd.DataFrame({
-    'FIFO':  # Calculate FIFO metrics
-    'SPT':  # Calculate SPT metrics
-    'EDD': # Calculate EDD metrics
-}).T
-
-print("NYC Flagship Friday Rush Performance:")
-print(friday_metrics.round(2))
-
-# Which rule do you recommend for global rollout?
-best_rule = # Your choice just as string: 'FIFO', 'SPT', or 'EDD'
-```
-
-:::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
-# SOLUTION
-friday_fifo = schedule_fifo(friday_orders.copy())
-friday_spt = schedule_spt(friday_orders.copy())
-friday_edd = schedule_edd(friday_orders.copy())
+# Apply static SPT (sorts all orders, ignores arrivals)
+friday_static_spt = schedule_spt_static(friday_orders.copy())
+df_friday_static_spt = pd.DataFrame(friday_static_spt)
 
-df_friday_fifo = pd.DataFrame(friday_fifo)
-df_friday_spt = pd.DataFrame(friday_spt)
-df_friday_edd = pd.DataFrame(friday_edd)
-
-friday_metrics = pd.DataFrame({
-    'FIFO': calculate_metrics(df_friday_fifo),
-    'SPT': calculate_metrics(df_friday_spt),
-    'EDD': calculate_metrics(df_friday_edd)
-}).T
-
-print("Friday Rush Performance:")
-print(friday_metrics.round(2))
-
-# EDD is best for customer satisfaction (minimum late orders)
-best_rule = 'EDD'
+print("Static SPT on Friday Rush:")
+print(df_friday_static_spt.head(10)[['id', 'arrival', 'processing', 'start', 'completion']])
+print(f"\nNotice the problem: Order {df_friday_static_spt.iloc[0]['id']} starts at time 0")
+print(f"But it doesn't arrive until time {df_friday_static_spt.iloc[0]['arrival']:.1f}!")
+print(f"This creates {df_friday_static_spt.iloc[0]['arrival']:.1f} minutes of idle time.")
 ```
+
+::: {.callout-warning}
+**Static scheduling on online problems creates idle time!**
+
+Static SPT sorts all orders by processing time, then tries to do the shortest first. But if that order hasn't arrived yet, the machine sits idle waiting.
+
+We need **dynamic dispatching** that only considers orders that have already arrived.
 :::
-
-```{python}
-#| eval: false
-#| code-fold: true
-# Don't modify below - these test your solution
-assert friday_metrics.loc['SPT', 'avg_flow_time'] < friday_metrics.loc['FIFO', 'avg_flow_time'], \
-    "SPT should have better average flow time"
-assert friday_metrics.loc['EDD', 'late_orders'] <= friday_metrics.loc['FIFO', 'late_orders'], \
-    "EDD should have fewer or equal late orders vs FIFO"
-assert best_rule in ['FIFO', 'SPT', 'EDD'], "Choose FIFO, SPT, or EDD"
-print(f"Analysis complete! Your CEO recommendation: {best_rule}")
-print("\nKey insights from NYC flagship Friday data:")
-print(f" - SPT reduces avg wait by {(1-friday_metrics.loc['SPT','avg_flow_time']/friday_metrics.loc['FIFO','avg_flow_time'])*100:.1f}%")
-print(f" - EDD reduces late orders by {friday_metrics.loc['FIFO','late_orders'] - friday_metrics.loc['EDD','late_orders']:.0f}")
-```
 
 # Section 6 - Dynamic Dispatching
 
-So far, Bean Counter used **static scheduling**: we sorted all orders upfront, then processed them in that fixed sequence. This is simple to understand and code, but there's a problem...
+## The Dynamic Dispatching Algorithm
 
-At Bean Counter at 6 AM, you can't schedule orders that haven't been placed yet! When customer A arrives at 6:00 and customer B arrives at 6:10, you must decide what to do at 6:00 *without knowing about customer B yet*.
+Instead of sorting everything upfront, we make decisions **one at a time** as the machine becomes free:
 
-**Dynamic dispatching** solves this: at each decision point, we only consider orders that have **already arrived**.
+1. Start with `current_time = 0`
+2. **While there are unscheduled orders:**
+   - Find which orders have `arrival <= current_time` (the "available pool")
+   - If no orders available, jump forward to the next arrival
+   - Apply your rule (FIFO/SPT/EDD) to choose from the available pool
+   - Schedule that order, update time, repeat
 
-::: {.callout-important}
-## Static vs Dynamic
-Imagine these orders:
-
-- Order A: arrives at 0, takes 10 minutes
-- Order C: arrives at 4, takes 3 minutes
-
-**Static SPT**: Sorts all orders → [C(3min), A(10min)] → tries to do C first
-
-- But C hasn't arrived yet when we start at time 0!
-- We wait idle from 0→4, then do C from 4→7
-- Result: Wasted 4 minutes of machine time
-
-**Dynamic SPT**: At time 0, only A is available → do A immediately
-
-- Do A from 0→10 (no idle time)
-- C arrives at 4, but we're busy until 10
-- Do C from 10→13
-- Result: No wasted time, better utilization!
-:::
+This simulates real-time decision-making!
 
 ## Exercise 6.1 - Implement Dynamic SPT
 
-Now implement the realistic version of SPT using dynamic dispatching. The key difference: make decisions **one at a time** as the machine becomes free.
+Implement SPT with dynamic dispatching for Bean Counter.
 
-1. Keep a list of `remaining` unscheduled orders
-2. Start with `current_time = 0` and empty `scheduled` list
-3. **While there are remaining orders:**
-   - **Step A**: Find which orders have `arrival <= current_time` (the "available" orders)
-   - **Step B**: If no orders available, jump forward: `current_time = min(arrival of remaining orders)`
-   - **Step C**: Among available orders, choose based on your rule (SPT = shortest processing)
-   - **Step D**: Schedule that order, update `current_time`, move it from `remaining` to `scheduled`
-4. Return the `scheduled` list
-
-::: callout-important
-We're simulating time moving forward, making decisions only with current information!
-:::
-
-::: callout-tip
-- Use a `while remaining:` loop instead of a `for` loop
-- `available = [o for o in remaining if o['arrival'] <= current_time]` (list comprehension!)
-- `if not available:` checks if the list is empty
-- `next_order = min(available, key=lambda x: x['processing'])` picks shortest
-- `remaining.remove(next_order)` removes the order from the list
-- Don't forget to make copies of dictionaries when moving them between lists!
+::: {.callout-tip}
+- Use a `while remaining:` loop (not a for loop over pre-sorted list)
+- Filter to `available = [orders where arrival <= current_time]`
+- If no available orders, jump forward: `current_time = min(arrival of remaining)`
+- Then apply SPT to the available pool
 :::
 
 ```{python}
@@ -660,22 +558,22 @@ def schedule_spt_dynamic(orders):
     At each decision point, choose shortest job among those that have arrived
     """
     scheduled = []
-    remaining = orders.copy()  # Don't modify the original list
+    remaining = [o.copy() for o in orders]  # Make copies to avoid modifying originals
     current_time = 0
 
     while remaining:
-        # Step A: Find available orders (already arrived)
-        available = # YOUR CODE: filter remaining orders where arrival <= current_time
+        # Find available orders (already arrived)
+        available = # YOUR CODE: list of orders where arrival <= current_time
 
-        # Step B: If nothing available, jump to next arrival
+        # If nothing available, jump to next arrival
         if not available:
-            current_time = # YOUR CODE: minimum arrival time among remaining orders
+            current_time = # YOUR CODE: min arrival time of remaining orders
             available = # YOUR CODE: update available orders
 
-        # Step C: Choose shortest processing time among available
-        next_order = # YOUR CODE: find order with minimum processing time
+        # Choose shortest processing time among available
+        next_order = # YOUR CODE: min(available, key=...)
 
-        # Step D: Schedule it
+        # Schedule it
         next_order['start'] = current_time
         next_order['completion'] = current_time + next_order['processing']
         current_time = next_order['completion']
@@ -686,9 +584,9 @@ def schedule_spt_dynamic(orders):
 
     return scheduled
 
-# Test on the original 5 orders
-dynamic_spt_schedule = schedule_spt_dynamic(orders.copy())
-df_dynamic_spt = pd.DataFrame(dynamic_spt_schedule)
+# Test dynamic SPT
+friday_dynamic_spt = schedule_spt_dynamic(friday_orders)
+df_friday_dynamic_spt = pd.DataFrame(friday_dynamic_spt)
 ```
 
 :::{.content-visible when-profile="solutions"}
@@ -698,7 +596,7 @@ df_dynamic_spt = pd.DataFrame(dynamic_spt_schedule)
 def schedule_spt_dynamic(orders):
     """Schedule orders using DYNAMIC Shortest Processing Time"""
     scheduled = []
-    remaining = orders.copy()
+    remaining = [o.copy() for o in orders]
     current_time = 0
 
     while remaining:
@@ -723,50 +621,200 @@ def schedule_spt_dynamic(orders):
 
     return scheduled
 
-dynamic_spt_schedule = schedule_spt_dynamic(orders.copy())
-df_dynamic_spt = pd.DataFrame(dynamic_spt_schedule)
+friday_dynamic_spt = schedule_spt_dynamic(friday_orders)
+df_friday_dynamic_spt = pd.DataFrame(friday_dynamic_spt)
 ```
 :::
 
 ```{python}
 #| eval: false
 #| code-fold: true
-# Don't modify below - these test your solution
-assert df_dynamic_spt.iloc[0]['id'] == 'A', "First order should be A (only one available at time 0)"
-assert df_dynamic_spt['completion'].max() == 29, f"Dynamic SPT makespan should be 29, got {df_dynamic_spt['completion'].max()}"
-assert df_dynamic_spt['completion'].max() < df_spt['completion'].max(), \
-    f"Dynamic SPT ({df_dynamic_spt['completion'].max()}) should beat static SPT ({df_spt['completion'].max()})"
-print("✓ Excellent! Dynamic SPT implementation is correct!")
-print(f"\nDynamic SPT improves makespan: {df_spt['completion'].max()} → {df_dynamic_spt['completion'].max()} minutes")
-print("\nDynamic SPT Schedule:")
-print(df_dynamic_spt[['id', 'arrival', 'processing', 'start', 'completion']])
+# Tests
+assert all(df_friday_dynamic_spt['start'] >= df_friday_dynamic_spt['arrival']), \
+    "All orders should start at or after their arrival time"
+assert df_friday_dynamic_spt['completion'].max() < df_friday_static_spt['completion'].max(), \
+    "Dynamic SPT should beat static SPT on makespan"
+
+# Calculate idle time for both approaches
+static_idle = sum(max(0, row['arrival'] - (df_friday_static_spt.iloc[i-1]['completion'] if i > 0 else 0))
+                  for i, row in df_friday_static_spt.iterrows())
+dynamic_idle = sum(max(0, row['start'] - (df_friday_dynamic_spt.iloc[i-1]['completion'] if i > 0 else 0))
+                   for i, row in df_friday_dynamic_spt.iterrows())
+
+print("Excellent! Dynamic SPT implementation is correct!")
+print(f"\nDynamic vs Static SPT on Friday Rush:")
+print(f" • Static makespan: {df_friday_static_spt['completion'].max():.1f} minutes")
+print(f" • Dynamic makespan: {df_friday_dynamic_spt['completion'].max():.1f} minutes")
+print(f" • Improvement: {df_friday_static_spt['completion'].max() - df_friday_dynamic_spt['completion'].max():.1f} minutes faster")
+print(f" • Static idle time: {static_idle:.1f} minutes")
+print(f" • Dynamic idle time: {dynamic_idle:.1f} minutes")
 ```
 
-::: {.callout-note}
-**Dynamic is better when:**
+## Exercise 6.2 - Implement Dynamic EDD
 
-- Orders arrive over time (not all at once)
-- You want to avoid idle time waiting for future orders
-- Real-time responsiveness matters
+Now implement EDD with dynamic dispatching to minimize tardiness in the Friday rush.
 
-**Static is acceptable when:**
+```{python}
+#| eval: false
+# YOUR CODE BELOW
+def schedule_edd_dynamic(orders):
+    """
+    Schedule orders using DYNAMIC Earliest Due Date
+    At each decision point, choose order with earliest deadline among available orders
+    """
+    scheduled = []
+    remaining = [o.copy() for o in orders]
+    current_time = 0
 
-- All orders are known upfront (batch processing)
-- Simplicity and predictability are valued
+    while remaining:
+        # YOUR CODE: Find available orders
+        available = # [orders where arrival <= current_time]
+
+        # YOUR CODE: Handle no available orders
+        if not available:
+            current_time = # min arrival of remaining
+            available = # update available
+
+        # YOUR CODE: Choose earliest due date (HINT: change key from SPT)
+        next_order = # min(available, key=lambda x: x['due'])
+
+        # Schedule it (same as SPT)
+        next_order['start'] = current_time
+        next_order['completion'] = current_time + next_order['processing']
+        current_time = next_order['completion']
+
+        scheduled.append(next_order)
+        remaining.remove(next_order)
+
+    return scheduled
+
+# Test dynamic EDD
+friday_dynamic_edd = schedule_edd_dynamic(friday_orders)
+df_friday_dynamic_edd = pd.DataFrame(friday_dynamic_edd)
+```
+
+:::{.content-visible when-profile="solutions"}
+```{python}
+#| eval: true
+# SOLUTION
+def schedule_edd_dynamic(orders):
+    """Schedule orders using DYNAMIC Earliest Due Date"""
+    scheduled = []
+    remaining = [o.copy() for o in orders]
+    current_time = 0
+
+    while remaining:
+        available = [o for o in remaining if o['arrival'] <= current_time]
+
+        if not available:
+            current_time = min(o['arrival'] for o in remaining)
+            available = [o for o in remaining if o['arrival'] <= current_time]
+
+        next_order = min(available, key=lambda x: x['due'])
+
+        next_order['start'] = current_time
+        next_order['completion'] = current_time + next_order['processing']
+        current_time = next_order['completion']
+
+        scheduled.append(next_order)
+        remaining.remove(next_order)
+
+    return scheduled
+
+friday_dynamic_edd = schedule_edd_dynamic(friday_orders)
+df_friday_dynamic_edd = pd.DataFrame(friday_dynamic_edd)
+```
 :::
+
+```{python}
+#| eval: false
+#| code-fold: true
+# Tests
+assert all(df_friday_dynamic_edd['start'] >= df_friday_dynamic_edd['arrival']), \
+    "All orders should start at or after arrival"
+
+metrics_dynamic_spt = calculate_metrics(df_friday_dynamic_spt)
+metrics_dynamic_edd = calculate_metrics(df_friday_dynamic_edd)
+
+assert metrics_dynamic_edd['total_tardiness'] <= metrics_dynamic_spt['total_tardiness'], \
+    "EDD should minimize tardiness better than SPT"
+
+print("✓ Dynamic EDD implementation correct!")
+print(f"\nFriday Rush: Dynamic SPT vs Dynamic EDD")
+print(f" • SPT avg flow time: {metrics_dynamic_spt['avg_flow_time']:.1f} minutes")
+print(f" • EDD avg flow time: {metrics_dynamic_edd['avg_flow_time']:.1f} minutes")
+print(f" • SPT total tardiness: {metrics_dynamic_spt['total_tardiness']:.1f} minutes")
+print(f" • EDD total tardiness: {metrics_dynamic_edd['total_tardiness']:.1f} minutes")
+print(f" • SPT late orders: {metrics_dynamic_spt['late_orders']:.0f}")
+print(f" • EDD late orders: {metrics_dynamic_edd['late_orders']:.0f}")
+```
+
+## Final Performance Comparison
+
+```{python}
+#| eval: true
+# Calculate metrics for all Friday approaches
+friday_comparison = pd.DataFrame({
+    'Dynamic_SPT': calculate_metrics(df_friday_dynamic_spt),
+    'Dynamic_EDD': calculate_metrics(df_friday_dynamic_edd)
+}).T
+
+print("Friday Morning Rush - Final Performance:")
+print(friday_comparison.round(2))
+
+# Visualization
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+metrics_to_plot = ['makespan', 'avg_flow_time', 'total_tardiness', 'late_orders']
+colors = ['#F6B265', '#DB6B6B']
+
+for ax, metric in zip(axes.flat, metrics_to_plot):
+    values = [friday_comparison.loc[rule, metric] for rule in ['Dynamic_SPT', 'Dynamic_EDD']]
+    bars = ax.bar(['Dynamic SPT', 'Dynamic EDD'], values, color=colors, alpha=0.7)
+
+    best_idx = np.argmin(values)
+    bars[best_idx].set_edgecolor('green')
+    bars[best_idx].set_linewidth(3)
+
+    ax.set_title(metric.replace('_', ' ').title(), fontweight='bold')
+    ax.set_ylabel('Value')
+
+    for bar, val in zip(bars, values):
+        height = bar.get_height()
+        ax.text(bar.get_x() + bar.get_width()/2., height,
+                f'{val:.1f}', ha='center', va='bottom')
+
+plt.suptitle('Friday Rush: Dynamic Scheduling Performance', fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()
+```
 
 # Conclusion
 
-**Great work, CEO!** You've mastered the fundamental scheduling algorithms that power operations worldwide. For Bean Counter's Friday rush the orders arrive continuously over 2 hours, so dynamic dispatching would provide real improvements.
+**Congratulations!** You've mastered both paradigms of scheduling:
 
 ## Key Takeaways
 
-1. **FIFO** - When fairness matters most
-2. **SPT** - To minimize average wait times (even better with dynamic dispatching!)
-3. **EDD** - To meet critical deadlines
-4. **Static vs Dynamic** - Static is simpler; dynamic is more realistic and efficient
-5. **Visualization** - Gantt charts reveal bottlenecks
-6. **Metrics matter** - Choose based on your business goals
+1. **Static Scheduling** (Corporate Event):
+   - All orders known upfront
+   - Sort and sequence optimally
+   - SPT minimizes flow time, EDD minimizes tardiness
+   - Simple to implement and understand
+
+2. **Dynamic Scheduling** (Friday Rush):
+   - Orders arrive over time
+   - Make real-time decisions with partial information
+   - Only consider orders that have arrived
+   - Better machine utilization, more realistic
+
+3. **Algorithm Performance**:
+   - **FIFO**: Simple, fair, but not optimized
+   - **SPT**: Minimizes average wait time
+   - **EDD**: Minimizes tardiness and late orders
+   - Choice depends on business priorities!
+
+4. **When to Use Each**:
+   - Static: Batch processing, complete information, planning ahead
+   - Dynamic: Real-time operations, orders arrive continuously, reactive scheduling
 
 ## What's Next?
 
@@ -774,4 +822,4 @@ You've now mastered both static and dynamic scheduling approaches! In the next n
 
 In the following lectures, you'll then learn advanced techniques like **local search** and **metaheuristics** that can improve even the best greedy solutions by intelligently exploring schedule variations.
 
-**Your Bean Counter empire is now optimized for global success!**
+**Your Bean Counter operations are now optimized for both planning and real-time scenarios!**
