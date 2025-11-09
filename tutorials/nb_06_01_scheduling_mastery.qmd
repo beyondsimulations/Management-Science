@@ -9,22 +9,24 @@ code-links:
 
 # Introduction
 
-Welcome to your challenge as Bean Counter CEO! Scheduling in Bean Counters stores is far from optimal so you have decided to do something about it.
+Welcome to your role as **Bean Counter's CEO**! You've built a global coffee empire, but you've noticed a critical problem: **scheduling chaos** in your stores is costing you customers and revenue.
 
-**The Friday Morning Crisis:** It's 6 AM on your busiest day. Your flagship store has:
+**Your Strategic Vision:** You've decided to solve this problem scientifically, starting with your **flagship store in New York City**. If you can perfect the scheduling system here, you'll roll it out to all Bean Counter locations worldwide.
 
-- **47 coffee orders** already queued
-- **3 espresso machines** available
-- **Customers** ranging from rushed commuters to patient regulars
-- **Your reputation** on the line
+**The Friday Morning Crisis at the Flagship:** It's 6 AM on your busiest day. The flagship store has:
 
-Every scheduling decision impacts wait times, customer satisfaction, and your bottom line. Today, you'll train the art of scheduling by implementing and comparing three fundamental approaches that every successful business uses.
+- **47 coffee orders** already queued (and more arriving every minute)
+- **3 espresso machines** available but underutilized
+- **Customers** ranging from rushed Wall Street traders to patient students
+- **Your global reputation** on the line - if you fail here, the whole expansion is at risk
 
-**Your Mission:** Build scheduling algorithms from scratch, visualize their performance, and make the critical decision about which approach Bean Counter should adopt.
+Every scheduling decision impacts wait times, customer satisfaction, and your bottom line. Today, you'll master the art of scheduling by implementing and comparing three fundamental approaches that successful businesses worldwide use.
+
+**Your Mission:** Build scheduling algorithms from scratch, test them on real flagship store data, visualize their performance, and make the critical CEO decision about which approach Bean Counter should adopt globally.
 
 ::: {.callout-note}
 ## How to Use This Tutorial
-Cells marked with "YOUR CODE BELOW" expect you to write code. Test your solutions with the provided assertions. Work through sections in order - each builds on previous concepts!
+Cells marked with "YOUR CODE BELOW" expect you to write code. Test your solutions with the provided assertions. Work through sections in order as each builds on previous concepts!
 :::
 
 ```{python}
@@ -97,7 +99,15 @@ print("Metrics function ready. You'll use this to evaluate each scheduling rule.
 
 **Slack** tells us how much flexibility we have before an order becomes late. Calculate the slack for each order assuming we start processing immediately.
 
-Slack = Due Time - (Current Time + Processing Time)
+**Formula:** Slack = Due Time - (Current Time + Processing Time)
+
+::: {.callout-tip}
+- You can do math on entire DataFrame columns at once!
+- `df_orders['due']` gets all due times as a column
+- `df_orders['due'] - df_orders['processing']` subtracts processing from due for ALL rows
+- To find the minimum slack row, use: `df_orders['slack'].idxmin()` (finds the index of minimum)
+- To get the order ID at that index: `df_orders.loc[index, 'id']`
+:::
 
 ```{python}
 #| eval: false
@@ -141,6 +151,14 @@ Now let's implement the three fundamental scheduling rules. You'll code each fro
 
 The simplest approach - process orders in arrival sequence.
 
+::: {.callout-tip}
+- **`sorted()` function**: Sorts a list based on a criterion
+- **`lambda` functions**: A shorthand way to write small functions
+  - `lambda x: x['arrival']` means "for each order x, look at its arrival time"
+  - This is the same as writing: `def get_arrival(x): return x['arrival']`
+- `order['key']` gets the value for 'key' from the order dictionary
+:::
+
 ```{python}
 #| eval: true
 def schedule_fifo(orders):
@@ -149,21 +167,34 @@ def schedule_fifo(orders):
     Process orders in the order they arrived
     """
     # Sort by arrival time
+    # The lambda function tells sorted() to sort by the 'arrival' value in each order
     scheduled = sorted(orders, key=lambda x: x['arrival'])
 
     # Calculate completion times
-    current_time = 0
+    current_time = 0  # Track when the machine becomes free
     for order in scheduled:
         # Start time is max of current time and arrival time
+        # Why? The machine might be busy (current_time) OR the order hasn't arrived yet (arrival)
+        # We start whichever comes LATER
         start_time = max(current_time, order['arrival'])
+
+        # Add the start time to this order's information
         order['start'] = start_time
+
+        # Completion time = when we start + how long it takes
         order['completion'] = start_time + order['processing']
+
+        # Update current_time: machine is now busy until this order completes
         current_time = order['completion']
 
     return scheduled
 
 # Test FIFO on our orders
+# Why .copy()? We don't want to modify the original 'orders' list
+# Each scheduling function will modify the orders, so we give it a copy
 fifo_schedule = schedule_fifo(orders.copy())
+
+# Convert the list of orders to a DataFrame for easier viewing
 df_fifo = pd.DataFrame(fifo_schedule)
 print("FIFO Schedule:")
 print(df_fifo[['id', 'arrival', 'start', 'completion', 'due']])
@@ -171,7 +202,12 @@ print(df_fifo[['id', 'arrival', 'start', 'completion', 'due']])
 
 ## Exercise 2.1 - Implement SPT (Shortest Processing Time)
 
-Now implement SPT - always process the shortest available job next.
+Now implement SPT to always process the shortest available job next.
+
+::: {.callout-tip}
+The structure is IDENTICAL to FIFO! You only need to change one thing!
+Everything else (the for loop, the calculations) stays exactly the same!
+:::
 
 ```{python}
 #| eval: false
@@ -184,7 +220,7 @@ def schedule_spt(orders):
     # Sort by processing time (shortest first)
     scheduled = # Sort orders by processing time
 
-    # Calculate completion times (same logic as FIFO)
+    # Calculate completion times
     current_time = 0
     for order in scheduled:
         start_time = # Calculate start time
@@ -235,7 +271,11 @@ print(df_spt[['id', 'processing', 'start', 'completion']])
 
 ## Exercise 2.2 - Implement EDD (Earliest Due Date)
 
-Finally, implement EDD - process orders by their due date.
+Finally, implement EDD to process orders by their due date.
+
+::: {.callout-tip}
+Same pattern again, except for one difference.
+:::
 
 ```{python}
 #| eval: false
@@ -246,16 +286,18 @@ def schedule_edd(orders):
     Process orders with earliest deadlines first
     """
     # Sort by due date
+    # HINT: Same as SPT, but sort by 'due' instead of 'processing'
     scheduled = # Sort orders by due date
 
-    # Calculate completion times
+    # Calculate completion times (SAME AS FIFO AND SPT)
     current_time = 0
     for order in scheduled:
         # YOUR CODE: Calculate start and completion times
-        start_time =
-        order['start'] =
-        order['completion'] =
-        current_time =
+        # HINT: Copy the 4 lines from FIFO or SPT - they're identical!
+        start_time = # max(current_time, order['arrival'])
+        order['start'] = # start_time
+        order['completion'] = # start_time + order['processing']
+        current_time = # order['completion']
 
     return scheduled
 
@@ -294,62 +336,19 @@ assert df_edd.iloc[0]['id'] == 'C', "First order in EDD should be C (due at 15)"
 assert df_edd.iloc[1]['id'] == 'E', "Second order in EDD should be E (due at 18)"
 total_tardiness = np.maximum(0, df_edd['completion'] - df_edd['due']).sum()
 assert total_tardiness == 0, f"EDD should have 0 total tardiness, got {total_tardiness}"
-print("✓ Perfect! EDD minimizes tardiness as expected!")
+print("Perfect! EDD minimizes tardiness as expected!")
 print("\nEDD Schedule with zero tardiness:")
 print(df_edd[['id', 'due', 'start', 'completion']])
 ```
 
 # Section 3 - Visualizing Schedules with Gantt Charts
 
-A picture is worth a thousand schedules! Let's create Gantt charts to visualize how each rule performs.
+A picture is worth a thousand schedules! Let's create Gantt charts to visualize how each rule performs. Try to use generate AI to come up with the code to create a beautiful Gantt chart here based on the results of your schedule.
 
 ```{python}
 #| eval: true
-def plot_gantt_chart(schedule_df, title, ax=None):
-    """Create a Gantt chart for a schedule"""
-    if ax is None:
-        fig, ax = plt.subplots(figsize=(12, 4))
+# YOUR CODE BELOW
 
-    colors = plt.cm.Set3(np.linspace(0, 1, len(schedule_df)))
-
-    for idx, row in enumerate(schedule_df.iterrows()):
-        order = row[1]
-        ax.barh(idx, order['processing'],
-                left=order['start'], height=0.8,
-                color=colors[idx], alpha=0.8,
-                edgecolor='black', linewidth=1)
-
-        # Add order ID in the middle of the bar
-        ax.text(order['start'] + order['processing']/2, idx,
-                order['id'], ha='center', va='center',
-                fontweight='bold', fontsize=11)
-
-        # Mark due date with vertical line
-        if 'due' in order:
-            ax.axvline(x=order['due'], color='red',
-                      linestyle='--', alpha=0.3, linewidth=1)
-
-    ax.set_yticks(range(len(schedule_df)))
-    ax.set_yticklabels([f"Order {row['id']}" for _, row in schedule_df.iterrows()])
-    ax.set_xlabel('Time (minutes)', fontsize=11)
-    ax.set_title(title, fontsize=12, fontweight='bold')
-    ax.grid(True, alpha=0.2, axis='x')
-
-    # Add legend for due dates
-    red_line = mpatches.Patch(color='red', alpha=0.3, label='Due dates')
-    ax.legend(handles=[red_line], loc='upper right')
-
-    return ax
-
-# Visualize all three schedules
-fig, axes = plt.subplots(3, 1, figsize=(12, 10))
-
-plot_gantt_chart(df_fifo, 'FIFO Schedule - Fair but may miss deadlines', axes[0])
-plot_gantt_chart(df_spt, 'SPT Schedule - Quick orders first', axes[1])
-plot_gantt_chart(df_edd, 'EDD Schedule - Deadline focused', axes[2])
-
-plt.tight_layout()
-plt.show()
 ```
 
 # Section 4 - Performance Comparison
@@ -360,13 +359,21 @@ Now let's compare how each rule performs on key metrics.
 
 Calculate performance metrics for all three scheduling rules.
 
+::: {.callout-tip}
+## Coding Hints
+- The `calculate_metrics()` function is already defined - you just call it!
+- Call it like this: `calculate_metrics(df_fifo)`
+- It returns a dictionary with metrics like `{'makespan': 29, 'avg_flow_time': 15.2, ...}`
+- To create a DataFrame from dictionaries, use: `pd.DataFrame([DICTIONARY])`
+:::
+
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
 # Calculate metrics for each schedule using the calculate_metrics function
 
 # Calculate metrics for FIFO
-metrics_fifo = calculate_metrics(df_fifo)
+metrics_fifo = # Calculate FIFO metrics
 
 # Calculate metrics for SPT
 metrics_spt = # Calculate SPT metrics
@@ -377,8 +384,8 @@ metrics_edd = # Calculate EDD metrics
 # Create comparison DataFrame
 comparison = pd.DataFrame({
     'FIFO': metrics_fifo,
-    'SPT': # Add SPT metrics,
-    'EDD': # Add EDD metrics
+    'SPT': metrics_spt,
+    'EDD': metrics_edd
 }).T
 
 print("Performance Comparison:")
@@ -414,10 +421,10 @@ assert comparison.loc['EDD', 'total_tardiness'] == 0, \
     "EDD should have zero tardiness"
 assert comparison.loc['SPT', 'avg_flow_time'] == comparison['avg_flow_time'].min(), \
     "SPT should minimize average flow time"
-print("✓ Excellent analysis! Key insights:")
-print(f"  - SPT reduces avg flow time by {(1 - comparison.loc['SPT', 'avg_flow_time']/comparison.loc['FIFO', 'avg_flow_time'])*100:.1f}% vs FIFO")
-print(f"  - EDD eliminates all tardiness ({comparison.loc['EDD', 'late_orders']:.0f} late orders)")
-print(f"  - All methods have same makespan: {comparison['makespan'].iloc[0]:.0f} minutes")
+print("Excellent analysis! Key insights:")
+print(f" - SPT reduces avg flow time by {(1 - comparison.loc['SPT', 'avg_flow_time']/comparison.loc['FIFO', 'avg_flow_time'])*100:.1f}% vs FIFO")
+print(f" - EDD eliminates all tardiness ({comparison.loc['EDD', 'late_orders']:.0f} late orders)")
+print(f" - All methods have same makespan: {comparison['makespan'].iloc[0]:.0f} minutes")
 ```
 
 ## Visualizing the Trade-offs
@@ -453,49 +460,72 @@ plt.tight_layout()
 plt.show()
 ```
 
-# Section 5 - Real Bean Counter Friday Data
+# Section 5 - Real Flagship Store Friday Data
 
-Now let's test on realistic Friday morning data with 47 orders!
+Now let's test on realistic Friday morning data from your **NYC flagship store** with 47 orders! This is the real test. If your algorithms work here, you can confidently deploy them across all global locations.
+
+::: {.callout-note}
+## Understanding the Data Generation Code
+Don't worry if you don't understand all the code below, it is just generating realistic data for you! Here's what it does:
+
+- **`np.random.seed(2025)`**: Ensures everyone gets the same "random" data (reproducibility)
+- **`np.random.exponential(2.5)`**: Models realistic arrival patterns (some orders cluster, some spread out)
+- **`np.random.choice()`**: Randomly picks processing times and order types based on realistic probabilities
+- **Order types**: 20% rush (Wall Street traders), 60% normal, 20% relaxed (students)
+
+This mimics your **real flagship store data** from last Friday!
+:::
 
 ```{python}
 #| eval: true
-# Generate realistic Friday morning orders
-np.random.seed(42)
+# DON'T MODIFY THIS DATA - These are your orders!
+# Generate realistic Friday morning orders from NYC flagship store
+np.random.seed(2025)  # Same data for everyone
 n_orders = 47
 
 # Create orders arriving over first 2 hours (120 minutes)
 friday_orders = []
 for i in range(n_orders):
     order = {
-        'id': f'F{i+1:02d}',
+        'id': f'F{i+1:02d}',  # F01, F02, F03, etc.
+        # Orders arrive randomly (exponential distribution models real arrival patterns)
         'arrival': np.random.exponential(2.5) if i == 0 else friday_orders[-1]['arrival'] + np.random.exponential(2.5),
+        # Processing times: 30% quick (3min), 30% medium (5min), 20% long (7min), etc.
         'processing': np.random.choice([3, 5, 7, 10, 12], p=[0.3, 0.3, 0.2, 0.15, 0.05]),
-        'due': 0  # Will set based on order type
+        'due': 0  # Will set based on order type below
     }
 
     # 20% rush orders (tight deadline), 60% normal, 20% relaxed
     order_type = np.random.choice(['rush', 'normal', 'relaxed'], p=[0.2, 0.6, 0.2])
     if order_type == 'rush':
+        # Rush: due soon after processing (5-15 min buffer)
         order['due'] = order['arrival'] + order['processing'] + np.random.randint(5, 15)
     elif order_type == 'normal':
+        # Normal: reasonable buffer (15-30 min)
         order['due'] = order['arrival'] + order['processing'] + np.random.randint(15, 30)
     else:
+        # Relaxed: plenty of time (30-60 min buffer)
         order['due'] = order['arrival'] + order['processing'] + np.random.randint(30, 60)
 
     friday_orders.append(order)
 
 df_friday = pd.DataFrame(friday_orders)
-print(f"Friday Morning Rush: {len(friday_orders)} orders")
+print(f"NYC Flagship - Friday Morning Rush: {len(friday_orders)} orders")
 print(f"Arrival span: {df_friday['arrival'].min():.1f} to {df_friday['arrival'].max():.1f} minutes")
 print(f"Processing times: {df_friday['processing'].min()} to {df_friday['processing'].max()} minutes")
 print(f"Total processing needed: {df_friday['processing'].sum()} minutes")
 print(f"\nOrder mix:")
 print(df_friday['processing'].value_counts().sort_index())
+# DON'T MODIFY THIS DATA - These are your orders!
 ```
 
-## Exercise 5.1 - Find the Best Rule for Bean Counter
+## Exercise 5.1 - Find the Best Rule for Bean Counter's Global Rollout
 
-Apply all three rules to the Friday data and determine which is best for your business.
+Apply all three rules to the flagship Friday data and determine which is best for your **global business strategy**.
+
+::: {.callout-tip}
+**Remember**: Use `.copy()` so each function gets a fresh copy of the orders!
+:::
 
 ```{python}
 #| eval: false
@@ -503,27 +533,27 @@ Apply all three rules to the Friday data and determine which is best for your bu
 # Apply all three scheduling rules to Friday orders
 
 # Schedule with each rule
-friday_fifo = schedule_fifo(friday_orders.copy())
+friday_fifo = # APPLY FIFO
 friday_spt = # Apply SPT
 friday_edd = # Apply EDD
 
 # Convert to DataFrames
-df_friday_fifo = pd.DataFrame(friday_fifo)
+df_friday_fifo = # Convert FIFO to DataFrame
 df_friday_spt = # Convert SPT to DataFrame
 df_friday_edd = # Convert EDD to DataFrame
 
 # Calculate metrics
 friday_metrics = pd.DataFrame({
-    'FIFO': calculate_metrics(df_friday_fifo),
-    'SPT': # Calculate SPT metrics,
+    'FIFO':  # Calculate FIFO metrics
+    'SPT':  # Calculate SPT metrics
     'EDD': # Calculate EDD metrics
 }).T
 
-print("Friday Rush Performance:")
+print("NYC Flagship Friday Rush Performance:")
 print(friday_metrics.round(2))
 
-# Which rule do you recommend?
-best_rule = # Your choice based on the metrics
+# Which rule do you recommend for global rollout?
+best_rule = # Your choice just as string: 'FIFO', 'SPT', or 'EDD'
 ```
 
 :::{.content-visible when-profile="solutions"}
@@ -561,18 +591,31 @@ assert friday_metrics.loc['SPT', 'avg_flow_time'] < friday_metrics.loc['FIFO', '
 assert friday_metrics.loc['EDD', 'late_orders'] <= friday_metrics.loc['FIFO', 'late_orders'], \
     "EDD should have fewer or equal late orders vs FIFO"
 assert best_rule in ['FIFO', 'SPT', 'EDD'], "Choose FIFO, SPT, or EDD"
-print(f"✓ Analysis complete! Your recommendation: {best_rule}")
-print("\nKey insights from Friday data:")
-print(f"  - SPT reduces avg wait by {(1-friday_metrics.loc['SPT','avg_flow_time']/friday_metrics.loc['FIFO','avg_flow_time'])*100:.1f}%")
-print(f"  - EDD reduces late orders by {friday_metrics.loc['FIFO','late_orders'] - friday_metrics.loc['EDD','late_orders']:.0f}")
-print(f"  - Trade-off: Fast service (SPT) vs. meeting deadlines (EDD)")
+print(f"Analysis complete! Your CEO recommendation: {best_rule}")
+print("\nKey insights from NYC flagship Friday data:")
+print(f" - SPT reduces avg wait by {(1-friday_metrics.loc['SPT','avg_flow_time']/friday_metrics.loc['FIFO','avg_flow_time'])*100:.1f}%")
+print(f" - EDD reduces late orders by {friday_metrics.loc['FIFO','late_orders'] - friday_metrics.loc['EDD','late_orders']:.0f}")
+print(f" - Trade-off: Fast service (SPT) vs. meeting deadlines (EDD)")
+print(f"\nCEO Decision: Deploy {best_rule} to all global locations!")
 ```
 
-## CEO's Decision Dashboard
+## CEO's Global Rollout Decision Dashboard
+
+This dashboard shows what will happen when you deploy your chosen scheduling rule to all 1,247 Bean Counter locations worldwide.
 
 ```{python}
 #| eval: true
-# Create executive dashboard
+# Create executive dashboard for CEO decision
+# It should include the average wait time, late orders and total tardiness
+# YOUR CODE BELOW
+
+```
+
+:::{.content-visible when-profile="solutions"}
+```{python}
+#| eval: true
+# SOLUTION
+# Create executive dashboard for CEO decision
 fig = plt.figure(figsize=(14, 8))
 gs = fig.add_gridspec(2, 3, hspace=0.3, wspace=0.3)
 
@@ -623,28 +666,41 @@ for ax, values in [(ax1, wait_times), (ax2, late), (ax3, tard), (ax4, satisfacti
         ax.text(bar.get_x() + bar.get_width()/2., height,
                 format_str, ha='center', va='bottom', fontweight='bold')
 
-plt.suptitle('Bean Counter Friday Rush - CEO Dashboard', fontsize=16, fontweight='bold')
+plt.suptitle('Bean Counter NYC Flagship - CEO Global Rollout Dashboard', fontsize=16, fontweight='bold')
 plt.show()
 ```
+:::
 
 # Conclusion
 
-**Outstanding work, CEO!** You've mastered the fundamental scheduling algorithms that power operations worldwide.
+**Great work, CEO!** You've mastered the fundamental scheduling algorithms that power operations worldwide. More importantly, you've tested them on **real flagship store data** and can now confidently make a strategic decision.
+
+## Your Global Impact
+
+By solving the scheduling problem at your NYC flagship store, you've created a system that will:
+
+::: {.callout-important}
+## Bean Counter Global Rollout Impact
+- **Thousand stores** worldwide will implement your chosen algorithm
+- **Millions of customers** annually will benefit from optimized service
+- **Operational costs** reduced through better resource utilization
+- **Customer satisfaction** improved through predictable service times
+- **Competitive advantage** through data-driven operations management
+:::
 
 ## Key Takeaways
 
-::: {.callout-tip}
-## Your Scheduling Toolkit
 1. **FIFO** - When fairness matters most
 2. **SPT** - To minimize average wait times
 3. **EDD** - To meet critical deadlines
 4. **Hybrid approaches** - Combine rules for complex scenarios
 5. **Visualization** - Gantt charts reveal bottlenecks
 6. **Metrics matter** - Choose based on your business goals
-:::
 
 ## What's Next?
 
-In Lecture 7, you'll learn how to **improve** these schedules using local search techniques. Instead of accepting the greedy solution, you'll discover how to iteratively enhance it!
+Your greedy algorithms work well, but can we do even better? In the next notebook, you'll tackle the **Bike Factory Competition** where you'll apply these scheduling techniques to a real two-stage manufacturing problem.
 
-**Your Bean Counter empire is now optimized for success! ☕📈**
+In the following lectures, you'll then learn advanced techniques like **local search** and **metaheuristics** that can improve even the best greedy solutions by intelligently exploring schedule variations.
+
+**Your Bean Counter empire is now optimized for global success!**

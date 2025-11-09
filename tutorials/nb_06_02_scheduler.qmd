@@ -1,6 +1,6 @@
 ---
-title: "Competition 03 - The Cycle Scheduler Challenge"
-subtitle: "Management Science - Manufacturing Competition"
+title: "Competition 03 - The Bike Factory Crisis"
+subtitle: "Management Science - Two-Stage Scheduling Competition"
 code-links:
   - text: Python
     href: nb_06_02_scheduler.py
@@ -9,24 +9,88 @@ code-links:
 
 # Client Briefing: Custom Cycles Manufacturing
 
-## Competition Scenario
+## Company Background
 
-You've been hired as the operations manager for a custom bicycle factory. It's Friday afternoon, and you've just received a batch of urgent orders that must be completed over the weekend.
+**Custom Cycles Manufacturing** is a premium bicycle manufacturer based in Hamburg, Germany. Founded in 1998, they've built a reputation for high-quality custom builds with a loyal customer base of cycling enthusiasts and professional riders. Annual revenue: 8.5M with 35% coming from holiday rush orders.
 
-**The Challenge:**
-- **16 bicycle orders** with varying complexity
-- **2 workstations:** Assembly and Painting (each bike needs both)
-- **Each order must go through Assembly first, then Painting**
-- **Overtime penalty:** €100/hour for any work after 8pm Saturday
-- **Customer penalties:** Late delivery incurs penalties
+**Your Role:** You've been hired as the weekend operations manager to handle a critical scheduling crisis.
 
-**Your Task:** Schedule the orders to minimize total cost (overtime + late penalties).
+## The Friday Afternoon Crisis
 
-## Competition Data
+**It's Friday 2:00 PM.** The production manager just quit unexpectedly, leaving you with a major problem:
+
+- **16 custom bicycle orders** received this week - all promised for delivery Monday
+- **2 workstations** available: Assembly Station and Painting Station
+- **Sequential process:** Every bike MUST go through Assembly first, then Painting
+- **Skeleton crew:** Weekend staffing is minimal - only one technician per station
+- **Cost pressures:**
+  - Overtime costs **€100/hour** for any work after Saturday 8 PM (minute 1800)
+  - Late delivery penalties ranging from **€50 to €150 per order**
+
+**CEO's Message:** "We can't afford to lose these customers before the holiday season. Figure out the optimal schedule and minimize our costs. Our reputation depends on it!"
+
+## The Challenge
+
+### Your Mission
+
+Schedule all 16 bicycle orders through both workstations to **minimize total cost** (overtime + late penalties).
+
+### The Two-Stage Process
+
+Each bicycle must follow this sequence:
+
+1. **Assembly Station:** Frame assembly, component installation
+2. **Painting Station:** Surface prep, painting, curing (can only start AFTER assembly completes)
+
+**Critical Constraint:** A bike cannot begin painting until its assembly is finished!
+
+### Success Metrics
+
+Your schedule will be evaluated on:
+
+1. **Total Cost (70%):** Overtime costs + Late delivery penalties
+2. **Strategy Clarity (30%):** Clear explanation of your approach
+
+### Financial Impact
+
+**Overtime Costs:**
+
+- Regular hours: Friday 2 PM - Saturday 8 PM (0 minutes - 1800 minutes)
+- Overtime: After Saturday 8 PM (minute 1800+)
+- Rate: €100 per hour (€1.67 per minute)
+
+**Late Penalties:**
+
+- Rush orders: €150 per late delivery
+- Standard orders: €50 per late delivery
+- Custom orders: €100 per late delivery
+
+**Example Cost Calculation:**
+
+- If painting finishes at minute 1860 (60 min overtime): 60 ÷ 60 × €100 = **€100**
+- If order B02 (rush) completes after minute 360: **€150 penalty**
+- Total cost for this scenario: **€250**
+
+# Data Access & Analysis
 
 ```{python}
 #| eval: true
-# Competition orders - DO NOT MODIFY THIS DATA
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+
+# Set random seed for reproducibility
+np.random.seed(2025)
+
+print("Libraries loaded! Ready to tackle the bike factory crisis.")
+```
+
+## Competition Orders
+
+```{python}
+#| eval: true
+# DON'T MODIFY THIS DATA - These are your actual orders!
 bike_orders = [
     {'id': 'B01', 'type': 'Standard', 'assembly': 45, 'painting': 30, 'due': 480, 'penalty': 50},
     {'id': 'B02', 'type': 'Rush', 'assembly': 60, 'painting': 45, 'due': 360, 'penalty': 150},
@@ -48,166 +112,265 @@ bike_orders = [
 
 # Convert to DataFrame for analysis
 df_bikes = pd.DataFrame(bike_orders)
-print("Bike Factory Orders:")
+
+print("Custom Cycles - Weekend Rush Orders")
+print("=" * 50)
 print(f"Total orders: {len(df_bikes)}")
-print(f"\nOrder breakdown:")
-print(df_bikes['type'].value_counts())
-print(f"\nTotal assembly time needed: {df_bikes['assembly'].sum()} minutes ({df_bikes['assembly'].sum()/60:.1f} hours)")
-print(f"Total painting time needed: {df_bikes['painting'].sum()} minutes ({df_bikes['painting'].sum()/60:.1f} hours)")
-print(f"\nWork starts: Friday 2pm (minute 0)")
-print(f"Regular hours end: Saturday 8pm (minute 1800)")
-print(f"Overtime rate: €100/hour after minute 1800")
+print(f"\nOrder breakdown by type:")
+print(df_bikes['type'].value_counts().to_string())
+print(f"\nWorkload analysis:")
+print(f"  Total assembly time: {df_bikes['assembly'].sum()} minutes ({df_bikes['assembly'].sum()/60:.1f} hours)")
+print(f"  Total painting time: {df_bikes['painting'].sum()} minutes ({df_bikes['painting'].sum()/60:.1f} hours)")
+print(f"  Average assembly: {df_bikes['assembly'].mean():.1f} minutes")
+print(f"  Average painting: {df_bikes['painting'].mean():.1f} minutes")
+print(f"\nTime constraints:")
+print(f"  Work starts: Friday 2:00 PM (minute 0)")
+print(f"  Regular hours end: Saturday 8:00 PM (minute 1800)")
+print(f"  Overtime rate: €100/hour after minute 1800")
+print(f"\nPenalty exposure:")
+print(f"  Total if ALL orders late: €{df_bikes['penalty'].sum():,}")
+# DON'T MODIFY ABOVE!
 ```
 
-## Your Competition Task
-
-Implement a two-stage scheduling algorithm that:
-1. Decides the order of bikes
-2. Schedules them through both workstations
-3. Minimizes total cost (overtime + penalties)
+## Initial Data Exploration
 
 ```{python}
-#| eval: false
-# YOUR COMPETITION CODE HERE
-def schedule_bike_factory(orders, rule='EDD'):
+#| eval: true
+# Visualize order characteristics
+fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+
+# 1. Processing times by order
+ax = axes[0, 0]
+x = np.arange(len(df_bikes))
+width = 0.35
+ax.bar(x - width/2, df_bikes['assembly'], width, label='Assembly', color='#537E8F', alpha=0.7)
+ax.bar(x + width/2, df_bikes['painting'], width, label='Painting', color='#F6B265', alpha=0.7)
+ax.set_xlabel('Order ID')
+ax.set_ylabel('Time (minutes)')
+ax.set_title('Processing Times by Order', fontweight='bold')
+ax.set_xticks(x)
+ax.set_xticklabels(df_bikes['id'], rotation=45)
+ax.legend()
+ax.grid(axis='y', alpha=0.3)
+
+# 2. Due dates timeline
+ax = axes[0, 1]
+colors = {'Rush': '#DB6B6B', 'Standard': '#537E8F', 'Custom': '#F6B265'}
+for order_type in ['Rush', 'Standard', 'Custom']:
+    subset = df_bikes[df_bikes['type'] == order_type]
+    ax.scatter(subset['due'], subset.index, label=order_type,
+              color=colors[order_type], s=100, alpha=0.7)
+ax.axvline(x=1800, color='red', linestyle='--', label='Overtime starts', linewidth=2)
+ax.set_xlabel('Due Time (minutes)')
+ax.set_ylabel('Order Index')
+ax.set_title('Due Dates and Overtime Threshold', fontweight='bold')
+ax.legend()
+ax.grid(alpha=0.3)
+
+# 3. Order type distribution
+ax = axes[1, 0]
+type_counts = df_bikes['type'].value_counts()
+colors_pie = [colors[t] for t in type_counts.index]
+ax.pie(type_counts.values, labels=type_counts.index, autopct='%1.0f%%',
+       colors=colors_pie, startangle=90)
+ax.set_title('Order Mix', fontweight='bold')
+
+# 4. Penalty distribution
+ax = axes[1, 1]
+penalty_by_type = df_bikes.groupby('type')['penalty'].agg(['sum', 'mean', 'count'])
+x_pos = np.arange(len(penalty_by_type))
+ax.bar(x_pos, penalty_by_type['sum'], color=[colors[t] for t in penalty_by_type.index], alpha=0.7)
+ax.set_xlabel('Order Type')
+ax.set_ylabel('Total Penalty Exposure (€)')
+ax.set_title('Maximum Penalty Risk by Type', fontweight='bold')
+ax.set_xticks(x_pos)
+ax.set_xticklabels(penalty_by_type.index)
+ax.grid(axis='y', alpha=0.3)
+
+# Add value labels
+for i, v in enumerate(penalty_by_type['sum']):
+    ax.text(i, v, f'€{v:.0f}', ha='center', va='bottom', fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+
+print("\nKey Insights:")
+print(f"  - Tightest deadline: Order {df_bikes.loc[df_bikes['due'].idxmin(), 'id']} (due at {df_bikes['due'].min()} min)")
+print(f"  - Longest processing: Order {df_bikes.loc[(df_bikes['assembly']+df_bikes['painting']).idxmax(), 'id']} ({(df_bikes['assembly']+df_bikes['painting']).max()} min total)")
+print(f"  - Rush orders have {df_bikes[df_bikes['type']=='Rush']['penalty'].iloc[0]/df_bikes[df_bikes['type']=='Standard']['penalty'].iloc[0]:.0f}x higher penalties")
+```
+
+# Starter Code & Helper Functions
+
+```{python}
+#| eval: true
+def calculate_schedule_cost(schedule, overtime_threshold=1800, overtime_rate_per_min=100/60):
     """
-    Schedule bikes through assembly and painting stations
+    Calculate total cost for a given schedule
 
     Parameters:
-    orders: list of bike orders
-    rule: scheduling rule to use ('FIFO', 'SPT', 'EDD', or 'CUSTOM')
+    - schedule: list of orders with completion times
+    - overtime_threshold: minute when overtime starts (default 1800)
+    - overtime_rate_per_min: cost per minute of overtime (default €1.67/min)
 
     Returns:
-    schedule: list of orders with start/completion times for each station
-    total_cost: total cost (overtime + penalties)
+    - Dictionary with cost breakdown
     """
+    total_overtime_cost = 0
+    total_penalty_cost = 0
+    late_orders = []
 
-    # Step 1: Sort orders based on your chosen rule
-    if rule == 'FIFO':
-        sorted_orders = orders.copy()  # Keep original order
-    elif rule == 'SPT':
-        # YOUR CODE: Sort by total processing time
-        sorted_orders =
-    elif rule == 'EDD':
-        # YOUR CODE: Sort by due date
-        sorted_orders =
-    else:
-        # YOUR CUSTOM RULE HERE
-        sorted_orders = orders.copy()
+    for order in schedule:
+        # Check for overtime (based on painting end time)
+        if order['painting_end'] > overtime_threshold:
+            overtime_minutes = order['painting_end'] - overtime_threshold
+            overtime_cost = overtime_minutes * overtime_rate_per_min
+            total_overtime_cost += overtime_cost
 
-    # Step 2: Schedule through both stations
+        # Check for late delivery
+        if order['completion'] > order['due']:
+            total_penalty_cost += order['penalty']
+            late_orders.append(order['id'])
+
+    return {
+        'total_cost': total_overtime_cost + total_penalty_cost,
+        'overtime_cost': total_overtime_cost,
+        'penalty_cost': total_penalty_cost,
+        'late_count': len(late_orders),
+        'late_orders': late_orders
+    }
+
+def two_stage_schedule(orders, sequence):
+    """
+    Schedule orders through assembly and painting stations
+
+    Parameters:
+    - orders: list of order dictionaries
+    - sequence: list of order IDs in desired processing order
+
+    Returns:
+    - scheduled_orders: list with start/end times added
+    """
+    # Create a copy and reorder based on sequence
+    order_dict = {o['id']: o.copy() for o in orders}
+    scheduled_orders = [order_dict[oid] for oid in sequence]
+
     assembly_time = 0
     painting_time = 0
 
-    for order in sorted_orders:
-        # Assembly station
+    for order in scheduled_orders:
+        # Assembly station (starts immediately when available)
         order['assembly_start'] = assembly_time
         order['assembly_end'] = assembly_time + order['assembly']
         assembly_time = order['assembly_end']
 
-        # Painting station (can't start until assembly is done)
+        # Painting station (must wait for both: painting available AND assembly done)
         order['painting_start'] = max(painting_time, order['assembly_end'])
         order['painting_end'] = order['painting_start'] + order['painting']
         painting_time = order['painting_end']
 
+        # Overall completion is when painting finishes
         order['completion'] = order['painting_end']
 
-    # Step 3: Calculate costs
-    total_overtime_cost = 0
-    total_penalty_cost = 0
+    return scheduled_orders
 
-    for order in sorted_orders:
-        # Overtime cost (work after minute 1800)
-        if order['painting_end'] > 1800:
-            overtime_minutes = order['painting_end'] - 1800
-            # YOUR CODE: Calculate overtime cost
-            total_overtime_cost +=
-
-        # Late penalty
-        if order['completion'] > order['due']:
-            # YOUR CODE: Add penalty
-            total_penalty_cost +=
-
-    total_cost = total_overtime_cost + total_penalty_cost
-
-    return sorted_orders, total_cost
-
-# Test your solution with different rules
-rules_to_test = ['FIFO', 'SPT', 'EDD']
-results = {}
-
-for rule in rules_to_test:
-    schedule, cost = schedule_bike_factory(bike_orders.copy(), rule)
-    results[rule] = {'schedule': schedule, 'cost': cost}
-    print(f"{rule}: Total cost = €{cost:.2f}")
+print("Helper functions loaded!")
+print("\nAvailable functions:")
+print("  - calculate_schedule_cost(schedule) → cost breakdown")
+print("  - two_stage_schedule(orders, sequence) → scheduled orders with times")
 ```
 
-## Visualize Your Best Solution
+## Example: Testing a Simple Schedule
+
+```{python}
+#| eval: true
+# Example: Schedule in original order (FIFO approach)
+print("Example: FIFO Schedule (Original Order)")
+
+# Create sequence in original order
+fifo_sequence = [o['id'] for o in bike_orders]
+print(f"Order sequence: {fifo_sequence}")
+
+# Schedule the orders (function just takes the schedule created)
+# Hint: Print `fifo_sequence` to see what's expected for the function to work
+fifo_schedule = two_stage_schedule(bike_orders, fifo_sequence)
+
+# Calculate costs (this)
+fifo_costs = calculate_schedule_cost(fifo_schedule)
+
+print(f"\nResults:")
+print(f"  Total Cost: €{fifo_costs['total_cost']:.2f}")
+print(f"  Breakdown:")
+print(f"    - Overtime: €{fifo_costs['overtime_cost']:.2f}")
+print(f"    - Penalties: €{fifo_costs['penalty_cost']:.2f}")
+print(f"  Late orders: {fifo_costs['late_count']} out of {len(bike_orders)}")
+print(f"  Final completion: {fifo_schedule[-1]['completion']} minutes ({fifo_schedule[-1]['completion']/60:.1f} hours)")
+
+print("\nThis is just ONE possible schedule. Can you do better?")
+```
+
+# Your Task
+
+## Step 1: Understand the Problem
+
+Before coding, think through these questions:
+
+- What makes a "good" schedule for this problem?
+- How does the two-stage constraint affect your choices?
+
+## Step 2: Implement Different Scheduling Rules
+
+Try multiple approaches and compare them to select the best one.
 
 ```{python}
 #| eval: false
-# Visualize your best scheduling approach
-best_rule = min(results.keys(), key=lambda x: results[x]['cost'])
-best_schedule = results[best_rule]['schedule']
+# YOUR SOLUTION HERE
 
-# Create Gantt chart for the two-stage process
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 8))
-
-# Assembly station
-for i, order in enumerate(best_schedule):
-    color = '#DB6B6B' if order['type'] == 'Rush' else '#537E8F' if order['type'] == 'Standard' else '#F6B265'
-    ax1.barh(0, order['assembly'], left=order['assembly_start'],
-            height=0.8, color=color, alpha=0.7, edgecolor='black')
-    ax1.text(order['assembly_start'] + order['assembly']/2, 0,
-            order['id'], ha='center', va='center', fontsize=8)
-
-ax1.set_ylim(-0.5, 0.5)
-ax1.set_yticks([0])
-ax1.set_yticklabels(['Assembly'])
-ax1.set_xlabel('Time (minutes)')
-ax1.set_title(f'Assembly Station - {best_rule} Schedule', fontweight='bold')
-ax1.axvline(x=1800, color='red', linestyle='--', label='Overtime starts')
-ax1.legend()
-
-# Painting station
-for i, order in enumerate(best_schedule):
-    color = '#DB6B6B' if order['type'] == 'Rush' else '#537E8F' if order['type'] == 'Standard' else '#F6B265'
-    ax2.barh(0, order['painting'], left=order['painting_start'],
-            height=0.8, color=color, alpha=0.7, edgecolor='black')
-    ax2.text(order['painting_start'] + order['painting']/2, 0,
-            order['id'], ha='center', va='center', fontsize=8)
-
-ax2.set_ylim(-0.5, 0.5)
-ax2.set_yticks([0])
-ax2.set_yticklabels(['Painting'])
-ax2.set_xlabel('Time (minutes)')
-ax2.set_title(f'Painting Station - {best_rule} Schedule', fontweight='bold')
-ax2.axvline(x=1800, color='red', linestyle='--', label='Overtime starts')
-ax2.legend()
-
-plt.suptitle(f'Best Solution: {best_rule} - Total Cost: €{results[best_rule]["cost"]:.2f}',
-            fontsize=14, fontweight='bold')
-plt.tight_layout()
-plt.show()
-
-# Print summary
-print(f"\nCompetition Summary:")
-print(f"Best approach: {best_rule}")
-print(f"Total cost: €{results[best_rule]['cost']:.2f}")
-print(f"Breakdown:")
-print(f"  - Overtime cost: €{sum([max(0, (o['painting_end']-1800)/60*100) for o in best_schedule]):.2f}")
-print(f"  - Penalty cost: €{sum([o['penalty'] if o['completion'] > o['due'] else 0 for o in best_schedule]):.2f}")
 ```
 
-:::{.callout-important}
-## Competition Submission Requirements
-1. Your scheduling function implementation
-2. Total cost achieved with your best approach
-3. Brief explanation (2-3 sentences) of your strategy
-4. Optional: Gantt chart visualization of your solution
+## Step 3: Visualize Your Best Solution
 
-**Evaluation Criteria:**
-- 50% - Solution quality (lowest cost)
-- 30% - Code correctness and clarity
-- 20% - Strategy explanation
-:::
+```{python}
+#| eval: false
+# Create Gantt chart for your best solution
+# YOUR SOLUTION HERE
+
+```
+
+## Step 4: Create Your Submission
+
+Prepare a one-slide presentation (PDF) containing:
+
+- **Your Best Schedule:** Total cost achieved (prominently displayed)
+- **Approach:** Which scheduling rule(s) did you use?
+- **Gantt Chart:** Visual showing your two-stage schedule (optional but recommended)
+- **Cost Breakdown:** Overtime vs. penalties
+- **Strategy Justification:** 2-3 sentences explaining why your approach works
+
+# Tips for Success
+
+## Strategy Suggestions
+
+1. **Start with Simple Rules:** Get FIFO and EDD working first
+2. **Understand Two-Stage Logic:** The painting station often has idle time - that's normal!
+3. **Consider Trade-offs:** Sometimes accepting overtime prevents expensive penalties
+4. **Johnson's Algorithm:** It minimizes makespan, but that might not minimize costs!
+5. **Custom Rules:** Think about penalty-weighted priorities or hybrid approaches
+
+## Common Pitfalls to Avoid
+
+- **Forgetting the two-stage constraint:** Painting MUST wait for assembly to finish
+- **Overtime calculation:** Only count minutes AFTER 1800, not total time
+- **Penalty logic:** Only charge penalties if completion > due time
+- **Ignoring order types:** Rush orders have 3x the penalty of standard orders!
+
+## Final Checklist
+
+- [ ] All bikes scheduled through both stations
+- [ ] Painting never starts before assembly ends
+- [ ] No negative times
+- [ ] Overtime only charged after minute 1800
+- [ ] Penalties only for late orders (completion > due)
+- [ ] Total cost = overtime + penalties
+
+# Good Luck!
