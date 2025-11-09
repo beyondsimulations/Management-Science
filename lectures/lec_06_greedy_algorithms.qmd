@@ -109,6 +109,47 @@ This is the **greedy choice problem**: Which local decision leads to the best gl
 - **But:** No guarantee of global optimality
 :::
 
+## The Greedy Paradigm
+
+[Algorithmic strategy that builds solutions piece by piece]{.highlight}
+
+. . .
+
+**Core Philosophy:**
+
+::: incremental
+- Make the **best immediate decision** at each step
+- Never reconsider previous choices (no backtracking)
+- Hope that local optimality leads to global optimality
+- Trade guaranteed optimality for speed and simplicity
+:::
+
+. . .
+
+:::{.callout-note}
+Greedy algorithms are one of the **three major algorithmic paradigms** alongside Divide & Conquer (e.g., merge sort) and Dynamic Programming (e.g., Fibonacci with memoization).
+:::
+
+## Greedy in Everyday Life
+
+[You already use greedy thinking daily!]{.highlight}
+
+. . .
+
+**Common Greedy Decisions:**
+
+::: incremental
+- **Making change:** Give the largest coin first (€2 → €1 → €0.50...)
+- **Grocery shopping:** Pick items with best price/value ratio
+- **Route planning:** Take the nearest unvisited landmark
+- **Packing a suitcase:** Put largest items in first
+- **Reading emails:** Answer quick replies first, defer complex ones
+:::
+
+. . .
+
+[Question]{.question}: Which of these actually gives the optimal solution?
+
 ## When Greedy Works vs. Fails
 
 [Not all greedy algorithms are optimal]{.highlight}
