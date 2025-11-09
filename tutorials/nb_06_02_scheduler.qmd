@@ -17,59 +17,18 @@ code-links:
 
 ## The Friday Afternoon Crisis
 
-**It's Friday 2:00 PM.** The production manager just quit unexpectedly, leaving you with a major problem:
+**It's Friday at 06:00 in the morning.** The production manager just quit unexpectedly, leaving you with a major problem:
 
-- **16 custom bicycle orders** received this week - all promised for delivery Monday
+- **16 custom bicycle orders** received this week - all promised for delivery this Friday
 - **2 workstations** available: Assembly Station and Painting Station
 - **Sequential process:** Every bike MUST go through Assembly first, then Painting
-- **Skeleton crew:** Weekend staffing is minimal - only one technician per station
+- **Skeleton crew:** Staffing is minimal - only one technician per station
 - **Cost pressures:**
-  - Overtime costs **€100/hour** for any work after Saturday 8 PM (minute 1800)
+  - Overtime costs **€100/hour** for any work after Friday 19:00 (minute 780)
   - Late delivery penalties ranging from **€50 to €150 per order**
+  - These are one time fees for missed deadlines, the bikes still have to be completed till saturday morning as customers with missed deadlines will collect them then
 
 **CEO's Message:** "We can't afford to lose these customers before the holiday season. Figure out the optimal schedule and minimize our costs. Our reputation depends on it!"
-
-## The Challenge
-
-### Your Mission
-
-Schedule all 16 bicycle orders through both workstations to **minimize total cost** (overtime + late penalties).
-
-### The Two-Stage Process
-
-Each bicycle must follow this sequence:
-
-1. **Assembly Station:** Frame assembly, component installation
-2. **Painting Station:** Surface prep, painting, curing (can only start AFTER assembly completes)
-
-**Critical Constraint:** A bike cannot begin painting until its assembly is finished!
-
-### Success Metrics
-
-Your schedule will be evaluated on:
-
-1. **Total Cost (70%):** Overtime costs + Late delivery penalties
-2. **Strategy Clarity (30%):** Clear explanation of your approach
-
-### Financial Impact
-
-**Overtime Costs:**
-
-- Regular hours: Friday 2 PM - Saturday 8 PM (0 minutes - 1800 minutes)
-- Overtime: After Saturday 8 PM (minute 1800+)
-- Rate: €100 per hour (€1.67 per minute)
-
-**Late Penalties:**
-
-- Rush orders: €150 per late delivery
-- Standard orders: €50 per late delivery
-- Custom orders: €100 per late delivery
-
-**Example Cost Calculation:**
-
-- If painting finishes at minute 1860 (60 min overtime): 60 ÷ 60 × €100 = **€100**
-- If order B02 (rush) completes after minute 360: **€150 penalty**
-- Total cost for this scenario: **€250**
 
 # Data Access & Analysis
 
@@ -100,11 +59,11 @@ bike_orders = [
     {'id': 'B06', 'type': 'Standard', 'assembly': 40, 'painting': 30, 'due': 600, 'penalty': 50},
     {'id': 'B07', 'type': 'Rush', 'assembly': 35, 'painting': 25, 'due': 240, 'penalty': 150},
     {'id': 'B08', 'type': 'Standard', 'assembly': 55, 'painting': 35, 'due': 660, 'penalty': 50},
-    {'id': 'B09', 'type': 'Custom', 'assembly': 75, 'painting': 50, 'due': 840, 'penalty': 100},
+    {'id': 'B09', 'type': 'Custom', 'assembly': 75, 'painting': 50, 'due': 640, 'penalty': 100},
     {'id': 'B10', 'type': 'Standard', 'assembly': 45, 'painting': 30, 'due': 520, 'penalty': 50},
     {'id': 'B11', 'type': 'Rush', 'assembly': 40, 'painting': 35, 'due': 280, 'penalty': 150},
     {'id': 'B12', 'type': 'Standard', 'assembly': 50, 'painting': 40, 'due': 580, 'penalty': 50},
-    {'id': 'B13', 'type': 'Custom', 'assembly': 85, 'painting': 55, 'due': 900, 'penalty': 100},
+    {'id': 'B13', 'type': 'Custom', 'assembly': 85, 'painting': 55, 'due': 780, 'penalty': 100},
     {'id': 'B14', 'type': 'Rush', 'assembly': 45, 'painting': 30, 'due': 320, 'penalty': 150},
     {'id': 'B15', 'type': 'Standard', 'assembly': 35, 'painting': 25, 'due': 640, 'penalty': 50},
     {'id': 'B16', 'type': 'Standard', 'assembly': 60, 'painting': 45, 'due': 700, 'penalty': 50}
@@ -113,7 +72,7 @@ bike_orders = [
 # Convert to DataFrame for analysis
 df_bikes = pd.DataFrame(bike_orders)
 
-print("Custom Cycles - Weekend Rush Orders")
+print("Custom Cycles - Rush Orders")
 print("=" * 50)
 print(f"Total orders: {len(df_bikes)}")
 print(f"\nOrder breakdown by type:")
@@ -124,9 +83,9 @@ print(f"  Total painting time: {df_bikes['painting'].sum()} minutes ({df_bikes['
 print(f"  Average assembly: {df_bikes['assembly'].mean():.1f} minutes")
 print(f"  Average painting: {df_bikes['painting'].mean():.1f} minutes")
 print(f"\nTime constraints:")
-print(f"  Work starts: Friday 2:00 PM (minute 0)")
-print(f"  Regular hours end: Saturday 8:00 PM (minute 1800)")
-print(f"  Overtime rate: €100/hour after minute 1800")
+print(f"  Work starts: Friday 6:00 (minute 0)")
+print(f"  Regular hours end: Friday 19:00 (minute 780)")
+print(f"  Overtime rate: €100/hour after minute 780")
 print(f"\nPenalty exposure:")
 print(f"  Total if ALL orders late: €{df_bikes['penalty'].sum():,}")
 # DON'T MODIFY ABOVE!
@@ -160,7 +119,7 @@ for order_type in ['Rush', 'Standard', 'Custom']:
     subset = df_bikes[df_bikes['type'] == order_type]
     ax.scatter(subset['due'], subset.index, label=order_type,
               color=colors[order_type], s=100, alpha=0.7)
-ax.axvline(x=1800, color='red', linestyle='--', label='Overtime starts', linewidth=2)
+ax.axvline(x=780, color='red', linestyle='--', label='Overtime starts', linewidth=2)
 ax.set_xlabel('Due Time (minutes)')
 ax.set_ylabel('Order Index')
 ax.set_title('Due Dates and Overtime Threshold', fontweight='bold')
@@ -204,13 +163,13 @@ print(f"  - Rush orders have {df_bikes[df_bikes['type']=='Rush']['penalty'].iloc
 
 ```{python}
 #| eval: true
-def calculate_schedule_cost(schedule, overtime_threshold=1800, overtime_rate_per_min=100/60):
+def calculate_schedule_cost(schedule, overtime_threshold=780, overtime_rate_per_min=100/60):
     """
     Calculate total cost for a given schedule
 
     Parameters:
     - schedule: list of orders with completion times
-    - overtime_threshold: minute when overtime starts (default 1800)
+    - overtime_threshold: minute when overtime starts (default 780)
     - overtime_rate_per_min: cost per minute of overtime (default €1.67/min)
 
     Returns:
