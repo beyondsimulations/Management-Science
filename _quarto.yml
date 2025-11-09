@@ -61,7 +61,7 @@ website:
             href: tutorials/nb_03_03_visualization.qmd
       - section: "04 Monte Carlo"
         contents:
-          - text: "04 Concepts"
+          - text: "04 Lecture"
             href: lectures/lec_04_monte_carlo.qmd
           - text: "NB-04-01 Monte Carlo"
             href: tutorials/nb_04_01_monte_carlo.qmd
@@ -69,12 +69,20 @@ website:
             href: tutorials/nb_04_02_techventure.qmd
       - section: "05 Forecasting"
         contents:
-          - text: "05 Forecasting"
+          - text: "05 Lecture"
             href: lectures/lec_05_forecasting.qmd
           - text: "NB-05-01 Time Series"
             href: tutorials/nb_05_01_time_series.qmd
           - text: "NB-05-02 Competition"
             href: tutorials/nb_05_02_predictor.qmd
+      - section: "06 Greedy"
+        contents:
+          - text: "06 Lecture"
+            href: lectures/lec_06_greedy_algorithms.qmd
+          - text: "NB-06-01 Scheduling"
+            href: tutorials/nb_06_01_scheduling.qmd
+          - text: "NB-06-02 Competition"
+            href: tutorials/nb_06_02_scheduler.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd
