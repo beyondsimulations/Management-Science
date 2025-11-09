@@ -1,0 +1,213 @@
+---
+title: "Competition 03 - The Cycle Scheduler Challenge"
+subtitle: "Management Science - Manufacturing Competition"
+code-links:
+  - text: Python
+    href: nb_06_02_scheduler.py
+    icon: hand-thumbs-up
+---
+
+# Client Briefing: Custom Cycles Manufacturing
+
+## Competition Scenario
+
+You've been hired as the operations manager for a custom bicycle factory. It's Friday afternoon, and you've just received a batch of urgent orders that must be completed over the weekend.
+
+**The Challenge:**
+- **16 bicycle orders** with varying complexity
+- **2 workstations:** Assembly and Painting (each bike needs both)
+- **Each order must go through Assembly first, then Painting**
+- **Overtime penalty:** €100/hour for any work after 8pm Saturday
+- **Customer penalties:** Late delivery incurs penalties
+
+**Your Task:** Schedule the orders to minimize total cost (overtime + late penalties).
+
+## Competition Data
+
+```{python}
+#| eval: true
+# Competition orders - DO NOT MODIFY THIS DATA
+bike_orders = [
+    {'id': 'B01', 'type': 'Standard', 'assembly': 45, 'painting': 30, 'due': 480, 'penalty': 50},
+    {'id': 'B02', 'type': 'Rush', 'assembly': 60, 'painting': 45, 'due': 360, 'penalty': 150},
+    {'id': 'B03', 'type': 'Standard', 'assembly': 30, 'painting': 25, 'due': 540, 'penalty': 50},
+    {'id': 'B04', 'type': 'Rush', 'assembly': 50, 'painting': 40, 'due': 300, 'penalty': 150},
+    {'id': 'B05', 'type': 'Custom', 'assembly': 90, 'painting': 60, 'due': 720, 'penalty': 100},
+    {'id': 'B06', 'type': 'Standard', 'assembly': 40, 'painting': 30, 'due': 600, 'penalty': 50},
+    {'id': 'B07', 'type': 'Rush', 'assembly': 35, 'painting': 25, 'due': 240, 'penalty': 150},
+    {'id': 'B08', 'type': 'Standard', 'assembly': 55, 'painting': 35, 'due': 660, 'penalty': 50},
+    {'id': 'B09', 'type': 'Custom', 'assembly': 75, 'painting': 50, 'due': 840, 'penalty': 100},
+    {'id': 'B10', 'type': 'Standard', 'assembly': 45, 'painting': 30, 'due': 520, 'penalty': 50},
+    {'id': 'B11', 'type': 'Rush', 'assembly': 40, 'painting': 35, 'due': 280, 'penalty': 150},
+    {'id': 'B12', 'type': 'Standard', 'assembly': 50, 'painting': 40, 'due': 580, 'penalty': 50},
+    {'id': 'B13', 'type': 'Custom', 'assembly': 85, 'painting': 55, 'due': 900, 'penalty': 100},
+    {'id': 'B14', 'type': 'Rush', 'assembly': 45, 'painting': 30, 'due': 320, 'penalty': 150},
+    {'id': 'B15', 'type': 'Standard', 'assembly': 35, 'painting': 25, 'due': 640, 'penalty': 50},
+    {'id': 'B16', 'type': 'Standard', 'assembly': 60, 'painting': 45, 'due': 700, 'penalty': 50}
+]
+
+# Convert to DataFrame for analysis
+df_bikes = pd.DataFrame(bike_orders)
+print("Bike Factory Orders:")
+print(f"Total orders: {len(df_bikes)}")
+print(f"\nOrder breakdown:")
+print(df_bikes['type'].value_counts())
+print(f"\nTotal assembly time needed: {df_bikes['assembly'].sum()} minutes ({df_bikes['assembly'].sum()/60:.1f} hours)")
+print(f"Total painting time needed: {df_bikes['painting'].sum()} minutes ({df_bikes['painting'].sum()/60:.1f} hours)")
+print(f"\nWork starts: Friday 2pm (minute 0)")
+print(f"Regular hours end: Saturday 8pm (minute 1800)")
+print(f"Overtime rate: €100/hour after minute 1800")
+```
+
+## Your Competition Task
+
+Implement a two-stage scheduling algorithm that:
+1. Decides the order of bikes
+2. Schedules them through both workstations
+3. Minimizes total cost (overtime + penalties)
+
+```{python}
+#| eval: false
+# YOUR COMPETITION CODE HERE
+def schedule_bike_factory(orders, rule='EDD'):
+    """
+    Schedule bikes through assembly and painting stations
+
+    Parameters:
+    orders: list of bike orders
+    rule: scheduling rule to use ('FIFO', 'SPT', 'EDD', or 'CUSTOM')
+
+    Returns:
+    schedule: list of orders with start/completion times for each station
+    total_cost: total cost (overtime + penalties)
+    """
+
+    # Step 1: Sort orders based on your chosen rule
+    if rule == 'FIFO':
+        sorted_orders = orders.copy()  # Keep original order
+    elif rule == 'SPT':
+        # YOUR CODE: Sort by total processing time
+        sorted_orders =
+    elif rule == 'EDD':
+        # YOUR CODE: Sort by due date
+        sorted_orders =
+    else:
+        # YOUR CUSTOM RULE HERE
+        sorted_orders = orders.copy()
+
+    # Step 2: Schedule through both stations
+    assembly_time = 0
+    painting_time = 0
+
+    for order in sorted_orders:
+        # Assembly station
+        order['assembly_start'] = assembly_time
+        order['assembly_end'] = assembly_time + order['assembly']
+        assembly_time = order['assembly_end']
+
+        # Painting station (can't start until assembly is done)
+        order['painting_start'] = max(painting_time, order['assembly_end'])
+        order['painting_end'] = order['painting_start'] + order['painting']
+        painting_time = order['painting_end']
+
+        order['completion'] = order['painting_end']
+
+    # Step 3: Calculate costs
+    total_overtime_cost = 0
+    total_penalty_cost = 0
+
+    for order in sorted_orders:
+        # Overtime cost (work after minute 1800)
+        if order['painting_end'] > 1800:
+            overtime_minutes = order['painting_end'] - 1800
+            # YOUR CODE: Calculate overtime cost
+            total_overtime_cost +=
+
+        # Late penalty
+        if order['completion'] > order['due']:
+            # YOUR CODE: Add penalty
+            total_penalty_cost +=
+
+    total_cost = total_overtime_cost + total_penalty_cost
+
+    return sorted_orders, total_cost
+
+# Test your solution with different rules
+rules_to_test = ['FIFO', 'SPT', 'EDD']
+results = {}
+
+for rule in rules_to_test:
+    schedule, cost = schedule_bike_factory(bike_orders.copy(), rule)
+    results[rule] = {'schedule': schedule, 'cost': cost}
+    print(f"{rule}: Total cost = €{cost:.2f}")
+```
+
+## Visualize Your Best Solution
+
+```{python}
+#| eval: false
+# Visualize your best scheduling approach
+best_rule = min(results.keys(), key=lambda x: results[x]['cost'])
+best_schedule = results[best_rule]['schedule']
+
+# Create Gantt chart for the two-stage process
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 8))
+
+# Assembly station
+for i, order in enumerate(best_schedule):
+    color = '#DB6B6B' if order['type'] == 'Rush' else '#537E8F' if order['type'] == 'Standard' else '#F6B265'
+    ax1.barh(0, order['assembly'], left=order['assembly_start'],
+            height=0.8, color=color, alpha=0.7, edgecolor='black')
+    ax1.text(order['assembly_start'] + order['assembly']/2, 0,
+            order['id'], ha='center', va='center', fontsize=8)
+
+ax1.set_ylim(-0.5, 0.5)
+ax1.set_yticks([0])
+ax1.set_yticklabels(['Assembly'])
+ax1.set_xlabel('Time (minutes)')
+ax1.set_title(f'Assembly Station - {best_rule} Schedule', fontweight='bold')
+ax1.axvline(x=1800, color='red', linestyle='--', label='Overtime starts')
+ax1.legend()
+
+# Painting station
+for i, order in enumerate(best_schedule):
+    color = '#DB6B6B' if order['type'] == 'Rush' else '#537E8F' if order['type'] == 'Standard' else '#F6B265'
+    ax2.barh(0, order['painting'], left=order['painting_start'],
+            height=0.8, color=color, alpha=0.7, edgecolor='black')
+    ax2.text(order['painting_start'] + order['painting']/2, 0,
+            order['id'], ha='center', va='center', fontsize=8)
+
+ax2.set_ylim(-0.5, 0.5)
+ax2.set_yticks([0])
+ax2.set_yticklabels(['Painting'])
+ax2.set_xlabel('Time (minutes)')
+ax2.set_title(f'Painting Station - {best_rule} Schedule', fontweight='bold')
+ax2.axvline(x=1800, color='red', linestyle='--', label='Overtime starts')
+ax2.legend()
+
+plt.suptitle(f'Best Solution: {best_rule} - Total Cost: €{results[best_rule]["cost"]:.2f}',
+            fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()
+
+# Print summary
+print(f"\nCompetition Summary:")
+print(f"Best approach: {best_rule}")
+print(f"Total cost: €{results[best_rule]['cost']:.2f}")
+print(f"Breakdown:")
+print(f"  - Overtime cost: €{sum([max(0, (o['painting_end']-1800)/60*100) for o in best_schedule]):.2f}")
+print(f"  - Penalty cost: €{sum([o['penalty'] if o['completion'] > o['due'] else 0 for o in best_schedule]):.2f}")
+```
+
+:::{.callout-important}
+## Competition Submission Requirements
+1. Your scheduling function implementation
+2. Total cost achieved with your best approach
+3. Brief explanation (2-3 sentences) of your strategy
+4. Optional: Gantt chart visualization of your solution
+
+**Evaluation Criteria:**
+- 50% - Solution quality (lowest cost)
+- 30% - Code correctness and clarity
+- 20% - Strategy explanation
+:::
