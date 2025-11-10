@@ -271,7 +271,7 @@ flat_fitted = flat_es.fittedvalues
 
 axes[0].plot(t, flat_data, 'o-', color=BRAND_COLORS["twoDark"], alpha=0.7, linewidth=1.5, markersize=5, label='Actual Sales')
 axes[0].plot(t, flat_fitted, color=BRAND_COLORS["threeDark"], linestyle='--', linewidth=2.5, alpha=0.8, label='Simple ES (tracks well!)')
-axes[0].set_title('Stable Sales, fontweight='bold',fontsize=10)
+axes[0].set_title('Stable Sales', fontweight='bold',fontsize=10)
 axes[0].set_xlabel('Week',fontsize=9)
 axes[0].set_ylabel('Sales',fontsize=9)
 axes[0].legend()
@@ -286,7 +286,7 @@ trend_fitted = trend_es.fittedvalues
 axes[1].plot(t, trend_data, 'o-', color=BRAND_COLORS["oneDark"], alpha=0.7, linewidth=1.5, markersize=5, label='Actual Sales')
 axes[1].plot(t, trend_fitted, color=BRAND_COLORS["threeDark"], linestyle='--', linewidth=2.5, alpha=0.8, label='Simple ES (always behind!)')
 axes[1].plot(t, 100 + 3*t, color=BRAND_COLORS["twoDark"], linestyle='--', linewidth=2.5, alpha=0.7, label='True trend')
-axes[1].set_title('Growing Sales, fontweight='bold',fontsize=10)
+axes[1].set_title('Growing Sales', fontweight='bold',fontsize=10)
 axes[1].set_xlabel('Week',fontsize=9)
 axes[1].set_ylabel('Sales',fontsize=9)
 axes[1].legend()
