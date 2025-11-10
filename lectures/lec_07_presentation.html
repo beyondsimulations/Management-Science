@@ -273,7 +273,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>The Traveling Salesman Problem</h2>
 <p><span class="highlight">The classic optimization challenge: Visit all locations exactly once, minimize total distance.</span></p>
 <div class="fragment">
-<div id="b97a2485" class="cell" data-execution_count="1">
+<div id="9772c7d0" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -284,42 +284,68 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </section>
-<section id="the-complexity-explosion" class="slide level2">
-<h2>The Complexity Explosion</h2>
-<p><span class="question">Question</span>: With 12 cafés to visit, how many possible routes exist?</p>
+<section id="why-cant-computers-just-try-everything" class="slide level2">
+<h2>Why Can’t Computers Just Try Everything?</h2>
+<p><span class="highlight">Let’s calculate: 12 cafés = 12! = 479,001,600 routes</span></p>
 <div class="fragment">
-<p><strong>Answer: 12! = 479,001,600 possible routes</strong></p>
+<p><strong>If your computer checks 1 million routes per second:</strong></p>
+<ul>
+<li class="fragment">5 cafés: 0.0001 seconds ✓</li>
+<li class="fragment">10 cafés: 0.18 seconds ✓</li>
+<li class="fragment">12 cafés: 8 minutes ⚠️</li>
+<li class="fragment">15 cafés: 12 hours ⚠️</li>
+<li class="fragment">20 cafés: 77,000 years ☠️</li>
+</ul>
 </div>
 <div class="fragment">
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Number of Stops</strong> - 5 cafés - 8 cafés - 12 cafés - 20 cafés</p>
-</div><div class="column" style="width:50%;">
-<p><strong>Possible Routes</strong> - 120 - 40,320 - 479 million - 2.4 quintillion</p>
-</div></div>
-</div>
-<div class="fragment">
-<div class="callout callout-warning callout-style-simple">
+<div class="callout callout-important callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Testing all routes for 12 cafés would take <span class="highlight">hours</span> even on a fast computer. For 20 cafés? <span class="highlight">77,000 years</span>!</p>
+<p><strong>The Reality:</strong> Amazon has 100,000+ delivery stops daily. Exact optimization would take longer than the universe has existed!</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="why-tsp-is-hard" class="slide level2">
-<h2>Why TSP is Hard</h2>
+<section id="the-complexity-explosion" class="slide level2">
+<h2>The Complexity Explosion</h2>
 <p><span class="highlight">The factorial growth makes exhaustive search impossible.</span></p>
-<div id="eafc63be" class="cell" data-execution_count="2">
+<div id="d930e681" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
 <p><img data-src="lec_07_local_search_files/figure-revealjs/cell-3-output-1.png" width="946" height="561"></p>
 </figure>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="local-search-framework" class="title-slide slide level1 title center">
+<h1><span class="flow">Local Search Framework</span></h1>
+
+</section>
+<section id="the-four-pillars-of-local-search" class="slide level2">
+<h2>The Four Pillars of Local Search</h2>
+<p><span class="highlight">Any problem can be solved with local search by defining:</span></p>
+<ol type="1">
+<li class="fragment"><strong>Search Space:</strong> All possible solutions (3.6M routes for 10 cafés!)</li>
+<li class="fragment"><strong>Initial Solution:</strong> Starting point (our greedy route)</li>
+<li class="fragment"><strong>Objective Function:</strong> How we measure quality (total distance)</li>
+<li class="fragment"><strong>Neighborhood Structure:</strong> How to create “nearby” solutions (2-opt swaps)</li>
+</ol>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>The power of local search: The same “engine” works for routing, scheduling, or any combinatorial problem - just plug in different components!</p>
+</div>
 </div>
 </div>
 </div>
@@ -348,13 +374,38 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </section>
-<section id="nearest-neighbor-in-action" class="slide level2">
-<h2>Nearest Neighbor in Action</h2>
-<div id="23f1dbd4" class="cell" data-execution_count="3">
+<section id="construction-methods-comparison" class="slide level2">
+<h2>Construction Methods Comparison</h2>
+<p><span class="highlight">Different ways to build initial routes:</span></p>
+<div id="0e9ca351" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-4-output-1.png" width="947" height="753"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-4-output-1.png" width="948" height="561"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Different construction methods give different starting points. The better your start, the better your final result after improvement!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="nearest-neighbor-in-action" class="slide level2">
+<h2>Nearest Neighbor in Action</h2>
+<div id="d65a81f5" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-5-output-1.png" width="947" height="753"></p>
 </figure>
 </div>
 </div>
@@ -373,7 +424,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Nearest neighbor typically gives solutions <span class="highlight">15-20% worse</span> than optimal. Can we improve it?</p>
+<p>Nearest neighbor typically gives solutions <span class="highlight">15-25% worse</span> than optimal. Can we improve it?</p>
 </div>
 </div>
 </div>
@@ -389,11 +440,11 @@ Dr.&nbsp;Tobias Vlćek
 <p><span class="highlight">Systematically improve routes by removing crossing paths.</span></p>
 <div class="fragment">
 <p><strong>The Idea:</strong> Take two edges and swap them to uncross the route</p>
-<div id="8258c121" class="cell" data-execution_count="4">
+<div id="26ab83df" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-5-output-1.png" width="1140" height="466"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-6-output-1.png" width="1140" height="466"></p>
 </figure>
 </div>
 </div>
@@ -428,12 +479,36 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="opt-applied-to-our-route" class="slide level2">
 <h2>2-Opt Applied to Our Route</h2>
-<div id="62271470" class="cell" data-execution_count="5">
+<div id="5c06001f" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-6-output-1.png" width="1330" height="567"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-7-output-1.png" width="1330" height="567"></p>
 </figure>
+</div>
+</div>
+</div>
+</section>
+<section id="beyond-2-opt-more-powerful-moves" class="slide level2">
+<h2>Beyond 2-Opt: More Powerful Moves</h2>
+<p><span class="highlight">The k-opt family of improvements:</span></p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>2-opt</strong> - Removes 2 edges - 1 way to reconnect - O(n²) combinations - Fast, good results</p>
+</div><div class="column" style="width:33%;">
+<p><strong>3-opt</strong> - Removes 3 edges - 7 ways to reconnect - O(n³) combinations - Better but slower</p>
+</div><div class="column" style="width:33%;">
+<p><strong>Or-opt</strong> - Moves 1-3 nodes - Different philosophy - Good for time windows - Preserves orientation</p>
+</div></div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Industry practice: Start with 2-opt (fast), use 3-opt if you have time!</p>
+</div>
 </div>
 </div>
 </div>
@@ -457,20 +532,17 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </section>
-<section id="when-local-search-gets-stuck" class="slide level2">
-<h2>When Local Search Gets Stuck</h2>
-<p><span class="question">Question</span>: What happens when no single swap improves the solution?</p>
+<section id="the-local-optimum-trap-a-hikers-dilemma" class="slide level2">
+<h2>The Local Optimum Trap: A Hiker’s Dilemma</h2>
+<p><span class="highlight">Imagine you’re a hiker dropped in foggy mountains at night…</span></p>
 <div class="fragment">
-<p><strong>Local Optimum:</strong> Best in the neighborhood, but not globally optimal</p>
-<div id="80538ba3" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-7-output-1.png" width="946" height="465"></p>
-</figure>
+<p><strong>Your Mission:</strong> Find the highest peak (global optimum) <strong>Your Tool:</strong> An altimeter (objective function) <strong>Your Vision:</strong> Only the ground at your feet (local neighborhood)</p>
 </div>
+<div class="fragment">
+<p><strong>The Greedy Strategy:</strong> Always step uphill</p>
 </div>
-</div>
+<div class="fragment">
+<p><span class="question">Question</span>: What happens when you reach the top of a small hill?</p>
 </div>
 <div class="fragment">
 <div class="callout callout-warning callout-style-simple">
@@ -479,7 +551,101 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>2-opt can only make small changes. Sometimes you need <span class="highlight">bigger moves</span> or different approaches (next week: metaheuristics)!</p>
+<p>You’re stuck! Every step is downhill, but you might be on a tiny hill while Mount Everest is nearby. This is the <span class="highlight">local optimum trap</span>!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-local-optima" class="slide level2">
+<h2>Visualizing Local Optima</h2>
+<div id="46fa9fa1" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-8-output-1.png" width="946" height="465"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="escaping-local-optima-multi-start-strategy" class="slide level2">
+<h2>Escaping Local Optima: Multi-Start Strategy</h2>
+<p><span class="highlight">Simple fix: Don’t put all eggs in one basket!</span></p>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> multi_start_optimization(n_starts<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb2-2"><a></a>    <span class="co">"""Try multiple random starts, keep the best"""</span></span>
+<span id="cb2-3"><a></a>    best_route <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-4"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_starts):</span>
+<span id="cb2-5"><a></a>        <span class="co"># New random start</span></span>
+<span id="cb2-6"><a></a>        route <span class="op">=</span> random_initial_route()</span>
+<span id="cb2-7"><a></a>        <span class="co"># Improve with 2-opt</span></span>
+<span id="cb2-8"><a></a>        route <span class="op">=</span> improve_with_2opt(route)</span>
+<span id="cb2-9"><a></a>        <span class="co"># Keep if best so far</span></span>
+<span id="cb2-10"><a></a>        <span class="cf">if</span> better_than(route, best_route):</span>
+<span id="cb2-11"><a></a>            best_route <span class="op">=</span> route</span>
+<span id="cb2-12"><a></a>    <span class="cf">return</span> best_route</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Like hiring 10 drivers, letting each plan their own route, then picking the best! Simple but effective.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="real-world-impact-how-good-is-good-enough" class="slide level2">
+<h2>Real-World Impact: How Good is Good Enough?</h2>
+<p><span class="highlight">Industry benchmarks for delivery optimization:</span></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>vs Optimal</th>
+<th>Industry Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Human intuition</td>
+<td>+40-60%</td>
+<td>Still common!</td>
+</tr>
+<tr class="even">
+<td>Nearest Neighbor</td>
+<td>+20-25%</td>
+<td>Quick dispatch</td>
+</tr>
+<tr class="odd">
+<td>NN + 2-opt</td>
+<td>+5-15%</td>
+<td>Standard practice</td>
+</tr>
+<tr class="even">
+<td>Advanced Meta</td>
+<td>+2-5%</td>
+<td>Premium logistics</td>
+</tr>
+<tr class="odd">
+<td>Exact (if possible)</td>
+<td>0%</td>
+<td>Research only</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Business Reality:</strong> A 10% improvement = millions in savings for large logistics companies. Your 2-opt implementation could literally pay for itself in one day!</p>
 </div>
 </div>
 </div>
@@ -509,6 +675,76 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Mission Briefing</span></h1>
 
 </section>
+<section id="choosing-your-weapon-algorithm-selection" class="slide level2">
+<h2>Choosing Your Weapon: Algorithm Selection</h2>
+<p><span class="highlight">Different situations call for different approaches:</span></p>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 46%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Best Approach</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Need solution NOW (&lt; 1 sec)</td>
+<td>Nearest Neighbor</td>
+<td>Lightning fast</td>
+</tr>
+<tr class="even">
+<td>Have 1 minute</td>
+<td>NN + 2-opt</td>
+<td>Good balance</td>
+</tr>
+<tr class="odd">
+<td>Have 5 minutes</td>
+<td>Multi-start + 2-opt</td>
+<td>Explore more options</td>
+</tr>
+<tr class="even">
+<td>Time windows critical</td>
+<td>NN (prioritize early) + Or-opt</td>
+<td>Preserves time feasibility</td>
+</tr>
+<tr class="odd">
+<td>Academic benchmark</td>
+<td>3-opt or SA</td>
+<td>Maximum quality</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Today’s Competition:</strong> You have 60 minutes - use multi-start with 2-opt!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="implementation-pitfalls-to-avoid" class="slide level2">
+<h2>Implementation Pitfalls to Avoid</h2>
+<p><span class="highlight">Common bugs that cost you 30 minutes:</span></p>
+<p>❌ <strong>Forgetting return to bakery:</strong> Your distance calculation must include the trip back!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># WRONG</span></span>
+<span id="cb3-2"><a></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between consecutive stops)</span>
+<span id="cb3-3"><a></a><span class="co"># RIGHT</span></span>
+<span id="cb3-4"><a></a>total <span class="op">=</span> <span class="bu">sum</span>(distances) <span class="op">+</span> distance(last_stop, bakery)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>❌ <strong>Index confusion in 2-opt:</strong> Remember Python slicing!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># The 2-opt swap reverses route[i+1:j+1], not route[i:j]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>❌ <strong>Modifying while iterating:</strong> Make a copy!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>new_route <span class="op">=</span> current_route.copy()  <span class="co"># Don't modify original</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="your-toolkit-for-today" class="slide level2">
 <h2>Your Toolkit for Today</h2>
 <p><span class="highlight">Construction + Improvement = Better Routes</span></p>
@@ -537,7 +773,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Next: Bean Counter Practice</h2>
 <p><span class="highlight">In the notebook, you’ll help Bean Counter optimize coffee bean deliveries to 10 franchises.</span></p>
 <div class="fragment">
-<p><strong>You’ll implement:</strong> ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Performance comparison :::</p>
+<p><strong>You’ll implement:</strong> ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Multi-start optimization :::</p>
 </div>
 <div class="fragment">
 <p><strong>Then:</strong> Apply these skills to Artisan Bakery’s 12-café challenge!</p>
@@ -557,6 +793,25 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 <div class="callout-content">
 <p><strong>Hint:</strong> Start with nearest neighbor, but don’t forget about those time windows! Sometimes a slightly longer route that meets deadlines is better than the shortest route that arrives late.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="next-week-when-local-search-isnt-enough" class="slide level2">
+<h2>Next Week: When Local Search Isn’t Enough</h2>
+<p><span class="highlight">Today we learned to climb hills. Next week: How to jump mountains!</span></p>
+<div class="fragment">
+<p><strong>Coming Attractions:</strong> - <strong>Simulated Annealing:</strong> Accept worse solutions probabilistically (like heating metal) - <strong>Tabu Search:</strong> Remember where you’ve been (search with memory) - <strong>Genetic Algorithms:</strong> Evolve solutions (survival of the fittest routes)</p>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>All use the same local search foundation - just with clever tricks to escape local optima!</p>
 </div>
 </div>
 </div>
@@ -582,8 +837,10 @@ Dr.&nbsp;Tobias Vlćek
 <div class="callout-content">
 <ul>
 <li>TSP is computationally hard (factorial growth)</li>
+<li>Local search is a universal framework (4 pillars)</li>
 <li>Greedy construction gives fast initial solutions</li>
-<li>Local search (2-opt) improves solutions iteratively</li>
+<li>2-opt improves solutions iteratively</li>
+<li>Multi-start helps escape local optima</li>
 <li>Real constraints (time windows) add complexity</li>
 <li>Two-phase approach: Build then improve!</li>
 </ul>

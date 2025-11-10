@@ -430,12 +430,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-routing-problem" id="toc-the-routing-problem" class="nav-link" data-scroll-target="#the-routing-problem"><span class="flow">The Routing Problem</span></a>
   <ul class="collapse">
   <li><a href="#the-traveling-salesman-problem" id="toc-the-traveling-salesman-problem" class="nav-link" data-scroll-target="#the-traveling-salesman-problem">The Traveling Salesman Problem</a></li>
+  <li><a href="#why-cant-computers-just-try-everything" id="toc-why-cant-computers-just-try-everything" class="nav-link" data-scroll-target="#why-cant-computers-just-try-everything">Why Can’t Computers Just Try Everything?</a></li>
   <li><a href="#the-complexity-explosion" id="toc-the-complexity-explosion" class="nav-link" data-scroll-target="#the-complexity-explosion">The Complexity Explosion</a></li>
-  <li><a href="#why-tsp-is-hard" id="toc-why-tsp-is-hard" class="nav-link" data-scroll-target="#why-tsp-is-hard">Why TSP is Hard</a></li>
+  </ul></li>
+  <li><a href="#local-search-framework" id="toc-local-search-framework" class="nav-link" data-scroll-target="#local-search-framework"><span class="flow">Local Search Framework</span></a>
+  <ul class="collapse">
+  <li><a href="#the-four-pillars-of-local-search" id="toc-the-four-pillars-of-local-search" class="nav-link" data-scroll-target="#the-four-pillars-of-local-search">The Four Pillars of Local Search</a></li>
   </ul></li>
   <li><a href="#greedy-construction" id="toc-greedy-construction" class="nav-link" data-scroll-target="#greedy-construction"><span class="flow">Greedy Construction</span></a>
   <ul class="collapse">
   <li><a href="#nearest-neighbor-algorithm" id="toc-nearest-neighbor-algorithm" class="nav-link" data-scroll-target="#nearest-neighbor-algorithm">Nearest Neighbor Algorithm</a></li>
+  <li><a href="#construction-methods-comparison" id="toc-construction-methods-comparison" class="nav-link" data-scroll-target="#construction-methods-comparison">Construction Methods Comparison</a></li>
   <li><a href="#nearest-neighbor-in-action" id="toc-nearest-neighbor-in-action" class="nav-link" data-scroll-target="#nearest-neighbor-in-action">Nearest Neighbor in Action</a></li>
   <li><a href="#the-problem-with-greedy" id="toc-the-problem-with-greedy" class="nav-link" data-scroll-target="#the-problem-with-greedy">The Problem with Greedy</a></li>
   </ul></li>
@@ -444,15 +449,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-2-opt-algorithm" id="toc-the-2-opt-algorithm" class="nav-link" data-scroll-target="#the-2-opt-algorithm">The 2-Opt Algorithm</a></li>
   <li><a href="#how-2-opt-works" id="toc-how-2-opt-works" class="nav-link" data-scroll-target="#how-2-opt-works">How 2-Opt Works</a></li>
   <li><a href="#opt-applied-to-our-route" id="toc-opt-applied-to-our-route" class="nav-link" data-scroll-target="#opt-applied-to-our-route">2-Opt Applied to Our Route</a></li>
+  <li><a href="#beyond-2-opt-more-powerful-moves" id="toc-beyond-2-opt-more-powerful-moves" class="nav-link" data-scroll-target="#beyond-2-opt-more-powerful-moves">Beyond 2-Opt: More Powerful Moves</a></li>
   <li><a href="#local-search-philosophy" id="toc-local-search-philosophy" class="nav-link" data-scroll-target="#local-search-philosophy">Local Search Philosophy</a></li>
-  <li><a href="#when-local-search-gets-stuck" id="toc-when-local-search-gets-stuck" class="nav-link" data-scroll-target="#when-local-search-gets-stuck">When Local Search Gets Stuck</a></li>
+  <li><a href="#the-local-optimum-trap-a-hikers-dilemma" id="toc-the-local-optimum-trap-a-hikers-dilemma" class="nav-link" data-scroll-target="#the-local-optimum-trap-a-hikers-dilemma">The Local Optimum Trap: A Hiker’s Dilemma</a></li>
+  <li><a href="#visualizing-local-optima" id="toc-visualizing-local-optima" class="nav-link" data-scroll-target="#visualizing-local-optima">Visualizing Local Optima</a></li>
+  <li><a href="#escaping-local-optima-multi-start-strategy" id="toc-escaping-local-optima-multi-start-strategy" class="nav-link" data-scroll-target="#escaping-local-optima-multi-start-strategy">Escaping Local Optima: Multi-Start Strategy</a></li>
+  <li><a href="#real-world-impact-how-good-is-good-enough" id="toc-real-world-impact-how-good-is-good-enough" class="nav-link" data-scroll-target="#real-world-impact-how-good-is-good-enough">Real-World Impact: How Good is Good Enough?</a></li>
   <li><a href="#time-windows-add-complexity" id="toc-time-windows-add-complexity" class="nav-link" data-scroll-target="#time-windows-add-complexity">Time Windows Add Complexity</a></li>
   </ul></li>
   <li><a href="#mission-briefing" id="toc-mission-briefing" class="nav-link" data-scroll-target="#mission-briefing"><span class="flow">Mission Briefing</span></a>
   <ul class="collapse">
+  <li><a href="#choosing-your-weapon-algorithm-selection" id="toc-choosing-your-weapon-algorithm-selection" class="nav-link" data-scroll-target="#choosing-your-weapon-algorithm-selection">Choosing Your Weapon: Algorithm Selection</a></li>
+  <li><a href="#implementation-pitfalls-to-avoid" id="toc-implementation-pitfalls-to-avoid" class="nav-link" data-scroll-target="#implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</a></li>
   <li><a href="#your-toolkit-for-today" id="toc-your-toolkit-for-today" class="nav-link" data-scroll-target="#your-toolkit-for-today">Your Toolkit for Today</a></li>
   <li><a href="#next-bean-counter-practice" id="toc-next-bean-counter-practice" class="nav-link" data-scroll-target="#next-bean-counter-practice">Next: Bean Counter Practice</a></li>
   <li><a href="#the-competition-challenge" id="toc-the-competition-challenge" class="nav-link" data-scroll-target="#the-competition-challenge">The Competition Challenge</a></li>
+  <li><a href="#next-week-when-local-search-isnt-enough" id="toc-next-week-when-local-search-isnt-enough" class="nav-link" data-scroll-target="#next-week-when-local-search-isnt-enough">Next Week: When Local Search Isn’t Enough</a></li>
   </ul></li>
   <li><a href="#literature" id="toc-literature" class="nav-link" data-scroll-target="#literature"><span class="flow">Literature</span></a>
   <ul class="collapse">
@@ -553,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="the-traveling-salesman-problem">The Traveling Salesman Problem</h2>
 <p><span class="highlight">The classic optimization challenge: Visit all locations exactly once, minimize total distance.</span></p>
 <p>. . .</p>
-<div id="b97a2485" class="cell" data-execution_count="1">
+<div id="9772c7d0" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -563,40 +575,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="the-complexity-explosion" class="level2">
-<h2 class="anchored" data-anchor-id="the-complexity-explosion">The Complexity Explosion</h2>
-<p><span class="question">Question</span>: With 12 cafés to visit, how many possible routes exist?</p>
+<section id="why-cant-computers-just-try-everything" class="level2">
+<h2 class="anchored" data-anchor-id="why-cant-computers-just-try-everything">Why Can’t Computers Just Try Everything?</h2>
+<p><span class="highlight">Let’s calculate: 12 cafés = 12! = 479,001,600 routes</span></p>
 <p>. . .</p>
-<p><strong>Answer: 12! = 479,001,600 possible routes</strong></p>
-<p>. . .</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Number of Stops</strong> - 5 cafés - 8 cafés - 12 cafés - 20 cafés</p>
-</div><div class="column" style="width:50%;">
-<p><strong>Possible Routes</strong> - 120 - 40,320 - 479 million - 2.4 quintillion</p>
+<p><strong>If your computer checks 1 million routes per second:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li>5 cafés: 0.0001 seconds ✓</li>
+<li>10 cafés: 0.18 seconds ✓</li>
+<li>12 cafés: 8 minutes ⚠️</li>
+<li>15 cafés: 12 hours ⚠️</li>
+<li>20 cafés: 77,000 years ☠️</li>
+</ul>
 </div>
-</div>
 <p>. . .</p>
-<div class="callout callout-style-simple callout-warning">
+<div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Testing all routes for 12 cafés would take <span class="highlight">hours</span> even on a fast computer. For 20 cafés? <span class="highlight">77,000 years</span>!</p>
+<p><strong>The Reality:</strong> Amazon has 100,000+ delivery stops daily. Exact optimization would take longer than the universe has existed!</p>
 </div>
 </div>
 </div>
 </section>
-<section id="why-tsp-is-hard" class="level2">
-<h2 class="anchored" data-anchor-id="why-tsp-is-hard">Why TSP is Hard</h2>
+<section id="the-complexity-explosion" class="level2">
+<h2 class="anchored" data-anchor-id="the-complexity-explosion">The Complexity Explosion</h2>
 <p><span class="highlight">The factorial growth makes exhaustive search impossible.</span></p>
-<div id="eafc63be" class="cell" data-execution_count="2">
+<div id="d930e681" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="lec_07_local_search_files/figure-revealjs/cell-3-output-1.png" width="946" height="561" class="figure-img"></p>
 </figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="local-search-framework" class="level1 title">
+<h1 class="title"><span class="flow">Local Search Framework</span></h1>
+<section id="the-four-pillars-of-local-search" class="level2">
+<h2 class="anchored" data-anchor-id="the-four-pillars-of-local-search">The Four Pillars of Local Search</h2>
+<p><span class="highlight">Any problem can be solved with local search by defining:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Search Space:</strong> All possible solutions (3.6M routes for 10 cafés!)</li>
+<li><strong>Initial Solution:</strong> Starting point (our greedy route)</li>
+<li><strong>Objective Function:</strong> How we measure quality (total distance)</li>
+<li><strong>Neighborhood Structure:</strong> How to create “nearby” solutions (2-opt swaps)</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The power of local search: The same “engine” works for routing, scheduling, or any combinatorial problem - just plug in different components!</p>
 </div>
 </div>
 </div>
@@ -621,13 +660,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="nearest-neighbor-in-action" class="level2">
-<h2 class="anchored" data-anchor-id="nearest-neighbor-in-action">Nearest Neighbor in Action</h2>
-<div id="23f1dbd4" class="cell" data-execution_count="3">
+<section id="construction-methods-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="construction-methods-comparison">Construction Methods Comparison</h2>
+<p><span class="highlight">Different ways to build initial routes:</span></p>
+<div id="0e9ca351" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_07_local_search_files/figure-revealjs/cell-4-output-1.png" width="947" height="753" class="figure-img"></p>
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-4-output-1.png" width="948" height="561" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Different construction methods give different starting points. The better your start, the better your final result after improvement!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="nearest-neighbor-in-action" class="level2">
+<h2 class="anchored" data-anchor-id="nearest-neighbor-in-action">Nearest Neighbor in Action</h2>
+<div id="d65a81f5" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-5-output-1.png" width="947" height="753" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -645,7 +708,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Nearest neighbor typically gives solutions <span class="highlight">15-20% worse</span> than optimal. Can we improve it?</p>
+<p>Nearest neighbor typically gives solutions <span class="highlight">15-25% worse</span> than optimal. Can we improve it?</p>
 </div>
 </div>
 </div>
@@ -658,11 +721,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="highlight">Systematically improve routes by removing crossing paths.</span></p>
 <p>. . .</p>
 <p><strong>The Idea:</strong> Take two edges and swap them to uncross the route</p>
-<div id="8258c121" class="cell" data-execution_count="4">
+<div id="26ab83df" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_07_local_search_files/figure-revealjs/cell-5-output-1.png" width="1140" height="466" class="figure-img"></p>
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-6-output-1.png" width="1140" height="466" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -694,12 +757,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="opt-applied-to-our-route" class="level2">
 <h2 class="anchored" data-anchor-id="opt-applied-to-our-route">2-Opt Applied to Our Route</h2>
-<div id="62271470" class="cell" data-execution_count="5">
+<div id="5c06001f" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_07_local_search_files/figure-revealjs/cell-6-output-1.png" width="1330" height="567" class="figure-img"></p>
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-7-output-1.png" width="1330" height="567" class="figure-img"></p>
 </figure>
+</div>
+</div>
+</div>
+</section>
+<section id="beyond-2-opt-more-powerful-moves" class="level2">
+<h2 class="anchored" data-anchor-id="beyond-2-opt-more-powerful-moves">Beyond 2-Opt: More Powerful Moves</h2>
+<p><span class="highlight">The k-opt family of improvements:</span></p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>2-opt</strong> - Removes 2 edges - 1 way to reconnect - O(n²) combinations - Fast, good results</p>
+</div><div class="column" style="width:33%;">
+<p><strong>3-opt</strong> - Removes 3 edges - 7 ways to reconnect - O(n³) combinations - Better but slower</p>
+</div><div class="column" style="width:33%;">
+<p><strong>Or-opt</strong> - Moves 1-3 nodes - Different philosophy - Good for time windows - Preserves orientation</p>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Industry practice: Start with 2-opt (fast), use 3-opt if you have time!</p>
 </div>
 </div>
 </div>
@@ -721,20 +808,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="when-local-search-gets-stuck" class="level2">
-<h2 class="anchored" data-anchor-id="when-local-search-gets-stuck">When Local Search Gets Stuck</h2>
-<p><span class="question">Question</span>: What happens when no single swap improves the solution?</p>
+<section id="the-local-optimum-trap-a-hikers-dilemma" class="level2">
+<h2 class="anchored" data-anchor-id="the-local-optimum-trap-a-hikers-dilemma">The Local Optimum Trap: A Hiker’s Dilemma</h2>
+<p><span class="highlight">Imagine you’re a hiker dropped in foggy mountains at night…</span></p>
 <p>. . .</p>
-<p><strong>Local Optimum:</strong> Best in the neighborhood, but not globally optimal</p>
-<div id="80538ba3" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_07_local_search_files/figure-revealjs/cell-7-output-1.png" width="946" height="465" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><strong>Your Mission:</strong> Find the highest peak (global optimum) <strong>Your Tool:</strong> An altimeter (objective function) <strong>Your Vision:</strong> Only the ground at your feet (local neighborhood)</p>
+<p>. . .</p>
+<p><strong>The Greedy Strategy:</strong> Always step uphill</p>
+<p>. . .</p>
+<p><span class="question">Question</span>: What happens when you reach the top of a small hill?</p>
 <p>. . .</p>
 <div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
@@ -742,7 +824,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>2-opt can only make small changes. Sometimes you need <span class="highlight">bigger moves</span> or different approaches (next week: metaheuristics)!</p>
+<p>You’re stuck! Every step is downhill, but you might be on a tiny hill while Mount Everest is nearby. This is the <span class="highlight">local optimum trap</span>!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-local-optima" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-local-optima">Visualizing Local Optima</h2>
+<div id="46fa9fa1" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-8-output-1.png" width="946" height="465" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="escaping-local-optima-multi-start-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="escaping-local-optima-multi-start-strategy">Escaping Local Optima: Multi-Start Strategy</h2>
+<p><span class="highlight">Simple fix: Don’t put all eggs in one basket!</span></p>
+<p>. . .</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multi_start_optimization(n_starts<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Try multiple random starts, keep the best"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    best_route <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_starts):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># New random start</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        route <span class="op">=</span> random_initial_route()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Improve with 2-opt</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        route <span class="op">=</span> improve_with_2opt(route)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Keep if best so far</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> better_than(route, best_route):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            best_route <span class="op">=</span> route</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_route</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Like hiring 10 drivers, letting each plan their own route, then picking the best! Simple but effective.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="real-world-impact-how-good-is-good-enough" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-impact-how-good-is-good-enough">Real-World Impact: How Good is Good Enough?</h2>
+<p><span class="highlight">Industry benchmarks for delivery optimization:</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>vs Optimal</th>
+<th>Industry Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Human intuition</td>
+<td>+40-60%</td>
+<td>Still common!</td>
+</tr>
+<tr class="even">
+<td>Nearest Neighbor</td>
+<td>+20-25%</td>
+<td>Quick dispatch</td>
+</tr>
+<tr class="odd">
+<td>NN + 2-opt</td>
+<td>+5-15%</td>
+<td>Standard practice</td>
+</tr>
+<tr class="even">
+<td>Advanced Meta</td>
+<td>+2-5%</td>
+<td>Premium logistics</td>
+</tr>
+<tr class="odd">
+<td>Exact (if possible)</td>
+<td>0%</td>
+<td>Research only</td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Business Reality:</strong> A 10% improvement = millions in savings for large logistics companies. Your 2-opt implementation could literally pay for itself in one day!</p>
 </div>
 </div>
 </div>
@@ -767,6 +940,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="mission-briefing" class="level1 title">
 <h1 class="title"><span class="flow">Mission Briefing</span></h1>
+<section id="choosing-your-weapon-algorithm-selection" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-your-weapon-algorithm-selection">Choosing Your Weapon: Algorithm Selection</h2>
+<p><span class="highlight">Different situations call for different approaches:</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 46%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Best Approach</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Need solution NOW (&lt; 1 sec)</td>
+<td>Nearest Neighbor</td>
+<td>Lightning fast</td>
+</tr>
+<tr class="even">
+<td>Have 1 minute</td>
+<td>NN + 2-opt</td>
+<td>Good balance</td>
+</tr>
+<tr class="odd">
+<td>Have 5 minutes</td>
+<td>Multi-start + 2-opt</td>
+<td>Explore more options</td>
+</tr>
+<tr class="even">
+<td>Time windows critical</td>
+<td>NN (prioritize early) + Or-opt</td>
+<td>Preserves time feasibility</td>
+</tr>
+<tr class="odd">
+<td>Academic benchmark</td>
+<td>3-opt or SA</td>
+<td>Maximum quality</td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Today’s Competition:</strong> You have 60 minutes - use multi-start with 2-opt!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="implementation-pitfalls-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</h2>
+<p><span class="highlight">Common bugs that cost you 30 minutes:</span></p>
+<p>❌ <strong>Forgetting return to bakery:</strong> Your distance calculation must include the trip back!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between consecutive stops)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RIGHT</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances) <span class="op">+</span> distance(last_stop, bakery)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>❌ <strong>Index confusion in 2-opt:</strong> Remember Python slicing!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The 2-opt swap reverses route[i+1:j+1], not route[i:j]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>❌ <strong>Modifying while iterating:</strong> Make a copy!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>new_route <span class="op">=</span> current_route.copy()  <span class="co"># Don't modify original</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="your-toolkit-for-today" class="level2">
 <h2 class="anchored" data-anchor-id="your-toolkit-for-today">Your Toolkit for Today</h2>
 <p><span class="highlight">Construction + Improvement = Better Routes</span></p>
@@ -794,7 +1036,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="next-bean-counter-practice">Next: Bean Counter Practice</h2>
 <p><span class="highlight">In the notebook, you’ll help Bean Counter optimize coffee bean deliveries to 10 franchises.</span></p>
 <p>. . .</p>
-<p><strong>You’ll implement:</strong> ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Performance comparison :::</p>
+<p><strong>You’ll implement:</strong> ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Multi-start optimization :::</p>
 <p>. . .</p>
 <p><strong>Then:</strong> Apply these skills to Artisan Bakery’s 12-café challenge!</p>
 </section>
@@ -811,6 +1053,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p><strong>Hint:</strong> Start with nearest neighbor, but don’t forget about those time windows! Sometimes a slightly longer route that meets deadlines is better than the shortest route that arrives late.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="next-week-when-local-search-isnt-enough" class="level2">
+<h2 class="anchored" data-anchor-id="next-week-when-local-search-isnt-enough">Next Week: When Local Search Isn’t Enough</h2>
+<p><span class="highlight">Today we learned to climb hills. Next week: How to jump mountains!</span></p>
+<p>. . .</p>
+<p><strong>Coming Attractions:</strong> - <strong>Simulated Annealing:</strong> Accept worse solutions probabilistically (like heating metal) - <strong>Tabu Search:</strong> Remember where you’ve been (search with memory) - <strong>Genetic Algorithms:</strong> Evolve solutions (survival of the fittest routes)</p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>All use the same local search foundation - just with clever tricks to escape local optima!</p>
 </div>
 </div>
 </div>
@@ -834,8 +1093,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <ul>
 <li>TSP is computationally hard (factorial growth)</li>
+<li>Local search is a universal framework (4 pillars)</li>
 <li>Greedy construction gives fast initial solutions</li>
-<li>Local search (2-opt) improves solutions iteratively</li>
+<li>2-opt improves solutions iteratively</li>
+<li>Multi-start helps escape local optima</li>
 <li>Real constraints (time windows) add complexity</li>
 <li>Two-phase approach: Build then improve!</li>
 </ul>

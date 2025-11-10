@@ -4848,7 +4848,7 @@
     "href": "lectures/lec_05_forecasting.html#when-simple-smoothing-fails",
     "title": "Forecasting the Future",
     "section": "When Simple Smoothing Fails",
-    "text": "When Simple Smoothing Fails\nSimple smoothing assumes the data is flat. What if it’s not?\n\n\n/Users/vlcek/Documents/git-teaching/Management-Science/.venv/lib/python3.12/site-packages/pandas/util/_decorators.py:213: EstimationWarning: Model has no free parameters to estimate. Set optimized=False to suppress this warning\n  return func(*args, **kwargs)\n/Users/vlcek/Documents/git-teaching/Management-Science/.venv/lib/python3.12/site-packages/pandas/util/_decorators.py:213: EstimationWarning: Model has no free parameters to estimate. Set optimized=False to suppress this warning\n  return func(*args, **kwargs)",
+    "text": "When Simple Smoothing Fails\nSimple smoothing assumes the data is flat. What if it’s not?",
     "crumbs": [
       "05 Forecasting",
       "05 Lecture"
@@ -4925,7 +4925,7 @@
     "href": "lectures/lec_05_forecasting.html#holts-method-visual-comparison",
     "title": "Forecasting the Future",
     "section": "Holt’s Method: Visual Comparison",
-    "text": "Holt’s Method: Visual Comparison\n\n\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/673615079.py:17: UserWarning: linestyle is redundantly defined by the 'linestyle' keyword argument and the fmt string \"o-\" (-&gt; linestyle='-'). The keyword argument will take precedence.\n  ax.plot(t_forecast, forecast_values, 'o-', color=BRAND_COLORS[\"threeDark\"],",
+    "text": "Holt’s Method: Visual Comparison",
     "crumbs": [
       "05 Forecasting",
       "05 Lecture"
@@ -4958,7 +4958,7 @@
     "href": "lectures/lec_05_forecasting.html#the-problem-trend-seasonality",
     "title": "Forecasting the Future",
     "section": "The Problem: Trend + Seasonality",
-    "text": "The Problem: Trend + Seasonality\nWhat if your data has BOTH trend AND seasonality?\n. . .\n\n\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/3228390177.py:6: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.\n  months = pd.date_range(start='2023-01-01', periods=36, freq='M')",
+    "text": "The Problem: Trend + Seasonality\nWhat if your data has BOTH trend AND seasonality?\n. . .",
     "crumbs": [
       "05 Forecasting",
       "05 Lecture"
@@ -5046,7 +5046,7 @@
     "href": "lectures/lec_05_forecasting.html#holt-winters-visual",
     "title": "Forecasting the Future",
     "section": "Holt-Winters: Visual",
-    "text": "Holt-Winters: Visual\n\n\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/3325181793.py:5: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.\n  months = pd.date_range('2022-01-01', periods=24, freq='M')\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/3325181793.py:21: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.\n  forecast_dates = pd.date_range(historical_dates[-1] + pd.DateOffset(months=1),\n\n\n\n\n\n\n\n\n\n. . .\n\n\n\n\n\n\nNotice how the forecast continues the seasonal pattern while following the trend!",
+    "text": "Holt-Winters: Visual\n\n\n\n\n\n\n\n\n\n. . .\n\n\n\n\n\n\nNotice how the forecast continues the seasonal pattern while following the trend!",
     "crumbs": [
       "05 Forecasting",
       "05 Lecture"
@@ -5395,7 +5395,7 @@
     "href": "lectures/lec_05_presentation.html#when-simple-smoothing-fails",
     "title": "Forecasting the Future",
     "section": "When Simple Smoothing Fails",
-    "text": "When Simple Smoothing Fails\nSimple smoothing assumes the data is flat. What if it’s not?\n\n\n/Users/vlcek/Documents/git-teaching/Management-Science/.venv/lib/python3.12/site-packages/pandas/util/_decorators.py:213: EstimationWarning: Model has no free parameters to estimate. Set optimized=False to suppress this warning\n  return func(*args, **kwargs)\n/Users/vlcek/Documents/git-teaching/Management-Science/.venv/lib/python3.12/site-packages/pandas/util/_decorators.py:213: EstimationWarning: Model has no free parameters to estimate. Set optimized=False to suppress this warning\n  return func(*args, **kwargs)"
+    "text": "When Simple Smoothing Fails\nSimple smoothing assumes the data is flat. What if it’s not?"
   },
   {
     "objectID": "lectures/lec_05_presentation.html#holts-method-the-idea",
@@ -5444,7 +5444,7 @@
     "href": "lectures/lec_05_presentation.html#holts-method-visual-comparison",
     "title": "Forecasting the Future",
     "section": "Holt’s Method: Visual Comparison",
-    "text": "Holt’s Method: Visual Comparison\n\n\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/673615079.py:17: UserWarning: linestyle is redundantly defined by the 'linestyle' keyword argument and the fmt string \"o-\" (-&gt; linestyle='-'). The keyword argument will take precedence.\n  ax.plot(t_forecast, forecast_values, 'o-', color=BRAND_COLORS[\"threeDark\"],"
+    "text": "Holt’s Method: Visual Comparison"
   },
   {
     "objectID": "lectures/lec_05_presentation.html#choosing-alpha-and-beta",
@@ -5465,7 +5465,7 @@
     "href": "lectures/lec_05_presentation.html#the-problem-trend-seasonality",
     "title": "Forecasting the Future",
     "section": "The Problem: Trend + Seasonality",
-    "text": "The Problem: Trend + Seasonality\nWhat if your data has BOTH trend AND seasonality?\n\n\n\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/3228390177.py:6: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.\n  months = pd.date_range(start='2023-01-01', periods=36, freq='M')"
+    "text": "The Problem: Trend + Seasonality\nWhat if your data has BOTH trend AND seasonality?"
   },
   {
     "objectID": "lectures/lec_05_presentation.html#holt-winters-three-components",
@@ -5521,7 +5521,7 @@
     "href": "lectures/lec_05_presentation.html#holt-winters-visual",
     "title": "Forecasting the Future",
     "section": "Holt-Winters: Visual",
-    "text": "Holt-Winters: Visual\n\n\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/3325181793.py:5: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.\n  months = pd.date_range('2022-01-01', periods=24, freq='M')\n/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_54290/3325181793.py:21: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.\n  forecast_dates = pd.date_range(historical_dates[-1] + pd.DateOffset(months=1),\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNotice how the forecast continues the seasonal pattern while following the trend!"
+    "text": "Holt-Winters: Visual\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNotice how the forecast continues the seasonal pattern while following the trend!"
   },
   {
     "objectID": "lectures/lec_05_presentation.html#when-to-use-holt-winters",
@@ -5734,18 +5734,25 @@
     "text": "The Traveling Salesman Problem\nThe classic optimization challenge: Visit all locations exactly once, minimize total distance.\n. . ."
   },
   {
+    "objectID": "lectures/lec_07_local_search.html#why-cant-computers-just-try-everything",
+    "href": "lectures/lec_07_local_search.html#why-cant-computers-just-try-everything",
+    "title": "Better Routing",
+    "section": "Why Can’t Computers Just Try Everything?",
+    "text": "Why Can’t Computers Just Try Everything?\nLet’s calculate: 12 cafés = 12! = 479,001,600 routes\n. . .\nIf your computer checks 1 million routes per second:\n\n\n5 cafés: 0.0001 seconds ✓\n10 cafés: 0.18 seconds ✓\n12 cafés: 8 minutes ⚠️\n15 cafés: 12 hours ⚠️\n20 cafés: 77,000 years ☠️\n\n\n. . .\n\n\n\n\n\n\nThe Reality: Amazon has 100,000+ delivery stops daily. Exact optimization would take longer than the universe has existed!"
+  },
+  {
     "objectID": "lectures/lec_07_local_search.html#the-complexity-explosion",
     "href": "lectures/lec_07_local_search.html#the-complexity-explosion",
     "title": "Better Routing",
     "section": "The Complexity Explosion",
-    "text": "The Complexity Explosion\nQuestion: With 12 cafés to visit, how many possible routes exist?\n. . .\nAnswer: 12! = 479,001,600 possible routes\n. . .\n\n\nNumber of Stops - 5 cafés - 8 cafés - 12 cafés - 20 cafés\n\nPossible Routes - 120 - 40,320 - 479 million - 2.4 quintillion\n\n\n. . .\n\n\n\n\n\n\nTesting all routes for 12 cafés would take hours even on a fast computer. For 20 cafés? 77,000 years!"
+    "text": "The Complexity Explosion\nThe factorial growth makes exhaustive search impossible."
   },
   {
-    "objectID": "lectures/lec_07_local_search.html#why-tsp-is-hard",
-    "href": "lectures/lec_07_local_search.html#why-tsp-is-hard",
+    "objectID": "lectures/lec_07_local_search.html#the-four-pillars-of-local-search",
+    "href": "lectures/lec_07_local_search.html#the-four-pillars-of-local-search",
     "title": "Better Routing",
-    "section": "Why TSP is Hard",
-    "text": "Why TSP is Hard\nThe factorial growth makes exhaustive search impossible."
+    "section": "The Four Pillars of Local Search",
+    "text": "The Four Pillars of Local Search\nAny problem can be solved with local search by defining:\n\n\nSearch Space: All possible solutions (3.6M routes for 10 cafés!)\nInitial Solution: Starting point (our greedy route)\nObjective Function: How we measure quality (total distance)\nNeighborhood Structure: How to create “nearby” solutions (2-opt swaps)\n\n\n. . .\n\n\n\n\n\n\nThe power of local search: The same “engine” works for routing, scheduling, or any combinatorial problem - just plug in different components!"
   },
   {
     "objectID": "lectures/lec_07_local_search.html#nearest-neighbor-algorithm",
@@ -5753,6 +5760,13 @@
     "title": "Better Routing",
     "section": "Nearest Neighbor Algorithm",
     "text": "Nearest Neighbor Algorithm\nBuild a route by always visiting the closest unvisited location.\n. . .\nThe Algorithm: 1. Start at the bakery 2. Find the nearest unvisited café 3. Go there 4. Repeat until all visited 5. Return to bakery\n. . .\n\n\n\n\n\n\nIntuition: Like picking low-hanging fruit - grab what’s easiest (nearest) first!"
+  },
+  {
+    "objectID": "lectures/lec_07_local_search.html#construction-methods-comparison",
+    "href": "lectures/lec_07_local_search.html#construction-methods-comparison",
+    "title": "Better Routing",
+    "section": "Construction Methods Comparison",
+    "text": "Construction Methods Comparison\nDifferent ways to build initial routes:\n\n\n\n\n\n\n\n\n\n. . .\n\n\n\n\n\n\nDifferent construction methods give different starting points. The better your start, the better your final result after improvement!"
   },
   {
     "objectID": "lectures/lec_07_local_search.html#nearest-neighbor-in-action",
@@ -5766,7 +5780,7 @@
     "href": "lectures/lec_07_local_search.html#the-problem-with-greedy",
     "title": "Better Routing",
     "section": "The Problem with Greedy",
-    "text": "The Problem with Greedy\nQuestion: Can you spot any obvious inefficiencies in this route?\n. . .\nCommon Issues: ::: incremental - Crossing paths: Route crosses over itself - Long return: Far from bakery at the end - Myopic decisions: Can’t see the “big picture” :::\n. . .\n\n\n\n\n\n\nNearest neighbor typically gives solutions 15-20% worse than optimal. Can we improve it?"
+    "text": "The Problem with Greedy\nQuestion: Can you spot any obvious inefficiencies in this route?\n. . .\nCommon Issues: ::: incremental - Crossing paths: Route crosses over itself - Long return: Far from bakery at the end - Myopic decisions: Can’t see the “big picture” :::\n. . .\n\n\n\n\n\n\nNearest neighbor typically gives solutions 15-25% worse than optimal. Can we improve it?"
   },
   {
     "objectID": "lectures/lec_07_local_search.html#the-2-opt-algorithm",
@@ -5790,6 +5804,13 @@
     "text": "2-Opt Applied to Our Route"
   },
   {
+    "objectID": "lectures/lec_07_local_search.html#beyond-2-opt-more-powerful-moves",
+    "href": "lectures/lec_07_local_search.html#beyond-2-opt-more-powerful-moves",
+    "title": "Better Routing",
+    "section": "Beyond 2-Opt: More Powerful Moves",
+    "text": "Beyond 2-Opt: More Powerful Moves\nThe k-opt family of improvements:\n\n\n2-opt - Removes 2 edges - 1 way to reconnect - O(n²) combinations - Fast, good results\n\n3-opt - Removes 3 edges - 7 ways to reconnect - O(n³) combinations - Better but slower\n\nOr-opt - Moves 1-3 nodes - Different philosophy - Good for time windows - Preserves orientation\n\n\n. . .\n\n\n\n\n\n\nIndustry practice: Start with 2-opt (fast), use 3-opt if you have time!"
+  },
+  {
     "objectID": "lectures/lec_07_local_search.html#local-search-philosophy",
     "href": "lectures/lec_07_local_search.html#local-search-philosophy",
     "title": "Better Routing",
@@ -5797,11 +5818,32 @@
     "text": "Local Search Philosophy\nStart with any solution, then iteratively improve it.\n. . .\nThe Process: ::: incremental 1. Initial Solution: Use greedy (fast but suboptimal) 2. Define Neighborhood: What changes can we make? 3. Search: Try neighboring solutions 4. Accept: Move if better 5. Repeat: Until no improvements found :::\n. . .\n\n\n\n\n\n\nLocal search transforms “quick and dirty” solutions into “pretty good” ones!"
   },
   {
-    "objectID": "lectures/lec_07_local_search.html#when-local-search-gets-stuck",
-    "href": "lectures/lec_07_local_search.html#when-local-search-gets-stuck",
+    "objectID": "lectures/lec_07_local_search.html#the-local-optimum-trap-a-hikers-dilemma",
+    "href": "lectures/lec_07_local_search.html#the-local-optimum-trap-a-hikers-dilemma",
     "title": "Better Routing",
-    "section": "When Local Search Gets Stuck",
-    "text": "When Local Search Gets Stuck\nQuestion: What happens when no single swap improves the solution?\n. . .\nLocal Optimum: Best in the neighborhood, but not globally optimal\n\n\n\n\n\n\n\n\n\n. . .\n\n\n\n\n\n\n2-opt can only make small changes. Sometimes you need bigger moves or different approaches (next week: metaheuristics)!"
+    "section": "The Local Optimum Trap: A Hiker’s Dilemma",
+    "text": "The Local Optimum Trap: A Hiker’s Dilemma\nImagine you’re a hiker dropped in foggy mountains at night…\n. . .\nYour Mission: Find the highest peak (global optimum) Your Tool: An altimeter (objective function) Your Vision: Only the ground at your feet (local neighborhood)\n. . .\nThe Greedy Strategy: Always step uphill\n. . .\nQuestion: What happens when you reach the top of a small hill?\n. . .\n\n\n\n\n\n\nYou’re stuck! Every step is downhill, but you might be on a tiny hill while Mount Everest is nearby. This is the local optimum trap!"
+  },
+  {
+    "objectID": "lectures/lec_07_local_search.html#visualizing-local-optima",
+    "href": "lectures/lec_07_local_search.html#visualizing-local-optima",
+    "title": "Better Routing",
+    "section": "Visualizing Local Optima",
+    "text": "Visualizing Local Optima"
+  },
+  {
+    "objectID": "lectures/lec_07_local_search.html#escaping-local-optima-multi-start-strategy",
+    "href": "lectures/lec_07_local_search.html#escaping-local-optima-multi-start-strategy",
+    "title": "Better Routing",
+    "section": "Escaping Local Optima: Multi-Start Strategy",
+    "text": "Escaping Local Optima: Multi-Start Strategy\nSimple fix: Don’t put all eggs in one basket!\n. . .\ndef multi_start_optimization(n_starts=10):\n    \"\"\"Try multiple random starts, keep the best\"\"\"\n    best_route = None\n    for i in range(n_starts):\n        # New random start\n        route = random_initial_route()\n        # Improve with 2-opt\n        route = improve_with_2opt(route)\n        # Keep if best so far\n        if better_than(route, best_route):\n            best_route = route\n    return best_route\n. . .\n\n\n\n\n\n\nLike hiring 10 drivers, letting each plan their own route, then picking the best! Simple but effective."
+  },
+  {
+    "objectID": "lectures/lec_07_local_search.html#real-world-impact-how-good-is-good-enough",
+    "href": "lectures/lec_07_local_search.html#real-world-impact-how-good-is-good-enough",
+    "title": "Better Routing",
+    "section": "Real-World Impact: How Good is Good Enough?",
+    "text": "Real-World Impact: How Good is Good Enough?\nIndustry benchmarks for delivery optimization:\n\n\n\nMethod\nvs Optimal\nIndustry Use\n\n\n\n\nHuman intuition\n+40-60%\nStill common!\n\n\nNearest Neighbor\n+20-25%\nQuick dispatch\n\n\nNN + 2-opt\n+5-15%\nStandard practice\n\n\nAdvanced Meta\n+2-5%\nPremium logistics\n\n\nExact (if possible)\n0%\nResearch only\n\n\n\n. . .\n\n\n\n\n\n\nBusiness Reality: A 10% improvement = millions in savings for large logistics companies. Your 2-opt implementation could literally pay for itself in one day!"
   },
   {
     "objectID": "lectures/lec_07_local_search.html#time-windows-add-complexity",
@@ -5809,6 +5851,20 @@
     "title": "Better Routing",
     "section": "Time Windows Add Complexity",
     "text": "Time Windows Add Complexity\nSome cafés open early and need priority delivery:\n. . .\nArtisan Bakery’s Constraints: - Café Europa: Opens 6:30 AM (early birds) - Sunrise Bistro: Opens 6:30 AM (breakfast rush) - Morning Glory: Opens 6:45 AM (commuter stop) - Others: Open 7:00 AM or later\n. . .\n\n\n\n\n\n\nWith time windows, we must balance distance minimization with deadline satisfaction. Pure distance optimization might arrive too late!"
+  },
+  {
+    "objectID": "lectures/lec_07_local_search.html#choosing-your-weapon-algorithm-selection",
+    "href": "lectures/lec_07_local_search.html#choosing-your-weapon-algorithm-selection",
+    "title": "Better Routing",
+    "section": "Choosing Your Weapon: Algorithm Selection",
+    "text": "Choosing Your Weapon: Algorithm Selection\nDifferent situations call for different approaches:\n\n\n\n\n\n\n\n\nSituation\nBest Approach\nWhy\n\n\n\n\nNeed solution NOW (&lt; 1 sec)\nNearest Neighbor\nLightning fast\n\n\nHave 1 minute\nNN + 2-opt\nGood balance\n\n\nHave 5 minutes\nMulti-start + 2-opt\nExplore more options\n\n\nTime windows critical\nNN (prioritize early) + Or-opt\nPreserves time feasibility\n\n\nAcademic benchmark\n3-opt or SA\nMaximum quality\n\n\n\n. . .\n\n\n\n\n\n\nToday’s Competition: You have 60 minutes - use multi-start with 2-opt!"
+  },
+  {
+    "objectID": "lectures/lec_07_local_search.html#implementation-pitfalls-to-avoid",
+    "href": "lectures/lec_07_local_search.html#implementation-pitfalls-to-avoid",
+    "title": "Better Routing",
+    "section": "Implementation Pitfalls to Avoid",
+    "text": "Implementation Pitfalls to Avoid\nCommon bugs that cost you 30 minutes:\n❌ Forgetting return to bakery: Your distance calculation must include the trip back!\n# WRONG\ntotal = sum(distances between consecutive stops)\n# RIGHT\ntotal = sum(distances) + distance(last_stop, bakery)\n❌ Index confusion in 2-opt: Remember Python slicing!\n# The 2-opt swap reverses route[i+1:j+1], not route[i:j]\n❌ Modifying while iterating: Make a copy!\nnew_route = current_route.copy()  # Don't modify original"
   },
   {
     "objectID": "lectures/lec_07_local_search.html#your-toolkit-for-today",
@@ -5822,7 +5878,7 @@
     "href": "lectures/lec_07_local_search.html#next-bean-counter-practice",
     "title": "Better Routing",
     "section": "Next: Bean Counter Practice",
-    "text": "Next: Bean Counter Practice\nIn the notebook, you’ll help Bean Counter optimize coffee bean deliveries to 10 franchises.\n. . .\nYou’ll implement: ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Performance comparison :::\n. . .\nThen: Apply these skills to Artisan Bakery’s 12-café challenge!"
+    "text": "Next: Bean Counter Practice\nIn the notebook, you’ll help Bean Counter optimize coffee bean deliveries to 10 franchises.\n. . .\nYou’ll implement: ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Multi-start optimization :::\n. . .\nThen: Apply these skills to Artisan Bakery’s 12-café challenge!"
   },
   {
     "objectID": "lectures/lec_07_local_search.html#the-competition-challenge",
@@ -5832,11 +5888,18 @@
     "text": "The Competition Challenge\nArtisan Bakery needs your help with their morning route!\n. . .\nYour Mission: - Optimize delivery to 12 cafés - Handle 3 early time windows - Minimize total distance - Beat the current 3-hour route\n. . .\n\n\n\n\n\n\nHint: Start with nearest neighbor, but don’t forget about those time windows! Sometimes a slightly longer route that meets deadlines is better than the shortest route that arrives late."
   },
   {
+    "objectID": "lectures/lec_07_local_search.html#next-week-when-local-search-isnt-enough",
+    "href": "lectures/lec_07_local_search.html#next-week-when-local-search-isnt-enough",
+    "title": "Better Routing",
+    "section": "Next Week: When Local Search Isn’t Enough",
+    "text": "Next Week: When Local Search Isn’t Enough\nToday we learned to climb hills. Next week: How to jump mountains!\n. . .\nComing Attractions: - Simulated Annealing: Accept worse solutions probabilistically (like heating metal) - Tabu Search: Remember where you’ve been (search with memory) - Genetic Algorithms: Evolve solutions (survival of the fittest routes)\n. . .\n\n\n\n\n\n\nAll use the same local search foundation - just with clever tricks to escape local optima!"
+  },
+  {
     "objectID": "lectures/lec_07_local_search.html#resources",
     "href": "lectures/lec_07_local_search.html#resources",
     "title": "Better Routing",
     "section": "Resources",
-    "text": "Resources\nEssential Reading: - Applegate et al. (2011): The Traveling Salesman Problem - The definitive TSP reference - Laporte (1992): The Vehicle Routing Problem - Overview of routing algorithms - Lin & Kernighan (1973): Classic paper on k-opt improvements\nPython Libraries: - scipy.spatial.distance - Fast distance calculations - networkx - Graph algorithms including TSP approximations - ortools - Google’s optimization tools with routing\n\n\n\n\n\n\nNoteSummary\n\n\n\n\nTSP is computationally hard (factorial growth)\nGreedy construction gives fast initial solutions\nLocal search (2-opt) improves solutions iteratively\nReal constraints (time windows) add complexity\nTwo-phase approach: Build then improve!"
+    "text": "Resources\nEssential Reading: - Applegate et al. (2011): The Traveling Salesman Problem - The definitive TSP reference - Laporte (1992): The Vehicle Routing Problem - Overview of routing algorithms - Lin & Kernighan (1973): Classic paper on k-opt improvements\nPython Libraries: - scipy.spatial.distance - Fast distance calculations - networkx - Graph algorithms including TSP approximations - ortools - Google’s optimization tools with routing\n\n\n\n\n\n\nNoteSummary\n\n\n\n\nTSP is computationally hard (factorial growth)\nLocal search is a universal framework (4 pillars)\nGreedy construction gives fast initial solutions\n2-opt improves solutions iteratively\nMulti-start helps escape local optima\nReal constraints (time windows) add complexity\nTwo-phase approach: Build then improve!"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#client-briefing-artisan-bakery",
@@ -5867,18 +5930,25 @@
     "text": "The Traveling Salesman Problem\nThe classic optimization challenge: Visit all locations exactly once, minimize total distance."
   },
   {
+    "objectID": "lectures/lec_07_presentation.html#why-cant-computers-just-try-everything",
+    "href": "lectures/lec_07_presentation.html#why-cant-computers-just-try-everything",
+    "title": "Better Routing",
+    "section": "Why Can’t Computers Just Try Everything?",
+    "text": "Why Can’t Computers Just Try Everything?\nLet’s calculate: 12 cafés = 12! = 479,001,600 routes\n\nIf your computer checks 1 million routes per second:\n\n5 cafés: 0.0001 seconds ✓\n10 cafés: 0.18 seconds ✓\n12 cafés: 8 minutes ⚠️\n15 cafés: 12 hours ⚠️\n20 cafés: 77,000 years ☠️\n\n\n\n\n\n\n\n\n\nThe Reality: Amazon has 100,000+ delivery stops daily. Exact optimization would take longer than the universe has existed!"
+  },
+  {
     "objectID": "lectures/lec_07_presentation.html#the-complexity-explosion",
     "href": "lectures/lec_07_presentation.html#the-complexity-explosion",
     "title": "Better Routing",
     "section": "The Complexity Explosion",
-    "text": "The Complexity Explosion\nQuestion: With 12 cafés to visit, how many possible routes exist?\n\nAnswer: 12! = 479,001,600 possible routes\n\n\n\n\nNumber of Stops - 5 cafés - 8 cafés - 12 cafés - 20 cafés\n\nPossible Routes - 120 - 40,320 - 479 million - 2.4 quintillion\n\n\n\n\n\n\n\n\n\nTesting all routes for 12 cafés would take hours even on a fast computer. For 20 cafés? 77,000 years!"
+    "text": "The Complexity Explosion\nThe factorial growth makes exhaustive search impossible."
   },
   {
-    "objectID": "lectures/lec_07_presentation.html#why-tsp-is-hard",
-    "href": "lectures/lec_07_presentation.html#why-tsp-is-hard",
+    "objectID": "lectures/lec_07_presentation.html#the-four-pillars-of-local-search",
+    "href": "lectures/lec_07_presentation.html#the-four-pillars-of-local-search",
     "title": "Better Routing",
-    "section": "Why TSP is Hard",
-    "text": "Why TSP is Hard\nThe factorial growth makes exhaustive search impossible."
+    "section": "The Four Pillars of Local Search",
+    "text": "The Four Pillars of Local Search\nAny problem can be solved with local search by defining:\n\nSearch Space: All possible solutions (3.6M routes for 10 cafés!)\nInitial Solution: Starting point (our greedy route)\nObjective Function: How we measure quality (total distance)\nNeighborhood Structure: How to create “nearby” solutions (2-opt swaps)\n\n\n\n\n\n\n\n\nThe power of local search: The same “engine” works for routing, scheduling, or any combinatorial problem - just plug in different components!"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#nearest-neighbor-algorithm",
@@ -5886,6 +5956,13 @@
     "title": "Better Routing",
     "section": "Nearest Neighbor Algorithm",
     "text": "Nearest Neighbor Algorithm\nBuild a route by always visiting the closest unvisited location.\n\nThe Algorithm: 1. Start at the bakery 2. Find the nearest unvisited café 3. Go there 4. Repeat until all visited 5. Return to bakery\n\n\n\n\n\n\n\n\nIntuition: Like picking low-hanging fruit - grab what’s easiest (nearest) first!"
+  },
+  {
+    "objectID": "lectures/lec_07_presentation.html#construction-methods-comparison",
+    "href": "lectures/lec_07_presentation.html#construction-methods-comparison",
+    "title": "Better Routing",
+    "section": "Construction Methods Comparison",
+    "text": "Construction Methods Comparison\nDifferent ways to build initial routes:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifferent construction methods give different starting points. The better your start, the better your final result after improvement!"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#nearest-neighbor-in-action",
@@ -5899,7 +5976,7 @@
     "href": "lectures/lec_07_presentation.html#the-problem-with-greedy",
     "title": "Better Routing",
     "section": "The Problem with Greedy",
-    "text": "The Problem with Greedy\nQuestion: Can you spot any obvious inefficiencies in this route?\n\nCommon Issues: ::: incremental - Crossing paths: Route crosses over itself - Long return: Far from bakery at the end - Myopic decisions: Can’t see the “big picture” :::\n\n\n\n\n\n\n\n\nNearest neighbor typically gives solutions 15-20% worse than optimal. Can we improve it?"
+    "text": "The Problem with Greedy\nQuestion: Can you spot any obvious inefficiencies in this route?\n\nCommon Issues: ::: incremental - Crossing paths: Route crosses over itself - Long return: Far from bakery at the end - Myopic decisions: Can’t see the “big picture” :::\n\n\n\n\n\n\n\n\nNearest neighbor typically gives solutions 15-25% worse than optimal. Can we improve it?"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#the-2-opt-algorithm",
@@ -5923,6 +6000,13 @@
     "text": "2-Opt Applied to Our Route"
   },
   {
+    "objectID": "lectures/lec_07_presentation.html#beyond-2-opt-more-powerful-moves",
+    "href": "lectures/lec_07_presentation.html#beyond-2-opt-more-powerful-moves",
+    "title": "Better Routing",
+    "section": "Beyond 2-Opt: More Powerful Moves",
+    "text": "Beyond 2-Opt: More Powerful Moves\nThe k-opt family of improvements:\n\n\n2-opt - Removes 2 edges - 1 way to reconnect - O(n²) combinations - Fast, good results\n\n3-opt - Removes 3 edges - 7 ways to reconnect - O(n³) combinations - Better but slower\n\nOr-opt - Moves 1-3 nodes - Different philosophy - Good for time windows - Preserves orientation\n\n\n\n\n\n\n\n\nIndustry practice: Start with 2-opt (fast), use 3-opt if you have time!"
+  },
+  {
     "objectID": "lectures/lec_07_presentation.html#local-search-philosophy",
     "href": "lectures/lec_07_presentation.html#local-search-philosophy",
     "title": "Better Routing",
@@ -5930,11 +6014,32 @@
     "text": "Local Search Philosophy\nStart with any solution, then iteratively improve it.\n\nThe Process: ::: incremental 1. Initial Solution: Use greedy (fast but suboptimal) 2. Define Neighborhood: What changes can we make? 3. Search: Try neighboring solutions 4. Accept: Move if better 5. Repeat: Until no improvements found :::\n\n\n\n\n\n\n\n\nLocal search transforms “quick and dirty” solutions into “pretty good” ones!"
   },
   {
-    "objectID": "lectures/lec_07_presentation.html#when-local-search-gets-stuck",
-    "href": "lectures/lec_07_presentation.html#when-local-search-gets-stuck",
+    "objectID": "lectures/lec_07_presentation.html#the-local-optimum-trap-a-hikers-dilemma",
+    "href": "lectures/lec_07_presentation.html#the-local-optimum-trap-a-hikers-dilemma",
     "title": "Better Routing",
-    "section": "When Local Search Gets Stuck",
-    "text": "When Local Search Gets Stuck\nQuestion: What happens when no single swap improves the solution?\n\nLocal Optimum: Best in the neighborhood, but not globally optimal\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2-opt can only make small changes. Sometimes you need bigger moves or different approaches (next week: metaheuristics)!"
+    "section": "The Local Optimum Trap: A Hiker’s Dilemma",
+    "text": "The Local Optimum Trap: A Hiker’s Dilemma\nImagine you’re a hiker dropped in foggy mountains at night…\n\nYour Mission: Find the highest peak (global optimum) Your Tool: An altimeter (objective function) Your Vision: Only the ground at your feet (local neighborhood)\n\n\nThe Greedy Strategy: Always step uphill\n\n\nQuestion: What happens when you reach the top of a small hill?\n\n\n\n\n\n\n\n\nYou’re stuck! Every step is downhill, but you might be on a tiny hill while Mount Everest is nearby. This is the local optimum trap!"
+  },
+  {
+    "objectID": "lectures/lec_07_presentation.html#visualizing-local-optima",
+    "href": "lectures/lec_07_presentation.html#visualizing-local-optima",
+    "title": "Better Routing",
+    "section": "Visualizing Local Optima",
+    "text": "Visualizing Local Optima"
+  },
+  {
+    "objectID": "lectures/lec_07_presentation.html#escaping-local-optima-multi-start-strategy",
+    "href": "lectures/lec_07_presentation.html#escaping-local-optima-multi-start-strategy",
+    "title": "Better Routing",
+    "section": "Escaping Local Optima: Multi-Start Strategy",
+    "text": "Escaping Local Optima: Multi-Start Strategy\nSimple fix: Don’t put all eggs in one basket!\n\ndef multi_start_optimization(n_starts=10):\n    \"\"\"Try multiple random starts, keep the best\"\"\"\n    best_route = None\n    for i in range(n_starts):\n        # New random start\n        route = random_initial_route()\n        # Improve with 2-opt\n        route = improve_with_2opt(route)\n        # Keep if best so far\n        if better_than(route, best_route):\n            best_route = route\n    return best_route\n\n\n\n\n\n\n\n\nLike hiring 10 drivers, letting each plan their own route, then picking the best! Simple but effective."
+  },
+  {
+    "objectID": "lectures/lec_07_presentation.html#real-world-impact-how-good-is-good-enough",
+    "href": "lectures/lec_07_presentation.html#real-world-impact-how-good-is-good-enough",
+    "title": "Better Routing",
+    "section": "Real-World Impact: How Good is Good Enough?",
+    "text": "Real-World Impact: How Good is Good Enough?\nIndustry benchmarks for delivery optimization:\n\n\n\nMethod\nvs Optimal\nIndustry Use\n\n\n\n\nHuman intuition\n+40-60%\nStill common!\n\n\nNearest Neighbor\n+20-25%\nQuick dispatch\n\n\nNN + 2-opt\n+5-15%\nStandard practice\n\n\nAdvanced Meta\n+2-5%\nPremium logistics\n\n\nExact (if possible)\n0%\nResearch only\n\n\n\n\n\n\n\n\n\n\nBusiness Reality: A 10% improvement = millions in savings for large logistics companies. Your 2-opt implementation could literally pay for itself in one day!"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#time-windows-add-complexity",
@@ -5942,6 +6047,20 @@
     "title": "Better Routing",
     "section": "Time Windows Add Complexity",
     "text": "Time Windows Add Complexity\nSome cafés open early and need priority delivery:\n\nArtisan Bakery’s Constraints: - Café Europa: Opens 6:30 AM (early birds) - Sunrise Bistro: Opens 6:30 AM (breakfast rush) - Morning Glory: Opens 6:45 AM (commuter stop) - Others: Open 7:00 AM or later\n\n\n\n\n\n\n\n\nWith time windows, we must balance distance minimization with deadline satisfaction. Pure distance optimization might arrive too late!"
+  },
+  {
+    "objectID": "lectures/lec_07_presentation.html#choosing-your-weapon-algorithm-selection",
+    "href": "lectures/lec_07_presentation.html#choosing-your-weapon-algorithm-selection",
+    "title": "Better Routing",
+    "section": "Choosing Your Weapon: Algorithm Selection",
+    "text": "Choosing Your Weapon: Algorithm Selection\nDifferent situations call for different approaches:\n\n\n\n\n\n\n\n\nSituation\nBest Approach\nWhy\n\n\n\n\nNeed solution NOW (&lt; 1 sec)\nNearest Neighbor\nLightning fast\n\n\nHave 1 minute\nNN + 2-opt\nGood balance\n\n\nHave 5 minutes\nMulti-start + 2-opt\nExplore more options\n\n\nTime windows critical\nNN (prioritize early) + Or-opt\nPreserves time feasibility\n\n\nAcademic benchmark\n3-opt or SA\nMaximum quality\n\n\n\n\n\n\n\n\n\n\nToday’s Competition: You have 60 minutes - use multi-start with 2-opt!"
+  },
+  {
+    "objectID": "lectures/lec_07_presentation.html#implementation-pitfalls-to-avoid",
+    "href": "lectures/lec_07_presentation.html#implementation-pitfalls-to-avoid",
+    "title": "Better Routing",
+    "section": "Implementation Pitfalls to Avoid",
+    "text": "Implementation Pitfalls to Avoid\nCommon bugs that cost you 30 minutes:\n❌ Forgetting return to bakery: Your distance calculation must include the trip back!\n# WRONG\ntotal = sum(distances between consecutive stops)\n# RIGHT\ntotal = sum(distances) + distance(last_stop, bakery)\n❌ Index confusion in 2-opt: Remember Python slicing!\n# The 2-opt swap reverses route[i+1:j+1], not route[i:j]\n❌ Modifying while iterating: Make a copy!\nnew_route = current_route.copy()  # Don't modify original"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#your-toolkit-for-today",
@@ -5955,7 +6074,7 @@
     "href": "lectures/lec_07_presentation.html#next-bean-counter-practice",
     "title": "Better Routing",
     "section": "Next: Bean Counter Practice",
-    "text": "Next: Bean Counter Practice\nIn the notebook, you’ll help Bean Counter optimize coffee bean deliveries to 10 franchises.\n\nYou’ll implement: ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Performance comparison :::\n\n\nThen: Apply these skills to Artisan Bakery’s 12-café challenge!"
+    "text": "Next: Bean Counter Practice\nIn the notebook, you’ll help Bean Counter optimize coffee bean deliveries to 10 franchises.\n\nYou’ll implement: ::: incremental - Distance calculations between locations - Nearest neighbor construction - Route distance measurement - 2-opt improvement - Multi-start optimization :::\n\n\nThen: Apply these skills to Artisan Bakery’s 12-café challenge!"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#the-competition-challenge",
@@ -5965,11 +6084,18 @@
     "text": "The Competition Challenge\nArtisan Bakery needs your help with their morning route!\n\nYour Mission: - Optimize delivery to 12 cafés - Handle 3 early time windows - Minimize total distance - Beat the current 3-hour route\n\n\n\n\n\n\n\n\nHint: Start with nearest neighbor, but don’t forget about those time windows! Sometimes a slightly longer route that meets deadlines is better than the shortest route that arrives late."
   },
   {
+    "objectID": "lectures/lec_07_presentation.html#next-week-when-local-search-isnt-enough",
+    "href": "lectures/lec_07_presentation.html#next-week-when-local-search-isnt-enough",
+    "title": "Better Routing",
+    "section": "Next Week: When Local Search Isn’t Enough",
+    "text": "Next Week: When Local Search Isn’t Enough\nToday we learned to climb hills. Next week: How to jump mountains!\n\nComing Attractions: - Simulated Annealing: Accept worse solutions probabilistically (like heating metal) - Tabu Search: Remember where you’ve been (search with memory) - Genetic Algorithms: Evolve solutions (survival of the fittest routes)\n\n\n\n\n\n\n\n\nAll use the same local search foundation - just with clever tricks to escape local optima!"
+  },
+  {
     "objectID": "lectures/lec_07_presentation.html#resources",
     "href": "lectures/lec_07_presentation.html#resources",
     "title": "Better Routing",
     "section": "Resources",
-    "text": "Resources\nEssential Reading: - Applegate et al. (2011): The Traveling Salesman Problem - The definitive TSP reference - Laporte (1992): The Vehicle Routing Problem - Overview of routing algorithms - Lin & Kernighan (1973): Classic paper on k-opt improvements\nPython Libraries: - scipy.spatial.distance - Fast distance calculations - networkx - Graph algorithms including TSP approximations - ortools - Google’s optimization tools with routing\n\n\n\n\n\n\nSummary\n\n\n\nTSP is computationally hard (factorial growth)\nGreedy construction gives fast initial solutions\nLocal search (2-opt) improves solutions iteratively\nReal constraints (time windows) add complexity\nTwo-phase approach: Build then improve!"
+    "text": "Resources\nEssential Reading: - Applegate et al. (2011): The Traveling Salesman Problem - The definitive TSP reference - Laporte (1992): The Vehicle Routing Problem - Overview of routing algorithms - Lin & Kernighan (1973): Classic paper on k-opt improvements\nPython Libraries: - scipy.spatial.distance - Fast distance calculations - networkx - Graph algorithms including TSP approximations - ortools - Google’s optimization tools with routing\n\n\n\n\n\n\nSummary\n\n\n\nTSP is computationally hard (factorial growth)\nLocal search is a universal framework (4 pillars)\nGreedy construction gives fast initial solutions\n2-opt improves solutions iteratively\nMulti-start helps escape local optima\nReal constraints (time windows) add complexity\nTwo-phase approach: Build then improve!"
   },
   {
     "objectID": "tutorials/nb_01_02_lists_loops.html",
