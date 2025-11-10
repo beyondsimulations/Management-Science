@@ -489,29 +489,6 @@ arrivals = np.random.exponential(5, 10000)  # Average 5 minutes
 
 :::
 
-## When NOT to Use Monte Carlo
-
-[Monte Carlo is powerful, but not always the right tool:]{.highlight}
-
-. . .
-
-::: incremental
-- **You have a simple analytical solution**
-  - Use math directly: no need for 10,000 simulations!
-
-- **You can't reasonably estimate input distributions**
-  - Garbage in = garbage out, need basis for assumptions
-
-- **The problem is deterministic (no uncertainty)**
-  - Simulation adds complexity without value
-:::
-
-. . .
-
-:::{.callout-warning}
-Simulation is a tool for managing uncertainty, not creating false precision!
-:::
-
 # [Portfolios]{.flow} {.title}
 
 ## Combining Investments
@@ -909,6 +886,226 @@ plt.show()
 
 :::{.callout-warning}
 **2008 Financial Crisis:** Many "diversified" portfolios collapsed due to correlations!
+:::
+
+# [When Monte Carlo?]{.flow} {.title}
+
+## When to Use Monte Carlo
+
+[Question]{.question}: For our simple startup examples so far, do we really NEED Monte Carlo?
+
+. . .
+
+**Short answer: No!** For basic mean/variance calculations, we can use analytical formulas.
+
+. . .
+
+[So when is Monte Carlo truly necessary?]{.highlight}
+
+## Necessary vs. Convenient
+
+[You can use math (analytical solutions):]{.highlight}
+
+::: incremental
+- **Simple distributions:** Mean and variance of normal distributions
+- **Linear combinations:** Portfolio of independent assets
+:::
+
+. . .
+
+[You NEED Monte Carlo when:]{.highlight}
+
+::: incremental
+- **Complex dependencies:** Nonlinear relationships
+- **Path-dependent problems:** Outcome depends on a sequence
+- **No closed-form solution:** The math is intractable
+:::
+
+## Real Monte Carlo Applications
+
+[Where Monte Carlo is ESSENTIAL, not just convenient:]{.highlight}
+
+**1. Option Pricing with Path Dependencies**
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Payoff depends on AVERAGE price over time
+n_simulations = 10000; strike_price = 105; payoffs = []
+for sim in range(n_simulations):
+    prices = [100]  # Starting price
+    for day in range(365):
+        prices.append(prices[-1] * (1 + np.random.normal(0.001, 0.02)))
+    payoff = max(0, np.mean(prices) - strike_price)
+    payoffs.append(payoff)
+payoffs = np.array(payoffs)
+print(f"Average option value: ${payoffs.mean():.2f}")
+print(f"Probability of profit: {(payoffs > 0).mean():.1%}")
+```
+
+## Real Monte Carlo Applications II
+
+```{python}
+#| eval: true
+#| echo: false
+# Visualize option payoff distribution
+setup_clean_style()
+fig, ax = plt.subplots()
+ax.hist(payoffs, bins=50, alpha=0.7, color=BRAND_COLORS["twoDark"],
+        edgecolor='black', linewidth=0.5)
+ax.axvline(payoffs.mean(), color=BRAND_COLORS["threeDark"], linestyle='--',
+           linewidth=2, label=f'Mean: ${payoffs.mean():.2f}')
+ax.axvline(np.percentile(payoffs, 95), color=BRAND_COLORS["oneDark"],
+           linestyle=':', linewidth=2, label=f'95th percentile: ${np.percentile(payoffs, 95):.2f}')
+ax.set_xlabel('Option Payoff ($)', fontsize=12)
+ax.set_ylabel('Frequency', fontsize=12)
+ax.set_title('Distribution of Option Payoffs', fontsize=14, fontweight='bold')
+ax.legend()
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+## Real Monte Carlo Applications III
+
+**2. Supply Chain with Cascading Effects**
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Each stage affects the next (nonlinear dependencies)
+n_simulations = 10000; factory_capacity = 150; demand = 120; price = 5
+penalty = 10; revenues = []
+
+for sim in range(n_simulations):
+    parts_delivered = np.random.poisson(100)
+    production = min(parts_delivered, factory_capacity)
+    if production >= demand:
+        revenue = demand * price
+    else:
+        revenue = production * price - penalty
+    revenues.append(revenue)
+
+revenues = np.array(revenues)
+print(f"Average revenue: ${revenues.mean():.2f}")
+print(f"Worst-case revenue: ${revenues.min():.2f}")
+```
+
+## Real Monte Carlo Applications IV
+
+```{python}
+#| eval: true
+#| echo: false
+# Visualize supply chain revenue distribution
+setup_clean_style()
+fig, ax = plt.subplots()
+ax.hist(revenues, bins=30, alpha=0.7, color=BRAND_COLORS["oneDark"],
+        edgecolor='black', linewidth=0.5)
+ax.axvline(revenues.mean(), color=BRAND_COLORS["threeDark"], linestyle='--',
+           linewidth=2, label=f'Mean: ${revenues.mean():.2f}')
+ax.axvline(demand * price, color=BRAND_COLORS["twoDark"], linestyle=':',
+           linewidth=2, label=f'Target (meet demand): ${demand * price:.2f}')
+ax.set_xlabel('Revenue ($)', fontsize=12)
+ax.set_ylabel('Frequency', fontsize=12)
+ax.set_title('Distribution of Supply Chain Revenues', fontsize=14, fontweight='bold')
+ax.legend()
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+## Real Monte Carlo Applications V
+
+**3. Project Management with Sequential Risks**
+
+```{python}
+#| eval: true
+#| echo: true
+#| output-location: fragment
+# Project phases must happen in order, later phases only if earlier succeed
+n_simulations = 10000; shape = 2; scale = 10; project_times = []
+
+for sim in range(n_simulations):
+    total_time = 0
+    for phase in ['design', 'build', 'test', 'deploy']:
+        # Each phase has uncertain duration
+        phase_time = np.random.gamma(shape, scale)
+        total_time += phase_time
+        if np.random.random() < 0.1:
+            total_time += phase_time * 0.5  # Rework time
+    project_times.append(total_time)
+
+project_times = np.array(project_times)
+print(f"Average project duration: {project_times.mean():.1f} days")
+print(f"90th percentile: {np.percentile(project_times, 90):.1f} days")
+```
+
+## Real Monte Carlo Applications VI
+
+```{python}
+#| eval: true
+#| echo: false
+# Visualize project completion time distribution
+setup_clean_style()
+fig, ax = plt.subplots()
+ax.hist(project_times, bins=50, alpha=0.7, color=BRAND_COLORS["twoLight"],
+        edgecolor='black', linewidth=0.5)
+ax.axvline(project_times.mean(), color=BRAND_COLORS["threeDark"], linestyle='--',
+           linewidth=2, label=f'Mean: {project_times.mean():.1f} days')
+ax.axvline(np.percentile(project_times, 90), color=BRAND_COLORS["oneDark"],
+           linestyle=':', linewidth=2, label=f'90th %ile: {np.percentile(project_times, 90):.1f} days')
+ax.axvline(100, color='red', linestyle='-',
+           linewidth=2, alpha=0.5, label='Target: 100 days')
+ax.set_xlabel('Project Duration (days)', fontsize=12)
+ax.set_ylabel('Frequency', fontsize=12)
+ax.set_title('Distribution of Project Completion Times', fontsize=14, fontweight='bold')
+ax.legend()
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+## Example: Why Still Useful?
+
+[Question]{.question}: If we can calculate variance analytically, why simulate?
+
+. . .
+
+::: incremental
+- **Visualization:** Seeing the full distribution is intuitive
+- **Flexibility:** When problems become complex, simulation adapts
+- **Extensions:** Practice for complex problem
+:::
+
+. . .
+
+:::{.callout-tip}
+Think of our examples as learning the tool on simple problems so you can solve complex ones where Monte Carlo is required!
+:::
+
+## When NOT to Use Monte Carlo
+
+[Even when you CAN use Monte Carlo, sometimes you shouldn't:]{.highlight}
+
+. . .
+
+::: incremental
+- **Simple analytical solution exists and suffices**
+  - Use math directly: faster, more precise, easier to understand
+
+- **Can't reasonably estimate input distributions**
+  - Garbage in = garbage out; need solid basis for assumptions
+
+- **Problem is deterministic (no uncertainty)**
+  - Simulation adds complexity without value
+:::
+
+. . .
+
+:::{.callout-warning}
+Simulation is a tool for managing uncertainty, not creating false precision!
 :::
 
 # [Making Smart Decisions]{.flow} {.title}
