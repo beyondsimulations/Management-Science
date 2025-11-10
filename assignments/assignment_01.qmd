@@ -10,10 +10,10 @@ code-links:
 
 ## Assignment Overview
 
-**Due:** Start of Lecture 8
-**Weight:** 30% of final grade
-**Expected Time:** 4-6 hours
-**Work:** Groups
+- **Due:** Start of Lecture 8
+- **Weight:** 30% of final grade
+- **Expected Time:** 4-6 hours
+- **Work:** Groups
 
 You're a group of junior analysts at a consulting firm. A client needs help with:
 
@@ -54,6 +54,7 @@ Fill in the names of all the members of your group in `group_name` instead of `[
 Your client is considering investing €100,000 in a new product launch. Based on market research, you have initial projections for how this investment might perform.
 
 **Initial projections:**
+
 - Best case: €180,000 return (20% probability)
 - Most likely: €140,000 return (60% probability)
 - Worst case: €90,000 return (20% probability)
@@ -63,6 +64,7 @@ Your client is considering investing €100,000 in a new product launch. Based o
 Create a Monte Carlo simulation with the probabilities above to understand the basic risk profile.
 
 **Your function should:**
+
 1. Take the number of simulations as input
 2. For each simulation, randomly select one outcome based on the given probabilities
 3. Return an array of all simulated returns

@@ -10,10 +10,10 @@ code-links:
 
 ## Assignment Overview
 
-**Due:** Start of Lecture 10
-**Weight:** 30% of final grade
-**Expected Time:** 5-7 hours
-**Work:** Groups
+- **Due:** Start of Lecture 10
+- **Weight:** 30% of final grade
+- **Expected Time:** 5-7 hours
+- **Work:** Groups
 
 Your consulting firm has landed a major contract with **CityExpress**, a rapidly growing local delivery company. The CEO is concerned about rising operational costs and worker turnover. Your team has been tasked with:
 
