@@ -3464,293 +3464,133 @@
     ]
   },
   {
-    "objectID": "general/uv.html",
-    "href": "general/uv.html",
-    "title": "Installing Python",
+    "objectID": "general/syllabus.html",
+    "href": "general/syllabus.html",
+    "title": "Course Syllabus",
     "section": "",
-    "text": "uv is a new (and very fast) Python tool written in Rust. It:\n\nInstalls Python for you (no manual downloads).\nCreates isolated virtual environments (safe sandboxes per project).\nInstalls and updates packages quickly.\n\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
+    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nGitHub Copilot integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios\n\n\n\n\n\nMini-competitions begin - apply algorithms to business problems\nFormat for Lectures 4-9:\n\nHour 1: Solution presentations of previous competition\nHour 2: Interactive lecture on core concepts\nHour 3: Hands-on notebook practice + class discussion\nHour 4: Mini-competition with real data\nBonus Points: Best solution teams earn points toward final grade\n\n\n\n\nProbability distributions and random sampling\nBusiness risk modeling techniques\nPortfolio optimization under uncertainty\nCoffee shop simulation case study\n\n\n\n\n\nTime series analysis fundamentals\nDemand forecasting methods\nForecast evaluation metrics\nSeasonal and trend analysis\n\n\n\n\n\nSPT (Shortest Processing Time) rule\nEDD (Earliest Due Date) rule\nGantt chart visualization\nPerformance metrics: makespan, tardiness, flow time\n\n\n\n\n\nNearest neighbor heuristic\n2-opt local search improvements\nRoute optimization metrics\nReal logistics applications\n\n\n\n\n\nWeighted scoring methods\nPareto efficiency concepts\nDecision criteria combination\nBusiness trade-off analysis\n\n\n\n\n\nWhen simple heuristics fail\nGenetic algorithms introduction\nSimulated annealing basics\nAlgorithm selection strategies\n\n\n\n\n\nReal client challenges with professional presentations\n\n\n\nThree client projects to choose from:\n\nQuickBite: Food delivery routing optimization\nNurseNext: Healthcare staff scheduling\nTechMart: E-commerce inventory optimization\n\nTeam formation and data exploration\nProject scope definition\n\n\n\n\n\nPresentation skills training\nIntensive solution development\nPeer consultation and feedback\nPrototype completion milestone\n\n\n\n\n\nProfessional presentation competition\n“Executive panel evaluation”\nSolution demonstration and Q&A",
     "crumbs": [
-      "Installation"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "general/uv.html#why-we-use-uv-for-this-course",
-    "href": "general/uv.html#why-we-use-uv-for-this-course",
-    "title": "Installing Python",
+    "objectID": "general/syllabus.html#part-i-python-foundation-lectures-1-3",
+    "href": "general/syllabus.html#part-i-python-foundation-lectures-1-3",
+    "title": "Course Syllabus",
     "section": "",
-    "text": "uv is a new (and very fast) Python tool written in Rust. It:\n\nInstalls Python for you (no manual downloads).\nCreates isolated virtual environments (safe sandboxes per project).\nInstalls and updates packages quickly.\n\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
+    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nGitHub Copilot integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios",
     "crumbs": [
-      "Installation"
+      "Syllabus"
     ]
   },
   {
-    "objectID": "general/uv.html#install-uv",
-    "href": "general/uv.html#install-uv",
-    "title": "Installing Python",
-    "section": "Install uv",
-    "text": "Install uv\nChoose the instructions for your operating system. To these, you need to work in your terminal.\n\n\n\n\n\n\nOpen the terminal in VS Code by selecting (Terminal → New Terminal).\n\n\n\n\nmacOS or Linux (Terminal)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nIf curl is missing:\nwget -qO- https://astral.sh/uv/install.sh | sh\nAfter installation: close and reopen your terminal (so your PATH updates).\n\n\nWindows (PowerShell)\nOpen PowerShell and run:\npowershell -ExecutionPolicy Bypass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\nIf you see a script execution warning, you can alternatively first run:\nSet-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\nThen re-run the install line.\n\n\nVerify installation\nRun (macOS / Linux / Windows):\nuv --version\nIf you see a version number: great!\n\n\n\n\n\n\nIf you get “command not found” or “‘uv’ is not recognized”:\n\nClose and reopen the terminal (important).\nOn Windows: make sure you used PowerShell (not Command Prompt).\nStill broken? Ask for help, no need of guessing the error.",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/uv.html#installpython",
-    "href": "general/uv.html#installpython",
-    "title": "Installing Python",
-    "section": "InstallPython",
-    "text": "InstallPython\nWe want everyone on the same Python version for consistency. Thus, we’ll use Python 3.12 for the course this year.\nInstall (you only need to do this once):\nuv python install 3.12\nCheck the installation:\nuv run python --version\nExpected output starts with:\nPython 3.12.",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/uv.html#create-your-first-project",
-    "href": "general/uv.html#create-your-first-project",
-    "title": "Installing Python",
-    "section": "Create your first project",
-    "text": "Create your first project\nPick a folder where you keep course work. If you do not have one, make sure to create one! Open the course folder in your IDE and then run the following from the terminal:\nuv init\nuv init creates:\n\nmain.py (starter script)\npyproject.toml (project + dependencies config)\n.python-version (records the Python version we chose)\n.gitignore (useful if you ever use Git)\nREADME.md (you can jot notes here)\n(A .venv folder will appear later once packages are added or synced.)\n\n\n\n\n\n\n\nYou do not need to edit any of these (except maybe README.md for your notes and main.py if you want to run something different).",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/uv.html#run-the-starter-script",
-    "href": "general/uv.html#run-the-starter-script",
-    "title": "Installing Python",
-    "section": "Run the starter script",
-    "text": "Run the starter script\nInside the project folder in your terminal:\nuv run python main.py\nYou should see something like:\nHello World!\n(If you want, you can open main.py and change the message, then re-run.)\n\nWhat does that code mean?\ndef main():\n    print(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    main()\n\ndef main(): defines a function (a reusable block of code).\nprint(...) shows text in the terminal.\nThe line if __name__ == \"__main__\": ensures this only auto-runs when the file is executed directly.\n\nDon’t worry about this yet, we’ll gradually build up to it.",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/uv.html#adding-packages-later-in-the-course",
-    "href": "general/uv.html#adding-packages-later-in-the-course",
-    "title": "Installing Python",
-    "section": "Adding packages (later in the course)",
-    "text": "Adding packages (later in the course)\nIf/when you need a package (example: pandas):\nuv add pandas\nIf you added the wrong one:\nuv remove pandas\nIf your pyproject.toml changed (e.g. you pulled code from someone else):\nuv sync\n\n\n\n\n\n\nIf something seems “off”, just close the terminal and reopen in the project folder. Fresh starts fix many early mistakes.",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/uv.html#updating-uv",
-    "href": "general/uv.html#updating-uv",
-    "title": "Installing Python",
-    "section": "Updating uv",
-    "text": "Updating uv\nOccasionally:\nuv self update\n\n\n\n\n\n\nIf it ever errors, you can just reinstall using the same one-liner from earlier.",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/uv.html#best-practices-for-this-course",
-    "href": "general/uv.html#best-practices-for-this-course",
-    "title": "Installing Python",
-    "section": "Best practices for this course",
-    "text": "Best practices for this course\n\nOne folder for the course keeps everything tidy.\nNever install packages “globally” outside a project.\nKeep a short personal log in each project’s README.md (What did I do? What still confuses me?).\nAsk early for help, guessing usually takes much more time than asking.\n\nYou can always see available commands:\nuv --help",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/uv.html#recap",
-    "href": "general/uv.html#recap",
-    "title": "Installing Python",
-    "section": "Recap",
-    "text": "Recap\nYou can now:\n\nInstall uv.\nCreate a project.\nRun a script.\nAdd/remove/sync packages.\n\nNow, you’re set to continue the course.",
-    "crumbs": [
-      "Installation"
-    ]
-  },
-  {
-    "objectID": "general/privacy.html",
-    "href": "general/privacy.html",
-    "title": "Privacy Policy",
+    "objectID": "general/syllabus.html#part-ii-management-science-tools-lectures-4-9",
+    "href": "general/syllabus.html#part-ii-management-science-tools-lectures-4-9",
+    "title": "Course Syllabus",
     "section": "",
-    "text": "Welcome! This Privacy Policy explains how we collect, use, shares, and protects information in relation to our AI Chatbot service (the “Chatbot”) provided on this website. All other services do not use data that is covered by this policy!\nWe are committed to protecting your privacy. This policy outlines our practices concerning the data processed when you interact with our Chatbot. By using the Chatbot, you agree to the collection and use of information in accordance with this policy."
+    "text": "Mini-competitions begin - apply algorithms to business problems\nFormat for Lectures 4-9:\n\nHour 1: Solution presentations of previous competition\nHour 2: Interactive lecture on core concepts\nHour 3: Hands-on notebook practice + class discussion\nHour 4: Mini-competition with real data\nBonus Points: Best solution teams earn points toward final grade\n\n\n\n\nProbability distributions and random sampling\nBusiness risk modeling techniques\nPortfolio optimization under uncertainty\nCoffee shop simulation case study\n\n\n\n\n\nTime series analysis fundamentals\nDemand forecasting methods\nForecast evaluation metrics\nSeasonal and trend analysis\n\n\n\n\n\nSPT (Shortest Processing Time) rule\nEDD (Earliest Due Date) rule\nGantt chart visualization\nPerformance metrics: makespan, tardiness, flow time\n\n\n\n\n\nNearest neighbor heuristic\n2-opt local search improvements\nRoute optimization metrics\nReal logistics applications\n\n\n\n\n\nWeighted scoring methods\nPareto efficiency concepts\nDecision criteria combination\nBusiness trade-off analysis\n\n\n\n\n\nWhen simple heuristics fail\nGenetic algorithms introduction\nSimulated annealing basics\nAlgorithm selection strategies",
+    "crumbs": [
+      "Syllabus"
+    ]
   },
   {
-    "objectID": "general/privacy.html#introduction",
-    "href": "general/privacy.html#introduction",
-    "title": "Privacy Policy",
+    "objectID": "general/syllabus.html#part-iii-consulting-competition-lectures-10-12",
+    "href": "general/syllabus.html#part-iii-consulting-competition-lectures-10-12",
+    "title": "Course Syllabus",
     "section": "",
-    "text": "Welcome! This Privacy Policy explains how we collect, use, shares, and protects information in relation to our AI Chatbot service (the “Chatbot”) provided on this website. All other services do not use data that is covered by this policy!\nWe are committed to protecting your privacy. This policy outlines our practices concerning the data processed when you interact with our Chatbot. By using the Chatbot, you agree to the collection and use of information in accordance with this policy."
+    "text": "Real client challenges with professional presentations\n\n\n\nThree client projects to choose from:\n\nQuickBite: Food delivery routing optimization\nNurseNext: Healthcare staff scheduling\nTechMart: E-commerce inventory optimization\n\nTeam formation and data exploration\nProject scope definition\n\n\n\n\n\nPresentation skills training\nIntensive solution development\nPeer consultation and feedback\nPrototype completion milestone\n\n\n\n\n\nProfessional presentation competition\n“Executive panel evaluation”\nSolution demonstration and Q&A",
+    "crumbs": [
+      "Syllabus"
+    ]
   },
   {
-    "objectID": "general/privacy.html#data-controller",
-    "href": "general/privacy.html#data-controller",
-    "title": "Privacy Policy",
-    "section": "2. Data Controller",
-    "text": "2. Data Controller\nThe data controller responsible for your personal data is:\nBeyond Simulations GmbH\nAm Eich 9d\n22113 Oststeinbek\nGermany\nEmail: info@beyond-simulations.com"
+    "objectID": "general/syllabus.html#grade-composition-100-points-total",
+    "href": "general/syllabus.html#grade-composition-100-points-total",
+    "title": "Course Syllabus",
+    "section": "Grade Composition (100 points total)",
+    "text": "Grade Composition (100 points total)\n\n\n\nComponent\nPoints\nPercentage\nDescription\n\n\n\n\nAssignment 1: Risk & Forecasting\n30\n30%\nDue Lecture 8\n\n\nAssignment 2: Optimization Toolkit\n30\n30%\nDue Lecture 10\n\n\nFinal Competition Project\n40\n40%\nLectures 10-12\n\n\n- Solution Quality\n20\n20%\nTechnical implementation\n\n\n- Presentation\n20\n20%\nCommunication effectiveness",
+    "crumbs": [
+      "Syllabus"
+    ]
   },
   {
-    "objectID": "general/privacy.html#information-we-collect",
-    "href": "general/privacy.html#information-we-collect",
-    "title": "Privacy Policy",
-    "section": "3. Information We Collect",
-    "text": "3. Information We Collect\nWhen you interact with our Chatbot, we collect and process the following types of information:\n\nChat Interactions: This includes the questions, prompts, and text you submit to the Chatbot (“Prompts”) and the responses generated by the Chatbot (“Responses”). We do not store any personal data and all prompts are anonymized.\nTechnical Data: We may automatically collect technical information associated with your interaction, such as timestamps, session identifiers for service functionality. This data is processed on our self-hosted server at Hetzner in Germany.\nUsage Data: We may collect aggregated and anonymized data about how the Chatbot is used to monitor performance and improve the service."
+    "objectID": "general/syllabus.html#bonus-opportunities-additional-points-possible",
+    "href": "general/syllabus.html#bonus-opportunities-additional-points-possible",
+    "title": "Course Syllabus",
+    "section": "Bonus Opportunities (Additional points possible)",
+    "text": "Bonus Opportunities (Additional points possible)\n\nMini-competition victories (Lectures 4-9): up to +10 points\nPeer-selected best client project: +5 points",
+    "crumbs": [
+      "Syllabus"
+    ]
   },
   {
-    "objectID": "general/privacy.html#how-we-use-your-information",
-    "href": "general/privacy.html#how-we-use-your-information",
-    "title": "Privacy Policy",
-    "section": "4. How We Use Your Information",
-    "text": "4. How We Use Your Information\nWe use the collected information for the following purposes:\n\nTo Provide and Operate the Chatbot: To receive your Prompts, process them using AI models, and deliver Responses back to you.\nTo Route Requests: To manage communication between our Chatbot interface and the underlying AI models via intermediary services.\nFor Safety and Content Moderation: To analyze Prompts and/or potential Responses for harmful, inappropriate, or policy-violating content using designated services by Mistral AI acting as guardrails, aiming to ensure safer interactions.\nFor Service Improvement: To analyze usage patterns to understand user needs, troubleshoot issues, and enhance the Chatbot’s performance and capabilities.\nFor Security and Monitoring: To maintain the security of our service, prevent fraud, and monitor for potential misuse.\nTo Comply with Legal Obligations: To meet any applicable legal or regulatory requirements."
+    "objectID": "general/syllabus.html#late-work-policy",
+    "href": "general/syllabus.html#late-work-policy",
+    "title": "Course Syllabus",
+    "section": "Late Work Policy",
+    "text": "Late Work Policy\n\nAssignment 1 & 2: -10% per day late (up to 3 days)\nCompetition project: No late submissions accepted (real consulting deadline!)\nExtensions granted only for documented emergencies",
+    "crumbs": [
+      "Syllabus"
+    ]
   },
   {
-    "objectID": "general/privacy.html#legal-basis-for-processing",
-    "href": "general/privacy.html#legal-basis-for-processing",
-    "title": "Privacy Policy",
-    "section": "5. Legal Basis for Processing",
-    "text": "5. Legal Basis for Processing\nWe process your personal data based on the following legal grounds:\n\nLegitimate Interests: Processing is necessary for our legitimate interests in operating and improving the Chatbot service and maintaining its security, provided these interests are not overridden by your data protection rights.\nConsent: In some cases, we might ask for your explicit consent for specific processing activities (e.g., using conversation data for fine-tuning models beyond basic service provision).\nLegal Obligation: Processing is necessary to comply with a legal obligation to which we are subject."
-  },
-  {
-    "objectID": "general/privacy.html#data-sharing-and-third-parties",
-    "href": "general/privacy.html#data-sharing-and-third-parties",
-    "title": "Privacy Policy",
-    "section": "6. Data Sharing and Third Parties",
-    "text": "6. Data Sharing and Third Parties\nTo provide the Chatbot service, your Prompts are processed by and shared with the following third-party services and infrastructure providers:\n\nChatbot Interface: The user interface for the Chatbot runs directly in your web browser.\nRAG-Backend: The RAG backend runs on a self-hosted server on Hetzner in Germany.\nLLM Observation (Langfuse): We use Langfuse to observe the usage of the LLM models we use. Your Prompts (and generated responses) pass through Langfuse to reach the selected LLM provider or guardrail service. The data is stored on our self-hosted server at Hetzner in Germany.\nHosting Provider (Hetzner): Our instance of Langfuse is self-hosted on servers provided by Hetzner Online GmbH. Hetzner acts as a data processor providing the infrastructure. We store application data and interaction logs on these servers, located within Germany.\nMistral AI: We use Mistral AI for two primary purposes: (1) as one of the LLM options to generate Responses to your Prompts, and (2) as a guardrail service to check Prompts and/or potential Responses (which may have been generated by Mistral AI itself) for safety, appropriateness, and compliance with content policies before a final response is delivered to you. When Mistral is used for either generation or guardrail checking, your data (relevant Prompts and/or potential Responses) is processed according to Mistral’s terms and privacy policy. The data ist not used or saved for training purposes by the model providers.\n\nImportant Note on Third-Party Processing: These LLM and guardrail providers process your data to generate Responses or perform safety checks. They may use data according to their own policies, potentially including service improvement, subject to their terms. We encourage you to review their respective privacy policies. We do not explicitly share personal identifiers like your name or email through the Chatbot interaction unless you voluntarily include such information in your Prompts."
-  },
-  {
-    "objectID": "general/privacy.html#data-storage-security-and-retention",
-    "href": "general/privacy.html#data-storage-security-and-retention",
-    "title": "Privacy Policy",
-    "section": "7. Data Storage, Security, and Retention",
-    "text": "7. Data Storage, Security, and Retention\n\nStorage: Chat interaction data (Prompts, Responses) and technical logs may be stored temporarily or persistently (depending on configuration) on our Langfuse instance hosted on Hetzner servers in Germany.\nSecurity: We implement reasonable technical and organizational measures to protect your data from unauthorized access, disclosure, alteration, or destruction. This includes using HTTPS encryption for data transmitted between your browser, our server, and the LLM providers. Access to the backend systems is restricted.\nRetention: We retain chat interaction data and technical logs only for as long as necessary to fulfill the purposes outlined in this policy, for troubleshooting, security logging, service improvement, or as required by law. Retention periods vary depending on the type of data and our operational needs."
-  },
-  {
-    "objectID": "general/privacy.html#your-data-protection-rights",
-    "href": "general/privacy.html#your-data-protection-rights",
-    "title": "Privacy Policy",
-    "section": "8. Your Data Protection Rights",
-    "text": "8. Your Data Protection Rights\nDepending on your location and applicable data protection laws, you may have the following rights regarding your personal data:\n\nRight to Access: You can request copies of your personal data that we hold.\nRight to Rectification: You can request correction of inaccurate or incomplete data.\nRight to Erasure (‘Right to be Forgotten’): You can request the deletion of your personal data under certain conditions.\nRight to Restrict Processing: You can request the limitation of how we process your data under certain conditions.\nRight to Data Portability: You can request that we transfer the data we have collected to another organization, or directly to you, under certain conditions.\nRight to Object: You can object to our processing of your personal data based on legitimate interests.\nRight to Withdraw Consent: If processing is based on consent, you can withdraw it at any time.\n\nTo exercise any of these rights, please contact us using the details provided in Section 2 (Data Controller). We may need to verify your identity before processing your request."
-  },
-  {
-    "objectID": "general/privacy.html#changes-to-this-privacy-policy",
-    "href": "general/privacy.html#changes-to-this-privacy-policy",
-    "title": "Privacy Policy",
-    "section": "9. Changes to This Privacy Policy",
-    "text": "9. Changes to This Privacy Policy\nWe may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the “Last Updated” date at the top. We encourage you to review this policy periodically for any changes."
-  },
-  {
-    "objectID": "general/faq.html",
-    "href": "general/faq.html",
-    "title": "Frequently Asked Questions",
+    "objectID": "general/literature.html",
+    "href": "general/literature.html",
+    "title": "Literature and Resources",
     "section": "",
-    "text": "If you have a question that is not answered here, please let me know by sending me an e-mail to vlcek@beyondsimulations.com.",
+    "text": "This section provides a curated list of books and resources to enhance your understanding of algorithmic thinking and programming. Each recommendation includes a brief description to help you choose the most suitable resources for you.",
     "crumbs": [
-      "FAQs"
+      "Literature"
     ]
   },
   {
-    "objectID": "general/faq.html#unanswered-questions",
-    "href": "general/faq.html#unanswered-questions",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "If you have a question that is not answered here, please let me know by sending me an e-mail to vlcek@beyondsimulations.com.",
+    "objectID": "general/literature.html#books",
+    "href": "general/literature.html#books",
+    "title": "Literature and Resources",
+    "section": "Books",
+    "text": "Books\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.\n\nA book that inspired this lecture and will give you a good intuition for the principles of algorithmic thinking and how they can be applied to solve problems in everyday life.\n\nZingaro, D. (2024) Algorithmic thinking, 2nd edition: Unlock your programming potential. AU: No Starch Press.\n\nA book that introduces you to different algorithms and their reasoning. Written without any pseudocode, but with a lot of examples and explanations.",
     "crumbs": [
-      "FAQs"
+      "Literature"
     ]
   },
   {
-    "objectID": "general/faq.html#contribution-and-mistakes",
-    "href": "general/faq.html#contribution-and-mistakes",
-    "title": "Frequently Asked Questions",
-    "section": "Contribution and Mistakes",
-    "text": "Contribution and Mistakes\nIf you have found a mistake in the course material or if you have any suggestion on how to improve the course, please let me know by sending me an e-mail to vlcek@beyondsimulations.com.",
+    "objectID": "general/literature.html#books-1",
+    "href": "general/literature.html#books-1",
+    "title": "Literature and Resources",
+    "section": "Books",
+    "text": "Books\n\nDowney, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O’Reilly.\n\nA great book to start with if you have no experience with programming.\nLink to free online book\n\n\n\nDowney, A. B. (2023). Modeling and Simulation in Python. No Starch Press.\n\n\nAn interesting book for those who want know more about simulations in Python.\nLink to the book\nVanderPlas, J. (2016). A whirlwind tour of Python (August 2016, First edition). O’Reilly Media Inc.\n\nA very good and short book to get a quick overview of the most important features of Python if you already have some experience with programming.\nLink to the free online version\n\nElter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.\n\nA book that is unfortunately only available in German, but a very good and comedic start for beginners with lots of illustrations, examples and exercises. It is only available in print.\n\nMatthes, E. (2023). Python crash course: A hands-on, project-based introduction to programming (3rd edition). No Starch Press.\n\nA great book to learn Python with a hands-on approach. Highly recommended even for beginners but only available to buy.",
     "crumbs": [
-      "FAQs"
+      "Literature"
     ]
   },
   {
-    "objectID": "general/faq.html#faqs",
-    "href": "general/faq.html#faqs",
-    "title": "Frequently Asked Questions",
-    "section": "FAQs",
-    "text": "FAQs\n\nHow can I download PDF slides from the lecture?\n\nFirst, open the lecture you want to download the slides from.\nThen, click on the RevealJS button in the top right corner.\nNow, click on the three stacked bars in the lower left corner.\nThen, click on Tools in the upper left corner.\nNow you can select PDF Export Mode and then save the slides as a PDF.\n\n\n\n\n\n\n\nUnfortunately, this method does not work perfectly on all browsers. If you have a Chrome based browser, you should be fine.",
+    "objectID": "general/literature.html#resources",
+    "href": "general/literature.html#resources",
+    "title": "Literature and Resources",
+    "section": "Resources",
+    "text": "Resources\n\nDaily Dose of Data Science\n\nA website and a newsletter with lots of easy-to-digest resources to improve your skills in Data Science.",
     "crumbs": [
-      "FAQs"
+      "Literature"
     ]
   },
   {
-    "objectID": "general/faq.html#how-does-the-chatbot-work",
-    "href": "general/faq.html#how-does-the-chatbot-work",
-    "title": "Frequently Asked Questions",
-    "section": "How does the chatbot work?",
-    "text": "How does the chatbot work?\nThe course AI is a chatbot that uses the Mistral and some custom code hosted on Hetzner in Germany. If you have any questions about the course, feel free to ask the AI. Note, that the AI is not perfect and sometimes the answers might be incorrect. For more information about how the data is processed, please refer to the privacy policy.",
+    "objectID": "general/literature.html#books-2",
+    "href": "general/literature.html#books-2",
+    "title": "Literature and Resources",
+    "section": "Books",
+    "text": "Books\n\nWilke, C. (2019). Fundamentals of data visualization: A primer on making informative and compelling figures (First edition). O’Reilly Media.\n\nA book that is highly recommended to understand the principles of data visualization and how to create effective visualizations.\nLink to the free book website\n\nThomas, D., & Hunt, A. (2019). The pragmatic programmer, 20th anniversary edition: Journey to mastery (Second edition). Addison-Wesley.\n\nA fantasticbook to understand the principles of software development and how to create effective software.",
     "crumbs": [
-      "FAQs"
+      "Literature"
     ]
   },
   {
-    "objectID": "general/faq.html#is-using-copilot-cheating",
-    "href": "general/faq.html#is-using-copilot-cheating",
-    "title": "Frequently Asked Questions",
-    "section": "Is using Copilot cheating?",
-    "text": "Is using Copilot cheating?\nNo! Think of it more like using a calculator. It is allowed and encouraged, but you must understand what it does in the background to check the results.",
+    "objectID": "general/literature.html#resources-1",
+    "href": "general/literature.html#resources-1",
+    "title": "Literature and Resources",
+    "section": "Resources",
+    "text": "Resources\n\nQuarto\n\nA static website generator that is very powerful and flexible. Used to create the slides and the website for the course.\n\nCursor\n\nA code editor based on VS Code that is very powerful and flexible. It uses AI to help you write code.\n\nZed\n\nA young and lightweight code editor that is very fast and lightweight with built-in collaboration and AI features.\n\nAdvent of Code\n\nA wonderful website with daily challenges during the christmas time. Highly recommended to playfully improve your skills.\n\nTiny Python Projects\n\nInteresting and fun projects to programm in order to improve your programming skills.\n\nGithub\n\nThe largest provider for git repositories owned by Microsoft. A lot of open source projects are hosted here and you can read the code.\n\nCodewars\n\nA platform to improve your coding skills by solving challenges. You can compete with others, see how other people solved the challenges and read and learn from the code.\n\nCheat-Sheets\n\nFantastic resource with cheat sheets for the book “Python Crash Course” by Eric Matthes. You can use these to quickly look up syntax and functions.",
     "crumbs": [
-      "FAQs"
-    ]
-  },
-  {
-    "objectID": "general/faq.html#will-copilot-make-me-a-worse-programmer",
-    "href": "general/faq.html#will-copilot-make-me-a-worse-programmer",
-    "title": "Frequently Asked Questions",
-    "section": "Will Copilot make me a worse programmer?",
-    "text": "Will Copilot make me a worse programmer?\nIf you don’t learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better then just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.",
-    "crumbs": [
-      "FAQs"
-    ]
-  },
-  {
-    "objectID": "general/faq.html#what-if-copilot-suggests-wrong-code",
-    "href": "general/faq.html#what-if-copilot-suggests-wrong-code",
-    "title": "Frequently Asked Questions",
-    "section": "What if Copilot suggests wrong code?",
-    "text": "What if Copilot suggests wrong code?\nCopilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.1 That’s why humans are still very important in the loop.",
-    "crumbs": [
-      "FAQs"
-    ]
-  },
-  {
-    "objectID": "general/faq.html#footnotes",
-    "href": "general/faq.html#footnotes",
-    "title": "Frequently Asked Questions",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://machinelearning.apple.com/research/illusion-of-thinking↩︎",
-    "crumbs": [
-      "FAQs"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to Management Science!",
-    "section": "",
-    "text": "Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making. By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.\nIn this course, you’ll build a comprehensive toolkit by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you’ll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of “executives.”",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#required-tools",
-    "href": "index.html#required-tools",
-    "title": "Welcome to Management Science!",
-    "section": "Required Tools",
-    "text": "Required Tools\n\nLaptop capable of running Python and Jupyter notebooks\nPython (installed via uv package manager in class)\nGitHub Copilot (free with Student Developer Pack)\nVS Code or similar IDE",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#getting-help",
-    "href": "index.html#getting-help",
-    "title": "Welcome to Management Science!",
-    "section": "Getting Help",
-    "text": "Getting Help\n\nDuring class: Ask questions immediately, others likely have the same question\nTeam support: Leverage your group for collaborative problem-solving\nEmail: Response within 48 hours for urgent questions",
-    "crumbs": [
-      "Welcome"
+      "Literature"
     ]
   },
   {
@@ -4008,7 +3848,7 @@
     "href": "general/cheatsheet.html#standard-libraries",
     "title": "Cheatsheet",
     "section": "Standard Libraries",
-    "text": "Standard Libraries\n\nDefinition: Libraries that are part of the Python standard library.\nAccess: Import them using import.\n\n\nimport math\nimport random\n\n\nFor long package names, you can use the as keyword to create an alias.\n\n\nimport random as rd\n\n\nTo call a function from an imported package, use the package name as a prefix.\n\n\nrandom_number = rd.random()\nprint(random_number)\n\n0.18295670751886306",
+    "text": "Standard Libraries\n\nDefinition: Libraries that are part of the Python standard library.\nAccess: Import them using import.\n\n\nimport math\nimport random\n\n\nFor long package names, you can use the as keyword to create an alias.\n\n\nimport random as rd\n\n\nTo call a function from an imported package, use the package name as a prefix.\n\n\nrandom_number = rd.random()\nprint(random_number)\n\n0.4503426732658832",
     "crumbs": [
       "Cheatsheet"
     ]
@@ -4074,133 +3914,393 @@
     ]
   },
   {
-    "objectID": "general/literature.html",
-    "href": "general/literature.html",
-    "title": "Literature and Resources",
+    "objectID": "general/cheatsheet.html#basic-simulation-pattern",
+    "href": "general/cheatsheet.html#basic-simulation-pattern",
+    "title": "Cheatsheet",
+    "section": "Basic Simulation Pattern",
+    "text": "Basic Simulation Pattern\nDefinition: Running many scenarios to understand possible outcomes under uncertainty.\nCommon Pattern: 1. Create empty list to store results: results = [] 2. Run simulations in a loop, calling simulation function 3. Append each result to list: results.append(simulation_result) 4. Convert to DataFrame: pd.DataFrame(results)\n\n# Example simulation function\ndef simulate_business_day():\n    customers = np.random.normal(100, 20)  # Uncertain demand\n    revenue = customers * np.random.uniform(8, 12)  # Variable pricing\n    profit = revenue - 500  # Fixed costs\n    return {'customers': customers, 'revenue': revenue, 'profit': profit}\n\n# Run multiple simulations\nresults = []\nfor i in range(10000):\n    day_result = simulate_business_day()\n    results.append(day_result)\n\n# Convert to DataFrame for analysis\ndf_results = pd.DataFrame(results)",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#analyzing-simulation-results",
+    "href": "general/cheatsheet.html#analyzing-simulation-results",
+    "title": "Cheatsheet",
+    "section": "Analyzing Simulation Results",
+    "text": "Analyzing Simulation Results\n\n# Basic statistics\nmean_profit = df_results['profit'].mean()\nstd_profit = df_results['profit'].std()\n\n# Risk analysis\nloss_probability = (df_results['profit'] &lt; 0).mean()\nprofit_range = (df_results['profit'] &gt;= 100) & (df_results['profit'] &lt;= 200)\nrange_probability = profit_range.mean()\n\n# Percentiles for Value at Risk\nvar_5 = np.percentile(df_results['profit'], 5)  # Worst 5% scenario\nvar_95 = np.percentile(df_results['profit'], 95)  # Best 5% scenario",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#working-with-dates",
+    "href": "general/cheatsheet.html#working-with-dates",
+    "title": "Cheatsheet",
+    "section": "Working with Dates",
+    "text": "Working with Dates\n\n# Convert strings to datetime\ndates = pd.to_datetime(['2024-01-15', '2024-02-20'])\n\n# Extract date components using .dt accessor\ndf['month'] = df['date'].dt.month\ndf['day_of_week'] = df['date'].dt.day_of_week  # 0=Monday, 6=Sunday\ndf['quarter'] = df['date'].dt.quarter\ndf['is_month_end'] = df['date'].dt.is_month_end\n\n# Access specific elements\nthird_month = df['date'].dt.month.iloc[2]  # Third row's month",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#moving-averages",
+    "href": "general/cheatsheet.html#moving-averages",
+    "title": "Cheatsheet",
+    "section": "Moving Averages",
+    "text": "Moving Averages\nDefinition: Smooth time series by averaging over a window of periods.\n\n# Simple moving average\ndf['ma_7'] = df['sales'].rolling(window=7).mean()  # 7-day average\ndf['ma_30'] = df['sales'].rolling(window=30).mean()  # 30-day average\n\n# Note: First few values will be NaN due to insufficient data\n# Use .dropna() to remove NaN values if needed\nclean_data = df.dropna()",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#basic-forecasting-methods",
+    "href": "general/cheatsheet.html#basic-forecasting-methods",
+    "title": "Cheatsheet",
+    "section": "Basic Forecasting Methods",
+    "text": "Basic Forecasting Methods\n\nNaive Forecast\n\ndef naive_forecast(data, periods=1):\n    \"\"\"Tomorrow = today (simplest baseline)\"\"\"\n    return [data.iloc[-1]] * periods\n\n\n\nMoving Average Forecast\n\ndef moving_average_forecast(data, window=7, periods=1):\n    \"\"\"Forecast using average of last 'window' periods\"\"\"\n    ma = data.iloc[-window:].mean()\n    return [ma] * periods\n\n\n\nExponential Smoothing\n\ndef exponential_smoothing_forecast(data, alpha=0.3, periods=1):\n    \"\"\"Weight recent observations more heavily\"\"\"\n    forecasts = [data.iloc[0]]  # Start with first value\n\n    # Calculate smoothed values\n    for i in range(1, len(data)):\n        forecast = alpha * data.iloc[i] + (1 - alpha) * forecasts[-1]\n        forecasts.append(forecast)\n\n    # Use last smoothed value for future periods\n    return [forecasts[-1]] * periods\n\nAlpha parameter:\n\nα = 0.9: Very responsive (trust recent data)\nα = 0.3: Balanced (typical default)\nα = 0.1: Very stable (smooth out noise)",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#forecast-accuracy-metrics",
+    "href": "general/cheatsheet.html#forecast-accuracy-metrics",
+    "title": "Cheatsheet",
+    "section": "Forecast Accuracy Metrics",
+    "text": "Forecast Accuracy Metrics\n\ndef calculate_mae(actual, forecast):\n    \"\"\"Mean Absolute Error - average error size\"\"\"\n    return np.mean(np.abs(actual - forecast))\n\ndef calculate_rmse(actual, forecast):\n    \"\"\"Root Mean Squared Error - penalizes large errors\"\"\"\n    return np.sqrt(np.mean((actual - forecast) ** 2))\n\nWhen to use:\n\nMAE: Easier to interpret, same units as data\nRMSE: More sensitive to large errors/outliers",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#key-performance-metrics",
+    "href": "general/cheatsheet.html#key-performance-metrics",
+    "title": "Cheatsheet",
+    "section": "Key Performance Metrics",
+    "text": "Key Performance Metrics\n\ndef calculate_metrics(schedule_df):\n    \"\"\"Calculate scheduling performance metrics\"\"\"\n    return {\n        'makespan': schedule_df['completion'].max(),  # Total time\n        'avg_flow_time': schedule_df['completion'].mean(),  # Average completion\n        'total_tardiness': np.maximum(0, schedule_df['completion'] - schedule_df['due']).sum(),\n        'late_orders': (schedule_df['completion'] &gt; schedule_df['due']).sum()\n    }",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#key-concepts",
+    "href": "general/cheatsheet.html#key-concepts",
+    "title": "Cheatsheet",
+    "section": "Key Concepts",
+    "text": "Key Concepts\n\nSlack: Scheduling flexibility = Due Time - Processing Time\nStatic Scheduling: Sort all orders first, then process sequentially\nDynamic Scheduling: Make decisions as orders arrive",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#common-scheduling-rules",
+    "href": "general/cheatsheet.html#common-scheduling-rules",
+    "title": "Cheatsheet",
+    "section": "Common Scheduling Rules",
+    "text": "Common Scheduling Rules\n\nFIFO (First In, First Out)\nProcess orders in original sequence (by ID or arrival time).\n\n\nSPT (Shortest Processing Time)\nProcess shortest jobs first - minimizes average flow time.\n\n\nEDD (Earliest Due Date)\nProcess orders with earliest due dates first - minimizes maximum lateness.",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "general/cheatsheet.html#dynamic-vs-static-scheduling",
+    "href": "general/cheatsheet.html#dynamic-vs-static-scheduling",
+    "title": "Cheatsheet",
+    "section": "Dynamic vs Static Scheduling",
+    "text": "Dynamic vs Static Scheduling\nStatic: All orders available at time 0, sort once and process. Dynamic: Orders arrive over time, make decisions when machine becomes free.\n\n# Dynamic scheduling pattern\ndef schedule_dynamic(orders):\n    scheduled = []\n    remaining = [o.copy() for o in orders]\n    current_time = 0\n\n    while remaining:\n        # Find available orders (arrived by current_time)\n        available = [o for o in remaining if o['arrival'] &lt;= current_time]\n\n        # If nothing available, jump to next arrival\n        if not available:\n            current_time = min(o['arrival'] for o in remaining)\n            available = [o for o in remaining if o['arrival'] &lt;= current_time]\n\n        # Apply scheduling rule (e.g., SPT)\n        next_order = min(available, key=lambda x: x['processing'])\n\n        # Schedule and update\n        next_order['start'] = current_time\n        next_order['completion'] = current_time + next_order['processing']\n        current_time = next_order['completion']\n\n        scheduled.append(next_order)\n        remaining.remove(next_order)\n\n    return scheduled",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to Management Science!",
     "section": "",
-    "text": "This section provides a curated list of books and resources to enhance your understanding of algorithmic thinking and programming. Each recommendation includes a brief description to help you choose the most suitable resources for you.",
+    "text": "Management Science is an interdisciplinary field that applies scientific methods to organizational problem-solving and decision-making. By leveraging mathematical modeling, statistics, and numerical algorithms, management science helps businesses achieve their strategic goals effectively.\nIn this course, you’ll build a comprehensive toolkit by solving real problems across diverse business domains. Each algorithm is a tool, each case is a client, and each presentation is a pitch. Throughout the semester, you’ll work with realistic, business-relevant scenarios using Python. The course end in a consulting competition where teams tackle client briefs (food delivery routing, healthcare staff scheduling, or inventory optimization) and present solutions to a panel of “executives.”",
     "crumbs": [
-      "Literature"
+      "Welcome"
     ]
   },
   {
-    "objectID": "general/literature.html#books",
-    "href": "general/literature.html#books",
-    "title": "Literature and Resources",
-    "section": "Books",
-    "text": "Books\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.\n\nA book that inspired this lecture and will give you a good intuition for the principles of algorithmic thinking and how they can be applied to solve problems in everyday life.\n\nZingaro, D. (2024) Algorithmic thinking, 2nd edition: Unlock your programming potential. AU: No Starch Press.\n\nA book that introduces you to different algorithms and their reasoning. Written without any pseudocode, but with a lot of examples and explanations.",
+    "objectID": "index.html#required-tools",
+    "href": "index.html#required-tools",
+    "title": "Welcome to Management Science!",
+    "section": "Required Tools",
+    "text": "Required Tools\n\nLaptop capable of running Python and Jupyter notebooks\nPython (installed via uv package manager in class)\nGitHub Copilot (free with Student Developer Pack)\nVS Code or similar IDE",
     "crumbs": [
-      "Literature"
+      "Welcome"
     ]
   },
   {
-    "objectID": "general/literature.html#books-1",
-    "href": "general/literature.html#books-1",
-    "title": "Literature and Resources",
-    "section": "Books",
-    "text": "Books\n\nDowney, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O’Reilly.\n\nA great book to start with if you have no experience with programming.\nLink to free online book\n\n\n\nDowney, A. B. (2023). Modeling and Simulation in Python. No Starch Press.\n\n\nAn interesting book for those who want know more about simulations in Python.\nLink to the book\nVanderPlas, J. (2016). A whirlwind tour of Python (August 2016, First edition). O’Reilly Media Inc.\n\nA very good and short book to get a quick overview of the most important features of Python if you already have some experience with programming.\nLink to the free online version\n\nElter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.\n\nA book that is unfortunately only available in German, but a very good and comedic start for beginners with lots of illustrations, examples and exercises. It is only available in print.\n\nMatthes, E. (2023). Python crash course: A hands-on, project-based introduction to programming (3rd edition). No Starch Press.\n\nA great book to learn Python with a hands-on approach. Highly recommended even for beginners but only available to buy.",
+    "objectID": "index.html#getting-help",
+    "href": "index.html#getting-help",
+    "title": "Welcome to Management Science!",
+    "section": "Getting Help",
+    "text": "Getting Help\n\nDuring class: Ask questions immediately, others likely have the same question\nTeam support: Leverage your group for collaborative problem-solving\nEmail: Response within 48 hours for urgent questions",
     "crumbs": [
-      "Literature"
+      "Welcome"
     ]
   },
   {
-    "objectID": "general/literature.html#resources",
-    "href": "general/literature.html#resources",
-    "title": "Literature and Resources",
-    "section": "Resources",
-    "text": "Resources\n\nDaily Dose of Data Science\n\nA website and a newsletter with lots of easy-to-digest resources to improve your skills in Data Science.",
-    "crumbs": [
-      "Literature"
-    ]
-  },
-  {
-    "objectID": "general/literature.html#books-2",
-    "href": "general/literature.html#books-2",
-    "title": "Literature and Resources",
-    "section": "Books",
-    "text": "Books\n\nWilke, C. (2019). Fundamentals of data visualization: A primer on making informative and compelling figures (First edition). O’Reilly Media.\n\nA book that is highly recommended to understand the principles of data visualization and how to create effective visualizations.\nLink to the free book website\n\nThomas, D., & Hunt, A. (2019). The pragmatic programmer, 20th anniversary edition: Journey to mastery (Second edition). Addison-Wesley.\n\nA fantasticbook to understand the principles of software development and how to create effective software.",
-    "crumbs": [
-      "Literature"
-    ]
-  },
-  {
-    "objectID": "general/literature.html#resources-1",
-    "href": "general/literature.html#resources-1",
-    "title": "Literature and Resources",
-    "section": "Resources",
-    "text": "Resources\n\nQuarto\n\nA static website generator that is very powerful and flexible. Used to create the slides and the website for the course.\n\nCursor\n\nA code editor based on VS Code that is very powerful and flexible. It uses AI to help you write code.\n\nZed\n\nA young and lightweight code editor that is very fast and lightweight with built-in collaboration and AI features.\n\nAdvent of Code\n\nA wonderful website with daily challenges during the christmas time. Highly recommended to playfully improve your skills.\n\nTiny Python Projects\n\nInteresting and fun projects to programm in order to improve your programming skills.\n\nGithub\n\nThe largest provider for git repositories owned by Microsoft. A lot of open source projects are hosted here and you can read the code.\n\nCodewars\n\nA platform to improve your coding skills by solving challenges. You can compete with others, see how other people solved the challenges and read and learn from the code.\n\nCheat-Sheets\n\nFantastic resource with cheat sheets for the book “Python Crash Course” by Eric Matthes. You can use these to quickly look up syntax and functions.",
-    "crumbs": [
-      "Literature"
-    ]
-  },
-  {
-    "objectID": "general/syllabus.html",
-    "href": "general/syllabus.html",
-    "title": "Course Syllabus",
+    "objectID": "general/faq.html",
+    "href": "general/faq.html",
+    "title": "Frequently Asked Questions",
     "section": "",
-    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nGitHub Copilot integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios\n\n\n\n\n\nMini-competitions begin - apply algorithms to business problems\nFormat for Lectures 4-9:\n\nHour 1: Solution presentations of previous competition\nHour 2: Interactive lecture on core concepts\nHour 3: Hands-on notebook practice + class discussion\nHour 4: Mini-competition with real data\nBonus Points: Best solution teams earn points toward final grade\n\n\n\n\nProbability distributions and random sampling\nBusiness risk modeling techniques\nPortfolio optimization under uncertainty\nCoffee shop simulation case study\n\n\n\n\n\nTime series analysis fundamentals\nDemand forecasting methods\nForecast evaluation metrics\nSeasonal and trend analysis\n\n\n\n\n\nSPT (Shortest Processing Time) rule\nEDD (Earliest Due Date) rule\nGantt chart visualization\nPerformance metrics: makespan, tardiness, flow time\n\n\n\n\n\nNearest neighbor heuristic\n2-opt local search improvements\nRoute optimization metrics\nReal logistics applications\n\n\n\n\n\nWeighted scoring methods\nPareto efficiency concepts\nDecision criteria combination\nBusiness trade-off analysis\n\n\n\n\n\nWhen simple heuristics fail\nGenetic algorithms introduction\nSimulated annealing basics\nAlgorithm selection strategies\n\n\n\n\n\nReal client challenges with professional presentations\n\n\n\nThree client projects to choose from:\n\nQuickBite: Food delivery routing optimization\nNurseNext: Healthcare staff scheduling\nTechMart: E-commerce inventory optimization\n\nTeam formation and data exploration\nProject scope definition\n\n\n\n\n\nPresentation skills training\nIntensive solution development\nPeer consultation and feedback\nPrototype completion milestone\n\n\n\n\n\nProfessional presentation competition\n“Executive panel evaluation”\nSolution demonstration and Q&A",
+    "text": "If you have a question that is not answered here, please let me know by sending me an e-mail to vlcek@beyondsimulations.com.",
     "crumbs": [
-      "Syllabus"
+      "FAQs"
     ]
   },
   {
-    "objectID": "general/syllabus.html#part-i-python-foundation-lectures-1-3",
-    "href": "general/syllabus.html#part-i-python-foundation-lectures-1-3",
-    "title": "Course Syllabus",
+    "objectID": "general/faq.html#unanswered-questions",
+    "href": "general/faq.html#unanswered-questions",
+    "title": "Frequently Asked Questions",
     "section": "",
-    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nGitHub Copilot integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios",
+    "text": "If you have a question that is not answered here, please let me know by sending me an e-mail to vlcek@beyondsimulations.com.",
     "crumbs": [
-      "Syllabus"
+      "FAQs"
     ]
   },
   {
-    "objectID": "general/syllabus.html#part-ii-management-science-tools-lectures-4-9",
-    "href": "general/syllabus.html#part-ii-management-science-tools-lectures-4-9",
-    "title": "Course Syllabus",
+    "objectID": "general/faq.html#contribution-and-mistakes",
+    "href": "general/faq.html#contribution-and-mistakes",
+    "title": "Frequently Asked Questions",
+    "section": "Contribution and Mistakes",
+    "text": "Contribution and Mistakes\nIf you have found a mistake in the course material or if you have any suggestion on how to improve the course, please let me know by sending me an e-mail to vlcek@beyondsimulations.com.",
+    "crumbs": [
+      "FAQs"
+    ]
+  },
+  {
+    "objectID": "general/faq.html#faqs",
+    "href": "general/faq.html#faqs",
+    "title": "Frequently Asked Questions",
+    "section": "FAQs",
+    "text": "FAQs\n\nHow can I download PDF slides from the lecture?\n\nFirst, open the lecture you want to download the slides from.\nThen, click on the RevealJS button in the top right corner.\nNow, click on the three stacked bars in the lower left corner.\nThen, click on Tools in the upper left corner.\nNow you can select PDF Export Mode and then save the slides as a PDF.\n\n\n\n\n\n\n\nUnfortunately, this method does not work perfectly on all browsers. If you have a Chrome based browser, you should be fine.",
+    "crumbs": [
+      "FAQs"
+    ]
+  },
+  {
+    "objectID": "general/faq.html#how-does-the-chatbot-work",
+    "href": "general/faq.html#how-does-the-chatbot-work",
+    "title": "Frequently Asked Questions",
+    "section": "How does the chatbot work?",
+    "text": "How does the chatbot work?\nThe course AI is a chatbot that uses the Mistral and some custom code hosted on Hetzner in Germany. If you have any questions about the course, feel free to ask the AI. Note, that the AI is not perfect and sometimes the answers might be incorrect. For more information about how the data is processed, please refer to the privacy policy.",
+    "crumbs": [
+      "FAQs"
+    ]
+  },
+  {
+    "objectID": "general/faq.html#is-using-copilot-cheating",
+    "href": "general/faq.html#is-using-copilot-cheating",
+    "title": "Frequently Asked Questions",
+    "section": "Is using Copilot cheating?",
+    "text": "Is using Copilot cheating?\nNo! Think of it more like using a calculator. It is allowed and encouraged, but you must understand what it does in the background to check the results.",
+    "crumbs": [
+      "FAQs"
+    ]
+  },
+  {
+    "objectID": "general/faq.html#will-copilot-make-me-a-worse-programmer",
+    "href": "general/faq.html#will-copilot-make-me-a-worse-programmer",
+    "title": "Frequently Asked Questions",
+    "section": "Will Copilot make me a worse programmer?",
+    "text": "Will Copilot make me a worse programmer?\nIf you don’t learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better then just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.",
+    "crumbs": [
+      "FAQs"
+    ]
+  },
+  {
+    "objectID": "general/faq.html#what-if-copilot-suggests-wrong-code",
+    "href": "general/faq.html#what-if-copilot-suggests-wrong-code",
+    "title": "Frequently Asked Questions",
+    "section": "What if Copilot suggests wrong code?",
+    "text": "What if Copilot suggests wrong code?\nCopilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.1 That’s why humans are still very important in the loop.",
+    "crumbs": [
+      "FAQs"
+    ]
+  },
+  {
+    "objectID": "general/faq.html#footnotes",
+    "href": "general/faq.html#footnotes",
+    "title": "Frequently Asked Questions",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://machinelearning.apple.com/research/illusion-of-thinking↩︎",
+    "crumbs": [
+      "FAQs"
+    ]
+  },
+  {
+    "objectID": "general/privacy.html",
+    "href": "general/privacy.html",
+    "title": "Privacy Policy",
     "section": "",
-    "text": "Mini-competitions begin - apply algorithms to business problems\nFormat for Lectures 4-9:\n\nHour 1: Solution presentations of previous competition\nHour 2: Interactive lecture on core concepts\nHour 3: Hands-on notebook practice + class discussion\nHour 4: Mini-competition with real data\nBonus Points: Best solution teams earn points toward final grade\n\n\n\n\nProbability distributions and random sampling\nBusiness risk modeling techniques\nPortfolio optimization under uncertainty\nCoffee shop simulation case study\n\n\n\n\n\nTime series analysis fundamentals\nDemand forecasting methods\nForecast evaluation metrics\nSeasonal and trend analysis\n\n\n\n\n\nSPT (Shortest Processing Time) rule\nEDD (Earliest Due Date) rule\nGantt chart visualization\nPerformance metrics: makespan, tardiness, flow time\n\n\n\n\n\nNearest neighbor heuristic\n2-opt local search improvements\nRoute optimization metrics\nReal logistics applications\n\n\n\n\n\nWeighted scoring methods\nPareto efficiency concepts\nDecision criteria combination\nBusiness trade-off analysis\n\n\n\n\n\nWhen simple heuristics fail\nGenetic algorithms introduction\nSimulated annealing basics\nAlgorithm selection strategies",
-    "crumbs": [
-      "Syllabus"
-    ]
+    "text": "Welcome! This Privacy Policy explains how we collect, use, shares, and protects information in relation to our AI Chatbot service (the “Chatbot”) provided on this website. All other services do not use data that is covered by this policy!\nWe are committed to protecting your privacy. This policy outlines our practices concerning the data processed when you interact with our Chatbot. By using the Chatbot, you agree to the collection and use of information in accordance with this policy."
   },
   {
-    "objectID": "general/syllabus.html#part-iii-consulting-competition-lectures-10-12",
-    "href": "general/syllabus.html#part-iii-consulting-competition-lectures-10-12",
-    "title": "Course Syllabus",
+    "objectID": "general/privacy.html#introduction",
+    "href": "general/privacy.html#introduction",
+    "title": "Privacy Policy",
     "section": "",
-    "text": "Real client challenges with professional presentations\n\n\n\nThree client projects to choose from:\n\nQuickBite: Food delivery routing optimization\nNurseNext: Healthcare staff scheduling\nTechMart: E-commerce inventory optimization\n\nTeam formation and data exploration\nProject scope definition\n\n\n\n\n\nPresentation skills training\nIntensive solution development\nPeer consultation and feedback\nPrototype completion milestone\n\n\n\n\n\nProfessional presentation competition\n“Executive panel evaluation”\nSolution demonstration and Q&A",
+    "text": "Welcome! This Privacy Policy explains how we collect, use, shares, and protects information in relation to our AI Chatbot service (the “Chatbot”) provided on this website. All other services do not use data that is covered by this policy!\nWe are committed to protecting your privacy. This policy outlines our practices concerning the data processed when you interact with our Chatbot. By using the Chatbot, you agree to the collection and use of information in accordance with this policy."
+  },
+  {
+    "objectID": "general/privacy.html#data-controller",
+    "href": "general/privacy.html#data-controller",
+    "title": "Privacy Policy",
+    "section": "2. Data Controller",
+    "text": "2. Data Controller\nThe data controller responsible for your personal data is:\nBeyond Simulations GmbH\nAm Eich 9d\n22113 Oststeinbek\nGermany\nEmail: info@beyond-simulations.com"
+  },
+  {
+    "objectID": "general/privacy.html#information-we-collect",
+    "href": "general/privacy.html#information-we-collect",
+    "title": "Privacy Policy",
+    "section": "3. Information We Collect",
+    "text": "3. Information We Collect\nWhen you interact with our Chatbot, we collect and process the following types of information:\n\nChat Interactions: This includes the questions, prompts, and text you submit to the Chatbot (“Prompts”) and the responses generated by the Chatbot (“Responses”). We do not store any personal data and all prompts are anonymized.\nTechnical Data: We may automatically collect technical information associated with your interaction, such as timestamps, session identifiers for service functionality. This data is processed on our self-hosted server at Hetzner in Germany.\nUsage Data: We may collect aggregated and anonymized data about how the Chatbot is used to monitor performance and improve the service."
+  },
+  {
+    "objectID": "general/privacy.html#how-we-use-your-information",
+    "href": "general/privacy.html#how-we-use-your-information",
+    "title": "Privacy Policy",
+    "section": "4. How We Use Your Information",
+    "text": "4. How We Use Your Information\nWe use the collected information for the following purposes:\n\nTo Provide and Operate the Chatbot: To receive your Prompts, process them using AI models, and deliver Responses back to you.\nTo Route Requests: To manage communication between our Chatbot interface and the underlying AI models via intermediary services.\nFor Safety and Content Moderation: To analyze Prompts and/or potential Responses for harmful, inappropriate, or policy-violating content using designated services by Mistral AI acting as guardrails, aiming to ensure safer interactions.\nFor Service Improvement: To analyze usage patterns to understand user needs, troubleshoot issues, and enhance the Chatbot’s performance and capabilities.\nFor Security and Monitoring: To maintain the security of our service, prevent fraud, and monitor for potential misuse.\nTo Comply with Legal Obligations: To meet any applicable legal or regulatory requirements."
+  },
+  {
+    "objectID": "general/privacy.html#legal-basis-for-processing",
+    "href": "general/privacy.html#legal-basis-for-processing",
+    "title": "Privacy Policy",
+    "section": "5. Legal Basis for Processing",
+    "text": "5. Legal Basis for Processing\nWe process your personal data based on the following legal grounds:\n\nLegitimate Interests: Processing is necessary for our legitimate interests in operating and improving the Chatbot service and maintaining its security, provided these interests are not overridden by your data protection rights.\nConsent: In some cases, we might ask for your explicit consent for specific processing activities (e.g., using conversation data for fine-tuning models beyond basic service provision).\nLegal Obligation: Processing is necessary to comply with a legal obligation to which we are subject."
+  },
+  {
+    "objectID": "general/privacy.html#data-sharing-and-third-parties",
+    "href": "general/privacy.html#data-sharing-and-third-parties",
+    "title": "Privacy Policy",
+    "section": "6. Data Sharing and Third Parties",
+    "text": "6. Data Sharing and Third Parties\nTo provide the Chatbot service, your Prompts are processed by and shared with the following third-party services and infrastructure providers:\n\nChatbot Interface: The user interface for the Chatbot runs directly in your web browser.\nRAG-Backend: The RAG backend runs on a self-hosted server on Hetzner in Germany.\nLLM Observation (Langfuse): We use Langfuse to observe the usage of the LLM models we use. Your Prompts (and generated responses) pass through Langfuse to reach the selected LLM provider or guardrail service. The data is stored on our self-hosted server at Hetzner in Germany.\nHosting Provider (Hetzner): Our instance of Langfuse is self-hosted on servers provided by Hetzner Online GmbH. Hetzner acts as a data processor providing the infrastructure. We store application data and interaction logs on these servers, located within Germany.\nMistral AI: We use Mistral AI for two primary purposes: (1) as one of the LLM options to generate Responses to your Prompts, and (2) as a guardrail service to check Prompts and/or potential Responses (which may have been generated by Mistral AI itself) for safety, appropriateness, and compliance with content policies before a final response is delivered to you. When Mistral is used for either generation or guardrail checking, your data (relevant Prompts and/or potential Responses) is processed according to Mistral’s terms and privacy policy. The data ist not used or saved for training purposes by the model providers.\n\nImportant Note on Third-Party Processing: These LLM and guardrail providers process your data to generate Responses or perform safety checks. They may use data according to their own policies, potentially including service improvement, subject to their terms. We encourage you to review their respective privacy policies. We do not explicitly share personal identifiers like your name or email through the Chatbot interaction unless you voluntarily include such information in your Prompts."
+  },
+  {
+    "objectID": "general/privacy.html#data-storage-security-and-retention",
+    "href": "general/privacy.html#data-storage-security-and-retention",
+    "title": "Privacy Policy",
+    "section": "7. Data Storage, Security, and Retention",
+    "text": "7. Data Storage, Security, and Retention\n\nStorage: Chat interaction data (Prompts, Responses) and technical logs may be stored temporarily or persistently (depending on configuration) on our Langfuse instance hosted on Hetzner servers in Germany.\nSecurity: We implement reasonable technical and organizational measures to protect your data from unauthorized access, disclosure, alteration, or destruction. This includes using HTTPS encryption for data transmitted between your browser, our server, and the LLM providers. Access to the backend systems is restricted.\nRetention: We retain chat interaction data and technical logs only for as long as necessary to fulfill the purposes outlined in this policy, for troubleshooting, security logging, service improvement, or as required by law. Retention periods vary depending on the type of data and our operational needs."
+  },
+  {
+    "objectID": "general/privacy.html#your-data-protection-rights",
+    "href": "general/privacy.html#your-data-protection-rights",
+    "title": "Privacy Policy",
+    "section": "8. Your Data Protection Rights",
+    "text": "8. Your Data Protection Rights\nDepending on your location and applicable data protection laws, you may have the following rights regarding your personal data:\n\nRight to Access: You can request copies of your personal data that we hold.\nRight to Rectification: You can request correction of inaccurate or incomplete data.\nRight to Erasure (‘Right to be Forgotten’): You can request the deletion of your personal data under certain conditions.\nRight to Restrict Processing: You can request the limitation of how we process your data under certain conditions.\nRight to Data Portability: You can request that we transfer the data we have collected to another organization, or directly to you, under certain conditions.\nRight to Object: You can object to our processing of your personal data based on legitimate interests.\nRight to Withdraw Consent: If processing is based on consent, you can withdraw it at any time.\n\nTo exercise any of these rights, please contact us using the details provided in Section 2 (Data Controller). We may need to verify your identity before processing your request."
+  },
+  {
+    "objectID": "general/privacy.html#changes-to-this-privacy-policy",
+    "href": "general/privacy.html#changes-to-this-privacy-policy",
+    "title": "Privacy Policy",
+    "section": "9. Changes to This Privacy Policy",
+    "text": "9. Changes to This Privacy Policy\nWe may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the “Last Updated” date at the top. We encourage you to review this policy periodically for any changes."
+  },
+  {
+    "objectID": "general/uv.html",
+    "href": "general/uv.html",
+    "title": "Installing Python",
+    "section": "",
+    "text": "uv is a new (and very fast) Python tool written in Rust. It:\n\nInstalls Python for you (no manual downloads).\nCreates isolated virtual environments (safe sandboxes per project).\nInstalls and updates packages quickly.\n\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
     "crumbs": [
-      "Syllabus"
+      "Installation"
     ]
   },
   {
-    "objectID": "general/syllabus.html#grade-composition-100-points-total",
-    "href": "general/syllabus.html#grade-composition-100-points-total",
-    "title": "Course Syllabus",
-    "section": "Grade Composition (100 points total)",
-    "text": "Grade Composition (100 points total)\n\n\n\nComponent\nPoints\nPercentage\nDescription\n\n\n\n\nAssignment 1: Risk & Forecasting\n30\n30%\nDue Lecture 8\n\n\nAssignment 2: Optimization Toolkit\n30\n30%\nDue Lecture 10\n\n\nFinal Competition Project\n40\n40%\nLectures 10-12\n\n\n- Solution Quality\n20\n20%\nTechnical implementation\n\n\n- Presentation\n20\n20%\nCommunication effectiveness",
+    "objectID": "general/uv.html#why-we-use-uv-for-this-course",
+    "href": "general/uv.html#why-we-use-uv-for-this-course",
+    "title": "Installing Python",
+    "section": "",
+    "text": "uv is a new (and very fast) Python tool written in Rust. It:\n\nInstalls Python for you (no manual downloads).\nCreates isolated virtual environments (safe sandboxes per project).\nInstalls and updates packages quickly.\n\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
     "crumbs": [
-      "Syllabus"
+      "Installation"
     ]
   },
   {
-    "objectID": "general/syllabus.html#bonus-opportunities-additional-points-possible",
-    "href": "general/syllabus.html#bonus-opportunities-additional-points-possible",
-    "title": "Course Syllabus",
-    "section": "Bonus Opportunities (Additional points possible)",
-    "text": "Bonus Opportunities (Additional points possible)\n\nMini-competition victories (Lectures 4-9): up to +10 points\nPeer-selected best client project: +5 points",
+    "objectID": "general/uv.html#install-uv",
+    "href": "general/uv.html#install-uv",
+    "title": "Installing Python",
+    "section": "Install uv",
+    "text": "Install uv\nChoose the instructions for your operating system. To these, you need to work in your terminal.\n\n\n\n\n\n\nOpen the terminal in VS Code by selecting (Terminal → New Terminal).\n\n\n\n\nmacOS or Linux (Terminal)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nIf curl is missing:\nwget -qO- https://astral.sh/uv/install.sh | sh\nAfter installation: close and reopen your terminal (so your PATH updates).\n\n\nWindows (PowerShell)\nOpen PowerShell and run:\npowershell -ExecutionPolicy Bypass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\nIf you see a script execution warning, you can alternatively first run:\nSet-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\nThen re-run the install line.\n\n\nVerify installation\nRun (macOS / Linux / Windows):\nuv --version\nIf you see a version number: great!\n\n\n\n\n\n\nIf you get “command not found” or “‘uv’ is not recognized”:\n\nClose and reopen the terminal (important).\nOn Windows: make sure you used PowerShell (not Command Prompt).\nStill broken? Ask for help, no need of guessing the error.",
     "crumbs": [
-      "Syllabus"
+      "Installation"
     ]
   },
   {
-    "objectID": "general/syllabus.html#late-work-policy",
-    "href": "general/syllabus.html#late-work-policy",
-    "title": "Course Syllabus",
-    "section": "Late Work Policy",
-    "text": "Late Work Policy\n\nAssignment 1 & 2: -10% per day late (up to 3 days)\nCompetition project: No late submissions accepted (real consulting deadline!)\nExtensions granted only for documented emergencies",
+    "objectID": "general/uv.html#installpython",
+    "href": "general/uv.html#installpython",
+    "title": "Installing Python",
+    "section": "InstallPython",
+    "text": "InstallPython\nWe want everyone on the same Python version for consistency. Thus, we’ll use Python 3.12 for the course this year.\nInstall (you only need to do this once):\nuv python install 3.12\nCheck the installation:\nuv run python --version\nExpected output starts with:\nPython 3.12.",
     "crumbs": [
-      "Syllabus"
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "general/uv.html#create-your-first-project",
+    "href": "general/uv.html#create-your-first-project",
+    "title": "Installing Python",
+    "section": "Create your first project",
+    "text": "Create your first project\nPick a folder where you keep course work. If you do not have one, make sure to create one! Open the course folder in your IDE and then run the following from the terminal:\nuv init\nuv init creates:\n\nmain.py (starter script)\npyproject.toml (project + dependencies config)\n.python-version (records the Python version we chose)\n.gitignore (useful if you ever use Git)\nREADME.md (you can jot notes here)\n(A .venv folder will appear later once packages are added or synced.)\n\n\n\n\n\n\n\nYou do not need to edit any of these (except maybe README.md for your notes and main.py if you want to run something different).",
+    "crumbs": [
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "general/uv.html#run-the-starter-script",
+    "href": "general/uv.html#run-the-starter-script",
+    "title": "Installing Python",
+    "section": "Run the starter script",
+    "text": "Run the starter script\nInside the project folder in your terminal:\nuv run python main.py\nYou should see something like:\nHello World!\n(If you want, you can open main.py and change the message, then re-run.)\n\nWhat does that code mean?\ndef main():\n    print(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    main()\n\ndef main(): defines a function (a reusable block of code).\nprint(...) shows text in the terminal.\nThe line if __name__ == \"__main__\": ensures this only auto-runs when the file is executed directly.\n\nDon’t worry about this yet, we’ll gradually build up to it.",
+    "crumbs": [
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "general/uv.html#adding-packages-later-in-the-course",
+    "href": "general/uv.html#adding-packages-later-in-the-course",
+    "title": "Installing Python",
+    "section": "Adding packages (later in the course)",
+    "text": "Adding packages (later in the course)\nIf/when you need a package (example: pandas):\nuv add pandas\nIf you added the wrong one:\nuv remove pandas\nIf your pyproject.toml changed (e.g. you pulled code from someone else):\nuv sync\n\n\n\n\n\n\nIf something seems “off”, just close the terminal and reopen in the project folder. Fresh starts fix many early mistakes.",
+    "crumbs": [
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "general/uv.html#updating-uv",
+    "href": "general/uv.html#updating-uv",
+    "title": "Installing Python",
+    "section": "Updating uv",
+    "text": "Updating uv\nOccasionally:\nuv self update\n\n\n\n\n\n\nIf it ever errors, you can just reinstall using the same one-liner from earlier.",
+    "crumbs": [
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "general/uv.html#best-practices-for-this-course",
+    "href": "general/uv.html#best-practices-for-this-course",
+    "title": "Installing Python",
+    "section": "Best practices for this course",
+    "text": "Best practices for this course\n\nOne folder for the course keeps everything tidy.\nNever install packages “globally” outside a project.\nKeep a short personal log in each project’s README.md (What did I do? What still confuses me?).\nAsk early for help, guessing usually takes much more time than asking.\n\nYou can always see available commands:\nuv --help",
+    "crumbs": [
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "general/uv.html#recap",
+    "href": "general/uv.html#recap",
+    "title": "Installing Python",
+    "section": "Recap",
+    "text": "Recap\nYou can now:\n\nInstall uv.\nCreate a project.\nRun a script.\nAdd/remove/sync packages.\n\nNow, you’re set to continue the course.",
+    "crumbs": [
+      "Installation"
     ]
   },
   {
