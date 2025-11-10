@@ -130,27 +130,27 @@ fig, axes = plt.subplots(4, 1)
 
 # Original series
 axes[0].plot(dates[:90], sales[:90], color=BRAND_COLORS["twoDark"], linewidth=1.5)
-axes[0].set_title('Original Sales Data (3 months)', fontweight='bold')
-axes[0].set_ylabel('Sales')
+axes[0].set_title('Original Sales Data (3 months)', fontweight='bold',fontsize=10)
+axes[0].set_ylabel('Sales',fontsize=9)
 axes[0].grid(True, alpha=0.2)
 
 # Trend component
 axes[1].plot(dates[:90], trend[:90], color=BRAND_COLORS["oneDark"], linewidth=2.5)
-axes[1].set_title('Trend Component', fontweight='bold')
-axes[1].set_ylabel('Trend')
+axes[1].set_title('Trend Component', fontweight='bold',fontsize=10)
+axes[1].set_ylabel('Trend',fontsize=9)
 axes[1].grid(True, alpha=0.2)
 
 # Seasonal component
 axes[2].plot(dates[:90], seasonal[:90], color=BRAND_COLORS["threeDark"], linewidth=1.5)
-axes[2].set_title('Seasonal Component (Weekly Pattern)', fontweight='bold')
-axes[2].set_ylabel('Seasonality')
+axes[2].set_title('Seasonal Component (Weekly Pattern)', fontweight='bold',fontsize=10)
+axes[2].set_ylabel('Seasonality',fontsize=9)
 axes[2].grid(True, alpha=0.2)
 
 # Random component
 axes[3].plot(dates[:90], noise[:90], color=BRAND_COLORS["twoLight"], linewidth=1, alpha=0.7)
-axes[3].set_title('Random Component (Noise)', fontweight='bold')
-axes[3].set_ylabel('Noise')
-axes[3].set_xlabel('Date')
+axes[3].set_title('Random Component (Noise)', fontweight='bold',fontsize=10)
+axes[3].set_ylabel('Noise',fontsize=9)
+axes[3].set_xlabel('Date',fontsize=9)
 axes[3].grid(True, alpha=0.2)
 
 plt.tight_layout()
@@ -181,9 +181,9 @@ ma = pd.Series(sales[:60]).rolling(window=window, center=True).mean()
 
 ax.plot(dates[:60], sales[:60], color=BRAND_COLORS["twoLight"], linewidth=1, alpha=0.5, label='Daily Sales')
 ax.plot(dates[:60], ma, color=BRAND_COLORS["threeDark"], linewidth=2.5, label=f'{window}-Day Moving Average')
-ax.set_xlabel('Date', fontsize=11)
-ax.set_ylabel('Sales (units)', fontsize=11)
-ax.set_title('Smoothing with Moving Averages', fontsize=14, fontweight='bold')
+ax.set_xlabel('Date', fontsize=9)
+ax.set_ylabel('Sales (units)', fontsize=9)
+ax.set_title('Smoothing with Moving Averages', fontsize=10, fontweight='bold')
 ax.legend()
 ax.grid(True, alpha=0.2)
 plt.tight_layout()
@@ -271,24 +271,24 @@ flat_fitted = flat_es.fittedvalues
 
 axes[0].plot(t, flat_data, 'o-', color=BRAND_COLORS["twoDark"], alpha=0.7, linewidth=1.5, markersize=5, label='Actual Sales')
 axes[0].plot(t, flat_fitted, color=BRAND_COLORS["threeDark"], linestyle='--', linewidth=2.5, alpha=0.8, label='Simple ES (tracks well!)')
-axes[0].set_title('Stable Sales: Simple ES is Perfect', fontweight='bold')
-axes[0].set_xlabel('Week')
-axes[0].set_ylabel('Sales')
+axes[0].set_title('Stable Sales, fontweight='bold',fontsize=10)
+axes[0].set_xlabel('Week',fontsize=9)
+axes[0].set_ylabel('Sales',fontsize=9)
 axes[0].legend()
 axes[0].grid(True, alpha=0.2)
 
 # Trending data (needs Holt's method)
 trend_data = 100 + 3*t + np.random.normal(0, 5, 20)
 trend_series = pd.Series(trend_data)
-trend_es = SimpleExpSmoothing(trend_series).fit(smoothing_level=0.3)
+trend_es = SimpleExpSmoothing(trend_series).fit(smoothing_level=0.3,optimized=False)
 trend_fitted = trend_es.fittedvalues
 
 axes[1].plot(t, trend_data, 'o-', color=BRAND_COLORS["oneDark"], alpha=0.7, linewidth=1.5, markersize=5, label='Actual Sales')
 axes[1].plot(t, trend_fitted, color=BRAND_COLORS["threeDark"], linestyle='--', linewidth=2.5, alpha=0.8, label='Simple ES (always behind!)')
 axes[1].plot(t, 100 + 3*t, color=BRAND_COLORS["twoDark"], linestyle='--', linewidth=2.5, alpha=0.7, label='True trend')
-axes[1].set_title('Growing Sales: Simple ES Falls Behind', fontweight='bold')
-axes[1].set_xlabel('Week')
-axes[1].set_ylabel('Sales')
+axes[1].set_title('Growing Sales, fontweight='bold',fontsize=10)
+axes[1].set_xlabel('Week',fontsize=9)
+axes[1].set_ylabel('Sales',fontsize=9)
 axes[1].legend()
 axes[1].grid(True, alpha=0.2)
 
@@ -419,7 +419,7 @@ for h in range(1, 4):
 #| eval: true
 #| echo: false
 setup_clean_style()
-fig, ax = plt.subplots(figsize=(12, 6))
+fig, ax = plt.subplots()
 
 # Use the actual data from our step-by-step example
 t_historical = np.arange(len(sales_data))
@@ -434,8 +434,7 @@ ax.plot(t_historical, level_history, color=BRAND_COLORS["oneDark"], linewidth=2.
         alpha=0.8, label='Level Component (smoothed)')
 
 # Plot forecast
-ax.plot(t_forecast, forecast_values, 'o-', color=BRAND_COLORS["threeDark"],
-        linestyle='--', linewidth=2.5, markersize=10, label='Forecast (Level + Trend)',
+ax.plot(t_forecast, forecast_values, 'o-', color=BRAND_COLORS["threeDark"], linewidth=2.5, markersize=10, label='Forecast (Level + Trend)',
         alpha=0.8)
 
 # Annotations
@@ -455,9 +454,9 @@ ax.axvline(x=t_historical[-1] + 0.5, color='gray', linestyle=':', linewidth=2, a
 ax.text(t_historical[-1] + 0.5, ax.get_ylim()[0] + 5, 'Forecast →',
         fontsize=10, ha='left', style='italic')
 
-ax.set_xlabel('Time Period', fontsize=12)
-ax.set_ylabel('Sales (units)', fontsize=12)
-ax.legend(loc='upper left', fontsize=11)
+ax.set_xlabel('Time Period', fontsize=9)
+ax.set_ylabel('Sales (units)', fontsize=9)
+ax.legend(loc='upper left', fontsize=9)
 ax.grid(True, alpha=0.2)
 ax.set_xlim(-0.5, t_forecast[-1] + 0.5)
 
@@ -534,7 +533,7 @@ fig, ax = plt.subplots()
 
 # Generate data with both trend and seasonality
 np.random.seed(42)
-months = pd.date_range(start='2023-01-01', periods=36, freq='M')
+months = pd.date_range(start='2023-01-01', periods=36, freq='ME')
 base_trend = np.linspace(100, 200, 36)
 seasonality = 40 * np.sin(2 * np.pi * np.arange(36) / 12)
 data_combined = base_trend + seasonality + np.random.normal(0, 8, 36)
@@ -544,8 +543,8 @@ ax.plot(months, data_combined, 'o-', color=BRAND_COLORS["twoDark"],
 ax.plot(months, base_trend, '--', color=BRAND_COLORS["oneDark"],
         linewidth=2.5, alpha=0.7, label='Underlying Trend')
 
-ax.set_xlabel('Month', fontsize=12)
-ax.set_ylabel('Sales (units)', fontsize=12)
+ax.set_xlabel('Month', fontsize=9)
+ax.set_ylabel('Sales (units)', fontsize=9)
 ax.legend(loc='upper left')
 ax.grid(True, alpha=0.2)
 plt.tight_layout()
@@ -576,7 +575,7 @@ t = np.arange(36)
 # Component 1: Level (the base_trend is the deseasonalized level)
 axes[0].plot(t, data_combined, 'o', alpha=0.3, markersize=4, color='gray', label='Actual Data')
 axes[0].plot(t, base_trend, '-', linewidth=2.5, color=BRAND_COLORS["twoDark"], label='Level Component')
-axes[0].set_title('Level: "Where are we?"', fontweight='bold', fontsize=12)
+axes[0].set_title('Level', fontweight='bold', fontsize=10)
 axes[0].set_xlabel('Month')
 axes[0].set_ylabel('Sales')
 axes[0].legend()
@@ -587,7 +586,7 @@ trend_val = (200 - 100) / 36  # Growth per month ≈ 2.78
 trend_vals = np.ones(36) * trend_val
 axes[1].bar(range(36), trend_vals, color=BRAND_COLORS["oneDark"], alpha=0.7)
 axes[1].axhline(y=0, color='black', linestyle='-', linewidth=0.5)
-axes[1].set_title(f'Trend: "Growing by {trend_val:.1f} units/month"', fontweight='bold', fontsize=12)
+axes[1].set_title('Trend', fontweight='bold', fontsize=10)
 axes[1].set_xlabel('Month')
 axes[1].set_ylabel('Trend Rate')
 axes[1].set_ylim(-1, 4)
@@ -598,7 +597,7 @@ month_indices = np.arange(12)
 seasonal_cycle = seasonality[:12]  # First year's seasonal pattern
 axes[2].plot(month_indices, seasonal_cycle, 'o-', linewidth=2.5, markersize=8,
             color=BRAND_COLORS["threeDark"])
-axes[2].set_title('Seasonality: "Summer peak pattern"', fontweight='bold', fontsize=12)
+axes[2].set_title('Seasonality"', fontweight='bold', fontsize=10)
 axes[2].set_xlabel('Month of Year')
 axes[2].set_ylabel('Seasonal Effect')
 axes[2].set_xticks(range(12))
@@ -703,7 +702,7 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing
 
 # Create monthly data with trend and seasonality
 np.random.seed(42)
-months = pd.date_range('2022-01-01', periods=24, freq='M')
+months = pd.date_range('2022-01-01', periods=24, freq='ME')
 trend = np.linspace(100, 150, 24)
 seasonal = 30 * np.sin(2 * np.pi * np.arange(24) / 12)
 monthly_sales = trend + seasonal + np.random.normal(0, 5, 24)
@@ -720,7 +719,7 @@ fig, ax = plt.subplots()
 
 historical_dates = ts_data.index
 forecast_dates = pd.date_range(historical_dates[-1] + pd.DateOffset(months=1),
-                               periods=6, freq='M')
+                               periods=6, freq='ME')
 
 ax.plot(historical_dates, ts_data, 'o-', color=BRAND_COLORS["twoDark"],
         linewidth=2, markersize=5, label='Historical Sales', alpha=0.8)
@@ -735,10 +734,10 @@ ax.plot(forecast_dates, forecast, 'o-', color=BRAND_COLORS["threeDark"],
 ax.axvspan(forecast_dates[0], forecast_dates[-1], alpha=0.1,
           color=BRAND_COLORS["threeDark"], label='Forecast Period')
 
-ax.set_xlabel('Date', fontsize=12)
-ax.set_ylabel('Sales (units)', fontsize=12)
+ax.set_xlabel('Date', fontsize=9)
+ax.set_ylabel('Sales (units)', fontsize=9)
 ax.set_title('Holt-Winters Forecast: Captures Both Trend and Seasonality',
-            fontsize=14, fontweight='bold')
+            fontsize=10, fontweight='bold')
 ax.legend(loc='upper left')
 ax.grid(True, alpha=0.2)
 plt.tight_layout()
@@ -834,7 +833,7 @@ for method, (x, y, color, description) in methods.items():
                          facecolor=color, alpha=0.7, edgecolor='black', linewidth=2)
     ax.add_patch(rect)
     ax.text(x, y+0.1, method, ha='center', va='center',
-           fontweight='bold', fontsize=11)
+           fontweight='bold', fontsize=9)
     ax.text(x, y-0.15, description, ha='center', va='center',
            fontsize=9, style='italic')
 
@@ -1020,18 +1019,18 @@ fig, axes = plt.subplots(1, 2)
 # Simple model
 axes[0].scatter(x, y_noisy, alpha=0.6, s=80, color=BRAND_COLORS["twoDark"])
 axes[0].plot(x, y_simple, color=BRAND_COLORS["threeDark"], linewidth=2.5, label='Simple Model')
-axes[0].set_title('Good Model: Captures Pattern', fontweight='bold', fontsize=12)
-axes[0].set_xlabel('Time')
-axes[0].set_ylabel('Sales')
+axes[0].set_title('Good Model: Captures Pattern', fontweight='bold', fontsize=10)
+axes[0].set_xlabel('Time', fontsize=9)
+axes[0].set_ylabel('Sales', fontsize=9)
 axes[0].legend()
 axes[0].grid(True, alpha=0.2)
 
 # Complex model
 axes[1].scatter(x, y_noisy, alpha=0.6, s=80, color=BRAND_COLORS["twoDark"])
 axes[1].plot(x_dense, y_complex, color=BRAND_COLORS["threeDark"], linewidth=2.5, label='Complex Model')
-axes[1].set_title('Overfit Model: Memorizes Noise', fontweight='bold', fontsize=12)
-axes[1].set_xlabel('Time')
-axes[1].set_ylabel('Sales')
+axes[1].set_title('Overfit Model: Memorizes Noise', fontweight='bold', fontsize=10)
+axes[1].set_xlabel('Time', fontsize=9)
+axes[1].set_ylabel('Sales', fontsize=10)
 axes[1].set_ylim(axes[0].get_ylim())
 axes[1].legend()
 axes[1].grid(True, alpha=0.2)
@@ -1048,7 +1047,7 @@ plt.show()
 #| eval: true
 #| echo: false
 setup_clean_style()
-fig, ax = plt.subplots(figsize=(12, 3))
+fig, ax = plt.subplots()
 
 # Create timeline visualization
 timeline = np.arange(0, 24)
@@ -1059,18 +1058,18 @@ bars = ax.bar(timeline, [1]*24, color=colors, edgecolor='black', linewidth=1)
 # Annotations
 ax.annotate('Train your model here', xy=(9, 1), xytext=(9, 1.3),
             arrowprops=dict(arrowstyle='->', color='black', lw=2),
-            ha='center', fontsize=11, fontweight='bold')
+            ha='center', fontsize=8, fontweight='bold')
 ax.annotate('Tune parameters here', xy=(19, 1), xytext=(19, 1.2),
             arrowprops=dict(arrowstyle='->', color='black', lw=2),
-            ha='center', fontsize=11, fontweight='bold')
+            ha='center', fontsize=8, fontweight='bold')
 ax.annotate('Final evaluation only!', xy=(22.5, 1), xytext=(22.5, 1.4),
             arrowprops=dict(arrowstyle='->', color='black', lw=2),
-            ha='center', fontsize=11, fontweight='bold')
+            ha='center', fontsize=8, fontweight='bold')
 
 ax.set_xlim(-0.5, 23.5)
 ax.set_ylim(0, 1.5)
-ax.set_xlabel('Months of Historical Data', fontsize=12)
-ax.set_title('The Split: Never Mix Training and Test Data', fontsize=14, fontweight='bold')
+ax.set_xlabel('Months of Historical Data', fontsize=9)
+ax.set_title('The Split: Never Mix Training and Test Data', fontsize=10, fontweight='bold')
 ax.set_yticks([])
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
