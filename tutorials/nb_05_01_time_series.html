@@ -534,7 +534,7 @@ window.Quarto = {
 <p>Cells marked with “YOUR CODE BELOW” expect you to write code. Test your solutions with the provided assertions. Work through the sections in order - each builds on previous concepts!</p>
 </div>
 </div>
-<div id="e7f9c753" class="cell" data-execution_count="1">
+<div id="7ffb134a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -553,7 +553,7 @@ window.Quarto = {
 <p>Before we can forecast, we need to understand how to work with dates and time-based data in pandas.</p>
 <section id="understanding-date-conversion" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-date-conversion">Understanding Date Conversion</h2>
-<div id="e497fcff" class="cell" data-execution_count="2">
+<div id="39b4940c" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Converting strings to dates</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>date_strings <span class="op">=</span> [<span class="st">'2024-01-15'</span>, <span class="st">'2024-02-20'</span>, <span class="st">'2024-03-10'</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dates <span class="op">=</span> pd.to_datetime(date_strings)</span>
@@ -607,7 +607,7 @@ Extract components:
 <section id="exercise-1.1---load-and-prepare-sales-data" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.1---load-and-prepare-sales-data">Exercise 1.1 - Load and Prepare Sales Data</h2>
 <p>Create a DataFrame with Bean Counter’s sales data and convert the date column properly.</p>
-<div id="fd98bd96" class="cell" data-execution_count="3">
+<div id="899e34b6" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING BELOW!</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates sample sales data for Bean Counter (3 years for enough seasonal cycles)</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dates <span class="op">=</span> pd.date_range(start<span class="op">=</span><span class="st">'2022-01-01'</span>, end<span class="op">=</span><span class="st">'2024-12-31'</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
@@ -622,7 +622,7 @@ Extract components:
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> base_sales <span class="op">+</span> trend <span class="op">+</span> seasonal <span class="op">+</span> weekly <span class="op">+</span> noise</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING ABOVE!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7c2385b0" class="cell" data-execution_count="4">
+<div id="7d1ec600" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame with date and sales columns</span></span>
@@ -632,7 +632,7 @@ Extract components:
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>first_month <span class="op">=</span>   <span class="co"># Get the month of the first date</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>last_month <span class="op">=</span>    <span class="co"># Get the month of the last date</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cefe9643" class="cell" data-execution_count="6">
+<div id="ab78dec6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -667,14 +667,14 @@ Extract components:
 </div>
 </div>
 </div>
-<div id="3d0c351c" class="cell" data-execution_count="7">
+<div id="09355ecb" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate basic statistics</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mean_sales <span class="op">=</span>   <span class="co"># Average daily sales</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>max_sales <span class="op">=</span>    <span class="co"># Highest sales day</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>min_sales <span class="op">=</span>    <span class="co"># Lowest sales day</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="056ed84a" class="cell" data-execution_count="9">
+<div id="88a5ed0d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -699,7 +699,7 @@ Extract components:
 <li>Day 4 average: (Day2 + Day3 + Day4) / 3</li>
 <li>Day 5 average: (Day3 + Day4 + Day5) / 3</li>
 </ul>
-<div id="9b745908" class="cell" data-execution_count="10">
+<div id="1edadab0" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: 7-day moving average</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'MA7'</span>] <span class="op">=</span> df[<span class="st">'sales'</span>].rolling(window<span class="op">=</span><span class="dv">7</span>).mean()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -738,7 +738,7 @@ Extract components:
 <section id="exercise-2.1---create-multiple-moving-averages" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2.1---create-multiple-moving-averages">Exercise 2.1 - Create Multiple Moving Averages</h2>
 <p>Calculate different window sizes to see their smoothing effects.</p>
-<div id="0da390bf" class="cell" data-execution_count="11">
+<div id="31b52191" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate moving averages with different windows</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'MA3'</span>] <span class="op">=</span>   <span class="co"># 3-day moving average</span></span>
@@ -750,7 +750,7 @@ Extract components:
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>na_count_14 <span class="op">=</span>  <span class="co"># Number of NaN values in MA14</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>na_count_30 <span class="op">=</span>  <span class="co"># Number of NaN values in MA30</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="85c8dd72" class="cell" data-execution_count="13">
+<div id="1acb1d6a" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -781,7 +781,7 @@ Extract components:
 <h2 class="anchored" data-anchor-id="exercise-2.2---weighted-moving-average">Exercise 2.2 - Weighted Moving Average</h2>
 <p>Recent data often matters more! A weighted moving average assigns higher weights to recent observations.</p>
 <p><strong>The Idea:</strong> Instead of equal weights [1/7, 1/7, 1/7, 1/7, 1/7, 1/7, 1/7], we use custom weights like [0.05, 0.05, 0.10, 0.15, 0.20, 0.20, 0.25] where recent days get more importance.</p>
-<div id="8a5dd588" class="cell" data-execution_count="14">
+<div id="8fe2936c" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create weighted moving average (last 7 days)</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Weights: [0.05, 0.05, 0.10, 0.15, 0.20, 0.20, 0.25] (sum = 1.0)</span></span>
@@ -794,7 +794,7 @@ Extract components:
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to simple average for same window</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>sma_day30 <span class="op">=</span>   <span class="co"># Simple average of same window</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="93d8f945" class="cell" data-execution_count="16">
+<div id="e328d79f" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -812,7 +812,7 @@ Extract components:
 <p>Now let’s build actual forecasting functions! We’ll start with simple methods before moving to more advanced techniques.</p>
 <section id="building-basic-forecast-functions" class="level2">
 <h2 class="anchored" data-anchor-id="building-basic-forecast-functions">Building Basic Forecast Functions</h2>
-<div id="3b672215" class="cell" data-execution_count="17">
+<div id="6ad15187" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> naive_forecast(data, periods<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Naive forecast: tomorrow = today (simplest baseline)"""</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [data.iloc[<span class="op">-</span><span class="dv">1</span>]] <span class="op">*</span> periods</span>
@@ -858,7 +858,7 @@ MA forecast (next 3 days): [np.float64(117.69909865143963), np.float64(117.69909
 <section id="exercise-3.1---implement-exponential-smoothing" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3.1---implement-exponential-smoothing">Exercise 3.1 - Implement Exponential Smoothing</h2>
 <p>Create an exponential smoothing forecast function.</p>
-<div id="a3894570" class="cell" data-execution_count="18">
+<div id="3021b013" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exponential_smoothing_forecast(data, alpha<span class="op">=</span><span class="fl">0.3</span>, periods<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -884,7 +884,7 @@ MA forecast (next 3 days): [np.float64(117.69909865143963), np.float64(117.69909
 <span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>test_data <span class="op">=</span> pd.Series([<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">98</span>, <span class="dv">103</span>, <span class="dv">107</span>])</span>
 <span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> exponential_smoothing_forecast(test_data, alpha<span class="op">=</span><span class="fl">0.3</span>, periods<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4848697d" class="cell" data-execution_count="20">
+<div id="697f0a7c" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -918,7 +918,7 @@ MA forecast (next 3 days): [np.float64(117.69909865143963), np.float64(117.69909
 <li><code>.mean()</code> - Calculates the average for each week</li>
 </ol>
 <p><strong>Example:</strong></p>
-<div id="1162683d" class="cell" data-execution_count="21">
+<div id="06c5a552" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert daily Bean Counter sales to weekly averages</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>weekly_sales <span class="op">=</span> df.set_index(<span class="st">'date'</span>).resample(<span class="st">'W'</span>)[<span class="st">'sales'</span>].mean()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Daily data: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss"> observations"</span>)</span>
@@ -990,7 +990,7 @@ Freq: W-SUN, Name: sales, dtype: float64</code></pre>
 <li>Forecast = Current level + (periods ahead × trend)</li>
 </ul>
 <p>Let’s see Holt’s method in action using Python’s <code>statsmodels</code> library:</p>
-<div id="0ec00734" class="cell" data-execution_count="22">
+<div id="f09646a4" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.holtwinters <span class="im">import</span> ExponentialSmoothing</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample trending data</span></span>
@@ -1031,7 +1031,7 @@ Notice: Forecasts increase each week (captures trend!)</code></pre>
 <section id="exercise-4.1---apply-holts-method-to-bean-counter" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4.1---apply-holts-method-to-bean-counter">Exercise 4.1 - Apply Holt’s Method to Bean Counter</h2>
 <p>Bean Counter’s sales are growing. Use Holt’s method to capture this trend.</p>
-<div id="c22a4bd0" class="cell" data-execution_count="23">
+<div id="d3cd9367" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare weekly data (aggregate daily to weekly to reduce noise)</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_weekly <span class="op">=</span> df.set_index(<span class="st">'date'</span>).resample(<span class="st">'W'</span>)[<span class="st">'sales'</span>].mean()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1045,7 +1045,7 @@ Notice: Forecasts increase each week (captures trend!)</code></pre>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>fitted_holt <span class="op">=</span>  <span class="co"># Fit the model</span></span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>holt_forecast <span class="op">=</span>  <span class="co"># Forecast 14 weeks</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0d3592ed" class="cell" data-execution_count="25">
+<div id="016c0b5f" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -1101,7 +1101,7 @@ Notice: Forecasts increase each week (captures trend!)</code></pre>
 <li>You have ideally 2 full seasonal cycles (e.g., 2 years for yearly patterns)</li>
 </ul>
 <p>Let’s demonstrate with monthly data:</p>
-<div id="ce7bb0f3" class="cell" data-execution_count="26">
+<div id="2314c73a" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data with trend AND seasonality</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> pd.date_range(<span class="st">'2022-01-01'</span>, periods<span class="op">=</span><span class="dv">24</span>, freq<span class="op">=</span><span class="st">'M'</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>trend_comp <span class="op">=</span> np.linspace(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">24</span>)</span>
@@ -1145,7 +1145,7 @@ Freq: ME, dtype: float64
 Notice: Seasonal pattern continues (Jan is low, summer will be high)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_69599/3645223708.py:2: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+<pre><code>/var/folders/_5/jkkjxxdd5f1955l380dky7n80000gn/T/ipykernel_70783/3645223708.py:2: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
   months = pd.date_range('2022-01-01', periods=24, freq='M')</code></pre>
 </div>
 </div>
@@ -1154,7 +1154,7 @@ Notice: Seasonal pattern continues (Jan is low, summer will be high)</code></pre
 <h2 class="anchored" data-anchor-id="exercise-5.1---apply-holt-winters">Exercise 5.1 - Apply Holt-Winters</h2>
 <p>Now use Holt-Winters to capture both trend and seasonality in Bean Counter’s weekly sales.</p>
 <p><strong>Note:</strong> For weekly data with yearly seasonality, we need 2+ years (104+ weeks). We’ll use quarterly seasonality (13 weeks) since we have 104 weeks total.</p>
-<div id="afbe5a85" class="cell" data-execution_count="27">
+<div id="996a6e35" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the weekly data we created earlier</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Split: first 150 weeks training, last 8 weeks testing</span></span>
@@ -1170,7 +1170,7 @@ Notice: Seasonal pattern continues (Jan is low, summer will be high)</code></pre
 <span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>simple_forecast <span class="op">=</span> exponential_smoothing_forecast(train_hw, alpha<span class="op">=</span><span class="fl">0.3</span>, periods<span class="op">=</span><span class="dv">8</span>)</span>
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>holt_forecast_test <span class="op">=</span> ExponentialSmoothing(train_hw, trend<span class="op">=</span><span class="st">'add'</span>, seasonal<span class="op">=</span><span class="va">None</span>).fit().forecast(<span class="dv">8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3369c019" class="cell" data-execution_count="29">
+<div id="0eb1842c" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -1191,7 +1191,7 @@ Notice: Seasonal pattern continues (Jan is low, summer will be high)</code></pre
 <p>How good are our forecasts? Let’s measure and compare!</p>
 <section id="forecast-error-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="forecast-error-metrics">Forecast Error Metrics</h2>
-<div id="63ffb1b8" class="cell" data-execution_count="30">
+<div id="254af04a" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_mae(actual, forecast):</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Mean Absolute Error - average size of errors"""</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> np.<span class="bu">abs</span>(actual <span class="op">-</span> forecast)</span>
@@ -1233,7 +1233,7 @@ RMSE: 2.0 (penalizes big errors)</code></pre>
 <section id="exercise-6.1---compare-all-methods" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-6.1---compare-all-methods">Exercise 6.1 - Compare All Methods</h2>
 <p>Let’s have a forecasting comparison! Which method works best for Bean Counter?</p>
-<div id="6139c5db" class="cell" data-execution_count="31">
+<div id="ae3c4a65" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate MAE for all methods on the test period (last 8 weeks)</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>test_actual <span class="op">=</span> test_hw.values</span>
@@ -1252,7 +1252,7 @@ RMSE: 2.0 (penalizes big errors)</code></pre>
 <span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>mae_values <span class="op">=</span> [mae_simple, mae_holt, mae_hw]</span>
 <span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>best_method_index <span class="op">=</span> np.argmin(mae_values) <span class="co"># Index of best method</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4acf81ad" class="cell" data-execution_count="33">
+<div id="cfc02ae7" class="cell" data-execution_count="33">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>

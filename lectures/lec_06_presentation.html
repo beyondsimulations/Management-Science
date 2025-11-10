@@ -437,11 +437,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="complexity-why-greedy-is-fast" class="slide level2">
 <h2>Complexity: Why Greedy is Fast</h2>
-<div id="8e48f00d" class="cell" data-execution_count="1">
+<div id="85d59144" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-2-output-1.png" width="659" height="371"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-2-output-1.png" width="1139" height="419"></p>
 </figure>
 </div>
 </div>
@@ -494,11 +494,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-hospital-check-in" class="slide level2">
 <h2>Example: Hospital Check-In</h2>
-<div id="5d317124" class="cell" data-execution_count="2">
+<div id="3708a275" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-3-output-1.png" width="659" height="369"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-3-output-1.png" width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -539,11 +539,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-coffee-shop-orders" class="slide level2">
 <h2>Example: Coffee Shop Orders</h2>
-<div id="ce446f37" class="cell" data-execution_count="3">
+<div id="1aeb80b3" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-4-output-1.png" width="660" height="369"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-4-output-1.png" width="1140" height="417"></p>
 </figure>
 </div>
 </div>
@@ -584,11 +584,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-package-delivery" class="slide level2">
 <h2>Example: Package Delivery</h2>
-<div id="e2a72275" class="cell" data-execution_count="4">
+<div id="62477921" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-5-output-1.png" width="670" height="369"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-5-output-1.png" width="1140" height="417"></p>
 </figure>
 </div>
 </div>
@@ -610,11 +610,11 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Quick Reference &amp; Decision Guide</h2>
 <p><span class="highlight">Choose your rule based on business priority</span></p>
 <div class="fragment">
-<div id="6b095d0c" class="cell" data-execution_count="5">
+<div id="9e076d27" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-6-output-1.png" width="660" height="371"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-6-output-1.png" width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -625,7 +625,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Implementing SPT in Python I</h2>
 <p><span class="highlight">Let’s code it together - it’s remarkably simple!</span></p>
 <p>Let’s assume we want to make some pizzas under deadlines.</p>
-<div id="6036c93e" class="cell" data-execution_count="6">
+<div id="77002887" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Pizza data</span></span>
 <span id="cb1-2"><a></a>pizzas <span class="op">=</span> [</span>
 <span id="cb1-3"><a></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
@@ -641,7 +641,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="implementing-spt-in-python-ii" class="slide level2">
 <h2>Implementing SPT in Python II</h2>
-<div id="6f469401" class="cell" data-execution_count="7">
+<div id="77c84dcd" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># SPT Rule: Sort by processing time</span></span>
 <span id="cb2-2"><a></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
 <span id="cb2-3"><a></a></span>
@@ -677,7 +677,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="implementing-edd-in-python" class="slide level2">
 <h2>Implementing EDD in Python</h2>
 <p><span class="highlight">EDD is just as simple - change the sorting key!</span></p>
-<div id="676dcf64" class="cell" data-execution_count="8">
+<div id="68ed5160" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># EDD Rule: Sort by due date</span></span>
 <span id="cb4-2"><a></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
 <span id="cb4-3"><a></a></span>
@@ -756,11 +756,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="all-schedules-compared" class="slide level2">
 <h2>All Schedules Compared</h2>
-<div id="c13f9966" class="cell" data-execution_count="9">
+<div id="f7b56ff8" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-10-output-1.png" width="659" height="369"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-10-output-1.png" width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -1001,11 +1001,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="fifo-x-y-z" class="slide level2">
 <h2>FIFO: X → Y → Z</h2>
-<div id="0acc0d3b" class="cell" data-execution_count="10">
+<div id="b341d366" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-11-output-1.png" width="659" height="369"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-11-output-1.png" width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -1141,11 +1141,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="johnsons-schedule-z-y-x" class="slide level2">
 <h2>Johnson’s Schedule: Z → Y → X</h2>
-<div id="6ee878e3" class="cell" data-execution_count="11">
+<div id="25a05243" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-html/cell-12-output-1.png" width="659" height="369"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-12-output-1.png" width="1139" height="417"></p>
 </figure>
 </div>
 </div>

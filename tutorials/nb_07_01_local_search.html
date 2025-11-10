@@ -524,7 +524,7 @@ window.Quarto = {
 <p>Work through each section in order. Write code where marked “YOUR CODE BELOW” and verify with the provided assertions. This prepares you for the competition challenge!</p>
 </div>
 </div>
-<div id="122672e6" class="cell" data-execution_count="1">
+<div id="a7dab997" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -544,7 +544,7 @@ window.Quarto = {
 <p>Before optimizing routes, we need to understand distances and the scale of the problem.</p>
 <section id="bean-counters-franchise-locations" class="level2">
 <h2 class="anchored" data-anchor-id="bean-counters-franchise-locations">Bean Counter’s Franchise Locations</h2>
-<div id="6b9ac1a8" class="cell" data-execution_count="2">
+<div id="00fd6278" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate franchise locations (x, y coordinates in km)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n_franchises <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -594,7 +594,7 @@ Total possible routes: 3,628,800</code></pre>
 </div>
 </div>
 </div>
-<div id="e43aa98b" class="cell" data-execution_count="3">
+<div id="0c183fc0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_distance(point1, point2):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -610,7 +610,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Implement the Euclidean distance formula</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span>  <span class="co"># Remove this and implement</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a97fe423" class="cell" data-execution_count="5">
+<div id="f8cced43" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -628,7 +628,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-1.2---create-distance-matrix" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.2---create-distance-matrix">Exercise 1.2 - Create Distance Matrix</h2>
 <p>Now create a matrix of all distances between locations (HQ and franchises).</p>
-<div id="61abb2f6" class="cell" data-execution_count="6">
+<div id="794baa80" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_distance_matrix(hq_location, franchise_locations):</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -653,7 +653,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distances</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a34b13b6" class="cell" data-execution_count="8">
+<div id="1906ade4" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -674,7 +674,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="understanding-nearest-neighbor" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-nearest-neighbor">Understanding Nearest Neighbor</h2>
 <p>The algorithm is simple but effective: 1. Start at HQ 2. Find the nearest unvisited franchise 3. Go there and deliver 4. Repeat until all visited 5. Return to HQ</p>
-<div id="4629b057" class="cell" data-execution_count="9">
+<div id="a5611887" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize Bean Counter's delivery network</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -713,7 +713,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-2.1---implement-nearest-neighbor" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2.1---implement-nearest-neighbor">Exercise 2.1 - Implement Nearest Neighbor</h2>
 <p>Build a route using the nearest neighbor heuristic.</p>
-<div id="3fa422a7" class="cell" data-execution_count="10">
+<div id="49fef9b1" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nearest_neighbor_route(distance_matrix):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -738,7 +738,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> route</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="dca5f342" class="cell" data-execution_count="12">
+<div id="a24551bb" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -753,7 +753,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-2.2---calculate-total-route-distance" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2.2---calculate-total-route-distance">Exercise 2.2 - Calculate Total Route Distance</h2>
 <p>Calculate the total distance for a complete delivery route (HQ → Franchises → HQ).</p>
-<div id="dbd14a07" class="cell" data-execution_count="13">
+<div id="dda05313" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_route_distance(route, distance_matrix):</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -779,7 +779,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total_distance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="890241df" class="cell" data-execution_count="15">
+<div id="fd6f0b37" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -804,7 +804,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="understanding-2-opt-swaps" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-2-opt-swaps">Understanding 2-Opt Swaps</h2>
 <p>2-opt looks for crossing paths in the route and uncrosses them:</p>
-<div id="e8951768" class="cell" data-execution_count="16">
+<div id="f75573e5" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the initial nearest neighbor route</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -850,7 +850,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-3.1---implement-2-opt-swap" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3.1---implement-2-opt-swap">Exercise 3.1 - Implement 2-Opt Swap</h2>
 <p>Implement the logic to perform a 2-opt swap on a route.</p>
-<div id="e06fde64" class="cell" data-execution_count="17">
+<div id="bd618a42" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> perform_2opt_swap(route, i, j):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -870,7 +870,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span>  <span class="co"># Remove this</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="281ef9ce" class="cell" data-execution_count="19">
+<div id="c95672d0" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -888,7 +888,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-3.2---complete-2-opt-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3.2---complete-2-opt-algorithm">Exercise 3.2 - Complete 2-Opt Algorithm</h2>
 <p>Now implement the full 2-opt improvement algorithm.</p>
-<div id="a0709103" class="cell" data-execution_count="20">
+<div id="c9bb7daf" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> improve_route_2opt(route, distance_matrix, max_iterations<span class="op">=</span><span class="dv">100</span>):</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -922,7 +922,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> current_route, current_distance, improvement_count</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9aa30321" class="cell" data-execution_count="22">
+<div id="04db3152" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -946,7 +946,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-4.1---random-initial-route" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4.1---random-initial-route">Exercise 4.1 - Random Initial Route</h2>
 <p>Create a random initial route and see if 2-opt can improve it.</p>
-<div id="1b442b6f" class="cell" data-execution_count="23">
+<div id="526f4d9e" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_random_route(n_franchises):</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -972,7 +972,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    random_route, distance_matrix</span>
 <span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="807d0e3e" class="cell" data-execution_count="25">
+<div id="a9c3094a" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -990,7 +990,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-4.2---multiple-random-starts" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4.2---multiple-random-starts">Exercise 4.2 - Multiple Random Starts</h2>
 <p>Try multiple random starting points to find the best solution.</p>
-<div id="9ed5dbb4" class="cell" data-execution_count="26">
+<div id="16bf1fe7" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multi_start_optimization(distance_matrix, n_starts<span class="op">=</span><span class="dv">10</span>):</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -1023,7 +1023,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Try multi-start optimization</span></span>
 <span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>multi_route, multi_distance <span class="op">=</span> multi_start_optimization(distance_matrix, n_starts<span class="op">=</span><span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="94bfe4ac" class="cell" data-execution_count="28">
+<div id="42ed551f" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -1043,7 +1043,7 @@ Total possible routes: 3,628,800</code></pre>
 <p>As CEO, you need to choose the best approach for Bean Counter’s deliveries.</p>
 <section id="visualizing-all-solutions" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-all-solutions">Visualizing All Solutions</h2>
-<div id="247b0dee" class="cell" data-execution_count="29">
+<div id="6ea8e8eb" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare all approaches</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1095,7 +1095,7 @@ Total possible routes: 3,628,800</code></pre>
 <section id="exercise-5.1---performance-summary" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-5.1---performance-summary">Exercise 5.1 - Performance Summary</h2>
 <p>Create a summary comparing all approaches.</p>
-<div id="9b6a7a37" class="cell" data-execution_count="30">
+<div id="3f3bca49" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_performance_summary(methods_data):</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -1124,7 +1124,7 @@ Total possible routes: 3,628,800</code></pre>
 <span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Create summary</span></span>
 <span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>summary_df <span class="op">=</span> create_performance_summary(methods_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="1e08c528" class="cell" data-execution_count="32">
+<div id="5fd221c7" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -1144,7 +1144,7 @@ Total possible routes: 3,628,800</code></pre>
 </section>
 <section id="final-ceo-recommendation" class="level2">
 <h2 class="anchored" data-anchor-id="final-ceo-recommendation">Final CEO Recommendation</h2>
-<div id="4f647286" class="cell" data-execution_count="33">
+<div id="4d354315" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create final recommendation visualization</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
