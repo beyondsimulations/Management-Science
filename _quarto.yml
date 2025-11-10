@@ -94,6 +94,8 @@ website:
             href: assignments/assignment_01.qmd
       - text: "Cheatsheet"
         href: general/cheatsheet.qmd
+      - text: "Vote"
+        href: general/vote.qmd
       - text: "FAQs"
         href: general/faq.qmd
       - text: "Literature"
