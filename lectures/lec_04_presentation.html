@@ -294,7 +294,7 @@ Dr.&nbsp;Tobias Vlćek
 <p><span class="question">Question</span>: If you roll two dice, what’s the probability of getting exactly 7 as result?</p>
 <div class="fragment">
 <p><strong>Method 2: Simulation</strong></p>
-<div id="7f97ee14" class="cell" data-execution_count="1">
+<div id="10eb8555" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-3"><a></a></span>
@@ -316,7 +316,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="how-probability-converges" class="slide level2">
 <h2>How Probability Converges</h2>
-<div id="39cea048" class="cell" data-execution_count="2">
+<div id="f4758b27" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -386,7 +386,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Why This Matters for Business</h2>
 <p><span class="question">Question</span>: How many simulations do we need for reliable results?</p>
 <div class="fragment">
-<div id="b96be7cc" class="cell" data-execution_count="3">
+<div id="ad155c6d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Test convergence with different sample sizes</span></span>
 <span id="cb3-2"><a></a>sample_sizes <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>]</span>
 <span id="cb3-3"><a></a>estimates <span class="op">=</span> []</span>
@@ -481,7 +481,7 @@ n=100000: Estimated probability = 0.1670</code></pre>
 <li><strong>size</strong>: How many samples to generate</li>
 </ul>
 <div class="fragment">
-<div id="1b380089" class="cell" data-execution_count="4">
+<div id="76ee370f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># AI-Growth: average 38% return, ±25% volatility</span></span>
 <span id="cb5-2"><a></a>returns <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="fl">0.38</span>, scale<span class="op">=</span><span class="fl">0.25</span>, size<span class="op">=</span><span class="dv">10_000</span>)</span>
 <span id="cb5-3"><a></a><span class="bu">print</span>(<span class="ss">f"Mean return: </span><span class="sc">{</span>returns<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
@@ -506,7 +506,7 @@ Maximum: 125.7%</code></pre>
 <p><span class="question">Question:</span> Do you still know what a percentile is?</p>
 </div>
 <div class="fragment">
-<div id="edfc48ab" class="cell" data-execution_count="5">
+<div id="29c04ca2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Percentiles:"</span>)</span>
 <span id="cb7-2"><a></a><span class="bu">print</span>(<span class="ss">f"  5th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">5</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 5% of scenarios)"</span>)</span>
 <span id="cb7-3"><a></a><span class="bu">print</span>(<span class="ss">f" 25th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">25</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 25% of scenarios)"</span>)</span>
@@ -531,7 +531,7 @@ Percentiles:
 <h2>Understanding the Distribution</h2>
 <p><span class="question">Question</span>: Before we plot, what shape do you expect for <code>np.random.normal()</code>?</p>
 <div class="fragment">
-<div id="d646dbb7" class="cell" data-execution_count="6">
+<div id="561653c2" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -546,7 +546,7 @@ Percentiles:
 <h2>Risk Analysis</h2>
 <p><span class="question">Question</span>: What’s the probability that AI-Growth loses money?</p>
 <div class="fragment">
-<div id="f7831a2c" class="cell" data-execution_count="7">
+<div id="9f0941f6" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="co"># Calculate risk metrics</span></span>
 <span id="cb9-2"><a></a>prob_loss <span class="op">=</span> (returns <span class="op">&lt;</span> <span class="dv">0</span>).mean() <span class="co"># proportion of returns that are less than zero</span></span>
 <span id="cb9-3"><a></a>prob_double <span class="op">=</span> (returns <span class="op">&gt;</span> <span class="fl">1.0</span>).mean()  <span class="co"># proportion greater than 100%</span></span>
@@ -577,7 +577,7 @@ Probability of doubling money: 0.8%</code></pre>
 <section id="different-distributions" class="slide level2">
 <h2>Different Distributions</h2>
 <p><span class="highlight">Attention: Not everything follows a normal distribution!</span></p>
-<div id="1c785b66" class="cell" data-execution_count="8">
+<div id="2ed2bd63" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -593,7 +593,7 @@ Probability of doubling money: 0.8%</code></pre>
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Normal</a></li><li><a href="#tabset-1-2">Uniform</a></li><li><a href="#tabset-1-3">Exponential</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div id="bf3b8c83" class="cell" data-execution_count="9">
+<div id="8564530f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="co"># Most common in nature/business</span></span>
 <span id="cb11-2"><a></a><span class="co"># Bell-shaped, symmetric</span></span>
 <span id="cb11-3"><a></a>returns <span class="op">=</span> np.random.normal(mean, std, size)</span>
@@ -609,7 +609,7 @@ Probability of doubling money: 0.8%</code></pre>
 </ul>
 </div>
 <div id="tabset-1-2">
-<div id="f22c9e95" class="cell" data-execution_count="10">
+<div id="8d5fe4b5" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="co"># Equal probability across range</span></span>
 <span id="cb12-2"><a></a><span class="co"># Example: FinFlow returns between 10-35%</span></span>
 <span id="cb12-3"><a></a>returns <span class="op">=</span> np.random.uniform(<span class="fl">0.10</span>, <span class="fl">0.35</span>, size)</span>
@@ -625,7 +625,7 @@ Probability of doubling money: 0.8%</code></pre>
 </ul>
 </div>
 <div id="tabset-1-3">
-<div id="8dde38bb" class="cell" data-execution_count="11">
+<div id="69e4251a" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a><span class="co"># Time between events</span></span>
 <span id="cb13-2"><a></a><span class="co"># Example: Customer arrivals, equipment failure</span></span>
 <span id="cb13-3"><a></a>times <span class="op">=</span> np.random.exponential(scale, size)</span>
@@ -639,38 +639,6 @@ Probability of doubling money: 0.8%</code></pre>
 <li>Always positive</li>
 <li>Common for waiting times and rare events</li>
 </ul>
-</div>
-</div>
-</div>
-</section>
-<section id="when-not-to-use-monte-carlo" class="slide level2">
-<h2>When NOT to Use Monte Carlo</h2>
-<p><span class="highlight">Monte Carlo is powerful, but not always the right tool:</span></p>
-<div class="fragment">
-<ul>
-<li class="fragment"><strong>You have a simple analytical solution</strong>
-<ul>
-<li class="fragment">Use math directly: no need for 10,000 simulations!</li>
-</ul></li>
-<li class="fragment"><strong>You can’t reasonably estimate input distributions</strong>
-<ul>
-<li class="fragment">Garbage in = garbage out, need basis for assumptions</li>
-</ul></li>
-<li class="fragment"><strong>The problem is deterministic (no uncertainty)</strong>
-<ul>
-<li class="fragment">Simulation adds complexity without value</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Simulation is a tool for managing uncertainty, not creating false precision!</p>
-</div>
 </div>
 </div>
 </div>
@@ -706,7 +674,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="four-startup-profiles" class="slide level2">
 <h2>Four Startup Profiles</h2>
-<div id="41ea30ee" class="cell" data-execution_count="13">
+<div id="78f982fe" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -812,7 +780,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="correlation-in-practice" class="slide level2">
 <h2>Correlation in Practice</h2>
-<div id="80f5f76c" class="cell" data-fig-height="4" data-fig-width="12" data-execution_count="15">
+<div id="805880ba" class="cell" data-fig-height="4" data-fig-width="12" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -861,7 +829,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="impact-on-portfolio-risk" class="slide level2">
 <h2>Impact on Portfolio Risk</h2>
-<div id="2f21a91d" class="cell" data-execution_count="16">
+<div id="a6a151b1" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -907,7 +875,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="when-diversification-fails" class="slide level2">
 <h2>When Diversification Fails</h2>
-<div id="cea6401d" class="cell" data-execution_count="17">
+<div id="eedca6c5" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -924,6 +892,208 @@ Probability of doubling money: 0.8%</code></pre>
 </div>
 <div class="callout-content">
 <p><strong>2008 Financial Crisis:</strong> Many “diversified” portfolios collapsed due to correlations!</p>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="when-monte-carlo" class="title-slide slide level1 title center">
+<h1><span class="flow">When Monte Carlo?</span></h1>
+
+</section>
+<section id="when-to-use-monte-carlo" class="slide level2">
+<h2>When to Use Monte Carlo</h2>
+<p><span class="question">Question</span>: For our simple startup examples so far, do we really NEED Monte Carlo?</p>
+<div class="fragment">
+<p><strong>Short answer: No!</strong> For basic mean/variance calculations, we can use analytical formulas.</p>
+</div>
+<div class="fragment">
+<p><span class="highlight">So when is Monte Carlo truly necessary?</span></p>
+</div>
+</section>
+<section id="necessary-vs.-convenient" class="slide level2">
+<h2>Necessary vs.&nbsp;Convenient</h2>
+<p><span class="highlight">You can use math (analytical solutions):</span></p>
+<ul>
+<li class="fragment"><strong>Simple distributions:</strong> Mean and variance of normal distributions</li>
+<li class="fragment"><strong>Linear combinations:</strong> Portfolio of independent assets</li>
+</ul>
+<div class="fragment">
+<p><span class="highlight">You NEED Monte Carlo when:</span></p>
+<ul>
+<li class="fragment"><strong>Complex dependencies:</strong> Nonlinear relationships</li>
+<li class="fragment"><strong>Path-dependent problems:</strong> Outcome depends on a sequence</li>
+<li class="fragment"><strong>No closed-form solution:</strong> The math is intractable</li>
+</ul>
+</div>
+</section>
+<section id="real-monte-carlo-applications" class="slide level2">
+<h2>Real Monte Carlo Applications</h2>
+<p><span class="highlight">Where Monte Carlo is ESSENTIAL, not just convenient:</span></p>
+<p><strong>1. Option Pricing with Path Dependencies</strong></p>
+<div id="ac6b6eea" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a><span class="co"># Payoff depends on AVERAGE price over time</span></span>
+<span id="cb14-2"><a></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> strike_price <span class="op">=</span> <span class="dv">105</span><span class="op">;</span> payoffs <span class="op">=</span> []</span>
+<span id="cb14-3"><a></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
+<span id="cb14-4"><a></a>    prices <span class="op">=</span> [<span class="dv">100</span>]  <span class="co"># Starting price</span></span>
+<span id="cb14-5"><a></a>    <span class="cf">for</span> day <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">365</span>):</span>
+<span id="cb14-6"><a></a>        prices.append(prices[<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.random.normal(<span class="fl">0.001</span>, <span class="fl">0.02</span>)))</span>
+<span id="cb14-7"><a></a>    payoff <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, np.mean(prices) <span class="op">-</span> strike_price)</span>
+<span id="cb14-8"><a></a>    payoffs.append(payoff)</span>
+<span id="cb14-9"><a></a>payoffs <span class="op">=</span> np.array(payoffs)</span>
+<span id="cb14-10"><a></a><span class="bu">print</span>(<span class="ss">f"Average option value: $</span><span class="sc">{</span>payoffs<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb14-11"><a></a><span class="bu">print</span>(<span class="ss">f"Probability of profit: </span><span class="sc">{</span>(payoffs <span class="op">&gt;</span> <span class="dv">0</span>)<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment" data-execution_count="18">
+<div class="cell-output cell-output-stdout">
+<pre><code>Average option value: $19.58
+Probability of profit: 68.9%</code></pre>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-ii" class="slide level2">
+<h2>Real Monte Carlo Applications II</h2>
+<div id="d9928e41" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-20-output-1.png" width="1140" height="419"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-iii" class="slide level2">
+<h2>Real Monte Carlo Applications III</h2>
+<p><strong>2. Supply Chain with Cascading Effects</strong></p>
+<div id="ebcdea78" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="co"># Each stage affects the next (nonlinear dependencies)</span></span>
+<span id="cb16-2"><a></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> factory_capacity <span class="op">=</span> <span class="dv">150</span><span class="op">;</span> demand <span class="op">=</span> <span class="dv">120</span><span class="op">;</span> price <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb16-3"><a></a>penalty <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> revenues <span class="op">=</span> []</span>
+<span id="cb16-4"><a></a></span>
+<span id="cb16-5"><a></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
+<span id="cb16-6"><a></a>    parts_delivered <span class="op">=</span> np.random.poisson(<span class="dv">100</span>)</span>
+<span id="cb16-7"><a></a>    production <span class="op">=</span> <span class="bu">min</span>(parts_delivered, factory_capacity)</span>
+<span id="cb16-8"><a></a>    <span class="cf">if</span> production <span class="op">&gt;=</span> demand:</span>
+<span id="cb16-9"><a></a>        revenue <span class="op">=</span> demand <span class="op">*</span> price</span>
+<span id="cb16-10"><a></a>    <span class="cf">else</span>:</span>
+<span id="cb16-11"><a></a>        revenue <span class="op">=</span> production <span class="op">*</span> price <span class="op">-</span> penalty</span>
+<span id="cb16-12"><a></a>    revenues.append(revenue)</span>
+<span id="cb16-13"><a></a></span>
+<span id="cb16-14"><a></a>revenues <span class="op">=</span> np.array(revenues)</span>
+<span id="cb16-15"><a></a><span class="bu">print</span>(<span class="ss">f"Average revenue: $</span><span class="sc">{</span>revenues<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb16-16"><a></a><span class="bu">print</span>(<span class="ss">f"Worst-case revenue: $</span><span class="sc">{</span>revenues<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment" data-execution_count="20">
+<div class="cell-output cell-output-stdout">
+<pre><code>Average revenue: $489.22
+Worst-case revenue: $325.00</code></pre>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-iv" class="slide level2">
+<h2>Real Monte Carlo Applications IV</h2>
+<div id="427fc09f" class="cell" data-execution_count="21">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-22-output-1.png" width="1140" height="419"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-v" class="slide level2">
+<h2>Real Monte Carlo Applications V</h2>
+<p><strong>3. Project Management with Sequential Risks</strong></p>
+<div id="bb8b1fae" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="co"># Project phases must happen in order, later phases only if earlier succeed</span></span>
+<span id="cb18-2"><a></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> shape <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> scale <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> project_times <span class="op">=</span> []</span>
+<span id="cb18-3"><a></a></span>
+<span id="cb18-4"><a></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
+<span id="cb18-5"><a></a>    total_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-6"><a></a>    <span class="cf">for</span> phase <span class="kw">in</span> [<span class="st">'design'</span>, <span class="st">'build'</span>, <span class="st">'test'</span>, <span class="st">'deploy'</span>]:</span>
+<span id="cb18-7"><a></a>        <span class="co"># Each phase has uncertain duration</span></span>
+<span id="cb18-8"><a></a>        phase_time <span class="op">=</span> np.random.gamma(shape, scale)</span>
+<span id="cb18-9"><a></a>        total_time <span class="op">+=</span> phase_time</span>
+<span id="cb18-10"><a></a>        <span class="cf">if</span> np.random.random() <span class="op">&lt;</span> <span class="fl">0.1</span>:</span>
+<span id="cb18-11"><a></a>            total_time <span class="op">+=</span> phase_time <span class="op">*</span> <span class="fl">0.5</span>  <span class="co"># Rework time</span></span>
+<span id="cb18-12"><a></a>    project_times.append(total_time)</span>
+<span id="cb18-13"><a></a></span>
+<span id="cb18-14"><a></a>project_times <span class="op">=</span> np.array(project_times)</span>
+<span id="cb18-15"><a></a><span class="bu">print</span>(<span class="ss">f"Average project duration: </span><span class="sc">{</span>project_times<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> days"</span>)</span>
+<span id="cb18-16"><a></a><span class="bu">print</span>(<span class="ss">f"90th percentile: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(project_times, <span class="dv">90</span>)<span class="sc">:.1f}</span><span class="ss"> days"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment" data-execution_count="22">
+<div class="cell-output cell-output-stdout">
+<pre><code>Average project duration: 84.3 days
+90th percentile: 125.2 days</code></pre>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-vi" class="slide level2">
+<h2>Real Monte Carlo Applications VI</h2>
+<div id="04a94266" class="cell" data-execution_count="23">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-24-output-1.png" width="1140" height="419"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-why-still-useful" class="slide level2">
+<h2>Example: Why Still Useful?</h2>
+<p><span class="question">Question</span>: If we can calculate variance analytically, why simulate?</p>
+<div class="fragment">
+<ul>
+<li class="fragment"><strong>Visualization:</strong> Seeing the full distribution is intuitive</li>
+<li class="fragment"><strong>Flexibility:</strong> When problems become complex, simulation adapts</li>
+<li class="fragment"><strong>Extensions:</strong> Practice for complex problem</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Think of our examples as learning the tool on simple problems so you can solve complex ones where Monte Carlo is required!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="when-not-to-use-monte-carlo" class="slide level2">
+<h2>When NOT to Use Monte Carlo</h2>
+<p><span class="highlight">Even when you CAN use Monte Carlo, sometimes you shouldn’t:</span></p>
+<div class="fragment">
+<ul>
+<li class="fragment"><strong>Simple analytical solution exists and suffices</strong>
+<ul>
+<li class="fragment">Use math directly: faster, more precise, easier to understand</li>
+</ul></li>
+<li class="fragment"><strong>Can’t reasonably estimate input distributions</strong>
+<ul>
+<li class="fragment">Garbage in = garbage out; need solid basis for assumptions</li>
+</ul></li>
+<li class="fragment"><strong>Problem is deterministic (no uncertainty)</strong>
+<ul>
+<li class="fragment">Simulation adds complexity without value</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Simulation is a tool for managing uncertainty, not creating false precision!</p>
 </div>
 </div>
 </div>

@@ -2344,13 +2344,6 @@
     "text": "Overview\n\nNormalUniformExponential\n\n\n\n# Most common in nature/business\n# Bell-shaped, symmetric\nreturns = np.random.normal(mean, std, size)\n\n# Example: CloudAI startup returns\ncloudai = np.random.normal(0.25, 0.15, 10000)  # 25% ± 15%\n\nMain Characteristics:\n\nSymmetric bell curve\nMost values cluster around mean\nCommon in nature and business\n\n\n\n\n# Equal probability across range\n# Example: FinFlow returns between 10-35%\nreturns = np.random.uniform(0.10, 0.35, size)\n\n# Example: FinFlow startup returns\nfinflow = np.random.uniform(0.10, 0.35, 10000)  # 10-35% equally likely\n\nMain Characteristics:\n\nAll values equally likely\nHard boundaries (min/max)\nGood for modeling complete uncertainty within range\n\n\n\n\n# Time between events\n# Example: Customer arrivals, equipment failure\ntimes = np.random.exponential(scale, size)\n\n# Example: Time between customer arrivals (minutes)\narrivals = np.random.exponential(5, 10000)  # Average 5 minutes\n\nMain Characteristics:\n\nMany small values, few large ones\nAlways positive\nCommon for waiting times and rare events"
   },
   {
-    "objectID": "lectures/lec_04_presentation.html#when-not-to-use-monte-carlo",
-    "href": "lectures/lec_04_presentation.html#when-not-to-use-monte-carlo",
-    "title": "Dealing with Uncertainty",
-    "section": "When NOT to Use Monte Carlo",
-    "text": "When NOT to Use Monte Carlo\nMonte Carlo is powerful, but not always the right tool:\n\n\nYou have a simple analytical solution\n\nUse math directly: no need for 10,000 simulations!\n\nYou can’t reasonably estimate input distributions\n\nGarbage in = garbage out, need basis for assumptions\n\nThe problem is deterministic (no uncertainty)\n\nSimulation adds complexity without value\n\n\n\n\n\n\n\n\n\n\nSimulation is a tool for managing uncertainty, not creating false precision!"
-  },
-  {
     "objectID": "lectures/lec_04_presentation.html#combining-investments",
     "href": "lectures/lec_04_presentation.html#combining-investments",
     "title": "Dealing with Uncertainty",
@@ -2426,6 +2419,76 @@
     "title": "Dealing with Uncertainty",
     "section": "When Diversification Fails",
     "text": "When Diversification Fails\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2008 Financial Crisis: Many “diversified” portfolios collapsed due to correlations!"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#when-to-use-monte-carlo",
+    "href": "lectures/lec_04_presentation.html#when-to-use-monte-carlo",
+    "title": "Dealing with Uncertainty",
+    "section": "When to Use Monte Carlo",
+    "text": "When to Use Monte Carlo\nQuestion: For our simple startup examples so far, do we really NEED Monte Carlo?\n\nShort answer: No! For basic mean/variance calculations, we can use analytical formulas.\n\n\nSo when is Monte Carlo truly necessary?"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#necessary-vs.-convenient",
+    "href": "lectures/lec_04_presentation.html#necessary-vs.-convenient",
+    "title": "Dealing with Uncertainty",
+    "section": "Necessary vs. Convenient",
+    "text": "Necessary vs. Convenient\nYou can use math (analytical solutions):\n\nSimple distributions: Mean and variance of normal distributions\nLinear combinations: Portfolio of independent assets\n\n\nYou NEED Monte Carlo when:\n\nComplex dependencies: Nonlinear relationships\nPath-dependent problems: Outcome depends on a sequence\nNo closed-form solution: The math is intractable"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#real-monte-carlo-applications",
+    "href": "lectures/lec_04_presentation.html#real-monte-carlo-applications",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications",
+    "text": "Real Monte Carlo Applications\nWhere Monte Carlo is ESSENTIAL, not just convenient:\n1. Option Pricing with Path Dependencies\n\n# Payoff depends on AVERAGE price over time\nn_simulations = 10000; strike_price = 105; payoffs = []\nfor sim in range(n_simulations):\n    prices = [100]  # Starting price\n    for day in range(365):\n        prices.append(prices[-1] * (1 + np.random.normal(0.001, 0.02)))\n    payoff = max(0, np.mean(prices) - strike_price)\n    payoffs.append(payoff)\npayoffs = np.array(payoffs)\nprint(f\"Average option value: ${payoffs.mean():.2f}\")\nprint(f\"Probability of profit: {(payoffs &gt; 0).mean():.1%}\")\n\n\n\nAverage option value: $19.58\nProbability of profit: 68.9%"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#real-monte-carlo-applications-ii",
+    "href": "lectures/lec_04_presentation.html#real-monte-carlo-applications-ii",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications II",
+    "text": "Real Monte Carlo Applications II"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#real-monte-carlo-applications-iii",
+    "href": "lectures/lec_04_presentation.html#real-monte-carlo-applications-iii",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications III",
+    "text": "Real Monte Carlo Applications III\n2. Supply Chain with Cascading Effects\n\n# Each stage affects the next (nonlinear dependencies)\nn_simulations = 10000; factory_capacity = 150; demand = 120; price = 5\npenalty = 10; revenues = []\n\nfor sim in range(n_simulations):\n    parts_delivered = np.random.poisson(100)\n    production = min(parts_delivered, factory_capacity)\n    if production &gt;= demand:\n        revenue = demand * price\n    else:\n        revenue = production * price - penalty\n    revenues.append(revenue)\n\nrevenues = np.array(revenues)\nprint(f\"Average revenue: ${revenues.mean():.2f}\")\nprint(f\"Worst-case revenue: ${revenues.min():.2f}\")\n\n\n\nAverage revenue: $489.22\nWorst-case revenue: $325.00"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#real-monte-carlo-applications-iv",
+    "href": "lectures/lec_04_presentation.html#real-monte-carlo-applications-iv",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications IV",
+    "text": "Real Monte Carlo Applications IV"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#real-monte-carlo-applications-v",
+    "href": "lectures/lec_04_presentation.html#real-monte-carlo-applications-v",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications V",
+    "text": "Real Monte Carlo Applications V\n3. Project Management with Sequential Risks\n\n# Project phases must happen in order, later phases only if earlier succeed\nn_simulations = 10000; shape = 2; scale = 10; project_times = []\n\nfor sim in range(n_simulations):\n    total_time = 0\n    for phase in ['design', 'build', 'test', 'deploy']:\n        # Each phase has uncertain duration\n        phase_time = np.random.gamma(shape, scale)\n        total_time += phase_time\n        if np.random.random() &lt; 0.1:\n            total_time += phase_time * 0.5  # Rework time\n    project_times.append(total_time)\n\nproject_times = np.array(project_times)\nprint(f\"Average project duration: {project_times.mean():.1f} days\")\nprint(f\"90th percentile: {np.percentile(project_times, 90):.1f} days\")\n\n\n\nAverage project duration: 84.3 days\n90th percentile: 125.2 days"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#real-monte-carlo-applications-vi",
+    "href": "lectures/lec_04_presentation.html#real-monte-carlo-applications-vi",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications VI",
+    "text": "Real Monte Carlo Applications VI"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#example-why-still-useful",
+    "href": "lectures/lec_04_presentation.html#example-why-still-useful",
+    "title": "Dealing with Uncertainty",
+    "section": "Example: Why Still Useful?",
+    "text": "Example: Why Still Useful?\nQuestion: If we can calculate variance analytically, why simulate?\n\n\nVisualization: Seeing the full distribution is intuitive\nFlexibility: When problems become complex, simulation adapts\nExtensions: Practice for complex problem\n\n\n\n\n\n\n\n\n\nThink of our examples as learning the tool on simple problems so you can solve complex ones where Monte Carlo is required!"
+  },
+  {
+    "objectID": "lectures/lec_04_presentation.html#when-not-to-use-monte-carlo",
+    "href": "lectures/lec_04_presentation.html#when-not-to-use-monte-carlo",
+    "title": "Dealing with Uncertainty",
+    "section": "When NOT to Use Monte Carlo",
+    "text": "When NOT to Use Monte Carlo\nEven when you CAN use Monte Carlo, sometimes you shouldn’t:\n\n\nSimple analytical solution exists and suffices\n\nUse math directly: faster, more precise, easier to understand\n\nCan’t reasonably estimate input distributions\n\nGarbage in = garbage out; need solid basis for assumptions\n\nProblem is deterministic (no uncertainty)\n\nSimulation adds complexity without value\n\n\n\n\n\n\n\n\n\n\nSimulation is a tool for managing uncertainty, not creating false precision!"
   },
   {
     "objectID": "lectures/lec_04_presentation.html#decision-framework",
@@ -2668,17 +2731,6 @@
     ]
   },
   {
-    "objectID": "lectures/lec_04_monte_carlo.html#when-not-to-use-monte-carlo",
-    "href": "lectures/lec_04_monte_carlo.html#when-not-to-use-monte-carlo",
-    "title": "Dealing with Uncertainty",
-    "section": "When NOT to Use Monte Carlo",
-    "text": "When NOT to Use Monte Carlo\nMonte Carlo is powerful, but not always the right tool:\n. . .\n\n\nYou have a simple analytical solution\n\nUse math directly: no need for 10,000 simulations!\n\nYou can’t reasonably estimate input distributions\n\nGarbage in = garbage out, need basis for assumptions\n\nThe problem is deterministic (no uncertainty)\n\nSimulation adds complexity without value\n\n\n\n. . .\n\n\n\n\n\n\nSimulation is a tool for managing uncertainty, not creating false precision!",
-    "crumbs": [
-      "04 Monte Carlo",
-      "04 Lecture"
-    ]
-  },
-  {
     "objectID": "lectures/lec_04_monte_carlo.html#combining-investments",
     "href": "lectures/lec_04_monte_carlo.html#combining-investments",
     "title": "Dealing with Uncertainty",
@@ -2794,6 +2846,116 @@
     "title": "Dealing with Uncertainty",
     "section": "When Diversification Fails",
     "text": "When Diversification Fails\n\n\n\n\n\n\n\n\n\n. . .\n\n\n\n\n\n\n2008 Financial Crisis: Many “diversified” portfolios collapsed due to correlations!",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#when-to-use-monte-carlo",
+    "href": "lectures/lec_04_monte_carlo.html#when-to-use-monte-carlo",
+    "title": "Dealing with Uncertainty",
+    "section": "When to Use Monte Carlo",
+    "text": "When to Use Monte Carlo\nQuestion: For our simple startup examples so far, do we really NEED Monte Carlo?\n. . .\nShort answer: No! For basic mean/variance calculations, we can use analytical formulas.\n. . .\nSo when is Monte Carlo truly necessary?",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#necessary-vs.-convenient",
+    "href": "lectures/lec_04_monte_carlo.html#necessary-vs.-convenient",
+    "title": "Dealing with Uncertainty",
+    "section": "Necessary vs. Convenient",
+    "text": "Necessary vs. Convenient\nYou can use math (analytical solutions):\n\n\nSimple distributions: Mean and variance of normal distributions\nLinear combinations: Portfolio of independent assets\n\n\n. . .\nYou NEED Monte Carlo when:\n\n\nComplex dependencies: Nonlinear relationships\nPath-dependent problems: Outcome depends on a sequence\nNo closed-form solution: The math is intractable",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications",
+    "href": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications",
+    "text": "Real Monte Carlo Applications\nWhere Monte Carlo is ESSENTIAL, not just convenient:\n1. Option Pricing with Path Dependencies\n\n# Payoff depends on AVERAGE price over time\nn_simulations = 10000; strike_price = 105; payoffs = []\nfor sim in range(n_simulations):\n    prices = [100]  # Starting price\n    for day in range(365):\n        prices.append(prices[-1] * (1 + np.random.normal(0.001, 0.02)))\n    payoff = max(0, np.mean(prices) - strike_price)\n    payoffs.append(payoff)\npayoffs = np.array(payoffs)\nprint(f\"Average option value: ${payoffs.mean():.2f}\")\nprint(f\"Probability of profit: {(payoffs &gt; 0).mean():.1%}\")\n\nAverage option value: $19.58\nProbability of profit: 68.9%",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-ii",
+    "href": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-ii",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications II",
+    "text": "Real Monte Carlo Applications II",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-iii",
+    "href": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-iii",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications III",
+    "text": "Real Monte Carlo Applications III\n2. Supply Chain with Cascading Effects\n\n# Each stage affects the next (nonlinear dependencies)\nn_simulations = 10000; factory_capacity = 150; demand = 120; price = 5\npenalty = 10; revenues = []\n\nfor sim in range(n_simulations):\n    parts_delivered = np.random.poisson(100)\n    production = min(parts_delivered, factory_capacity)\n    if production &gt;= demand:\n        revenue = demand * price\n    else:\n        revenue = production * price - penalty\n    revenues.append(revenue)\n\nrevenues = np.array(revenues)\nprint(f\"Average revenue: ${revenues.mean():.2f}\")\nprint(f\"Worst-case revenue: ${revenues.min():.2f}\")\n\nAverage revenue: $489.22\nWorst-case revenue: $325.00",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-iv",
+    "href": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-iv",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications IV",
+    "text": "Real Monte Carlo Applications IV",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-v",
+    "href": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-v",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications V",
+    "text": "Real Monte Carlo Applications V\n3. Project Management with Sequential Risks\n\n# Project phases must happen in order, later phases only if earlier succeed\nn_simulations = 10000; shape = 2; scale = 10; project_times = []\n\nfor sim in range(n_simulations):\n    total_time = 0\n    for phase in ['design', 'build', 'test', 'deploy']:\n        # Each phase has uncertain duration\n        phase_time = np.random.gamma(shape, scale)\n        total_time += phase_time\n        if np.random.random() &lt; 0.1:\n            total_time += phase_time * 0.5  # Rework time\n    project_times.append(total_time)\n\nproject_times = np.array(project_times)\nprint(f\"Average project duration: {project_times.mean():.1f} days\")\nprint(f\"90th percentile: {np.percentile(project_times, 90):.1f} days\")\n\nAverage project duration: 84.3 days\n90th percentile: 125.2 days",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-vi",
+    "href": "lectures/lec_04_monte_carlo.html#real-monte-carlo-applications-vi",
+    "title": "Dealing with Uncertainty",
+    "section": "Real Monte Carlo Applications VI",
+    "text": "Real Monte Carlo Applications VI",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#example-why-still-useful",
+    "href": "lectures/lec_04_monte_carlo.html#example-why-still-useful",
+    "title": "Dealing with Uncertainty",
+    "section": "Example: Why Still Useful?",
+    "text": "Example: Why Still Useful?\nQuestion: If we can calculate variance analytically, why simulate?\n. . .\n\n\nVisualization: Seeing the full distribution is intuitive\nFlexibility: When problems become complex, simulation adapts\nExtensions: Practice for complex problem\n\n\n. . .\n\n\n\n\n\n\nThink of our examples as learning the tool on simple problems so you can solve complex ones where Monte Carlo is required!",
+    "crumbs": [
+      "04 Monte Carlo",
+      "04 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_04_monte_carlo.html#when-not-to-use-monte-carlo",
+    "href": "lectures/lec_04_monte_carlo.html#when-not-to-use-monte-carlo",
+    "title": "Dealing with Uncertainty",
+    "section": "When NOT to Use Monte Carlo",
+    "text": "When NOT to Use Monte Carlo\nEven when you CAN use Monte Carlo, sometimes you shouldn’t:\n. . .\n\n\nSimple analytical solution exists and suffices\n\nUse math directly: faster, more precise, easier to understand\n\nCan’t reasonably estimate input distributions\n\nGarbage in = garbage out; need solid basis for assumptions\n\nProblem is deterministic (no uncertainty)\n\nSimulation adds complexity without value\n\n\n\n. . .\n\n\n\n\n\n\nSimulation is a tool for managing uncertainty, not creating false precision!",
     "crumbs": [
       "04 Monte Carlo",
       "04 Lecture"
