@@ -124,12 +124,6 @@ This is the **greedy choice problem**: Which local decision leads to the best gl
 - Trade guaranteed optimality for speed and simplicity
 :::
 
-. . .
-
-:::{.callout-note}
-Greedy algorithms are one of the **three major algorithmic paradigms** alongside Divide & Conquer (e.g., merge sort) and Dynamic Programming (e.g., Fibonacci with memoization).
-:::
-
 ## Greedy in Everyday Life
 
 [You already use greedy thinking daily!]{.highlight}
@@ -159,7 +153,7 @@ Greedy algorithms are one of the **three major algorithmic paradigms** alongside
 **Greedy IS Optimal:**
 
 ::: incremental
-- Prim's/Kruskal's algorithms (minimum spanning tree)
+- Kruskal's algorithms (minimum spanning tree)
 - SPT scheduling (minimizes average flow time)
 - EDD scheduling (minimizes maximum lateness)
 :::
@@ -257,7 +251,7 @@ For 16 bikes: Exhaustive = 20 trillion operations, Greedy = 64 operations!
 
 . . .
 
-[Question]{.question}: Which rule would you use for the bike factory with penalties and overtime costs?
+[Question]{.question}: Just as first feeling. Which rule would you use for the bike factory with penalties and overtime costs?
 
 ## Rule 1: FIFO (First In, First Out)
 
@@ -446,67 +440,6 @@ plt.show()
 Note, that we only minimize maximal lateness here!
 :::
 
-## Quick Reference & Decision Guide
-
-[Choose your rule based on business priority]{.highlight}
-
-. . .
-
-```{python}
-#| eval: true
-#| echo: false
-import matplotlib.pyplot as plt
-import numpy as np
-import sys
-sys.path.append('../helpers')
-from plot_utils import BRAND_COLORS, setup_clean_style
-
-setup_clean_style()
-
-fig, ax = plt.subplots()
-
-# Decision tree structure
-decisions = [
-    (6, 4, "What's your\nprimary goal?", 'wheat'),
-    (2, 2.5, "Fairness\n& Trust", BRAND_COLORS["twoLight"]),
-    (6, 2.5, "Efficiency\n& Speed", BRAND_COLORS["oneDark"]),
-    (10, 2.5, "Meet\nDeadlines", BRAND_COLORS["threeDark"]),
-    (2, 1, "→ FIFO", BRAND_COLORS["twoLight"]),
-    (6, 1, "→ SPT", BRAND_COLORS["oneDark"]),
-    (10, 1, "→ EDD", BRAND_COLORS["threeDark"]),
-]
-
-for x, y, text, color in decisions:
-    if "→" in text:
-        # Final recommendation boxes
-        rect = plt.Rectangle((x-0.6, y-0.3), 1.2, 0.6,
-                            facecolor=color, alpha=0.8, edgecolor='black', linewidth=3)
-        ax.add_patch(rect)
-        ax.text(x, y, text, ha='center', va='center',
-               fontweight='bold', fontsize=14, color='white')
-    else:
-        # Decision nodes
-        rect = plt.Rectangle((x-0.9, y-0.35), 1.8, 0.7,
-                            facecolor=color, alpha=0.6, edgecolor='black', linewidth=2)
-        ax.add_patch(rect)
-        ax.text(x, y, text, ha='center', va='center',
-               fontweight='bold', fontsize=11)
-
-# Draw arrows
-arrows = [(6, 3.6, 2, 2.8), (6, 3.6, 6, 2.8), (6, 3.6, 10, 2.8),
-          (2, 2.2, 2, 1.3), (6, 2.2, 6, 1.3), (10, 2.2, 10, 1.3)]
-for x1, y1, x2, y2 in arrows:
-    ax.annotate('', xy=(x2, y2), xytext=(x1, y1),
-                arrowprops=dict(arrowstyle='->', lw=2, color='black'))
-
-ax.set_xlim(0, 12)
-ax.set_ylim(0, 5)
-ax.set_title('Scheduling Decision Tree', fontsize=14, fontweight='bold')
-ax.axis('off')
-plt.tight_layout()
-plt.show()
-```
-
 ## Implementing SPT in Python I
 
 [Let's code it together - it's remarkably simple!]{.highlight}
@@ -693,6 +626,36 @@ plt.show()
 **No single rule is always best!** The right choice depends on your objectives, which might include fairness, throughput, deadlines and much more.
 :::
 
+## Hybrid Scheduling Strategies
+
+**1. Priority Classes:**
+```
+IF order.type == "Rush":
+    schedule using EDD
+ELSE:
+    schedule using SPT
+```
+
+. . .
+
+**2. Time-Based Switching:**
+```
+IF current_time < 3pm:
+    use SPT (maximize throughput)
+ELSE:
+    use EDD (meet end-of-day deadlines)
+```
+
+. . .
+
+**3. Threshold Rules:**
+```
+IF (due_date - current_time) < 30 minutes:
+    prioritize this order (emergency mode)
+ELSE:
+    use normal SPT rule
+```
+
 ## Key Takeaways
 
 ::: incremental
@@ -807,6 +770,69 @@ You can't optimize what you don't measure! Choose metrics that align with busine
 | Maximize throughput | Makespan | Any (same!) |
 | Customer satisfaction | Number Late | **EDD** |
 | Fairness/transparency | (none) | **FIFO** |
+
+# [Weighted Scheduling]{.flow} {.title}
+
+## Revenue-Based: Consulting Firm
+
+[5 consulting projects with different durations and revenues]{.highlight}
+
+| Project | Duration | Revenue | Revenue/Hour |
+|---------|----------|---------|--------------|
+| C       | 55h      | €11,000 | €200         |
+| A       | 25h      | €6,000  | €240         |
+| E       | 55h      | €4,950  | €90          |
+| D       | 45h      | €5,400  | €120         |
+| B       | 35h      | €7,000  | €200         |
+
+. . .
+
+**Goal: Maximize revenue during limited consulting time**
+
+. . .
+
+[Question:]{.question} **Sort by total revenue? Duration? Or something else?**
+
+## Revenue/Hour Rule
+
+[Rule: Sort by revenue per hour (descending)]{.highlight}
+
+. . .
+
+**Sorted by Revenue/Hour:**
+
+| Project | Duration | Revenue | Revenue/Hour | Schedule |
+|---------|----------|---------|--------------|----------|
+| A       | 25h      | €6,000  | **€240**     | 1st      |
+| B       | 35h      | €7,000  | **€200**     | 2nd      |
+| C       | 55h      | €11,000 | **€200**     | 3rd      |
+| D       | 45h      | €5,400  | €120         | 4th      |
+| E       | 55h      | €4,950  | €90          | 5th      |
+
+. . .
+
+**Optimal order: A → B → C → D → E**
+
+## Why Revenue/Hour Works
+
+[Maximizing early revenue in capacity-constrained situations]{.highlight}
+
+. . .
+
+**Scenario: 120 hours of consulting capacity this quarter**
+
+::: incremental
+- **Revenue/hour approach:** A+B+C = 115h → **€24,000 revenue**
+- **Wrong order (E+D+C):** E+D+C = 155h → Doesn't fit!
+- **Only E+D = 100h** → **€10,350 revenue**
+- **Worst case:** Start with low-revenue/hour projects, waste capacity
+:::
+
+. . .
+
+:::{.callout-important}
+This is [Smith's Rule]{.highlight} in action: Sort by (value / time) to maximize weighted completion!
+:::
 
 # [Two-Stage Scheduling]{.flow} {.title}
 
@@ -935,6 +961,8 @@ Painting station waits 30 minutes for first bike! Total time = **95 minutes**
 [Question]{.question}: Is there a better approach for minimizing makespan?
 
 ## Johnson's Algorithm: The Intuition
+
+. . .
 
 [Why does Johnson's work? Let's understand the logic first]{.highlight}
 
@@ -1080,69 +1108,6 @@ plt.show()
 - Heuristics work well in practice
 - Simulated annealing, genetic algorithms
 
-# [Weighted Scheduling]{.flow} {.title}
-
-## Revenue-Based: Consulting Firm
-
-[5 consulting projects with different durations and revenues]{.highlight}
-
-| Project | Duration | Revenue | Revenue/Hour |
-|---------|----------|---------|--------------|
-| C       | 55h      | €11,000 | €200         |
-| A       | 25h      | €6,000  | €240         |
-| E       | 55h      | €4,950  | €90          |
-| D       | 45h      | €5,400  | €120         |
-| B       | 35h      | €7,000  | €200         |
-
-. . .
-
-**Goal: Maximize revenue during limited consulting time**
-
-. . .
-
-[Question:]{.question} **Sort by total revenue? Duration? Or something else?**
-
-## Revenue/Hour Rule
-
-[Rule: Sort by revenue per hour (descending)]{.highlight}
-
-. . .
-
-**Sorted by Revenue/Hour:**
-
-| Project | Duration | Revenue | Revenue/Hour | Schedule |
-|---------|----------|---------|--------------|----------|
-| A       | 25h      | €6,000  | **€240**     | 1st      |
-| B       | 35h      | €7,000  | **€200**     | 2nd      |
-| C       | 55h      | €11,000 | **€200**     | 3rd      |
-| D       | 45h      | €5,400  | €120         | 4th      |
-| E       | 55h      | €4,950  | €90          | 5th      |
-
-. . .
-
-**Optimal order: A → B → C → D → E**
-
-## Why Revenue/Hour Works
-
-[Maximizing early revenue in capacity-constrained situations]{.highlight}
-
-. . .
-
-**Scenario: 120 hours of consulting capacity this quarter**
-
-::: incremental
-- **Revenue/hour approach:** A+B+C = 115h → **€24,000 revenue**
-- **Wrong order (E+D+C):** E+D+C = 155h → Doesn't fit!
-- **Only E+D = 100h** → **€10,350 revenue**
-- **Worst case:** Start with low-revenue/hour projects, waste capacity
-:::
-
-. . .
-
-:::{.callout-important}
-This is [Smith's Rule]{.highlight} in action: Sort by (value / time) to maximize weighted completion!
-:::
-
 # [Advanced]{.flow} {.title}
 
 ## Dynamic vs Static Scheduling
@@ -1194,36 +1159,6 @@ This is [Smith's Rule]{.highlight} in action: Sort by (value / time) to maximize
 
 - **Uncertainty:**
   - Processing times, break downs, and other unforeseen events
-
-## Hybrid Scheduling Strategies
-
-**1. Priority Classes:**
-```
-IF order.type == "Rush":
-    schedule using EDD
-ELSE:
-    schedule using SPT
-```
-
-. . .
-
-**2. Time-Based Switching:**
-```
-IF current_time < 3pm:
-    use SPT (maximize throughput)
-ELSE:
-    use EDD (meet end-of-day deadlines)
-```
-
-. . .
-
-**3. Threshold Rules:**
-```
-IF (due_date - current_time) < 30 minutes:
-    prioritize this order (emergency mode)
-ELSE:
-    use normal SPT rule
-```
 
 ## Common Scheduling Mistakes I
 
