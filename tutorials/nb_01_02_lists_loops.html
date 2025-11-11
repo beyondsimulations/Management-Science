@@ -508,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="76e54055" class="cell" data-execution_count="1">
+<div id="636dc2f1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A list of daily sales for the week (Monday to Friday)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>daily_sales <span class="op">=</span> [<span class="fl">1250.50</span>, <span class="fl">1380.25</span>, <span class="fl">1425.00</span>, <span class="fl">1890.75</span>, <span class="fl">2150.00</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -544,7 +544,7 @@ All sales: [1250.5, 1380.25, 1425.0, 1890.75, 2150.0]</code></pre>
 </div>
 </div>
 <p>We can also use slicing to access multiple elements at once. For example, to get the sales for Tuesday through Thursday:</p>
-<div id="1a6de326" class="cell" data-execution_count="2">
+<div id="e3439385" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>midweek <span class="op">=</span> daily_sales[<span class="dv">1</span>:<span class="dv">4</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Midweek sales: </span><span class="sc">{</span>midweek<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -552,7 +552,7 @@ All sales: [1250.5, 1380.25, 1425.0, 1890.75, 2150.0]</code></pre>
 </div>
 </div>
 <p>If we want to access the sales for Wednesday and Thursday, we can use slicing as well:</p>
-<div id="a80a8fb6" class="cell" data-execution_count="3">
+<div id="bfcd8ba4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wed_thu <span class="op">=</span> daily_sales[<span class="dv">2</span>:<span class="dv">4</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Wednesday and Thursday sales: </span><span class="sc">{</span>wed_thu<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -560,7 +560,7 @@ All sales: [1250.5, 1380.25, 1425.0, 1890.75, 2150.0]</code></pre>
 </div>
 </div>
 <p>In case we only provide the second index, Python will assume we want all elements up to that index:</p>
-<div id="a6d072a4" class="cell" data-execution_count="4">
+<div id="c97e0f0b" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>first_three <span class="op">=</span> daily_sales[:<span class="dv">3</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First three days sales: </span><span class="sc">{</span>first_three<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -590,10 +590,10 @@ All sales: [1250.5, 1380.25, 1425.0, 1890.75, 2150.0]</code></pre>
 </div>
 </div>
 </div>
-<div id="629a1e71" class="cell" data-execution_count="5">
+<div id="5057fc62" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b38a694a" class="cell" data-execution_count="7">
+<div id="e78010c0" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -612,11 +612,11 @@ All sales: [1250.5, 1380.25, 1425.0, 1890.75, 2150.0]</code></pre>
 <li><code>midweek</code> (Tuesday through Thursday - indices 1, 2, 3)</li>
 <li><code>last_three</code> (the last three days)</li>
 </ul>
-<div id="f4680144" class="cell" data-execution_count="8">
+<div id="300f1cbe" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>week_sales <span class="op">=</span> [<span class="fl">1250.50</span>, <span class="fl">1380.25</span>, <span class="fl">1425.00</span>, <span class="fl">1890.75</span>, <span class="fl">2150.00</span>, <span class="fl">2340.50</span>, <span class="fl">1890.25</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ca0bf94b" class="cell" data-execution_count="10">
+<div id="8e4856cd" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -630,7 +630,7 @@ All sales: [1250.5, 1380.25, 1425.0, 1890.75, 2150.0]</code></pre>
 <section id="section-2---list-operations-append-and-len" class="level1">
 <h1>Section 2 - List Operations: append() and len()</h1>
 <p>Lists are dynamic - you can add items and check their size.</p>
-<div id="1b392464" class="cell" data-execution_count="11">
+<div id="43b9f523" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with morning coffee sales</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>coffee_sales <span class="op">=</span> [<span class="dv">23</span>, <span class="dv">45</span>, <span class="dv">67</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Morning sales: </span><span class="sc">{</span>coffee_sales<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -686,12 +686,12 @@ Now tracking 5 hours</code></pre>
 </div>
 </div>
 </div>
-<div id="1fdf7f96" class="cell" data-execution_count="12">
+<div id="7c268f93" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>customer_counts <span class="op">=</span> []</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>hours_tracked <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c80e723c" class="cell" data-execution_count="14">
+<div id="ccbd5c64" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -714,12 +714,12 @@ Now tracking 5 hours</code></pre>
 </div>
 </div>
 </div>
-<div id="4d193c7f" class="cell" data-execution_count="15">
+<div id="90e500c2" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>morning_sales <span class="op">=</span> [<span class="fl">245.50</span>, <span class="fl">189.25</span>, <span class="fl">156.00</span>]</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>afternoon_sales <span class="op">=</span> [<span class="fl">312.75</span>, <span class="fl">298.50</span>, <span class="fl">401.25</span>, <span class="fl">389.00</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="354142fa" class="cell" data-execution_count="17">
+<div id="10dbe637" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -733,7 +733,7 @@ Now tracking 5 hours</code></pre>
 <section id="section-3---for-loops-for-iteration" class="level1">
 <h1>Section 3 - For Loops for Iteration</h1>
 <p>Loops let us process each item in a list automatically. No more accessing items one by one!</p>
-<div id="397b6a0b" class="cell" data-execution_count="18">
+<div id="3324d81d" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Process each sale in our list</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> [<span class="fl">125.50</span>, <span class="fl">89.25</span>, <span class="fl">156.00</span>, <span class="fl">201.75</span>]</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -779,7 +779,7 @@ Commissions earned:
 <section id="the-accumulation-pattern" class="level2">
 <h2 class="anchored" data-anchor-id="the-accumulation-pattern">The Accumulation Pattern</h2>
 <p>One of the most important patterns in programming is <strong>accumulation</strong> - building up a result by repeatedly adding to it. This is essential for calculating totals, averages, and counts.</p>
-<div id="588c6e0b" class="cell" data-execution_count="19">
+<div id="64cc16c5" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Calculate total of all sales</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>daily_sales <span class="op">=</span> [<span class="fl">245.50</span>, <span class="fl">189.25</span>, <span class="fl">312.75</span>, <span class="fl">298.50</span>]</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -831,7 +831,7 @@ Number of sales: 4</code></pre>
 <section id="exercise-3.1---calculate-total-sales" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3.1---calculate-total-sales">Exercise 3.1 - Calculate Total Sales</h2>
 <p>Calculate the total of all prices in a list and also count how many items there are.</p>
-<div id="50e42bf4" class="cell" data-execution_count="20">
+<div id="4c1ce2fd" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> [<span class="fl">15.99</span>, <span class="fl">24.50</span>, <span class="fl">8.75</span>, <span class="fl">32.00</span>, <span class="fl">19.99</span>, <span class="fl">45.25</span>]</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>total_cost <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>item_count <span class="op">=</span> <span class="dv">0</span></span>
@@ -841,7 +841,7 @@ Number of sales: 4</code></pre>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Increment item_count by 1 each time</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="25115da7" class="cell" data-execution_count="22">
+<div id="0db0155a" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -855,7 +855,7 @@ Number of sales: 4</code></pre>
 <section id="section-4---loops-with-range-for-indexed-access" class="level1">
 <h1>Section 4 - Loops with range() for Indexed Access</h1>
 <p>Sometimes you need to know the position (index) of items as you loop through them. That’s where <code>range()</code> comes in!</p>
-<div id="8a140f32" class="cell" data-execution_count="23">
+<div id="b49e7e78" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># range() generates numbers for us to use as indices</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>days <span class="op">=</span> [<span class="st">"Mon"</span>, <span class="st">"Tue"</span>, <span class="st">"Wed"</span>, <span class="st">"Thu"</span>, <span class="st">"Fri"</span>]</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> [<span class="dv">1250</span>, <span class="dv">1380</span>, <span class="dv">1425</span>, <span class="dv">1890</span>, <span class="dv">2150</span>]</span>
@@ -905,7 +905,7 @@ First 5 order numbers:
 <section id="exercise-4.1---day-by-day-changes" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4.1---day-by-day-changes">Exercise 4.1 - Day-by-Day Changes</h2>
 <p>Calculate the change in sales from each day to the next and store them in a list.</p>
-<div id="4f839b14" class="cell" data-execution_count="24">
+<div id="40322f94" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> [<span class="dv">1250</span>, <span class="dv">1380</span>, <span class="dv">1125</span>, <span class="dv">1890</span>, <span class="dv">1650</span>]</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>daily_changes <span class="op">=</span> []</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -916,7 +916,7 @@ First 5 order numbers:
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the change for each day</span></span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3fa2e2a7" class="cell" data-execution_count="26">
+<div id="941b7f5c" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>
@@ -932,7 +932,7 @@ First 5 order numbers:
 <section id="section-5---calculating-aggregations" class="level1">
 <h1>Section 5 - Calculating Aggregations</h1>
 <p>One of the most powerful uses of loops is calculating summary statistics from your data.</p>
-<div id="4081d493" class="cell" data-execution_count="27">
+<div id="346916a6" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total, average, and count</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> [<span class="fl">4.50</span>, <span class="fl">3.75</span>, <span class="fl">5.25</span>, <span class="fl">4.00</span>, <span class="fl">6.50</span>]</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -971,7 +971,7 @@ Average price: $4.80</code></pre>
 <section id="exercise-5.1---customer-satisfaction-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-5.1---customer-satisfaction-analysis">Exercise 5.1 - Customer Satisfaction Analysis</h2>
 <p>Calculate the total of all ratings and the average rating. Also count how many total ratings there are.</p>
-<div id="108c3a7e" class="cell" data-execution_count="28">
+<div id="18007447" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>ratings <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -988,7 +988,7 @@ Average price: $4.80</code></pre>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR LOOP HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fcd359ce" class="cell" data-execution_count="30">
+<div id="9c1e9c8b" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your answer</span></span>

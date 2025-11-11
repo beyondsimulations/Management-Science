@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Cells marked with “YOUR CODE BELOW” expect you to write code. Test your solutions with the provided assertions. Work through sections in order as each builds on previous concepts!</p>
 </div>
 </div>
-<div id="90a40ddd" class="cell" data-execution_count="1">
+<div id="fdd2f0e8" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -549,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Due Time</strong>: When the customer needs it (measured from start of your shift)</li>
 </ul>
 <p><strong>Note</strong>: No arrival times! All orders are available at time 0.</p>
-<div id="63e54034" class="cell" data-execution_count="2">
+<div id="06527aaf" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TechCorp Corporate Event - 20 pre-orders</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># All available at start (time 0)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
@@ -608,7 +608,7 @@ First 10 orders:
 </section>
 <section id="key-performance-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="key-performance-metrics">Key Performance Metrics</h2>
-<div id="e5f042de" class="cell" data-execution_count="3">
+<div id="38960cb4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_metrics(schedule_df):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate key performance metrics for a schedule</span></span>
@@ -637,7 +637,7 @@ First 10 orders:
 <p><strong>Slack</strong> tells you how much scheduling flexibility exists for each order. It’s the time buffer before an order becomes late.</p>
 <p><strong>Formula:</strong> Slack = Due Time - Processing Time</p>
 <p>Why? If an order takes 5 minutes and is due at 20 minutes, you have 15 minutes of slack (can start anytime from 0 to 15).</p>
-<div id="0c79cf8f" class="cell" data-execution_count="4">
+<div id="440324a6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate slack for each order</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a 'slack' column to df_corporate</span></span>
@@ -647,7 +647,7 @@ First 10 orders:
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the most urgent order (minimum slack)</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>most_urgent <span class="op">=</span> <span class="co"># Find the order ID with minimum slack</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="1ebd987b" class="cell" data-execution_count="6">
+<div id="e95178b0" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
@@ -686,7 +686,7 @@ First 10 orders:
 </div>
 </div>
 </div>
-<div id="13c133d1" class="cell" data-execution_count="7">
+<div id="130b0653" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_fifo_static(orders):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using First In, First Out (FIFO)</span></span>
@@ -736,7 +736,7 @@ Total makespan: 122 minutes</code></pre>
 <section id="rule-2-spt-shortest-processing-time" class="level2">
 <h2 class="anchored" data-anchor-id="rule-2-spt-shortest-processing-time">Rule 2: SPT (Shortest Processing Time)</h2>
 <p>Now we implement SPT to always process the shortest job next and to process the quickest orders first to minimize average wait times.</p>
-<div id="6a4cf345" class="cell" data-execution_count="8">
+<div id="56fee72d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_spt_static(orders):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using Shortest Processing Time (SPT)</span></span>
@@ -792,7 +792,7 @@ Total makespan: 122 minutes</code></pre>
 </div>
 </div>
 </div>
-<div id="fccfe8e6" class="cell" data-execution_count="9">
+<div id="73bbd17f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_edd_static(orders):</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -815,7 +815,7 @@ Total makespan: 122 minutes</code></pre>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>edd_schedule <span class="op">=</span> schedule_edd_static(corporate_orders.copy())</span>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>df_edd <span class="op">=</span> pd.DataFrame(edd_schedule)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e7ea362f" class="cell" data-execution_count="11">
+<div id="c7087341" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
@@ -833,7 +833,7 @@ Total makespan: 122 minutes</code></pre>
 <section id="section-3---visualizing-schedules" class="level1">
 <h1>Section 3 - Visualizing Schedules</h1>
 <p>A picture is worth a thousand schedules! Let’s create Gantt charts to visualize how each rule performs. Try to use generate AI to come up with the code to create a beautiful Gantt chart here based on the results of your schedule.</p>
-<div id="ace5479f" class="cell" data-execution_count="12">
+<div id="5a251347" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -859,7 +859,7 @@ Total makespan: 122 minutes</code></pre>
 </ul>
 </div>
 </div>
-<div id="85419333" class="cell" data-execution_count="13">
+<div id="0a73401b" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for each schedule</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -877,7 +877,7 @@ Total makespan: 122 minutes</code></pre>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Performance Comparison - Corporate Event:"</span>)</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comparison.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7521b7dc" class="cell" data-execution_count="15">
+<div id="d8565f7c" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
@@ -898,7 +898,7 @@ Total makespan: 122 minutes</code></pre>
 </section>
 <section id="visualizing-the-trade-offs" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-trade-offs">Visualizing the Trade-offs</h2>
-<div id="5ffd29af" class="cell" data-execution_count="16">
+<div id="4e29803d" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create visual comparison</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -964,7 +964,7 @@ Total makespan: 122 minutes</code></pre>
 <li><strong>Real-time decisions</strong> - when the machine is free, which available order should you process?</li>
 </ul>
 <p>This requires <strong>dynamic dispatching</strong>: making decisions based only on orders that have already arrived.</p>
-<div id="cb33a390" class="cell" data-execution_count="17">
+<div id="d823d2f9" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate realistic Friday morning rush orders</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate realistic Friday morning rush orders</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
@@ -1028,7 +1028,7 @@ First 10 orders:
 <section id="what-happens-if-we-use-static-scheduling" class="level2">
 <h2 class="anchored" data-anchor-id="what-happens-if-we-use-static-scheduling">What Happens If We Use Static Scheduling?</h2>
 <p>Let’s see what goes wrong if we apply static SPT to this dynamic problem:</p>
-<div id="e467dda9" class="cell" data-execution_count="18">
+<div id="647c3f79" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply static SPT (sorts all orders, ignores arrivals)</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>friday_static_spt <span class="op">=</span> schedule_spt_static(friday_orders.copy())</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df_friday_static_spt <span class="op">=</span> pd.DataFrame(friday_static_spt)</span>
@@ -1106,7 +1106,7 @@ This creates 5.6 minutes of idle time.</code></pre>
 </div>
 </div>
 </div>
-<div id="817e444b" class="cell" data-execution_count="19">
+<div id="3ba81d47" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_spt_dynamic(orders):</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -1144,7 +1144,7 @@ This creates 5.6 minutes of idle time.</code></pre>
 <span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>friday_dynamic_spt <span class="op">=</span> schedule_spt_dynamic(friday_orders)</span>
 <span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>df_friday_dynamic_spt <span class="op">=</span> pd.DataFrame(friday_dynamic_spt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f4306dbd" class="cell" data-execution_count="21">
+<div id="65f282ac" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
@@ -1169,7 +1169,7 @@ This creates 5.6 minutes of idle time.</code></pre>
 <section id="exercise-6.2---implement-dynamic-edd" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-6.2---implement-dynamic-edd">Exercise 6.2 - Implement Dynamic EDD</h2>
 <p>Now implement EDD with dynamic dispatching to minimize tardiness in the Friday rush.</p>
-<div id="0fe53c88" class="cell" data-execution_count="22">
+<div id="e3b1cf08" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_edd_dynamic(orders):</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
@@ -1206,7 +1206,7 @@ This creates 5.6 minutes of idle time.</code></pre>
 <span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>friday_dynamic_edd <span class="op">=</span> schedule_edd_dynamic(friday_orders)</span>
 <span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>df_friday_dynamic_edd <span class="op">=</span> pd.DataFrame(friday_dynamic_edd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="95927e12" class="cell" data-execution_count="24">
+<div id="01cb589a" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
@@ -1232,7 +1232,7 @@ This creates 5.6 minutes of idle time.</code></pre>
 </section>
 <section id="final-performance-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="final-performance-comparison">Final Performance Comparison</h2>
-<div id="596d7853" class="cell" data-execution_count="25">
+<div id="f32d1aff" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for all Friday approaches</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>friday_comparison <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Dynamic_SPT'</span>: calculate_metrics(df_friday_dynamic_spt),</span>

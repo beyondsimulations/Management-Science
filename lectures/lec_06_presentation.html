@@ -437,7 +437,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="complexity-why-greedy-is-fast" class="slide level2">
 <h2>Complexity: Why Greedy is Fast</h2>
-<div id="0aea9e6f" class="cell" data-execution_count="1">
+<div id="aced83a9" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -494,7 +494,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-hospital-check-in" class="slide level2">
 <h2>Example: Hospital Check-In</h2>
-<div id="cda2a285" class="cell" data-execution_count="2">
+<div id="8b85eb0f" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -539,7 +539,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-coffee-shop-orders" class="slide level2">
 <h2>Example: Coffee Shop Orders</h2>
-<div id="2cf4da7d" class="cell" data-execution_count="3">
+<div id="9ef1f139" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -584,7 +584,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-package-delivery" class="slide level2">
 <h2>Example: Package Delivery</h2>
-<div id="3bd33379" class="cell" data-execution_count="4">
+<div id="755b283d" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -610,7 +610,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Quick Reference &amp; Decision Guide</h2>
 <p><span class="highlight">Choose your rule based on business priority</span></p>
 <div class="fragment">
-<div id="ad93bbc5" class="cell" data-execution_count="5">
+<div id="44a3e324" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -625,7 +625,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Implementing SPT in Python I</h2>
 <p><span class="highlight">Let’s code it together - it’s remarkably simple!</span></p>
 <p>Let’s assume we want to make some pizzas under deadlines.</p>
-<div id="d995a161" class="cell" data-execution_count="6">
+<div id="ad592b91" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Pizza data</span></span>
 <span id="cb1-2"><a></a>pizzas <span class="op">=</span> [</span>
 <span id="cb1-3"><a></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
@@ -641,7 +641,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="implementing-spt-in-python-ii" class="slide level2">
 <h2>Implementing SPT in Python II</h2>
-<div id="539ca6be" class="cell" data-execution_count="7">
+<div id="3c3349f8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># SPT Rule: Sort by processing time</span></span>
 <span id="cb2-2"><a></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
 <span id="cb2-3"><a></a></span>
@@ -677,7 +677,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="implementing-edd-in-python" class="slide level2">
 <h2>Implementing EDD in Python</h2>
 <p><span class="highlight">EDD is just as simple - change the sorting key!</span></p>
-<div id="6fa31363" class="cell" data-execution_count="8">
+<div id="3c41ef75" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># EDD Rule: Sort by due date</span></span>
 <span id="cb4-2"><a></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
 <span id="cb4-3"><a></a></span>
@@ -756,7 +756,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="all-schedules-compared" class="slide level2">
 <h2>All Schedules Compared</h2>
-<div id="dd3a42b0" class="cell" data-execution_count="9">
+<div id="3571f165" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1001,7 +1001,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="fifo-x-y-z" class="slide level2">
 <h2>FIFO: X → Y → Z</h2>
-<div id="9b5e1488" class="cell" data-execution_count="10">
+<div id="27b846a1" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1141,7 +1141,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="johnsons-schedule-z-y-x" class="slide level2">
 <h2>Johnson’s Schedule: Z → Y → X</h2>
-<div id="441edd57" class="cell" data-execution_count="11">
+<div id="4517f65e" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>

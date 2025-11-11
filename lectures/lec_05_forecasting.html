@@ -608,7 +608,7 @@ window.Quarto = {
 <section id="hidden-patterns-in-data" class="level2">
 <h2 class="anchored" data-anchor-id="hidden-patterns-in-data">Hidden Patterns in Data</h2>
 <p>Look at this daily sales data. <span class="highlight">What patterns do you see?</span></p>
-<div id="1021f52b" class="cell" data-execution_count="1">
+<div id="1d3d3134" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -659,7 +659,7 @@ window.Quarto = {
 </section>
 <section id="visual-decomposition" class="level2">
 <h2 class="anchored" data-anchor-id="visual-decomposition">Visual Decomposition</h2>
-<div id="5328f5a9" class="cell" data-execution_count="2">
+<div id="1428a1fa" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -684,7 +684,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="moving-average">Moving Average</h2>
 <p><span class="question">Question</span>: How do we separate signal from noise?</p>
 <p>. . .</p>
-<div id="b8f8a2a8" class="cell" data-execution_count="3">
+<div id="8b05cda7" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -761,7 +761,7 @@ window.Quarto = {
 <section id="when-simple-smoothing-fails" class="level2">
 <h2 class="anchored" data-anchor-id="when-simple-smoothing-fails">When Simple Smoothing Fails</h2>
 <p><span class="highlight">Simple smoothing assumes the data is flat. What if it’s not?</span></p>
-<div id="27415bc0" class="cell" data-execution_count="4">
+<div id="3a362d27" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -833,7 +833,7 @@ window.Quarto = {
 <section id="step-by-step-i" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-i">Step-by-Step I</h2>
 <p><span class="highlight">Let’s walk through 6 periods manually to build intuition</span></p>
-<div id="54c4186c" class="cell" data-output-location="fragment" data-execution_count="5">
+<div id="b6bf27f8" class="cell" data-output-location="fragment" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data with clear upward trend</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sales_data <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">112</span>, <span class="dv">118</span>, <span class="dv">124</span>, <span class="dv">130</span>])</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -857,7 +857,7 @@ window.Quarto = {
 </section>
 <section id="step-by-step-ii" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-ii">Step-by-Step II</h2>
-<div id="80bedf86" class="cell" data-output-location="fragment" data-execution_count="6">
+<div id="864b0a17" class="cell" data-output-location="fragment" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Holt's method for periods 2-6</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(sales_data)):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update level</span></span>
@@ -883,7 +883,7 @@ Period 6: Sales=130, Level=128.4, Trend=5.5</code></pre>
 </section>
 <section id="step-by-step-iii" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-iii">Step-by-Step III</h2>
-<div id="2a194a50" class="cell" data-output-location="fragment" data-execution_count="7">
+<div id="61b7346f" class="cell" data-output-location="fragment" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast next 3 periods</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Forecasts:"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>forecast_values <span class="op">=</span> []</span>
@@ -902,7 +902,7 @@ Forecasts:
 </section>
 <section id="holts-method-visual-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="holts-method-visual-comparison">Holt’s Method: Visual Comparison</h2>
-<div id="d1c22561" class="cell" data-execution_count="8">
+<div id="95a2a290" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -980,7 +980,7 @@ Forecasts:
 <h2 class="anchored" data-anchor-id="the-problem-trend-seasonality">The Problem: Trend + Seasonality</h2>
 <p><span class="highlight">What if your data has BOTH trend AND seasonality?</span></p>
 <p>. . .</p>
-<div id="39451ac5" class="cell" data-execution_count="9">
+<div id="5dc9d561" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1003,7 +1003,7 @@ Forecasts:
 </section>
 <section id="holt-winters-visualized" class="level2">
 <h2 class="anchored" data-anchor-id="holt-winters-visualized">Holt-Winters Visualized</h2>
-<div id="254cdfd1" class="cell" data-execution_count="10">
+<div id="492eda3d" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1090,7 +1090,7 @@ Forecasts:
 </section>
 <section id="holt-winters-visual" class="level2">
 <h2 class="anchored" data-anchor-id="holt-winters-visual">Holt-Winters: Visual</h2>
-<div id="4228113e" class="cell" data-execution_count="11">
+<div id="642fa999" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1143,7 +1143,7 @@ Forecasts:
 <section id="forecast-accuracy" class="level2">
 <h2 class="anchored" data-anchor-id="forecast-accuracy">Forecast Accuracy</h2>
 <p><span class="highlight">Easy with Python</span></p>
-<div id="c3eb1b55" class="cell" data-output-location="fragment" data-execution_count="12">
+<div id="1f67e682" class="cell" data-output-location="fragment" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Compare two forecasting methods</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>actual <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">110</span>, <span class="dv">108</span>, <span class="dv">112</span>])</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>forecast_a <span class="op">=</span> np.array([<span class="dv">98</span>, <span class="dv">107</span>, <span class="dv">109</span>, <span class="dv">110</span>, <span class="dv">111</span>])</span>
@@ -1166,7 +1166,7 @@ Better method: A</code></pre>
 <section id="when-to-use-which-method" class="level2">
 <h2 class="anchored" data-anchor-id="when-to-use-which-method">When to Use Which Method?</h2>
 <p>. . .</p>
-<div id="3e149b8e" class="cell" data-execution_count="13">
+<div id="d5900f05" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1334,7 +1334,7 @@ Better method: A</code></pre>
 <h2 class="anchored" data-anchor-id="the-issue-overfitting">The Issue: Overfitting</h2>
 <p><span class="question">Question</span>: What happens when we train an AI on all our data and use it to predict… the same data?</p>
 <p>. . .</p>
-<div id="2961ee97" class="cell" data-execution_count="14">
+<div id="2d36c323" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1347,7 +1347,7 @@ Better method: A</code></pre>
 <section id="training-vs-test-data" class="level2">
 <h2 class="anchored" data-anchor-id="training-vs-test-data">Training vs Test Data</h2>
 <p><span class="highlight">Never judge a complex model on the data it learned from!</span></p>
-<div id="ab591b3e" class="cell" data-execution_count="15">
+<div id="cba36b5d" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1396,7 +1396,7 @@ Better method: A</code></pre>
 </section>
 <section id="time-series-cross-validation" class="level2">
 <h2 class="anchored" data-anchor-id="time-series-cross-validation">Time Series Cross-Validation</h2>
-<div id="b0ed8a5c" class="cell" data-execution_count="16">
+<div id="70c3fa5d" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1457,7 +1457,7 @@ Better method: A</code></pre>
 <section id="forecast-horizons" class="level2">
 <h2 class="anchored" data-anchor-id="forecast-horizons">Forecast Horizons</h2>
 <p><span class="highlight">How far into the future can we predict?</span></p>
-<div id="527c67f4" class="cell" data-execution_count="17">
+<div id="48eeb65a" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1470,7 +1470,7 @@ Better method: A</code></pre>
 <section id="confidence-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h2>
 <p><span class="highlight">A forecast without confidence intervals is incomplete!</span></p>
-<div id="cab4073e" class="cell" data-execution_count="18">
+<div id="2220f5e9" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1484,7 +1484,7 @@ Better method: A</code></pre>
 <h2 class="anchored" data-anchor-id="forecast-combination">Forecast Combination</h2>
 <p><span class="highlight">Why choose one method when you can combine several?</span></p>
 <p>. . .</p>
-<div id="22844177" class="cell" data-output-location="fragment" data-execution_count="19">
+<div id="03d492b1" class="cell" data-output-location="fragment" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Combining multiple forecasts</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ma_forecast <span class="op">=</span> <span class="dv">120</span>      <span class="co"># Moving average prediction</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>exp_forecast <span class="op">=</span> <span class="dv">125</span>     <span class="co"># Exponential smoothing prediction</span></span>
@@ -1508,7 +1508,7 @@ Weighted combination: 126 units</code></pre>
 </section>
 <section id="lead-times-and-safety-stock" class="level2">
 <h2 class="anchored" data-anchor-id="lead-times-and-safety-stock">Lead Times and Safety Stock</h2>
-<div id="75e1f43f" class="cell" data-execution_count="20">
+<div id="9cc98933" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1533,7 +1533,7 @@ Weighted combination: 126 units</code></pre>
 <h2 class="anchored" data-anchor-id="safety-stock-calculation">Safety Stock Calculation</h2>
 <p><span class="highlight">How much buffer do you need?</span></p>
 <p>. . .</p>
-<div id="0faa7e27" class="cell" data-output-location="fragment" data-execution_count="21">
+<div id="97076fa4" class="cell" data-output-location="fragment" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Safety stock formula</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>

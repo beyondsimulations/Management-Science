@@ -501,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Comparing portfolio combinations</li>
 <li>Making data-driven recommendations</li>
 </ul>
-<div id="e49a92d3" class="cell" data-execution_count="1">
+<div id="ec71be60" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -520,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s start by modeling uncertain business variables using probability distributions.</p>
 <section id="understanding-np.random" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-np.random">Understanding np.random</h2>
-<div id="74a74fab" class="cell" data-execution_count="2">
+<div id="c197e59d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Daily customer traffic follows a normal distribution</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Historical data shows: mean = 100, std = 20</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -547,7 +547,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exercise-1.1---simulate-purchase-amounts" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.1---simulate-purchase-amounts">Exercise 1.1 - Simulate Purchase Amounts</h2>
 <p>Average purchase per customer varies uniformly between €8 and €12. Simulate 10,000 purchase amounts.</p>
-<div id="6dd93d4f" class="cell" data-execution_count="3">
+<div id="0f45e2ec" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate 10,000 purchase amounts uniformly distributed between 8 and 12</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>purchase_amounts <span class="op">=</span></span>
@@ -557,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>min_purchase <span class="op">=</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>max_purchase <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9615012e" class="cell" data-execution_count="5">
+<div id="bf750337" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below - these test your solution</span></span>
@@ -572,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exercise-1.2---calculate-probabilities" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1.2---calculate-probabilities">Exercise 1.2 - Calculate Probabilities</h2>
 <p>Using your simulated data from the previous task, calculate key probabilities.</p>
-<div id="6d0372e9" class="cell" data-execution_count="6">
+<div id="808a32f8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the many_days array from above (1000 days of customer data)</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the probability of different scenarios</span></span>
@@ -586,7 +586,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability of being within one std dev of mean (80-120)</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>prob_normal <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a25c5283" class="cell" data-execution_count="8">
+<div id="a8cd4a5b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -606,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now let’s combine multiple uncertain variables to simulate an entire business.</p>
 <section id="the-bean-counter-store-model" class="level2">
 <h2 class="anchored" data-anchor-id="the-bean-counter-store-model">The Bean Counter Store Model</h2>
-<div id="2e7ec65c" class="cell" data-execution_count="9">
+<div id="4423606f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_bean_counter_day(mean_customers<span class="op">=</span><span class="dv">100</span>, std_customers<span class="op">=</span><span class="dv">20</span>,</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                            min_purchase<span class="op">=</span><span class="dv">8</span>, max_purchase<span class="op">=</span><span class="dv">12</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                            fixed_costs<span class="op">=</span><span class="dv">500</span>, variable_cost_rate<span class="op">=</span><span class="fl">0.35</span>):</span>
@@ -665,7 +665,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When we run multiple simulations, we need to collect and analyze the results efficiently. Pandas DataFrames are perfect for this task.</p>
 <section id="creating-dataframes-from-simulation-results" class="level3">
 <h3 class="anchored" data-anchor-id="creating-dataframes-from-simulation-results">Creating DataFrames from Simulation Results</h3>
-<div id="4734951a" class="cell" data-execution_count="10">
+<div id="862d4815" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Create a DataFrame from a few simulations</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sample_results <span class="op">=</span> []</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
@@ -694,7 +694,7 @@ Columns: ['customers', 'avg_purchase', 'revenue', 'profit']</code></pre>
 </section>
 <section id="computing-statistics-with-dataframes" class="level3">
 <h3 class="anchored" data-anchor-id="computing-statistics-with-dataframes">Computing Statistics with DataFrames</h3>
-<div id="3d41b75c" class="cell" data-execution_count="11">
+<div id="b3989c6d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific calculations</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Mean profit: €</span><span class="sc">{</span>sample_df[<span class="st">'profit'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Standard deviation of profit: €</span><span class="sc">{</span>sample_df[<span class="st">'profit'</span>]<span class="sc">.</span>std()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
@@ -725,7 +725,7 @@ Percentage in range: 0.0%</code></pre>
 </section>
 <section id="accessing-specific-rows-with-iloc" class="level3">
 <h3 class="anchored" data-anchor-id="accessing-specific-rows-with-iloc">Accessing Specific Rows with iloc</h3>
-<div id="6e52f3f5" class="cell" data-execution_count="12">
+<div id="2bbd0601" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iloc uses integer positions to access rows and columns</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Using iloc to access specific simulation results:"</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -770,10 +770,10 @@ Profit from simulations 1, 3, and 4:
 4   -214.740259
 Name: profit, dtype: float64
 
-Two random simulations (indices [1, 0]):
-    customers      profit
-1   72.342082 -119.475021
-0  104.435416   74.576399</code></pre>
+Two random simulations (indices [3, 2]):
+    customers     profit
+3   84.989056 -34.156547
+2  108.748490  84.698014</code></pre>
 </div>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
@@ -803,7 +803,7 @@ Two random simulations (indices [1, 0]):
 <section id="exercise-2.1---run-multiple-simulations" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2.1---run-multiple-simulations">Exercise 2.1 - Run Multiple Simulations</h2>
 <p>Simulate 10,000 days of Bean Counter operations and analyze the results.</p>
-<div id="1a944b00" class="cell" data-execution_count="13">
+<div id="549426e1" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Run 10,000 simulations of Bean Counter store</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10_000</span></span>
@@ -819,7 +819,7 @@ Two random simulations (indices [1, 0]):
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>prob_loss <span class="op">=</span></span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>max_profit <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3fc2c0b8" class="cell" data-execution_count="15">
+<div id="625795e7" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -836,7 +836,7 @@ Two random simulations (indices [1, 0]):
 <section id="exercise-2.2---visualize-the-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2.2---visualize-the-distribution">Exercise 2.2 - Visualize the Distribution</h2>
 <p>Create a histogram of profit distribution and the percentage of profits between 100 and 400 Euro with key markers based on the results before.</p>
-<div id="dd8ce5b9" class="cell" data-execution_count="16">
+<div id="e35337ac" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate what percentage of profits are between €100 and €400</span></span>
@@ -845,7 +845,7 @@ Two random simulations (indices [1, 0]):
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a histogram of the profit distribution with 50 bins</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="344f822f" class="cell" data-execution_count="18">
+<div id="0564d32d" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -860,7 +860,7 @@ Two random simulations (indices [1, 0]):
 <p>Learn to calculate key risk metrics that investors care about.</p>
 <section id="value-at-risk-var" class="level2">
 <h2 class="anchored" data-anchor-id="value-at-risk-var">Value at Risk (VaR)</h2>
-<div id="e6eee839" class="cell" data-execution_count="19">
+<div id="09b5b2e1" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Value at Risk: "What's the worst-case scenario in X% of cases?"</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert DataFrame column to NumPy array for statistical calculations</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>profits_array <span class="op">=</span> df[<span class="st">'profit'</span>].values</span>
@@ -895,7 +895,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <section id="exercise-3.1---calculate-risk-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3.1---calculate-risk-metrics">Exercise 3.1 - Calculate Risk Metrics</h2>
 <p>Calculate comprehensive risk metrics for the coffee shop.</p>
-<div id="d541e0ac" class="cell" data-execution_count="20">
+<div id="f3568a58" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate various risk metrics</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -910,7 +910,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>worst_days <span class="op">=</span> profits_array[profits_array <span class="op">&lt;=</span> worst_10_pct_threshold]</span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>expected_shortfall <span class="op">=</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="311d901c" class="cell" data-execution_count="22">
+<div id="d0727c60" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -930,7 +930,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <p>Now we’ll analyze portfolios of coffee shops!</p>
 <section id="simulating-multiple-locations" class="level2">
 <h2 class="anchored" data-anchor-id="simulating-multiple-locations">Simulating Multiple Locations</h2>
-<div id="31cd0846" class="cell" data-execution_count="23">
+<div id="abd41297" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bean Counter is considering 4 different expansion locations with different characteristics</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_location(location_params, n_days<span class="op">=</span><span class="dv">10_000</span>):</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Simulate n_days for a specific location"""</span></span>
@@ -988,7 +988,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <section id="exercise-4.1---analyze-all-portfolio-combinations" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4.1---analyze-all-portfolio-combinations">Exercise 4.1 - Analyze All Portfolio Combinations</h2>
 <p>Bean Counter can afford to open exactly 2 new locations. Which pair should they choose for maximum profitability?</p>
-<div id="ee215cbc" class="cell" data-execution_count="24">
+<div id="2553dacd" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze all possible pairs of locations</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get all combinations of 2 locations</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>location_names <span class="op">=</span> <span class="bu">list</span>(locations.keys())</span>
@@ -1025,7 +1025,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>best_mean_portfolio <span class="op">=</span> <span class="co"># Your task!</span></span>
 <span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>best_mean_value <span class="op">=</span> <span class="co"># Your task!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fc82cb4e" class="cell" data-execution_count="26">
+<div id="a611caae" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
@@ -1045,7 +1045,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <p>Now let’s visualize and make a final recommendation!</p>
 <section id="visualizing-risk-return-tradeoffs" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-risk-return-tradeoffs">Visualizing Risk-Return Tradeoffs</h2>
-<div id="d5db4e18" class="cell" data-execution_count="27">
+<div id="5a0e7055" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create risk-return scatter plot for Bean Counter expansion</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1071,7 +1071,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <section id="exercise-5.1---final-ceo-recommendation" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-5.1---final-ceo-recommendation">Exercise 5.1 - Final CEO Recommendation</h2>
 <p>Based on your analysis, make a strategic expansion recommendation for Bean Counter.</p>
-<div id="29828152" class="cell" data-execution_count="28">
+<div id="c8031abc" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Which portfolio maximizes expected profit? (Only the name)</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>max_profit_portfolio <span class="op">=</span></span>
@@ -1082,7 +1082,7 @@ Interpretation: Daily profit typically varies by €150.82 from the mean</code><
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Your final recommendation (choose one)</span></span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>final_recommendation <span class="op">=</span> <span class="co"># Choose the portfolio you would recommend</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c16b0afb" class="cell" data-execution_count="30">
+<div id="f3468a6c" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't modify below</span></span>
