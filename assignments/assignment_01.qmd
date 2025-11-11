@@ -1,11 +1,6 @@
 ---
 title: "Assignment 1: Risk Analysis & Forecasting"
 subtitle: "Management Science"
-format: ipynb
-code-links:
-  - text: Python
-    href: assignment_01.py
-    icon: hand-thumbs-up
 ---
 
 ## Assignment Overview
