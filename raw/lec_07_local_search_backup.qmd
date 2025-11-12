@@ -1,0 +1,1776 @@
+---
+title: "Better Routing"
+subtitle: "Lecture 7 - Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_07_local_search.qmd)"
+    output-file: lec_07_presentation.html
+---
+
+# [Introduction]{.flow} {.title}
+
+## **[Client Briefing: Artisan Bakery]{.invert-font}** {background-image="https://unsplash.com/photos/RndRFJ1v1kk/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyODcwNzAzfA&force=true&w=2400" background-size="cover"}
+
+. . .
+
+[Master Baker's Morning Dilemma:]{.invert-font}
+
+["Every morning at 5 AM, our delivery van leaves with fresh bread for [16 cafés]{.highlight} across the city. Our driver currently takes much too long using his 'intuition' for the route. The fuel costs are killing us, and worse, some cafés get their bread late."]{.invert-font .fragment}
+
+## The Delivery Challenge
+
+[Artisan Bakery's daily logistics puzzle:]{.highlight}
+
+::: incremental
+- **16 Cafés:** Each expecting fresh bread by 8 AM
+- **One Van:** Limited capacity, must visit all locations
+- **Time Windows:** 3 cafés open early (6:30 AM) and need priority
+- **Current Problem:** Driver uses "gut feeling" for routing
+:::
+
+. . .
+
+:::{.callout-important}
+**The Stakes:** Poor routing costs plus reputation damage from late deliveries!
+:::
+
+## Quick Recap: Greedy Decisions
+
+[Last week we learned greedy algorithms for scheduling:]{.highlight}
+
+::: incremental
+- **SPT:** Process shortest jobs first
+- **EDD:** Process by earliest due date
+- **Fast & Simple:** Made quick decisions, no looking back
+:::
+
+. . .
+
+[Question]{.question}: Can we use the same greedy approach for routing?
+
+. . .
+
+:::{.callout-note}
+[Today:]{.highlighy} We'll start greedy, then learn how to [improve]{.highlight} solutions with local search!
+:::
+
+# [The Routing Problem]{.flow} {.title}
+
+## The Traveling Salesman Problem
+
+[Visit all locations exactly once, minimize total distance.]{.highlight}
+
+. . .
+
+```{python}
+#| eval: true
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+import sys
+sys.path.append('../helpers')
+from plot_utils import BRAND_COLORS, setup_clean_style
+
+setup_clean_style()
+np.random.seed(123)
+
+# Generate 12 cafe locations
+n_cafes = 16
+x_coords = np.random.uniform(0, 30, n_cafes)
+y_coords = np.random.uniform(0, 10, n_cafes)
+
+# Bakery at center
+bakery_x, bakery_y = 15, 5
+
+fig, ax = plt.subplots()
+ax.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], zorder=3, label='Cafés')
+ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], marker='s', zorder=3, label='Bakery')
+
+ax.set_xlabel('Distance (km)', fontsize=9)
+ax.set_ylabel('Distance (km)', fontsize=9)
+ax.grid(True, alpha=0.2)
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+## Compute Everything?
+
+[Already 12 cafés = 12! = 479,001,600 routes]{.highlight}
+
+. . .
+
+**If your computer checks 1 million routes per second:**
+
+::: incremental
+- 5 cafés: 0.0001 seconds ✓
+- 10 cafés: 0.18 seconds ✓
+- 12 cafés: 8 minutes ~
+- 15 cafés: 12 hours ~
+- 20 cafés: 77,000 years x
+:::
+
+. . .
+
+:::{.callout-important}
+**The Reality:** Exact approach would take longer than the universe has existed!
+:::
+
+## The Complexity Explosion
+
+[The factorial growth makes exhaustive search impossible.]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+import math
+
+stops = list(range(4, 25))
+possibilities = [math.factorial(n) for n in stops]
+
+fig, ax = plt.subplots()
+ax.semilogy(stops, possibilities, 'o-', color=BRAND_COLORS["threeDark"], linewidth=2.5, markersize=8)
+ax.set_xlabel('Number of Stops', fontsize=11)
+ax.set_ylabel('Possible Routes (log scale)', fontsize=11)
+ax.set_title('The Combinatorial Explosion', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.2, which='both')
+
+# Annotations
+ax.annotate('12 stops:\n479 million', xy=(12, math.factorial(12)),
+            xytext=(10.5, math.factorial(12)*10),
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["oneDark"]),
+            fontsize=10, ha='center')
+
+plt.tight_layout()
+plt.show()
+```
+
+## The "Cost" of Complexity
+
+[Why buying a faster computer won't help:]{.highlight}
+
+::: incremental
+
+- **P:** Tasks that can be solved in polynomial time
+  - Like Sorting a spreadsheet or Calculating Payroll.
+  - These are safe, predictable, and easy to automate.
+
+- **NP:** Easy to Check, Hard to Solve.
+  - Analogy: easy to check if a specific password works
+  - Very hard to guess a password by trying every combination!
+
+:::
+
+. . .
+
+::: callout-important
+Optimization TSP where we find minimum cost tour → NP-Hard
+:::
+
+# [Graph Theory Foundations]{.flow} {.title}
+
+## What is a Graph?
+
+[A graph $G = (V, E)$ consists of:]{.highlight}
+
+::: incremental
+- **Vertices (V):** The nodes or points (bakery + cafés)
+- **Edges (E):** The connections between vertices (roads)
+- **Weight Function:** $w$ assigns costs to edges (distances)
+:::
+
+. . .
+
+**For our bakery problem:**
+
+::: incremental
+- $|V| = 17$ (1 bakery + 17 cafés)
+- $|E| = \binom{17}{2} = 136$ possible connections
+- Each edge $(i,j)$ has weight $w_{ij}$ = distance between $i$ and $j$
+:::
+
+## Complete vs. Sparse Graphs
+
+[Different graph structures lead to different complexities:]{.highlight}
+
+::: incremental
+- **Complete Graph ($K_n$):** All vertices connected to each other
+  - TSP on $K_n$: $(n-1)!/2$ unique tours
+  - Real roads: Usually complete (drive between any two points)
+- **Sparse Graph:** Limited connections between vertices
+  - Fewer edges = fewer possible routes
+  - Examples: Public transit networks, restricted road access
+:::
+
+. . .
+
+:::{.callout-important}
+Density dramatically affects both problem difficulty and solution approaches!
+:::
+
+## Hamiltonian Cycles and Tours
+
+[Mathematical foundation of the TSP:]{.highlight}
+
+::: incremental
+- **Hamiltonian Path:** Visits each vertex exactly once
+- **Hamiltonian Cycle:** Hamiltonian path that returns to start vertex
+- **TSP Tour:** Minimum weight Hamiltonian cycle
+:::
+
+. . .
+
+**Mathematical Definition:**
+A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
+
+- Each $v_i \in V$ appears exactly once (except start/end)
+- Total weight: $w(T) = \sum_{i=1}^{n} w_{v_i, v_{i+1}}$ (where $v_{n+1} = v_1$)
+
+. . .
+
+[Goal: Find tour $T^*$ such that $w(T^*) = \min_{T \in \mathcal{H}} w(T)$]{.highlight}
+
+## Distance Functions and Metrics
+
+[The weight function can have different properties:]{.highlight}
+
+1. **Identity:** $d(i,i) = 0$ \quad \forall $i \in V$
+2. **Symmetry:** $d(i,j) = d(j,i)$ \quad \forall $i,j \in V$
+3. **Triangle Inequality:** $d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V$
+
+. . .
+
+**Common Distance Functions:**
+
+- **Euclidean:** $d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}$
+- **Manhattan:** $d(i,j) = |x_i - x_j| + |y_i - y_j|$
+- **Real road distances:** Often violate triangle inequality!
+
+# [Local Search Theory]{.flow} {.title}
+
+## Solution Space Structure
+
+[Understanding the landscape we're searching:]{.highlight}
+
+**Solution Space $\mathcal{S}$:** Set of all feasible solutions
+- For TSP: All Hamiltonian cycles = $(n-1)!/2$ solutions
+- **Objective Function:** $f: \mathcal{S} \rightarrow \mathbb{R}$ (total tour length)
+- **Global Optimum:** $s^* \in \mathcal{S}$ such that $f(s^*) \leq f(s)$ for all $s \in \mathcal{S}$
+
+. . .
+
+**Neighborhood Structure $N: \mathcal{S} \rightarrow 2^{\mathcal{S}}$:**
+- $N(s)$ = set of solutions "close to" solution $s$
+- **Local Optimum:** $s \in \mathcal{S}$ where $f(s) \leq f(s')$ for all $s' \in N(s)$
+
+. . .
+
+:::{.callout-important}
+**Key Challenge:** Local optimum ≠ Global optimum! Neighborhood design is crucial.
+:::
+
+## k-Opt Neighborhood Theory
+
+[Mathematical foundation of edge-swapping moves:]{.highlight}
+
+**k-Opt Move:** Remove $k$ edges from tour, reconnect in different way
+
+- **2-Opt:** Remove 2 edges $(i, i+1)$ and $(j, j+1)$, add $(i,j)$ and $(i+1, j+1)$
+- **3-Opt:** Remove 3 edges, $2^3 - 2 = 6$ ways to reconnect
+- **k-Opt:** Remove $k$ edges, exponentially many reconnections
+
+. . .
+
+**Neighborhood Sizes:**
+- 2-Opt: $\binom{n}{2} = O(n^2)$ neighbors
+- 3-Opt: $\binom{n}{3} \times 6 = O(n^3)$ neighbors
+- k-Opt: $\binom{n}{k} \times \text{exponential}$ neighbors
+
+. . .
+
+[**Trade-off:** Larger $k$ → Better solutions but exponential search time]{.highlight}
+
+## Local Search Convergence
+
+[When and why does local search terminate?]{.highlight}
+
+**Hill-Climbing Algorithm:**
+```
+function LocalSearch(s₀)
+    s ← s₀
+    repeat
+        s' ← BestImprovement(N(s))
+        if f(s') ≥ f(s) then return s
+        s ← s'
+```
+
+. . .
+
+**Convergence Properties:**
+- **Finite termination:** Always reaches local optimum (finite solution space)
+- **Improvement property:** $f(s_{t+1}) < f(s_t)$ until convergence
+- **No quality guarantee:** Local optimum can be arbitrarily bad
+
+. . .
+
+:::{.callout-note}
+**Runtime:** $O(|\mathcal{S}| \times |N(s)| \times T_f)$ where $T_f$ is objective evaluation time
+:::
+
+## Optimization Landscape Theory
+
+[The solution space forms a complex landscape with peaks and valleys:]{.highlight}
+
+**Fitness Landscape:** Visualization where:
+- **x-axis:** Solution space (tours)
+- **y-axis:** Objective value (distance)
+- **Peaks:** Local/global optima (shortest tours)
+- **Valleys:** Poor solutions (long tours)
+
+. . .
+
+**Landscape Properties:**
+- **Ruggedness:** How many local optima exist
+- **Neutrality:** Flat regions with equal objective values
+- **Deceptiveness:** Local optima far from global optimum
+- **Multimodality:** Multiple global optima
+
+. . .
+
+:::{.callout-important}
+**Key Insight:** TSP landscapes are highly multimodal and rugged - thousands of local optima exist!
+:::
+
+## Beyond Local Search: Preview of Lecture 9
+
+[Local search is just the beginning of advanced optimization:]{.highlight}
+
+**Coming Up - Metaheuristics:**
+
+::: incremental
+- **What if local search gets stuck?** → Advanced escape mechanisms
+- **What about multiple solutions?** → Population-based approaches
+- **How to use memory?** → Learning from search history
+:::
+
+. . .
+
+**Sneak Preview:**
+- **Simulated Annealing:** Accept bad moves with decreasing probability
+- **Genetic Algorithms:** Evolution-inspired optimization
+- **Tabu Search:** Forbidden move lists to escape cycles
+
+. . .
+
+[**Today's Focus:** Master local search fundamentals first - they're the building blocks for everything else!]{.highlight}
+
+## No Free Lunch Theorem
+
+[Fundamental limitation of optimization algorithms:]{.highlight}
+
+**Wolpert & Macready (1997):** For any algorithm $A_1$, there exists another algorithm $A_2$ such that:
+$$\sum_{f} P(d_m^y | f, m, A_1) = \sum_{f} P(d_m^y | f, m, A_2)$$
+
+. . .
+
+**Practical Implications:**
+- No algorithm is universally best across all problems
+- Algorithm performance depends on problem structure
+- Need problem-specific knowledge for good performance
+
+. . .
+
+:::{.callout-tip}
+**For TSP:** Algorithms exploiting geometric structure (like 2-opt) outperform generic methods!
+:::
+
+## Search Space Connectivity
+
+[How solutions connect determines search effectiveness:]{.highlight}
+
+**Graph of Solutions $G_S = (\mathcal{S}, E_N)$:**
+- Vertices: All possible solutions
+- Edges: Neighborhood relationships
+- Path: Sequence of local moves between solutions
+
+. . .
+
+**Connectivity Properties:**
+- **Diameter:** Maximum distance between any two solutions
+- **Clustering Coefficient:** How "clumped" good solutions are
+- **Small World Property:** Short paths exist between distant solutions
+
+. . .
+
+**For k-Opt on TSP:**
+- 2-Opt: Diameter = $O(n^2)$, can reach any tour
+- Higher k: Smaller diameter, exponential neighborhood size
+
+
+# [Local Search Framework]{.flow} {.title}
+
+## The Four Pillars of Local Search
+
+[Any problem can be solved with local search by defining:]{.highlight}
+
+::: incremental
+1. **Search Space:** All possible solutions (3.6M routes for 10 cafés!)
+2. **Initial Solution:** Starting point (our greedy route)
+3. **Objective Function:** How we measure quality (total distance)
+4. **Neighborhood Structure:** How to create "nearby" solutions (2-opt swaps)
+:::
+
+. . .
+
+:::{.callout-important}
+The power of local search: The same "engine" works for routing, scheduling, or any combinatorial problem - just plug in different components!
+:::
+
+# [Greedy Construction]{.flow} {.title}
+
+## Nearest Neighbor Algorithm
+
+[Build a route by always visiting the closest unvisited location.]{.highlight}
+
+. . .
+
+**The Algorithm:**
+1. Start at the bakery
+2. Find the nearest unvisited café
+3. Go there
+4. Repeat until all visited
+5. Return to bakery
+
+. . .
+
+:::{.callout-tip}
+**Intuition:** Like picking low-hanging fruit - grab what's easiest (nearest) first!
+:::
+
+## Construction Methods Comparison
+
+[Different ways to build initial routes:]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+# Show comparison of construction methods
+np.random.seed(123)
+
+# Generate random route
+def random_route(n):
+    route = list(range(n))
+    np.random.shuffle(route)
+    return route
+
+# Simple furthest insertion simulation
+def furthest_insertion_route(x_coords, y_coords, start_x, start_y):
+    n = len(x_coords)
+    if n <= 2:
+        return list(range(n))
+
+    # Start with furthest point
+    distances_from_start = [np.sqrt((x - start_x)**2 + (y - start_y)**2) for x, y in zip(x_coords, y_coords)]
+    route = [np.argmax(distances_from_start)]
+    unvisited = set(range(n)) - set(route)
+
+    # Add closest unvisited to any in route (simplified)
+    while unvisited:
+        best_dist = float('inf')
+        best_node = None
+        for u in unvisited:
+            for r in route:
+                dist = np.sqrt((x_coords[u] - x_coords[r])**2 + (y_coords[u] - y_coords[r])**2)
+                if dist < best_dist:
+                    best_dist = dist
+                    best_node = u
+        route.append(best_node)
+        unvisited.remove(best_node)
+
+    return route
+
+def calculate_distance(x1, y1, x2, y2):
+    return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+def nearest_neighbor_route(x_coords, y_coords, start_x, start_y):
+    n = len(x_coords)
+    unvisited = list(range(n))
+    route = []
+    current_x, current_y = start_x, start_y
+
+    while unvisited:
+        nearest_idx = min(unvisited,
+                         key=lambda i: calculate_distance(current_x, current_y,
+                                                        x_coords[i], y_coords[i]))
+        route.append(nearest_idx)
+        unvisited.remove(nearest_idx)
+        current_x, current_y = x_coords[nearest_idx], y_coords[nearest_idx]
+
+    return route
+
+def calculate_route_distance(route, x_coords, y_coords, start_x, start_y):
+    distance = calculate_distance(start_x, start_y, x_coords[route[0]], y_coords[route[0]])
+    for i in range(len(route) - 1):
+        distance += calculate_distance(x_coords[route[i]], y_coords[route[i]],
+                                      x_coords[route[i+1]], y_coords[route[i+1]])
+    distance += calculate_distance(x_coords[route[-1]], y_coords[route[-1]], start_x, start_y)
+    return distance
+
+# Calculate distances for different methods
+nn_route = nearest_neighbor_route(x_coords, y_coords, bakery_x, bakery_y)
+random_r = random_route(n_cafes)
+furthest_r = furthest_insertion_route(x_coords, y_coords, bakery_x, bakery_y)
+
+nn_dist = calculate_route_distance(nn_route, x_coords, y_coords, bakery_x, bakery_y)
+random_dist = calculate_route_distance(random_r, x_coords, y_coords, bakery_x, bakery_y)
+furthest_dist = calculate_route_distance(furthest_r, x_coords, y_coords, bakery_x, bakery_y)
+
+# Create bar chart
+methods = ['Nearest\nNeighbor', 'Random\nRoute', 'Furthest\nInsertion']
+distances = [nn_dist, random_dist, furthest_dist]
+colors = [BRAND_COLORS["twoDark"], BRAND_COLORS["threeDark"], BRAND_COLORS["oneDark"]]
+
+fig, ax = plt.subplots(figsize=(10, 6))
+bars = ax.bar(methods, distances, color=colors, alpha=0.8)
+ax.set_ylabel('Total Distance (km)', fontsize=12)
+ax.set_title('Starting Point Matters: Construction Method Comparison', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.2, axis='y')
+
+# Add value labels on bars
+for bar, dist in zip(bars, distances):
+    height = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2., height,
+            f'{dist:.1f} km', ha='center', va='bottom', fontsize=11)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-note}
+Different construction methods give different starting points. The better your start, the better your final result after improvement!
+:::
+
+## Nearest Neighbor in Action
+
+```{python}
+#| eval: true
+#| echo: false
+# Build the route
+route = nearest_neighbor_route(x_coords, y_coords, bakery_x, bakery_y)
+initial_distance = calculate_route_distance(route, x_coords, y_coords, bakery_x, bakery_y)
+
+# Visualize the route
+fig, ax = plt.subplots(figsize=(10, 8))
+
+# Draw route
+route_x = [bakery_x] + [x_coords[i] for i in route] + [bakery_x]
+route_y = [bakery_y] + [y_coords[i] for i in route] + [bakery_y]
+ax.plot(route_x, route_y, 'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.7)
+
+# Draw locations
+ax.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=200, zorder=3, label='Cafés')
+ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=400, marker='s', zorder=3, label='Bakery')
+
+# Add labels
+for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+    ax.annotate(f'C{i+1}', (x, y), ha='center', va='center', color='white', fontweight='bold')
+ax.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=14)
+
+ax.set_xlabel('Distance (km)', fontsize=11)
+ax.set_ylabel('Distance (km)', fontsize=11)
+ax.set_title(f'Nearest Neighbor Route: {initial_distance:.1f} km', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.2)
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+## The Problem with Greedy
+
+[Question]{.question}: Can you spot any obvious inefficiencies in this route?
+
+. . .
+
+**Common Issues:**
+::: incremental
+- **Crossing paths:** Route crosses over itself
+- **Long return:** Far from bakery at the end
+- **Myopic decisions:** Can't see the "big picture"
+:::
+
+. . .
+
+:::{.callout-warning}
+Nearest neighbor typically gives solutions [15-25% worse]{.highlight} than optimal. Can we improve it?
+:::
+
+# [Local Search Improvements]{.flow} {.title}
+
+## The 2-Opt Algorithm
+
+[Systematically improve routes by removing crossing paths.]{.highlight}
+
+. . .
+
+**The Idea:** Take two edges and swap them to uncross the route
+
+```{python}
+#| eval: true
+#| echo: false
+# Show a simple 2-opt swap illustration
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+# Before swap - create a crossing
+points_x = [2, 6, 8, 4]
+points_y = [2, 6, 2, 6]
+
+ax1.plot([points_x[0], points_x[1]], [points_y[0], points_y[1]], 'o-',
+         color=BRAND_COLORS["threeDark"], linewidth=3, markersize=10, label='Edge A-B')
+ax1.plot([points_x[2], points_x[3]], [points_y[2], points_y[3]], 'o-',
+         color=BRAND_COLORS["oneDark"], linewidth=3, markersize=10, label='Edge C-D')
+
+ax1.annotate('A', (points_x[0], points_y[0]), xytext=(-10, -10), textcoords='offset points', fontsize=12)
+ax1.annotate('B', (points_x[1], points_y[1]), xytext=(10, 10), textcoords='offset points', fontsize=12)
+ax1.annotate('C', (points_x[2], points_y[2]), xytext=(10, -10), textcoords='offset points', fontsize=12)
+ax1.annotate('D', (points_x[3], points_y[3]), xytext=(-10, 10), textcoords='offset points', fontsize=12)
+
+ax1.set_title('Before: Crossing Paths', fontweight='bold')
+ax1.set_xlim(0, 10)
+ax1.set_ylim(0, 8)
+ax1.grid(True, alpha=0.2)
+ax1.legend()
+
+# After swap
+ax2.plot([points_x[0], points_x[2]], [points_y[0], points_y[2]], 'o-',
+         color=BRAND_COLORS["twoDark"], linewidth=3, markersize=10, label='Edge A-C')
+ax2.plot([points_x[1], points_x[3]], [points_y[1], points_y[3]], 'o-',
+         color=BRAND_COLORS["twoLight"], linewidth=3, markersize=10, label='Edge B-D')
+
+ax2.annotate('A', (points_x[0], points_y[0]), xytext=(-10, -10), textcoords='offset points', fontsize=12)
+ax2.annotate('B', (points_x[1], points_y[1]), xytext=(10, 10), textcoords='offset points', fontsize=12)
+ax2.annotate('C', (points_x[2], points_y[2]), xytext=(10, -10), textcoords='offset points', fontsize=12)
+ax2.annotate('D', (points_x[3], points_y[3]), xytext=(-10, 10), textcoords='offset points', fontsize=12)
+
+ax2.set_title('After: Uncrossed = Shorter!', fontweight='bold')
+ax2.set_xlim(0, 10)
+ax2.set_ylim(0, 8)
+ax2.grid(True, alpha=0.2)
+ax2.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+## Manual 2-Opt Trace: Step-by-Step
+
+[Let's trace through one complete 2-opt iteration by hand.]{.highlight}
+
+**Starting Route:** B → C1 → C3 → C5 → C2 → C4 → B
+
+. . .
+
+**Distances:**
+```
+B → C1: 5 km    C3 → C5: 8 km    C4 → B: 6 km
+C1 → C3: 7 km   C5 → C2: 9 km
+C2 → C4: 4 km
+Total: 5 + 7 + 8 + 9 + 4 + 6 = 39 km
+```
+
+. . .
+
+[Notice the problem?]{.question} Route crosses itself between C3→C5 and C2→C4!
+
+## Manual 2-Opt Trace: The Swap
+
+[Step 1: Identify crossing edges]{.highlight}
+
+**Current:** C1 → C3 → C5 → C2 → C4
+- Edge A: C1 → C3 (position i=1)
+- Edge B: C2 → C4 (position j=4)
+
+. . .
+
+[Step 2: Remove these edges and reverse the segment between them]{.highlight}
+
+**Reverse segment [C3, C5, C2]:**
+- Original: C1 → [C3 → C5 → C2] → C4
+- Reversed: C1 → [C2 → C5 → C3] → C4
+
+. . .
+
+**New Route:** B → C1 → C2 → C5 → C3 → C4 → B
+
+## Manual 2-Opt Trace: Calculate Improvement
+
+[Step 3: Calculate new distance]{.highlight}
+
+**New distances:**
+```
+B → C1: 5 km    C2 → C5: 9 km    C3 → C4: 3 km
+C1 → C2: 6 km   C5 → C3: 8 km    C4 → B: 6 km
+Total: 5 + 6 + 9 + 8 + 3 + 6 = 37 km
+```
+
+. . .
+
+**Improvement:** 39 km → 37 km = [2 km saved!]{.highlight} ✓
+
+. . .
+
+:::{.callout-tip}
+**Key Operation:** `route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]`
+
+The `[::-1]` reverses the segment, eliminating crossings!
+:::
+
+## How 2-Opt Works
+
+[Now you've seen it by hand, here's the complete implementation:]{.highlight}
+
+. . .
+
+```python
+def two_opt_improvement(route, distances):
+    """Apply 2-opt until no improvements found"""
+    improved = True
+
+    while improved:
+        improved = False
+        best_distance = calculate_route_distance(route, distances)
+
+        # Try all possible edge swaps
+        for i in range(len(route) - 1):
+            for j in range(i + 2, len(route)):
+                # Reverse segment between i and j
+                new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
+                new_distance = calculate_route_distance(new_route, distances)
+
+                # Accept if better
+                if new_distance < best_distance:
+                    route = new_route
+                    best_distance = new_distance
+                    improved = True
+                    break  # Restart search with new route
+
+            if improved:
+                break
+
+    return route
+```
+
+. . .
+
+:::{.callout-note}
+2-opt examines all possible pairs of edges and swaps those that reduce total distance. Keep iterating until no improvement found!
+:::
+
+## 2-Opt Applied to Our Route
+
+```{python}
+#| eval: true
+#| echo: false
+# Implement basic 2-opt for demonstration
+def two_opt_improvement(route, x_coords, y_coords, start_x, start_y):
+    improved = True
+    best_route = route.copy()
+
+    while improved:
+        improved = False
+        for i in range(len(best_route) - 1):
+            for j in range(i + 2, len(best_route)):
+                # Create new route with swap
+                new_route = best_route[:i+1] + best_route[i+1:j+1][::-1] + best_route[j+1:]
+
+                # Calculate distances
+                old_dist = calculate_route_distance(best_route, x_coords, y_coords, start_x, start_y)
+                new_dist = calculate_route_distance(new_route, x_coords, y_coords, start_x, start_y)
+
+                if new_dist < old_dist:
+                    best_route = new_route
+                    improved = True
+                    break
+            if improved:
+                break
+
+    return best_route
+
+# Apply 2-opt
+improved_route = two_opt_improvement(route, x_coords, y_coords, bakery_x, bakery_y)
+improved_distance = calculate_route_distance(improved_route, x_coords, y_coords, bakery_x, bakery_y)
+
+# Visualize improved route
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# Original route
+route_x = [bakery_x] + [x_coords[i] for i in route] + [bakery_x]
+route_y = [bakery_y] + [y_coords[i] for i in route] + [bakery_y]
+ax1.plot(route_x, route_y, 'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.7)
+ax1.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=150, zorder=3)
+ax1.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=300, marker='s', zorder=3)
+ax1.set_title(f'Greedy: {initial_distance:.1f} km', fontweight='bold')
+ax1.grid(True, alpha=0.2)
+
+# Improved route
+improved_x = [bakery_x] + [x_coords[i] for i in improved_route] + [bakery_x]
+improved_y = [bakery_y] + [y_coords[i] for i in improved_route] + [bakery_y]
+ax2.plot(improved_x, improved_y, 'o-', color=BRAND_COLORS["twoDark"], linewidth=2, markersize=0, alpha=0.7)
+ax2.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=150, zorder=3)
+ax2.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=300, marker='s', zorder=3)
+ax2.set_title(f'After 2-Opt: {improved_distance:.1f} km', fontweight='bold')
+ax2.grid(True, alpha=0.2)
+
+# Calculate improvement
+improvement = (initial_distance - improved_distance) / initial_distance * 100
+
+plt.suptitle(f'Route Improvement: {improvement:.1f}% shorter!', fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()
+```
+
+## Common 2-Opt Bugs (And How to Fix Them)
+
+[Debug these scenarios you'll encounter:]{.highlight}
+
+. . .
+
+**Bug 1: Infinite Loop**
+```python
+# WRONG: Forgot to update route
+if new_distance < current_distance:
+    improved = True  # But route never changes!
+```
+**Fix:** `route = new_route` before continuing
+
+. . .
+
+**Bug 2: Missing Return to Start**
+```python
+# WRONG: Only measures cafe-to-cafe
+total = sum(distances between stops)
+```
+**Fix:** `total += distance(last_stop, depot)`
+
+. . .
+
+**Bug 3: Invalid Segment Reversal**
+```python
+# WRONG: Off-by-one error
+new_route = route[:i] + route[i:j][::-1] + route[j:]
+```
+**Fix:** `route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]`
+
+## Performance Analysis of Local Search
+
+[Mathematical analysis of algorithm behavior:]{.highlight}
+
+**Time Complexity Analysis:**
+- **2-opt:** Each iteration checks $O(n^2)$ pairs, worst-case $O(n^2)$ iterations
+  - Total: $O(n^4)$ for complete local search
+- **First Improvement vs. Best Improvement:**
+  - First: $O(n^2)$ per iteration (stops at first better solution)
+  - Best: $O(n^3)$ per iteration (evaluates all neighbors)
+
+. . .
+
+**Convergence Bounds:**
+- **Upper bound:** At most $|\mathcal{S}|$ iterations (finite improvement sequence)
+- **Practical bound:** Typically $O(n)$ to $O(n^2)$ iterations for TSP
+- **Step size:** Each improvement ≥ 1 unit (discrete objective function)
+
+. . .
+
+:::{.callout-important}
+**Trade-off:** Better neighborhood ↔ Higher computational cost per iteration
+:::
+
+## Local Search Quality Bounds
+
+[How good are local search solutions?]{.highlight}
+
+**Worst-Case Analysis:**
+- **2-opt on TSP:** No constant approximation ratio guarantee
+- **Bad example:** Local optimum can be $\Theta(n)$ times optimal
+- **Average case:** Much better performance in practice
+
+. . .
+
+**Expected Performance (Random Euclidean TSP):**
+- **Random start + 2-opt:** ~1.05-1.10 × optimal
+- **Good construction + 2-opt:** ~1.02-1.05 × optimal
+- **3-opt:** Additional 1-2% improvement typically
+
+. . .
+
+**Lin-Kernighan Bound:**
+- Advanced variable k-opt can achieve 1-2% of optimal
+- Exponential worst-case time, excellent practical performance
+
+## Beyond 2-Opt: More Powerful Moves
+
+[The k-opt family of improvements:]{.highlight}
+
+::: columns
+::: {.column width="33%"}
+**2-opt**
+- Removes 2 edges
+- 1 way to reconnect
+- O(n²) combinations
+- Fast, good results
+:::
+
+::: {.column width="33%"}
+**3-opt**
+- Removes 3 edges
+- 7 ways to reconnect
+- O(n³) combinations
+- Better but slower
+:::
+
+::: {.column width="33%"}
+**Or-opt**
+- Moves 1-3 nodes
+- Different philosophy
+- Good for time windows
+- Preserves orientation
+:::
+:::
+
+. . .
+
+**Advanced Neighborhood Structures:**
+- **Lin-Kernighan (LK):** Variable k-opt with look-ahead
+- **Ejection Chains:** Complex multi-step moves
+- **Large Neighborhood Search:** Destroy + reconstruct
+
+. . .
+
+:::{.callout-tip}
+Industry practice: Start with 2-opt (fast), use 3-opt if you have time!
+:::
+
+## Probabilistic Analysis
+
+[Understanding algorithm behavior statistically:]{.highlight}
+
+**Random Graph Models:**
+- **Euclidean Random TSP:** Points uniformly in unit square
+- **Expected optimal tour:** $O(\sqrt{n})$ for $n$ random points
+- **2-opt performance:** Concentration around 1.05 × optimal
+
+. . .
+
+**Smoothed Analysis (Spielman & Teng):**
+- Add small random perturbations to worst-case instances
+- **Result:** Polynomial expected time for many local search algorithms
+- **Intuition:** Real instances rarely exhibit pure worst-case behavior
+
+. . .
+
+**Empirical Performance Models:**
+$$\text{Solution Quality} = f(\text{instance size}, \text{structure}, \text{time limit})$$
+
+Typical scaling: Quality improves as $O(\log(\text{time}))$ after initial phase
+
+## Local Search Philosophy
+
+[Start with any solution, then iteratively improve it.]{.highlight}
+
+. . .
+
+**The Process:**
+::: incremental
+1. **Initial Solution:** Use greedy (fast but suboptimal)
+2. **Define Neighborhood:** What changes can we make?
+3. **Search:** Try neighboring solutions
+4. **Accept:** Move if better
+5. **Repeat:** Until no improvements found
+:::
+
+. . .
+
+:::{.callout-tip}
+Local search transforms "quick and dirty" solutions into "pretty good" ones!
+:::
+
+## The Local Optimum Trap: A Hiker's Dilemma
+
+[Imagine you're a hiker dropped in foggy mountains at night...]{.highlight}
+
+. . .
+
+**Your Mission:** Find the highest peak (global optimum)
+**Your Tool:** An altimeter (objective function)
+**Your Vision:** Only the ground at your feet (local neighborhood)
+
+. . .
+
+**The Greedy Strategy:** Always step uphill
+
+. . .
+
+[Question]{.question}: What happens when you reach the top of a small hill?
+
+. . .
+
+:::{.callout-warning}
+You're stuck! Every step is downhill, but you might be on a tiny hill while Mount Everest is nearby. This is the [local optimum trap]{.highlight}!
+:::
+
+## Visualizing Local Optima
+
+```{python}
+#| eval: true
+#| echo: false
+# Illustrate local vs global optimum concept
+fig, ax = plt.subplots(figsize=(10, 5))
+
+x = np.linspace(0, 10, 500)
+y = -np.sin(x) * np.exp(-x/10) + 0.1*np.sin(5*x) + 2
+
+ax.plot(x, y, color=BRAND_COLORS["twoDark"], linewidth=2.5)
+ax.scatter([2.1], [-np.sin(2.1) * np.exp(-2.1/10) + 0.1*np.sin(5*2.1) + 2],
+           color=BRAND_COLORS["threeDark"], s=200, zorder=3, label='Local Minimum')
+ax.scatter([0.5], [-np.sin(0.5) * np.exp(-0.5/10) + 0.1*np.sin(5*0.5) + 2],
+           color=BRAND_COLORS["oneDark"], s=200, zorder=3, label='Global Minimum')
+ax.scatter([6.3], [-np.sin(6.3) * np.exp(-6.3/10) + 0.1*np.sin(5*6.3) + 2],
+           color=BRAND_COLORS["oneDark"], s=200, zorder=3, label='Global Minimum')
+ax.set_xlabel('Solution Space', fontsize=11)
+ax.set_ylabel('Objective Value (Distance)', fontsize=11)
+ax.set_title('Fitness Landscape: Multiple Local Optima', fontsize=14, fontweight='bold')
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+## Fitness Landscape Topology
+
+[The structure of the solution space determines algorithm success:]{.highlight}
+
+**Landscape Characteristics:**
+
+::: incremental
+- **Smoothness:** How gradually objective changes with small moves
+- **Funnels:** Regions where paths lead toward high-quality solutions
+- **Plateaus:** Flat regions with equal objective values
+- **Deception:** Gradient points away from global optimum
+:::
+
+. . .
+
+**TSP Landscape Properties:**
+- **Highly multimodal:** $\Theta(n!)$ local optima exist
+- **Correlation length:** Solutions with similar objective tend to be near each other
+- **Big Valley Structure:** Good solutions cluster around optimal tours
+
+. . .
+
+:::{.callout-important}
+**Key Insight:** TSP exhibits "big valley" - most local optima lie in valleys leading toward global optimum!
+:::
+
+## Mathematical Model of Landscapes
+
+[Formal characterization of fitness landscape structure:]{.highlight}
+
+**Autocorrelation Function:** Measures landscape smoothness
+$$r(d) = \frac{E[f(s) \cdot f(s')] - E[f(s)]^2}{\text{Var}[f(s)]}$$
+where $s'$ is at distance $d$ from $s$ in the neighborhood graph.
+
+. . .
+
+**Correlation Length $\tau$:**
+$$\tau = -\frac{1}{\ln|r(1)|}$$
+
+- High $\tau$: Smooth landscape, local search effective
+- Low $\tau$: Rugged landscape, random search better
+
+. . .
+
+**Epistasis and NK-Models:**
+- Measures interaction between decision variables
+- TSP: High epistasis (changing one edge affects entire tour)
+
+## Preview: Advanced Escape Strategies
+
+[Quick glimpse at what's coming in Lecture 9:]{.highlight}
+
+**Simulated Annealing Preview:** Sometimes accept worse moves
+- Probability decreases over time (like cooling metal)
+- Allows escape from local optima
+- **Full theory next week!**
+
+. . .
+
+**Tabu Search Preview:** Remember where you've been
+- Keep list of forbidden moves (prevent cycling)
+- Override if move is exceptionally good
+- **Memory mechanisms detailed in Lecture 9!**
+
+. . .
+
+**Multi-Start vs. Advanced Methods:**
+- Today: Run local search multiple times independently
+- **Lecture 9:** Systematic strategies that learn and adapt
+
+## Convergence Theory and Guarantees
+
+[When and why do local search algorithms terminate?]{.highlight}
+
+**Finite Convergence Theorem:** For discrete solution spaces with improving moves:
+- **Guarantee:** Algorithm terminates in finite time
+- **Proof:** Monotonic improvement + finite solution space → convergence
+- **Bound:** At most $|\mathcal{S}|$ iterations (typically much fewer)
+
+. . .
+
+**Markov Chain Analysis:** Model local search as state transitions
+- **State Space:** All possible solutions $\mathcal{S}$
+- **Transition Matrix:** $P_{ij} = $ probability of moving from solution $i$ to $j$
+- **Stationary Distribution:** Long-run probability of visiting each solution
+
+. . .
+
+:::{.callout-important}
+**Key Result:** Hill-climbing converges to absorbing states (local optima). Mixing time determines convergence speed.
+:::
+
+## Runtime Complexity Analysis
+
+[Detailed analysis of computational requirements:]{.highlight}
+
+**Algorithm Components:**
+- **Neighborhood Generation:** $O(|N(s)|)$ per iteration
+- **Objective Evaluation:** $O(n)$ for TSP distance calculation
+- **Best Move Selection:** $O(|N(s)|)$ comparisons
+- **Solution Update:** $O(1)$ for most neighborhoods
+
+. . .
+
+**Total Complexity Bounds:**
+- **2-opt TSP:** $O(n^2)$ neighborhood × $O(n^2)$ iterations = $O(n^4)$
+- **First-improvement:** $O(n^2)$ per iteration (early termination)
+- **With advanced data structures:** $O(n^2 \log n)$ achievable
+
+. . .
+
+**Space Complexity:**
+- Solution storage: $O(n)$
+- Neighborhood evaluation: $O(1)$ with incremental calculation
+- Advanced methods: $O(n^2)$ for distance matrices/cache
+
+## Expected Performance Theory
+
+[Statistical analysis of solution quality:]{.highlight}
+
+**Random Instance Models:**
+- **Euclidean TSP:** Points uniformly distributed in unit square
+- **Expected optimal tour length:** $\beta\sqrt{n}$ where $\beta \approx 0.765$
+- **2-opt expected performance:** $1.05\beta\sqrt{n} \pm O(n^{1/4})$
+
+. . .
+
+**Concentration Inequalities:** For large $n$:
+$$P(|X_n - E[X_n]| \geq t) \leq 2\exp(-2nt^2/n)$$
+where $X_n$ is normalized tour length.
+
+. . .
+
+**Practical Implications:**
+- Solution quality concentrates around expected value
+- Variance decreases as $O(1/\sqrt{n})$
+- Large instances have predictable performance
+
+## Advanced Theoretical Results
+
+[Cutting-edge research on local search behavior:]{.highlight}
+
+**Smoothed Analysis Results (Spielman-Teng framework):**
+- Add Gaussian noise $\mathcal{N}(0, \sigma^2)$ to instance data
+- **Theorem:** Expected runtime becomes polynomial for many problems
+- **TSP Result:** 2-opt runs in $O(n^{4.5})$ expected time under smoothing
+
+. . .
+
+**Phase Transitions in Optimization:**
+- **Critical temperature** $T_c$ where algorithm behavior changes
+- Below $T_c$: Trapped in local optima
+- Above $T_c$: Efficient global exploration
+- **Application:** Optimal cooling schedules for simulated annealing
+
+. . .
+
+**Approximation Preserving Reductions:**
+- **L-reduction:** Preserve approximation ratios between problems
+- **PTAS preservation:** Polynomial-time approximation schemes transfer
+- **Example:** Euclidean TSP PTAS → Euclidean Steiner Tree PTAS
+
+## Complexity Classes and Problem Relationships
+
+[TSP connects to fundamental questions in computer science:]{.highlight}
+
+**Complexity Hierarchy:**
+- **TSP Decision Problem:** Given graph $G$ and bound $k$, does TSP tour ≤ $k$ exist?
+  - **Classification:** NP-Complete (Karp, 1972)
+  - **Reduction from:** Hamiltonian Cycle Problem
+  - **Reduces to:** Many other routing problems
+
+. . .
+
+**Parameterized Complexity:**
+- **Fixed Parameter Tractable (FPT):** Solvable in $f(k) \cdot n^c$ time
+- **TSP parameterized by treewidth:** $O(2^k \cdot k^2 \cdot n)$ algorithm exists
+- **TSP parameterized by solution value:** W[1]-hard (likely no FPT algorithm)
+
+. . .
+
+**Inapproximability Results:**
+- **General TSP:** No polynomial $\alpha$-approximation unless P = NP
+- **Metric TSP:** APX-hard (no PTAS unless P = NP)
+- **Euclidean TSP:** Admits PTAS (breakthrough by Arora, 1998)
+
+## Connection to Other Optimization Problems
+
+[Local search principles apply across optimization domains:]{.highlight}
+
+**Graph Optimization Problems:**
+- **Maximum Cut:** 2-opt = vertex moves, achieves 0.5-approximation
+- **Graph Coloring:** k-opt = recoloring neighborhoods
+- **Minimum Spanning Tree:** Cycle-breaking local search
+
+. . .
+
+**Scheduling Problems:**
+- **Job Shop Scheduling:** Critical path neighborhoods
+- **Vehicle Routing:** Time window constraints + TSP structure
+- **Bin Packing:** Item reassignment neighborhoods
+
+. . .
+
+**Continuous Optimization Analogs:**
+- **Gradient Descent:** Continuous local search in $\mathbb{R}^n$
+- **Simulated Annealing:** Discrete → continuous generalization
+- **Tabu Search:** Memory mechanisms in both domains
+
+## Research Frontiers Preview
+
+[Where optimization is heading (advanced topics):]{.highlight}
+
+**Machine Learning + Optimization:**
+- **Goal:** Predict which algorithm works best on which instances
+- **Application:** Automatic algorithm selection and tuning
+
+. . .
+
+**Hybrid Methods:**
+- **Idea:** Combine exact algorithms with heuristics
+- **Benefit:** Guarantees + practical efficiency
+- **Example:** Mathematical optimization with local search bounds
+
+. . .
+
+**Future Topics** (beyond this course):
+- **Quantum Optimization:** Quantum computers for routing problems
+- **AI-Driven Heuristics:** Neural networks designing optimization algorithms
+- **Real-time Optimization:** Adapting to changing conditions
+
+```{python}
+#| eval: true
+#| echo: false
+# Complete the visualization properly
+ax.annotate('Stuck here!', xy=(2.1, 1.65), xytext=(1, 1.3),
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["threeDark"]),
+            fontsize=11)
+ax.annotate('Want here!', xy=(6.3, 1.45), xytext=(7.5, 1.2),
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["oneDark"]),
+            fontsize=11)
+
+ax.set_xlabel('Solution Space', fontsize=11)
+ax.set_ylabel('Total Distance', fontsize=11)
+ax.set_title('The Local Optimum Trap', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.2)
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+## Escaping Local Optima: Multi-Start Strategy
+
+[Simple fix: Don't put all eggs in one basket!]{.highlight}
+
+. . .
+
+```python
+def multi_start_optimization(n_starts=10):
+    """Try multiple random starts, keep the best"""
+    best_route = None
+    for i in range(n_starts):
+        # New random start
+        route = random_initial_route()
+        # Improve with 2-opt
+        route = improve_with_2opt(route)
+        # Keep if best so far
+        if better_than(route, best_route):
+            best_route = route
+    return best_route
+```
+
+. . .
+
+:::{.callout-note}
+Like hiring 10 drivers, letting each plan their own route, then picking the best! Simple but effective.
+:::
+
+## Real-World Impact: How Good is Good Enough?
+
+[Industry benchmarks for delivery optimization:]{.highlight}
+
+| Method | vs Optimal | Industry Use |
+|--------|------------|--------------|
+| Human intuition | +40-60% | Still common! |
+| Nearest Neighbor | +20-25% | Quick dispatch |
+| NN + 2-opt | +5-15% | Standard practice |
+| Advanced Meta | +2-5% | Premium logistics |
+| Exact (if possible) | 0% | Research only |
+
+. . .
+
+:::{.callout-important}
+**Business Reality:** A 10% improvement = millions in savings for large logistics companies. Your 2-opt implementation could literally pay for itself in one day!
+:::
+
+## Time Windows: The Real-World Constraint
+
+[Remember our bakery? Some cafés open earlier than others:]{.highlight}
+
+**Artisan Bakery's Morning Schedule:**
+- **Bakery opens:** 5:00 AM (van departs)
+- **Early Birds (3 cafés):** Must receive by 6:45 AM
+  - Café Europa, Sunrise Bistro, Morning Glory
+- **Standard (9 cafés):** Must receive by 8:00 AM
+
+. . .
+
+[Question]{.question}: Can we just find the shortest route?
+
+. . .
+
+:::{.callout-warning}
+**NO!** The shortest route might deliver to early cafés last, arriving at 7:30 AM. [Feasibility first, optimization second!]{.highlight}
+:::
+
+## Time Windows: Mathematical Definition
+
+[Each location has a delivery time window $[e_i, l_i]$:]{.highlight}
+
+**Constraints:**
+- $e_i$ = earliest acceptable arrival time
+- $l_i$ = latest acceptable arrival time (deadline)
+- $a_i$ = actual arrival time at location $i$
+- Must satisfy: $e_i \leq a_i \leq l_i$ for all locations
+
+. . .
+
+**Arrival Time Calculation:**
+$$a_i = a_{i-1} + t_{i-1,i} + s_{i-1}$$
+
+Where:
+- $t_{i-1,i}$ = travel time from previous location
+- $s_{i-1}$ = service time at previous location
+
+. . .
+
+**Feasible route:** All time windows satisfied
+**Infeasible route:** At least one window violated (even if shortest!)
+
+## Time Windows: Nearest Neighbor Modification
+
+[Modify greedy construction to prioritize early deadlines:]{.highlight}
+
+```python
+def nearest_neighbor_with_time_windows(locations, time_windows, start_time):
+    """Greedy construction respecting time constraints"""
+    unvisited = set(range(len(locations)))
+    route = []
+    current_location = depot
+    current_time = start_time
+
+    while unvisited:
+        # Find feasible neighbors (can reach before deadline)
+        feasible = [i for i in unvisited
+                   if current_time + travel_time(current_location, i)
+                      <= time_windows[i]['latest']]
+
+        if not feasible:
+            return None  # No feasible route exists!
+
+        # Among feasible, choose nearest OR most urgent
+        next_stop = min(feasible,
+                       key=lambda i: (time_windows[i]['latest'],
+                                     distance(current_location, i)))
+
+        # Update state
+        current_time += travel_time(current_location, next_stop)
+        current_time = max(current_time, time_windows[next_stop]['earliest'])
+        current_time += service_time(next_stop)
+
+        route.append(next_stop)
+        unvisited.remove(next_stop)
+        current_location = next_stop
+
+    return route
+```
+
+## Time Window Validation Function
+
+[Always verify feasibility before accepting a new route:]{.highlight}
+
+```python
+def validate_time_windows(route, locations, time_windows, start_time):
+    """Check if route satisfies all time constraints"""
+    current_time = start_time
+    current_location = depot
+    violations = []
+
+    for i, stop in enumerate(route):
+        # Calculate arrival time
+        travel_time = distance(current_location, stop) / avg_speed
+        arrival_time = current_time + travel_time
+
+        # Check time window
+        earliest = time_windows[stop]['earliest']
+        latest = time_windows[stop]['latest']
+
+        if arrival_time > latest:
+            violations.append({
+                'stop': stop,
+                'arrival': arrival_time,
+                'deadline': latest,
+                'late_by': arrival_time - latest
+            })
+
+        # Update for next iteration
+        service_start = max(arrival_time, earliest)  # Wait if early
+        current_time = service_start + time_windows[stop]['service_time']
+        current_location = stop
+
+    return len(violations) == 0, violations
+```
+
+## 2-Opt with Time Windows: The Challenge
+
+[Problem: 2-opt can break time feasibility!]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+# Illustrate time window violation
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+# Original feasible route
+stops = ['Bakery', 'Early1', 'Early2', 'Late1', 'Late2']
+times_feasible = [5.0, 5.5, 6.2, 7.1, 7.8]
+deadlines = [None, 6.75, 6.75, 8.0, 8.0]
+
+ax1.plot(range(len(stops)), times_feasible, 'o-',
+         color=BRAND_COLORS["twoDark"], linewidth=2.5, markersize=10)
+for i, (stop, deadline) in enumerate(zip(stops, deadlines)):
+    if deadline:
+        ax1.axhline(y=deadline, xmin=i/5, xmax=(i+0.5)/5,
+                   color=BRAND_COLORS["oneDark"], linestyle='--', alpha=0.5)
+ax1.set_xticks(range(len(stops)))
+ax1.set_xticklabels(stops, rotation=45, ha='right')
+ax1.set_ylabel('Time (decimal hours)', fontsize=11)
+ax1.set_title('Original Route: FEASIBLE ✓', fontsize=13, fontweight='bold')
+ax1.grid(True, alpha=0.2)
+ax1.set_ylim(4.5, 8.5)
+
+# After 2-opt: violated
+times_infeasible = [5.0, 5.5, 7.2, 6.8, 7.8]
+ax2.plot(range(len(stops)), times_infeasible, 'o-',
+         color=BRAND_COLORS["threeDark"], linewidth=2.5, markersize=10)
+for i, (stop, deadline) in enumerate(zip(stops, deadlines)):
+    if deadline:
+        ax2.axhline(y=deadline, xmin=i/5, xmax=(i+0.5)/5,
+                   color=BRAND_COLORS["oneDark"], linestyle='--', alpha=0.5)
+ax2.scatter([2], [times_infeasible[2]], color='red', s=200, zorder=5, marker='x', linewidths=3)
+ax2.set_xticks(range(len(stops)))
+ax2.set_xticklabels(stops, rotation=45, ha='right')
+ax2.set_ylabel('Time (decimal hours)', fontsize=11)
+ax2.set_title('After 2-Opt: INFEASIBLE ✗', fontsize=13, fontweight='bold')
+ax2.grid(True, alpha=0.2)
+ax2.set_ylim(4.5, 8.5)
+
+plt.tight_layout()
+plt.show()
+```
+
+:::{.callout-warning}
+**Early2 now arrives at 7:12 AM** - missed its 6:45 deadline by 27 minutes!
+:::
+
+## 2-Opt with Time Windows: The Solution
+
+[Only accept swaps that maintain feasibility:]{.highlight}
+
+```python
+def two_opt_with_time_windows(route, distances, time_windows, start_time):
+    """2-opt that respects time constraints"""
+    improved = True
+
+    while improved:
+        improved = False
+
+        for i in range(len(route) - 1):
+            for j in range(i + 2, len(route)):
+                # Create candidate route
+                new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
+
+                # Check feasibility FIRST
+                is_feasible, violations = validate_time_windows(
+                    new_route, distances, time_windows, start_time
+                )
+
+                if not is_feasible:
+                    continue  # Skip infeasible swaps
+
+                # Among feasible swaps, take if shorter
+                old_distance = calculate_route_distance(route, distances)
+                new_distance = calculate_route_distance(new_route, distances)
+
+                if new_distance < old_distance:
+                    route = new_route
+                    improved = True
+                    break
+
+            if improved:
+                break
+
+    return route
+```
+
+:::{.callout-tip}
+**Key Principle:** Feasibility is a hard constraint, distance is the objective. Never violate constraints to improve objective!
+:::
+
+## Time Windows: Practical Example
+
+[Let's see it in action with our bakery data:]{.highlight}
+
+```python
+# Define time windows (hours after midnight)
+time_windows = {
+    'Cafe_Europa': {'earliest': 6.0, 'latest': 6.75, 'service': 0.08},
+    'Sunrise_Bistro': {'earliest': 6.0, 'latest': 6.75, 'service': 0.08},
+    'Morning_Glory': {'earliest': 6.0, 'latest': 6.75, 'service': 0.08},
+    'Downtown_Cafe': {'earliest': 6.5, 'latest': 8.0, 'service': 0.08},
+    # ... other cafes with 8:00 AM deadline
+}
+
+# Construction phase: prioritize urgent deadlines
+route = nearest_neighbor_with_time_windows(
+    locations=cafe_locations,
+    time_windows=time_windows,
+    start_time=5.0  # 5:00 AM departure
+)
+
+# Improvement phase: maintain feasibility
+route = two_opt_with_time_windows(
+    route=route,
+    distances=distance_matrix,
+    time_windows=time_windows,
+    start_time=5.0
+)
+
+# Validate final solution
+is_valid, violations = validate_time_windows(route, locations, time_windows, 5.0)
+print(f"Final route feasible: {is_valid}")
+print(f"Total distance: {calculate_route_distance(route, distances):.1f} km")
+```
+
+## Time Windows: Trade-offs
+
+[Time constraints force you to make strategic compromises:]{.highlight}
+
+::: columns
+::: {.column width="50%"}
+**Pure Distance Optimization**
+- Shortest total distance
+- May violate deadlines
+- Optimal for objective
+- Infeasible for real world
+:::
+
+::: {.column width="50%"}
+**Time Window Optimization**
+- Longer total distance
+- All deadlines met
+- Suboptimal objective
+- Feasible and usable
+:::
+:::
+
+. . .
+
+**Real Example:**
+- Best TSP route: 42.3 km (but 30 min late to early café)
+- Best feasible route: 46.7 km (all deadlines met)
+- **Cost of feasibility:** +10% distance
+
+. . .
+
+:::{.callout-important}
+**Business Reality:** A late delivery is worse than a slightly longer route. Constraints are not suggestions!
+:::
+
+# [Mission Briefing]{.flow} {.title}
+
+## Choosing Your Weapon: Algorithm Selection
+
+[Different situations call for different approaches:]{.highlight}
+
+| Situation | Best Approach | Why |
+|-----------|--------------|-----|
+| Need solution NOW (< 1 sec) | Nearest Neighbor | Lightning fast |
+| Have 1 minute | NN + 2-opt | Good balance |
+| Have 5 minutes | Multi-start + 2-opt | Explore more options |
+| Time windows critical | NN (prioritize early) + Or-opt | Preserves time feasibility |
+| Academic benchmark | 3-opt or SA | Maximum quality |
+
+. . .
+
+:::{.callout-tip}
+**Today's Competition:** You have 60 minutes - use multi-start with 2-opt!
+:::
+
+## Implementation Pitfalls to Avoid
+
+[Common bugs that cost you 30 minutes:]{.highlight}
+
+❌ **Forgetting return to bakery:** Your distance calculation must include the trip back!
+```python
+# WRONG
+total = sum(distances between consecutive stops)
+# RIGHT
+total = sum(distances) + distance(last_stop, bakery)
+```
+
+❌ **Index confusion in 2-opt:** Remember Python slicing!
+```python
+# The 2-opt swap reverses route[i+1:j+1], not route[i:j]
+```
+
+❌ **Modifying while iterating:** Make a copy!
+```python
+new_route = current_route.copy()  # Don't modify original
+```
+
+## Your Toolkit for Today
+
+[Construction + Improvement = Better Routes]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**Construction (Greedy)**
+- Nearest Neighbor
+- Cheapest Insertion
+- Savings Algorithm
+:::
+
+::: {.column width="50%"}
+**Improvement (Local Search)**
+- 2-opt swaps
+- 3-opt (advanced)
+- Or-opt (move sequences)
+:::
+:::
+
+. . .
+
+:::{.callout-note}
+Most commercial routing software uses this two-phase approach: Build quickly, then polish!
+:::
+
+## Next: Bean Counter Practice
+
+[In the notebook, you'll help Bean Counter optimize coffee bean deliveries to 10 franchises.]{.highlight}
+
+. . .
+
+**You'll implement:**
+::: incremental
+- Distance calculations between locations
+- Nearest neighbor construction
+- Route distance measurement
+- 2-opt improvement
+- Multi-start optimization
+:::
+
+. . .
+
+**Then:** Apply these skills to Artisan Bakery's 12-café challenge!
+
+## The Competition Challenge
+
+[Artisan Bakery needs your help with their morning route!]{.highlight}
+
+. . .
+
+**Your Mission:**
+- Optimize delivery to 12 cafés
+- Handle 3 early time windows
+- Minimize total distance
+- Beat the current 3-hour route
+
+. . .
+
+:::{.callout-tip}
+**Hint:** Start with nearest neighbor, but don't forget about those time windows! Sometimes a slightly longer route that meets deadlines is better than the shortest route that arrives late.
+:::
+
+## Next Week: When Local Search Isn't Enough
+
+[Today we learned to climb hills. Next week: How to jump mountains!]{.highlight}
+
+. . .
+
+**Coming Attractions:**
+- **Simulated Annealing:** Accept worse solutions probabilistically (like heating metal)
+- **Tabu Search:** Remember where you've been (search with memory)
+- **Genetic Algorithms:** Evolve solutions (survival of the fittest routes)
+
+. . .
+
+:::{.callout-note}
+All use the same local search foundation - just with clever tricks to escape local optima!
+:::
+
+# [Literature]{.flow} {.title}
+
+## Resources
+
+**Essential Reading:**
+- Applegate et al. (2011): *The Traveling Salesman Problem* - The definitive TSP reference
+- Laporte (1992): *The Vehicle Routing Problem* - Overview of routing algorithms
+- Lin & Kernighan (1973): Classic paper on k-opt improvements
+
+**Python Libraries:**
+- `scipy.spatial.distance` - Fast distance calculations
+- `networkx` - Graph algorithms including TSP approximations
+- `ortools` - Google's optimization tools with routing
+
+:::{.callout-note}
+## Summary
+- TSP is computationally hard (factorial growth)
+- Local search is a universal framework (4 pillars)
+- Greedy construction gives fast initial solutions
+- 2-opt improves solutions iteratively
+- Multi-start helps escape local optima
+- Real constraints (time windows) add complexity
+- Two-phase approach: Build then improve!
+:::

@@ -999,15 +999,15 @@ def bean_counter_score(location, w_profit=0.5, w_carbon=0.5):
 **CEO Persona:** "We're bleeding money on delivery costs while customers complain about cold food"
 
 **The Problem:**
-"We deliver 32 meals daily in Berlin. Current system: drivers choose their own routes. Result: €50 average cost per delivery hour, 35% late deliveries, cold food complaints. We need smart routing that keeps food hot."
+"We deliver 50 meals daily in Berlin. Current system: drivers choose their own routes. Result: way too high average cost per delivery hour, 75% late deliveries, cold food complaints. We need smart routing that keeps food hot."
 
 **Technical Requirements:**
-- Time windows for all deliveries (but simple ones)
+- Time windows for all deliveries, which can be violated
 - Violations mean cold food and a penalty
 - 3 drivers from one depot
 
 **Deliverables Required:**
-1. Routing algorithm for 32 orders
+1. Routing algorithm for 50 orders
 2. Visualization of the routes
 3. Performance metrics
 4. Cost savings projection

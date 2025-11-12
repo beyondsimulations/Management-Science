@@ -171,12 +171,30 @@ The CEO wants to see the difference visually and understand the cost savings.
 
 ```
 
-**Business Question:**
-Based on your analysis, write a brief recommendation (3-4 sentences) to the CEO about whether to invest in route optimization software. Consider the monthly savings potential and any limitations of your approach.
+**Business Question: Investment Recommendation**
+
+Based on your analysis, prepare a formal recommendation to the CEO about investing in route optimization software.
 
 ```{python}
 """
-YOUR ANSWER HERE:
+RECOMMENDATION TO CEO
+
+To: CityExpress CEO
+From: [Your Consulting Team]
+Re: Route Optimization Software Investment Recommendation
+
+Investment Decision: [Should we invest in route optimization software? Yes/No]
+
+Cost-Benefit Analysis: [2-3 sentences quantifying the monthly and annual savings
+potential based on your results. Include specific numbers from your analysis.]
+
+Implementation Recommendations: [2-3 sentences on how to roll out this solution. Consider pilot testing, training needs, and timeline.]
+
+Limitations & Risk Mitigation: [2-3 sentences acknowledging limitations of the
+2-opt approach and suggesting how to address them]
+
+Expected ROI: [1-2 sentences on payback period and long-term value, considering
+software costs versus fuel savings.]
 """
 ```
 
@@ -351,23 +369,53 @@ Limitations: [what are the downsides of local search?]
 """
 ```
 
-### Task 4: Business Insights (5%)
+### Task 4: Business Recommendations & Contingency Planning (5%)
 
-**Business Question 1:**
-Worker 2 calls in sick 10 minutes before their shift. How would you reassign the remaining 5 workers to 6 shifts (leaving one unfilled)? Which shift would you leave empty and why? Would your greedy strategy need modification? (3-4 sentences)
+**Business Question 1: Emergency Coverage Protocol**
+
+A critical situation has emerged: Worker 2 calls in sick 10 minutes before their shift. Prepare an emergency response to the warehouse manager.
 
 ```{python}
 """
-YOUR ANSWER HERE:
+EMERGENCY COVERAGE
+
+To: Warehouse Manager
+From: [Your Consulting Team]
+Re: Emergency Shift Coverage Protocol - Worker Absence
+
+Immediate Action Plan: [2-3 sentences]
+
+Decision Framework: [2-3 sentences]
+
+Future System Adaptation: [2-3 sentences]
+
 """
 ```
 
-**Business Question 2:**
-The warehouse manager says: *"This is too complicated. I just need bodies in shifts. I don't care about preferences."* How would this change your approach? What would the company lose? What would they gain? (3-4 sentences)
+**Business Question 2: Strategic Workforce Management Analysis**
+
+The warehouse manager is skeptical: *"This is too complicated. I just need bodies in shifts. I don't care about preferences."* Prepare a strategic analysis comparing approaches.
 
 ```{python}
 """
-YOUR ANSWER HERE:
+STRATEGIC ANALYSIS
+
+To: Warehouse Manager
+From: [Your Consulting Team]
+Re: Cost-Benefit Analysis of Worker Preference System
+
+Current Approach (Random Assignment):
+- Advantages: [2-3 sentences]
+- Hidden Costs: [2-3 sentences]
+
+Proposed Approach (Preference-Based):
+- Implementation Costs: [2-3 sentences]
+- Expected Benefits: [2-3 sentences]
+
+ROI Calculation: [2-3 sentences]
+
+Recommendation: [1-2 sentences with your final recommendation based on your
+quantitative analysis above.]
 """
 ```
 
