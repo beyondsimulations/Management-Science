@@ -32,14 +32,14 @@
     "href": "assignments/assignment_02.html#part-a-route-optimization-50",
     "title": "Assignment 2: Optimization in Practice",
     "section": "Part A: Route Optimization (50%)",
-    "text": "Part A: Route Optimization (50%)\n\nThe Challenge\nCityExpress currently plans routes manually. A driver mentioned: “I feel like I’m driving in circles sometimes.” The operations manager suspects they’re wasting 15-20% on inefficient routing.\nTomorrow’s schedule has 20 customer deliveries. Your job: build a route that minimizes total distance, starting and ending at the depot.\nImpact: If successful, this approach will be rolled out to all 50 daily routes.\n\n\nThe Data\n\n\n\n\n\n\nUnique Data Per Group: The customer locations below are randomly generated based on your group’s seed. Each group will get different customer coordinates within a 20km × 20km service area.\n\n\n\n\n# DON'T CHANGE ANYTHING BELOW!\n# Generate customer locations based on your group's seed\n# Each group gets unique locations within a 20km × 20km area\n\n# Depot is always at the center\nlocations = {0: (10, 10)}\n\n# Generate 20 customer locations randomly\nfor i in range(1, 21):\n    x = np.random.uniform(2, 18)  # Between 2-18 km\n    y = np.random.uniform(2, 18)  # Between 2-18 km\n    locations[i] = (x, y)\n\nprint(\"=\" * 60)\nprint(\"YOUR GROUP'S UNIQUE CUSTOMER LOCATIONS\")\nprint(\"=\" * 60)\nprint(f\"Depot: {locations[0]}\")\nprint(f\"\\nCustomer locations (x, y in km):\")\nfor i in range(1, 21):\n    print(f\"  Customer {i:2d}: ({locations[i][0]:5.2f}, {locations[i][1]:5.2f})\")\nprint(\"=\" * 60)\n# DON'T CHANGE ANYTHING ABOVE!\n\n============================================================\nYOUR GROUP'S UNIQUE CUSTOMER LOCATIONS\n============================================================\nDepot: (10, 10)\n\nCustomer locations (x, y in km):\n  Customer  1: ( 9.41, 16.04)\n  Customer  2: (15.36,  8.14)\n  Customer  3: (17.38,  6.39)\n  Customer  4: (13.38, 16.57)\n  Customer  5: ( 7.27,  7.93)\n  Customer  6: (15.17,  4.37)\n  Customer  7: (14.18,  9.43)\n  Customer  8: ( 5.42,  3.19)\n  Customer  9: (16.40,  9.89)\n  Customer 10: ( 5.72,  4.78)\n  Customer 11: (15.37, 11.12)\n  Customer 12: (16.40, 13.20)\n  Customer 13: (17.64,  5.18)\n  Customer 14: ( 3.93, 14.47)\n  Customer 15: ( 6.75,  2.02)\n  Customer 16: (15.19,  3.52)\n  Customer 17: (12.47, 13.84)\n  Customer 18: ( 3.15, 10.12)\n  Customer 19: (17.72,  2.77)\n  Customer 20: ( 9.56,  4.95)\n============================================================\n\n\n\n\nTask 1: Build an Initial Route (20%)\nUse the nearest neighbor heuristic to create a baseline route.\nThe approach:\n\nStart at the depot\nAt each step, visit the nearest unvisited customer\nReturn to depot when all customers are visited\n\nYour deliverable:\n\nImplement functions to calculate distances and build the route\nPrint the route and its total distance\n\n\n\n\n\n\n\nThe Euclidean distance formula is: \\(\\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\\)\n\n\n\n\n# Build your nearest neighbor route here\n# You'll need functions to:\n# 1. Calculate distance between two locations\n# 2. Calculate total route distance\n# 3. Build the route using nearest neighbor logic\n# YOUR CODE HERE\n\n\n\nTask 2: Improve the Route (20%)\nThe nearest neighbor heuristic is fast but rarely optimal. Use 2-opt local search to improve your route.\nHow 2-opt works: The algorithm removes two edges from your route and reconnects them in a different way, potentially “uncrossing” the route.\nBefore:  Depot → A → B → C → D → Depot\nAfter reversing segment between positions 1 and 3:\nAfter:   Depot → C → B → A → D → Depot\nThe approach:\n\nTry all possible ways to reverse segments of your route\nIf a reversal improves the distance, keep it\nRepeat until no improvement is possible\n\nYour deliverable:\n\nImplement 2-opt improvement\nShow the improved route and distance\nReport how many iterations it took to converge\n\n\n\n\n\n\n\nKeep the depot fixed at the start and end! Only reverse segments between customers.\n\n\n\n\n# Implement 2-opt improvement here\n# YOUR CODE HERE\n\n\n\nTask 3: Visualize and Quantify Impact (10%)\nThe CEO wants to see the difference visually and understand the cost savings.\nYour deliverable:\n\nVisualization: Plot both routes (before and after optimization) showing:\n\nCustomer locations\nRoute paths\nClear labels for depot and customers\n\nBusiness metrics:\n\nOriginal distance vs. improved distance\nPercentage improvement\nCost savings per delivery (assume €2/km fuel cost)\nProjected monthly savings if applied to all 50 daily routes\n\n\n\n# Create visualizations and calculate business impact\n# YOUR CODE HERE\n\nBusiness Question: Based on your analysis, write a brief recommendation (3-4 sentences) to the CEO about whether to invest in route optimization software. Consider the monthly savings potential and any limitations of your approach.\n\n\"\"\"\nYOUR ANSWER HERE:\n\"\"\"\n\n'\\nYOUR ANSWER HERE:\\n'"
+    "text": "Part A: Route Optimization (50%)\n\nThe Challenge\nCityExpress currently plans routes manually. A driver mentioned: “I feel like I’m driving in circles sometimes.” The operations manager suspects they’re wasting 15-20% on inefficient routing.\nTomorrow’s schedule has 20 customer deliveries. Your job: build a route that minimizes total distance, starting and ending at the depot.\nImpact: If successful, this approach will be rolled out to all 50 daily routes.\n\n\nThe Data\n\n\n\n\n\n\nUnique Data Per Group: The customer locations below are randomly generated based on your group’s seed. Each group will get different customer coordinates within a 20km × 20km service area.\n\n\n\n\n# DON'T CHANGE ANYTHING BELOW!\n# Generate customer locations based on your group's seed\n# Each group gets unique locations within a 20km × 20km area\n\n# Depot is always at the center\nlocations = {0: (10, 10)}\n\n# Generate 20 customer locations randomly\nfor i in range(1, 21):\n    x = np.random.uniform(2, 18)  # Between 2-18 km\n    y = np.random.uniform(2, 18)  # Between 2-18 km\n    locations[i] = (x, y)\n\nprint(\"=\" * 60)\nprint(\"YOUR GROUP'S UNIQUE CUSTOMER LOCATIONS\")\nprint(\"=\" * 60)\nprint(f\"Depot: {locations[0]}\")\nprint(f\"\\nCustomer locations (x, y in km):\")\nfor i in range(1, 21):\n    print(f\"  Customer {i:2d}: ({locations[i][0]:5.2f}, {locations[i][1]:5.2f})\")\nprint(\"=\" * 60)\n# DON'T CHANGE ANYTHING ABOVE!\n\n============================================================\nYOUR GROUP'S UNIQUE CUSTOMER LOCATIONS\n============================================================\nDepot: (10, 10)\n\nCustomer locations (x, y in km):\n  Customer  1: ( 8.30,  3.49)\n  Customer  2: (13.43, 10.17)\n  Customer  3: (16.11,  2.56)\n  Customer  4: (17.54,  2.98)\n  Customer  5: (16.09, 13.56)\n  Customer  6: ( 4.55,  7.75)\n  Customer  7: ( 9.58, 12.90)\n  Customer  8: ( 6.80, 15.83)\n  Customer  9: ( 6.01, 16.64)\n  Customer 10: (12.32, 12.32)\n  Customer 11: ( 8.88, 10.49)\n  Customer 12: ( 5.86, 10.81)\n  Customer 13: (13.63, 12.67)\n  Customer 14: (14.24,  3.29)\n  Customer 15: ( 8.88, 13.38)\n  Customer 16: (16.28, 11.47)\n  Customer 17: (15.31, 13.29)\n  Customer 18: ( 8.21,  7.63)\n  Customer 19: ( 3.73,  3.06)\n  Customer 20: (15.17, 17.44)\n============================================================\n\n\n\n\nTask 1: Build an Initial Route (20%)\nUse the nearest neighbor heuristic to create a baseline route.\nThe approach:\n\nStart at the depot\nAt each step, visit the nearest unvisited customer\nReturn to depot when all customers are visited\n\nYour deliverable:\n\nImplement functions to calculate distances and build the route\nPrint the route and its total distance\n\n\n\n\n\n\n\nThe Euclidean distance formula is: \\(\\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\\)\n\n\n\n\n# Build your nearest neighbor route here\n# You'll need functions to:\n# 1. Calculate distance between two locations\n# 2. Calculate total route distance\n# 3. Build the route using nearest neighbor logic\n# YOUR CODE HERE\n\n\n\nTask 2: Improve the Route (20%)\nThe nearest neighbor heuristic is fast but rarely optimal. Use 2-opt local search to improve your route.\nHow 2-opt works: The algorithm removes two edges from your route and reconnects them in a different way, potentially “uncrossing” the route.\nBefore:  Depot → A → B → C → D → Depot\nAfter reversing segment between positions 1 and 3:\nAfter:   Depot → C → B → A → D → Depot\nThe approach:\n\nTry all possible ways to reverse segments of your route\nIf a reversal improves the distance, keep it\nRepeat until no improvement is possible\n\nYour deliverable:\n\nImplement 2-opt improvement\nShow the improved route and distance\nReport how many iterations it took to converge\n\n\n\n\n\n\n\nKeep the depot fixed at the start and end! Only reverse segments between customers.\n\n\n\n\n# Implement 2-opt improvement here\n# YOUR CODE HERE\n\n\n\nTask 3: Visualize and Quantify Impact (10%)\nThe CEO wants to see the difference visually and understand the cost savings.\nYour deliverable:\n\nVisualization: Plot both routes (before and after optimization) showing:\n\nCustomer locations\nRoute paths\nClear labels for depot and customers\n\nBusiness metrics:\n\nOriginal distance vs. improved distance\nPercentage improvement\nCost savings per delivery (assume €2/km fuel cost)\nProjected monthly savings if applied to all 50 daily routes\n\n\n\n# Create visualizations and calculate business impact\n# YOUR CODE HERE\n\nBusiness Question: Investment Recommendation\nBased on your analysis, prepare a formal recommendation to the CEO about investing in route optimization software.\n\n\"\"\"\nRECOMMENDATION TO CEO\n\nTo: CityExpress CEO\nFrom: [Your Consulting Team]\nRe: Route Optimization Software Investment Recommendation\n\nInvestment Decision: [Should we invest in route optimization software? Yes/No]\n\nCost-Benefit Analysis: [2-3 sentences quantifying the monthly and annual savings\npotential based on your results. Include specific numbers from your analysis.]\n\nImplementation Recommendations: [2-3 sentences on how to roll out this solution. Consider pilot testing, training needs, and timeline.]\n\nLimitations & Risk Mitigation: [2-3 sentences acknowledging limitations of the\n2-opt approach and suggesting how to address them]\n\nExpected ROI: [1-2 sentences on payback period and long-term value, considering\nsoftware costs versus fuel savings.]\n\"\"\"\n\n'\\nRECOMMENDATION TO CEO\\n\\nTo: CityExpress CEO\\nFrom: [Your Consulting Team]\\nRe: Route Optimization Software Investment Recommendation\\n\\nInvestment Decision: [Should we invest in route optimization software? Yes/No]\\n\\nCost-Benefit Analysis: [2-3 sentences quantifying the monthly and annual savings\\npotential based on your results. Include specific numbers from your analysis.]\\n\\nImplementation Recommendations: [2-3 sentences on how to roll out this solution. Consider pilot testing, training needs, and timeline.]\\n\\nLimitations & Risk Mitigation: [2-3 sentences acknowledging limitations of the\\n2-opt approach and suggesting how to address them]\\n\\nExpected ROI: [1-2 sentences on payback period and long-term value, considering\\nsoftware costs versus fuel savings.]\\n'"
   },
   {
     "objectID": "assignments/assignment_02.html#part-b-worker-shift-scheduling-50",
     "href": "assignments/assignment_02.html#part-b-worker-shift-scheduling-50",
     "title": "Assignment 2: Optimization in Practice",
     "section": "Part B: Worker Shift Scheduling (50%)",
-    "text": "Part B: Worker Shift Scheduling (50%)\n\nThe Challenge\nCityExpress warehouse operates with 6 workers across 6 shifts per week. Recently, worker turnover has been high. Exit interviews reveal: “They never give me the shifts I want.”\nThe warehouse manager manually assigns shifts each week, often just assigning workers in order without considering preferences. Your job: create a better assignment system that maximizes worker satisfaction.\nImpact: Higher satisfaction could reduce the 30% annual turnover rate, saving thousands in recruiting and training costs.\n\n\nThe Data\n\n\n\n\n\n\nUnique Data Per Group: Worker shift preferences below are randomly generated based on your group’s seed. Each group will get different preference patterns while maintaining similar complexity (varying numbers of preferences per worker, overlapping demands).\n\n\n\n\n# DON'T CHANGE ANYTHING BELOW!\n# Available shifts for the week (14 shifts across 7 days, 2 per day)\nshifts = [\n    'Monday-Morning', 'Monday-Evening',\n    'Tuesday-Morning', 'Tuesday-Evening',\n    'Wednesday-Morning', 'Wednesday-Evening',\n    'Thursday-Morning', 'Thursday-Evening',\n    'Friday-Morning', 'Friday-Evening',\n    'Saturday-Morning', 'Saturday-Evening',\n    'Sunday-Morning', 'Sunday-Evening'\n]\n\n# Generate worker preferences randomly for your group\nworker_preferences = {}\nfor worker_id in range(14):\n    # Each worker gets 2-4 preferred shifts\n    num_prefs = np.random.randint(2, 5)\n    # Randomly select preferred shifts (without replacement)\n    preferred_indices = np.random.choice(14, size=num_prefs, replace=False)\n    worker_preferences[worker_id] = [shifts[i] for i in sorted(preferred_indices)]\n\nprint(\"=\" * 70)\nprint(\"YOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES\")\nprint(\"=\" * 70)\nfor worker_id, prefs in worker_preferences.items():\n    print(f\"Worker {worker_id:2d}: {prefs}\")\nprint(f\"\\nTotal preferences across all workers: {sum(len(p) for p in worker_preferences.values())}\")\nprint(f\"Average preferences per worker: {sum(len(p) for p in worker_preferences.values()) / 14:.1f}\")\nprint(\"=\" * 70)\n\n# Each worker works exactly ONE shift\n# Each shift must have exactly ONE worker\n# DON'T CHANGE ANYTHING ABOVE!\n\n======================================================================\nYOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES\n======================================================================\nWorker  0: ['Friday-Morning', 'Saturday-Morning', 'Sunday-Morning', 'Sunday-Evening']\nWorker  1: ['Tuesday-Evening', 'Wednesday-Evening', 'Saturday-Evening']\nWorker  2: ['Tuesday-Evening', 'Thursday-Evening', 'Friday-Morning', 'Sunday-Morning']\nWorker  3: ['Wednesday-Morning', 'Wednesday-Evening', 'Friday-Morning', 'Saturday-Morning']\nWorker  4: ['Monday-Morning', 'Friday-Morning', 'Saturday-Evening', 'Sunday-Evening']\nWorker  5: ['Monday-Evening', 'Friday-Morning']\nWorker  6: ['Monday-Morning', 'Tuesday-Morning', 'Saturday-Morning']\nWorker  7: ['Monday-Evening', 'Friday-Evening', 'Saturday-Morning', 'Sunday-Evening']\nWorker  8: ['Monday-Evening', 'Saturday-Morning', 'Saturday-Evening', 'Sunday-Morning']\nWorker  9: ['Monday-Evening', 'Thursday-Evening', 'Saturday-Morning', 'Sunday-Morning']\nWorker 10: ['Monday-Evening', 'Saturday-Morning']\nWorker 11: ['Tuesday-Evening', 'Thursday-Evening']\nWorker 12: ['Monday-Evening', 'Sunday-Evening']\nWorker 13: ['Friday-Morning', 'Saturday-Evening']\n\nTotal preferences across all workers: 44\nAverage preferences per worker: 3.1\n======================================================================\n\n\n\n\n\n\n\n\nAssignment representation: Use a list where assignment[worker_id] = shift_index\nExample: [0, 3, 1, 13, 2, 5, ...] means:\n\nWorker 0 → shift 0 (Monday-Morning)\nWorker 1 → shift 3 (Tuesday-Evening)\nWorker 2 → shift 1 (Monday-Evening)\nWorker 3 → shift 13 (Sunday-Evening)\netc.\n\n\n\n\n\n\nTask 1: Design a Greedy Assignment Strategy (15%)\nRemember greedy heuristics from Lecture 6 (SPT, EDD)? Design your own greedy rule for shift assignment.\nThink about: - SPT prioritized shortest jobs - EDD prioritized earliest deadlines - What should YOU prioritize? Worker flexibility? Number of preferences? Something else?\nYour deliverable: 1. Implement a function that creates a valid assignment using YOUR greedy strategy 2. Print the assignment (who gets which shift) 3. Write 3-4 sentences explaining: - What attribute you chose to prioritize - Why this makes sense - How it relates to scheduling heuristics from Lecture 6\n\n# Implement your greedy assignment strategy\n# Must produce a valid assignment (all workers assigned, no duplicate shifts)\n# YOUR CODE HERE\n\n\n\"\"\"\nYOUR EXPLANATION HERE:\nMy greedy strategy: [what did you prioritize?]\nReasoning: [why does this make sense?]\nConnection to Lecture 6: [how does this relate to SPT/EDD/other heuristics?]\n\"\"\"\n\n'\\nYOUR EXPLANATION HERE:\\nMy greedy strategy: [what did you prioritize?]\\nReasoning: [why does this make sense?]\\nConnection to Lecture 6: [how does this relate to SPT/EDD/other heuristics?]\\n'\n\n\n\n\nTask 2: Measure Assignment Quality (15%)\nYou need a way to measure how “good” an assignment is. Design a satisfaction scoring system.\nDesign questions:\n\nShould 1st choice be worth more than 2nd choice? How much more?\nWhat if a worker gets a shift they didn’t list?\nShould some workers count more than others?\n\nYour deliverable:\n\nImplement a satisfaction calculation function\nCalculate the satisfaction score for your greedy assignment\nWrite 2-3 sentences explaining:\n\nYour scoring system design\nWhy you chose this approach\n\n\n\n# Implement satisfaction calculation\n# YOUR CODE HERE\n\n\n\"\"\"\nYOUR EXPLANATION HERE:\nMy scoring system: [how do you calculate satisfaction?]\nReasoning: [why this approach?]\n\"\"\"\n\n'\\nYOUR EXPLANATION HERE:\\nMy scoring system: [how do you calculate satisfaction?]\\nReasoning: [why this approach?]\\n'\n\n\n\n\nTask 3: Improve with Local Search (15%)\nYour greedy solution is probably not optimal. Use local search (like 2-opt from Part A) to improve it.\nThe approach:\n\nTry swapping shifts between pairs of workers\nIf a swap improves satisfaction, keep it\nRepeat until no improvement is found\n\nYour deliverable:\n\nImplement local search improvement\nShow before/after satisfaction scores\nCreate a visualization comparing the solutions (table or chart)\nWrite 3-4 sentences explaining:\n\nHow much you improved the greedy solution\nWhether you think you found the optimal solution\nWhat limitations local search might have\n\n\n\n# Implement local search improvement\n# YOUR CODE HERE\n\n\n# Visualize the improvement\n# YOUR CODE HERE\n\n\n\"\"\"\nYOUR EXPLANATION HERE:\nResults: [how much improvement?]\nOptimality: [did you reach the best possible solution? how do you know?]\nLimitations: [what are the downsides of local search?]\n\"\"\"\n\n'\\nYOUR EXPLANATION HERE:\\nResults: [how much improvement?]\\nOptimality: [did you reach the best possible solution? how do you know?]\\nLimitations: [what are the downsides of local search?]\\n'\n\n\n\n\nTask 4: Business Insights (5%)\nBusiness Question 1: Worker 2 calls in sick 10 minutes before their shift. How would you reassign the remaining 5 workers to 6 shifts (leaving one unfilled)? Which shift would you leave empty and why? Would your greedy strategy need modification? (3-4 sentences)\n\n\"\"\"\nYOUR ANSWER HERE:\n\"\"\"\n\n'\\nYOUR ANSWER HERE:\\n'\n\n\nBusiness Question 2: The warehouse manager says: “This is too complicated. I just need bodies in shifts. I don’t care about preferences.” How would this change your approach? What would the company lose? What would they gain? (3-4 sentences)\n\n\"\"\"\nYOUR ANSWER HERE:\n\"\"\"\n\n'\\nYOUR ANSWER HERE:\\n'"
+    "text": "Part B: Worker Shift Scheduling (50%)\n\nThe Challenge\nCityExpress warehouse operates with 6 workers across 6 shifts per week. Recently, worker turnover has been high. Exit interviews reveal: “They never give me the shifts I want.”\nThe warehouse manager manually assigns shifts each week, often just assigning workers in order without considering preferences. Your job: create a better assignment system that maximizes worker satisfaction.\nImpact: Higher satisfaction could reduce the 30% annual turnover rate, saving thousands in recruiting and training costs.\n\n\nThe Data\n\n\n\n\n\n\nUnique Data Per Group: Worker shift preferences below are randomly generated based on your group’s seed. Each group will get different preference patterns while maintaining similar complexity (varying numbers of preferences per worker, overlapping demands).\n\n\n\n\n# DON'T CHANGE ANYTHING BELOW!\n# Available shifts for the week (14 shifts across 7 days, 2 per day)\nshifts = [\n    'Monday-Morning', 'Monday-Evening',\n    'Tuesday-Morning', 'Tuesday-Evening',\n    'Wednesday-Morning', 'Wednesday-Evening',\n    'Thursday-Morning', 'Thursday-Evening',\n    'Friday-Morning', 'Friday-Evening',\n    'Saturday-Morning', 'Saturday-Evening',\n    'Sunday-Morning', 'Sunday-Evening'\n]\n\n# Generate worker preferences randomly for your group\nworker_preferences = {}\nfor worker_id in range(14):\n    # Each worker gets 2-4 preferred shifts\n    num_prefs = np.random.randint(2, 5)\n    # Randomly select preferred shifts (without replacement)\n    preferred_indices = np.random.choice(14, size=num_prefs, replace=False)\n    worker_preferences[worker_id] = [shifts[i] for i in sorted(preferred_indices)]\n\nprint(\"=\" * 70)\nprint(\"YOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES\")\nprint(\"=\" * 70)\nfor worker_id, prefs in worker_preferences.items():\n    print(f\"Worker {worker_id:2d}: {prefs}\")\nprint(f\"\\nTotal preferences across all workers: {sum(len(p) for p in worker_preferences.values())}\")\nprint(f\"Average preferences per worker: {sum(len(p) for p in worker_preferences.values()) / 14:.1f}\")\nprint(\"=\" * 70)\n\n# Each worker works exactly ONE shift\n# Each shift must have exactly ONE worker\n# DON'T CHANGE ANYTHING ABOVE!\n\n======================================================================\nYOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES\n======================================================================\nWorker  0: ['Thursday-Morning', 'Friday-Evening', 'Sunday-Evening']\nWorker  1: ['Wednesday-Morning', 'Thursday-Morning', 'Thursday-Evening', 'Saturday-Evening']\nWorker  2: ['Monday-Morning', 'Friday-Evening', 'Saturday-Evening']\nWorker  3: ['Monday-Evening', 'Wednesday-Morning', 'Wednesday-Evening']\nWorker  4: ['Monday-Morning', 'Tuesday-Morning']\nWorker  5: ['Thursday-Morning', 'Thursday-Evening']\nWorker  6: ['Monday-Morning', 'Wednesday-Evening', 'Thursday-Morning', 'Saturday-Evening']\nWorker  7: ['Tuesday-Evening', 'Thursday-Evening', 'Saturday-Morning']\nWorker  8: ['Monday-Morning', 'Thursday-Morning']\nWorker  9: ['Monday-Morning', 'Wednesday-Morning', 'Sunday-Morning']\nWorker 10: ['Monday-Morning', 'Tuesday-Evening', 'Friday-Morning']\nWorker 11: ['Wednesday-Morning', 'Saturday-Morning', 'Sunday-Morning']\nWorker 12: ['Monday-Morning', 'Wednesday-Evening', 'Friday-Evening', 'Saturday-Evening']\nWorker 13: ['Monday-Morning', 'Saturday-Morning', 'Saturday-Evening']\n\nTotal preferences across all workers: 42\nAverage preferences per worker: 3.0\n======================================================================\n\n\n\n\n\n\n\n\nAssignment representation: Use a list where assignment[worker_id] = shift_index\nExample: [0, 3, 1, 13, 2, 5, ...] means:\n\nWorker 0 → shift 0 (Monday-Morning)\nWorker 1 → shift 3 (Tuesday-Evening)\nWorker 2 → shift 1 (Monday-Evening)\nWorker 3 → shift 13 (Sunday-Evening)\netc.\n\n\n\n\n\n\nTask 1: Design a Greedy Assignment Strategy (15%)\nRemember greedy heuristics from Lecture 6 (SPT, EDD)? Design your own greedy rule for shift assignment.\nThink about: - SPT prioritized shortest jobs - EDD prioritized earliest deadlines - What should YOU prioritize? Worker flexibility? Number of preferences? Something else?\nYour deliverable: 1. Implement a function that creates a valid assignment using YOUR greedy strategy 2. Print the assignment (who gets which shift) 3. Write 3-4 sentences explaining: - What attribute you chose to prioritize - Why this makes sense - How it relates to scheduling heuristics from Lecture 6\n\n# Implement your greedy assignment strategy\n# Must produce a valid assignment (all workers assigned, no duplicate shifts)\n# YOUR CODE HERE\n\n\n\"\"\"\nYOUR EXPLANATION HERE:\nMy greedy strategy: [what did you prioritize?]\nReasoning: [why does this make sense?]\nConnection to Lecture 6: [how does this relate to SPT/EDD/other heuristics?]\n\"\"\"\n\n'\\nYOUR EXPLANATION HERE:\\nMy greedy strategy: [what did you prioritize?]\\nReasoning: [why does this make sense?]\\nConnection to Lecture 6: [how does this relate to SPT/EDD/other heuristics?]\\n'\n\n\n\n\nTask 2: Measure Assignment Quality (15%)\nYou need a way to measure how “good” an assignment is. Design a satisfaction scoring system.\nDesign questions:\n\nShould 1st choice be worth more than 2nd choice? How much more?\nWhat if a worker gets a shift they didn’t list?\nShould some workers count more than others?\n\nYour deliverable:\n\nImplement a satisfaction calculation function\nCalculate the satisfaction score for your greedy assignment\nWrite 2-3 sentences explaining:\n\nYour scoring system design\nWhy you chose this approach\n\n\n\n# Implement satisfaction calculation\n# YOUR CODE HERE\n\n\n\"\"\"\nYOUR EXPLANATION HERE:\nMy scoring system: [how do you calculate satisfaction?]\nReasoning: [why this approach?]\n\"\"\"\n\n'\\nYOUR EXPLANATION HERE:\\nMy scoring system: [how do you calculate satisfaction?]\\nReasoning: [why this approach?]\\n'\n\n\n\n\nTask 3: Improve with Local Search (15%)\nYour greedy solution is probably not optimal. Use local search (like 2-opt from Part A) to improve it.\nThe approach:\n\nTry swapping shifts between pairs of workers\nIf a swap improves satisfaction, keep it\nRepeat until no improvement is found\n\nYour deliverable:\n\nImplement local search improvement\nShow before/after satisfaction scores\nCreate a visualization comparing the solutions (table or chart)\nWrite 3-4 sentences explaining:\n\nHow much you improved the greedy solution\nWhether you think you found the optimal solution\nWhat limitations local search might have\n\n\n\n# Implement local search improvement\n# YOUR CODE HERE\n\n\n# Visualize the improvement\n# YOUR CODE HERE\n\n\n\"\"\"\nYOUR EXPLANATION HERE:\nResults: [how much improvement?]\nOptimality: [did you reach the best possible solution? how do you know?]\nLimitations: [what are the downsides of local search?]\n\"\"\"\n\n'\\nYOUR EXPLANATION HERE:\\nResults: [how much improvement?]\\nOptimality: [did you reach the best possible solution? how do you know?]\\nLimitations: [what are the downsides of local search?]\\n'\n\n\n\n\nTask 4: Business Recommendations & Contingency Planning (5%)\nBusiness Question 1: Emergency Coverage Protocol\nA critical situation has emerged: Worker 2 calls in sick 10 minutes before their shift. Prepare an emergency response to the warehouse manager.\n\n\"\"\"\nEMERGENCY COVERAGE\n\nTo: Warehouse Manager\nFrom: [Your Consulting Team]\nRe: Emergency Shift Coverage Protocol - Worker Absence\n\nImmediate Action Plan: [2-3 sentences]\n\nDecision Framework: [2-3 sentences]\n\nFuture System Adaptation: [2-3 sentences]\n\n\"\"\"\n\n'\\nEMERGENCY COVERAGE\\n\\nTo: Warehouse Manager\\nFrom: [Your Consulting Team]\\nRe: Emergency Shift Coverage Protocol - Worker Absence\\n\\nImmediate Action Plan: [2-3 sentences]\\n\\nDecision Framework: [2-3 sentences]\\n\\nFuture System Adaptation: [2-3 sentences]\\n\\n'\n\n\nBusiness Question 2: Strategic Workforce Management Analysis\nThe warehouse manager is skeptical: “This is too complicated. I just need bodies in shifts. I don’t care about preferences.” Prepare a strategic analysis comparing approaches.\n\n\"\"\"\nSTRATEGIC ANALYSIS\n\nTo: Warehouse Manager\nFrom: [Your Consulting Team]\nRe: Cost-Benefit Analysis of Worker Preference System\n\nCurrent Approach (Random Assignment):\n- Advantages: [2-3 sentences]\n- Hidden Costs: [2-3 sentences]\n\nProposed Approach (Preference-Based):\n- Implementation Costs: [2-3 sentences]\n- Expected Benefits: [2-3 sentences]\n\nROI Calculation: [2-3 sentences]\n\nRecommendation: [1-2 sentences with your final recommendation based on your\nquantitative analysis above.]\n\"\"\"\n\n'\\nSTRATEGIC ANALYSIS\\n\\nTo: Warehouse Manager\\nFrom: [Your Consulting Team]\\nRe: Cost-Benefit Analysis of Worker Preference System\\n\\nCurrent Approach (Random Assignment):\\n- Advantages: [2-3 sentences]\\n- Hidden Costs: [2-3 sentences]\\n\\nProposed Approach (Preference-Based):\\n- Implementation Costs: [2-3 sentences]\\n- Expected Benefits: [2-3 sentences]\\n\\nROI Calculation: [2-3 sentences]\\n\\nRecommendation: [1-2 sentences with your final recommendation based on your\\nquantitative analysis above.]\\n'"
   },
   {
     "objectID": "assignments/assignment_02.html#submission-checklist",
@@ -4830,7 +4830,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html",
     "title": "Smart Quick Decisions",
     "section": "",
-    "text": ". . .\nOperations Manager’s Friday Crisis:\n“It’s Friday 2 PM. We just received 16 custom bicycle orders that must be completed by Monday. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Saturday 8 PM. How do we schedule production to minimize costs?”\n\n\n\nCustom Cycles faces multiple scheduling decisions:\n\n\nOrder Sequencing: Which bike to build first?\nWorkstation Management: Assembly must finish before painting\nDeadline Pressure: Rush orders have steep penalties (€150 each)\nCost Control: Overtime at €100/hour after Saturday 8 PM\n\n\n. . .\n\n\n\n\n\n\nThe Stakes: With 16 orders totaling 13+ hours of work, wrong scheduling could mean €1000+ in overtime and penalties!\n\n\n\n\n\n\nQuestion: With 16 bicycle orders to sequence, how many possible schedules exist?\n. . .\n16! = 20,922,789,888,000 possible schedules\n. . .\n\n\nNumber of Orders\n\n5 bikes\n10 bikes\n16 bikes\n\n\nPossible Schedules\n\n120\n3.6 million\n20.9 trillion\n\n\n\n. . .\n\n\n\n\n\n\nTesting all 20.9 trillion possibilities for 16 bikes would take thousands of years on a modern computer!\n\n\n\n\n\n\nLook at these 4 bicycle orders. Which should we build first?\n. . .\n\n\n\nOrder\nArrival\nProcessing\nDue\nPenalty\n\n\n\n\nB12\n1st\n90 min\n180 min\n€150\n\n\nB08\n2nd\n45 min\n280 min\n€150\n\n\nB15\n3rd\n75 min\n220 min\n€150\n\n\nB03\n4th\n30 min\n300 min\n€150\n\n\n\n. . .\nQuestion: How would you proceed here?\n. . .\n\n\n\n\n\n\nThis is the greedy choice problem: Which local decision leads to the best global outcome?",
+    "text": ". . .\nOperations Manager’s Friday Crisis:\n“It’s Friday at 06:00 in the morning. We just received 16 custom bicycle orders that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”\n\n\n\nCustom Cycles faces multiple scheduling decisions:\n\n\nOrder Sequencing: Which bike to build first?\nWorkstation Management: Assembly must finish before painting\nDeadline Pressure: Rush orders have steep penalties (€150 each)\nCost Control: Overtime at €100/hour after Saturday 8 PM\n\n\n. . .\n\n\n\n\n\n\nThe Stakes: With 16 orders totaling 13+ hours of work, wrong scheduling could mean €1000+ in overtime and penalties!\n\n\n\n\n\n\nQuestion: With 16 bicycle orders to sequence, how many possible schedules exist?\n. . .\n16! = 20,922,789,888,000 possible schedules\n. . .\n\n\nNumber of Orders\n\n5 bikes\n10 bikes\n16 bikes\n\n\nPossible Schedules\n\n120\n3.6 million\n20.9 trillion\n\n\n\n. . .\n\n\n\n\n\n\nTesting all 20.9 trillion possibilities for 16 bikes would take thousands of years on a modern computer!\n\n\n\n\n\n\nLook at these 4 bicycle orders. Which should we build first?\n. . .\n\n\n\nOrder\nArrival\nProcessing\nDue\nPenalty\n\n\n\n\nB12\n1st\n90 min\n180 min\n€150\n\n\nB08\n2nd\n45 min\n280 min\n€150\n\n\nB15\n3rd\n75 min\n220 min\n€150\n\n\nB03\n4th\n30 min\n300 min\n€150\n\n\n\n. . .\nQuestion: How would you proceed here?\n. . .\n\n\n\n\n\n\nThis is the greedy choice problem: Which local decision leads to the best global outcome?",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -4841,7 +4841,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html#client-briefing-custom-cycles-manufacturing",
     "title": "Smart Quick Decisions",
     "section": "",
-    "text": ". . .\nOperations Manager’s Friday Crisis:\n“It’s Friday 2 PM. We just received 16 custom bicycle orders that must be completed by Monday. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Saturday 8 PM. How do we schedule production to minimize costs?”",
+    "text": ". . .\nOperations Manager’s Friday Crisis:\n“It’s Friday at 06:00 in the morning. We just received 16 custom bicycle orders that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -4896,7 +4896,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html#the-greedy-paradigm",
     "title": "Smart Quick Decisions",
     "section": "The Greedy Paradigm",
-    "text": "The Greedy Paradigm\nAlgorithmic strategy that builds solutions piece by piece\n. . .\nCore Philosophy:\n\n\nMake the best immediate decision at each step\nNever reconsider previous choices (no backtracking)\nHope that local optimality leads to global optimality\nTrade guaranteed optimality for speed and simplicity\n\n\n. . .\n\n\n\n\n\n\nGreedy algorithms are one of the three major algorithmic paradigms alongside Divide & Conquer (e.g., merge sort) and Dynamic Programming (e.g., Fibonacci with memoization).",
+    "text": "The Greedy Paradigm\nAlgorithmic strategy that builds solutions piece by piece\n. . .\nCore Philosophy:\n\n\nMake the best immediate decision at each step\nNever reconsider previous choices (no backtracking)\nHope that local optimality leads to global optimality\nTrade guaranteed optimality for speed and simplicity",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -4918,7 +4918,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html#when-greedy-works-vs.-fails",
     "title": "Smart Quick Decisions",
     "section": "When Greedy Works vs. Fails",
-    "text": "When Greedy Works vs. Fails\nNot all greedy algorithms are optimal\n. . .\nGreedy IS Optimal:\n\n\nPrim’s/Kruskal’s algorithms (minimum spanning tree)\nSPT scheduling (minimizes average flow time)\nEDD scheduling (minimizes maximum lateness)\n\n\n. . .\nGreedy FAILS:\n\n\nTraveling salesman problem (nearest neighbor is worse)\n0/1 Knapsack (greedy by value/weight ratio fails)",
+    "text": "When Greedy Works vs. Fails\nNot all greedy algorithms are optimal\n. . .\nGreedy IS Optimal:\n\n\nKruskal’s algorithms (minimum spanning tree)\nSPT scheduling (minimizes average flow time)\nEDD scheduling (minimizes maximum lateness)\n\n\n. . .\nGreedy FAILS:\n\n\nTraveling salesman problem (nearest neighbor is worse)\n0/1 Knapsack (greedy by value/weight ratio fails)",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -4951,7 +4951,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html#three-classic-scheduling-rules",
     "title": "Smart Quick Decisions",
     "section": "Three Classic Scheduling Rules",
-    "text": "Three Classic Scheduling Rules\nWe’ll explore three greedy approaches that manufacturing uses:\n\n\nFIFO (First In, First Out) - The fairness rule\nSPT (Shortest Processing Time) - The efficiency rule\nEDD (Earliest Due Date) - The deadline rule\n\n\n. . .\nQuestion: Which rule would you use for the bike factory with penalties and overtime costs?",
+    "text": "Three Classic Scheduling Rules\nWe’ll explore three greedy approaches that manufacturing uses:\n\n\nFIFO (First In, First Out) - The fairness rule\nSPT (Shortest Processing Time) - The efficiency rule\nEDD (Earliest Due Date) - The deadline rule\n\n\n. . .\nQuestion: Just as first feeling. Which rule would you use for the bike factory with penalties and overtime costs?",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -5024,17 +5024,6 @@
     ]
   },
   {
-    "objectID": "lectures/lec_06_greedy_algorithms.html#quick-reference-decision-guide",
-    "href": "lectures/lec_06_greedy_algorithms.html#quick-reference-decision-guide",
-    "title": "Smart Quick Decisions",
-    "section": "Quick Reference & Decision Guide",
-    "text": "Quick Reference & Decision Guide\nChoose your rule based on business priority\n. . .",
-    "crumbs": [
-      "06 Greedy",
-      "06 Lecture"
-    ]
-  },
-  {
     "objectID": "lectures/lec_06_greedy_algorithms.html#implementing-spt-in-python-i",
     "href": "lectures/lec_06_greedy_algorithms.html#implementing-spt-in-python-i",
     "title": "Smart Quick Decisions",
@@ -5084,6 +5073,17 @@
     "title": "Smart Quick Decisions",
     "section": "All Schedules Compared",
     "text": "All Schedules Compared\n\n\n\n\n\n\n\n\n\n. . .\n\n\n\n\n\n\nNo single rule is always best! The right choice depends on your objectives, which might include fairness, throughput, deadlines and much more.",
+    "crumbs": [
+      "06 Greedy",
+      "06 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_06_greedy_algorithms.html#hybrid-scheduling-strategies",
+    "href": "lectures/lec_06_greedy_algorithms.html#hybrid-scheduling-strategies",
+    "title": "Smart Quick Decisions",
+    "section": "Hybrid Scheduling Strategies",
+    "text": "Hybrid Scheduling Strategies\n1. Priority Classes:\nIF order.type == \"Rush\":\n    schedule using EDD\nELSE:\n    schedule using SPT\n. . .\n2. Time-Based Switching:\nIF current_time &lt; 3pm:\n    use SPT (maximize throughput)\nELSE:\n    use EDD (meet end-of-day deadlines)\n. . .\n3. Threshold Rules:\nIF (due_date - current_time) &lt; 30 minutes:\n    prioritize this order (emergency mode)\nELSE:\n    use normal SPT rule",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -5167,6 +5167,39 @@
     ]
   },
   {
+    "objectID": "lectures/lec_06_greedy_algorithms.html#revenue-based-consulting-firm",
+    "href": "lectures/lec_06_greedy_algorithms.html#revenue-based-consulting-firm",
+    "title": "Smart Quick Decisions",
+    "section": "Revenue-Based: Consulting Firm",
+    "text": "Revenue-Based: Consulting Firm\n5 consulting projects with different durations and revenues\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\n\n\n\n\nC\n55h\n€11,000\n€200\n\n\nA\n25h\n€6,000\n€240\n\n\nE\n55h\n€4,950\n€90\n\n\nD\n45h\n€5,400\n€120\n\n\nB\n35h\n€7,000\n€200\n\n\n\n. . .\nGoal: Maximize revenue during limited consulting time\n. . .\nQuestion: Sort by total revenue? Duration? Or something else?",
+    "crumbs": [
+      "06 Greedy",
+      "06 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_06_greedy_algorithms.html#revenuehour-rule",
+    "href": "lectures/lec_06_greedy_algorithms.html#revenuehour-rule",
+    "title": "Smart Quick Decisions",
+    "section": "Revenue/Hour Rule",
+    "text": "Revenue/Hour Rule\nRule: Sort by revenue per hour (descending)\n. . .\nSorted by Revenue/Hour:\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\nSchedule\n\n\n\n\nA\n25h\n€6,000\n€240\n1st\n\n\nB\n35h\n€7,000\n€200\n2nd\n\n\nC\n55h\n€11,000\n€200\n3rd\n\n\nD\n45h\n€5,400\n€120\n4th\n\n\nE\n55h\n€4,950\n€90\n5th\n\n\n\n. . .\nOptimal order: A → B → C → D → E",
+    "crumbs": [
+      "06 Greedy",
+      "06 Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_06_greedy_algorithms.html#why-revenuehour-works",
+    "href": "lectures/lec_06_greedy_algorithms.html#why-revenuehour-works",
+    "title": "Smart Quick Decisions",
+    "section": "Why Revenue/Hour Works",
+    "text": "Why Revenue/Hour Works\nMaximizing early revenue in capacity-constrained situations\n. . .\nScenario: 120 hours of consulting capacity this quarter\n\n\nRevenue/hour approach: A+B+C = 115h → €24,000 revenue\nWrong order (E+D+C): E+D+C = 155h → Doesn’t fit!\nOnly E+D = 100h → €10,350 revenue\nWorst case: Start with low-revenue/hour projects, waste capacity\n\n\n. . .\n\n\n\n\n\n\nThis is Smith’s Rule in action: Sort by (value / time) to maximize weighted completion!",
+    "crumbs": [
+      "06 Greedy",
+      "06 Lecture"
+    ]
+  },
+  {
     "objectID": "lectures/lec_06_greedy_algorithms.html#the-real-challenge-flow-shops",
     "href": "lectures/lec_06_greedy_algorithms.html#the-real-challenge-flow-shops",
     "title": "Smart Quick Decisions",
@@ -5215,7 +5248,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html#johnsons-algorithm-the-intuition",
     "title": "Smart Quick Decisions",
     "section": "Johnson’s Algorithm: The Intuition",
-    "text": "Johnson’s Algorithm: The Intuition\nWhy does Johnson’s work? Let’s understand the logic first\n. . .\nThink about bottlenecks in a two-stage flow:\n\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n. . .\nKey Observation:\n\n\nIf a job is quick on Machine 1 → Do it early (Machine 1 finishes fast, Machine 2 starts sooner!)\nIf a job is quick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)",
+    "text": "Johnson’s Algorithm: The Intuition\n. . .\nWhy does Johnson’s work? Let’s understand the logic first\n. . .\nThink about bottlenecks in a two-stage flow:\n\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n. . .\nKey Observation:\n\n\nIf a job is quick on Machine 1 → Do it early (Machine 1 finishes fast, Machine 2 starts sooner!)\nIf a job is quick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -5266,39 +5299,6 @@
     ]
   },
   {
-    "objectID": "lectures/lec_06_greedy_algorithms.html#revenue-based-consulting-firm",
-    "href": "lectures/lec_06_greedy_algorithms.html#revenue-based-consulting-firm",
-    "title": "Smart Quick Decisions",
-    "section": "Revenue-Based: Consulting Firm",
-    "text": "Revenue-Based: Consulting Firm\n5 consulting projects with different durations and revenues\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\n\n\n\n\nC\n55h\n€11,000\n€200\n\n\nA\n25h\n€6,000\n€240\n\n\nE\n55h\n€4,950\n€90\n\n\nD\n45h\n€5,400\n€120\n\n\nB\n35h\n€7,000\n€200\n\n\n\n. . .\nGoal: Maximize revenue during limited consulting time\n. . .\nQuestion: Sort by total revenue? Duration? Or something else?",
-    "crumbs": [
-      "06 Greedy",
-      "06 Lecture"
-    ]
-  },
-  {
-    "objectID": "lectures/lec_06_greedy_algorithms.html#revenuehour-rule",
-    "href": "lectures/lec_06_greedy_algorithms.html#revenuehour-rule",
-    "title": "Smart Quick Decisions",
-    "section": "Revenue/Hour Rule",
-    "text": "Revenue/Hour Rule\nRule: Sort by revenue per hour (descending)\n. . .\nSorted by Revenue/Hour:\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\nSchedule\n\n\n\n\nA\n25h\n€6,000\n€240\n1st\n\n\nB\n35h\n€7,000\n€200\n2nd\n\n\nC\n55h\n€11,000\n€200\n3rd\n\n\nD\n45h\n€5,400\n€120\n4th\n\n\nE\n55h\n€4,950\n€90\n5th\n\n\n\n. . .\nOptimal order: A → B → C → D → E",
-    "crumbs": [
-      "06 Greedy",
-      "06 Lecture"
-    ]
-  },
-  {
-    "objectID": "lectures/lec_06_greedy_algorithms.html#why-revenuehour-works",
-    "href": "lectures/lec_06_greedy_algorithms.html#why-revenuehour-works",
-    "title": "Smart Quick Decisions",
-    "section": "Why Revenue/Hour Works",
-    "text": "Why Revenue/Hour Works\nMaximizing early revenue in capacity-constrained situations\n. . .\nScenario: 120 hours of consulting capacity this quarter\n\n\nRevenue/hour approach: A+B+C = 115h → €24,000 revenue\nWrong order (E+D+C): E+D+C = 155h → Doesn’t fit!\nOnly E+D = 100h → €10,350 revenue\nWorst case: Start with low-revenue/hour projects, waste capacity\n\n\n. . .\n\n\n\n\n\n\nThis is Smith’s Rule in action: Sort by (value / time) to maximize weighted completion!",
-    "crumbs": [
-      "06 Greedy",
-      "06 Lecture"
-    ]
-  },
-  {
     "objectID": "lectures/lec_06_greedy_algorithms.html#dynamic-vs-static-scheduling",
     "href": "lectures/lec_06_greedy_algorithms.html#dynamic-vs-static-scheduling",
     "title": "Smart Quick Decisions",
@@ -5315,17 +5315,6 @@
     "title": "Smart Quick Decisions",
     "section": "Real-World Considerations",
     "text": "Real-World Considerations\n\nSetup Times:\n\nChanging requires tool adjustments or cleaning\nSequence-dependent scheduling (TSP-like)\n\n\n. . .\n\nResource Constraints:\n\nLimited ressources, specialized tools, material shortages\nWorker skill levels and availability\n\n\n. . .\n\nUncertainty:\n\nProcessing times, break downs, and other unforeseen events",
-    "crumbs": [
-      "06 Greedy",
-      "06 Lecture"
-    ]
-  },
-  {
-    "objectID": "lectures/lec_06_greedy_algorithms.html#hybrid-scheduling-strategies",
-    "href": "lectures/lec_06_greedy_algorithms.html#hybrid-scheduling-strategies",
-    "title": "Smart Quick Decisions",
-    "section": "Hybrid Scheduling Strategies",
-    "text": "Hybrid Scheduling Strategies\n1. Priority Classes:\nIF order.type == \"Rush\":\n    schedule using EDD\nELSE:\n    schedule using SPT\n. . .\n2. Time-Based Switching:\nIF current_time &lt; 3pm:\n    use SPT (maximize throughput)\nELSE:\n    use EDD (meet end-of-day deadlines)\n. . .\n3. Threshold Rules:\nIF (due_date - current_time) &lt; 30 minutes:\n    prioritize this order (emergency mode)\nELSE:\n    use normal SPT rule",
     "crumbs": [
       "06 Greedy",
       "06 Lecture"
@@ -5468,7 +5457,7 @@
     "href": "lectures/lec_06_presentation.html#client-briefing-custom-cycles-manufacturing",
     "title": "Smart Quick Decisions",
     "section": "Client Briefing: Custom Cycles Manufacturing",
-    "text": "Client Briefing: Custom Cycles Manufacturing\n\nOperations Manager’s Friday Crisis:\n“It’s Friday 2 PM. We just received 16 custom bicycle orders that must be completed by Monday. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Saturday 8 PM. How do we schedule production to minimize costs?”"
+    "text": "Client Briefing: Custom Cycles Manufacturing\n\nOperations Manager’s Friday Crisis:\n“It’s Friday at 06:00 in the morning. We just received 16 custom bicycle orders that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#the-manufacturing-challenge",
@@ -5503,7 +5492,7 @@
     "href": "lectures/lec_06_presentation.html#the-greedy-paradigm",
     "title": "Smart Quick Decisions",
     "section": "The Greedy Paradigm",
-    "text": "The Greedy Paradigm\nAlgorithmic strategy that builds solutions piece by piece\n\nCore Philosophy:\n\nMake the best immediate decision at each step\nNever reconsider previous choices (no backtracking)\nHope that local optimality leads to global optimality\nTrade guaranteed optimality for speed and simplicity\n\n\n\n\n\n\n\n\n\nGreedy algorithms are one of the three major algorithmic paradigms alongside Divide & Conquer (e.g., merge sort) and Dynamic Programming (e.g., Fibonacci with memoization)."
+    "text": "The Greedy Paradigm\nAlgorithmic strategy that builds solutions piece by piece\n\nCore Philosophy:\n\nMake the best immediate decision at each step\nNever reconsider previous choices (no backtracking)\nHope that local optimality leads to global optimality\nTrade guaranteed optimality for speed and simplicity"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#greedy-in-everyday-life",
@@ -5517,7 +5506,7 @@
     "href": "lectures/lec_06_presentation.html#when-greedy-works-vs.-fails",
     "title": "Smart Quick Decisions",
     "section": "When Greedy Works vs. Fails",
-    "text": "When Greedy Works vs. Fails\nNot all greedy algorithms are optimal\n\nGreedy IS Optimal:\n\nPrim’s/Kruskal’s algorithms (minimum spanning tree)\nSPT scheduling (minimizes average flow time)\nEDD scheduling (minimizes maximum lateness)\n\n\n\nGreedy FAILS:\n\nTraveling salesman problem (nearest neighbor is worse)\n0/1 Knapsack (greedy by value/weight ratio fails)"
+    "text": "When Greedy Works vs. Fails\nNot all greedy algorithms are optimal\n\nGreedy IS Optimal:\n\nKruskal’s algorithms (minimum spanning tree)\nSPT scheduling (minimizes average flow time)\nEDD scheduling (minimizes maximum lateness)\n\n\n\nGreedy FAILS:\n\nTraveling salesman problem (nearest neighbor is worse)\n0/1 Knapsack (greedy by value/weight ratio fails)"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#the-two-key-properties",
@@ -5538,7 +5527,7 @@
     "href": "lectures/lec_06_presentation.html#three-classic-scheduling-rules",
     "title": "Smart Quick Decisions",
     "section": "Three Classic Scheduling Rules",
-    "text": "Three Classic Scheduling Rules\nWe’ll explore three greedy approaches that manufacturing uses:\n\nFIFO (First In, First Out) - The fairness rule\nSPT (Shortest Processing Time) - The efficiency rule\nEDD (Earliest Due Date) - The deadline rule\n\n\nQuestion: Which rule would you use for the bike factory with penalties and overtime costs?"
+    "text": "Three Classic Scheduling Rules\nWe’ll explore three greedy approaches that manufacturing uses:\n\nFIFO (First In, First Out) - The fairness rule\nSPT (Shortest Processing Time) - The efficiency rule\nEDD (Earliest Due Date) - The deadline rule\n\n\nQuestion: Just as first feeling. Which rule would you use for the bike factory with penalties and overtime costs?"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#rule-1-fifo-first-in-first-out",
@@ -5583,13 +5572,6 @@
     "text": "Example: Package Delivery\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote, that we only minimize maximal lateness here!"
   },
   {
-    "objectID": "lectures/lec_06_presentation.html#quick-reference-decision-guide",
-    "href": "lectures/lec_06_presentation.html#quick-reference-decision-guide",
-    "title": "Smart Quick Decisions",
-    "section": "Quick Reference & Decision Guide",
-    "text": "Quick Reference & Decision Guide\nChoose your rule based on business priority"
-  },
-  {
     "objectID": "lectures/lec_06_presentation.html#implementing-spt-in-python-i",
     "href": "lectures/lec_06_presentation.html#implementing-spt-in-python-i",
     "title": "Smart Quick Decisions",
@@ -5623,6 +5605,13 @@
     "title": "Smart Quick Decisions",
     "section": "All Schedules Compared",
     "text": "All Schedules Compared\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo single rule is always best! The right choice depends on your objectives, which might include fairness, throughput, deadlines and much more."
+  },
+  {
+    "objectID": "lectures/lec_06_presentation.html#hybrid-scheduling-strategies",
+    "href": "lectures/lec_06_presentation.html#hybrid-scheduling-strategies",
+    "title": "Smart Quick Decisions",
+    "section": "Hybrid Scheduling Strategies",
+    "text": "Hybrid Scheduling Strategies\n1. Priority Classes:\nIF order.type == \"Rush\":\n    schedule using EDD\nELSE:\n    schedule using SPT\n\n2. Time-Based Switching:\nIF current_time &lt; 3pm:\n    use SPT (maximize throughput)\nELSE:\n    use EDD (meet end-of-day deadlines)\n\n\n3. Threshold Rules:\nIF (due_date - current_time) &lt; 30 minutes:\n    prioritize this order (emergency mode)\nELSE:\n    use normal SPT rule"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#key-takeaways",
@@ -5674,6 +5663,27 @@
     "text": "Which Metric When?\nMatching metrics to business context\n\n\n\nBusiness Goal\nMetric to Optimize\nBest Rule\n\n\n\n\nReduce customer wait time\nAvg Flow Time\nSPT\n\n\nMeet all deadlines\nMax Lateness\nEDD\n\n\nMinimize contract penalties\nTotal Tardiness\nEDD\n\n\nMaximize throughput\nMakespan\nAny (same!)\n\n\nCustomer satisfaction\nNumber Late\nEDD\n\n\nFairness/transparency\n(none)\nFIFO"
   },
   {
+    "objectID": "lectures/lec_06_presentation.html#revenue-based-consulting-firm",
+    "href": "lectures/lec_06_presentation.html#revenue-based-consulting-firm",
+    "title": "Smart Quick Decisions",
+    "section": "Revenue-Based: Consulting Firm",
+    "text": "Revenue-Based: Consulting Firm\n5 consulting projects with different durations and revenues\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\n\n\n\n\nC\n55h\n€11,000\n€200\n\n\nA\n25h\n€6,000\n€240\n\n\nE\n55h\n€4,950\n€90\n\n\nD\n45h\n€5,400\n€120\n\n\nB\n35h\n€7,000\n€200\n\n\n\n\nGoal: Maximize revenue during limited consulting time\n\n\nQuestion: Sort by total revenue? Duration? Or something else?"
+  },
+  {
+    "objectID": "lectures/lec_06_presentation.html#revenuehour-rule",
+    "href": "lectures/lec_06_presentation.html#revenuehour-rule",
+    "title": "Smart Quick Decisions",
+    "section": "Revenue/Hour Rule",
+    "text": "Revenue/Hour Rule\nRule: Sort by revenue per hour (descending)\n\nSorted by Revenue/Hour:\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\nSchedule\n\n\n\n\nA\n25h\n€6,000\n€240\n1st\n\n\nB\n35h\n€7,000\n€200\n2nd\n\n\nC\n55h\n€11,000\n€200\n3rd\n\n\nD\n45h\n€5,400\n€120\n4th\n\n\nE\n55h\n€4,950\n€90\n5th\n\n\n\n\n\nOptimal order: A → B → C → D → E"
+  },
+  {
+    "objectID": "lectures/lec_06_presentation.html#why-revenuehour-works",
+    "href": "lectures/lec_06_presentation.html#why-revenuehour-works",
+    "title": "Smart Quick Decisions",
+    "section": "Why Revenue/Hour Works",
+    "text": "Why Revenue/Hour Works\nMaximizing early revenue in capacity-constrained situations\n\nScenario: 120 hours of consulting capacity this quarter\n\nRevenue/hour approach: A+B+C = 115h → €24,000 revenue\nWrong order (E+D+C): E+D+C = 155h → Doesn’t fit!\nOnly E+D = 100h → €10,350 revenue\nWorst case: Start with low-revenue/hour projects, waste capacity\n\n\n\n\n\n\n\n\n\nThis is Smith’s Rule in action: Sort by (value / time) to maximize weighted completion!"
+  },
+  {
     "objectID": "lectures/lec_06_presentation.html#the-real-challenge-flow-shops",
     "href": "lectures/lec_06_presentation.html#the-real-challenge-flow-shops",
     "title": "Smart Quick Decisions",
@@ -5706,7 +5716,7 @@
     "href": "lectures/lec_06_presentation.html#johnsons-algorithm-the-intuition",
     "title": "Smart Quick Decisions",
     "section": "Johnson’s Algorithm: The Intuition",
-    "text": "Johnson’s Algorithm: The Intuition\nWhy does Johnson’s work? Let’s understand the logic first\n\nThink about bottlenecks in a two-stage flow:\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n\nKey Observation:\n\nIf a job is quick on Machine 1 → Do it early (Machine 1 finishes fast, Machine 2 starts sooner!)\nIf a job is quick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)"
+    "text": "Johnson’s Algorithm: The Intuition\n\nWhy does Johnson’s work? Let’s understand the logic first\n\n\nThink about bottlenecks in a two-stage flow:\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n\nKey Observation:\n\nIf a job is quick on Machine 1 → Do it early (Machine 1 finishes fast, Machine 2 starts sooner!)\nIf a job is quick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#johnsons-algorithm-the-rule",
@@ -5737,27 +5747,6 @@
     "text": "Beyond Two Machines\nWhat about 3+ machines?\n\nBad news:\n\n3+ machine flow shop is NP-hard\nNo polynomial optimal algorithm known\n\n\n\nGood news:\n\nHeuristics work well in practice\nSimulated annealing, genetic algorithms"
   },
   {
-    "objectID": "lectures/lec_06_presentation.html#revenue-based-consulting-firm",
-    "href": "lectures/lec_06_presentation.html#revenue-based-consulting-firm",
-    "title": "Smart Quick Decisions",
-    "section": "Revenue-Based: Consulting Firm",
-    "text": "Revenue-Based: Consulting Firm\n5 consulting projects with different durations and revenues\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\n\n\n\n\nC\n55h\n€11,000\n€200\n\n\nA\n25h\n€6,000\n€240\n\n\nE\n55h\n€4,950\n€90\n\n\nD\n45h\n€5,400\n€120\n\n\nB\n35h\n€7,000\n€200\n\n\n\n\nGoal: Maximize revenue during limited consulting time\n\n\nQuestion: Sort by total revenue? Duration? Or something else?"
-  },
-  {
-    "objectID": "lectures/lec_06_presentation.html#revenuehour-rule",
-    "href": "lectures/lec_06_presentation.html#revenuehour-rule",
-    "title": "Smart Quick Decisions",
-    "section": "Revenue/Hour Rule",
-    "text": "Revenue/Hour Rule\nRule: Sort by revenue per hour (descending)\n\nSorted by Revenue/Hour:\n\n\n\nProject\nDuration\nRevenue\nRevenue/Hour\nSchedule\n\n\n\n\nA\n25h\n€6,000\n€240\n1st\n\n\nB\n35h\n€7,000\n€200\n2nd\n\n\nC\n55h\n€11,000\n€200\n3rd\n\n\nD\n45h\n€5,400\n€120\n4th\n\n\nE\n55h\n€4,950\n€90\n5th\n\n\n\n\n\nOptimal order: A → B → C → D → E"
-  },
-  {
-    "objectID": "lectures/lec_06_presentation.html#why-revenuehour-works",
-    "href": "lectures/lec_06_presentation.html#why-revenuehour-works",
-    "title": "Smart Quick Decisions",
-    "section": "Why Revenue/Hour Works",
-    "text": "Why Revenue/Hour Works\nMaximizing early revenue in capacity-constrained situations\n\nScenario: 120 hours of consulting capacity this quarter\n\nRevenue/hour approach: A+B+C = 115h → €24,000 revenue\nWrong order (E+D+C): E+D+C = 155h → Doesn’t fit!\nOnly E+D = 100h → €10,350 revenue\nWorst case: Start with low-revenue/hour projects, waste capacity\n\n\n\n\n\n\n\n\n\nThis is Smith’s Rule in action: Sort by (value / time) to maximize weighted completion!"
-  },
-  {
     "objectID": "lectures/lec_06_presentation.html#dynamic-vs-static-scheduling",
     "href": "lectures/lec_06_presentation.html#dynamic-vs-static-scheduling",
     "title": "Smart Quick Decisions",
@@ -5770,13 +5759,6 @@
     "title": "Smart Quick Decisions",
     "section": "Real-World Considerations",
     "text": "Real-World Considerations\n\nSetup Times:\n\nChanging requires tool adjustments or cleaning\nSequence-dependent scheduling (TSP-like)\n\n\n\n\nResource Constraints:\n\nLimited ressources, specialized tools, material shortages\nWorker skill levels and availability\n\n\n\n\n\nUncertainty:\n\nProcessing times, break downs, and other unforeseen events"
-  },
-  {
-    "objectID": "lectures/lec_06_presentation.html#hybrid-scheduling-strategies",
-    "href": "lectures/lec_06_presentation.html#hybrid-scheduling-strategies",
-    "title": "Smart Quick Decisions",
-    "section": "Hybrid Scheduling Strategies",
-    "text": "Hybrid Scheduling Strategies\n1. Priority Classes:\nIF order.type == \"Rush\":\n    schedule using EDD\nELSE:\n    schedule using SPT\n\n2. Time-Based Switching:\nIF current_time &lt; 3pm:\n    use SPT (maximize throughput)\nELSE:\n    use EDD (meet end-of-day deadlines)\n\n\n3. Threshold Rules:\nIF (due_date - current_time) &lt; 30 minutes:\n    prioritize this order (emergency mode)\nELSE:\n    use normal SPT rule"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#common-scheduling-mistakes-i",

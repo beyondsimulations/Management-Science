@@ -478,12 +478,12 @@ window.Quarto = {
   <li><a href="#example-coffee-shop-orders" id="toc-example-coffee-shop-orders" class="nav-link" data-scroll-target="#example-coffee-shop-orders">Example: Coffee Shop Orders</a></li>
   <li><a href="#rule-3-edd-earliest-due-date" id="toc-rule-3-edd-earliest-due-date" class="nav-link" data-scroll-target="#rule-3-edd-earliest-due-date">Rule 3: EDD (Earliest Due Date)</a></li>
   <li><a href="#example-package-delivery" id="toc-example-package-delivery" class="nav-link" data-scroll-target="#example-package-delivery">Example: Package Delivery</a></li>
-  <li><a href="#quick-reference-decision-guide" id="toc-quick-reference-decision-guide" class="nav-link" data-scroll-target="#quick-reference-decision-guide">Quick Reference &amp; Decision Guide</a></li>
   <li><a href="#implementing-spt-in-python-i" id="toc-implementing-spt-in-python-i" class="nav-link" data-scroll-target="#implementing-spt-in-python-i">Implementing SPT in Python I</a></li>
   <li><a href="#implementing-spt-in-python-ii" id="toc-implementing-spt-in-python-ii" class="nav-link" data-scroll-target="#implementing-spt-in-python-ii">Implementing SPT in Python II</a></li>
   <li><a href="#implementing-edd-in-python" id="toc-implementing-edd-in-python" class="nav-link" data-scroll-target="#implementing-edd-in-python">Implementing EDD in Python</a></li>
   <li><a href="#comparing-all-three" id="toc-comparing-all-three" class="nav-link" data-scroll-target="#comparing-all-three">Comparing All Three</a></li>
   <li><a href="#all-schedules-compared" id="toc-all-schedules-compared" class="nav-link" data-scroll-target="#all-schedules-compared">All Schedules Compared</a></li>
+  <li><a href="#hybrid-scheduling-strategies" id="toc-hybrid-scheduling-strategies" class="nav-link" data-scroll-target="#hybrid-scheduling-strategies">Hybrid Scheduling Strategies</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
   </ul></li>
   <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications"><span class="flow">Applications</span></a>
@@ -498,6 +498,12 @@ window.Quarto = {
   <li><a href="#why-metrics-matter" id="toc-why-metrics-matter" class="nav-link" data-scroll-target="#why-metrics-matter">Why Metrics Matter</a></li>
   <li><a href="#which-metric-when" id="toc-which-metric-when" class="nav-link" data-scroll-target="#which-metric-when">Which Metric When?</a></li>
   </ul></li>
+  <li><a href="#weighted-scheduling" id="toc-weighted-scheduling" class="nav-link" data-scroll-target="#weighted-scheduling"><span class="flow">Weighted Scheduling</span></a>
+  <ul class="collapse">
+  <li><a href="#revenue-based-consulting-firm" id="toc-revenue-based-consulting-firm" class="nav-link" data-scroll-target="#revenue-based-consulting-firm">Revenue-Based: Consulting Firm</a></li>
+  <li><a href="#revenuehour-rule" id="toc-revenuehour-rule" class="nav-link" data-scroll-target="#revenuehour-rule">Revenue/Hour Rule</a></li>
+  <li><a href="#why-revenuehour-works" id="toc-why-revenuehour-works" class="nav-link" data-scroll-target="#why-revenuehour-works">Why Revenue/Hour Works</a></li>
+  </ul></li>
   <li><a href="#two-stage-scheduling" id="toc-two-stage-scheduling" class="nav-link" data-scroll-target="#two-stage-scheduling"><span class="flow">Two-Stage Scheduling</span></a>
   <ul class="collapse">
   <li><a href="#the-real-challenge-flow-shops" id="toc-the-real-challenge-flow-shops" class="nav-link" data-scroll-target="#the-real-challenge-flow-shops">The Real Challenge: Flow Shops</a></li>
@@ -510,17 +516,10 @@ window.Quarto = {
   <li><a href="#johnsons-schedule-z-y-x" id="toc-johnsons-schedule-z-y-x" class="nav-link" data-scroll-target="#johnsons-schedule-z-y-x">Johnson’s Schedule: Z → Y → X</a></li>
   <li><a href="#beyond-two-machines" id="toc-beyond-two-machines" class="nav-link" data-scroll-target="#beyond-two-machines">Beyond Two Machines</a></li>
   </ul></li>
-  <li><a href="#weighted-scheduling" id="toc-weighted-scheduling" class="nav-link" data-scroll-target="#weighted-scheduling"><span class="flow">Weighted Scheduling</span></a>
-  <ul class="collapse">
-  <li><a href="#revenue-based-consulting-firm" id="toc-revenue-based-consulting-firm" class="nav-link" data-scroll-target="#revenue-based-consulting-firm">Revenue-Based: Consulting Firm</a></li>
-  <li><a href="#revenuehour-rule" id="toc-revenuehour-rule" class="nav-link" data-scroll-target="#revenuehour-rule">Revenue/Hour Rule</a></li>
-  <li><a href="#why-revenuehour-works" id="toc-why-revenuehour-works" class="nav-link" data-scroll-target="#why-revenuehour-works">Why Revenue/Hour Works</a></li>
-  </ul></li>
   <li><a href="#advanced" id="toc-advanced" class="nav-link" data-scroll-target="#advanced"><span class="flow">Advanced</span></a>
   <ul class="collapse">
   <li><a href="#dynamic-vs-static-scheduling" id="toc-dynamic-vs-static-scheduling" class="nav-link" data-scroll-target="#dynamic-vs-static-scheduling">Dynamic vs Static Scheduling</a></li>
   <li><a href="#real-world-considerations" id="toc-real-world-considerations" class="nav-link" data-scroll-target="#real-world-considerations">Real-World Considerations</a></li>
-  <li><a href="#hybrid-scheduling-strategies" id="toc-hybrid-scheduling-strategies" class="nav-link" data-scroll-target="#hybrid-scheduling-strategies">Hybrid Scheduling Strategies</a></li>
   <li><a href="#common-scheduling-mistakes-i" id="toc-common-scheduling-mistakes-i" class="nav-link" data-scroll-target="#common-scheduling-mistakes-i">Common Scheduling Mistakes I</a></li>
   <li><a href="#common-scheduling-mistakes-ii" id="toc-common-scheduling-mistakes-ii" class="nav-link" data-scroll-target="#common-scheduling-mistakes-ii">Common Scheduling Mistakes II</a></li>
   <li><a href="#common-scheduling-mistakes-iii" id="toc-common-scheduling-mistakes-iii" class="nav-link" data-scroll-target="#common-scheduling-mistakes-iii">Common Scheduling Mistakes III</a></li>
@@ -580,7 +579,7 @@ window.Quarto = {
 <h2 data-background-image="https://unsplash.com/photos/XwZKcZes8xo/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8Y3VzdG9tJTIwY3ljbGVzfGVufDB8fHx8MTc2MjU5OTU4NXww&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-custom-cycles-manufacturing"><strong><span class="invert-font">Client Briefing: Custom Cycles Manufacturing</span></strong></h2>
 <p>. . .</p>
 <p><span class="invert-font">Operations Manager’s Friday Crisis:</span></p>
-<p><span class="invert-font fragment">“It’s Friday 2 PM. We just received <span class="highlight">16 custom bicycle orders</span> that must be completed by Monday. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Saturday 8 PM. How do we schedule production to minimize costs?”</span></p>
+<p><span class="invert-font fragment">“It’s Friday at 06:00 in the morning. We just received <span class="highlight">16 custom bicycle orders</span> that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”</span></p>
 </section>
 <section id="the-manufacturing-challenge" class="level2">
 <h2 class="anchored" data-anchor-id="the-manufacturing-challenge">The Manufacturing Challenge</h2>
@@ -729,17 +728,6 @@ window.Quarto = {
 <li>Trade guaranteed optimality for speed and simplicity</li>
 </ul>
 </div>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Greedy algorithms are one of the <strong>three major algorithmic paradigms</strong> alongside Divide &amp; Conquer (e.g., merge sort) and Dynamic Programming (e.g., Fibonacci with memoization).</p>
-</div>
-</div>
-</div>
 </section>
 <section id="greedy-in-everyday-life" class="level2">
 <h2 class="anchored" data-anchor-id="greedy-in-everyday-life">Greedy in Everyday Life</h2>
@@ -765,7 +753,7 @@ window.Quarto = {
 <p><strong>Greedy IS Optimal:</strong></p>
 <div class="incremental">
 <ul class="incremental">
-<li>Prim’s/Kruskal’s algorithms (minimum spanning tree)</li>
+<li>Kruskal’s algorithms (minimum spanning tree)</li>
 <li>SPT scheduling (minimizes average flow time)</li>
 <li>EDD scheduling (minimizes maximum lateness)</li>
 </ul>
@@ -797,7 +785,7 @@ window.Quarto = {
 </section>
 <section id="complexity-why-greedy-is-fast" class="level2">
 <h2 class="anchored" data-anchor-id="complexity-why-greedy-is-fast">Complexity: Why Greedy is Fast</h2>
-<div id="aced83a9" class="cell" data-execution_count="1">
+<div id="14dc741f" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -829,7 +817,7 @@ window.Quarto = {
 </ol>
 </div>
 <p>. . .</p>
-<p><span class="question">Question</span>: Which rule would you use for the bike factory with penalties and overtime costs?</p>
+<p><span class="question">Question</span>: Just as first feeling. Which rule would you use for the bike factory with penalties and overtime costs?</p>
 </section>
 <section id="rule-1-fifo-first-in-first-out" class="level2">
 <h2 class="anchored" data-anchor-id="rule-1-fifo-first-in-first-out">Rule 1: FIFO (First In, First Out)</h2>
@@ -855,7 +843,7 @@ window.Quarto = {
 </section>
 <section id="example-hospital-check-in" class="level2">
 <h2 class="anchored" data-anchor-id="example-hospital-check-in">Example: Hospital Check-In</h2>
-<div id="8b85eb0f" class="cell" data-execution_count="2">
+<div id="348c7e7b" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -900,7 +888,7 @@ window.Quarto = {
 </section>
 <section id="example-coffee-shop-orders" class="level2">
 <h2 class="anchored" data-anchor-id="example-coffee-shop-orders">Example: Coffee Shop Orders</h2>
-<div id="9ef1f139" class="cell" data-execution_count="3">
+<div id="1695e111" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -945,7 +933,7 @@ window.Quarto = {
 </section>
 <section id="example-package-delivery" class="level2">
 <h2 class="anchored" data-anchor-id="example-package-delivery">Example: Package Delivery</h2>
-<div id="755b283d" class="cell" data-execution_count="4">
+<div id="d0bd3a66" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -966,25 +954,11 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="quick-reference-decision-guide" class="level2">
-<h2 class="anchored" data-anchor-id="quick-reference-decision-guide">Quick Reference &amp; Decision Guide</h2>
-<p><span class="highlight">Choose your rule based on business priority</span></p>
-<p>. . .</p>
-<div id="44a3e324" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_06_greedy_algorithms_files/figure-revealjs/cell-6-output-1.png" width="1140" height="419" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 <section id="implementing-spt-in-python-i" class="level2">
 <h2 class="anchored" data-anchor-id="implementing-spt-in-python-i">Implementing SPT in Python I</h2>
 <p><span class="highlight">Let’s code it together - it’s remarkably simple!</span></p>
 <p>Let’s assume we want to make some pizzas under deadlines.</p>
-<div id="ad592b91" class="cell" data-execution_count="6">
+<div id="f2383595" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pizza data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pizzas <span class="op">=</span> [</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
@@ -999,7 +973,7 @@ window.Quarto = {
 </section>
 <section id="implementing-spt-in-python-ii" class="level2">
 <h2 class="anchored" data-anchor-id="implementing-spt-in-python-ii">Implementing SPT in Python II</h2>
-<div id="3c3349f8" class="cell" data-output-location="fragment" data-execution_count="7">
+<div id="7e6c0fd1" class="cell" data-output-location="fragment" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SPT Rule: Sort by processing time</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1032,7 +1006,7 @@ window.Quarto = {
 <section id="implementing-edd-in-python" class="level2">
 <h2 class="anchored" data-anchor-id="implementing-edd-in-python">Implementing EDD in Python</h2>
 <p><span class="highlight">EDD is just as simple - change the sorting key!</span></p>
-<div id="3c41ef75" class="cell" data-output-location="fragment" data-execution_count="8">
+<div id="4d477aa1" class="cell" data-output-location="fragment" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EDD Rule: Sort by due date</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1105,11 +1079,11 @@ window.Quarto = {
 </section>
 <section id="all-schedules-compared" class="level2">
 <h2 class="anchored" data-anchor-id="all-schedules-compared">All Schedules Compared</h2>
-<div id="3571f165" class="cell" data-execution_count="9">
+<div id="43215f4a" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_06_greedy_algorithms_files/figure-revealjs/cell-10-output-1.png" width="1139" height="417" class="figure-img"></p>
+<p><img src="lec_06_greedy_algorithms_files/figure-revealjs/cell-9-output-1.png" width="1139" height="417" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1125,6 +1099,26 @@ window.Quarto = {
 </div>
 </div>
 </div>
+</section>
+<section id="hybrid-scheduling-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="hybrid-scheduling-strategies">Hybrid Scheduling Strategies</h2>
+<p><strong>1. Priority Classes:</strong></p>
+<pre><code>IF order.type == "Rush":
+    schedule using EDD
+ELSE:
+    schedule using SPT</code></pre>
+<p>. . .</p>
+<p><strong>2. Time-Based Switching:</strong></p>
+<pre><code>IF current_time &lt; 3pm:
+    use SPT (maximize throughput)
+ELSE:
+    use EDD (meet end-of-day deadlines)</code></pre>
+<p>. . .</p>
+<p><strong>3. Threshold Rules:</strong></p>
+<pre><code>IF (due_date - current_time) &lt; 30 minutes:
+    prioritize this order (emergency mode)
+ELSE:
+    use normal SPT rule</code></pre>
 </section>
 <section id="key-takeaways" class="level2">
 <h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
@@ -1277,246 +1271,6 @@ window.Quarto = {
 </table>
 </section>
 </section>
-<section id="two-stage-scheduling" class="level1 title">
-<h1 class="title"><span class="flow">Two-Stage Scheduling</span></h1>
-<section id="the-real-challenge-flow-shops" class="level2">
-<h2 class="anchored" data-anchor-id="the-real-challenge-flow-shops">The Real Challenge: Flow Shops</h2>
-<p><span class="highlight">Most manufacturing involves multiple stages</span></p>
-<p>. . .</p>
-<p><strong>Flow Shop:</strong> Jobs must visit machines in the <strong>same order</strong></p>
-<div class="incremental">
-<ul class="incremental">
-<li>Car manufacturing: Welding → Painting → Assembly</li>
-<li>Bicycle factory: Assembly → Painting</li>
-<li>Electronics: Circuit board → Component placement → Testing</li>
-<li>Restaurant: Cooking → Plating → Service</li>
-</ul>
-</div>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Key difference from single-machine:</strong> Machine 2 must wait for Machine 1 to finish each job. This creates <strong>idle time</strong> and <strong>blocking</strong>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="two-stage-example-setup" class="level2">
-<h2 class="anchored" data-anchor-id="two-stage-example-setup">Two-Stage Example Setup</h2>
-<p><span class="highlight">3 Bicycles through Assembly → Painting</span></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Bike</th>
-<th>Assembly Time</th>
-<th>Painting Time</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>X</td>
-<td>30 min</td>
-<td>20 min</td>
-<td>50</td>
-</tr>
-<tr class="even">
-<td>Y</td>
-<td>20 min</td>
-<td>30 min</td>
-<td>50</td>
-</tr>
-<tr class="odd">
-<td>Z</td>
-<td>15 min</td>
-<td>15 min</td>
-<td>30</td>
-</tr>
-</tbody>
-</table>
-<p>. . .</p>
-<p><span class="question">Question</span>: If we process in order X → Y → Z, what happens?</p>
-</section>
-<section id="fifo-x-y-z" class="level2">
-<h2 class="anchored" data-anchor-id="fifo-x-y-z">FIFO: X → Y → Z</h2>
-<div id="27b846a1" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_06_greedy_algorithms_files/figure-revealjs/cell-11-output-1.png" width="1139" height="417" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-warning">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Painting station waits 30 minutes for first bike! Total time = <strong>95 minutes</strong></p>
-</div>
-</div>
-</div>
-</section>
-<section id="why-simple-rules-struggle" class="level2">
-<h2 class="anchored" data-anchor-id="why-simple-rules-struggle">Why Simple Rules Struggle</h2>
-<p><span class="highlight">Each rule has ambiguities in two-stage problems</span></p>
-<p>. . .</p>
-<p><strong>SPT - Shortest Processing Time:</strong></p>
-<ul>
-<li>Sort by assembly time? → Favors Z (15 min)</li>
-<li>Sort by painting time? → Favors X (20 min)</li>
-<li>Sort by total time? → All tied (50, 50, 30)</li>
-</ul>
-<p>. . .</p>
-<p><strong>EDD - Earliest Due Date:</strong> Doesn’t minimize idle time or makespan</p>
-<p>. . .</p>
-<p><strong>FIFO:</strong> Arbitrary order, no optimization</p>
-<p>. . .</p>
-<p><span class="question">Question</span>: Is there a better approach for minimizing makespan?</p>
-</section>
-<section id="johnsons-algorithm-the-intuition" class="level2">
-<h2 class="anchored" data-anchor-id="johnsons-algorithm-the-intuition">Johnson’s Algorithm: The Intuition</h2>
-<p><span class="highlight">Why does Johnson’s work? Let’s understand the logic first</span></p>
-<p>. . .</p>
-<p><strong>Think about bottlenecks in a two-stage flow:</strong></p>
-<div class="incremental">
-<ul class="incremental">
-<li><strong>Machine 2</strong> sits idle waiting for Machine 1 to finish</li>
-<li><strong>Goal:</strong> Minimize that idle time</li>
-</ul>
-</div>
-<p>. . .</p>
-<p><strong>Key Observation:</strong></p>
-<div class="incremental">
-<ul class="incremental">
-<li>If a job is <strong>quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 1 finishes fast, Machine 2 starts sooner!)</li>
-<li>If a job is <strong>quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
-</ul>
-</div>
-</section>
-<section id="johnsons-algorithm-the-rule" class="level2">
-<h2 class="anchored" data-anchor-id="johnsons-algorithm-the-rule">Johnson’s Algorithm: The Rule</h2>
-<p><span class="highlight">Four simple steps to optimal scheduling</span></p>
-<p>. . .</p>
-<div class="incremental">
-<ol class="incremental" type="1">
-<li><strong>Find minimum time</strong> across both machines for all remaining jobs</li>
-<li><strong>If minimum is on M1:</strong> Schedule this job at <strong>earliest</strong> open position</li>
-<li><strong>If minimum is on M2:</strong> Schedule this job at <strong>latest</strong> open position</li>
-<li><strong>Repeat</strong> until all jobs scheduled</li>
-</ol>
-</div>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Johnson proved this <strong>greedy choice property</strong> guarantees global optimum for makespan in 2-machine flow shops!</p>
-</div>
-</div>
-</div>
-<p>. . .</p>
-<p><span class="highlight">Let’s apply this to our 3 bikes…</span></p>
-</section>
-<section id="applying-johnsons-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="applying-johnsons-algorithm">Applying Johnson’s Algorithm</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Bike</th>
-<th>Assembly</th>
-<th>Painting</th>
-<th>Min Time</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>X</td>
-<td>30</td>
-<td>20</td>
-<td>20 (P)</td>
-</tr>
-<tr class="even">
-<td>Y</td>
-<td>20</td>
-<td>30</td>
-<td>20 (A)</td>
-</tr>
-<tr class="odd">
-<td>Z</td>
-<td>15</td>
-<td>15</td>
-<td>15 (A/P)</td>
-</tr>
-</tbody>
-</table>
-<div class="incremental">
-<ol class="incremental" type="1">
-<li>Min time = 15 (Z, assembly) → <strong>Schedule Z first</strong></li>
-<li>Min time = 20 (Y, assembly) → <strong>Schedule Y second</strong></li>
-<li>Min time = 20 (X, painting) → <strong>Schedule X last</strong></li>
-</ol>
-</div>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Easy, right?</p>
-</div>
-</div>
-</div>
-</section>
-<section id="johnsons-schedule-z-y-x" class="level2">
-<h2 class="anchored" data-anchor-id="johnsons-schedule-z-y-x">Johnson’s Schedule: Z → Y → X</h2>
-<div id="4517f65e" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_06_greedy_algorithms_files/figure-revealjs/cell-12-output-1.png" width="1139" height="417" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>10-minute improvement!</strong> (85 vs 95) - 10.5% faster with optimal ordering</p>
-</div>
-</div>
-</div>
-</section>
-<section id="beyond-two-machines" class="level2">
-<h2 class="anchored" data-anchor-id="beyond-two-machines">Beyond Two Machines</h2>
-<p><span class="highlight">What about 3+ machines?</span></p>
-<p>. . .</p>
-<p><strong>Bad news:</strong></p>
-<ul>
-<li>3+ machine flow shop is <strong>NP-hard</strong></li>
-<li>No polynomial optimal algorithm known</li>
-</ul>
-<p>. . .</p>
-<p><strong>Good news:</strong></p>
-<ul>
-<li>Heuristics work well in practice</li>
-<li>Simulated annealing, genetic algorithms</li>
-</ul>
-</section>
-</section>
 <section id="weighted-scheduling" class="level1 title">
 <h1 class="title"><span class="flow">Weighted Scheduling</span></h1>
 <section id="revenue-based-consulting-firm" class="level2">
@@ -1651,6 +1405,247 @@ window.Quarto = {
 </div>
 </section>
 </section>
+<section id="two-stage-scheduling" class="level1 title">
+<h1 class="title"><span class="flow">Two-Stage Scheduling</span></h1>
+<section id="the-real-challenge-flow-shops" class="level2">
+<h2 class="anchored" data-anchor-id="the-real-challenge-flow-shops">The Real Challenge: Flow Shops</h2>
+<p><span class="highlight">Most manufacturing involves multiple stages</span></p>
+<p>. . .</p>
+<p><strong>Flow Shop:</strong> Jobs must visit machines in the <strong>same order</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li>Car manufacturing: Welding → Painting → Assembly</li>
+<li>Bicycle factory: Assembly → Painting</li>
+<li>Electronics: Circuit board → Component placement → Testing</li>
+<li>Restaurant: Cooking → Plating → Service</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Key difference from single-machine:</strong> Machine 2 must wait for Machine 1 to finish each job. This creates <strong>idle time</strong> and <strong>blocking</strong>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="two-stage-example-setup" class="level2">
+<h2 class="anchored" data-anchor-id="two-stage-example-setup">Two-Stage Example Setup</h2>
+<p><span class="highlight">3 Bicycles through Assembly → Painting</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bike</th>
+<th>Assembly Time</th>
+<th>Painting Time</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>30 min</td>
+<td>20 min</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td>Y</td>
+<td>20 min</td>
+<td>30 min</td>
+<td>50</td>
+</tr>
+<tr class="odd">
+<td>Z</td>
+<td>15 min</td>
+<td>15 min</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<p><span class="question">Question</span>: If we process in order X → Y → Z, what happens?</p>
+</section>
+<section id="fifo-x-y-z" class="level2">
+<h2 class="anchored" data-anchor-id="fifo-x-y-z">FIFO: X → Y → Z</h2>
+<div id="fd4abb37" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_06_greedy_algorithms_files/figure-revealjs/cell-10-output-1.png" width="1139" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Painting station waits 30 minutes for first bike! Total time = <strong>95 minutes</strong></p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-simple-rules-struggle" class="level2">
+<h2 class="anchored" data-anchor-id="why-simple-rules-struggle">Why Simple Rules Struggle</h2>
+<p><span class="highlight">Each rule has ambiguities in two-stage problems</span></p>
+<p>. . .</p>
+<p><strong>SPT - Shortest Processing Time:</strong></p>
+<ul>
+<li>Sort by assembly time? → Favors Z (15 min)</li>
+<li>Sort by painting time? → Favors X (20 min)</li>
+<li>Sort by total time? → All tied (50, 50, 30)</li>
+</ul>
+<p>. . .</p>
+<p><strong>EDD - Earliest Due Date:</strong> Doesn’t minimize idle time or makespan</p>
+<p>. . .</p>
+<p><strong>FIFO:</strong> Arbitrary order, no optimization</p>
+<p>. . .</p>
+<p><span class="question">Question</span>: Is there a better approach for minimizing makespan?</p>
+</section>
+<section id="johnsons-algorithm-the-intuition" class="level2">
+<h2 class="anchored" data-anchor-id="johnsons-algorithm-the-intuition">Johnson’s Algorithm: The Intuition</h2>
+<p>. . .</p>
+<p><span class="highlight">Why does Johnson’s work? Let’s understand the logic first</span></p>
+<p>. . .</p>
+<p><strong>Think about bottlenecks in a two-stage flow:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Machine 2</strong> sits idle waiting for Machine 1 to finish</li>
+<li><strong>Goal:</strong> Minimize that idle time</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><strong>Key Observation:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li>If a job is <strong>quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 1 finishes fast, Machine 2 starts sooner!)</li>
+<li>If a job is <strong>quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
+</ul>
+</div>
+</section>
+<section id="johnsons-algorithm-the-rule" class="level2">
+<h2 class="anchored" data-anchor-id="johnsons-algorithm-the-rule">Johnson’s Algorithm: The Rule</h2>
+<p><span class="highlight">Four simple steps to optimal scheduling</span></p>
+<p>. . .</p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Find minimum time</strong> across both machines for all remaining jobs</li>
+<li><strong>If minimum is on M1:</strong> Schedule this job at <strong>earliest</strong> open position</li>
+<li><strong>If minimum is on M2:</strong> Schedule this job at <strong>latest</strong> open position</li>
+<li><strong>Repeat</strong> until all jobs scheduled</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Johnson proved this <strong>greedy choice property</strong> guarantees global optimum for makespan in 2-machine flow shops!</p>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="highlight">Let’s apply this to our 3 bikes…</span></p>
+</section>
+<section id="applying-johnsons-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="applying-johnsons-algorithm">Applying Johnson’s Algorithm</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bike</th>
+<th>Assembly</th>
+<th>Painting</th>
+<th>Min Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>30</td>
+<td>20</td>
+<td>20 (P)</td>
+</tr>
+<tr class="even">
+<td>Y</td>
+<td>20</td>
+<td>30</td>
+<td>20 (A)</td>
+</tr>
+<tr class="odd">
+<td>Z</td>
+<td>15</td>
+<td>15</td>
+<td>15 (A/P)</td>
+</tr>
+</tbody>
+</table>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li>Min time = 15 (Z, assembly) → <strong>Schedule Z first</strong></li>
+<li>Min time = 20 (Y, assembly) → <strong>Schedule Y second</strong></li>
+<li>Min time = 20 (X, painting) → <strong>Schedule X last</strong></li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Easy, right?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="johnsons-schedule-z-y-x" class="level2">
+<h2 class="anchored" data-anchor-id="johnsons-schedule-z-y-x">Johnson’s Schedule: Z → Y → X</h2>
+<div id="665c1536" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_06_greedy_algorithms_files/figure-revealjs/cell-11-output-1.png" width="1139" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>10-minute improvement!</strong> (85 vs 95) - 10.5% faster with optimal ordering</p>
+</div>
+</div>
+</div>
+</section>
+<section id="beyond-two-machines" class="level2">
+<h2 class="anchored" data-anchor-id="beyond-two-machines">Beyond Two Machines</h2>
+<p><span class="highlight">What about 3+ machines?</span></p>
+<p>. . .</p>
+<p><strong>Bad news:</strong></p>
+<ul>
+<li>3+ machine flow shop is <strong>NP-hard</strong></li>
+<li>No polynomial optimal algorithm known</li>
+</ul>
+<p>. . .</p>
+<p><strong>Good news:</strong></p>
+<ul>
+<li>Heuristics work well in practice</li>
+<li>Simulated annealing, genetic algorithms</li>
+</ul>
+</section>
+</section>
 <section id="advanced" class="level1 title">
 <h1 class="title"><span class="flow">Advanced</span></h1>
 <section id="dynamic-vs-static-scheduling" class="level2">
@@ -1703,26 +1698,6 @@ window.Quarto = {
 <li>Processing times, break downs, and other unforeseen events</li>
 </ul></li>
 </ul>
-</section>
-<section id="hybrid-scheduling-strategies" class="level2">
-<h2 class="anchored" data-anchor-id="hybrid-scheduling-strategies">Hybrid Scheduling Strategies</h2>
-<p><strong>1. Priority Classes:</strong></p>
-<pre><code>IF order.type == "Rush":
-    schedule using EDD
-ELSE:
-    schedule using SPT</code></pre>
-<p>. . .</p>
-<p><strong>2. Time-Based Switching:</strong></p>
-<pre><code>IF current_time &lt; 3pm:
-    use SPT (maximize throughput)
-ELSE:
-    use EDD (meet end-of-day deadlines)</code></pre>
-<p>. . .</p>
-<p><strong>3. Threshold Rules:</strong></p>
-<pre><code>IF (due_date - current_time) &lt; 30 minutes:
-    prioritize this order (emergency mode)
-ELSE:
-    use normal SPT rule</code></pre>
 </section>
 <section id="common-scheduling-mistakes-i" class="level2">
 <h2 class="anchored" data-anchor-id="common-scheduling-mistakes-i">Common Scheduling Mistakes I</h2>

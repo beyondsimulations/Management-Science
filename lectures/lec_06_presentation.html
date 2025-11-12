@@ -214,7 +214,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2><strong><span class="invert-font">Client Briefing: Custom Cycles Manufacturing</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">Operations Manager’s Friday Crisis:</span></p>
-<p><span class="invert-font fragment">“It’s Friday 2 PM. We just received <span class="highlight">16 custom bicycle orders</span> that must be completed by Monday. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Saturday 8 PM. How do we schedule production to minimize costs?”</span></p>
+<p><span class="invert-font fragment">“It’s Friday at 06:00 in the morning. We just received <span class="highlight">16 custom bicycle orders</span> that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”</span></p>
 </div>
 </section>
 <section id="the-manufacturing-challenge" class="slide level2">
@@ -368,18 +368,6 @@ Dr.&nbsp;Tobias Vlćek
 <li class="fragment">Trade guaranteed optimality for speed and simplicity</li>
 </ul>
 </div>
-<div class="fragment">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Greedy algorithms are one of the <strong>three major algorithmic paradigms</strong> alongside Divide &amp; Conquer (e.g., merge sort) and Dynamic Programming (e.g., Fibonacci with memoization).</p>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="greedy-in-everyday-life" class="slide level2">
 <h2>Greedy in Everyday Life</h2>
@@ -404,7 +392,7 @@ Dr.&nbsp;Tobias Vlćek
 <div class="fragment">
 <p><strong>Greedy IS Optimal:</strong></p>
 <ul>
-<li class="fragment">Prim’s/Kruskal’s algorithms (minimum spanning tree)</li>
+<li class="fragment">Kruskal’s algorithms (minimum spanning tree)</li>
 <li class="fragment">SPT scheduling (minimizes average flow time)</li>
 <li class="fragment">EDD scheduling (minimizes maximum lateness)</li>
 </ul>
@@ -437,7 +425,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="complexity-why-greedy-is-fast" class="slide level2">
 <h2>Complexity: Why Greedy is Fast</h2>
-<div id="aced83a9" class="cell" data-execution_count="1">
+<div id="14dc741f" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -468,7 +456,7 @@ Dr.&nbsp;Tobias Vlćek
 <li class="fragment"><strong>EDD (Earliest Due Date)</strong> - The deadline rule</li>
 </ol>
 <div class="fragment">
-<p><span class="question">Question</span>: Which rule would you use for the bike factory with penalties and overtime costs?</p>
+<p><span class="question">Question</span>: Just as first feeling. Which rule would you use for the bike factory with penalties and overtime costs?</p>
 </div>
 </section>
 <section id="rule-1-fifo-first-in-first-out" class="slide level2">
@@ -494,7 +482,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-hospital-check-in" class="slide level2">
 <h2>Example: Hospital Check-In</h2>
-<div id="8b85eb0f" class="cell" data-execution_count="2">
+<div id="348c7e7b" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -539,7 +527,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-coffee-shop-orders" class="slide level2">
 <h2>Example: Coffee Shop Orders</h2>
-<div id="9ef1f139" class="cell" data-execution_count="3">
+<div id="1695e111" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -584,7 +572,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-package-delivery" class="slide level2">
 <h2>Example: Package Delivery</h2>
-<div id="755b283d" class="cell" data-execution_count="4">
+<div id="d0bd3a66" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -606,26 +594,11 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </section>
-<section id="quick-reference-decision-guide" class="slide level2">
-<h2>Quick Reference &amp; Decision Guide</h2>
-<p><span class="highlight">Choose your rule based on business priority</span></p>
-<div class="fragment">
-<div id="44a3e324" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-6-output-1.png" width="1140" height="419"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
 <section id="implementing-spt-in-python-i" class="slide level2">
 <h2>Implementing SPT in Python I</h2>
 <p><span class="highlight">Let’s code it together - it’s remarkably simple!</span></p>
 <p>Let’s assume we want to make some pizzas under deadlines.</p>
-<div id="ad592b91" class="cell" data-execution_count="6">
+<div id="f2383595" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Pizza data</span></span>
 <span id="cb1-2"><a></a>pizzas <span class="op">=</span> [</span>
 <span id="cb1-3"><a></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
@@ -641,7 +614,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="implementing-spt-in-python-ii" class="slide level2">
 <h2>Implementing SPT in Python II</h2>
-<div id="3c3349f8" class="cell" data-execution_count="7">
+<div id="7e6c0fd1" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># SPT Rule: Sort by processing time</span></span>
 <span id="cb2-2"><a></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
 <span id="cb2-3"><a></a></span>
@@ -651,7 +624,7 @@ Dr.&nbsp;Tobias Vlćek
 <span id="cb2-7"><a></a>    current_time <span class="op">+=</span> pizza[<span class="st">'time'</span>]</span>
 <span id="cb2-8"><a></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>pizza[<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">: due </span><span class="sc">{</span>pizza[<span class="st">'due'</span>]<span class="sc">}</span><span class="ss">, done </span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell fragment" data-execution_count="7">
+<div class="cell fragment" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
 <pre><code>SPT Schedule:
   P3: due 25, done 6
@@ -677,7 +650,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="implementing-edd-in-python" class="slide level2">
 <h2>Implementing EDD in Python</h2>
 <p><span class="highlight">EDD is just as simple - change the sorting key!</span></p>
-<div id="3c41ef75" class="cell" data-execution_count="8">
+<div id="4d477aa1" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># EDD Rule: Sort by due date</span></span>
 <span id="cb4-2"><a></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
 <span id="cb4-3"><a></a></span>
@@ -687,7 +660,7 @@ Dr.&nbsp;Tobias Vlćek
 <span id="cb4-7"><a></a>    current_time <span class="op">+=</span> pizza[<span class="st">'time'</span>]</span>
 <span id="cb4-8"><a></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>pizza[<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">: due </span><span class="sc">{</span>pizza[<span class="st">'due'</span>]<span class="sc">}</span><span class="ss">, done </span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell fragment" data-execution_count="8">
+<div class="cell fragment" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>EDD Schedule:
   P2: due 15, done 8
@@ -756,11 +729,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="all-schedules-compared" class="slide level2">
 <h2>All Schedules Compared</h2>
-<div id="3571f165" class="cell" data-execution_count="9">
+<div id="43215f4a" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-10-output-1.png" width="1139" height="417"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-9-output-1.png" width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -776,6 +749,28 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
+</div>
+</section>
+<section id="hybrid-scheduling-strategies" class="slide level2">
+<h2>Hybrid Scheduling Strategies</h2>
+<p><strong>1. Priority Classes:</strong></p>
+<pre><code>IF order.type == "Rush":
+    schedule using EDD
+ELSE:
+    schedule using SPT</code></pre>
+<div class="fragment">
+<p><strong>2. Time-Based Switching:</strong></p>
+<pre><code>IF current_time &lt; 3pm:
+    use SPT (maximize throughput)
+ELSE:
+    use EDD (meet end-of-day deadlines)</code></pre>
+</div>
+<div class="fragment">
+<p><strong>3. Threshold Rules:</strong></p>
+<pre><code>IF (due_date - current_time) &lt; 30 minutes:
+    prioritize this order (emergency mode)
+ELSE:
+    use normal SPT rule</code></pre>
 </div>
 </section>
 <section id="key-takeaways" class="slide level2">
@@ -933,255 +928,6 @@ Dr.&nbsp;Tobias Vlćek
 </table>
 </section></section>
 <section>
-<section id="two-stage-scheduling" class="title-slide slide level1 title center">
-<h1><span class="flow">Two-Stage Scheduling</span></h1>
-
-</section>
-<section id="the-real-challenge-flow-shops" class="slide level2">
-<h2>The Real Challenge: Flow Shops</h2>
-<p><span class="highlight">Most manufacturing involves multiple stages</span></p>
-<div class="fragment">
-<p><strong>Flow Shop:</strong> Jobs must visit machines in the <strong>same order</strong></p>
-<ul>
-<li class="fragment">Car manufacturing: Welding → Painting → Assembly</li>
-<li class="fragment">Bicycle factory: Assembly → Painting</li>
-<li class="fragment">Electronics: Circuit board → Component placement → Testing</li>
-<li class="fragment">Restaurant: Cooking → Plating → Service</li>
-</ul>
-</div>
-<div class="fragment">
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>Key difference from single-machine:</strong> Machine 2 must wait for Machine 1 to finish each job. This creates <strong>idle time</strong> and <strong>blocking</strong>.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="two-stage-example-setup" class="slide level2">
-<h2>Two-Stage Example Setup</h2>
-<p><span class="highlight">3 Bicycles through Assembly → Painting</span></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Bike</th>
-<th>Assembly Time</th>
-<th>Painting Time</th>
-<th>Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>X</td>
-<td>30 min</td>
-<td>20 min</td>
-<td>50</td>
-</tr>
-<tr class="even">
-<td>Y</td>
-<td>20 min</td>
-<td>30 min</td>
-<td>50</td>
-</tr>
-<tr class="odd">
-<td>Z</td>
-<td>15 min</td>
-<td>15 min</td>
-<td>30</td>
-</tr>
-</tbody>
-</table>
-<div class="fragment">
-<p><span class="question">Question</span>: If we process in order X → Y → Z, what happens?</p>
-</div>
-</section>
-<section id="fifo-x-y-z" class="slide level2">
-<h2>FIFO: X → Y → Z</h2>
-<div id="27b846a1" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-11-output-1.png" width="1139" height="417"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-warning callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Painting station waits 30 minutes for first bike! Total time = <strong>95 minutes</strong></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="why-simple-rules-struggle" class="slide level2">
-<h2>Why Simple Rules Struggle</h2>
-<p><span class="highlight">Each rule has ambiguities in two-stage problems</span></p>
-<div class="fragment">
-<p><strong>SPT - Shortest Processing Time:</strong></p>
-<ul>
-<li>Sort by assembly time? → Favors Z (15 min)</li>
-<li>Sort by painting time? → Favors X (20 min)</li>
-<li>Sort by total time? → All tied (50, 50, 30)</li>
-</ul>
-</div>
-<div class="fragment">
-<p><strong>EDD - Earliest Due Date:</strong> Doesn’t minimize idle time or makespan</p>
-</div>
-<div class="fragment">
-<p><strong>FIFO:</strong> Arbitrary order, no optimization</p>
-</div>
-<div class="fragment">
-<p><span class="question">Question</span>: Is there a better approach for minimizing makespan?</p>
-</div>
-</section>
-<section id="johnsons-algorithm-the-intuition" class="slide level2">
-<h2>Johnson’s Algorithm: The Intuition</h2>
-<p><span class="highlight">Why does Johnson’s work? Let’s understand the logic first</span></p>
-<div class="fragment">
-<p><strong>Think about bottlenecks in a two-stage flow:</strong></p>
-<ul>
-<li class="fragment"><strong>Machine 2</strong> sits idle waiting for Machine 1 to finish</li>
-<li class="fragment"><strong>Goal:</strong> Minimize that idle time</li>
-</ul>
-</div>
-<div class="fragment">
-<p><strong>Key Observation:</strong></p>
-<ul>
-<li class="fragment">If a job is <strong>quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 1 finishes fast, Machine 2 starts sooner!)</li>
-<li class="fragment">If a job is <strong>quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
-</ul>
-</div>
-</section>
-<section id="johnsons-algorithm-the-rule" class="slide level2">
-<h2>Johnson’s Algorithm: The Rule</h2>
-<p><span class="highlight">Four simple steps to optimal scheduling</span></p>
-<div class="fragment">
-<ol type="1">
-<li class="fragment"><strong>Find minimum time</strong> across both machines for all remaining jobs</li>
-<li class="fragment"><strong>If minimum is on M1:</strong> Schedule this job at <strong>earliest</strong> open position</li>
-<li class="fragment"><strong>If minimum is on M2:</strong> Schedule this job at <strong>latest</strong> open position</li>
-<li class="fragment"><strong>Repeat</strong> until all jobs scheduled</li>
-</ol>
-</div>
-<div class="fragment">
-<div class="callout callout-note callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Johnson proved this <strong>greedy choice property</strong> guarantees global optimum for makespan in 2-machine flow shops!</p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p><span class="highlight">Let’s apply this to our 3 bikes…</span></p>
-</div>
-</section>
-<section id="applying-johnsons-algorithm" class="slide level2">
-<h2>Applying Johnson’s Algorithm</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Bike</th>
-<th>Assembly</th>
-<th>Painting</th>
-<th>Min Time</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>X</td>
-<td>30</td>
-<td>20</td>
-<td>20 (P)</td>
-</tr>
-<tr class="even">
-<td>Y</td>
-<td>20</td>
-<td>30</td>
-<td>20 (A)</td>
-</tr>
-<tr class="odd">
-<td>Z</td>
-<td>15</td>
-<td>15</td>
-<td>15 (A/P)</td>
-</tr>
-</tbody>
-</table>
-<ol type="1">
-<li class="fragment">Min time = 15 (Z, assembly) → <strong>Schedule Z first</strong></li>
-<li class="fragment">Min time = 20 (Y, assembly) → <strong>Schedule Y second</strong></li>
-<li class="fragment">Min time = 20 (X, painting) → <strong>Schedule X last</strong></li>
-</ol>
-<div class="fragment">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Easy, right?</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="johnsons-schedule-z-y-x" class="slide level2">
-<h2>Johnson’s Schedule: Z → Y → X</h2>
-<div id="4517f65e" class="cell" data-execution_count="11">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-12-output-1.png" width="1139" height="417"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="callout callout-tip callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p><strong>10-minute improvement!</strong> (85 vs 95) - 10.5% faster with optimal ordering</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="beyond-two-machines" class="slide level2">
-<h2>Beyond Two Machines</h2>
-<p><span class="highlight">What about 3+ machines?</span></p>
-<div class="fragment">
-<p><strong>Bad news:</strong></p>
-<ul>
-<li>3+ machine flow shop is <strong>NP-hard</strong></li>
-<li>No polynomial optimal algorithm known</li>
-</ul>
-</div>
-<div class="fragment">
-<p><strong>Good news:</strong></p>
-<ul>
-<li>Heuristics work well in practice</li>
-<li>Simulated annealing, genetic algorithms</li>
-</ul>
-</div>
-</section></section>
-<section>
 <section id="weighted-scheduling" class="title-slide slide level1 title center">
 <h1><span class="flow">Weighted Scheduling</span></h1>
 
@@ -1322,6 +1068,257 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
+<section id="two-stage-scheduling" class="title-slide slide level1 title center">
+<h1><span class="flow">Two-Stage Scheduling</span></h1>
+
+</section>
+<section id="the-real-challenge-flow-shops" class="slide level2">
+<h2>The Real Challenge: Flow Shops</h2>
+<p><span class="highlight">Most manufacturing involves multiple stages</span></p>
+<div class="fragment">
+<p><strong>Flow Shop:</strong> Jobs must visit machines in the <strong>same order</strong></p>
+<ul>
+<li class="fragment">Car manufacturing: Welding → Painting → Assembly</li>
+<li class="fragment">Bicycle factory: Assembly → Painting</li>
+<li class="fragment">Electronics: Circuit board → Component placement → Testing</li>
+<li class="fragment">Restaurant: Cooking → Plating → Service</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Key difference from single-machine:</strong> Machine 2 must wait for Machine 1 to finish each job. This creates <strong>idle time</strong> and <strong>blocking</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="two-stage-example-setup" class="slide level2">
+<h2>Two-Stage Example Setup</h2>
+<p><span class="highlight">3 Bicycles through Assembly → Painting</span></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Bike</th>
+<th>Assembly Time</th>
+<th>Painting Time</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>30 min</td>
+<td>20 min</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td>Y</td>
+<td>20 min</td>
+<td>30 min</td>
+<td>50</td>
+</tr>
+<tr class="odd">
+<td>Z</td>
+<td>15 min</td>
+<td>15 min</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><span class="question">Question</span>: If we process in order X → Y → Z, what happens?</p>
+</div>
+</section>
+<section id="fifo-x-y-z" class="slide level2">
+<h2>FIFO: X → Y → Z</h2>
+<div id="fd4abb37" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-10-output-1.png" width="1139" height="417"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Painting station waits 30 minutes for first bike! Total time = <strong>95 minutes</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-simple-rules-struggle" class="slide level2">
+<h2>Why Simple Rules Struggle</h2>
+<p><span class="highlight">Each rule has ambiguities in two-stage problems</span></p>
+<div class="fragment">
+<p><strong>SPT - Shortest Processing Time:</strong></p>
+<ul>
+<li>Sort by assembly time? → Favors Z (15 min)</li>
+<li>Sort by painting time? → Favors X (20 min)</li>
+<li>Sort by total time? → All tied (50, 50, 30)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>EDD - Earliest Due Date:</strong> Doesn’t minimize idle time or makespan</p>
+</div>
+<div class="fragment">
+<p><strong>FIFO:</strong> Arbitrary order, no optimization</p>
+</div>
+<div class="fragment">
+<p><span class="question">Question</span>: Is there a better approach for minimizing makespan?</p>
+</div>
+</section>
+<section id="johnsons-algorithm-the-intuition" class="slide level2">
+<h2>Johnson’s Algorithm: The Intuition</h2>
+<div class="fragment">
+<p><span class="highlight">Why does Johnson’s work? Let’s understand the logic first</span></p>
+</div>
+<div class="fragment">
+<p><strong>Think about bottlenecks in a two-stage flow:</strong></p>
+<ul>
+<li class="fragment"><strong>Machine 2</strong> sits idle waiting for Machine 1 to finish</li>
+<li class="fragment"><strong>Goal:</strong> Minimize that idle time</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Key Observation:</strong></p>
+<ul>
+<li class="fragment">If a job is <strong>quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 1 finishes fast, Machine 2 starts sooner!)</li>
+<li class="fragment">If a job is <strong>quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
+</ul>
+</div>
+</section>
+<section id="johnsons-algorithm-the-rule" class="slide level2">
+<h2>Johnson’s Algorithm: The Rule</h2>
+<p><span class="highlight">Four simple steps to optimal scheduling</span></p>
+<div class="fragment">
+<ol type="1">
+<li class="fragment"><strong>Find minimum time</strong> across both machines for all remaining jobs</li>
+<li class="fragment"><strong>If minimum is on M1:</strong> Schedule this job at <strong>earliest</strong> open position</li>
+<li class="fragment"><strong>If minimum is on M2:</strong> Schedule this job at <strong>latest</strong> open position</li>
+<li class="fragment"><strong>Repeat</strong> until all jobs scheduled</li>
+</ol>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Johnson proved this <strong>greedy choice property</strong> guarantees global optimum for makespan in 2-machine flow shops!</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><span class="highlight">Let’s apply this to our 3 bikes…</span></p>
+</div>
+</section>
+<section id="applying-johnsons-algorithm" class="slide level2">
+<h2>Applying Johnson’s Algorithm</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Bike</th>
+<th>Assembly</th>
+<th>Painting</th>
+<th>Min Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>30</td>
+<td>20</td>
+<td>20 (P)</td>
+</tr>
+<tr class="even">
+<td>Y</td>
+<td>20</td>
+<td>30</td>
+<td>20 (A)</td>
+</tr>
+<tr class="odd">
+<td>Z</td>
+<td>15</td>
+<td>15</td>
+<td>15 (A/P)</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li class="fragment">Min time = 15 (Z, assembly) → <strong>Schedule Z first</strong></li>
+<li class="fragment">Min time = 20 (Y, assembly) → <strong>Schedule Y second</strong></li>
+<li class="fragment">Min time = 20 (X, painting) → <strong>Schedule X last</strong></li>
+</ol>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Easy, right?</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="johnsons-schedule-z-y-x" class="slide level2">
+<h2>Johnson’s Schedule: Z → Y → X</h2>
+<div id="665c1536" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-11-output-1.png" width="1139" height="417"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>10-minute improvement!</strong> (85 vs 95) - 10.5% faster with optimal ordering</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="beyond-two-machines" class="slide level2">
+<h2>Beyond Two Machines</h2>
+<p><span class="highlight">What about 3+ machines?</span></p>
+<div class="fragment">
+<p><strong>Bad news:</strong></p>
+<ul>
+<li>3+ machine flow shop is <strong>NP-hard</strong></li>
+<li>No polynomial optimal algorithm known</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Good news:</strong></p>
+<ul>
+<li>Heuristics work well in practice</li>
+<li>Simulated annealing, genetic algorithms</li>
+</ul>
+</div>
+</section></section>
+<section>
 <section id="advanced" class="title-slide slide level1 title center">
 <h1><span class="flow">Advanced</span></h1>
 
@@ -1379,28 +1376,6 @@ Dr.&nbsp;Tobias Vlćek
 <li>Processing times, break downs, and other unforeseen events</li>
 </ul></li>
 </ul>
-</div>
-</section>
-<section id="hybrid-scheduling-strategies" class="slide level2">
-<h2>Hybrid Scheduling Strategies</h2>
-<p><strong>1. Priority Classes:</strong></p>
-<pre><code>IF order.type == "Rush":
-    schedule using EDD
-ELSE:
-    schedule using SPT</code></pre>
-<div class="fragment">
-<p><strong>2. Time-Based Switching:</strong></p>
-<pre><code>IF current_time &lt; 3pm:
-    use SPT (maximize throughput)
-ELSE:
-    use EDD (meet end-of-day deadlines)</code></pre>
-</div>
-<div class="fragment">
-<p><strong>3. Threshold Rules:</strong></p>
-<pre><code>IF (due_date - current_time) &lt; 30 minutes:
-    prioritize this order (emergency mode)
-ELSE:
-    use normal SPT rule</code></pre>
 </div>
 </section>
 <section id="common-scheduling-mistakes-i" class="slide level2">
