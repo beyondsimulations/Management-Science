@@ -16,7 +16,7 @@ format:
 
 [Operations Manager's Friday Crisis:]{.invert-font}
 
-["It's Friday 2 PM. We just received [16 custom bicycle orders]{.highlight} that must be completed by Monday. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Saturday 8 PM. How do we schedule production to minimize costs?"]{.invert-font .fragment}
+["It’s Friday at 06:00 in the morning. We just received [16 custom bicycle orders]{.highlight} that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?"]{.invert-font .fragment}
 
 ## The Manufacturing Challenge
 
