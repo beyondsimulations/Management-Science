@@ -97,6 +97,20 @@ print("Great, the purchase simulation is correct!")
 #
 # Using your simulated data from the previous task, calculate key
 # probabilities.
+#
+# > **Boolean Operations and Probabilities**
+# >
+# > ``` python
+# > # Create boolean array (True/False)
+# > data = np.array([50, 150, 80, 200])
+# > high_values = data > 100  # [False, True, False, True]
+# >
+# > # Calculate probability: mean of boolean = proportion of True
+# > prob = (data > 100).mean()  # 0.5 = 50%
+# >
+# > # Combine conditions with & (and) or | (or)
+# > prob_range = ((data >= 80) & (data <= 150)).mean()
+# > ```
 
 # %%
 # YOUR CODE BELOW
@@ -110,6 +124,7 @@ prob_high =
 prob_low =
 
 # Probability of being within one std dev of mean (80-120)
+# Hint: Use & to combine two conditions
 prob_normal =
 
 # %%
@@ -259,6 +274,20 @@ print(sample_df.iloc[random_indices][['customers', 'profit']])
 # ## Exercise 2.1 - Run Multiple Simulations
 #
 # Simulate 10,000 days of Bean Counter operations and analyze the results.
+#
+# > **Simulation Loop Pattern**
+# >
+# > ``` python
+# > # Standard Monte Carlo pattern
+# > results = []  # Empty list to collect results
+# >
+# > for i in range(n_simulations):
+# >     result = simulate_function()  # Run one simulation
+# >     results.append(result)        # Add to list
+# >
+# > # Convert to DataFrame for analysis
+# > df = pd.DataFrame(results)
+# > ```
 
 # %%
 # YOUR CODE BELOW
@@ -271,10 +300,10 @@ for i in range(n_simulations):
 
 
 # Calculate key metrics (Tip: a DataFrame could help here!)
-df =
-mean_profit =
-prob_loss =
-max_profit =
+df =  # Convert results to DataFrame
+mean_profit =  # Average of 'profit' column
+prob_loss =  # Probability profit < 0
+max_profit =  # Maximum profit
 
 # %%
 # Don't modify below

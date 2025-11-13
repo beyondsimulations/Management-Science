@@ -360,6 +360,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">07 Local</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_07_local_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_01_local_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-01 Routing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_02_routing_competition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
  <span class="menu-text">***</span>
   </li>
@@ -371,13 +400,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignments/assignment_00.html" class="sidebar-item-text sidebar-link">
@@ -511,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Cells marked with “YOUR CODE BELOW” expect you to write code. Test your solutions with the provided assertions. Work through sections in order as each builds on previous concepts!</p>
 </div>
 </div>
-<div id="fdd2f0e8" class="cell" data-execution_count="1">
+<div id="2b511f57" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -549,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Due Time</strong>: When the customer needs it (measured from start of your shift)</li>
 </ul>
 <p><strong>Note</strong>: No arrival times! All orders are available at time 0.</p>
-<div id="06527aaf" class="cell" data-execution_count="2">
+<div id="51b94cc5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TechCorp Corporate Event - 20 pre-orders</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># All available at start (time 0)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
@@ -568,9 +597,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        due <span class="op">=</span> np.random.randint(<span class="dv">60</span>, <span class="dv">90</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    corporate_orders.append({</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id'</span>: <span class="ss">f'C</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">:02d}</span><span class="ss">'</span>,</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'processing'</span>: processing,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'due'</span>: due</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id'</span>: <span class="ss">f'C</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">:02d}</span><span class="ss">'</span>, <span class="co"># Order-ID</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'processing'</span>: processing, <span class="co"># Time needed to process each order</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'due'</span>: due <span class="co"># Time when each order is due</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    })</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>df_corporate <span class="op">=</span> pd.DataFrame(corporate_orders)</span>
@@ -608,7 +637,7 @@ First 10 orders:
 </section>
 <section id="key-performance-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="key-performance-metrics">Key Performance Metrics</h2>
-<div id="38960cb4" class="cell" data-execution_count="3">
+<div id="df9c1c9e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_metrics(schedule_df):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate key performance metrics for a schedule</span></span>
@@ -637,27 +666,48 @@ First 10 orders:
 <p><strong>Slack</strong> tells you how much scheduling flexibility exists for each order. It’s the time buffer before an order becomes late.</p>
 <p><strong>Formula:</strong> Slack = Due Time - Processing Time</p>
 <p>Why? If an order takes 5 minutes and is due at 20 minutes, you have 15 minutes of slack (can start anytime from 0 to 15).</p>
-<div id="440324a6" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate slack for each order</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a 'slack' column to df_corporate</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_corporate[<span class="st">'slack'</span>] <span class="op">=</span> <span class="co"># Calculate: due - processing</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the most urgent order (minimum slack)</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>most_urgent <span class="op">=</span> <span class="co"># Find the order ID with minimum slack</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="e95178b0" class="cell" data-execution_count="6">
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>DataFrame Column Operations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new column from calculation</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'new_col'</span>] <span class="op">=</span> df[<span class="st">'col1'</span>] <span class="op">-</span> df[<span class="st">'col2'</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find index of minimum value</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>min_idx <span class="op">=</span> df[<span class="st">'column'</span>].idxmin()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Get value from specific row</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> df.loc[min_idx, <span class="st">'column_name'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="91761ac8" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate slack for each order</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a 'slack' column to df_corporate</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df_corporate[<span class="st">'slack'</span>] <span class="op">=</span> <span class="co"># Calculate: due - processing</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the most urgent order (minimum slack)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: Use idxmin() to find index, then .loc[] to get the ID</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>most_urgent <span class="op">=</span> <span class="co"># Find the order ID with minimum slack</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="d5ea4735" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'slack'</span> <span class="kw">in</span> df_corporate.columns, <span class="st">"Add a 'slack' column to df_corporate"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(df_corporate[<span class="st">'slack'</span>]) <span class="op">==</span> <span class="dv">20</span>, <span class="st">"Should calculate slack for all 20 orders"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (df_corporate[<span class="st">'slack'</span>] <span class="op">==</span> df_corporate[<span class="st">'due'</span>] <span class="op">-</span> df_corporate[<span class="st">'processing'</span>]).<span class="bu">all</span>(), <span class="op">\</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Slack formula: due - processing"</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Perfect! Most urgent order: </span><span class="sc">{</span>most_urgent<span class="sc">}</span><span class="ss"> with </span><span class="sc">{</span>df_corporate[<span class="st">'slack'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss"> minutes slack"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Top 5 most urgent orders:"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_corporate.nsmallest(<span class="dv">5</span>, <span class="st">'slack'</span>)[[<span class="st">'id'</span>, <span class="st">'processing'</span>, <span class="st">'due'</span>, <span class="st">'slack'</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'slack'</span> <span class="kw">in</span> df_corporate.columns, <span class="st">"Add a 'slack' column to df_corporate"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">len</span>(df_corporate[<span class="st">'slack'</span>]) <span class="op">==</span> <span class="dv">20</span>, <span class="st">"Should calculate slack for all 20 orders"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (df_corporate[<span class="st">'slack'</span>] <span class="op">==</span> df_corporate[<span class="st">'due'</span>] <span class="op">-</span> df_corporate[<span class="st">'processing'</span>]).<span class="bu">all</span>(), <span class="op">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Slack formula: due - processing"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Perfect! Most urgent order: </span><span class="sc">{</span>most_urgent<span class="sc">}</span><span class="ss"> with </span><span class="sc">{</span>df_corporate[<span class="st">'slack'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss"> minutes slack"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Top 5 most urgent orders:"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_corporate.nsmallest(<span class="dv">5</span>, <span class="st">'slack'</span>)[[<span class="st">'id'</span>, <span class="st">'processing'</span>, <span class="st">'due'</span>, <span class="st">'slack'</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -686,35 +736,35 @@ First 10 orders:
 </div>
 </div>
 </div>
-<div id="130b0653" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_fifo_static(orders):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using First In, First Out (FIFO)</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Process in original order</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort by ID to maintain original order</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> <span class="bu">sorted</span>(orders, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">'id'</span>])</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate completion times</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> order <span class="kw">in</span> scheduled:</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># In static scheduling, all orders are available at time 0</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># So we just start immediately after the previous order</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> order[<span class="st">'processing'</span>]</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> order[<span class="st">'completion'</span>]</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Test FIFO</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Why .copy()? We don't want to modify the original 'orders' list</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Each scheduling function will modify the orders, so we give it a copy</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>fifo_schedule <span class="op">=</span> schedule_fifo_static(corporate_orders.copy())</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>df_fifo <span class="op">=</span> pd.DataFrame(fifo_schedule)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"FIFO Schedule (first 10 orders):"</span>)</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_fifo.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>, <span class="st">'due'</span>]])</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total makespan: </span><span class="sc">{</span>df_fifo[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a94f3385" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_fifo_static(orders):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using First In, First Out (FIFO)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Process in original order</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort by ID to maintain original order</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> <span class="bu">sorted</span>(orders, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">'id'</span>])</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate completion times</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> order <span class="kw">in</span> scheduled:</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># In static scheduling, all orders are available at time 0</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># So we just start immediately after the previous order</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> order[<span class="st">'processing'</span>]</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> order[<span class="st">'completion'</span>]</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Test FIFO</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Why .copy()? We don't want to modify the original 'orders' list</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Each scheduling function will modify the orders, so we give it a copy</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>fifo_schedule <span class="op">=</span> schedule_fifo_static(corporate_orders.copy())</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>df_fifo <span class="op">=</span> pd.DataFrame(fifo_schedule)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"FIFO Schedule (first 10 orders):"</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_fifo.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>, <span class="st">'due'</span>]])</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total makespan: </span><span class="sc">{</span>df_fifo[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>FIFO Schedule (first 10 orders):
     id  processing  start  completion  due
@@ -736,31 +786,31 @@ Total makespan: 122 minutes</code></pre>
 <section id="rule-2-spt-shortest-processing-time" class="level2">
 <h2 class="anchored" data-anchor-id="rule-2-spt-shortest-processing-time">Rule 2: SPT (Shortest Processing Time)</h2>
 <p>Now we implement SPT to always process the shortest job next and to process the quickest orders first to minimize average wait times.</p>
-<div id="56fee72d" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_spt_static(orders):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using Shortest Processing Time (SPT)</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Process shortest jobs first</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort by processing time (shortest first)</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> <span class="bu">sorted</span>(orders, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">'processing'</span>])</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate completion times</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> order <span class="kw">in</span> scheduled:</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> order[<span class="st">'processing'</span>]</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> order[<span class="st">'completion'</span>]</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SPT</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>spt_schedule <span class="op">=</span> schedule_spt_static(corporate_orders.copy())</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>df_spt <span class="op">=</span> pd.DataFrame(spt_schedule)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SPT Schedule (first 10 orders - sorted by processing time):"</span>)</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_spt.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>, <span class="st">'due'</span>]])</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total makespan: </span><span class="sc">{</span>df_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2c17569b" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_spt_static(orders):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using Shortest Processing Time (SPT)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Process shortest jobs first</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort by processing time (shortest first)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> <span class="bu">sorted</span>(orders, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">'processing'</span>])</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate completion times</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> order <span class="kw">in</span> scheduled:</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> order[<span class="st">'processing'</span>]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> order[<span class="st">'completion'</span>]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Test SPT</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>spt_schedule <span class="op">=</span> schedule_spt_static(corporate_orders.copy())</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>df_spt <span class="op">=</span> pd.DataFrame(spt_schedule)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SPT Schedule (first 10 orders - sorted by processing time):"</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_spt.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>, <span class="st">'due'</span>]])</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total makespan: </span><span class="sc">{</span>df_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>SPT Schedule (first 10 orders - sorted by processing time):
     id  processing  start  completion  due
@@ -792,40 +842,40 @@ Total makespan: 122 minutes</code></pre>
 </div>
 </div>
 </div>
-<div id="73bbd17f" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_edd_static(orders):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using Earliest Due Date (EDD)</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Process orders with earliest deadlines first</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort by due date (earliest first)</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate completion times</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> order <span class="kw">in</span> scheduled:</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'start'</span>] <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'completion'</span>] <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your EDD implementation</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>edd_schedule <span class="op">=</span> schedule_edd_static(corporate_orders.copy())</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>df_edd <span class="op">=</span> pd.DataFrame(edd_schedule)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a1c52267" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_edd_static(orders):</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using Earliest Due Date (EDD)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Process orders with earliest deadlines first</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sort by due date (earliest first)</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate completion times</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> order <span class="kw">in</span> scheduled:</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'start'</span>] <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        order[<span class="st">'completion'</span>] <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Test your EDD implementation</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>edd_schedule <span class="op">=</span> schedule_edd_static(corporate_orders.copy())</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>df_edd <span class="op">=</span> pd.DataFrame(edd_schedule)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c7087341" class="cell" data-execution_count="11">
+<div id="d3194afc" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> df_edd.iloc[<span class="dv">0</span>][<span class="st">'due'</span>] <span class="op">&lt;=</span> df_edd.iloc[<span class="dv">1</span>][<span class="st">'due'</span>], <span class="st">"First order should have earliest due date"</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> df_edd[<span class="st">'completion'</span>].<span class="bu">max</span>() <span class="op">==</span> df_fifo[<span class="st">'completion'</span>].<span class="bu">max</span>(), <span class="st">"All schedules have same makespan"</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>total_tardiness <span class="op">=</span> np.maximum(<span class="dv">0</span>, df_edd[<span class="st">'completion'</span>] <span class="op">-</span> df_edd[<span class="st">'due'</span>]).<span class="bu">sum</span>()</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"EDD implementation correct!"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">EDD Schedule (first 10 orders - sorted by due date):"</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_edd.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'due'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>]])</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total tardiness: </span><span class="sc">{</span>total_tardiness<span class="sc">:.0f}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> df_edd.iloc[<span class="dv">0</span>][<span class="st">'due'</span>] <span class="op">&lt;=</span> df_edd.iloc[<span class="dv">1</span>][<span class="st">'due'</span>], <span class="st">"First order should have earliest due date"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> df_edd[<span class="st">'completion'</span>].<span class="bu">max</span>() <span class="op">==</span> df_fifo[<span class="st">'completion'</span>].<span class="bu">max</span>(), <span class="st">"All schedules have same makespan"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>total_tardiness <span class="op">=</span> np.maximum(<span class="dv">0</span>, df_edd[<span class="st">'completion'</span>] <span class="op">-</span> df_edd[<span class="st">'due'</span>]).<span class="bu">sum</span>()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"EDD implementation correct!"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">EDD Schedule (first 10 orders - sorted by due date):"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_edd.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'due'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>]])</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total tardiness: </span><span class="sc">{</span>total_tardiness<span class="sc">:.0f}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -833,8 +883,8 @@ Total makespan: 122 minutes</code></pre>
 <section id="section-3---visualizing-schedules" class="level1">
 <h1>Section 3 - Visualizing Schedules</h1>
 <p>A picture is worth a thousand schedules! Let’s create Gantt charts to visualize how each rule performs. Try to use generate AI to come up with the code to create a beautiful Gantt chart here based on the results of your schedule.</p>
-<div id="5a251347" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="97deb024" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="section-4---performance-comparison" class="level1">
@@ -855,77 +905,104 @@ Total makespan: 122 minutes</code></pre>
 <ul>
 <li>The <code>calculate_metrics()</code> function is already defined - you just call it!</li>
 <li>It returns a dictionary with metrics like <code>{'makespan': 29, 'avg_flow_time': 15.2, ...}</code></li>
-<li>To create a DataFrame from dictionaries, use: <code>pd.DataFrame([DICTIONARY])</code></li>
+<li>Pass the DataFrame to the function: <code>calculate_metrics(df_fifo)</code></li>
 </ul>
 </div>
 </div>
-<div id="0a73401b" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for each schedule</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>metrics_fifo <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>metrics_spt <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>metrics_edd <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison DataFrame</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'FIFO'</span>: metrics_fifo,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SPT'</span>: metrics_spt,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'EDD'</span>: metrics_edd</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>}).T</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Performance Comparison - Corporate Event:"</span>)</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comparison.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="d8565f7c" class="cell" data-execution_count="15">
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Creating DataFrames from Dictionaries
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dictionary of dictionaries</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Method_A'</span>: {<span class="st">'metric1'</span>: <span class="dv">10</span>, <span class="st">'metric2'</span>: <span class="dv">20</span>},</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Method_B'</span>: {<span class="st">'metric1'</span>: <span class="dv">15</span>, <span class="st">'metric2'</span>: <span class="dv">18</span>}</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame with .T to transpose (swap rows/columns)</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data).T</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Result:</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#          metric1  metric2</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Method_A      10       20</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Method_B      15       18</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="ffff5160" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for each schedule</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: calculate_metrics(df_fifo) returns a dictionary</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>metrics_fifo <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>metrics_spt <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>metrics_edd <span class="op">=</span> <span class="co"># YOUR CODE</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison DataFrame</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># The .T transposes so methods are rows</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'FIFO'</span>: metrics_fifo,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SPT'</span>: metrics_spt,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'EDD'</span>: metrics_edd</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>}).T</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Performance Comparison - Corporate Event:"</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(comparison.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="b0b2fa41" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> comparison.loc[<span class="st">'SPT'</span>, <span class="st">'avg_flow_time'</span>] <span class="op">&lt;=</span> comparison.loc[<span class="st">'FIFO'</span>, <span class="st">'avg_flow_time'</span>], <span class="op">\</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SPT should have best average flow time"</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> comparison.loc[<span class="st">'EDD'</span>, <span class="st">'total_tardiness'</span>] <span class="op">&lt;=</span> comparison.loc[<span class="st">'FIFO'</span>, <span class="st">'total_tardiness'</span>], <span class="op">\</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EDD should minimize tardiness"</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> comparison.loc[<span class="st">'EDD'</span>, <span class="st">'total_tardiness'</span>] <span class="op">&lt;=</span> comparison.loc[<span class="st">'SPT'</span>, <span class="st">'total_tardiness'</span>], <span class="op">\</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EDD should beat SPT on tardiness"</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✓ Excellent analysis!"</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Key Insights:"</span>)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" SPT reduces avg flow time by </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> comparison.loc[<span class="st">'SPT'</span>, <span class="st">'avg_flow_time'</span>]<span class="op">/</span>comparison.loc[<span class="st">'FIFO'</span>, <span class="st">'avg_flow_time'</span>])<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">% vs FIFO"</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" EDD reduces tardiness by </span><span class="sc">{</span>comparison<span class="sc">.</span>loc[<span class="st">'FIFO'</span>, <span class="st">'total_tardiness'</span>] <span class="op">-</span> comparison<span class="sc">.</span>loc[<span class="st">'EDD'</span>, <span class="st">'total_tardiness'</span>]<span class="sc">:.0f}</span><span class="ss"> minutes vs FIFO"</span>)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" EDD reduces late orders from </span><span class="sc">{</span>comparison<span class="sc">.</span>loc[<span class="st">'FIFO'</span>, <span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss"> to </span><span class="sc">{</span>comparison<span class="sc">.</span>loc[<span class="st">'EDD'</span>, <span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" All methods have same makespan: </span><span class="sc">{</span>comparison[<span class="st">'makespan'</span>]<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.0f}</span><span class="ss"> minutes (sum of all processing times)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> comparison.loc[<span class="st">'SPT'</span>, <span class="st">'avg_flow_time'</span>] <span class="op">&lt;=</span> comparison.loc[<span class="st">'FIFO'</span>, <span class="st">'avg_flow_time'</span>], <span class="op">\</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SPT should have best average flow time"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> comparison.loc[<span class="st">'EDD'</span>, <span class="st">'total_tardiness'</span>] <span class="op">&lt;=</span> comparison.loc[<span class="st">'FIFO'</span>, <span class="st">'total_tardiness'</span>], <span class="op">\</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EDD should minimize tardiness"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> comparison.loc[<span class="st">'EDD'</span>, <span class="st">'total_tardiness'</span>] <span class="op">&lt;=</span> comparison.loc[<span class="st">'SPT'</span>, <span class="st">'total_tardiness'</span>], <span class="op">\</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EDD should beat SPT on tardiness"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✓ Excellent analysis!"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Key Insights:"</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" SPT reduces avg flow time by </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> comparison.loc[<span class="st">'SPT'</span>, <span class="st">'avg_flow_time'</span>]<span class="op">/</span>comparison.loc[<span class="st">'FIFO'</span>, <span class="st">'avg_flow_time'</span>])<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">% vs FIFO"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" EDD reduces tardiness by </span><span class="sc">{</span>comparison<span class="sc">.</span>loc[<span class="st">'FIFO'</span>, <span class="st">'total_tardiness'</span>] <span class="op">-</span> comparison<span class="sc">.</span>loc[<span class="st">'EDD'</span>, <span class="st">'total_tardiness'</span>]<span class="sc">:.0f}</span><span class="ss"> minutes vs FIFO"</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" EDD reduces late orders from </span><span class="sc">{</span>comparison<span class="sc">.</span>loc[<span class="st">'FIFO'</span>, <span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss"> to </span><span class="sc">{</span>comparison<span class="sc">.</span>loc[<span class="st">'EDD'</span>, <span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" All methods have same makespan: </span><span class="sc">{</span>comparison[<span class="st">'makespan'</span>]<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">:.0f}</span><span class="ss"> minutes (sum of all processing times)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="visualizing-the-trade-offs" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-trade-offs">Visualizing the Trade-offs</h2>
-<div id="4e29803d" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create visual comparison</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>metrics_to_plot <span class="op">=</span> [<span class="st">'makespan'</span>, <span class="st">'avg_flow_time'</span>, <span class="st">'total_tardiness'</span>, <span class="st">'late_orders'</span>]</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#537E8F'</span>, <span class="st">'#F6B265'</span>, <span class="st">'#DB6B6B'</span>]</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, metric <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, metrics_to_plot):</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> [comparison.loc[rule, metric] <span class="cf">for</span> rule <span class="kw">in</span> [<span class="st">'FIFO'</span>, <span class="st">'SPT'</span>, <span class="st">'EDD'</span>]]</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    bars <span class="op">=</span> ax.bar([<span class="st">'FIFO'</span>, <span class="st">'SPT'</span>, <span class="st">'EDD'</span>], values, color<span class="op">=</span>colors, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Highlight the best performer</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    best_idx <span class="op">=</span> np.argmin(values)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_edgecolor(<span class="st">'black'</span>)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_linewidth(<span class="dv">2</span>)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    ax.set_title(metric.replace(<span class="st">'_'</span>, <span class="st">' '</span>).title(), fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Value'</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add value labels</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, values):</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        height <span class="op">=</span> bar.get_height()</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        ax.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="fl">2.</span>, height,</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f'</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">'</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>)</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Corporate Event: Static Scheduling Performance'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e3ac70b2" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create visual comparison</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>metrics_to_plot <span class="op">=</span> [<span class="st">'makespan'</span>, <span class="st">'avg_flow_time'</span>, <span class="st">'total_tardiness'</span>, <span class="st">'late_orders'</span>]</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#537E8F'</span>, <span class="st">'#F6B265'</span>, <span class="st">'#DB6B6B'</span>]</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, metric <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, metrics_to_plot):</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> [comparison.loc[rule, metric] <span class="cf">for</span> rule <span class="kw">in</span> [<span class="st">'FIFO'</span>, <span class="st">'SPT'</span>, <span class="st">'EDD'</span>]]</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    bars <span class="op">=</span> ax.bar([<span class="st">'FIFO'</span>, <span class="st">'SPT'</span>, <span class="st">'EDD'</span>], values, color<span class="op">=</span>colors, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Highlight the best performer</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    best_idx <span class="op">=</span> np.argmin(values)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_edgecolor(<span class="st">'black'</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_linewidth(<span class="dv">2</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    ax.set_title(metric.replace(<span class="st">'_'</span>, <span class="st">' '</span>).title(), fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Value'</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add value labels</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, values):</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>        height <span class="op">=</span> bar.get_height()</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        ax.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="fl">2.</span>, height,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f'</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">'</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Corporate Event: Static Scheduling Performance'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -964,46 +1041,46 @@ Total makespan: 122 minutes</code></pre>
 <li><strong>Real-time decisions</strong> - when the machine is free, which available order should you process?</li>
 </ul>
 <p>This requires <strong>dynamic dispatching</strong>: making decisions based only on orders that have already arrived.</p>
-<div id="d823d2f9" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate realistic Friday morning rush orders</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate realistic Friday morning rush orders</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>n_orders <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>friday_orders <span class="op">=</span> []</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>current_arrival <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_orders):</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Orders arrive with gaps (exponential inter-arrival times)</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        current_arrival <span class="op">+=</span> np.random.exponential(<span class="fl">2.0</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    processing <span class="op">=</span> np.random.choice([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], p<span class="op">=</span>[<span class="fl">0.1</span>,<span class="fl">0.5</span>, <span class="fl">0.4</span>])</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Due times are relative to arrival (customers want drinks soon after ordering)</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    order_urgency <span class="op">=</span> np.random.choice([<span class="st">'rush'</span>, <span class="st">'normal'</span>, <span class="st">'relaxed'</span>], p<span class="op">=</span>[<span class="fl">0.10</span>, <span class="fl">0.40</span>, <span class="fl">0.50</span>])</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> order_urgency <span class="op">==</span> <span class="st">'rush'</span>:</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        due <span class="op">=</span> current_arrival <span class="op">+</span> processing <span class="op">+</span> np.random.randint(<span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> order_urgency <span class="op">==</span> <span class="st">'normal'</span>:</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        due <span class="op">=</span> current_arrival <span class="op">+</span> processing <span class="op">+</span> np.random.randint(<span class="dv">4</span>, <span class="dv">6</span>)</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        due <span class="op">=</span> current_arrival <span class="op">+</span> processing <span class="op">+</span> np.random.randint(<span class="dv">7</span>, <span class="dv">12</span>)</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    friday_orders.append({</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id'</span>: <span class="ss">f'F</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">:02d}</span><span class="ss">'</span>,</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'arrival'</span>: <span class="bu">round</span>(current_arrival, <span class="dv">1</span>),</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'processing'</span>: processing,</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">'due'</span>: <span class="bu">round</span>(due, <span class="dv">1</span>)</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>df_friday <span class="op">=</span> pd.DataFrame(friday_orders)</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Friday Morning Rush - Flagship Store"</span>)</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total orders: </span><span class="sc">{</span><span class="bu">len</span>(friday_orders)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Arrival span: </span><span class="sc">{</span>df_friday[<span class="st">'arrival'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.1f}</span><span class="ss"> to </span><span class="sc">{</span>df_friday[<span class="st">'arrival'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total processing needed: </span><span class="sc">{</span>df_friday[<span class="st">'processing'</span>]<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">First 10 orders:"</span>)</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_friday.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'arrival'</span>, <span class="st">'processing'</span>, <span class="st">'due'</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fc71fb0a" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate realistic Friday morning rush orders</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate realistic Friday morning rush orders</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>n_orders <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>friday_orders <span class="op">=</span> []</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>current_arrival <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_orders):</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Orders arrive with gaps (exponential inter-arrival times)</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        current_arrival <span class="op">+=</span> np.random.exponential(<span class="fl">2.0</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    processing <span class="op">=</span> np.random.choice([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], p<span class="op">=</span>[<span class="fl">0.1</span>,<span class="fl">0.5</span>, <span class="fl">0.4</span>])</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Due times are relative to arrival (customers want drinks soon after ordering)</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    order_urgency <span class="op">=</span> np.random.choice([<span class="st">'rush'</span>, <span class="st">'normal'</span>, <span class="st">'relaxed'</span>], p<span class="op">=</span>[<span class="fl">0.10</span>, <span class="fl">0.40</span>, <span class="fl">0.50</span>])</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> order_urgency <span class="op">==</span> <span class="st">'rush'</span>:</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        due <span class="op">=</span> current_arrival <span class="op">+</span> processing <span class="op">+</span> np.random.randint(<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> order_urgency <span class="op">==</span> <span class="st">'normal'</span>:</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        due <span class="op">=</span> current_arrival <span class="op">+</span> processing <span class="op">+</span> np.random.randint(<span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>        due <span class="op">=</span> current_arrival <span class="op">+</span> processing <span class="op">+</span> np.random.randint(<span class="dv">7</span>, <span class="dv">12</span>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    friday_orders.append({</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'id'</span>: <span class="ss">f'F</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">:02d}</span><span class="ss">'</span>,</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'arrival'</span>: <span class="bu">round</span>(current_arrival, <span class="dv">1</span>),</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'processing'</span>: processing,</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">'due'</span>: <span class="bu">round</span>(due, <span class="dv">1</span>)</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>df_friday <span class="op">=</span> pd.DataFrame(friday_orders)</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Friday Morning Rush - Flagship Store"</span>)</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total orders: </span><span class="sc">{</span><span class="bu">len</span>(friday_orders)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Arrival span: </span><span class="sc">{</span>df_friday[<span class="st">'arrival'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.1f}</span><span class="ss"> to </span><span class="sc">{</span>df_friday[<span class="st">'arrival'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total processing needed: </span><span class="sc">{</span>df_friday[<span class="st">'processing'</span>]<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">First 10 orders:"</span>)</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_friday.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'arrival'</span>, <span class="st">'processing'</span>, <span class="st">'due'</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Friday Morning Rush - Flagship Store
 Total orders: 30
@@ -1028,16 +1105,16 @@ First 10 orders:
 <section id="what-happens-if-we-use-static-scheduling" class="level2">
 <h2 class="anchored" data-anchor-id="what-happens-if-we-use-static-scheduling">What Happens If We Use Static Scheduling?</h2>
 <p>Let’s see what goes wrong if we apply static SPT to this dynamic problem:</p>
-<div id="647c3f79" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply static SPT (sorts all orders, ignores arrivals)</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>friday_static_spt <span class="op">=</span> schedule_spt_static(friday_orders.copy())</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df_friday_static_spt <span class="op">=</span> pd.DataFrame(friday_static_spt)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Static SPT on Friday Rush:"</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_friday_static_spt.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'arrival'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>]])</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Notice the problem: Order </span><span class="sc">{</span>df_friday_static_spt<span class="sc">.</span>iloc[<span class="dv">0</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss"> starts at time 0"</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"But it doesn't arrive until time </span><span class="sc">{</span>df_friday_static_spt<span class="sc">.</span>iloc[<span class="dv">0</span>][<span class="st">'arrival'</span>]<span class="sc">:.1f}</span><span class="ss">!"</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"This creates </span><span class="sc">{</span>df_friday_static_spt<span class="sc">.</span>iloc[<span class="dv">0</span>][<span class="st">'arrival'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes of idle time."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b6a3a547" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply static SPT (sorts all orders, ignores arrivals)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>friday_static_spt <span class="op">=</span> schedule_spt_static(friday_orders.copy())</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df_friday_static_spt <span class="op">=</span> pd.DataFrame(friday_static_spt)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Static SPT on Friday Rush:"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_friday_static_spt.head(<span class="dv">10</span>)[[<span class="st">'id'</span>, <span class="st">'arrival'</span>, <span class="st">'processing'</span>, <span class="st">'start'</span>, <span class="st">'completion'</span>]])</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Notice the problem: Order </span><span class="sc">{</span>df_friday_static_spt<span class="sc">.</span>iloc[<span class="dv">0</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss"> starts at time 0"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"But it doesn't arrive until time </span><span class="sc">{</span>df_friday_static_spt<span class="sc">.</span>iloc[<span class="dv">0</span>][<span class="st">'arrival'</span>]<span class="sc">:.1f}</span><span class="ss">!"</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"This creates </span><span class="sc">{</span>df_friday_static_spt<span class="sc">.</span>iloc[<span class="dv">0</span>][<span class="st">'arrival'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes of idle time."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Static SPT on Friday Rush:
     id  arrival  processing  start  completion
@@ -1091,181 +1168,212 @@ This creates 5.6 minutes of idle time.</code></pre>
 <section id="exercise-6.1---implement-dynamic-spt" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-6.1---implement-dynamic-spt">Exercise 6.1 - Implement Dynamic SPT</h2>
 <p>Implement SPT with dynamic dispatching for Bean Counter.</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-body-container">
-<ul>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Dynamic Scheduling Logic
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Key difference from static:</strong> You can only schedule orders that have already arrived!</p>
+<ol type="1">
 <li>Use a <code>while remaining:</code> loop (not a for loop over pre-sorted list)</li>
 <li>Filter to <code>available = [orders where arrival &lt;= current_time]</code></li>
 <li>If no available orders, jump forward: <code>current_time = min(arrival of remaining)</code></li>
 <li>Then apply SPT to the available pool</li>
-</ul>
+</ol>
 </div>
 </div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="3ba81d47" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_spt_dynamic(orders):</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using DYNAMIC Shortest Processing Time</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">    At each decision point, choose shortest job among those that have arrived</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> []</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    remaining <span class="op">=</span> [o.copy() <span class="cf">for</span> o <span class="kw">in</span> orders]  <span class="co"># Make copies to avoid modifying originals</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> remaining:</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Find available orders (already arrived)</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>        available <span class="op">=</span> <span class="co"># YOUR CODE: list of orders where arrival &lt;= current_time</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If nothing available, jump to next arrival</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> available:</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>            current_time <span class="op">=</span> <span class="co"># YOUR CODE: min arrival time of remaining orders</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>            available <span class="op">=</span> <span class="co"># YOUR CODE: update available orders</span></span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Choose shortest processing time among available</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>        next_order <span class="op">=</span> <span class="co"># YOUR CODE: min...</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Schedule it</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> next_order[<span class="st">'processing'</span>]</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> next_order[<span class="st">'completion'</span>]</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Move from remaining to scheduled</span></span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>        scheduled.append(next_order)</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>        remaining.remove(next_order)</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Test dynamic SPT</span></span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>friday_dynamic_spt <span class="op">=</span> schedule_spt_dynamic(friday_orders)</span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>df_friday_dynamic_spt <span class="op">=</span> pd.DataFrame(friday_dynamic_spt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>List Comprehension for Filtering
 </div>
-<div id="65f282ac" class="cell" data-execution_count="21">
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>List comprehension</strong> creates a new list based on a condition:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># General pattern</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>new_list <span class="op">=</span> [item <span class="cf">for</span> item <span class="kw">in</span> old_list <span class="cf">if</span> condition]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: filter numbers &gt; 5</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">6</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>big_numbers <span class="op">=</span> [n <span class="cf">for</span> n <span class="kw">in</span> numbers <span class="cf">if</span> n <span class="op">&gt;</span> <span class="dv">5</span>]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: [7, 9, 6]</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter orders by arrival time</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>available <span class="op">=</span> [order <span class="cf">for</span> order <span class="kw">in</span> remaining <span class="cf">if</span> order[<span class="st">'arrival'</span>] <span class="op">&lt;=</span> current_time]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="92da7cc7" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_spt_dynamic(orders):</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using DYNAMIC Shortest Processing Time</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">    At each decision point, choose shortest job among those that have arrived</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> []</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    remaining <span class="op">=</span> [o.copy() <span class="cf">for</span> o <span class="kw">in</span> orders]  <span class="co"># Make copies to avoid modifying originals</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> remaining:</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Find available orders (already arrived)</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use list comprehension: [o for o in remaining if ...]</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>        available <span class="op">=</span> <span class="co"># YOUR CODE: list of orders where arrival &lt;= current_time</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If nothing available, jump to next arrival</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> available:</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Find earliest arrival among remaining orders</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>            current_time <span class="op">=</span> <span class="co"># YOUR CODE: min arrival time of remaining orders</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Now re-filter for available orders</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>            available <span class="op">=</span> <span class="co"># YOUR CODE: update available orders</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Choose shortest processing time among available</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use min() with key=lambda</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>        next_order <span class="op">=</span> <span class="co"># YOUR CODE: min(available, key=lambda ...)</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Schedule it</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> next_order[<span class="st">'processing'</span>]</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> next_order[<span class="st">'completion'</span>]</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Move from remaining to scheduled</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>        scheduled.append(next_order)</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>        remaining.remove(next_order)</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Test dynamic SPT</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>friday_dynamic_spt <span class="op">=</span> schedule_spt_dynamic(friday_orders)</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>df_friday_dynamic_spt <span class="op">=</span> pd.DataFrame(friday_dynamic_spt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="99f366cc" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(df_friday_dynamic_spt[<span class="st">'start'</span>] <span class="op">&gt;=</span> df_friday_dynamic_spt[<span class="st">'arrival'</span>]), <span class="op">\</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"All orders should start at or after their arrival time"</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate idle time for both approaches</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>static_idle <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">max</span>(<span class="dv">0</span>, row[<span class="st">'arrival'</span>] <span class="op">-</span> (df_friday_static_spt.iloc[i<span class="op">-</span><span class="dv">1</span>][<span class="st">'completion'</span>] <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span>))</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">for</span> i, row <span class="kw">in</span> df_friday_static_spt.iterrows())</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>dynamic_idle <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">max</span>(<span class="dv">0</span>, row[<span class="st">'start'</span>] <span class="op">-</span> (df_friday_dynamic_spt.iloc[i<span class="op">-</span><span class="dv">1</span>][<span class="st">'completion'</span>] <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span>))</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">for</span> i, row <span class="kw">in</span> df_friday_dynamic_spt.iterrows())</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Excellent! Dynamic SPT implementation is correct!"</span>)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Dynamic vs Static SPT on Friday Rush:"</span>)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Static makespan (with arrival violations!): </span><span class="sc">{</span>df_friday_static_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Dynamic makespan (no violations): </span><span class="sc">{</span>df_friday_dynamic_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Change: </span><span class="sc">{</span>df_friday_static_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>() <span class="op">-</span> df_friday_dynamic_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes faster"</span>)</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Dynamic idle time: </span><span class="sc">{</span>dynamic_idle<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(df_friday_dynamic_spt[<span class="st">'start'</span>] <span class="op">&gt;=</span> df_friday_dynamic_spt[<span class="st">'arrival'</span>]), <span class="op">\</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"All orders should start at or after their arrival time"</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate idle time for both approaches</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>static_idle <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">max</span>(<span class="dv">0</span>, row[<span class="st">'arrival'</span>] <span class="op">-</span> (df_friday_static_spt.iloc[i<span class="op">-</span><span class="dv">1</span>][<span class="st">'completion'</span>] <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span>))</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">for</span> i, row <span class="kw">in</span> df_friday_static_spt.iterrows())</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>dynamic_idle <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">max</span>(<span class="dv">0</span>, row[<span class="st">'start'</span>] <span class="op">-</span> (df_friday_dynamic_spt.iloc[i<span class="op">-</span><span class="dv">1</span>][<span class="st">'completion'</span>] <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span>))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">for</span> i, row <span class="kw">in</span> df_friday_dynamic_spt.iterrows())</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Excellent! Dynamic SPT implementation is correct!"</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Dynamic vs Static SPT on Friday Rush:"</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Static makespan (with arrival violations!): </span><span class="sc">{</span>df_friday_static_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Dynamic makespan (no violations): </span><span class="sc">{</span>df_friday_dynamic_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Change: </span><span class="sc">{</span>df_friday_static_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>() <span class="op">-</span> df_friday_dynamic_spt[<span class="st">'completion'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1f}</span><span class="ss"> minutes faster"</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • Dynamic idle time: </span><span class="sc">{</span>dynamic_idle<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="exercise-6.2---implement-dynamic-edd" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-6.2---implement-dynamic-edd">Exercise 6.2 - Implement Dynamic EDD</h2>
 <p>Now implement EDD with dynamic dispatching to minimize tardiness in the Friday rush.</p>
-<div id="e3b1cf08" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_edd_dynamic(orders):</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using DYNAMIC Earliest Due Date</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">    At each decision point, choose order with earliest deadline among available orders</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> []</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    remaining <span class="op">=</span> [o.copy() <span class="cf">for</span> o <span class="kw">in</span> orders]</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> remaining:</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># YOUR CODE: Find available orders</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>        available <span class="op">=</span> <span class="co"># [orders where arrival &lt;= current_time]</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># YOUR CODE: Handle no available orders</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> available:</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>            current_time <span class="op">=</span> <span class="co"># min arrival of remaining</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>            available <span class="op">=</span> <span class="co"># update available</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># YOUR CODE: Choose earliest due date</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        next_order <span class="op">=</span> <span class="co"># Hint: Just change the key from SPT</span></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Schedule it (same as SPT)</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> next_order[<span class="st">'processing'</span>]</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> next_order[<span class="st">'completion'</span>]</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>        scheduled.append(next_order)</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>        remaining.remove(next_order)</span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Test dynamic EDD</span></span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>friday_dynamic_edd <span class="op">=</span> schedule_edd_dynamic(friday_orders)</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>df_friday_dynamic_edd <span class="op">=</span> pd.DataFrame(friday_dynamic_edd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2ed7c8d4" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE BELOW</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> schedule_edd_dynamic(orders):</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Schedule orders using DYNAMIC Earliest Due Date</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">    At each decision point, choose order with earliest deadline among available orders</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    scheduled <span class="op">=</span> []</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    remaining <span class="op">=</span> [o.copy() <span class="cf">for</span> o <span class="kw">in</span> orders]</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> remaining:</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># YOUR CODE: Find available orders</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        available <span class="op">=</span> <span class="co"># [orders where arrival &lt;= current_time]</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># YOUR CODE: Handle no available orders</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> available:</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>            current_time <span class="op">=</span> <span class="co"># min arrival of remaining</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>            available <span class="op">=</span> <span class="co"># update available</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># YOUR CODE: Choose earliest due date</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>        next_order <span class="op">=</span> <span class="co"># Hint: Just change the key from SPT</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Schedule it (same as SPT)</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'start'</span>] <span class="op">=</span> current_time</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>        next_order[<span class="st">'completion'</span>] <span class="op">=</span> current_time <span class="op">+</span> next_order[<span class="st">'processing'</span>]</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>        current_time <span class="op">=</span> next_order[<span class="st">'completion'</span>]</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>        scheduled.append(next_order)</span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>        remaining.remove(next_order)</span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scheduled</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Test dynamic EDD</span></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>friday_dynamic_edd <span class="op">=</span> schedule_edd_dynamic(friday_orders)</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>df_friday_dynamic_edd <span class="op">=</span> pd.DataFrame(friday_dynamic_edd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="01cb589a" class="cell" data-execution_count="24">
+<div id="dd08393f" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(df_friday_dynamic_edd[<span class="st">'start'</span>] <span class="op">&gt;=</span> df_friday_dynamic_edd[<span class="st">'arrival'</span>]), <span class="op">\</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"All orders should start at or after arrival"</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>metrics_dynamic_spt <span class="op">=</span> calculate_metrics(df_friday_dynamic_spt)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>metrics_dynamic_edd <span class="op">=</span> calculate_metrics(df_friday_dynamic_edd)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> metrics_dynamic_edd[<span class="st">'total_tardiness'</span>] <span class="op">&lt;=</span> metrics_dynamic_spt[<span class="st">'total_tardiness'</span>], <span class="op">\</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EDD should minimize tardiness better than SPT"</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✓ Dynamic EDD implementation correct!"</span>)</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Friday Rush: Dynamic SPT vs Dynamic EDD"</span>)</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • SPT avg flow time: </span><span class="sc">{</span>metrics_dynamic_spt[<span class="st">'avg_flow_time'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • EDD avg flow time: </span><span class="sc">{</span>metrics_dynamic_edd[<span class="st">'avg_flow_time'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • SPT total tardiness: </span><span class="sc">{</span>metrics_dynamic_spt[<span class="st">'total_tardiness'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • EDD total tardiness: </span><span class="sc">{</span>metrics_dynamic_edd[<span class="st">'total_tardiness'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • SPT late orders: </span><span class="sc">{</span>metrics_dynamic_spt[<span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • EDD late orders: </span><span class="sc">{</span>metrics_dynamic_edd[<span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(df_friday_dynamic_edd[<span class="st">'start'</span>] <span class="op">&gt;=</span> df_friday_dynamic_edd[<span class="st">'arrival'</span>]), <span class="op">\</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"All orders should start at or after arrival"</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>metrics_dynamic_spt <span class="op">=</span> calculate_metrics(df_friday_dynamic_spt)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>metrics_dynamic_edd <span class="op">=</span> calculate_metrics(df_friday_dynamic_edd)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> metrics_dynamic_edd[<span class="st">'total_tardiness'</span>] <span class="op">&lt;=</span> metrics_dynamic_spt[<span class="st">'total_tardiness'</span>], <span class="op">\</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EDD should minimize tardiness better than SPT"</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✓ Dynamic EDD implementation correct!"</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Friday Rush: Dynamic SPT vs Dynamic EDD"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • SPT avg flow time: </span><span class="sc">{</span>metrics_dynamic_spt[<span class="st">'avg_flow_time'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • EDD avg flow time: </span><span class="sc">{</span>metrics_dynamic_edd[<span class="st">'avg_flow_time'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • SPT total tardiness: </span><span class="sc">{</span>metrics_dynamic_spt[<span class="st">'total_tardiness'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • EDD total tardiness: </span><span class="sc">{</span>metrics_dynamic_edd[<span class="st">'total_tardiness'</span>]<span class="sc">:.1f}</span><span class="ss"> minutes"</span>)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • SPT late orders: </span><span class="sc">{</span>metrics_dynamic_spt[<span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" • EDD late orders: </span><span class="sc">{</span>metrics_dynamic_edd[<span class="st">'late_orders'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="final-performance-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="final-performance-comparison">Final Performance Comparison</h2>
-<div id="f32d1aff" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for all Friday approaches</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>friday_comparison <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Dynamic_SPT'</span>: calculate_metrics(df_friday_dynamic_spt),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Dynamic_EDD'</span>: calculate_metrics(df_friday_dynamic_edd)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>}).T</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Friday Morning Rush - Final Performance:"</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(friday_comparison.<span class="bu">round</span>(<span class="dv">2</span>))</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>metrics_to_plot <span class="op">=</span> [<span class="st">'makespan'</span>, <span class="st">'avg_flow_time'</span>, <span class="st">'total_tardiness'</span>, <span class="st">'late_orders'</span>]</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#F6B265'</span>, <span class="st">'#DB6B6B'</span>]</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, metric <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, metrics_to_plot):</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> [friday_comparison.loc[rule, metric] <span class="cf">for</span> rule <span class="kw">in</span> [<span class="st">'Dynamic_SPT'</span>, <span class="st">'Dynamic_EDD'</span>]]</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    bars <span class="op">=</span> ax.bar([<span class="st">'Dynamic SPT'</span>, <span class="st">'Dynamic EDD'</span>], values, color<span class="op">=</span>colors, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    best_idx <span class="op">=</span> np.argmin(values)</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_edgecolor(<span class="st">'black'</span>)</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_linewidth(<span class="dv">2</span>)</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    ax.set_title(metric.replace(<span class="st">'_'</span>, <span class="st">' '</span>).title(), fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Value'</span>)</span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, values):</span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>        height <span class="op">=</span> bar.get_height()</span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>        ax.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="fl">2.</span>, height,</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f'</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">'</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>)</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Friday Rush: Dynamic Scheduling Performance'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="91d8f761" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate metrics for all Friday approaches</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>friday_comparison <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Dynamic_SPT'</span>: calculate_metrics(df_friday_dynamic_spt),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Dynamic_EDD'</span>: calculate_metrics(df_friday_dynamic_edd)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>}).T</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Friday Morning Rush - Final Performance:"</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(friday_comparison.<span class="bu">round</span>(<span class="dv">2</span>))</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>metrics_to_plot <span class="op">=</span> [<span class="st">'makespan'</span>, <span class="st">'avg_flow_time'</span>, <span class="st">'total_tardiness'</span>, <span class="st">'late_orders'</span>]</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#F6B265'</span>, <span class="st">'#DB6B6B'</span>]</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, metric <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, metrics_to_plot):</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> [friday_comparison.loc[rule, metric] <span class="cf">for</span> rule <span class="kw">in</span> [<span class="st">'Dynamic_SPT'</span>, <span class="st">'Dynamic_EDD'</span>]]</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    bars <span class="op">=</span> ax.bar([<span class="st">'Dynamic SPT'</span>, <span class="st">'Dynamic EDD'</span>], values, color<span class="op">=</span>colors, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    best_idx <span class="op">=</span> np.argmin(values)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_edgecolor(<span class="st">'black'</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    bars[best_idx].set_linewidth(<span class="dv">2</span>)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    ax.set_title(metric.replace(<span class="st">'_'</span>, <span class="st">' '</span>).title(), fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Value'</span>)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, values):</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>        height <span class="op">=</span> bar.get_height()</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>        ax.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="fl">2.</span>, height,</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f'</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">'</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>)</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'Friday Rush: Dynamic Scheduling Performance'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Friday Morning Rush - Final Performance:
              makespan  avg_flow_time  total_tardiness  late_orders

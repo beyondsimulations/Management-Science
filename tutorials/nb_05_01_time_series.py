@@ -109,6 +109,23 @@ noise = np.random.normal(0, 20, len(dates))  # Controlled noise
 sales = base_sales + trend + seasonal + weekly + noise
 # DON'T CHANGE ANYTHING ABOVE!
 
+# %% [markdown]
+# > **Creating DataFrames and Working with Dates**
+# >
+# > ``` python
+# > # Create DataFrame from dictionary
+# > df = pd.DataFrame({'col1': values1, 'col2': values2})
+# >
+# > # Access datetime attributes with .dt
+# > df['date'].dt.month   # Extract month (1-12)
+# > df['date'].dt.year    # Extract year
+# > df['date'].dt.day     # Extract day
+# >
+# > # Get first/last element
+# > df['column'].iloc[0]   # First element
+# > df['column'].iloc[-1]  # Last element
+# > ```
+
 # %%
 # YOUR CODE BELOW
 
@@ -116,6 +133,7 @@ sales = base_sales + trend + seasonal + weekly + noise
 df =   # Create the DataFrame with 'date' and 'sales' columns
 
 # Extract month from the date column
+# Hint: Use .dt.month to get month, then .iloc[0] or .iloc[-1]
 first_month =   # Get the month of the first date
 last_month =    # Get the month of the last date
 
@@ -209,6 +227,19 @@ plt.show()
 # ## Exercise 2.1 - Create Multiple Moving Averages
 #
 # Calculate different window sizes to see their smoothing effects.
+#
+# > **Rolling Windows and NaN Values**
+# >
+# > ``` python
+# > # Create rolling window and calculate mean
+# > df['MA7'] = df['sales'].rolling(window=7).mean()
+# >
+# > # Count missing (NaN) values
+# > na_count = df['MA7'].isna().sum()
+# >
+# > # Why NaN? First 6 rows have no 7-day window yet!
+# > # Window of 7 → first 6 values are NaN
+# > ```
 
 # %%
 # YOUR CODE BELOW
@@ -218,6 +249,7 @@ df['MA14'] =  # 14-day (2 week) moving average
 df['MA30'] =  # 30-day (monthly) moving average
 
 # Count NaN values in each
+# Hint: Use .isna().sum()
 na_count_3 =   # Number of NaN values in MA3
 na_count_14 =  # Number of NaN values in MA14
 na_count_30 =  # Number of NaN values in MA30
@@ -254,6 +286,21 @@ plt.show()
 # **The Idea:** Instead of equal weights \[1/7, 1/7, 1/7, 1/7, 1/7, 1/7,
 # 1/7\], we use custom weights like \[0.05, 0.05, 0.10, 0.15, 0.20, 0.20,
 # 0.25\] where recent days get more importance.
+#
+# > **NumPy Array Operations**
+# >
+# > ``` python
+# > # Element-wise multiplication
+# > sales = np.array([100, 105, 110])
+# > weights = np.array([0.2, 0.3, 0.5])
+# > weighted_sales = sales * weights  # [20, 31.5, 55]
+# >
+# > # Sum all elements
+# > total = np.sum(weighted_sales)    # 106.5
+# >
+# > # Or combine: weighted average
+# > weighted_avg = np.sum(sales * weights)
+# > ```
 
 # %%
 # YOUR CODE BELOW
@@ -263,10 +310,10 @@ weights = np.array([0.05, 0.05, 0.10, 0.15, 0.20, 0.20, 0.25])
 
 # Calculate WMA for day 30 (using days 24-30)
 sales_window = df['sales'].iloc[24:31].values  # Days 24-30 (7 days)
-wma_day30 =   # Calculate weighted average: sum(sales * weights)
+wma_day30 =   # Calculate weighted average: np.sum(sales * weights)
 
 # Compare to simple average for same window
-sma_day30 =   # Simple average of same window
+sma_day30 =   # Simple average: np.mean(sales_window)
 
 # %%
 # Don't modify below
@@ -327,6 +374,29 @@ print(f"MA forecast (next 3 days): {moving_average_forecast(df['sales'], 7, 3)}"
 # ## Exercise 3.1 - Implement Exponential Smoothing
 #
 # Create an exponential smoothing forecast function.
+#
+# > **Exponential Smoothing Formula**
+# >
+# > **Core idea:** New forecast = mix of (actual data) and (old forecast)
+# >
+# > Formula: `forecast_new = α × actual_current + (1-α) × forecast_old`
+# >
+# > -   `α = 0.3` → 30% actual, 70% old forecast (smooth)
+# > -   `α = 0.7` → 70% actual, 30% old forecast (reactive)
+#
+# > **List Operations You’ll Need**
+# >
+# > ``` python
+# > # Access last element
+# > last_value = my_list[-1]
+# >
+# > # Multiply a list (creates repeated elements)
+# > future = [100] * 3  # [100, 100, 100]
+# >
+# > # In a loop, use data.iloc[i] to get value at index i
+# > for i in range(1, len(data)):
+# >     current_value = data.iloc[i]
+# > ```
 
 # %%
 # YOUR CODE BELOW
@@ -341,12 +411,13 @@ def exponential_smoothing_forecast(data, alpha=0.3, periods=1):
     # Calculate smoothed values for historical data
     for i in range(1, len(data)):
         # Apply exponential smoothing formula
+        # Hint: data.iloc[i] is current actual, forecasts[-1] is previous forecast
         forecast =   # alpha * current_actual + (1-alpha) * previous_forecast
         forecasts.append(forecast)
 
     # Use last smoothed value for future periods
     last_forecast = forecasts[-1]
-    future =   # Return list of forecasts (all same value based on number of periods)
+    future =   # Return list: [last_forecast] * periods
 
     return future
 
