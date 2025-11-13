@@ -16,16 +16,16 @@ format:
 
 [Master Baker's Morning Dilemma:]{.invert-font}
 
-["Every morning at 5 AM, our delivery van leaves with fresh bread for [16 cafés]{.highlight} across the city. Our driver currently takes much too long using his 'intuition' for the route. The fuel costs are killing us, and worse, some cafés get their bread late."]{.invert-font .fragment}
+["Every morning at 5:00, our delivery van leaves with fresh bread for [16 cafés]{.highlight} across the city. Our driver currently takes much too long using his 'intuition' for the route. The fuel costs are killing us, and worse, some cafés get their bread late."]{.invert-font .fragment}
 
 ## The Delivery Challenge
 
 [Artisan Bakery's daily logistics puzzle:]{.highlight}
 
 ::: incremental
-- **16 Cafés:** Each expecting fresh bread by 8 AM
-- **One Van:** Limited capacity, must visit all locations
-- **Time Windows:** 3 cafés open early (6:30 AM) and need priority
+- **16 Cafés:** Each expecting fresh bread by 8:00
+- **One Van:** Unlimited capacity, must visit all locations
+- **Time Windows:** 3 cafés open early (6:30) and need priority
 - **Current Problem:** Driver uses "gut feeling" for routing
 :::
 
@@ -75,7 +75,6 @@ from plot_utils import BRAND_COLORS, setup_clean_style
 setup_clean_style()
 np.random.seed(123)
 
-# Generate 16 cafe locations
 n_cafes = 16
 x_coords = np.random.uniform(0, 30, n_cafes)
 y_coords = np.random.uniform(0, 10, n_cafes)
@@ -89,6 +88,7 @@ ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], marker='s', zorder=3
 
 ax.set_xlabel('Distance (km)', fontsize=9)
 ax.set_ylabel('Distance (km)', fontsize=9)
+ax.set_aspect('equal', adjustable='box')
 ax.grid(True, alpha=0.2)
 ax.legend()
 plt.tight_layout()
@@ -97,18 +97,18 @@ plt.show()
 
 ## Compute Everything?
 
-[Already 16 cafés = 16! = 20,922,789,888,000 routes]{.highlight}
+[How many unique tours exist? With depot, n!/2 unique tours.]{.highlight}
 
 . . .
 
 **If your computer checks 1 million routes per second:**
 
 ::: incremental
-- 5 cafés: 0.0001 seconds ✓
-- 10 cafés: 0.18 seconds ✓
-- 12 cafés: 8 minutes ~
-- 16 cafés: 8 months! x
-- 20 cafés: 77,000 years x
+- 4 cafés: 4!/2 = 12 tours → 0.000012 seconds ✓
+- 8 cafés: 8!/2 = 20,160 tours → 0.02 seconds ✓
+- 12 cafés: 12!/2 = 239,500,800 tours → 4 minutes ~
+- 16 cafés: 16!/2 = 10,461,394,944,000 tours → 4 months! ✗
+- 20 cafés: 20!/2 → 38,573 years! ✗
 :::
 
 . . .
@@ -116,35 +116,6 @@ plt.show()
 :::{.callout-important}
 **The Reality:** Exact approach would take longer than the universe has existed!
 :::
-
-## The Complexity Explosion
-
-[The factorial growth makes exhaustive search impossible.]{.highlight}
-
-```{python}
-#| eval: true
-#| echo: false
-import math
-
-stops = list(range(4, 25))
-possibilities = [math.factorial(n) for n in stops]
-
-fig, ax = plt.subplots()
-ax.semilogy(stops, possibilities, 'o-', color=BRAND_COLORS["threeDark"], linewidth=2.5, markersize=8)
-ax.set_xlabel('Number of Stops', fontsize=11)
-ax.set_ylabel('Possible Routes (log scale)', fontsize=11)
-ax.set_title('The Combinatorial Explosion', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.2, which='both')
-
-# Annotations
-ax.annotate('16 stops:\n20 trillion', xy=(16, math.factorial(16)),
-            xytext=(14.5, math.factorial(16)*10),
-            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["oneDark"]),
-            fontsize=10, ha='center')
-
-plt.tight_layout()
-plt.show()
-```
 
 ## The "Cost" of Complexity
 
@@ -211,11 +182,116 @@ Density dramatically affects both problem difficulty and solution approaches!
 
 # [Greedy Construction]{.flow} {.title}
 
-## Nearest Neighbor Algorithm
+## A Bad Start: Random Route
 
-[Build a route by always visiting the closest unvisited location.]{.highlight}
+[What happens if we pick cafés randomly?]{.highlight}
 
 . . .
+
+```{python}
+#| eval: true
+#| echo: false
+# Setup for construction methods
+np.random.seed(123)
+n_cafes = 8
+x_coords = np.random.uniform(0, 12, n_cafes)
+y_coords = np.random.uniform(0, 4.5, n_cafes)
+bakery_x, bakery_y = 2, 3
+
+def calculate_distance(x1, y1, x2, y2):
+    return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+def calculate_route_distance(route, x_coords, y_coords, start_x, start_y):
+    distance = calculate_distance(start_x, start_y, x_coords[route[0]], y_coords[route[0]])
+    for i in range(len(route) - 1):
+        distance += calculate_distance(x_coords[route[i]], y_coords[route[i]],
+                                      x_coords[route[i+1]], y_coords[route[i+1]])
+    distance += calculate_distance(x_coords[route[-1]], y_coords[route[-1]], start_x, start_y)
+    return distance
+
+def random_route(n):
+    route = list(range(n))
+    np.random.shuffle(route)
+    return route
+
+# Generate random route
+random_r = random_route(n_cafes)
+random_dist = calculate_route_distance(random_r, x_coords, y_coords, bakery_x, bakery_y)
+
+# Visualize random route
+fig, ax = plt.subplots()
+
+# Draw route
+route_x = [bakery_x] + [x_coords[i] for i in random_r] + [bakery_x]
+route_y = [bakery_y] + [y_coords[i] for i in random_r] + [bakery_y]
+ax.plot(route_x, route_y, 'o-', color=BRAND_COLORS["threeDark"], linewidth=2, markersize=0, alpha=0.6)
+
+# Draw locations
+ax.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=400, zorder=3)
+ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=400, marker='s', zorder=3)
+
+# Add labels
+for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+    ax.annotate(f'C{i+1}', (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+ax.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+
+ax.set_xlabel('Distance (km)', fontsize=11)
+ax.set_ylabel('Distance (km)', fontsize=11)
+ax.set_aspect('equal', adjustable='box')
+ax.set_title(f'Random Route: {random_dist:.1f} km - Notice the Crossings!', fontsize=13, fontweight='bold', color='black')
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-warning}
+Random selection creates routes with many crossings and inefficiencies.
+:::
+
+## Nearest Neighbor: The Problem
+
+[Given these 8 cafés, which should we visit first?]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+# Show just the problem - no solution
+fig, ax = plt.subplots()
+
+# Draw locations only
+ax.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=400, zorder=3, label='Cafés')
+ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=400, marker='s', zorder=3, label='Bakery')
+
+# Add labels
+for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+    ax.annotate(f'C{i+1}', (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+ax.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+
+# Add distance annotations to nearest cafes
+for i in range(n_cafes):
+    dist = calculate_distance(bakery_x, bakery_y, x_coords[i], y_coords[i])
+    if dist < 10:  # Show only nearby distances
+        mid_x = (bakery_x + x_coords[i]) / 2
+        mid_y = (bakery_y + y_coords[i]) / 2
+        ax.annotate(f'{dist:.1f}', (mid_x, mid_y), fontsize=9, alpha=0.7)
+
+ax.set_xlabel('Distance (km)', fontsize=11)
+ax.set_ylabel('Distance (km)', fontsize=11)
+ax.set_aspect('equal', adjustable='box')
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+[Question]{.question}: Using nearest neighbor, which café would you visit first?
+
+## Nearest Neighbor: The Algorithm
+
+[Build a route by always visiting the closest unvisited location.]{.highlight}
 
 1. Start at the bakery
 2. Find the nearest unvisited café
@@ -226,26 +302,16 @@ Density dramatically affects both problem difficulty and solution approaches!
 . . .
 
 :::{.callout-tip}
-**Intuition:** Take what's easiest (nearest)!
+**Intuition:** Like picking low-hanging fruit - grab what's easiest (nearest) first!
 :::
 
-## Nearest Neighbor in Action
+## Nearest Neighbor: The Solution
+
+[Let's see how nearest neighbor builds the route step by step:]{.highlight}
 
 ```{python}
 #| eval: true
 #| echo: false
-# Build the route
-
-np.random.seed(123)
-
-# Generate 16 cafe locations
-n_cafes = 8
-x_coords = np.random.uniform(0, 30, n_cafes)
-y_coords = np.random.uniform(0, 10, n_cafes)
-
-# Bakery at center
-bakery_x, bakery_y = 8, 4
-
 def nearest_neighbor_route(x_coords, y_coords, start_x, start_y):
     n = len(x_coords)
     unvisited = list(range(n))
@@ -262,112 +328,51 @@ def nearest_neighbor_route(x_coords, y_coords, start_x, start_y):
 
     return route
 
-def calculate_route_distance(route, x_coords, y_coords, start_x, start_y):
-    distance = calculate_distance(start_x, start_y, x_coords[route[0]], y_coords[route[0]])
-    for i in range(len(route) - 1):
-        distance += calculate_distance(x_coords[route[i]], y_coords[route[i]],
-                                      x_coords[route[i+1]], y_coords[route[i+1]])
-    distance += calculate_distance(x_coords[route[-1]], y_coords[route[-1]], start_x, start_y)
-    return distance
-
-def calculate_distance(x1, y1, x2, y2):
-    return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
-
-route = nearest_neighbor_route(x_coords, y_coords, bakery_x, bakery_y)
-initial_distance = calculate_route_distance(route, x_coords, y_coords, bakery_x, bakery_y)
-
-# Visualize the route
-fig, ax = plt.subplots()
-
-# Draw route
-route_x = [bakery_x] + [x_coords[i] for i in route] + [bakery_x]
-route_y = [bakery_y] + [y_coords[i] for i in route] + [bakery_y]
-ax.plot(route_x, route_y, 'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.7)
-
-# Draw locations
-ax.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=250, zorder=3, label='Cafés')
-ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=250, marker='s', zorder=3, label='Bakery')
-
-# Add labels
-for i, (x, y) in enumerate(zip(x_coords, y_coords)):
-    ax.annotate(f'C{i+1}', (x, y), ha='center', va='center', color='white', fontweight='bold')
-ax.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=14)
-
-ax.set_xlabel('Distance (km)', fontsize=11)
-ax.set_ylabel('Distance (km)', fontsize=11)
-ax.set_title(f'Nearest Neighbor Route: {initial_distance:.1f} km', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.2)
-ax.legend()
-plt.tight_layout()
-plt.show()
-```
-
-## Construction Methods Comparison
-
-[Different ways to build initial routes:]{.highlight}
-
-```{python}
-#| eval: true
-#| echo: false
-# Show comparison of construction methods
-# Generate random route
-def random_route(n):
-    route = list(range(n))
-    np.random.shuffle(route)
-    return route
-
-# Simple furthest insertion simulation
-def furthest_insertion_route(x_coords, y_coords, start_x, start_y):
-    n = len(x_coords)
-    if n <= 2:
-        return list(range(n))
-
-    # Start with furthest point
-    distances_from_start = [np.sqrt((x - start_x)**2 + (y - start_y)**2) for x, y in zip(x_coords, y_coords)]
-    route = [np.argmax(distances_from_start)]
-    unvisited = set(range(n)) - set(route)
-
-    # Add closest unvisited to any in route (simplified)
-    while unvisited:
-        best_dist = float('inf')
-        best_node = None
-        for u in unvisited:
-            for r in route:
-                dist = np.sqrt((x_coords[u] - x_coords[r])**2 + (y_coords[u] - y_coords[r])**2)
-                if dist < best_dist:
-                    best_dist = dist
-                    best_node = u
-        route.append(best_node)
-        unvisited.remove(best_node)
-
-    return route
-
-# Calculate distances for different methods
+# Build route step by step
 nn_route = nearest_neighbor_route(x_coords, y_coords, bakery_x, bakery_y)
-random_r = random_route(n_cafes)
-furthest_r = furthest_insertion_route(x_coords, y_coords, bakery_x, bakery_y)
-
 nn_dist = calculate_route_distance(nn_route, x_coords, y_coords, bakery_x, bakery_y)
-random_dist = calculate_route_distance(random_r, x_coords, y_coords, bakery_x, bakery_y)
-furthest_dist = calculate_route_distance(furthest_r, x_coords, y_coords, bakery_x, bakery_y)
 
-# Create bar chart
-methods = ['Nearest\nNeighbor', 'Random\nRoute', 'Furthest\nInsertion']
-distances = [nn_dist, random_dist, furthest_dist]
-colors = [BRAND_COLORS["twoDark"], BRAND_COLORS["threeDark"], BRAND_COLORS["oneDark"]]
+# Create visualization showing the construction process
+fig, axes = plt.subplots(2, 4)
+axes = axes.flatten()
 
-fig, ax = plt.subplots()
-bars = ax.bar(methods, distances, color=colors, alpha=0.8)
-ax.set_ylabel('Total Distance (km)', fontsize=12)
-ax.set_title('Starting Point Matters: Construction Method Comparison', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.2, axis='y')
+for step_num in range(1, 9):  # Show steps 1-8
+    ax = axes[step_num - 1]  # Use index 0-7 for axes
 
-# Add value labels on bars
-for bar, dist in zip(bars, distances):
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height,
-            f'{dist:.1f} km', ha='center', va='bottom', fontsize=11)
+    # Draw all cafés
+    ax.scatter(x_coords, y_coords, c=BRAND_COLORS["twoLight"], s=100, zorder=2)
+    ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=150, marker='s', zorder=3)
 
+    # Draw route so far
+    partial_route = nn_route[:step_num]
+    route_x = [bakery_x] + [x_coords[i] for i in partial_route]
+    route_y = [bakery_y] + [y_coords[i] for i in partial_route]
+
+    if step_num == 8:  # Last step - complete the tour
+        route_x.append(bakery_x)
+        route_y.append(bakery_y)
+
+    ax.plot(route_x, route_y, 'o-', color=BRAND_COLORS["twoDark"], linewidth=2, markersize=0, alpha=0.7)
+
+    # Highlight visited cafés
+    for idx in partial_route:
+        ax.scatter(x_coords[idx], y_coords[idx], c=BRAND_COLORS["twoDark"], s=150, zorder=3)
+
+    # Add labels
+    for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+        color = 'white' if i in nn_route[:step_num] else 'black'
+        ax.annotate(f'{i+1}', (x, y), ha='center', va='center', color=color, fontweight='bold', fontsize=9)
+    ax.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
+    ax.set_xlim(-1, 13)
+    ax.set_ylim(-1, 5)
+    ax.set_aspect('equal', adjustable='box')
+    ax.grid(True, alpha=0.2)
+    ax.set_title(f'Step {step_num}', fontsize=10)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+plt.suptitle(f'Nearest Neighbor Construction: Final Distance = {nn_dist:.1f} km', fontsize=14, fontweight='bold')
 plt.tight_layout()
 plt.show()
 ```
@@ -375,18 +380,256 @@ plt.show()
 . . .
 
 :::{.callout-note}
-Different construction methods give different starting points!
+Furthest insertion builds a more balanced tour by establishing the outer structure first!
 :::
 
+## Furthest Insertion: The Problem
 
+[Same 8 cafés - but now we'll use a different strategy:]{.highlight}
 
-## The Problem with Greedy
+```{python}
+#| eval: true
+#| echo: false
+# Show the problem again for furthest insertion
+fig, ax = plt.subplots()
 
-[Question]{.question}: Can you spot any obvious inefficiencies in this route?
+# Draw locations only
+ax.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=400, zorder=3, label='Cafés')
+ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=400, marker='s', zorder=3, label='Bakery')
+
+# Add labels
+for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+    ax.annotate(f'C{i+1}', (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+ax.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+
+ax.set_xlabel('Distance (km)', fontsize=11)
+ax.set_ylabel('Distance (km)', fontsize=11)
+ax.set_aspect('equal', adjustable='box')
+ax.grid(True, alpha=0.2)
+plt.tight_layout()
+plt.show()
+```
 
 . . .
 
-**Common Issues:**
+::: callout-tip
+The farthest point is our start!
+:::
+
+## Furthest Insertion: The Algorithm
+
+[Build a route by starting with distant points and filling in gaps:]{.highlight}
+
+1. Start at the bakery
+2. Find the furthest café from bakery - add it to tour
+3. Create initial tour: Bakery → Furthest → Bakery
+4. **Repeat:** Find the café furthest from current tour
+5. Insert it at the position that minimizes tour increase
+6. Continue until all cafés are in the tour
+
+. . .
+
+:::{.callout-tip}
+**Intuition:** Build the "skeleton" of the route first with distant points, then fill in the gaps.
+:::
+
+## Furthest Insertion: Step-by-Step
+
+```{python}
+#| eval: true
+#| echo: false
+
+def furthest_insertion_route(x_coords, y_coords, start_x, start_y):
+    n = len(x_coords)
+    if n == 0:
+        return []
+
+    # Find furthest from start
+    distances_from_start = [calculate_distance(x_coords[i], y_coords[i], start_x, start_y)
+                           for i in range(n)]
+    furthest = np.argmax(distances_from_start)
+
+    # Initialize tour with furthest point
+    tour = [furthest]
+    unvisited = set(range(n)) - {furthest}
+
+    while unvisited:
+        # Find unvisited point furthest from tour
+        max_min_dist = -1
+        furthest_point = None
+
+        for u in unvisited:
+            # Find minimum distance from u to any point in tour
+            min_dist_to_tour = float('inf')
+            for t in tour:
+                dist = calculate_distance(x_coords[u], y_coords[u], x_coords[t], y_coords[t])
+                min_dist_to_tour = min(min_dist_to_tour, dist)
+
+            # Also consider distance to start
+            dist_to_start = calculate_distance(x_coords[u], y_coords[u], start_x, start_y)
+            min_dist_to_tour = min(min_dist_to_tour, dist_to_start)
+
+            if min_dist_to_tour > max_min_dist:
+                max_min_dist = min_dist_to_tour
+                furthest_point = u
+
+        # Find best insertion position
+        if len(tour) == 1:
+            tour.append(furthest_point)
+        else:
+            best_pos = 0
+            best_increase = float('inf')
+
+            # Try inserting at each position
+            for i in range(len(tour) + 1):
+                test_tour = tour[:i] + [furthest_point] + tour[i:]
+                new_dist = calculate_route_distance(test_tour, x_coords, y_coords, start_x, start_y)
+                old_dist = calculate_route_distance(tour, x_coords, y_coords, start_x, start_y)
+                increase = new_dist - old_dist
+
+                if increase < best_increase:
+                    best_increase = increase
+                    best_pos = i
+
+            tour.insert(best_pos, furthest_point)
+
+        unvisited.remove(furthest_point)
+
+    return tour
+
+# Build route with steps tracking
+fi_route = furthest_insertion_route(x_coords, y_coords, bakery_x, bakery_y)
+fi_dist = calculate_route_distance(fi_route, x_coords, y_coords, bakery_x, bakery_y)
+
+# Build route step by step for visualization
+tour_steps = []
+tour = []
+unvisited = set(range(n_cafes))
+
+# Step 1: Find furthest from start
+distances_from_start = [calculate_distance(x_coords[i], y_coords[i], bakery_x, bakery_y)
+                       for i in range(n_cafes)]
+furthest = np.argmax(distances_from_start)
+tour = [furthest]
+unvisited.remove(furthest)
+tour_steps.append(tour.copy())
+
+# Build rest of tour
+while unvisited:
+    # Find unvisited point furthest from tour
+    max_min_dist = -1
+    furthest_point = None
+
+    for u in unvisited:
+        min_dist_to_tour = float('inf')
+        for t in tour:
+            dist = calculate_distance(x_coords[u], y_coords[u], x_coords[t], y_coords[t])
+            min_dist_to_tour = min(min_dist_to_tour, dist)
+
+        dist_to_start = calculate_distance(x_coords[u], y_coords[u], bakery_x, bakery_y)
+        min_dist_to_tour = min(min_dist_to_tour, dist_to_start)
+
+        if min_dist_to_tour > max_min_dist:
+            max_min_dist = min_dist_to_tour
+            furthest_point = u
+
+    # Find best insertion position
+    if len(tour) == 1:
+        tour.append(furthest_point)
+    else:
+        best_pos = 0
+        best_increase = float('inf')
+
+        for i in range(len(tour) + 1):
+            test_tour = tour[:i] + [furthest_point] + tour[i:]
+            new_dist = calculate_route_distance(test_tour, x_coords, y_coords, bakery_x, bakery_y)
+            old_dist = calculate_route_distance(tour, x_coords, y_coords, bakery_x, bakery_y)
+            increase = new_dist - old_dist
+
+            if increase < best_increase:
+                best_increase = increase
+                best_pos = i
+
+        tour.insert(best_pos, furthest_point)
+
+    unvisited.remove(furthest_point)
+    tour_steps.append(tour.copy())
+
+# Create visualization showing the construction process
+fig, axes = plt.subplots(2, 4)
+axes = axes.flatten()
+
+for step_num in range(1, 9):  # Show steps 1-8
+    ax = axes[step_num - 1]  # Use index 0-7 for axes
+
+    # Draw all cafés
+    ax.scatter(x_coords, y_coords, c=BRAND_COLORS["oneLight"], s=150, zorder=2)
+    ax.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=150, marker='s', zorder=3)
+
+    # Draw tour so far
+    if step_num <= len(tour_steps):
+        current_tour = tour_steps[step_num - 1]
+
+        # Draw tour
+        route_x = [bakery_x] + [x_coords[i] for i in current_tour] + [bakery_x]
+        route_y = [bakery_y] + [y_coords[i] for i in current_tour] + [bakery_y]
+        ax.plot(route_x, route_y, 'o-', color=BRAND_COLORS["oneDark"], linewidth=2, markersize=0, alpha=0.7)
+
+        # Highlight visited cafés
+        for idx in current_tour:
+            ax.scatter(x_coords[idx], y_coords[idx], c=BRAND_COLORS["oneDark"], s=200, zorder=3)
+
+    # Add labels
+    for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+        color = 'white' if step_num <= len(tour_steps) and i in tour_steps[step_num - 1] else 'black'
+        ax.annotate(f'{i+1}', (x, y), ha='center', va='center', color=color, fontweight='bold', fontsize=9)
+    ax.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
+    ax.set_xlim(-1, 13)
+    ax.set_ylim(-1, 5)
+    ax.set_aspect('equal', adjustable='box')
+    ax.grid(True, alpha=0.2)
+    ax.set_title(f'Step {step_num}', fontsize=10)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+plt.suptitle(f'Furthest Insertion Construction: Final Distance = {fi_dist:.1f} km', fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-note}
+Notice how furthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!
+:::
+
+## Comparison
+
+[Let's compare all three construction methods:]{.highlight}
+
+::: incremental
+- **Random:** Usually worst - no strategy at all!
+- **Nearest Neighbor:** Fast and decent, but can create long returns
+- **Furthest:** Often best initial solution, builds good "skeleton"
+:::
+
+. . .
+
+::: callout-tip
+The better your starting point, the better your final result after local search!
+:::
+
+. . .
+
+::: callout-important
+**This is also true for all other problems we are solving!** A good initial heuristic to create a solution will help us later.
+:::
+
+## The Problem with Greedy
+
+[Often obvious inefficiencies in the resulting routes]{.highlight}
+
 ::: incremental
 - **Crossing paths:** Route crosses over itself
 - **Long return:** Far from bakery at the end
@@ -396,7 +639,7 @@ Different construction methods give different starting points!
 . . .
 
 :::{.callout-warning}
-Nearest neighbor typically gives solutions [15-25% worse]{.highlight} than optimal. Can we improve it?
+Can we improve our greedy solutions?
 :::
 
 # [Local Search Framework]{.flow} {.title}
@@ -406,7 +649,7 @@ Nearest neighbor typically gives solutions [15-25% worse]{.highlight} than optim
 [Any problem can be solved with local search by defining:]{.highlight}
 
 ::: incremental
-1. **Search Space:** All possible solutions (here 20 trillion routes!)
+1. **Search Space:** All possible solutions (here 10 trillion routes!)
 2. **Initial Solution:** Starting point (our greedy route)
 3. **Objective Function:** How we measure quality (total distance)
 4. **Neighborhood:** How to create "nearby" solutions (2-opt swaps)
@@ -425,18 +668,21 @@ The power of local search: The same "engine" works for routing, scheduling, or a
 ::: incremental
 - **Each point:** A different route through the cafés
 - **Height:** The total distance of that route (lower is better)
-- **Neighbors:** Routes that differ by one small change
+- **Neighbors:** Routes that differ by small change
 - **Local optimum:** Best route among nearby alternatives
 - **Global optimum:** The absolute best route overall
 :::
 
-. . .
+## Search Strategy
 
-**Our Strategy:**
+[How can we search this space?]{.highlight}
+
+::: incremental
 1. Start somewhere (greedy construction)
 2. Look around at neighboring solutions
 3. Move to better neighbors
 4. Stop when no neighbor is better
+:::
 
 . . .
 
@@ -452,13 +698,15 @@ Local search transforms "quick and dirty" solutions into "pretty good" ones!
 
 . . .
 
-**The Idea:** Take two edges and swap them to uncross the route
+**The Idea:** Take two edges and swap them (to uncross the route)
+
+. . .
 
 ```{python}
 #| eval: true
 #| echo: false
 # Show a simple 2-opt swap illustration
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+fig, (ax1, ax2) = plt.subplots(1, 2)
 
 # Before swap - create a crossing
 points_x = [2, 6, 8, 4]
@@ -477,6 +725,7 @@ ax1.annotate('D', (points_x[3], points_y[3]), xytext=(-10, 10), textcoords='offs
 ax1.set_title('Before: Crossing Paths', fontweight='bold')
 ax1.set_xlim(0, 10)
 ax1.set_ylim(0, 8)
+ax1.set_aspect('equal', adjustable='box')
 ax1.grid(True, alpha=0.2)
 ax1.legend()
 
@@ -494,6 +743,7 @@ ax2.annotate('D', (points_x[3], points_y[3]), xytext=(-10, 10), textcoords='offs
 ax2.set_title('After: Uncrossed = Shorter!', fontweight='bold')
 ax2.set_xlim(0, 10)
 ax2.set_ylim(0, 8)
+ax2.set_aspect('equal', adjustable='box')
 ax2.grid(True, alpha=0.2)
 ax2.legend()
 
@@ -501,79 +751,192 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Manual 2-Opt Example: Step-by-Step
+## Example: Step-by-Step
 
-[Let's trace through one 2-opt swap by hand:]{.highlight}
+[Let's see exactly how 2-opt fixes a crossing in a real route:]{.highlight}
 
-**Starting Route:** B → C1 → C3 → C5 → C2 → C4 → B
+```{python}
+#| eval: true
+#| echo: false
+# Create a concrete visual example of 2-opt
+fig, axes = plt.subplots(1, 3)
 
+# Define a simple example with a clear crossing
+example_coords = {
+    'B': (2, 5),
+    'C1': (4, 5),
+    'C2': (8, 8),
+    'C3': (6, 2),
+    'C4': (8, 2),
+    'C5': (10, 5)
+}
+
+# Original route with crossing: B → C1 → C3 → C5 → C2 → C4 → B
+original_route = ['B', 'C1', 'C3', 'C5', 'C2', 'C4', 'B']
+
+# Step 1: Show the problem
+ax1 = axes[0]
+for i in range(len(original_route) - 1):
+    start = original_route[i]
+    end = original_route[i + 1]
+    x_vals = [example_coords[start][0], example_coords[end][0]]
+    y_vals = [example_coords[start][1], example_coords[end][1]]
+    
+    # Highlight the edges to be removed
+    if (start, end) in [('C1', 'C3'), ('C2', 'C4')]:
+        ax1.plot(x_vals, y_vals, 'o-', color=BRAND_COLORS["threeDark"], linewidth=3, markersize=0, alpha=0.8, label='Edges to remove' if start == 'C1' else '')
+    else:
+        ax1.plot(x_vals, y_vals, 'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.6)
+
+for name, (x, y) in example_coords.items():
+    if name == 'B':
+        ax1.scatter(x, y, c=BRAND_COLORS["threeDark"], s=500, marker='s', zorder=3)
+        ax1.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+    else:
+        ax1.scatter(x, y, c=BRAND_COLORS["twoDark"], s=500, zorder=3)
+        ax1.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+
+ax1.set_title('1. Problem: Route Crosses Itself', fontsize=13, fontweight='bold')
+ax1.text(0.5, 0.02, 'B → C1 → C3 → C5 → C2 → C4 → B', transform=ax1.transAxes, 
+         ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.3))
+ax1.set_xlim(0, 12)
+ax1.set_ylim(0, 10)
+ax1.set_aspect('equal', adjustable='box')
+ax1.grid(True, alpha=0.2)
+ax1.legend(loc='upper right')
+
+# Step 2: Show the swap operation
+ax2 = axes[1]
+# Draw non-affected parts faintly
+for i in range(len(original_route) - 1):
+    start = original_route[i]
+    end = original_route[i + 1]
+    x_vals = [example_coords[start][0], example_coords[end][0]]
+    y_vals = [example_coords[start][1], example_coords[end][1]]
+    
+    if (start, end) not in [('C1', 'C3'), ('C2', 'C4')]:
+        ax2.plot(x_vals, y_vals, 'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.3)
+
+# Draw the edges to be removed in dashed red
+ax2.plot([example_coords['C1'][0], example_coords['C3'][0]], 
+         [example_coords['C1'][1], example_coords['C3'][1]], 
+         '--', color=BRAND_COLORS["threeDark"], linewidth=3, alpha=0.5, label='Remove')
+ax2.plot([example_coords['C2'][0], example_coords['C4'][0]], 
+         [example_coords['C2'][1], example_coords['C4'][1]], 
+         '--', color=BRAND_COLORS["threeDark"], linewidth=3, alpha=0.5)
+
+# Draw the new edges to be added
+ax2.plot([example_coords['C1'][0], example_coords['C2'][0]], 
+         [example_coords['C1'][1], example_coords['C2'][1]], 
+         '-', color=BRAND_COLORS["oneDark"], linewidth=3, alpha=0.8, label='Add')
+ax2.plot([example_coords['C3'][0], example_coords['C4'][0]], 
+         [example_coords['C3'][1], example_coords['C4'][1]], 
+         '-', color=BRAND_COLORS["oneDark"], linewidth=3, alpha=0.8)
+
+# Highlight the segment being reversed with shading
+segment_x = [example_coords[c][0] for c in ['C3', 'C5', 'C2']]
+segment_y = [example_coords[c][1] for c in ['C3', 'C5', 'C2']]
+ax2.fill(segment_x + [segment_x[0]], segment_y + [segment_y[0]], 
+        color=BRAND_COLORS["oneLight"], alpha=0.2)
+
+for name, (x, y) in example_coords.items():
+    if name == 'B':
+        ax2.scatter(x, y, c=BRAND_COLORS["threeDark"], s=500, marker='s', zorder=3)
+        ax2.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+    else:
+        ax2.scatter(x, y, c=BRAND_COLORS["twoDark"], s=500, zorder=3)
+        ax2.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+
+ax2.set_title('2. Operation: Remove 2 Edges, Add 2 New', fontsize=13, fontweight='bold')
+ax2.text(0.5, 0.02, 'Remove C1→C3 & C2→C4, Add C1→C2 & C3→C4', transform=ax2.transAxes,
+        ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
+ax2.set_xlim(0, 12)
+ax2.set_ylim(0, 10)
+ax2.set_aspect('equal', adjustable='box')
+ax2.grid(True, alpha=0.2)
+ax2.legend(loc='upper right')
+
+# Step 3: Show the fixed route
+ax3 = axes[2]
+# New route: B → C1 → C2 → C5 → C3 → C4 → B
+new_route = ['B', 'C1', 'C2', 'C5', 'C3', 'C4', 'B']
+
+for i in range(len(new_route) - 1):
+    start = new_route[i]
+    end = new_route[i + 1]
+    x_vals = [example_coords[start][0], example_coords[end][0]]
+    y_vals = [example_coords[start][1], example_coords[end][1]]
+    
+    # Highlight the new edges
+    if (start, end) in [('C1', 'C2'), ('C3', 'C4')]:
+        ax3.plot(x_vals, y_vals, 'o-', color=BRAND_COLORS["oneDark"], linewidth=3, markersize=0, alpha=0.8, label='New edges' if start == 'C1' else '')
+    else:
+        ax3.plot(x_vals, y_vals, 'o-', color=BRAND_COLORS["twoDark"], linewidth=2, markersize=0, alpha=0.6)
+
+for name, (x, y) in example_coords.items():
+    if name == 'B':
+        ax3.scatter(x, y, c=BRAND_COLORS["threeDark"], s=500, marker='s', zorder=3)
+        ax3.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+    else:
+        ax3.scatter(x, y, c=BRAND_COLORS["twoDark"], s=500, zorder=3)
+        ax3.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+
+ax3.set_title('3. Solution: No More Crossings!', fontsize=13, fontweight='bold')
+ax3.text(0.5, 0.02, 'B → C1 → C2 → C5 → C3 → C4 → B ✓', transform=ax3.transAxes,
+        ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.3))
+ax3.set_xlim(0, 12)
+ax3.set_ylim(0, 10)
+ax3.set_aspect('equal', adjustable='box')
+ax3.grid(True, alpha=0.2)
+ax3.legend(loc='upper right')
+
+plt.tight_layout()
+plt.show()
 ```
-B → C1: 5 km    C3 → C5: 8 km    C4 → B: 6 km
-C1 → C3: 7 km   C5 → C2: 9 km
-C2 → C4: 4 km
-Total: 5 + 7 + 8 + 9 + 4 + 6 = 39 km
-```
 
 . . .
 
-[Notice:]{.question} Route crosses itself between C3→C5 and C2→C4!
-
-. . .
-
-**The Swap:**
-1. Remove edges: C1→C3 and C2→C4
-2. Reverse middle segment: [C3, C5, C2] becomes [C2, C5, C3]
-3. New route: B → C1 → C2 → C5 → C3 → C4 → B
-
-. . .
-
-**New distance:** 5 + 6 + 9 + 8 + 3 + 6 = 37 km = [2 km saved!]{.highlight}
+:::{.callout-tip}
+**The Key Insight:** When you reverse a segment between two crossing edges, you automatically eliminate the crossing and create a shorter route!
+:::
 
 ## How 2-Opt Works
 
 ```python
-def two_opt_improvement(route, distances):
-    """Apply 2-opt until no improvements found"""
-    improved = True
-
-    while improved:
-        improved = False
-        best_distance = calculate_route_distance(route, distances)
-
-        # Try all possible edge swaps
-        for i in range(len(route) - 1):
-            for j in range(i + 2, len(route)):
-                # Reverse segment between i and j
-                new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
-                new_distance = calculate_route_distance(new_route, distances)
-
-                # Accept if better
-                if new_distance < best_distance:
-                    route = new_route
-                    best_distance = new_distance
-                    improved = True
-                    break
-
-            if improved:
+improved = True
+while improved:
+    improved = False
+    best_distance = calculate_route_distance(route, distances)
+    for i in range(len(route) - 1):
+        for j in range(i + 2, len(route)):
+            new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
+            new_distance = calculate_route_distance(new_route, distances)
+            if new_distance < best_distance:
+                route = new_route
+                best_distance = new_distance
+                improved = True
                 break
-
-    return route
+        if improved:
+            break
 ```
 
 . . .
 
 :::{.callout-note}
-**Key Operation:** `route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]`
-
 The `[::-1]` reverses the segment, eliminating crossings!
 :::
 
-## 2-Opt Applied to Our 16-Café Problem
+## 2-Opt Applied
+
+[Let's see how this changes the route!]{.highlight}
+
+. . .
 
 ```{python}
 #| eval: true
 #| echo: false
-# Implement basic 2-opt for demonstration
+# Implement basic 2-opt for demonstration using the 8-café data from earlier
+
 def two_opt_improvement(route, x_coords, y_coords, start_x, start_y):
     improved = True
     best_route = route.copy()
@@ -598,40 +961,63 @@ def two_opt_improvement(route, x_coords, y_coords, start_x, start_y):
 
     return best_route
 
-# Apply 2-opt
-improved_route = two_opt_improvement(route, x_coords, y_coords, bakery_x, bakery_y)
+# Apply 2-opt to our nearest neighbor solution
+improved_route = two_opt_improvement(nn_route, x_coords, y_coords, bakery_x, bakery_y)
 improved_distance = calculate_route_distance(improved_route, x_coords, y_coords, bakery_x, bakery_y)
 
 # Visualize improved route
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+fig, (ax1, ax2) = plt.subplots(1, 2)
 
-# Original route
-route_x = [bakery_x] + [x_coords[i] for i in route] + [bakery_x]
-route_y = [bakery_y] + [y_coords[i] for i in route] + [bakery_y]
+# Original nearest neighbor route
+route_x = [bakery_x] + [x_coords[i] for i in nn_route] + [bakery_x]
+route_y = [bakery_y] + [y_coords[i] for i in nn_route] + [bakery_y]
 ax1.plot(route_x, route_y, 'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.7)
-ax1.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=150, zorder=3)
+ax1.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=200, zorder=3)
 ax1.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=300, marker='s', zorder=3)
-ax1.set_title(f'Greedy: {initial_distance:.1f} km', fontweight='bold')
-ax1.grid(True, alpha=0.2)
 
-# Improved route
+# Add labels
+for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+    ax1.annotate(f'{i+1}', (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=9)
+ax1.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
+ax1.set_title(f'Nearest Neighbor: {nn_dist:.1f} km', fontweight='bold')
+ax1.grid(True, alpha=0.2)
+ax1.set_xlim(-1, 13)
+ax1.set_ylim(-1, 5)
+ax1.set_aspect('equal', adjustable='box')
+
+# Improved route after 2-opt
 improved_x = [bakery_x] + [x_coords[i] for i in improved_route] + [bakery_x]
 improved_y = [bakery_y] + [y_coords[i] for i in improved_route] + [bakery_y]
 ax2.plot(improved_x, improved_y, 'o-', color=BRAND_COLORS["twoDark"], linewidth=2, markersize=0, alpha=0.7)
-ax2.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=150, zorder=3)
+ax2.scatter(x_coords, y_coords, c=BRAND_COLORS["twoDark"], s=200, zorder=3)
 ax2.scatter(bakery_x, bakery_y, c=BRAND_COLORS["threeDark"], s=300, marker='s', zorder=3)
+
+# Add labels
+for i, (x, y) in enumerate(zip(x_coords, y_coords)):
+    ax2.annotate(f'{i+1}', (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=9)
+ax2.annotate('B', (bakery_x, bakery_y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
 ax2.set_title(f'After 2-Opt: {improved_distance:.1f} km', fontweight='bold')
 ax2.grid(True, alpha=0.2)
+ax2.set_xlim(-1, 13)
+ax2.set_ylim(-1, 5)
+ax2.set_aspect('equal', adjustable='box')
 
 # Calculate improvement
-improvement = (initial_distance - improved_distance) / initial_distance * 100
+improvement = (nn_dist - improved_distance) / nn_dist * 100
 
-plt.suptitle(f'Route Improvement: {improvement:.1f}% shorter!', fontsize=14, fontweight='bold')
 plt.tight_layout()
 plt.show()
 ```
 
-## Common 2-Opt Bugs (And How to Fix Them)
+. . .
+
+:::{.callout-tip}
+Notice how 2-opt removed the crossing paths from our nearest neighbor solution, creating a more efficient route!
+:::
+
+## Common 2-Opt Bugs
 
 [Debug these scenarios you'll encounter:]{.highlight}
 
@@ -643,7 +1029,6 @@ plt.show()
 if new_distance < current_distance:
     improved = True  # But route never changes!
 ```
-**Fix:** `route = new_route` before continuing
 
 . . .
 
@@ -652,7 +1037,6 @@ if new_distance < current_distance:
 # WRONG: Only measures cafe-to-cafe
 total = sum(distances between stops)
 ```
-**Fix:** `total += distance(last_stop, depot)`
 
 . . .
 
@@ -661,15 +1045,228 @@ total = sum(distances between stops)
 # WRONG: Off-by-one error
 new_route = route[:i] + route[i:j][::-1] + route[j:]
 ```
+
+. . .
+
 **Fix:** `route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]`
 
-## Beyond 2-Opt: k-Opt Neighborhoods
+## What About 1-Opt?
+
+```{python}
+#| eval: true
+#| echo: false
+fig, (ax1, ax2) = plt.subplots(1, 2)
+
+# Simple tour visualization
+tour_coords = [(2, 2), (6, 2), (6, 6), (2, 6)]
+labels = ['A', 'B', 'C', 'D']
+
+# Original tour
+ax1.plot([tour_coords[i][0] for i in [0, 1, 2, 3, 0]], 
+         [tour_coords[i][1] for i in [0, 1, 2, 3, 0]], 
+         'o-', color=BRAND_COLORS["twoDark"], linewidth=3, markersize=15)
+
+# Highlight one edge to remove
+ax1.plot([tour_coords[1][0], tour_coords[2][0]], 
+         [tour_coords[1][1], tour_coords[2][1]], 
+         'o-', color=BRAND_COLORS["threeDark"], linewidth=4, markersize=15, label='Remove this edge')
+
+for i, (coord, label) in enumerate(zip(tour_coords, labels)):
+    ax1.annotate(label, coord, ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+
+ax1.set_title('Original Tour: A→B→C→D→A', fontweight='bold', fontsize=12)
+ax1.set_xlim(0, 8)
+ax1.set_ylim(0, 8)
+ax1.set_aspect('equal', adjustable='box')
+ax1.grid(True, alpha=0.2)
+ax1.legend()
+
+# After removing one edge - broken path
+ax2.plot([tour_coords[0][0], tour_coords[1][0]], 
+         [tour_coords[0][1], tour_coords[1][1]], 
+         'o-', color=BRAND_COLORS["twoDark"], linewidth=3, markersize=15)
+ax2.plot([tour_coords[2][0], tour_coords[3][0], tour_coords[0][0]], 
+         [tour_coords[2][1], tour_coords[3][1], tour_coords[0][1]], 
+         'o-', color=BRAND_COLORS["twoDark"], linewidth=3, markersize=15)
+
+# Show the gap
+ax2.plot([tour_coords[1][0], tour_coords[2][0]], 
+         [tour_coords[1][1], tour_coords[2][1]], 
+         '--', color=BRAND_COLORS["threeDark"], linewidth=2, alpha=0.3, label='Gap (must reconnect here!)')
+
+for i, (coord, label) in enumerate(zip(tour_coords, labels)):
+    ax2.annotate(label, coord, ha='center', va='center', color='white', fontweight='bold', fontsize=12)
+
+ax2.set_title('After Removing 1 Edge: A→B ... C→D→A', fontweight='bold', fontsize=12)
+ax2.set_xlim(0, 8)
+ax2.set_ylim(0, 8)
+ax2.set_aspect('equal', adjustable='box')
+ax2.grid(True, alpha=0.2)
+ax2.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-note}
+[Where 1-opt DOES work:]{.highlight} In problems like knapsack (swap 1 item), assignment (reassign 1 person), or facility location (relocate 1 facility).
+:::
+
+## Or-Opt: Moving Sequences
+
+[Moves sequence of 1-3 consecutive cities to different position.]{.highlight}
+
+```{python}
+#| eval: true
+#| echo: false
+# Visual explanation of Or-opt
+fig, axes = plt.subplots(1, 3)
+
+# Define example route
+oropt_coords = {
+    'B': (2, 5),
+    'C1': (4, 3),
+    'C2': (6, 2),
+    'C3': (8, 3),
+    'C4': (10, 5),
+    'C5': (8, 7),
+    'C6': (6, 8),
+    'C7': (4, 7)
+}
+
+original_route = ['B', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'B']
+
+# Panel 1: Original route
+ax1 = axes[0]
+for i in range(len(original_route) - 1):
+    start = original_route[i]
+    end = original_route[i + 1]
+    
+    # Highlight the sequence we'll move
+    if start in ['C2', 'C3'] or (start == 'C1' and end == 'C2'):
+        ax1.plot([oropt_coords[start][0], oropt_coords[end][0]], 
+                [oropt_coords[start][1], oropt_coords[end][1]], 
+                'o-', color=BRAND_COLORS["threeDark"], linewidth=4, markersize=0, alpha=0.8,
+                label='Sequence to move' if start == 'C1' else '')
+    else:
+        ax1.plot([oropt_coords[start][0], oropt_coords[end][0]], 
+                [oropt_coords[start][1], oropt_coords[end][1]], 
+                'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.6)
+
+for name, (x, y) in oropt_coords.items():
+    if name in ['C2', 'C3']:
+        ax1.scatter(x, y, c=BRAND_COLORS["threeDark"], s=400, zorder=3)
+        ax1.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+    elif name == 'B':
+        ax1.scatter(x, y, c=BRAND_COLORS["oneDark"], s=400, marker='s', zorder=3)
+        ax1.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+    else:
+        ax1.scatter(x, y, c=BRAND_COLORS["twoDark"], s=400, zorder=3)
+        ax1.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
+ax1.set_title('1. Original: Identify Sequence', fontweight='bold', fontsize=12)
+ax1.text(0.5, 0.05, 'B→C1→[C2→C3]→C4→C5→C6→C7→B', transform=ax1.transAxes,
+        ha='center', fontsize=9, bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.3))
+ax1.set_xlim(0, 12)
+ax1.set_ylim(0, 10)
+ax1.set_aspect('equal', adjustable='box')
+ax1.grid(True, alpha=0.2)
+ax1.legend(loc='upper left')
+
+# Panel 2: Show the move operation
+ax2 = axes[1]
+# Draw the partial route faintly
+for i in range(len(original_route) - 1):
+    start = original_route[i]
+    end = original_route[i + 1]
+    
+    if start not in ['C2', 'C3'] and end not in ['C2', 'C3']:
+        ax2.plot([oropt_coords[start][0], oropt_coords[end][0]], 
+                [oropt_coords[start][1], oropt_coords[end][1]], 
+                'o-', color=BRAND_COLORS["twoLight"], linewidth=2, markersize=0, alpha=0.3)
+
+# Show the sequence being moved with an arrow
+ax2.annotate('', xy=(7, 7.5), xytext=(7, 2.5),
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["threeDark"], lw=4))
+ax2.text(7.5, 5, 'Move\nhere!', fontsize=12, fontweight='bold', color=BRAND_COLORS["threeDark"])
+
+for name, (x, y) in oropt_coords.items():
+    if name in ['C2', 'C3']:
+        ax2.scatter(x, y, c=BRAND_COLORS["threeDark"], s=400, zorder=3, alpha=0.5)
+        ax2.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+    elif name == 'B':
+        ax2.scatter(x, y, c=BRAND_COLORS["oneDark"], s=400, marker='s', zorder=3)
+        ax2.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+    else:
+        ax2.scatter(x, y, c=BRAND_COLORS["twoDark"], s=400, zorder=3)
+        ax2.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
+ax2.set_title('2. Operation: Move [C2→C3]', fontweight='bold', fontsize=12)
+ax2.text(0.5, 0.05, 'Extract [C2→C3], insert after C6', transform=ax2.transAxes,
+        ha='center', fontsize=9, bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
+ax2.set_xlim(0, 12)
+ax2.set_ylim(0, 10)
+ax2.set_aspect('equal', adjustable='box')
+ax2.grid(True, alpha=0.2)
+
+# Panel 3: New route after Or-opt
+ax3 = axes[2]
+new_route = ['B', 'C1', 'C4', 'C5', 'C6', 'C2', 'C3', 'C7', 'B']
+
+for i in range(len(new_route) - 1):
+    start = new_route[i]
+    end = new_route[i + 1]
+    
+    # Highlight new connections
+    if (start, end) in [('C1', 'C4'), ('C6', 'C2'), ('C3', 'C7')]:
+        ax3.plot([oropt_coords[start][0], oropt_coords[end][0]], 
+                [oropt_coords[start][1], oropt_coords[end][1]], 
+                'o-', color=BRAND_COLORS["oneDark"], linewidth=3, markersize=0, alpha=0.8,
+                label='New edges' if start == 'C1' else '')
+    else:
+        ax3.plot([oropt_coords[start][0], oropt_coords[end][0]], 
+                [oropt_coords[start][1], oropt_coords[end][1]], 
+                'o-', color=BRAND_COLORS["twoDark"], linewidth=2, markersize=0, alpha=0.6)
+
+for name, (x, y) in oropt_coords.items():
+    if name in ['C2', 'C3']:
+        ax3.scatter(x, y, c=BRAND_COLORS["threeDark"], s=400, zorder=3)
+        ax3.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+    elif name == 'B':
+        ax3.scatter(x, y, c=BRAND_COLORS["oneDark"], s=400, marker='s', zorder=3)
+        ax3.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
+    else:
+        ax3.scatter(x, y, c=BRAND_COLORS["twoDark"], s=400, zorder=3)
+        ax3.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=10)
+
+ax3.set_title('3. Result: Sequence Relocated', fontweight='bold', fontsize=12)
+ax3.text(0.5, 0.05, 'B→C1→C4→C5→C6→[C2→C3]→C7→B ✓', transform=ax3.transAxes,
+        ha='center', fontsize=9, bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.3))
+ax3.set_xlim(0, 12)
+ax3.set_ylim(0, 10)
+ax3.set_aspect('equal', adjustable='box')
+ax3.grid(True, alpha=0.2)
+ax3.legend(loc='upper left')
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+:::{.callout-tip}
+Moving a sequence can satisfy time constraints without breaking tour structure!
+:::
+
+## Beyond: k-Opt Neighborhoods
 
 [The k-opt family of improvements:]{.highlight}
 
 ::: columns
 ::: {.column width="33%"}
 **2-opt**
+
 - Removes 2 edges
 - 1 way to reconnect
 - n² combinations
@@ -678,6 +1275,7 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 ::: {.column width="33%"}
 **3-opt**
+
 - Removes 3 edges
 - 7 ways to reconnect
 - n³ combinations
@@ -686,57 +1284,61 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 ::: {.column width="33%"}
 **Or-opt**
+
 - Moves 1-3 nodes
-- Different philosophy
 - Good for time windows
-- Preserves orientation
+- Specialized variant
 :::
 :::
 
 . . .
 
 :::{.callout-tip}
-Industry practice: Start with 2-opt (fast), use 3-opt if you have time!
-
-As k increases, solutions improve but computation time grows exponentially.
+Start with 2-opt (fast), use 3-opt if you have time! As k increases, solutions improve but computation time grows exponentially.
 :::
+
+
+# [Local Optima]{.flow} {.title}
 
 ## Convergence and Local Optima
 
 [When does local search stop? Why might it get stuck?]{.highlight}
 
-**Convergence Analysis:**
+. . .
+
+**Convergence:**
+
 - Algorithm stops when no neighboring solution is better
-- Usually converges in n to n² iterations for n stops
-- Each iteration checks all n² possible swaps
 
 . . .
 
 **The Local Optimum Problem:**
+
+::: increment
 - Algorithm can only "see" neighboring solutions
 - Might miss better solutions that require multiple changes
 - Like being stuck on a small hill when there's a mountain nearby
+:::
 
 . . .
 
 :::{.callout-important}
-**Key Insight:** Local search guarantees improvement but not global optimality.
-That's why we need escape strategies!
+Local search for improvement but does not guarantee global optimality.
 :::
 
-## The Local Optimum Trap: A Hiker's Dilemma
+## The Local Optimum Trap
 
 [Imagine you're a hiker dropped in foggy mountains at night...]{.highlight}
 
+::: incremental
+- **Your Mission:** Find the highest peak (global optimum)
+- **Your Tool:** An altimeter (objective function)
+- **Your Vision:** Only the ground at your feet (local neighborhood)
+:::
+
 . . .
 
-**Your Mission:** Find the highest peak (global optimum)
-**Your Tool:** An altimeter (objective function)
-**Your Vision:** Only the ground at your feet (local neighborhood)
-
-. . .
-
-**The Greedy Strategy:** Always step uphill
+- **The Greedy Strategy:** Always step uphill
 
 . . .
 
@@ -745,7 +1347,7 @@ That's why we need escape strategies!
 . . .
 
 :::{.callout-warning}
-You're stuck! Every step is downhill, but you might be on a tiny hill while Mount Everest is nearby. This is the [local optimum trap]{.highlight}!
+You're stuck! Every step is downhill, but you might be on a tiny hill while a much larger moutain is nearby. This is the [local optimum trap]{.highlight}!
 :::
 
 ## Visualizing Local Optima
@@ -754,28 +1356,36 @@ You're stuck! Every step is downhill, but you might be on a tiny hill while Moun
 #| eval: true
 #| echo: false
 # Illustrate local vs global optimum concept
-fig, ax = plt.subplots(figsize=(10, 5))
+fig, ax = plt.subplots()
 
 x = np.linspace(0, 10, 500)
-y = -np.sin(x) * np.exp(-x/10) + 0.1*np.sin(5*x) + 2
+# Create a simpler function with two clear minima (valleys)
+# This represents the "fitness landscape" of different routes
+y = 3 + 0.2*x - 1.5*np.exp(-(x-3)**2/0.8) - 2.5*np.exp(-(x-7.5)**2/0.5)
 
 ax.plot(x, y, color=BRAND_COLORS["twoDark"], linewidth=2.5)
-ax.scatter([2.1], [-np.sin(2.1) * np.exp(-2.1/10) + 0.1*np.sin(5*2.1) + 2],
-           color=BRAND_COLORS["threeDark"], s=200, zorder=3, label='Local Minimum')
-ax.scatter([0.5], [-np.sin(0.5) * np.exp(-0.5/10) + 0.1*np.sin(5*0.5) + 2],
-           color=BRAND_COLORS["oneDark"], s=200, zorder=3, label='Global Minimum')
-ax.scatter([6.3], [-np.sin(6.3) * np.exp(-6.3/10) + 0.1*np.sin(5*6.3) + 2],
-           color=BRAND_COLORS["oneDark"], s=200, zorder=3)
 
-ax.annotate('Stuck here!', xy=(2.1, 1.65), xytext=(1, 1.3),
+# Define our local and global minima explicitly (in valleys)
+x_local = 2.9  # Local minimum (shallow valley)
+y_local = 3 + 0.2*x_local - 1.5*np.exp(-(x_local-3)**2/0.8) - 2.5*np.exp(-(x_local-7.5)**2/0.5)
+
+x_global = 7.5  # Global minimum (deeper valley)
+y_global = 3 + 0.2*x_global - 1.5*np.exp(-(x_global-3)**2/0.8) - 2.5*np.exp(-(x_global-7.5)**2/0.5)
+
+ax.scatter([x_local], [y_local],
+           color=BRAND_COLORS["threeDark"], s=200, zorder=3, label='Local Minimum')
+ax.scatter([x_global], [y_global],
+           color=BRAND_COLORS["oneDark"], s=200, zorder=3, label='Global Minimum')
+
+ax.annotate('Stuck here!', xy=(x_local, y_local), xytext=(x_local - 2.5, y_local + 0.5),
             arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["threeDark"]),
             fontsize=11)
-ax.annotate('Want here!', xy=(6.3, 1.45), xytext=(7.5, 1.2),
+ax.annotate('Want here!', xy=(x_global, y_global), xytext=(x_global, y_global - 0.8),
             arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["oneDark"]),
             fontsize=11)
 
 ax.set_xlabel('Solution Space', fontsize=11)
-ax.set_ylabel('Total Distance', fontsize=11)
+ax.set_ylabel('Total Distance (km)', fontsize=11)
 ax.set_title('The Local Optimum Trap', fontsize=14, fontweight='bold')
 ax.grid(True, alpha=0.2)
 ax.legend()
@@ -783,65 +1393,139 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Escaping Local Optima: Multi-Start Strategy
+::: callout-tip
+Here, the local minimum is already quite good, but we likely won't reach the global optimum from here.
+:::
 
-[Simple fix: Don't put all eggs in one basket!]{.highlight}
+## The Reality
 
-. . .
+[Real problems often have thousands of local optima!]{.highlight}
 
-```python
-def multi_start_optimization(n_starts=10):
-    """Try multiple random starts, keep the best"""
-    best_route = None
-    for i in range(n_starts):
-        # New random start
-        route = random_initial_route()
-        # Improve with 2-opt
-        route = improve_with_2opt(route)
-        # Keep if best so far
-        if better_than(route, best_route):
-            best_route = route
-    return best_route
+```{python}
+#| eval: true
+#| echo: false
+# Create a complex optimization landscape with many local optima
+fig, ax = plt.subplots()
+
+x = np.linspace(0, 20, 1000)
+# Build a complex function with many peaks and valleys
+# Start with a base trend
+y = 5 + 0.1*x
+# Add multiple sine/cosine waves of different frequencies
+y += 1.5*np.sin(0.5*x)  # Long wavelength
+y += 0.8*np.sin(2*x)     # Medium wavelength
+y += 0.4*np.sin(5*x)     # Short wavelength
+y += 0.3*np.cos(8*x)     # Even shorter
+y += 0.2*np.sin(12*x)    # Very short wavelength
+# Add some Gaussian valleys for local minima
+y -= 0.8*np.exp(-(x-3)**2/0.3)   # Small local minimum
+y -= 1.2*np.exp(-(x-7)**2/0.4)   # Medium local minimum
+y -= 0.9*np.exp(-(x-11)**2/0.3)  # Another local minimum
+y -= 5*np.exp(-(x-16)**2/0.5)    # Deep global minimum
+
+ax.plot(x, y, color=BRAND_COLORS["twoDark"], linewidth=2, alpha=0.8)
+
+# Find and mark several local minima
+local_minima_x = [2.0, 7.27, 11.34, 13.55]
+local_minima_labels = ['Local 1', 'Local 2', 'Local 3', 'Local 4']
+
+for x_loc, label in zip(local_minima_x, local_minima_labels):
+    y_loc = 5 + 0.1*x_loc
+    y_loc += 1.5*np.sin(0.5*x_loc) + 0.8*np.sin(2*x_loc) + 0.4*np.sin(5*x_loc)
+    y_loc += 0.3*np.cos(8*x_loc) + 0.2*np.sin(12*x_loc)
+    y_loc -= 0.8*np.exp(-(x_loc-3)**2/0.3)
+    y_loc -= 1.2*np.exp(-(x_loc-7)**2/0.4)
+    y_loc -= 0.9*np.exp(-(x_loc-11)**2/0.3)
+    y_loc -= 5*np.exp(-(x_loc-16)**2/0.5)
+
+    ax.scatter([x_loc], [y_loc], color=BRAND_COLORS["threeDark"], s=200, zorder=3)
+
+# Mark the global minimum
+x_global = 16.05
+y_global = 5 + 0.1*x_global
+y_global += 1.5*np.sin(0.5*x_global) + 0.8*np.sin(2*x_global) + 0.4*np.sin(5*x_global)
+y_global += 0.3*np.cos(8*x_global) + 0.2*np.sin(12*x_global)
+y_global -= 0.8*np.exp(-(x_global-3)**2/0.3)
+y_global -= 1.2*np.exp(-(x_global-7)**2/0.4)
+y_global -= 0.9*np.exp(-(x_global-11)**2/0.3)
+y_global -= 5*np.exp(-(x_global-16)**2/0.5)
+
+ax.scatter([x_global], [y_global], color=BRAND_COLORS["oneDark"], s=200, zorder=4)
+ax.annotate('GLOBAL\nMINIMUM', xy=(x_global, y_global), xytext=(x_global, y_global - 2),
+            fontsize=11, ha='center', fontweight='bold',
+            arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["oneDark"], lw=2))
+
+# Add shaded regions to show quality differences
+ax.axhspan(ymin=ax.get_ylim()[0], ymax=y_global + 0.5, alpha=0.1, color='green', label='Excellent')
+ax.axhspan(ymin=y_global + 0.5, ymax=4, alpha=0.1, color='yellow', label='Good')
+ax.axhspan(ymin=4, ymax=6, alpha=0.1, color='orange', label='Mediocre')
+ax.axhspan(ymin=6, ymax=ax.get_ylim()[1], alpha=0.1, color='red', label='Poor')
+
+ax.set_xlabel('Solution Space (Different Route Configurations)', fontsize=12)
+ax.set_ylabel('Total Distance (km)', fontsize=12)
+ax.grid(True, alpha=0.3)
+
+# Add text box with key insight
+plt.tight_layout()
+plt.show()
 ```
 
 . . .
 
-:::{.callout-note}
-Like hiring 10 drivers, letting each plan their own route, then picking the best! Simple but effective.
+:::{.callout-warning}
+The probability of finding the global optimum with simple local search is nearly zero!
 :::
+
+## Escaping Local Optima
+
+[Depending on the problem: Multi-Start Strategy!]{.highlight}
+
+::: incremental
+- Most local minima are much worse than the global optimum
+- The global minimum is sometimes isolated and hard to reach
+- Starting point dramatically affects final solution quality
+- Thus, start with different random solutions
+- Use different initial heuristics
+:::
+
+. . .
 
 :::{.callout-tip}
 **No Free Lunch Theorem:** There's no universal "best" algorithm for all problems.
 What works great for routing might fail for scheduling. Always match your tool to your problem!
 :::
 
-## Real-World Impact: How Good is Good Enough?
+## How Good is Good Enough?
 
-[Industry benchmarks for delivery optimization:]{.highlight}
+[Industry usage for delivery optimization]{.highlight}
 
-| Method | vs Optimal | Industry Use |
+| Method | Industry Use |
 |--------|------------|--------------|
-| Human intuition | +40-60% | Still common! |
-| Nearest Neighbor | +20-25% | Quick dispatch |
-| NN + 2-opt | +5-15% | Standard practice |
-| Advanced Meta | +2-5% | Premium logistics |
-| Exact (if possible) | 0% | Research only |
+| Human intuition | Still common! |
+| Start + 2-opt | Common practice |
+| Advanced Meta | Sometimes practice |
+| Exact (if possible) | Mostly research |
 
 . . .
 
 :::{.callout-important}
-**Business Reality:** A 10% improvement = millions in savings for large logistics companies. Your 2-opt implementation could literally pay for itself in one day!
+A 10% improvement = millions in savings for large logistics companies. Even a 2-opt implementation could literally save a lot of money if not used yet!
 :::
 
-## Time Windows: The Real-World Constraint
+# [Time Constraints]{.flow} {.title}
 
-[Remember our bakery? Some cafés open earlier than others:]{.highlight}
+## Time Windows
+
+[Remember our bakery? Some cafés open earlier than others!]{.highlight}
+
+. . .
 
 **Artisan Bakery's Morning Schedule:**
-- **Bakery opens:** 5:00 AM (van departs)
-- **Early Birds (3 cafés):** Must receive by 6:45 AM
+
+- **Bakery opens:** 5:00 (van departs)
+- **Early Birds (3 cafés):** Must receive by 6:30
   - Café Europa, Sunrise Bistro, Morning Glory
-- **Standard (13 cafés):** Must receive by 8:00 AM
+- **Standard (13 cafés):** Must receive by 8:00
 
 . . .
 
@@ -850,7 +1534,7 @@ What works great for routing might fail for scheduling. Always match your tool t
 . . .
 
 :::{.callout-warning}
-**NO!** The shortest route might deliver to early cafés last, arriving at 7:30 AM. [Feasibility first, optimization second!]{.highlight}
+The shortest route might deliver to early cafés last. [Feasibility first, optimization second!]{.highlight}
 :::
 
 ## Time Windows: Practical Approach
@@ -858,6 +1542,7 @@ What works great for routing might fail for scheduling. Always match your tool t
 [Each location has a delivery time window:]{.highlight}
 
 **Key Concepts:**
+
 - **Earliest time:** When café opens
 - **Latest time:** Delivery deadline
 - **Service time:** Time to unload
@@ -868,43 +1553,31 @@ What works great for routing might fail for scheduling. Always match your tool t
 
 . . .
 
-**Feasible route:** All deadlines met
-**Infeasible route:** At least one deadline missed (even if shortest!)
+- **Feasible route:** All deadlines met
+- **Infeasible route:** At least one deadline missed (even if shortest!)
 
-## Time Windows: Nearest Neighbor Modification
+## Time Windows: NN Modification
 
 [Modify greedy construction to prioritize early deadlines:]{.highlight}
 
 ```python
-def nearest_neighbor_with_time_windows(locations, time_windows, start_time):
-    """Greedy construction respecting time constraints"""
-    unvisited = set(range(len(locations)))
-    route = []
-    current_time = start_time
-
-    while unvisited:
-        # Find feasible neighbors (can reach before deadline)
-        feasible = [i for i in unvisited
-                   if current_time + travel_time(current, i)
-                      <= time_windows[i]['latest']]
-
-        if not feasible:
-            return None  # No feasible route exists!
-
-        # Among feasible, choose nearest OR most urgent
-        next_stop = min(feasible,
-                       key=lambda i: (time_windows[i]['latest'],
-                                     distance(current, i)))
-
-        # Update state
-        route.append(next_stop)
-        unvisited.remove(next_stop)
-        current_time += travel_time(current, next_stop) + service_time
-
-    return route
+unvisited = set(range(len(locations))); route = []; current_time = start_time
+while unvisited:
+    # Find feasible neighbors (can reach before deadline)
+    feasible = [i for i in unvisited
+                if current_time + travel_time(current, i)
+                    <= time_windows[i]['latest']]
+    if not feasible:
+        return None  # No feasible route exists!
+    # Among feasible, choose most urgent
+    next_stop = min(feasible, key=lambda i: (time_windows[i]['latest']))
+    # Update state
+    route.append(next_stop)
+    unvisited.remove(next_stop)
+    current_time += travel_time(current, next_stop) + service_time
 ```
 
-## 2-Opt with Time Windows: The Challenge
+## 2-Opt with Time Windows
 
 [Problem: 2-opt can break time feasibility!]{.highlight}
 
@@ -912,7 +1585,7 @@ def nearest_neighbor_with_time_windows(locations, time_windows, start_time):
 #| eval: true
 #| echo: false
 # Illustrate time window violation
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+fig, (ax1, ax2) = plt.subplots(1, 2)
 
 # Original feasible route
 stops = ['Bakery', 'Early1', 'Early2', 'Late1', 'Late2']
@@ -927,7 +1600,7 @@ for i, (stop, deadline) in enumerate(zip(stops, deadlines)):
                    color=BRAND_COLORS["oneDark"], linestyle='--', alpha=0.5)
 ax1.set_xticks(range(len(stops)))
 ax1.set_xticklabels(stops, rotation=45, ha='right')
-ax1.set_ylabel('Time (decimal hours)', fontsize=11)
+ax1.set_ylabel('Hours', fontsize=11)
 ax1.set_title('Original Route: FEASIBLE ✓', fontsize=13, fontweight='bold')
 ax1.grid(True, alpha=0.2)
 ax1.set_ylim(4.5, 8.5)
@@ -943,7 +1616,7 @@ for i, (stop, deadline) in enumerate(zip(stops, deadlines)):
 ax2.scatter([2], [times_infeasible[2]], color='red', s=200, zorder=5, marker='x', linewidths=3)
 ax2.set_xticks(range(len(stops)))
 ax2.set_xticklabels(stops, rotation=45, ha='right')
-ax2.set_ylabel('Time (decimal hours)', fontsize=11)
+ax2.set_ylabel('Hours', fontsize=11)
 ax2.set_title('After 2-Opt: INFEASIBLE ✗', fontsize=13, fontweight='bold')
 ax2.grid(True, alpha=0.2)
 ax2.set_ylim(4.5, 8.5)
@@ -952,72 +1625,68 @@ plt.tight_layout()
 plt.show()
 ```
 
+. . .
+
 :::{.callout-warning}
-**Early2 now arrives at 7:12 AM** - missed its 6:45 deadline by 27 minutes!
+**Early2 now arrives at 7:12 AM.** Missed its 6:45 deadline by 27 minutes!
 :::
 
-## 2-Opt with Time Windows: The Solution
+## The Solution
 
-[Only accept swaps that maintain feasibility:]{.highlight}
+[Only accept swaps that maintain feasibility!]{.highlight}
 
 ```python
-def two_opt_with_time_windows(route, distances, time_windows, start_time):
-    """2-opt that respects time constraints"""
-    improved = True
-
-    while improved:
-        improved = False
-
-        for i in range(len(route) - 1):
-            for j in range(i + 2, len(route)):
-                # Create candidate route
-                new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
-
-                # Check feasibility FIRST
-                if not is_feasible(new_route, time_windows, start_time):
-                    continue  # Skip infeasible swaps
-
-                # Among feasible swaps, take if shorter
-                if calculate_distance(new_route) < calculate_distance(route):
-                    route = new_route
-                    improved = True
-                    break
-
-            if improved:
+improved = True
+while improved:
+    improved = False
+    for i in range(len(route) - 1):
+        for j in range(i + 2, len(route)):
+            new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
+            # Check feasibility FIRST
+            if not is_feasible(new_route, time_windows, start_time):
+                continue  # Skip infeasible swaps
+            # Among feasible swaps, take if shorter
+            if calculate_distance(new_route) < calculate_distance(route):
+                route = new_route
+                improved = True
                 break
-
-    return route
+        if improved:
+            break
 ```
-
-:::{.callout-tip}
-**Key Principle:** Feasibility is a hard constraint, distance is the objective. Never violate constraints to improve objective!
-:::
-
-# [Mission Briefing]{.flow} {.title}
-
-## Choosing Your Weapon: Algorithm Selection
-
-[Different situations call for different approaches:]{.highlight}
-
-| Situation | Best Approach | Why |
-|-----------|--------------|-----|
-| Need solution NOW (< 1 sec) | Nearest Neighbor | Lightning fast |
-| Have 1 minute | NN + 2-opt | Good balance |
-| Have 5 minutes | Multi-start + 2-opt | Explore more options |
-| Time windows critical | NN (prioritize early) + Or-opt | Preserves time feasibility |
-| Academic benchmark | 3-opt or advanced | Maximum quality |
 
 . . .
 
 :::{.callout-tip}
-**Today's Competition:** You have 60 minutes - use multi-start with 2-opt!
+Feasibility is a hard constraint, distance is the objective.
+:::
+
+# [Briefing]{.flow} {.title}
+
+## Choosing Your Algorithm
+
+[Different situations call for different approaches:]{.highlight}
+
+| Situation | Best Approach | Why |
+|---------|----------|-----|
+| Solution now | Nearest Neighbor | Lightning fast |
+| Have seconds | NN + 2-opt | Good balance |
+| Have minutes | Multi-start + 2-opt | Explore more options |
+| Time windows | NN (early) + Or-opt | Preserves feasibility |
+| Benchmark | 3-opt or meta | Best solutions |
+
+. . .
+
+:::{.callout-tip}
+**Competition?** Choose whatever you are comfortable with.
 :::
 
 ## Implementation Pitfalls to Avoid
 
-[Common bugs that cost you 30 minutes:]{.highlight}
+[Common bugs that cost you time.]{.highlight}
 
-❌ **Forgetting return to bakery:** Your distance calculation must include the trip back!
+. . .
+
+**Forgetting return to bakery:**
 ```python
 # WRONG
 total = sum(distances between consecutive stops)
@@ -1025,46 +1694,38 @@ total = sum(distances between consecutive stops)
 total = sum(distances) + distance(last_stop, bakery)
 ```
 
-❌ **Index confusion in 2-opt:** Remember Python slicing!
+. . .
+
+**Index confusion in 2-opt:**
 ```python
 # The 2-opt swap reverses route[i+1:j+1], not route[i:j]
 ```
 
-❌ **Modifying while iterating:** Make a copy!
+. . .
+
+**Modifying while iterating:**
 ```python
 new_route = current_route.copy()  # Don't modify original
 ```
 
-## Next Week: Escaping Local Optima
+## Escaping Local Optima
 
 [When local search gets stuck, we need clever escapes:]{.highlight}
 
 . . .
 
 **Advanced Techniques Coming:**
-- **Simulated Annealing:** Sometimes accept worse moves (like heating metal)
+
+- **Simulated Annealing:** Sometimes accept worse moves
 - **Genetic Algorithms:** Combine good routes to make better ones
 - **Tabu Search:** Remember where you've been to avoid circles
 
 . . .
 
 :::{.callout-note}
-Today's local search foundation makes next week's advanced methods possible!
+Today's local search foundation makes advanced methods possible!
 :::
 
-# [Literature]{.flow} {.title}
-
-## Resources
-
-**Essential Reading:**
-- Applegate et al. (2011): *The Traveling Salesman Problem* - The definitive TSP reference
-- Laporte (1992): *The Vehicle Routing Problem* - Overview of routing algorithms
-- Lin & Kernighan (1973): Classic paper on k-opt improvements
-
-**Python Libraries:**
-- `scipy.spatial.distance` - Fast distance calculations
-- `networkx` - Graph algorithms including TSP approximations
-- `ortools` - Google's optimization tools with routing
 
 ## Summary
 
