@@ -83,9 +83,9 @@ for i in range(20):
         due = np.random.randint(60, 90)
 
     corporate_orders.append({
-        'id': f'C{i+1:02d}',
-        'processing': processing,
-        'due': due
+        'id': f'C{i+1:02d}', # Order-ID
+        'processing': processing, # Time needed to process each order
+        'due': due # Time when each order is due
     })
 
 df_corporate = pd.DataFrame(corporate_orders)

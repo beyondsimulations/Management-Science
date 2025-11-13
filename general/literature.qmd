@@ -77,3 +77,6 @@ This section provides a curated list of books and resources to enhance your unde
 
 - [Cheat-Sheets](https://ehmatthes.github.io/pcc_3e/cheat_sheets/)
     - Fantastic resource with cheat sheets for the book "Python Crash Course" by Eric Matthes. You can use these to quickly look up syntax and functions.
+    
+- [ortools](https://developers.google.com/optimization) 
+    - Google's optimization tools based on metaheuristics. Include options for routing as well!
