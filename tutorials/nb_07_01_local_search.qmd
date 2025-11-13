@@ -12,6 +12,7 @@ code-links:
 Welcome back, CEO! Bean Counter has grown to up to **10 franchise locations** across some cities, and you personally want to optimize the weekly coffee bean deliveries in all cities. Currently, delivery trucks just follow a random route. Time to optimize!
 
 **The Delivery Challenge:**
+
 - One truck leaves from Bean Counter HQ in a city
 - Must deliver coffee beans to all 10 franchises
 - Each franchise needs their specific blend
@@ -46,25 +47,21 @@ Before optimizing routes, we need to understand distances and the scale of the p
 
 ```{python}
 #| eval: true
+# Set random seed for reproducibility
+np.random.seed(2025)
+
 # Generate franchise locations (x, y coordinates in km)
 n_franchises = 10
 
 # Bean Counter HQ at city center
 hq_location = (5, 5)
 
-# Franchise locations spread across the city
-franchise_locations = [
-    (2.3, 7.8),   # North District
-    (8.1, 8.5),   # Northeast Corner
-    (9.2, 3.1),   # East Side
-    (7.5, 1.2),   # Southeast
-    (3.8, 0.9),   # South Quarter
-    (1.1, 2.4),   # Southwest
-    (0.8, 6.2),   # West End
-    (4.2, 9.1),   # North Central
-    (6.8, 6.3),   # City Center East
-    (3.4, 4.1),   # Inner West
-]
+# Generate 10 franchise locations randomly in a 10x10 km area
+franchise_locations = []
+for i in range(n_franchises):
+    x = np.random.uniform(0.5, 9.5)
+    y = np.random.uniform(0.5, 9.5)
+    franchise_locations.append((x, y))
 
 franchise_names = [
     "North District", "Northeast Corner", "East Side", "Southeast",
@@ -129,14 +126,25 @@ def calculate_distance(point1, point2):
 #| eval: false
 #| code-fold: true
 # Don't modify below - these test your solution
+# Test 1: Known distance (3-4-5 triangle)
 test_dist = calculate_distance((0, 0), (3, 4))
 assert abs(test_dist - 5.0) < 0.001, f"Distance should be 5.0, got {test_dist}"
 
+# Test 2: Distance to same point should be zero
+same_point = calculate_distance(hq_location, hq_location)
+assert abs(same_point) < 0.001, f"Distance to same point should be 0, got {same_point}"
+
+# Test 3: Distance should be positive for different points
 hq_to_first = calculate_distance(hq_location, franchise_locations[0])
-assert 3.5 < hq_to_first < 3.7, f"HQ to first franchise should be ~3.6 km, got {hq_to_first:.2f}"
+assert hq_to_first > 0, f"Distance should be positive, got {hq_to_first:.2f}"
+
+# Test 4: Distance should be symmetric
+dist_a_to_b = calculate_distance(hq_location, franchise_locations[0])
+dist_b_to_a = calculate_distance(franchise_locations[0], hq_location)
+assert abs(dist_a_to_b - dist_b_to_a) < 0.001, "Distance should be symmetric"
 
 print("✓ Distance calculation correct!")
-print(f"HQ to North District: {hq_to_first:.2f} km")
+print(f"HQ to first franchise: {hq_to_first:.2f} km")
 ```
 
 ## Exercise 1.2 - Create Distance Matrix
@@ -223,6 +231,7 @@ Now let's build our first route using the nearest neighbor algorithm.
 ## Understanding Nearest Neighbor
 
 The algorithm is simple but effective:
+
 1. Start at HQ
 2. Find the nearest unvisited franchise
 3. Go there and deliver
@@ -405,12 +414,18 @@ initial_distance = calculate_route_distance(initial_route, distance_matrix)
 #| eval: false
 #| code-fold: true
 # Don't modify below - these test your solution
+# Test 1: Partial route should have positive distance
 test_route = [1, 2, 3]
 test_dist = calculate_route_distance(test_route, distance_matrix)
 assert test_dist > 0, "Distance should be positive"
 
+# Test 2: Full route distance should be reasonable (not too small, not too large)
 full_dist = calculate_route_distance(initial_route, distance_matrix)
-assert 40 < full_dist < 60, f"Total distance should be 40-60 km, got {full_dist:.2f}"
+assert full_dist > 10, f"Total distance too small, check if return trip included: {full_dist:.2f} km"
+assert full_dist < 150, f"Total distance too large, check calculation: {full_dist:.2f} km"
+
+# Test 3: Full route should be longer than partial route
+assert full_dist > test_dist, "Full route should be longer than partial route"
 
 print(f"✓ Route distance calculation correct!")
 print(f"Nearest neighbor route: {full_dist:.2f} km")
@@ -558,6 +573,9 @@ def improve_route_2opt(route, distance_matrix, max_iterations=100):
                 # YOUR CODE HERE
 
                 pass  # Remove this
+                
+            if improved:
+                break
 
         if not improved:
             break  # No more improvements found
@@ -938,12 +956,24 @@ print(summary_df.to_string(index=False))
 #| eval: false
 #| code-fold: true
 # Don't modify below - these test your solution
+# Test 1: Should have all 5 methods
 assert len(summary_df) == 5, "Should have 5 methods"
+
+# Test 2: Should have required columns
 assert 'Total Cost (€)' in summary_df.columns, "Should calculate total cost"
-assert summary_df['Total Cost (€)'].min() < 120, "Best route should be under €120"
+assert 'Distance (km)' in summary_df.columns, "Should have distance"
+
+# Test 3: Costs should be positive and reasonable
+assert summary_df['Total Cost (€)'].min() > 0, "Costs should be positive"
+assert summary_df['Total Cost (€)'].max() < 500, "Costs should be reasonable (< €500)"
+
+# Test 4: Best method should beat worst method
+best_cost = summary_df['Total Cost (€)'].min()
+worst_cost = summary_df['Total Cost (€)'].max()
+assert best_cost < worst_cost, "Best method should have lower cost than worst"
 
 best_method = summary_df.loc[summary_df['Total Cost (€)'].idxmin(), 'Method']
-best_savings = summary_df['Total Cost (€)'].max() - summary_df['Total Cost (€)'].min()
+best_savings = worst_cost - best_cost
 
 print(f"\n✓ CEO Decision Summary Complete!")
 print(f"Best method: {best_method}")
@@ -987,26 +1017,48 @@ plt.tight_layout()
 plt.show()
 ```
 
-::: {.callout-important}
-## CEO Decision
-Based on our analysis, implementing **Nearest Neighbor + 2-Opt** for Bean Counter's deliveries will:
-- Reduce daily distance by ~15-20%
-- Save approximately €15-20 per day
-- Generate €4,500-6,000 annual savings
-- Pay for the implementation in less than 1 month
-- Improve delivery reliability and franchise satisfaction
-:::
+# Conclusion
 
-# Summary
+**Congratulations!** You've learned the fundamentals of route optimization and local search!
 
-Congratulations, CEO! You've successfully optimized Bean Counter's delivery network. You've learned:
+## Key Takeaways
 
-✓ **TSP Complexity:** Why exhaustive search is impossible (10! = 3.6M routes)
-✓ **Greedy Construction:** Nearest neighbor builds decent initial routes quickly
-✓ **Local Search:** 2-opt systematically improves any initial solution
-✓ **Multi-start Strategy:** Different starting points can find better solutions
-✓ **Business Impact:** Route optimization delivers immediate cost savings
+1. **The Traveling Salesman Problem (TSP)**:
+   - Visiting all locations with minimum distance
+   - Exact solutions impractical for real-world problems
 
-Your board is impressed! The €5,000+ annual savings will fund a new espresso machine for the flagship store.
+2. **Greedy Construction Algorithms**:
+   - **Nearest Neighbor**: Fast, simple, decent quality
+   - Start somewhere, always go to closest unvisited location
+   - Quick to implement and understand
 
-**Next Challenge:** Apply these skills to the Artisan Bakery competition with 12 cafés and time windows!
+3. **Local Search Improvement**:
+   - **2-opt**: Systematically uncross routes to reduce distance
+   - Converges to local optimum (best among nearby solutions)
+   - Simple yet powerful optimization technique
+
+4. **Multi-start Strategy**:
+   - Different starting points → different local optima
+   - Random starts help explore solution space
+   - Best found solution often much better than single attempt
+
+5. **Algorithm Performance**:
+   - **Nearest Neighbor**: Quick construction, reasonable results
+   - **NN + 2-Opt**: Balanced approach, more improvement possible
+   - Choice depends on time constraints and quality needs!
+
+6. **Business Impact**:
+   - Route optimization delivers immediate, measurable savings
+   - Better routes = lower fuel costs + faster deliveries
+   - Scales to much larger real-world delivery networks
+
+## What's Next?
+
+You've now mastered the core concepts of routing optimization! 
+In the **Artisan Bakery Competition**, you'll apply these techniques to a more challenging problem with:
+- 16 cafés (vs. 10 franchises)
+- Time window constraints (early deliveries required!)
+
+In future lectures, you'll learn advanced techniques like **metaheuristics** (simulated annealing, genetic algorithms, tabu search) that can escape local optima and find even better solutions by intelligently exploring the solution space.
+
+**Your Bean Counter deliveries are now optimized. Time to help the bakery!**
