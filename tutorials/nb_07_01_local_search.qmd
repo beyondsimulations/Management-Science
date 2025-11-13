@@ -34,8 +34,6 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 import math
 
-# Set random seed for reproducibility
-np.random.seed(42)
 print("Libraries loaded! Let's optimize Bean Counter's deliveries.")
 ```
 
@@ -48,13 +46,13 @@ Before optimizing routes, we need to understand distances and the scale of the p
 ```{python}
 #| eval: true
 # Set random seed for reproducibility
-np.random.seed(2025)
+np.random.seed(876)
 
 # Generate franchise locations (x, y coordinates in km)
 n_franchises = 10
 
 # Bean Counter HQ at city center
-hq_location = (5, 5)
+hq_location = (2, 3)
 
 # Generate 10 franchise locations randomly in a 10x10 km area
 franchise_locations = []
@@ -279,7 +277,8 @@ distance_matrix = create_distance_matrix(hq_location, franchise_locations)
 assert distance_matrix.shape == (11, 11), "Matrix should be 11x11 (HQ + 10 franchises)"
 assert np.all(np.diag(distance_matrix) == 0), "Diagonal should be zeros (distance to self)"
 assert np.allclose(distance_matrix, distance_matrix.T), "Matrix should be symmetric"
-assert distance_matrix[0, 1] > 3.5, "HQ to first franchise distance check"
+assert distance_matrix[0, 1] > 0, "HQ to first franchise distance check"
+assert np.mean(distance_matrix[distance_matrix > 0]) > 3.5, "Average distance between locations check"
 
 print("✓ Distance matrix created successfully!")
 print(f"Average distance between locations: {np.mean(distance_matrix[distance_matrix > 0]):.2f} km")
@@ -307,11 +306,11 @@ plt.figure(figsize=(10, 8))
 # Plot franchises
 x_coords = [loc[0] for loc in franchise_locations]
 y_coords = [loc[1] for loc in franchise_locations]
-plt.scatter(x_coords, y_coords, c='#537E8F', s=200, label='Franchises', zorder=3)
+plt.scatter(x_coords, y_coords, c='#537E8F', s=500, zorder=3)
 
 # Plot HQ
-plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=400,
-           marker='s', label='Bean Counter HQ', zorder=3)
+plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=500,
+           marker='s', zorder=3)
 
 # Add labels
 for i, (x, y) in enumerate(franchise_locations):
@@ -324,7 +323,6 @@ plt.xlabel('Distance East-West (km)')
 plt.ylabel('Distance North-South (km)')
 plt.title("Bean Counter's Franchise Network", fontsize=14, fontweight='bold')
 plt.grid(True, alpha=0.3)
-plt.legend()
 plt.tight_layout()
 plt.show()
 ```
@@ -549,7 +547,6 @@ The nearest neighbor route works, but can we improve it? Enter 2-opt!
 
 ```{python}
 #| eval: true
-# Visualize the initial nearest neighbor route
 plt.figure(figsize=(10, 8))
 
 # Create route coordinates for plotting
@@ -565,8 +562,8 @@ plt.plot(route_x, route_y, 'o-', color='#A0A0A0', linewidth=2,
          markersize=0, alpha=0.7, label='Delivery Route')
 
 # Plot locations
-plt.scatter(x_coords, y_coords, c='#537E8F', s=200, zorder=3)
-plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=400,
+plt.scatter(x_coords, y_coords, c='#537E8F', s=500, zorder=3)
+plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=500,
            marker='s', zorder=3)
 
 # Add labels
@@ -1231,6 +1228,7 @@ plt.show()
 
 You've now mastered the core concepts of routing optimization! 
 In the **Artisan Bakery Competition**, you'll apply these techniques to a more challenging problem with:
+
 - 16 cafés (vs. 10 franchises)
 - Time window constraints (early deliveries required!)
 

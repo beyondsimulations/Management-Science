@@ -26,7 +26,8 @@ format:
   - Fuel: €1.80 per km
   - Driver: €35 per hour
   - Late penalty: €50 per late delivery (damages reputation)
-- **Vehicle:** One delivery van, 40 km/h average speed in morning traffic
+- **Vehicle:** One delivery van, 20 km/h average speed in morning traffic
+- **Service Time:** 2 minutes at each café
 
 ## Data & Starter Code
 
@@ -42,7 +43,7 @@ from datetime import datetime, timedelta
 np.random.seed(2025)
 
 # Bakery location (city center)
-bakery_location = (5.0, 5.0)
+bakery_location = (3.0, 1.0)
 
 # Generate 16 café locations randomly in a 10x10 km area
 cafe_locations = []
@@ -128,7 +129,7 @@ def calculate_route_distance(route, distance_matrix):
     total += distance_matrix[route[-1]][0]  # Last café back to bakery
     return total
 
-def calculate_arrival_times(route, distance_matrix, start_time="05:00", speed_kmh=40):
+def calculate_arrival_times(route, distance_matrix, start_time="05:00", speed_kmh=20):
     """Calculate arrival time at each café."""
     arrivals = []
     current_time = datetime.strptime(start_time, "%H:%M")
@@ -141,7 +142,7 @@ def calculate_arrival_times(route, distance_matrix, start_time="05:00", speed_km
     # Time between cafés
     for i in range(len(route) - 1):
         travel_minutes = (distance_matrix[route[i]][route[i+1]] / speed_kmh) * 60
-        current_time += timedelta(minutes=travel_minutes + 2)  # 2 min delivery time
+        current_time += timedelta(minutes=travel_minutes + 2)  # 2 min service time
         arrivals.append(current_time.strftime("%H:%M"))
 
     return arrivals
