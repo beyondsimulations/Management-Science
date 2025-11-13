@@ -79,8 +79,29 @@ print(f"Total possible routes: {math.factorial(n_franchises):,}")
 First, let's implement the distance calculation using the Euclidean distance formula.
 
 ::: {.callout-tip}
+## The Euclidean Distance Formula
+
 The Euclidean distance between points $(x_1, y_1)$ and $(x_2, y_2)$ is:
 $$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+
+**Example:** Distance from (0, 0) to (3, 4)
+$$d = \sqrt{(3-0)^2 + (4-0)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$$
+:::
+
+::: {.callout-note}
+## Working with Tuples
+
+A **tuple** is a collection of values in parentheses: `point = (x, y)`
+
+```python
+# Unpacking tuple values
+point1 = (5, 5)
+x1, y1 = point1  # x1 = 5, y1 = 5
+
+# Or access by index
+x1 = point1[0]   # First element
+y1 = point1[1]   # Second element
+```
 :::
 
 ```{python}
@@ -97,7 +118,10 @@ def calculate_distance(point1, point2):
     Returns:
         Distance in km
     """
-    # Implement the Euclidean distance formula
+    # Step 1: Extract x and y coordinates from both points
+    
+    # Step 2: Calculate differences and apply distance formula
+    
     pass  # Remove this and implement
 ```
 
@@ -151,6 +175,41 @@ print(f"HQ to first franchise: {hq_to_first:.2f} km")
 
 Now create a matrix of all distances between locations (HQ and franchises).
 
+::: {.callout-tip}
+## What is a Distance Matrix?
+
+A **distance matrix** stores all pairwise distances in a 2D array:
+
+|     | HQ  | F1  | F2  | F3  |
+|-----|-----|-----|-----|-----|
+| HQ  | 0   | 3.2 | 5.1 | 4.0 |
+| F1  | 3.2 | 0   | 2.8 | 6.1 |
+| F2  | 5.1 | 2.8 | 0   | 3.9 |
+| F3  | 4.0 | 6.1 | 3.9 | 0   |
+
+`distances[0][1]` = distance from HQ to Franchise 1 = 3.2 km
+:::
+
+::: {.callout-note}
+## Nested Loops for Matrices
+
+Use **nested for loops** to fill a 2D array:
+
+```python
+# Create 3x3 matrix
+matrix = np.zeros((3, 3))
+
+# Fill it with nested loops
+for i in range(3):      # Rows
+    for j in range(3):  # Columns
+        matrix[i][j] = i + j
+
+# Result: [[0, 1, 2],
+#          [1, 2, 3],
+#          [2, 3, 4]]
+```
+:::
+
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
@@ -172,7 +231,9 @@ def create_distance_matrix(hq_location, franchise_locations):
     # Create empty matrix
     distances = np.zeros((n, n))
 
-    # Fill the matrix
+    # Fill the matrix using nested loops
+    # Hint: Use your calculate_distance function!
+    # Remember: distance from i to i should be 0
     # YOUR CODE HERE
 
     return distances
@@ -272,6 +333,45 @@ plt.show()
 
 Build a route using the nearest neighbor heuristic.
 
+::: {.callout-tip}
+## The min() Function with key Parameter
+
+Find the minimum based on a custom criterion:
+
+```python
+# Find smallest number
+numbers = [5, 2, 8, 1]
+smallest = min(numbers)  # 1
+
+# Find shortest word
+words = ["hello", "hi", "hey"]
+shortest = min(words, key=len)  # "hi"
+
+# Find franchise with minimum distance
+unvisited = [1, 2, 3]
+distances_from_hq = [5.2, 3.1, 7.8]
+nearest = min(unvisited, key=lambda i: distances_from_hq[i-1])  # 2
+```
+
+The `key=lambda i: ...` tells Python how to compare items.
+:::
+
+::: {.callout-note}
+## List Operations You'll Need
+
+```python
+# Add to list
+route.append(5)         # route = [1, 2, 3, 5]
+
+# Remove from list
+unvisited.remove(5)     # Removes value 5
+
+# Check if list is empty
+while unvisited:        # Loops while list has items
+    # do something
+```
+:::
+
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
@@ -291,9 +391,15 @@ def nearest_neighbor_route(distance_matrix):
     current = 0  # Start at HQ
 
     while unvisited:
-        # Find nearest unvisited franchise
-        # YOUR CODE HERE
-
+        # Step 1: Find nearest unvisited franchise using min()
+        # Hint: key=lambda i: distance_matrix[current, i]
+        
+        # Step 2: Add it to the route
+        
+        # Step 3: Remove from unvisited
+        
+        # Step 4: Update current location
+        
         pass  # Remove this
 
     return route
@@ -482,6 +588,38 @@ plt.show()
 
 Implement the logic to perform a 2-opt swap on a route.
 
+::: {.callout-tip}
+## What Does 2-Opt Do?
+
+A **2-opt swap** reverses a segment of the route to eliminate crossings:
+
+- **Before:** Route = [1, 2, 3, 4, 5, 6]  
+- **Swap(1, 4):** Reverse segment from position 2 to 4  
+- **After:** Route = [1, 2, **5, 4, 3**, 6]  
+
+This uncrosses paths and usually reduces total distance!
+:::
+
+::: {.callout-note}
+## List Slicing and Reversal
+
+```python
+route = [1, 2, 3, 4, 5, 6]
+
+# Slice: get part of list
+route[:3]        # [1, 2, 3] - start to index 3
+route[3:]        # [4, 5, 6] - index 3 to end
+route[2:5]       # [3, 4, 5] - index 2 to 5
+
+# Reverse: [::-1]
+route[2:5][::-1] # [5, 4, 3] - reversed segment
+
+# Combine slices
+route[:2] + route[2:5][::-1] + route[5:]
+# [1, 2] + [5, 4, 3] + [6] = [1, 2, 5, 4, 3, 6]
+```
+:::
+
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
@@ -497,9 +635,12 @@ def perform_2opt_swap(route, i, j):
     Returns:
         New route with the swap applied
     """
-    # Create new route with segment between i and j reversed
-    # Hint: route[:i+1] + reversed_middle + route[j+1:]
-    # YOUR CODE HERE
+    # Create new route: beginning + reversed_middle + end
+    # route[:i+1] keeps elements from start to i (inclusive)
+    # route[i+1:j+1][::-1] reverses segment from i+1 to j
+    # route[j+1:] keeps elements after j
+    
+    # YOUR CODE HERE (combine the three parts)
 
     pass  # Remove this
 ```
@@ -544,6 +685,34 @@ print("✓ 2-opt swap implemented correctly!")
 
 Now implement the full 2-opt improvement algorithm.
 
+::: {.callout-tip}
+## The 2-Opt Algorithm Logic
+
+1. Keep trying swaps until no improvement found
+2. For each pair of positions (i, j):
+   - Create new route with that swap
+   - Calculate its distance
+   - If better, keep it and mark `improved = True`
+3. Stop when a full pass finds no improvements
+:::
+
+::: {.callout-note}
+## Breaking Out of Nested Loops
+
+When you find an improvement, you want to restart the search:
+
+```python
+for i in range(10):
+    for j in range(10):
+        if found_improvement:
+            improved = True
+            break  # Exits inner loop
+    if improved:
+        break  # Exits outer loop
+# Now restart the whole search
+```
+:::
+
 ```{python}
 #| eval: false
 # YOUR CODE BELOW
@@ -569,9 +738,15 @@ def improve_route_2opt(route, distance_matrix, max_iterations=100):
         # Try all possible 2-opt swaps
         for i in range(len(current_route) - 1):
             for j in range(i + 2, len(current_route)):
-                # Try swap
-                # YOUR CODE HERE
-
+                # Step 1: Create new route with swap
+                
+                # Step 2: Calculate distance of new route
+                
+                # Step 3: If better, keep it and mark improved
+                # Remember to update: current_route, current_distance, improvement_count
+                
+                # Step 4: Break to restart search
+                
                 pass  # Remove this
                 
             if improved:
