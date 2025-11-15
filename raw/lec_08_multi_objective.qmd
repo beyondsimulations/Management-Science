@@ -1,0 +1,1091 @@
+---
+title: "Multi-Objective Optimization"
+subtitle: "Lecture 8 - Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_08_multi_objective.qmd)"
+    output-file: lec_08_presentation.html
+---
+
+# [Introduction]{.flow} {.title}
+
+## **[Client Briefing: EcoExpress Logistics]{.invert-font}** {background-image="https://unsplash.com/photos/QqSIuvz94s8/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTF8fHN1c3RhaW5hYmlsaXR5fGVufDB8fHx8MTc2MzE4Nzk0MHww&force=true&w=2400" background-size="cover"}
+
+. . .
+
+[Operations Director's Dilemma:]{.invert-font}
+
+["EU regulations demand 40% emission cuts, but we can't sacrifice [profitability]{.highlight}, [service quality]{.highlight}, or [reliability]{.highlight}!"]{.invert-font .fragment}
+
+## The Fleet Challenge
+
+**EcoExpress Logistics** operates regional last-mile delivery across 3 cities
+
+Current crisis:
+- EU Green Deal: 40% emission reduction by 2025
+- Rising fuel costs (€2.1/L diesel)
+- Amazon entering our market (speed pressure)
+- Driver shortage (need automation-friendly vehicles)
+
+[The Question:]{.highlight} How do we transform our fleet while staying competitive?
+
+## Quick Recap: Local Search
+
+Last week we optimized **routes** for delivery:
+
+::: {.incremental}
+- Started with greedy construction (Nearest Neighbor)
+- Improved with local search (2-opt)
+- Considered time windows
+- **But:** We only optimized [distance]{.highlight}
+:::
+
+. . .
+
+[What if we also care about emissions, cost, AND customer satisfaction?]{.question}
+
+# [The Problem]{.flow} {.title}
+
+## Single vs Multi-Objective
+
+::: columns
+::: {.column width="50%"}
+### Single Objective
+"Minimize total distance"
+
+```python
+best_route = min(routes, 
+                key=calculate_distance)
+```
+
+Clear winner! ✓
+:::
+
+::: {.column width="50%"}
+### Multiple Objectives  
+"Minimize cost AND emissions AND maximize speed"
+
+```python
+best = min(routes, key=???)
+# 🤔 How to compare?
+```
+
+No clear answer...
+:::
+:::
+
+## EcoExpress Vehicle Options
+
+```{python}
+#| echo: false
+#| eval: true
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set style
+plt.style.use('seaborn-v0_8-darkgrid')
+sns.set_palette("husl")
+
+vehicles = pd.DataFrame({
+    'Type': ['Electric Truck', 'Hybrid Van', 'Diesel Van', 'E-Cargo Bike', 'Autonomous Pod'],
+    'Purchase Cost (€)': [75000, 45000, 35000, 12000, 95000],
+    'Operating Cost (€/km)': [0.18, 0.25, 0.38, 0.05, 0.12],
+    'CO2 (g/km)': [0, 95, 185, 0, 0],
+    'Speed (km/h)': [55, 65, 70, 30, 40],
+    'Capacity (parcels)': [300, 200, 250, 50, 150],
+    'Range (km)': [250, 600, 800, 60, 180]
+})
+
+# Display as nice table
+from IPython.display import display, HTML
+display(HTML(vehicles.to_html(index=False, classes='table table-striped')))
+```
+
+[Which vehicle is "best" for EcoExpress?]{.question}
+
+## Trade-offs Everywhere
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+
+# Cost vs Emissions
+axes[0].scatter(vehicles['Purchase Cost (€)']/1000, 
+                vehicles['CO2 (g/km)'], 
+                s=vehicles['Capacity (parcels)'],
+                alpha=0.6)
+for i, txt in enumerate(vehicles['Type']):
+    axes[0].annotate(txt, (vehicles['Purchase Cost (€)'].iloc[i]/1000, 
+                           vehicles['CO2 (g/km)'].iloc[i]),
+                    fontsize=9)
+axes[0].set_xlabel('Purchase Cost (k€)')
+axes[0].set_ylabel('CO2 Emissions (g/km)')
+axes[0].set_title('Cost vs Environmental Impact')
+
+# Speed vs Cost
+axes[1].scatter(vehicles['Speed (km/h)'], 
+                vehicles['Operating Cost (€/km)'],
+                s=vehicles['Capacity (parcels)'],
+                alpha=0.6, color='orange')
+for i, txt in enumerate(vehicles['Type']):
+    axes[1].annotate(txt, (vehicles['Speed (km/h)'].iloc[i], 
+                           vehicles['Operating Cost (€/km)'].iloc[i]),
+                    fontsize=9)
+axes[1].set_xlabel('Speed (km/h)')
+axes[1].set_ylabel('Operating Cost (€/km)')
+axes[1].set_title('Speed vs Operating Cost')
+
+# Capacity vs Range
+axes[2].scatter(vehicles['Capacity (parcels)'], 
+                vehicles['Range (km)'],
+                s=vehicles['Purchase Cost (€)']/300,
+                alpha=0.6, color='green')
+for i, txt in enumerate(vehicles['Type']):
+    axes[2].annotate(txt, (vehicles['Capacity (parcels)'].iloc[i], 
+                           vehicles['Range (km)'].iloc[i]),
+                    fontsize=9)
+axes[2].set_xlabel('Capacity (parcels)')
+axes[2].set_ylabel('Range (km)')
+axes[2].set_title('Capacity vs Range')
+
+plt.tight_layout()
+plt.show()
+```
+
+Every vehicle excels at something different!
+
+## Real Business Constraints for EcoExpress
+
+Beyond the numbers, consider:
+
+::: {.incremental}
+- **EU regulations:** Carbon tax of €100/ton CO₂ starting 2025
+- **Competition:** Amazon promises 2-hour delivery
+- **Labor market:** Autonomous vehicles reduce driver dependency
+- **Urban zones:** Zero-emission zones in city centers
+- **Peak times:** Black Friday = 3x normal volume
+:::
+
+. . .
+
+::: {.callout-important}
+## The Key Insight
+There is no single "optimal" solution - only trade-offs
+:::
+
+# [Pareto Optimality]{.flow} {.title}
+
+## Dominated Solutions
+
+A solution is **dominated** if another solution is:
+- Better in at least one objective
+- Not worse in any objective
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Create example data
+np.random.seed(42)
+n_solutions = 30
+cost = np.random.uniform(20, 100, n_solutions)
+emissions = 150 - cost + np.random.normal(0, 15, n_solutions)
+
+# Identify Pareto front
+pareto_mask = np.ones(n_solutions, dtype=bool)
+for i in range(n_solutions):
+    for j in range(n_solutions):
+        if i != j:
+            if cost[j] <= cost[i] and emissions[j] <= emissions[i]:
+                if cost[j] < cost[i] or emissions[j] < emissions[i]:
+                    pareto_mask[i] = False
+                    break
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Plot dominated solutions
+ax.scatter(cost[~pareto_mask], emissions[~pareto_mask], 
+          alpha=0.3, s=100, color='red', label='Dominated')
+
+# Plot Pareto optimal solutions
+ax.scatter(cost[pareto_mask], emissions[pareto_mask], 
+          alpha=0.8, s=100, color='green', label='Pareto Optimal')
+
+# Sort Pareto points and draw frontier
+pareto_cost = cost[pareto_mask]
+pareto_emissions = emissions[pareto_mask]
+sorted_idx = np.argsort(pareto_cost)
+ax.plot(pareto_cost[sorted_idx], pareto_emissions[sorted_idx], 
+        'g--', alpha=0.5, linewidth=2)
+
+# Highlight one dominated solution
+example_idx = np.where(~pareto_mask)[0][5]
+ax.scatter(cost[example_idx], emissions[example_idx], 
+          s=200, color='red', marker='x', linewidth=3)
+ax.annotate('Dominated\n(worse in both)', 
+           (cost[example_idx], emissions[example_idx]),
+           xytext=(cost[example_idx]+10, emissions[example_idx]+5),
+           fontsize=10, ha='center',
+           arrowprops=dict(arrowstyle='->', color='red'))
+
+ax.set_xlabel('Cost (€)', fontsize=12)
+ax.set_ylabel('CO2 Emissions (g/km)', fontsize=12)
+ax.set_title('Pareto Frontier: Non-Dominated Solutions', fontsize=14)
+ax.legend()
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+## The Pareto Frontier
+
+The **Pareto frontier** = set of all non-dominated solutions
+
+::: {.incremental}
+- No solution is objectively "better"
+- Each represents a different trade-off
+- Moving along frontier: gain in one objective, loss in another
+- Decision makers choose based on **preferences**
+:::
+
+## Interactive: Find the Non-Dominated
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Simple example for interaction
+solutions = pd.DataFrame({
+    'Fleet': ['A', 'B', 'C', 'D', 'E'],
+    'Cost (k€)': [100, 120, 90, 110, 95],
+    'Emissions (tons/year)': [50, 30, 60, 35, 45]
+})
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+colors = ['red', 'green', 'red', 'green', 'green']
+for i, row in solutions.iterrows():
+    ax.scatter(row['Cost (k€)'], row['Emissions (tons/year)'], 
+              s=300, alpha=0.7, color=colors[i])
+    ax.annotate(row['Fleet'], 
+               (row['Cost (k€)'], row['Emissions (tons/year)']),
+               fontsize=14, ha='center', va='center', color='white', fontweight='bold')
+
+ax.set_xlabel('Cost (k€)', fontsize=12)
+ax.set_ylabel('Emissions (tons/year)', fontsize=12)
+ax.set_title('Which fleets are Pareto optimal?', fontsize=14)
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+display(HTML(solutions.to_html(index=False, classes='table table-striped')))
+```
+
+[Take a moment: Which fleets are non-dominated?]{.question}
+
+. . .
+
+**Answer:** B, D, and E form the Pareto frontier!
+
+## Three+ Objectives
+
+With 3 objectives, the Pareto frontier becomes a **surface**:
+
+```{python}
+#| echo: false
+#| eval: true
+
+from mpl_toolkits.mplot3d import Axes3D
+
+# Generate 3D Pareto example
+np.random.seed(123)
+n = 100
+cost_3d = np.random.uniform(50, 150, n)
+emissions_3d = 200 - cost_3d + np.random.normal(0, 20, n)
+speed_3d = cost_3d/2 + np.random.normal(0, 10, n)
+
+# Simple Pareto identification (approximate)
+pareto_3d = []
+for i in range(n):
+    dominated = False
+    for j in range(n):
+        if i != j:
+            if (cost_3d[j] <= cost_3d[i] and 
+                emissions_3d[j] <= emissions_3d[i] and 
+                speed_3d[j] >= speed_3d[i]):
+                if (cost_3d[j] < cost_3d[i] or 
+                    emissions_3d[j] < emissions_3d[i] or 
+                    speed_3d[j] > speed_3d[i]):
+                    dominated = True
+                    break
+    if not dominated:
+        pareto_3d.append(i)
+
+fig = plt.figure(figsize=(12, 8))
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot all solutions
+ax.scatter(cost_3d, emissions_3d, speed_3d, 
+          alpha=0.2, s=30, color='gray')
+
+# Highlight Pareto solutions
+ax.scatter(cost_3d[pareto_3d], emissions_3d[pareto_3d], speed_3d[pareto_3d], 
+          alpha=0.8, s=60, color='green', edgecolors='darkgreen')
+
+ax.set_xlabel('Cost (€)', fontsize=10)
+ax.set_ylabel('Emissions (g/km)', fontsize=10)
+ax.set_zlabel('Speed (km/h)', fontsize=10)
+ax.set_title('3D Pareto Frontier (Surface)', fontsize=14)
+ax.view_init(elev=20, azim=45)
+plt.show()
+```
+
+Harder to visualize, but same principle applies!
+
+# [Transportation Problem]{.flow} {.title}
+
+## Classic Transportation: Single Objective
+
+Before tackling multiple objectives, let's understand the foundation:
+
+**The Problem:** EcoExpress has 3 distribution centers and 4 delivery zones
+
+```{python}
+#| echo: false
+#| eval: true
+
+import pandas as pd
+import numpy as np
+
+# Transportation problem data
+transport_data = pd.DataFrame({
+    'From/To': ['DC Berlin', 'DC Hamburg', 'DC Munich'],
+    'Zone A': [8, 12, 15],
+    'Zone B': [10, 9, 13],
+    'Zone C': [11, 7, 10],
+    'Zone D': [14, 8, 9]
+})
+
+supply = [300, 250, 200]  # Parcels available
+demand = [200, 180, 220, 150]  # Parcels needed
+
+print("Cost per 100 parcels (€):")
+display(HTML(transport_data.to_html(index=False, classes='table table-striped')))
+print(f"\nSupply: DC Berlin={supply[0]}, Hamburg={supply[1]}, Munich={supply[2]}")
+print(f"Demand: Zone A={demand[0]}, B={demand[1]}, C={demand[2]}, D={demand[3]}")
+```
+
+**Mathematical Model:**
+$$\text{Minimize } Z = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij}$$
+
+Where:
+- $x_{ij}$ = parcels shipped from DC $i$ to Zone $j$
+- $c_{ij}$ = cost per parcel from $i$ to $j$
+
+## Adding the Second Objective: Emissions
+
+Now the real challenge - each route has different emissions:
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Emissions data
+emissions_data = pd.DataFrame({
+    'From/To': ['DC Berlin', 'DC Hamburg', 'DC Munich'],
+    'Zone A': [50, 80, 120],  # g CO2/parcel
+    'Zone B': [70, 60, 100],
+    'Zone C': [75, 45, 85],
+    'Zone D': [110, 55, 70]
+})
+
+print("Emissions per parcel (g CO₂):")
+display(HTML(emissions_data.to_html(index=False, classes='table table-striped')))
+```
+
+**Two-Objective Model:**
+$$\text{Minimize } Z_1 = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij} \quad \text{(Cost)}$$
+$$\text{Minimize } Z_2 = \sum_{i} \sum_{j} e_{ij} \cdot x_{ij} \quad \text{(Emissions)}$$
+
+[Notice: Cheapest routes ≠ Greenest routes!]{.highlight}
+
+## The Transportation Trade-off
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Simulate different solutions
+np.random.seed(42)
+n_solutions = 50
+
+# Generate random allocations and calculate objectives
+solutions = []
+for _ in range(n_solutions):
+    # Random allocation respecting constraints
+    allocation = np.random.dirichlet(np.ones(12), 1)[0] * 750
+    
+    # Calculate cost and emissions (simplified)
+    cost = np.sum(allocation * np.array([8,10,11,14,12,9,7,8,15,13,10,9])) * 10
+    emissions = np.sum(allocation * np.array([50,70,75,110,80,60,45,55,120,100,85,70]))
+    
+    solutions.append({'Cost': cost, 'Emissions': emissions})
+
+sol_df = pd.DataFrame(solutions)
+
+# Find Pareto frontier
+pareto_mask = np.ones(len(sol_df), dtype=bool)
+for i in range(len(sol_df)):
+    for j in range(len(sol_df)):
+        if i != j:
+            if (sol_df.iloc[j]['Cost'] <= sol_df.iloc[i]['Cost'] and
+                sol_df.iloc[j]['Emissions'] <= sol_df.iloc[i]['Emissions'] and
+                (sol_df.iloc[j]['Cost'] < sol_df.iloc[i]['Cost'] or
+                 sol_df.iloc[j]['Emissions'] < sol_df.iloc[i]['Emissions'])):
+                pareto_mask[i] = False
+                break
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Plot all solutions
+ax.scatter(sol_df['Cost'], sol_df['Emissions'], 
+          alpha=0.3, s=100, color='gray', label='Feasible allocations')
+
+# Plot Pareto optimal
+ax.scatter(sol_df[pareto_mask]['Cost'], sol_df[pareto_mask]['Emissions'],
+          alpha=0.8, s=150, color='green', label='Pareto optimal', edgecolors='darkgreen', linewidth=2)
+
+# Highlight extremes
+min_cost_idx = sol_df['Cost'].idxmin()
+min_emissions_idx = sol_df['Emissions'].idxmin()
+
+ax.scatter(sol_df.loc[min_cost_idx, 'Cost'], sol_df.loc[min_cost_idx, 'Emissions'],
+          s=300, color='blue', marker='*', label='Min Cost', edgecolors='darkblue', linewidth=2)
+ax.scatter(sol_df.loc[min_emissions_idx, 'Cost'], sol_df.loc[min_emissions_idx, 'Emissions'],
+          s=300, color='red', marker='*', label='Min Emissions', edgecolors='darkred', linewidth=2)
+
+ax.set_xlabel('Total Cost (€)', fontsize=12)
+ax.set_ylabel('Total Emissions (kg CO₂)', fontsize=12)
+ax.set_title('Transportation Problem: Cost vs Emissions Trade-off', fontsize=14)
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+Each point represents a different allocation strategy!
+
+# [Solution Methods]{.flow} {.title}
+
+## Method 1: Weighted Sum
+
+Combine all objectives into one score:
+
+$$\text{Score} = w_1 \cdot f_1(\mathbf{x}) + w_2 \cdot f_2(\mathbf{x}) + ... + w_p \cdot f_p(\mathbf{x})$$
+
+**Intuition:** Like mixing ingredients in a recipe - the weights are your preferences!
+
+```python
+def weighted_score(solution, w_cost=0.6, w_emissions=0.4):
+    # Normalize objectives to [0,1]
+    norm_cost = (solution.cost - min_cost) / (max_cost - min_cost)
+    norm_emissions = (solution.emissions - min_emissions) / (max_emissions - min_emissions)
+    
+    # Weighted combination
+    return w_cost * norm_cost + w_emissions * norm_emissions
+```
+
+::: {.callout-warning}
+## Critical Limitation!
+Weighted Sum **cannot find** solutions in non-convex regions (the "dips" in the frontier)
+:::
+
+## Weighted Sum Visualization
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Show how different weights lead to different optimal solutions
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+
+weights_sets = [
+    {'cost': 0.9, 'emissions': 0.1},
+    {'cost': 0.5, 'emissions': 0.5},
+    {'cost': 0.1, 'emissions': 0.9}
+]
+
+titles = ['Cost-Focused (90/10)', 'Balanced (50/50)', 'Green-Focused (10/90)']
+
+for idx, (weights, title) in enumerate(zip(weights_sets, titles)):
+    ax = axes[idx]
+    
+    # Recalculate scores
+    scores = weights['cost'] * (cost/100) + weights['emissions'] * (1 - emissions/150)
+    best_idx = np.argmax(scores)
+    
+    # Plot
+    ax.scatter(cost, emissions, alpha=0.3, s=50)
+    ax.scatter(cost[pareto_mask], emissions[pareto_mask], 
+              alpha=0.6, s=50, color='green')
+    ax.scatter(cost[best_idx], emissions[best_idx], 
+              s=200, color='red', marker='*', edgecolors='darkred', linewidth=2)
+    
+    ax.set_xlabel('Cost (€)')
+    ax.set_ylabel('Emissions (g/km)')
+    ax.set_title(title)
+    ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+Different weights → Different "optimal" solutions!
+
+## Method 2: ε-Constraint Method (Epsilon-Constraint)
+
+**The Superior Approach:** Convert all objectives except one into constraints
+
+**Mathematical Formulation:**
+$$\text{Minimize } f_1(\mathbf{x})$$
+$$\text{Subject to: } f_2(\mathbf{x}) \leq \epsilon_2$$
+$$\quad\quad\quad\quad\quad f_3(\mathbf{x}) \leq \epsilon_3$$
+
+**Intuition:** "Give me the cheapest option that emits less than 100 tons CO₂"
+
+```python
+def epsilon_constraint(max_emissions):
+    """Find minimum cost solution with emission constraint"""
+    feasible = [s for s in all_solutions 
+                if s.emissions <= max_emissions]
+    
+    if feasible:
+        return min(feasible, key=lambda s: s.cost)
+    return None
+
+# Generate Pareto frontier by varying epsilon
+pareto_solutions = []
+for epsilon in range(50, 200, 5):  # Vary emission limit
+    solution = epsilon_constraint(epsilon)
+    if solution:
+        pareto_solutions.append(solution)
+```
+
+::: {.callout-tip}
+## Why ε-Constraint Wins
+✅ Finds ALL Pareto solutions (including non-convex)  
+✅ Works with integer problems  
+✅ Easy to understand: "best X given limit on Y"
+:::
+
+## Visualizing the Difference: WSM vs ε-Constraint
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+# Create a non-convex frontier for demonstration
+np.random.seed(123)
+x = np.linspace(50, 150, 100)
+
+# Create non-convex shape (with a dip)
+y1 = 200 - 1.5*x + 20*np.sin(x/10)
+y2 = 180 - 1.2*x + 15*np.sin(x/8)
+y_frontier = np.minimum(y1, y2)
+
+# Add some noise for realism
+y_frontier += np.random.normal(0, 2, len(x))
+
+# Left plot: Weighted Sum Method
+ax1 = axes[0]
+ax1.scatter(x, y_frontier, s=20, alpha=0.5, color='gray')
+
+# Show what WSM can find (only convex hull)
+from scipy.spatial import ConvexHull
+points = np.column_stack([x, y_frontier])
+hull = ConvexHull(points)
+hull_points = points[hull.vertices]
+hull_points = hull_points[np.argsort(hull_points[:, 0])]
+
+ax1.plot(hull_points[:, 0], hull_points[:, 1], 'b-', linewidth=3, 
+         label='WSM can find these', alpha=0.7)
+ax1.fill_between(x, y_frontier, 250, where=(y_frontier < np.interp(x, hull_points[:, 0], hull_points[:, 1])),
+                  color='red', alpha=0.3, label='WSM misses these!')
+
+ax1.set_xlabel('Cost (€)', fontsize=11)
+ax1.set_ylabel('Emissions (kg CO₂)', fontsize=11)
+ax1.set_title('Weighted Sum Method Limitation', fontsize=12, fontweight='bold')
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+
+# Right plot: Epsilon-Constraint Method
+ax2 = axes[1]
+ax2.scatter(x, y_frontier, s=20, alpha=0.5, color='gray')
+
+# Show epsilon constraint lines
+epsilon_values = [60, 80, 100, 120, 140]
+colors = plt.cm.viridis(np.linspace(0.2, 0.8, len(epsilon_values)))
+
+for eps, color in zip(epsilon_values, colors):
+    ax2.axhline(y=eps, color=color, linestyle='--', alpha=0.5)
+    # Find optimal point for this epsilon
+    valid_idx = y_frontier <= eps
+    if np.any(valid_idx):
+        min_cost_idx = np.argmin(x[valid_idx])
+        optimal_x = x[valid_idx][min_cost_idx]
+        optimal_y = y_frontier[valid_idx][min_cost_idx]
+        ax2.scatter(optimal_x, optimal_y, s=100, color=color, 
+                   edgecolors='black', linewidth=2, zorder=10)
+
+ax2.plot(x, y_frontier, 'g-', linewidth=3, 
+         label='ε-Constraint finds ALL', alpha=0.7)
+
+ax2.set_xlabel('Cost (€)', fontsize=11)
+ax2.set_ylabel('Emissions (kg CO₂)', fontsize=11)
+ax2.set_title('ε-Constraint Method Success', fontsize=12, fontweight='bold')
+ax2.legend()
+ax2.grid(True, alpha=0.3)
+
+plt.suptitle('Why ε-Constraint > Weighted Sum for Non-Convex Problems', 
+             fontsize=14, fontweight='bold', y=1.02)
+plt.tight_layout()
+plt.show()
+```
+
+[The red "dip" contains valid solutions that weighted sum will never find!]{.highlight}
+
+## Method 3: Goal Programming
+
+Set targets for each objective, minimize deviations:
+
+$$\text{Minimize: } \sum_{i} w_i \cdot |value_i - target_i|$$
+
+Example targets:
+- Cost: 80k€ target
+- Emissions: 50 g/km target
+- Speed: 50 km/h target
+
+Find solution closest to **all** targets
+
+## Interactive Weighting
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Create interactive-style visualization showing weight impact
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Generate fleet combinations
+np.random.seed(456)
+n_fleets = 20
+fleet_cost = np.random.uniform(60, 140, n_fleets)
+fleet_emissions = 180 - fleet_cost + np.random.normal(0, 15, n_fleets)
+
+# Normalize for scoring
+norm_cost = (fleet_cost - fleet_cost.min()) / (fleet_cost.max() - fleet_cost.min())
+norm_emissions = (fleet_emissions - fleet_emissions.min()) / (fleet_emissions.max() - fleet_emissions.min())
+
+# Show three different weight scenarios
+weight_scenarios = [
+    (0.9, 0.1, 'Business Focus'),
+    (0.5, 0.5, 'Balanced'),
+    (0.1, 0.9, 'Environmental Focus')
+]
+
+colors = ['red', 'orange', 'green']
+for (w_cost, w_emissions, label), color in zip(weight_scenarios, colors):
+    scores = (1-w_cost) * norm_cost + (1-w_emissions) * norm_emissions
+    best = np.argmax(scores)
+    ax.scatter(fleet_cost[best], fleet_emissions[best], 
+              s=300, color=color, alpha=0.6, label=label,
+              edgecolors='black', linewidth=2)
+
+# Plot all options
+ax.scatter(fleet_cost, fleet_emissions, alpha=0.2, s=50, color='gray')
+
+ax.set_xlabel('Total Fleet Cost (k€)', fontsize=12)
+ax.set_ylabel('Annual Emissions (tons CO2)', fontsize=12)
+ax.set_title('Different Priorities → Different Optimal Fleets', fontsize=14)
+ax.legend()
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+[Your weights reflect your values!]{.highlight}
+
+# [Case Studies]{.flow} {.title}
+
+## Amazon's Speed vs Sustainability Dilemma
+
+**The Three-Way Trade-off:**
+1. **Minimize Delivery Time** (1-day/2-hour promise)
+2. **Minimize Cost** (fuel, labor, fulfillment)
+3. **Minimize Environmental Impact** (carbon footprint)
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Amazon's trade-off visualization
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Create data points representing different strategies
+strategies = {
+    'Standard (3-5 days)': {'speed': 20, 'cost': 30, 'emissions': 25},
+    '2-Day Prime': {'speed': 50, 'cost': 45, 'emissions': 40},
+    '1-Day Prime': {'speed': 80, 'cost': 70, 'emissions': 75},
+    'Same Day': {'speed': 95, 'cost': 90, 'emissions': 95}
+}
+
+for name, values in strategies.items():
+    size = 500 - values['emissions']*3  # Bigger = greener
+    ax.scatter(values['cost'], values['speed'], s=size, alpha=0.6, label=name)
+    ax.annotate(f"{values['emissions']}g CO₂", 
+                (values['cost'], values['speed']),
+                fontsize=9, ha='center')
+
+ax.set_xlabel('Cost Index', fontsize=12)
+ax.set_ylabel('Speed Index', fontsize=12)
+ax.set_title("Amazon's Delivery Options: The Hidden Trade-off", fontsize=14)
+ax.legend(title='Delivery Option')
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+[Faster delivery = More vehicles dispatched less full = Higher emissions]{.highlight}
+
+## Airlines: The Cost Index Solution
+
+Airlines solve this **in real-time** using the **Cost Index**:
+
+$$\text{Cost Index} = \frac{\text{Cost of Time (€/min)}}{\text{Cost of Fuel (€/kg)}}$$
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Airline cost index visualization
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+# Flight speed vs fuel consumption
+speeds = np.linspace(400, 600, 50)  # km/h
+fuel_consumption = 3000 + (speeds - 500)**2 / 20  # kg
+
+ax1 = axes[0]
+ax1.plot(speeds, fuel_consumption, 'b-', linewidth=2)
+ax1.scatter([450, 500, 550], [3112.5, 3000, 3112.5], 
+            s=150, color=['green', 'gold', 'red'],
+            label=['CI=0 (Min fuel)', 'CI=50 (Balanced)', 'CI=100 (Min time)'])
+ax1.set_xlabel('Cruise Speed (km/h)', fontsize=11)
+ax1.set_ylabel('Fuel Consumption (kg)', fontsize=11)
+ax1.set_title('Flight Speed Decision', fontsize=12)
+ax1.grid(True, alpha=0.3)
+
+# Different scenarios
+scenarios = ['On-time\nCheap fuel', 'Normal\nOperations', 'Running late\nExpensive fuel']
+ci_values = [20, 50, 80]
+colors = ['green', 'gold', 'red']
+
+ax2 = axes[1]
+bars = ax2.bar(scenarios, ci_values, color=colors, alpha=0.7)
+ax2.set_ylabel('Cost Index Setting', fontsize=11)
+ax2.set_title('Adaptive Strategy Based on Conditions', fontsize=12)
+ax2.set_ylim(0, 100)
+
+for bar, ci in zip(bars, ci_values):
+    height = bar.get_height()
+    ax2.text(bar.get_x() + bar.get_width()/2., height + 2,
+            f'CI={ci}', ha='center', fontsize=10, fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+```
+
+**Real Example:** If flight delayed → High time cost → High CI → Fly faster!
+
+## Tesla's Strategy: Moving the Frontier
+
+Instead of choosing a point on the Pareto frontier, Tesla **moved the entire frontier**:
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Original frontier (2010)
+cost_2010 = np.linspace(30, 120, 50)
+range_2010 = 600 - 4*cost_2010
+
+# New frontier (2024)
+cost_2024 = np.linspace(25, 100, 50)
+range_2024 = 700 - 3*cost_2024
+
+# Plot frontiers
+ax.plot(cost_2010, range_2010, 'r--', linewidth=2, label='2010 Technology', alpha=0.7)
+ax.plot(cost_2024, range_2024, 'g-', linewidth=2, label='2024 Technology', alpha=0.7)
+
+# Show specific models
+models = {
+    '2010 Roadster': (100, 400, 'red'),
+    '2024 Model 3': (40, 580, 'green'),
+    '2024 Model S': (90, 650, 'green')
+}
+
+for name, (cost, range_val, color) in models.items():
+    ax.scatter(cost, range_val, s=200, color=color, edgecolors='black', linewidth=2)
+    ax.annotate(name, (cost, range_val), xytext=(5, 5), textcoords='offset points')
+
+# Add arrow showing frontier shift
+ax.annotate('', xy=(50, 550), xytext=(65, 400),
+            arrowprops=dict(arrowstyle='->', lw=3, color='blue'))
+ax.text(57, 475, 'R&D Innovation\nShifts Frontier', fontsize=11, 
+        ha='center', color='blue', fontweight='bold')
+
+ax.set_xlabel('Vehicle Cost (€1000s)', fontsize=12)
+ax.set_ylabel('Range (km)', fontsize=12)
+ax.set_title('Tesla Strategy: Don\'t Accept Trade-offs, Change Them!', fontsize=14)
+ax.legend()
+ax.grid(True, alpha=0.3)
+ax.set_xlim(20, 125)
+ax.set_ylim(100, 700)
+
+plt.tight_layout()
+plt.show()
+```
+
+[Key Insight: R&D can fundamentally change what's possible]{.highlight}
+
+# [Real-World Application]{.flow} {.title}
+
+## EcoExpress Requirements
+
+For your **regional delivery network**, you need:
+
+::: {.incremental}
+- Total budget: €3.5 million
+- Fleet size: 60-120 vehicles
+- Service level: 95% on-time delivery
+- Emission target: 40% reduction from current
+- Handle Black Friday (3x normal volume)
+- Cover 3 cities with different regulations
+:::
+
+## Fleet Composition Strategy
+
+Instead of one vehicle type, consider a **mixed fleet**:
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Example fleet mix
+fleet_mix = pd.DataFrame({
+    'Vehicle Type': ['Electric Truck', 'Hybrid Van', 'Diesel Van', 'E-Cargo Bike', 'Autonomous Pod'],
+    'Quantity': [25, 30, 15, 20, 10],
+    'Use Case': ['City A (strict emissions)', 'City B (balanced)', 'City C (rural)', 'Dense urban cores', 'Night shifts'],
+    'Advantage': ['Zero emissions', 'Versatile', 'Long range', 'Agile in traffic', 'No driver needed']
+})
+
+display(HTML(fleet_mix.to_html(index=False, classes='table table-striped')))
+```
+
+Match vehicle strengths to specific delivery zones!
+
+## Decision Framework
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Create decision flowchart visualization
+fig, ax = plt.subplots(figsize=(12, 8))
+
+# Decision steps
+steps = [
+    'Define Objectives\n(Cost, Emissions, Speed, Flexibility)',
+    'Generate Options\n(Fleet combinations)',
+    'Find Pareto Frontier\n(Non-dominated fleets)',
+    'Apply Preferences\n(Weights or constraints)',
+    'Sensitivity Analysis\n(What if weights change?)',
+    'Make Decision\n(Choose fleet mix)'
+]
+
+y_positions = np.linspace(0.9, 0.1, len(steps))
+x_position = 0.5
+
+for i, (step, y_pos) in enumerate(zip(steps, y_positions)):
+    # Box for each step
+    rect = plt.Rectangle((x_position - 0.15, y_pos - 0.06), 
+                         0.3, 0.08, 
+                         facecolor='lightblue' if i % 2 == 0 else 'lightgreen',
+                         edgecolor='black', linewidth=2)
+    ax.add_patch(rect)
+    
+    # Text
+    ax.text(x_position, y_pos - 0.02, step, 
+           ha='center', va='center', fontsize=10, fontweight='bold')
+    
+    # Arrow to next step
+    if i < len(steps) - 1:
+        ax.arrow(x_position, y_pos - 0.06, 0, -0.04, 
+                head_width=0.02, head_length=0.01, fc='black', ec='black')
+
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+ax.axis('off')
+ax.set_title('Multi-Objective Decision Process', fontsize=16, fontweight='bold', pad=20)
+plt.tight_layout()
+plt.show()
+```
+
+## Common Pitfalls
+
+::: {.callout-warning}
+## Watch Out For These Mistakes
+
+1. **Forgetting to normalize** - Can't compare € to g/km directly
+2. **Ignoring feasibility** - Check constraints first
+3. **Over-optimizing** - Perfect is enemy of good
+4. **Analysis paralysis** - Set deadline for decision
+5. **Stakeholder alignment** - Get weight agreement upfront
+:::
+
+# [Mission Briefing]{.flow} {.title}
+
+## Today's Learning Path
+
+### Hour 3: Practice Notebook 
+**Your Role:** Bean Counter CEO
+- Learn to evaluate multi-objective trade-offs
+- Implement Pareto frontier finding
+- Apply weighted sum method
+- Make data-driven recommendations
+
+### Hour 4: Transportation & Fleet Competition
+**Two Challenges to Master:**
+
+**Part A: Multi-Objective Transportation (30 min)**
+- Allocate deliveries between DCs and zones
+- Balance cost vs emissions
+- Use ε-constraint method
+- Find YOUR optimal trade-off point
+
+**Part B: Fleet Selection (30 min)**  
+- Select vehicle mix for EcoExpress
+- Meet EU emission targets
+- Balance 3+ objectives
+- Justify your strategic choice
+
+## The Competition Challenge
+
+::: {.callout-important}
+## Fleet Selection Competition
+
+**Objective:** Design EcoExpress's sustainable delivery fleet
+
+**Given:**
+- Vehicle specifications (5 types with different trade-offs)
+- Budget: €3.5M capital investment
+- EU mandate: 40% emission reduction
+- Service requirements per city
+
+**Deliverable:**
+- Fleet composition (quantity per vehicle type)
+- Pareto frontier analysis
+- Business case with 3-year ROI projection
+
+**Evaluation:** Emissions (35%), Cost-efficiency (35%), Service quality (20%), Innovation (10%)
+:::
+
+## Tools You'll Master
+
+::: columns
+::: {.column width="50%"}
+**Analytical Tools**
+- Pareto frontier identification
+- Normalization techniques
+- Weighted scoring
+- Constraint handling
+:::
+
+::: {.column width="50%"}
+**Visualization Tools**
+- Trade-off plots
+- Parallel coordinates
+- Spider/radar charts
+- Decision matrices
+:::
+:::
+
+## Key Takeaways
+
+::: {.incremental}
+1. **Real decisions have multiple objectives** - rarely just "minimize cost"
+2. **Pareto frontier** shows all rational choices
+3. **Weights reflect values** - make them explicit
+4. **No perfect solution** - only good trade-offs
+5. **Visualization crucial** for stakeholder buy-in
+:::
+
+. . .
+
+[Ready to master the art of trade-offs?]{.highlight}
+
+## Break!
+
+```{python}
+#| echo: false
+#| eval: true
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Create a coffee cup
+cup_x = [2, 2, 2.5, 2.5, 3, 3, 3, 2]
+cup_y = [3, 5, 5, 4.5, 4.5, 5, 3, 3]
+ax.fill(cup_x, cup_y, color='brown', alpha=0.7)
+
+# Add steam with curves
+t = np.linspace(0, 4*np.pi, 100)
+for i in range(3):
+    steam_x = 2.5 + 0.1*np.sin(t) + i*0.15
+    steam_y = 5 + t/(2*np.pi) * 0.8
+    ax.plot(steam_x, steam_y, color='gray', alpha=0.5, linewidth=2)
+
+# Add trade-off arrows
+ax.arrow(4, 4, 1, 0, head_width=0.1, head_length=0.1, fc='green', ec='green')
+ax.text(5.5, 4, 'Speed', fontsize=12, ha='center')
+
+ax.arrow(4, 4, 0, 1, head_width=0.1, head_length=0.1, fc='blue', ec='blue')
+ax.text(4, 5.5, 'Quality', fontsize=12, ha='center')
+
+ax.arrow(4, 4, -0.7, -0.7, head_width=0.1, head_length=0.1, fc='red', ec='red')
+ax.text(3, 3, 'Cost', fontsize=12, ha='center')
+
+ax.text(2.5, 2, "Even coffee involves\ntrade-offs!", 
+        fontsize=14, ha='center', style='italic')
+
+ax.set_xlim(1, 6)
+ax.set_ylim(1, 6)
+ax.axis('off')
+plt.tight_layout()
+plt.show()
+```
+
+[Time to practice multi-objective optimization!]{.flow}

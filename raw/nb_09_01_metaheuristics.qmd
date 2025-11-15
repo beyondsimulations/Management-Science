@@ -1,0 +1,833 @@
+---
+title: "Notebook 9.1 - Metaheuristics in Action"
+subtitle: "Management Science - Bean Counter's Advanced Optimization"
+code-links:
+  - text: Python
+    href: nb_09_01_metaheuristics.py
+    icon: hand-thumbs-up
+---
+
+## Introduction
+
+Welcome back, Bean Counter CEO! Today we're learning about **metaheuristics** - advanced optimization techniques that can escape the local optima that trap simpler methods.
+
+You'll see these algorithms in action on Bean Counter problems and learn how to use AI tools to implement them for your own challenges.
+
+### How to Use This Tutorial
+- **Observe and analyze** the provided demonstrations
+- **Answer questions** about algorithm behavior
+- **Adapt solutions** using AI assistance
+- **Choose the right tool** for each problem
+
+Let's start with our imports:
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from typing import List, Dict, Tuple
+import random
+import math
+
+# Set seeds for reproducibility
+np.random.seed(2025)
+random.seed(2025)
+
+# Configure visualization
+plt.style.use('seaborn-v0_8-darkgrid')
+sns.set_palette("husl")
+```
+
+## Section 1: Bean Counter's Barista Scheduling Challenge
+
+Bean Counter needs to schedule 20 baristas across 5 shifts today. Each barista has different skills and costs.
+
+```{python}
+# Generate barista data
+baristas = pd.DataFrame({
+    'ID': [f'B{i:02d}' for i in range(1, 21)],
+    'Skill_Level': np.random.choice(['Expert', 'Intermediate', 'Junior'], 20, p=[0.2, 0.4, 0.4]),
+    'Hourly_Rate': np.random.uniform(15, 35, 20).round(2),
+    'Availability': [np.random.choice([True, False], 5, p=[0.7, 0.3]).tolist() for _ in range(20)]
+})
+
+# Shift requirements
+shifts = pd.DataFrame({
+    'Shift': ['Morning Rush', 'Midday', 'Afternoon', 'Evening', 'Late Night'],
+    'Min_Baristas': [5, 3, 4, 4, 2],
+    'Min_Experts': [2, 1, 1, 2, 0],
+    'Customer_Volume': [100, 60, 80, 90, 30]
+})
+
+print("Barista Pool (first 10):")
+print(baristas.head(10).to_string(index=False))
+print("\nShift Requirements:")
+print(shifts.to_string(index=False))
+```
+
+### Demo 1: Greedy Algorithm
+
+Let's start with a simple greedy approach - assign cheapest available baristas first:
+
+```{python}
+def greedy_scheduling(baristas_df, shifts_df):
+    """Simple greedy scheduler - assigns cheapest available baristas first."""
+    schedule = {shift: [] for shift in shifts_df['Shift']}
+    assigned = set()
+    total_cost = 0
+    
+    # Sort baristas by hourly rate (cheapest first)
+    sorted_baristas = baristas_df.sort_values('Hourly_Rate')
+    
+    for _, shift in shifts_df.iterrows():
+        shift_name = shift['Shift']
+        shift_idx = list(shifts_df['Shift']).index(shift_name)
+        needed = shift['Min_Baristas']
+        
+        # Assign baristas
+        for _, barista in sorted_baristas.iterrows():
+            if len(schedule[shift_name]) >= needed:
+                break
+            
+            if (barista['ID'] not in assigned and 
+                barista['Availability'][shift_idx]):
+                schedule[shift_name].append(barista['ID'])
+                assigned.add(barista['ID'])
+                total_cost += barista['Hourly_Rate'] * 4  # 4-hour shifts
+    
+    return schedule, total_cost
+
+# Run greedy algorithm
+greedy_schedule, greedy_cost = greedy_scheduling(baristas, shifts)
+
+print("Greedy Schedule:")
+for shift, staff in greedy_schedule.items():
+    print(f"  {shift}: {', '.join(staff)}")
+print(f"\nTotal Cost: ${greedy_cost:.2f}")
+```
+
+::: {.callout-note}
+## Observe the Greedy Behavior
+The greedy algorithm assigns the cheapest available baristas first, but doesn't consider skill requirements or future constraints. This often leads to suboptimal solutions.
+:::
+
+### Demo 2: Simulated Annealing
+
+Now let's see how simulated annealing can improve upon the greedy solution:
+
+```{python}
+def calculate_schedule_cost(schedule, baristas_df, shifts_df):
+    """Calculate total cost including penalties for not meeting skill requirements."""
+    total_cost = 0
+    
+    for shift_idx, (shift_name, staff) in enumerate(schedule.items()):
+        # Labor cost
+        for barista_id in staff:
+            barista = baristas_df[baristas_df['ID'] == barista_id].iloc[0]
+            total_cost += barista['Hourly_Rate'] * 4
+        
+        # Penalty for not having enough experts
+        shift_req = shifts_df.iloc[shift_idx]
+        experts_assigned = sum(1 for b_id in staff 
+                              if baristas_df[baristas_df['ID'] == b_id].iloc[0]['Skill_Level'] == 'Expert')
+        
+        if experts_assigned < shift_req['Min_Experts']:
+            penalty = (shift_req['Min_Experts'] - experts_assigned) * 100 * shift_req['Customer_Volume'] / 100
+            total_cost += penalty
+    
+    return total_cost
+
+def simulated_annealing_schedule(initial_schedule, baristas_df, shifts_df, 
+                                max_iterations=1000, initial_temp=100):
+    """Improve schedule using simulated annealing."""
+    current_schedule = initial_schedule.copy()
+    current_cost = calculate_schedule_cost(current_schedule, baristas_df, shifts_df)
+    
+    best_schedule = current_schedule.copy()
+    best_cost = current_cost
+    
+    temperature = initial_temp
+    cooling_rate = 0.995
+    
+    costs_history = [current_cost]
+    
+    for iteration in range(max_iterations):
+        # Create neighbor by swapping two baristas
+        new_schedule = current_schedule.copy()
+        
+        # Pick two random shifts and swap one barista between them
+        shifts_list = list(new_schedule.keys())
+        if all(len(new_schedule[s]) > 0 for s in shifts_list[:2]):
+            shift1, shift2 = random.sample(shifts_list, 2)
+            if new_schedule[shift1] and new_schedule[shift2]:
+                # Swap random baristas between shifts
+                idx1 = random.randint(0, len(new_schedule[shift1])-1)
+                idx2 = random.randint(0, len(new_schedule[shift2])-1)
+                
+                # Check availability before swapping
+                barista1 = new_schedule[shift1][idx1]
+                barista2 = new_schedule[shift2][idx2]
+                
+                shift1_idx = shifts_list.index(shift1)
+                shift2_idx = shifts_list.index(shift2)
+                
+                b1_avail = baristas_df[baristas_df['ID'] == barista1].iloc[0]['Availability']
+                b2_avail = baristas_df[baristas_df['ID'] == barista2].iloc[0]['Availability']
+                
+                if b1_avail[shift2_idx] and b2_avail[shift1_idx]:
+                    new_schedule[shift1][idx1] = barista2
+                    new_schedule[shift2][idx2] = barista1
+        
+        new_cost = calculate_schedule_cost(new_schedule, baristas_df, shifts_df)
+        
+        # Accept or reject the new solution
+        delta = new_cost - current_cost
+        if delta < 0 or random.random() < math.exp(-delta / temperature):
+            current_schedule = new_schedule
+            current_cost = new_cost
+            
+            if current_cost < best_cost:
+                best_schedule = current_schedule.copy()
+                best_cost = current_cost
+        
+        costs_history.append(current_cost)
+        temperature *= cooling_rate
+    
+    return best_schedule, best_cost, costs_history
+
+# Run simulated annealing
+sa_schedule, sa_cost, sa_history = simulated_annealing_schedule(
+    greedy_schedule, baristas, shifts
+)
+
+# Visualize the improvement
+plt.figure(figsize=(12, 5))
+
+plt.subplot(1, 2, 1)
+plt.plot(sa_history, alpha=0.7, linewidth=1)
+plt.axhline(y=greedy_cost, color='red', linestyle='--', label=f'Greedy: ${greedy_cost:.2f}')
+plt.axhline(y=sa_cost, color='green', linestyle='--', label=f'SA Best: ${sa_cost:.2f}')
+plt.xlabel('Iteration')
+plt.ylabel('Total Cost ($)')
+plt.title('Simulated Annealing Progress')
+plt.legend()
+plt.grid(True, alpha=0.3)
+
+plt.subplot(1, 2, 2)
+costs_comparison = [greedy_cost, sa_cost]
+labels = ['Greedy', 'Simulated\nAnnealing']
+colors = ['red', 'green']
+bars = plt.bar(labels, costs_comparison, color=colors, alpha=0.7)
+plt.ylabel('Total Cost ($)')
+plt.title('Algorithm Comparison')
+
+# Add value labels on bars
+for bar, cost in zip(bars, costs_comparison):
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 10,
+            f'${cost:.2f}', ha='center', va='bottom')
+
+improvement = (greedy_cost - sa_cost) / greedy_cost * 100
+plt.text(0.5, max(costs_comparison) * 0.5, f'{improvement:.1f}%\nimprovement',
+        ha='center', fontsize=12, fontweight='bold',
+        bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.5))
+
+plt.tight_layout()
+plt.show()
+
+print(f"Improvement: ${greedy_cost:.2f} → ${sa_cost:.2f} ({improvement:.1f}% better)")
+```
+
+### Exercise 1.1: Analyze SA Behavior
+
+```{python}
+# YOUR ANALYSIS
+# Answer these questions based on the SA demonstration above:
+
+# Q1: At what iteration did SA find its best solution?
+best_iteration = sa_history.index(min(sa_history))
+
+# Q2: How much cost was saved compared to greedy?
+cost_saved = greedy_cost - sa_cost
+
+# Q3: Did SA ever accept worse solutions? (Check if history ever increases)
+accepted_worse = any(sa_history[i] > sa_history[i-1] for i in range(1, len(sa_history)))
+
+# Don't modify below - these test your analysis
+assert best_iteration >= 0, "Best iteration should be non-negative"
+assert cost_saved >= 0, "SA should improve or match greedy"
+print(f"✓ Analysis complete!")
+print(f"  Best found at iteration: {best_iteration}")
+print(f"  Cost saved: ${cost_saved:.2f}")
+print(f"  Accepted worse solutions: {accepted_worse}")
+```
+
+::: {.callout-tip}
+## Key Observation
+Simulated annealing accepts worse solutions early (high temperature) to explore the solution space, then becomes more selective as it "cools down". This helps escape local optima!
+:::
+
+## Section 2: Bean Counter Expansion Planning with Genetic Algorithm
+
+Bean Counter wants to select 10 locations from 50 potential sites for new franchises.
+
+```{python}
+# Generate potential locations
+np.random.seed(2025)
+locations = pd.DataFrame({
+    'Location_ID': [f'L{i:02d}' for i in range(50)],
+    'X': np.random.uniform(0, 100, 50),
+    'Y': np.random.uniform(0, 100, 50),
+    'Population': np.random.exponential(50000, 50),
+    'Competition': np.random.randint(0, 10, 50),
+    'Rent_Monthly': np.random.uniform(2000, 8000, 50),
+    'Foot_Traffic': np.random.uniform(100, 1000, 50)
+})
+
+def evaluate_location_set(location_indices, locations_df):
+    """Evaluate a set of locations based on multiple criteria."""
+    selected = locations_df.iloc[location_indices]
+    
+    # Revenue potential (population * foot traffic / competition)
+    revenue_score = np.sum(selected['Population'] * selected['Foot_Traffic'] / 
+                          (selected['Competition'] + 1))
+    
+    # Cost (total rent)
+    total_cost = np.sum(selected['Rent_Monthly'])
+    
+    # Coverage (spread of locations - average pairwise distance)
+    distances = []
+    for i in range(len(location_indices)):
+        for j in range(i+1, len(location_indices)):
+            loc1 = selected.iloc[i]
+            loc2 = selected.iloc[j]
+            dist = np.sqrt((loc1['X'] - loc2['X'])**2 + (loc1['Y'] - loc2['Y'])**2)
+            distances.append(dist)
+    
+    avg_distance = np.mean(distances) if distances else 0
+    
+    # Combined fitness (maximize revenue and coverage, minimize cost)
+    fitness = revenue_score / 1000 + avg_distance * 10 - total_cost / 100
+    
+    return fitness
+
+print(f"Evaluating {len(locations)} potential locations for 10 new Bean Counter franchises")
+print("\nSample locations:")
+print(locations.head().to_string(index=False))
+```
+
+### Demo 3: Genetic Algorithm for Location Selection
+
+```{python}
+def genetic_algorithm_locations(locations_df, n_select=10, population_size=50, 
+                               generations=100):
+    """Use genetic algorithm to select optimal franchise locations."""
+    n_locations = len(locations_df)
+    
+    # Initialize population (random selections)
+    population = []
+    for _ in range(population_size):
+        individual = sorted(random.sample(range(n_locations), n_select))
+        population.append(individual)
+    
+    # Track best solution
+    best_fitness_history = []
+    avg_fitness_history = []
+    
+    for generation in range(generations):
+        # Evaluate fitness
+        fitness_scores = [evaluate_location_set(ind, locations_df) for ind in population]
+        
+        best_fitness_history.append(max(fitness_scores))
+        avg_fitness_history.append(np.mean(fitness_scores))
+        
+        # Selection (tournament)
+        new_population = []
+        
+        # Keep best individuals (elitism)
+        sorted_pop = [x for _, x in sorted(zip(fitness_scores, population), reverse=True)]
+        new_population.extend(sorted_pop[:10])  # Keep top 10
+        
+        # Create offspring
+        while len(new_population) < population_size:
+            # Tournament selection
+            tournament_size = 5
+            tournament_indices = random.sample(range(len(population)), tournament_size)
+            tournament_fitness = [fitness_scores[i] for i in tournament_indices]
+            winner_idx = tournament_indices[tournament_fitness.index(max(tournament_fitness))]
+            parent1 = population[winner_idx]
+            
+            tournament_indices = random.sample(range(len(population)), tournament_size)
+            tournament_fitness = [fitness_scores[i] for i in tournament_indices]
+            winner_idx = tournament_indices[tournament_fitness.index(max(tournament_fitness))]
+            parent2 = population[winner_idx]
+            
+            # Crossover
+            if random.random() < 0.8:  # Crossover probability
+                # Combine locations from both parents
+                all_locations = list(set(parent1 + parent2))
+                if len(all_locations) >= n_select:
+                    child = sorted(random.sample(all_locations, n_select))
+                else:
+                    # Fill with random locations
+                    remaining = list(set(range(n_locations)) - set(all_locations))
+                    child = sorted(all_locations + random.sample(remaining, n_select - len(all_locations)))
+            else:
+                child = parent1.copy()
+            
+            # Mutation
+            if random.random() < 0.1:  # Mutation probability
+                # Replace one location with a random one
+                idx_to_replace = random.randint(0, n_select - 1)
+                new_location = random.randint(0, n_locations - 1)
+                if new_location not in child:
+                    child[idx_to_replace] = new_location
+                    child = sorted(child)
+            
+            new_population.append(child)
+        
+        population = new_population
+    
+    # Return best solution
+    final_fitness = [evaluate_location_set(ind, locations_df) for ind in population]
+    best_idx = final_fitness.index(max(final_fitness))
+    
+    return population[best_idx], max(final_fitness), best_fitness_history, avg_fitness_history
+
+# Run genetic algorithm
+ga_solution, ga_fitness, best_history, avg_history = genetic_algorithm_locations(locations)
+
+print(f"GA Selected Locations: {ga_solution}")
+print(f"Fitness Score: {ga_fitness:.2f}")
+```
+
+### Visualize GA Evolution
+
+```{python}
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+# Evolution of fitness
+ax = axes[0]
+ax.plot(best_history, label='Best Fitness', color='green', linewidth=2)
+ax.plot(avg_history, label='Average Fitness', color='blue', alpha=0.7)
+ax.fill_between(range(len(avg_history)), avg_history, best_history, alpha=0.2)
+ax.set_xlabel('Generation')
+ax.set_ylabel('Fitness Score')
+ax.set_title('Genetic Algorithm Evolution')
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# Location distribution
+ax = axes[1]
+ax.scatter(locations['X'], locations['Y'], alpha=0.3, s=30, label='All Locations')
+selected_locations = locations.iloc[ga_solution]
+ax.scatter(selected_locations['X'], selected_locations['Y'], 
+          color='red', s=100, marker='*', label='Selected', zorder=5)
+
+# Draw connections between selected locations
+for i in range(len(ga_solution)):
+    for j in range(i+1, len(ga_solution)):
+        loc1 = selected_locations.iloc[i]
+        loc2 = selected_locations.iloc[j]
+        ax.plot([loc1['X'], loc2['X']], [loc1['Y'], loc2['Y']], 
+               'gray', alpha=0.1, linewidth=0.5)
+
+ax.set_xlabel('X Coordinate')
+ax.set_ylabel('Y Coordinate')
+ax.set_title('Selected Franchise Locations')
+ax.legend()
+ax.grid(True, alpha=0.3)
+
+# Performance comparison
+ax = axes[2]
+random_fitness = []
+for _ in range(20):
+    random_selection = random.sample(range(len(locations)), 10)
+    random_fitness.append(evaluate_location_set(random_selection, locations))
+
+comparison_data = {
+    'Random\n(average)': np.mean(random_fitness),
+    'Random\n(best of 20)': max(random_fitness),
+    'Genetic\nAlgorithm': ga_fitness
+}
+
+bars = ax.bar(comparison_data.keys(), comparison_data.values(), 
+              color=['gray', 'orange', 'green'], alpha=0.7)
+ax.set_ylabel('Fitness Score')
+ax.set_title('Algorithm Comparison')
+
+for bar, val in zip(bars, comparison_data.values()):
+    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 50,
+           f'{val:.0f}', ha='center', va='bottom')
+
+plt.tight_layout()
+plt.show()
+```
+
+### Exercise 2.1: Analyze GA Behavior
+
+```{python}
+# YOUR ANALYSIS
+# Answer these questions based on the GA demonstration:
+
+# Q1: Which generation found the best solution?
+best_generation = best_history.index(max(best_history))
+
+# Q2: How much better is GA than random selection?
+random_avg = np.mean([evaluate_location_set(random.sample(range(len(locations)), 10), locations) 
+                      for _ in range(20)])
+ga_improvement = (ga_fitness - random_avg) / random_avg * 100
+
+# Q3: Did the population converge? (Check if best and average get closer)
+early_gap = best_history[10] - avg_history[10]
+late_gap = best_history[-1] - avg_history[-1]
+converged = late_gap < early_gap
+
+# Don't modify below - these test your analysis
+assert best_generation >= 0, "Best generation should be non-negative"
+assert ga_improvement > 0, "GA should outperform random"
+print(f"✓ GA Analysis complete!")
+print(f"  Best found at generation: {best_generation}")
+print(f"  Improvement over random: {ga_improvement:.1f}%")
+print(f"  Population converged: {converged}")
+```
+
+::: {.callout-tip}
+## Genetic Algorithm Insights
+GA maintains a population of solutions, combining good traits from multiple "parents". This parallel search often finds better solutions than single-point methods like SA, especially for complex combinatorial problems.
+:::
+
+## Section 3: Choosing the Right Algorithm
+
+Let's compare different metaheuristics on a Bean Counter routing problem.
+
+```{python}
+# Generate a small routing problem
+n_cafes = 15
+cafe_locations = np.random.uniform(0, 50, (n_cafes, 2))
+
+def calculate_route_distance(route, locations):
+    """Calculate total distance for a route."""
+    total = 0
+    for i in range(len(route)):
+        j = (i + 1) % len(route)
+        total += np.linalg.norm(locations[route[i]] - locations[route[j]])
+    return total
+
+# Test different algorithms
+print(f"Routing problem: Visit {n_cafes} Bean Counter cafés")
+print("Testing different metaheuristics...")
+```
+
+### Demo 4: Algorithm Comparison
+
+```{python}
+# 1. Random baseline
+random_routes = []
+for _ in range(100):
+    route = list(range(n_cafes))
+    random.shuffle(route)
+    random_routes.append((route, calculate_route_distance(route, cafe_locations)))
+best_random = min(random_routes, key=lambda x: x[1])
+
+# 2. Greedy (Nearest Neighbor)
+def nearest_neighbor(locations):
+    n = len(locations)
+    unvisited = set(range(1, n))
+    route = [0]
+    current = 0
+    
+    while unvisited:
+        nearest = min(unvisited, key=lambda x: np.linalg.norm(locations[current] - locations[x]))
+        route.append(nearest)
+        unvisited.remove(nearest)
+        current = nearest
+    
+    return route
+
+greedy_route = nearest_neighbor(cafe_locations)
+greedy_distance = calculate_route_distance(greedy_route, cafe_locations)
+
+# 3. Simple 2-opt improvement
+def two_opt(route, locations, max_iterations=100):
+    best_route = route.copy()
+    best_distance = calculate_route_distance(best_route, locations)
+    
+    for _ in range(max_iterations):
+        improved = False
+        for i in range(1, len(route) - 2):
+            for j in range(i + 1, len(route)):
+                new_route = route[:i] + route[i:j+1][::-1] + route[j+1:]
+                new_distance = calculate_route_distance(new_route, locations)
+                
+                if new_distance < best_distance:
+                    best_route = new_route
+                    best_distance = new_distance
+                    improved = True
+                    break
+            if improved:
+                break
+        
+        if not improved:
+            break
+        route = best_route
+    
+    return best_route, best_distance
+
+two_opt_route, two_opt_distance = two_opt(greedy_route, cafe_locations)
+
+# Create comparison
+results = pd.DataFrame({
+    'Algorithm': ['Random (best of 100)', 'Greedy (NN)', '2-Opt Improvement'],
+    'Distance': [best_random[1], greedy_distance, two_opt_distance],
+    'Improvement': [0, 
+                    (best_random[1] - greedy_distance) / best_random[1] * 100,
+                    (best_random[1] - two_opt_distance) / best_random[1] * 100]
+})
+
+print("\nAlgorithm Comparison:")
+print(results.to_string(index=False))
+
+# Visualize routes
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+routes_to_plot = [
+    (best_random[0], best_random[1], 'Random'),
+    (greedy_route, greedy_distance, 'Greedy (NN)'),
+    (two_opt_route, two_opt_distance, '2-Opt')
+]
+
+for ax, (route, dist, title) in zip(axes, routes_to_plot):
+    # Plot cafes
+    ax.scatter(cafe_locations[:, 0], cafe_locations[:, 1], 
+              color='red', s=100, zorder=5)
+    
+    # Plot route
+    for i in range(len(route)):
+        j = (i + 1) % len(route)
+        ax.plot([cafe_locations[route[i], 0], cafe_locations[route[j], 0]],
+               [cafe_locations[route[i], 1], cafe_locations[route[j], 1]],
+               'b-', alpha=0.6)
+    
+    # Mark start
+    ax.scatter(cafe_locations[route[0], 0], cafe_locations[route[0], 1], 
+              color='green', s=200, marker='*', zorder=10)
+    
+    ax.set_title(f'{title}\nDistance: {dist:.1f}')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Section 4: Working with AI for Metaheuristics
+
+Now let's practice using AI tools to implement metaheuristics for Bean Counter problems.
+
+### Exercise 4.1: AI-Assisted Implementation
+
+```{python}
+# Bean Counter has a complex scheduling problem
+# Let's create a prompt for ChatGPT/Copilot
+
+problem_description = """
+Bean Counter Delivery Scheduling Problem:
+- 10 delivery drivers
+- 20 deliveries to make
+- Each delivery has: location (x,y), time window, priority
+- Minimize: total distance + lateness penalties
+- Constraints: Each driver can do max 3 deliveries
+"""
+
+ai_prompt = """
+I need to solve a delivery scheduling problem using simulated annealing.
+
+Problem:
+- 10 drivers, 20 deliveries
+- Each delivery has location, time window, and priority
+- Assign deliveries to drivers and sequence them
+- Minimize total distance and lateness
+
+Please provide:
+1. Data structure for the solution
+2. Neighborhood function (how to generate new solutions)
+3. Cost function
+4. SA main loop with temperature schedule
+"""
+
+print("AI ASSISTANT PROMPT:")
+print("=" * 60)
+print(ai_prompt)
+print("=" * 60)
+print("\nTIP: Copy this prompt to ChatGPT or GitHub Copilot!")
+print("The AI will provide a complete SA implementation you can adapt.")
+```
+
+::: {.callout-tip}
+## Using AI Effectively
+1. **Be specific** about your problem structure
+2. **List all constraints** clearly
+3. **Define the objective** precisely
+4. **Ask for explanations** of the code
+5. **Test with small examples** first
+:::
+
+## Section 5: Decision Framework
+
+Based on our experiments, let's create a decision framework for Bean Counter:
+
+```{python}
+# Decision matrix for Bean Counter problems
+decision_matrix = pd.DataFrame({
+    'Problem Type': [
+        'Quick staff schedule (< 1 min)',
+        'Route optimization',
+        'Complex scheduling',
+        'Location selection',
+        'Multi-objective optimization',
+        'Inventory optimization'
+    ],
+    'Recommended Algorithm': [
+        'Greedy',
+        '2-Opt or SA',
+        'Simulated Annealing',
+        'Genetic Algorithm',
+        'NSGA-II (GA variant)',
+        'Tabu Search'
+    ],
+    'Why': [
+        'Speed is critical',
+        'Well-studied problem',
+        'Escape local optima',
+        'Multiple good solutions',
+        'Pareto frontier needed',
+        'Avoid cycling'
+    ],
+    'AI Implementation': [
+        'Easy - Basic logic',
+        'Easy - Many templates',
+        'Easy - Standard code',
+        'Medium - More complex',
+        'Medium - Specialized',
+        'Medium - Memory management'
+    ]
+})
+
+print("BEAN COUNTER DECISION FRAMEWORK")
+print("=" * 80)
+print(decision_matrix.to_string(index=False))
+```
+
+### Exercise 5.1: Choose Your Algorithm
+
+```{python}
+# Bean Counter scenarios - which algorithm would you use?
+scenarios = [
+    "Emergency: Reschedule 30 baristas in 2 minutes after 5 called in sick",
+    "Optimize delivery routes for 50 franchises (have 2 hours to solve)",
+    "Select 20 products from 100 candidates for new menu",
+    "Minimize cost AND maximize quality for supplier selection"
+]
+
+# YOUR RECOMMENDATIONS
+my_recommendations = [
+    "Greedy",  # Scenario 1: Need speed
+    "Simulated Annealing",  # Scenario 2: CHANGE THIS
+    "Genetic Algorithm",  # Scenario 3: CHANGE THIS  
+    "Multi-objective GA"  # Scenario 4: CHANGE THIS
+]
+
+# Don't modify below - these test your choices
+valid_algorithms = ['Greedy', 'Local Search', 'Simulated Annealing', 
+                   'Genetic Algorithm', 'Tabu Search', 'Multi-objective GA']
+assert all(rec in valid_algorithms for rec in my_recommendations), "Use valid algorithm names"
+print("✓ Recommendations recorded!")
+
+print("\nYour Algorithm Choices:")
+for i, (scenario, algorithm) in enumerate(zip(scenarios, my_recommendations), 1):
+    print(f"\n{i}. {scenario}")
+    print(f"   → Your choice: {algorithm}")
+```
+
+## Conclusion
+
+Congratulations! You've seen metaheuristics in action for Bean Counter optimization problems.
+
+### Key Takeaways
+1. **Simulated Annealing** - Great for escaping local optima in scheduling
+2. **Genetic Algorithms** - Excellent for complex selection problems
+3. **Different tools for different problems** - No single best algorithm
+4. **AI tools are your friends** - Use them to implement complex algorithms
+5. **Start simple** - Try greedy first, then improve if needed
+
+### What You've Learned
+- How to recognize when simple methods fail
+- When to use each metaheuristic
+- How to work with AI to implement solutions
+- How to compare algorithm performance
+
+### Your Bean Counter Toolkit
+
+```{python}
+print("=" * 60)
+print("BEAN COUNTER CEO'S METAHEURISTIC TOOLKIT")
+print("=" * 60)
+
+toolkit = {
+    "Daily Operations": "Greedy (fast decisions)",
+    "Route Planning": "2-Opt → SA if stuck",
+    "Staff Scheduling": "Greedy → SA for improvements",
+    "Expansion Planning": "Genetic Algorithm",
+    "Supplier Selection": "Multi-objective optimization",
+    "Emergency Response": "Greedy (speed matters most)"
+}
+
+for situation, recommendation in toolkit.items():
+    print(f"\n{situation}:")
+    print(f"  → {recommendation}")
+
+print("\n" + "=" * 60)
+print("Remember: With AI assistance, you can implement")
+print("any of these algorithms without being an expert coder!")
+print("=" * 60)
+```
+
+### Final Thought
+
+```{python}
+# Create a motivation visualization
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Solution quality over time with different methods
+time = np.linspace(0, 100, 1000)
+greedy = np.ones_like(time) * 70
+local_search = np.minimum(70 + time/5, 80)
+sa = 70 + 20 * (1 - np.exp(-time/30)) + np.random.randn(1000) * np.exp(-time/20)
+ga = 60 + 30 * (1 - np.exp(-time/40))
+
+ax.plot(time, greedy, label='Greedy', linewidth=2, color='red')
+ax.plot(time, local_search, label='Local Search', linewidth=2, color='orange')
+ax.plot(time, sa, label='Simulated Annealing', linewidth=2, color='blue', alpha=0.7)
+ax.plot(time, ga, label='Genetic Algorithm', linewidth=2, color='green')
+
+ax.set_xlabel('Computation Time', fontsize=12)
+ax.set_ylabel('Solution Quality', fontsize=12)
+ax.set_title('The Power of Metaheuristics', fontsize=14, fontweight='bold')
+ax.legend(loc='lower right')
+ax.grid(True, alpha=0.3)
+
+ax.annotate('Good enough\nfor most cases', xy=(20, 70), xytext=(30, 60),
+           arrowprops=dict(arrowstyle='->', color='red'),
+           fontsize=10, color='red')
+
+ax.annotate('When you need\nthe best', xy=(80, 90), xytext=(60, 95),
+           arrowprops=dict(arrowstyle='->', color='green'),
+           fontsize=10, color='green')
+
+plt.tight_layout()
+plt.show()
+```
+
+[Ready to tackle the restaurant staffing competition? You've got this!]{.flow}

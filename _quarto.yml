@@ -83,6 +83,14 @@ website:
             href: tutorials/nb_06_01_scheduling.qmd
           - text: "NB-06-02 Competition"
             href: tutorials/nb_06_02_scheduler.qmd
+      - section: "07 Local"
+        contents:
+          - text: "07 Lecture"
+            href: lectures/lec_07_local_search.qmd
+          - text: "NB-07-01 Routing"
+            href: tutorials/nb_07_01_local_search.qmd
+          - text: "NB-07-02 Competition"
+            href: tutorials/nb_07_02_routing_competition.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd

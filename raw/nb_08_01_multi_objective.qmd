@@ -1,0 +1,661 @@
+---
+title: "Notebook 8.1 - Multi-Objective Optimization"
+subtitle: "Management Science - Product Portfolio Optimization"
+code-links:
+  - text: Python
+    href: nb_08_01_multi_objective.py
+    icon: hand-thumbs-up
+---
+
+## Introduction
+
+Welcome back to Bean Counter! As CEO, you're facing a critical decision: which new coffee products should we add to our menu? The challenge: each product has different profit margins, customer appeal, preparation complexity, and sustainability impacts.
+
+Unlike previous decisions where we optimized a single metric (like minimizing distance), today we'll learn to balance **multiple competing objectives** simultaneously.
+
+### How to Use This Tutorial
+- Run each code cell from top to bottom
+- Complete exercises marked with `# YOUR CODE BELOW`
+- Check your work with the provided assertions
+- Look for 💡 tips and 📝 notes throughout
+
+Let's start by importing our libraries:
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from typing import List, Tuple, Dict
+
+# Set random seed for reproducibility
+np.random.seed(2025)
+
+# Configure visualization
+plt.style.use('seaborn-v0_8-darkgrid')
+sns.set_palette("husl")
+```
+
+## Section 1: Understanding Trade-offs
+
+Before we dive into algorithms, let's understand what makes multi-objective optimization challenging.
+
+### Exercise 1.1: Product Data
+
+Bean Counter's R&D team has developed 8 potential new products. Each has been evaluated on multiple criteria:
+
+```{python}
+# Product specifications
+products = pd.DataFrame({
+    'Product': ['Matcha Latte', 'Protein Shake', 'Cold Brew', 'Turmeric Latte',
+                'Oat Cappuccino', 'Chai Tea', 'Energy Smoothie', 'Classic Espresso'],
+    'Profit_Margin': [3.2, 4.1, 2.8, 3.5, 2.9, 2.3, 4.5, 1.8],  # € per unit
+    'Customer_Appeal': [75, 60, 85, 55, 90, 70, 65, 95],  # score 0-100
+    'Prep_Time': [180, 240, 90, 210, 150, 120, 270, 60],  # seconds
+    'Sustainability': [60, 40, 80, 70, 85, 75, 35, 90]  # score 0-100
+})
+
+print("Available Products:")
+print(products.to_string(index=False))
+```
+
+::: {.callout-tip}
+## Multiple Objectives
+Notice how each product excels in different areas:
+- Energy Smoothie has high profit but low sustainability
+- Classic Espresso is fast and sustainable but low profit
+- Oat Cappuccino has high appeal but moderate profit
+:::
+
+### Exercise 1.2: Visualizing Trade-offs
+
+Let's visualize the trade-offs between different objectives:
+
+```{python}
+# YOUR CODE BELOW
+# Create a 2x2 subplot showing different trade-offs
+# Plot 1: Profit vs Customer Appeal
+# Plot 2: Profit vs Prep Time  
+# Plot 3: Customer Appeal vs Sustainability
+# Plot 4: Prep Time vs Sustainability
+
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+
+# Plot 1: Profit vs Customer Appeal
+axes[0, 0].scatter(products['Profit_Margin'], products['Customer_Appeal'], s=100)
+for i, txt in enumerate(products['Product']):
+    axes[0, 0].annotate(txt, (products['Profit_Margin'].iloc[i], 
+                              products['Customer_Appeal'].iloc[i]),
+                        fontsize=8, ha='right')
+axes[0, 0].set_xlabel('Profit Margin (€)')
+axes[0, 0].set_ylabel('Customer Appeal')
+axes[0, 0].set_title('Profit vs Appeal')
+axes[0, 0].grid(True, alpha=0.3)
+
+# Plot 2: Profit vs Prep Time
+axes[0, 1].scatter(products['Profit_Margin'], products['Prep_Time'], 
+                   s=100, color='orange')
+for i, txt in enumerate(products['Product']):
+    axes[0, 1].annotate(txt, (products['Profit_Margin'].iloc[i], 
+                              products['Prep_Time'].iloc[i]),
+                        fontsize=8, ha='right')
+axes[0, 1].set_xlabel('Profit Margin (€)')
+axes[0, 1].set_ylabel('Prep Time (seconds)')
+axes[0, 1].set_title('Profit vs Preparation Time')
+axes[0, 1].grid(True, alpha=0.3)
+
+# Plot 3: Customer Appeal vs Sustainability
+axes[1, 0].scatter(products['Customer_Appeal'], products['Sustainability'], 
+                   s=100, color='green')
+for i, txt in enumerate(products['Product']):
+    axes[1, 0].annotate(txt, (products['Customer_Appeal'].iloc[i], 
+                              products['Sustainability'].iloc[i]),
+                        fontsize=8, ha='right')
+axes[1, 0].set_xlabel('Customer Appeal')
+axes[1, 0].set_ylabel('Sustainability Score')
+axes[1, 0].set_title('Appeal vs Sustainability')
+axes[1, 0].grid(True, alpha=0.3)
+
+# Plot 4: Prep Time vs Sustainability
+axes[1, 1].scatter(products['Prep_Time'], products['Sustainability'], 
+                   s=100, color='purple')
+for i, txt in enumerate(products['Product']):
+    axes[1, 1].annotate(txt, (products['Prep_Time'].iloc[i], 
+                              products['Sustainability'].iloc[i]),
+                        fontsize=8, ha='right')
+axes[1, 1].set_xlabel('Prep Time (seconds)')
+axes[1, 1].set_ylabel('Sustainability Score')
+axes[1, 1].set_title('Speed vs Sustainability')
+axes[1, 1].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+# Don't modify below - these test your solution
+assert fig is not None, "Figure not created"
+assert len(axes.flatten()) == 4, "Should have 4 subplots"
+print("✓ Trade-off visualization complete!")
+```
+
+::: {.callout-note}
+## Creating Subplots
+The `plt.subplots(rows, cols)` function creates a grid of plots. Access individual plots with `axes[row, col]` for 2D arrays or `axes[i]` for 1D arrays.
+:::
+
+## Section 2: Finding Dominated Solutions
+
+A solution is **dominated** if another solution is better in at least one objective and not worse in any other objective.
+
+### Exercise 2.1: Identify Dominated Products
+
+For simplicity, let's first consider just two objectives: maximizing profit and minimizing prep time.
+
+```{python}
+def is_dominated(product_idx: int, products_df: pd.DataFrame) -> bool:
+    """
+    Check if a product is dominated by any other product.
+    We want to maximize profit and minimize prep time.
+    """
+    current = products_df.iloc[product_idx]
+    
+    for idx in range(len(products_df)):
+        if idx == product_idx:
+            continue
+            
+        other = products_df.iloc[idx]
+        
+        # YOUR CODE BELOW
+        # Check if 'other' dominates 'current':
+        # - other has higher or equal profit AND
+        # - other has lower or equal prep time AND  
+        # - at least one inequality is strict
+        
+        if (other['Profit_Margin'] >= current['Profit_Margin'] and
+            other['Prep_Time'] <= current['Prep_Time'] and
+            (other['Profit_Margin'] > current['Profit_Margin'] or
+             other['Prep_Time'] < current['Prep_Time'])):
+            return True
+    
+    return False
+
+# Find dominated products
+dominated = []
+for i in range(len(products)):
+    if is_dominated(i, products):
+        dominated.append(products.iloc[i]['Product'])
+
+# Don't modify below - these test your solution
+assert len(dominated) > 0, "Should find at least one dominated product"
+assert 'Turmeric Latte' in dominated, "Turmeric Latte should be dominated"
+print(f"✓ Found {len(dominated)} dominated products: {dominated}")
+```
+
+### Exercise 2.2: Pareto Frontier
+
+Now let's find the Pareto frontier - the set of non-dominated solutions:
+
+```{python}
+def find_pareto_frontier(products_df: pd.DataFrame, 
+                        maximize: List[str], 
+                        minimize: List[str]) -> pd.DataFrame:
+    """
+    Find the Pareto frontier for given objectives.
+    """
+    n = len(products_df)
+    is_pareto = np.ones(n, dtype=bool)
+    
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            
+            # YOUR CODE BELOW
+            # Check if product j dominates product i
+            # For maximization objectives: higher is better
+            # For minimization objectives: lower is better
+            
+            # Check dominance
+            better_or_equal = True
+            strictly_better = False
+            
+            for col in maximize:
+                if products_df.iloc[j][col] < products_df.iloc[i][col]:
+                    better_or_equal = False
+                    break
+                elif products_df.iloc[j][col] > products_df.iloc[i][col]:
+                    strictly_better = True
+                    
+            for col in minimize:
+                if products_df.iloc[j][col] > products_df.iloc[i][col]:
+                    better_or_equal = False
+                    break
+                elif products_df.iloc[j][col] < products_df.iloc[i][col]:
+                    strictly_better = True
+            
+            if better_or_equal and strictly_better:
+                is_pareto[i] = False
+                break
+    
+    return products_df[is_pareto]
+
+# Find Pareto frontier for profit (max) vs prep time (min)
+pareto_products = find_pareto_frontier(
+    products,
+    maximize=['Profit_Margin'],
+    minimize=['Prep_Time']
+)
+
+# Don't modify below - these test your solution
+assert len(pareto_products) >= 3, "Should find at least 3 Pareto optimal products"
+assert 'Classic Espresso' in pareto_products['Product'].values, "Classic Espresso should be Pareto optimal"
+assert 'Energy Smoothie' in pareto_products['Product'].values, "Energy Smoothie should be Pareto optimal"
+print(f"✓ Pareto frontier contains {len(pareto_products)} products:")
+print(pareto_products[['Product', 'Profit_Margin', 'Prep_Time']].to_string(index=False))
+```
+
+::: {.callout-tip}
+## Pareto Frontier Interpretation
+Products on the Pareto frontier represent different trade-offs:
+- Classic Espresso: Fastest preparation, lowest profit
+- Energy Smoothie: Highest profit, slowest preparation
+- Others: Balanced compromises between the extremes
+:::
+
+## Section 3: Weighted Sum Method
+
+One way to handle multiple objectives is to combine them into a single score using weights.
+
+### Exercise 3.1: Normalization
+
+First, we need to normalize objectives to the same scale (0-1):
+
+```{python}
+def normalize_objectives(products_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Normalize all numeric columns to [0, 1] range.
+    """
+    normalized = products_df.copy()
+    
+    for col in products_df.select_dtypes(include=[np.number]).columns:
+        # YOUR CODE BELOW
+        # Normalize each numeric column to [0, 1]
+        # normalized_value = (value - min) / (max - min)
+        
+        min_val = products_df[col].min()
+        max_val = products_df[col].max()
+        
+        if max_val > min_val:  # Avoid division by zero
+            normalized[col] = (products_df[col] - min_val) / (max_val - min_val)
+        else:
+            normalized[col] = 0.5  # If all values are the same
+    
+    return normalized
+
+# Normalize the data
+products_norm = normalize_objectives(products)
+
+# Don't modify below - these test your solution
+assert products_norm['Profit_Margin'].min() >= 0, "Min should be 0"
+assert products_norm['Profit_Margin'].max() <= 1, "Max should be 1"
+assert abs(products_norm['Customer_Appeal'].max() - 1.0) < 0.01, "Max appeal should be 1"
+print("✓ Normalization complete!")
+print("\nNormalized values (first 3 products):")
+print(products_norm.head(3).to_string(index=False))
+```
+
+::: {.callout-note}
+## Min-Max Normalization
+This technique scales values to [0,1] using:
+- 0 = worst value in dataset
+- 1 = best value in dataset
+- Linear scaling preserves relative distances
+:::
+
+### Exercise 3.2: Weighted Scoring
+
+Now let's calculate weighted scores for different preference scenarios:
+
+```{python}
+def calculate_weighted_score(products_norm: pd.DataFrame,
+                            weights: Dict[str, float]) -> pd.Series:
+    """
+    Calculate weighted score for each product.
+    Higher score is better.
+    """
+    # YOUR CODE BELOW
+    # Calculate score = sum of (weight * normalized_value)
+    # For objectives we want to minimize (like Prep_Time), use (1 - normalized_value)
+    
+    scores = pd.Series(index=products_norm.index, dtype=float)
+    
+    for i in range(len(products_norm)):
+        score = 0
+        score += weights['profit'] * products_norm.iloc[i]['Profit_Margin']
+        score += weights['appeal'] * products_norm.iloc[i]['Customer_Appeal']
+        score += weights['speed'] * (1 - products_norm.iloc[i]['Prep_Time'])  # Minimize prep time
+        score += weights['sustainability'] * products_norm.iloc[i]['Sustainability']
+        scores.iloc[i] = score
+    
+    return scores
+
+# Test three different weight scenarios
+scenarios = {
+    'Profit Focus': {'profit': 0.5, 'appeal': 0.2, 'speed': 0.2, 'sustainability': 0.1},
+    'Customer Focus': {'profit': 0.2, 'appeal': 0.5, 'speed': 0.2, 'sustainability': 0.1},
+    'Balanced': {'profit': 0.25, 'appeal': 0.25, 'speed': 0.25, 'sustainability': 0.25}
+}
+
+results = pd.DataFrame()
+for scenario_name, weights in scenarios.items():
+    scores = calculate_weighted_score(products_norm, weights)
+    best_idx = scores.idxmax()
+    results = pd.concat([results, pd.DataFrame({
+        'Scenario': [scenario_name],
+        'Best Product': [products.iloc[best_idx]['Product']],
+        'Score': [scores.iloc[best_idx]]
+    })], ignore_index=True)
+
+# Don't modify below - these test your solution
+assert len(results) == 3, "Should have 3 scenarios"
+assert all(results['Score'] > 0), "All scores should be positive"
+assert all(results['Score'] < 1), "All scores should be less than 1"
+print("✓ Weighted scoring complete!")
+print("\nBest product for each scenario:")
+print(results.to_string(index=False))
+```
+
+## Section 4: Portfolio Selection
+
+Bean Counter can add 3 new products to the menu. Let's find the best portfolio considering complementarity.
+
+### Exercise 4.1: Generate All Possible Portfolios
+
+```{python}
+from itertools import combinations
+
+def generate_portfolios(products_df: pd.DataFrame, portfolio_size: int) -> List[Tuple]:
+    """
+    Generate all possible portfolios of given size.
+    """
+    # YOUR CODE BELOW
+    # Use itertools.combinations to generate all possible portfolios
+    # Return list of tuples with product indices
+    
+    n_products = len(products_df)
+    portfolios = list(combinations(range(n_products), portfolio_size))
+    
+    return portfolios
+
+# Generate all 3-product portfolios
+all_portfolios = generate_portfolios(products, 3)
+
+# Don't modify below - these test your solution
+assert len(all_portfolios) == 56, "Should have C(8,3) = 56 portfolios"
+assert all(len(p) == 3 for p in all_portfolios), "Each portfolio should have 3 products"
+print(f"✓ Generated {len(all_portfolios)} possible portfolios")
+```
+
+::: {.callout-tip}
+## Combinatorial Explosion
+The number of ways to choose k items from n is C(n,k) = n!/(k!(n-k)!). With 8 products choosing 3, that's 8!/(3!5!) = 56 combinations. This grows quickly with more products!
+:::
+
+### Exercise 4.2: Evaluate Portfolio Performance
+
+```{python}
+def evaluate_portfolio(portfolio_indices: Tuple, products_df: pd.DataFrame) -> Dict:
+    """
+    Evaluate a portfolio on multiple metrics.
+    """
+    portfolio = products_df.iloc[list(portfolio_indices)]
+    
+    # YOUR CODE BELOW
+    # Calculate portfolio metrics:
+    # - avg_profit: average profit margin
+    # - total_appeal: sum of customer appeal (assuming broader customer base)
+    # - max_prep_time: maximum prep time (bottleneck in busy periods)
+    # - avg_sustainability: average sustainability score
+    
+    metrics = {
+        'avg_profit': portfolio['Profit_Margin'].mean(),
+        'total_appeal': portfolio['Customer_Appeal'].sum(),
+        'max_prep_time': portfolio['Prep_Time'].max(),
+        'avg_sustainability': portfolio['Sustainability'].mean(),
+        'products': ', '.join(portfolio['Product'].values)
+    }
+    
+    return metrics
+
+# Evaluate all portfolios
+portfolio_metrics = []
+for portfolio in all_portfolios:
+    metrics = evaluate_portfolio(portfolio, products)
+    portfolio_metrics.append(metrics)
+
+portfolio_df = pd.DataFrame(portfolio_metrics)
+
+# Don't modify below - these test your solution
+assert len(portfolio_df) == 56, "Should have metrics for all portfolios"
+assert all(portfolio_df['avg_profit'] > 0), "All portfolios should have positive profit"
+assert all(portfolio_df['total_appeal'] > 0), "All portfolios should have positive appeal"
+print("✓ Portfolio evaluation complete!")
+print(f"Profit range: {portfolio_df['avg_profit'].min():.2f} - {portfolio_df['avg_profit'].max():.2f}")
+print(f"Appeal range: {portfolio_df['total_appeal'].min():.0f} - {portfolio_df['total_appeal'].max():.0f}")
+```
+
+### Exercise 4.3: Find Pareto Optimal Portfolios
+
+```{python}
+def find_pareto_portfolios(portfolio_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Find Pareto optimal portfolios considering:
+    - Maximize avg_profit
+    - Maximize total_appeal
+    - Minimize max_prep_time
+    - Maximize avg_sustainability
+    """
+    n = len(portfolio_df)
+    is_pareto = np.ones(n, dtype=bool)
+    
+    # YOUR CODE BELOW
+    # Similar to Exercise 2.2, but with 4 objectives
+    
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            
+            # Check if portfolio j dominates portfolio i
+            if (portfolio_df.iloc[j]['avg_profit'] >= portfolio_df.iloc[i]['avg_profit'] and
+                portfolio_df.iloc[j]['total_appeal'] >= portfolio_df.iloc[i]['total_appeal'] and
+                portfolio_df.iloc[j]['max_prep_time'] <= portfolio_df.iloc[i]['max_prep_time'] and
+                portfolio_df.iloc[j]['avg_sustainability'] >= portfolio_df.iloc[i]['avg_sustainability'] and
+                (portfolio_df.iloc[j]['avg_profit'] > portfolio_df.iloc[i]['avg_profit'] or
+                 portfolio_df.iloc[j]['total_appeal'] > portfolio_df.iloc[i]['total_appeal'] or
+                 portfolio_df.iloc[j]['max_prep_time'] < portfolio_df.iloc[i]['max_prep_time'] or
+                 portfolio_df.iloc[j]['avg_sustainability'] > portfolio_df.iloc[i]['avg_sustainability'])):
+                is_pareto[i] = False
+                break
+    
+    return portfolio_df[is_pareto]
+
+# Find Pareto optimal portfolios
+pareto_portfolios = find_pareto_portfolios(portfolio_df)
+
+# Don't modify below - these test your solution
+assert len(pareto_portfolios) >= 5, "Should find at least 5 Pareto optimal portfolios"
+assert len(pareto_portfolios) <= 56, "Cannot have more Pareto portfolios than total"
+print(f"✓ Found {len(pareto_portfolios)} Pareto optimal portfolios out of {len(portfolio_df)}")
+print("\nTop 5 by profit:")
+print(pareto_portfolios.nlargest(5, 'avg_profit')[['products', 'avg_profit', 'total_appeal']].to_string(index=False))
+```
+
+## Section 5: Making the Final Decision
+
+As CEO, you need to choose one portfolio from the Pareto frontier.
+
+### Exercise 5.1: Apply Decision Criteria
+
+```{python}
+def apply_decision_weights(pareto_df: pd.DataFrame, 
+                          weights: Dict[str, float]) -> pd.DataFrame:
+    """
+    Score Pareto optimal portfolios using decision weights.
+    """
+    # Normalize the metrics
+    normalized = pareto_df.copy()
+    
+    # YOUR CODE BELOW
+    # Normalize each metric to [0,1] and calculate weighted score
+    
+    # Normalize metrics
+    for col in ['avg_profit', 'total_appeal', 'avg_sustainability']:
+        min_val = pareto_df[col].min()
+        max_val = pareto_df[col].max()
+        if max_val > min_val:
+            normalized[col + '_norm'] = (pareto_df[col] - min_val) / (max_val - min_val)
+        else:
+            normalized[col + '_norm'] = 0.5
+    
+    # For prep time, we want to minimize, so invert the normalization
+    min_val = pareto_df['max_prep_time'].min()
+    max_val = pareto_df['max_prep_time'].max()
+    if max_val > min_val:
+        normalized['max_prep_time_norm'] = 1 - (pareto_df['max_prep_time'] - min_val) / (max_val - min_val)
+    else:
+        normalized['max_prep_time_norm'] = 0.5
+    
+    # Calculate weighted score
+    normalized['score'] = (
+        weights['profit'] * normalized['avg_profit_norm'] +
+        weights['appeal'] * normalized['total_appeal_norm'] +
+        weights['speed'] * normalized['max_prep_time_norm'] +
+        weights['sustainability'] * normalized['avg_sustainability_norm']
+    )
+    
+    return normalized.sort_values('score', ascending=False)
+
+# CEO's weights (you can adjust these!)
+ceo_weights = {
+    'profit': 0.3,
+    'appeal': 0.3,
+    'speed': 0.2,
+    'sustainability': 0.2
+}
+
+# Apply weights and rank portfolios
+final_ranking = apply_decision_weights(pareto_portfolios, ceo_weights)
+
+# Don't modify below - these test your solution
+assert 'score' in final_ranking.columns, "Should have score column"
+assert final_ranking['score'].max() <= 1.0, "Max score should be <= 1"
+assert final_ranking['score'].min() >= 0.0, "Min score should be >= 0"
+print("✓ Final ranking complete!")
+print("\nTop 3 portfolio recommendations:")
+for i in range(min(3, len(final_ranking))):
+    row = final_ranking.iloc[i]
+    print(f"\n{i+1}. Score: {row['score']:.3f}")
+    print(f"   Products: {row['products']}")
+    print(f"   Avg Profit: €{row['avg_profit']:.2f}, Total Appeal: {row['total_appeal']:.0f}")
+    print(f"   Max Prep Time: {row['max_prep_time']:.0f}s, Avg Sustainability: {row['avg_sustainability']:.1f}")
+```
+
+### Exercise 5.2: Sensitivity Analysis
+
+Let's see how robust our decision is to weight changes:
+
+```{python}
+def sensitivity_analysis(pareto_df: pd.DataFrame, base_weights: Dict[str, float]) -> pd.DataFrame:
+    """
+    Test how sensitive the top choice is to weight changes.
+    """
+    results = []
+    
+    # YOUR CODE BELOW
+    # For each weight, vary it by ±20% and see if the top choice changes
+    
+    # Get baseline best portfolio
+    baseline = apply_decision_weights(pareto_df, base_weights)
+    baseline_best = baseline.iloc[0]['products']
+    
+    for key in base_weights:
+        for variation in [0.8, 1.2]:  # -20% and +20%
+            test_weights = base_weights.copy()
+            test_weights[key] = base_weights[key] * variation
+            
+            # Renormalize weights to sum to 1
+            total = sum(test_weights.values())
+            test_weights = {k: v/total for k, v in test_weights.items()}
+            
+            # Find new best
+            test_ranking = apply_decision_weights(pareto_df, test_weights)
+            new_best = test_ranking.iloc[0]['products']
+            
+            results.append({
+                'Parameter': key,
+                'Change': f"{(variation-1)*100:+.0f}%",
+                'Best Portfolio': new_best,
+                'Changed': new_best != baseline_best
+            })
+    
+    return pd.DataFrame(results)
+
+# Run sensitivity analysis
+sensitivity = sensitivity_analysis(pareto_portfolios, ceo_weights)
+
+# Don't modify below - these test your solution
+assert len(sensitivity) == 8, "Should test 8 variations (4 weights × 2 changes)"
+print("✓ Sensitivity analysis complete!")
+print("\nSensitivity to weight changes:")
+print(sensitivity.to_string(index=False))
+print(f"\nRobustness: {(~sensitivity['Changed']).sum()}/8 tests maintain same choice")
+```
+
+::: {.callout-tip}
+## Robust Decisions
+If the recommended portfolio remains the same despite weight variations, it's a robust choice. If it changes frequently, you may want to gather more precise preference information from stakeholders.
+:::
+
+## Conclusion
+
+Congratulations! You've mastered multi-objective optimization for Bean Counter's product portfolio. You've learned:
+
+### Key Takeaways
+1. **Trade-offs are everywhere** - No single solution optimizes all objectives
+2. **Pareto optimality** - Identifies all rational choices
+3. **Normalization is crucial** - Can't compare € to seconds directly
+4. **Weights reflect values** - Different stakeholders → different optimal solutions
+5. **Portfolio effects** - Combinations can be better than individual items
+6. **Sensitivity matters** - Test how robust your decision is
+
+### What's Next?
+In the competition, you'll apply these concepts to Bean Counter's fleet selection problem:
+- Choose delivery vehicles instead of coffee products
+- Balance cost, emissions, speed, and capacity
+- Present your recommendation to the board
+
+### Your Recommendation
+Based on your analysis, which portfolio would YOU recommend to Bean Counter? Consider:
+- Market positioning (premium vs. value)
+- Operational efficiency
+- Sustainability goals
+- Customer satisfaction
+
+```{python}
+# Display final recommendation
+print("="*60)
+print("FINAL RECOMMENDATION TO THE BOARD")
+print("="*60)
+best_portfolio = final_ranking.iloc[0]
+print(f"\nRecommended Portfolio: {best_portfolio['products']}")
+print(f"\nKey Metrics:")
+print(f"  • Average Profit Margin: €{best_portfolio['avg_profit']:.2f} per unit")
+print(f"  • Combined Customer Appeal: {best_portfolio['total_appeal']:.0f} points")
+print(f"  • Maximum Prep Time: {best_portfolio['max_prep_time']:.0f} seconds")
+print(f"  • Sustainability Score: {best_portfolio['avg_sustainability']:.1f}/100")
+print(f"\nOverall Score: {best_portfolio['score']:.3f}")
+print("\nThis portfolio balances profitability with customer satisfaction")
+print("while maintaining reasonable preparation times and sustainability.")
+```
+
+[Ready to optimize Bean Counter's delivery fleet? Let's go!]{.flow}

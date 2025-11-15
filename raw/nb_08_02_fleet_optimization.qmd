@@ -1,0 +1,656 @@
+---
+title: "Competition - Fleet Optimization Challenge"
+subtitle: "Management Science - EcoExpress Logistics Fleet"
+format:
+  html:
+    code-fold: true
+    code-tools: true
+---
+
+## Client Briefing
+
+**EcoExpress Logistics** needs your consulting expertise to transform their delivery fleet for sustainable last-mile delivery across 3 cities.
+
+### The Situation
+Our current fleet of 80 diesel vans faces critical challenges:
+- EU Green Deal: 40% emission reduction mandate by 2025
+- Rising fuel costs (€2.1/L diesel = €280,000/year extra)
+- Amazon entering market with 2-hour delivery promise
+- Driver shortage (15% unfilled positions)
+
+### Your Mission
+Design the optimal fleet composition by selecting from 5 vehicle types, balancing:
+- **Environmental compliance** (meet EU emission targets)
+- **Cost efficiency** (minimize total cost of ownership)
+- **Service excellence** (95% on-time delivery)
+- **Future readiness** (automation and scalability)
+
+### The Stakes
+- Budget: €3.5 million capital investment
+- Timeline: Implementation starts Q1 2025
+- Impact: 500,000 annual deliveries across 3 cities
+
+## Available Vehicles
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from itertools import product
+from typing import Dict, List, Tuple
+
+# Set random seed
+np.random.seed(2025)
+
+# Vehicle specifications for EcoExpress
+vehicles = pd.DataFrame({
+    'Type': ['Electric Truck', 'Hybrid Van', 'Diesel Van', 'E-Cargo Bike', 'Autonomous Pod'],
+    'Purchase_Cost': [75000, 45000, 35000, 12000, 95000],  # €
+    'Operating_Cost_per_km': [0.18, 0.25, 0.38, 0.05, 0.12],  # €/km
+    'CO2_per_km': [0, 95, 185, 0, 0],  # g/km
+    'Speed': [55, 65, 70, 30, 40],  # km/h average
+    'Capacity': [300, 200, 250, 50, 150],  # parcels
+    'Range': [250, 600, 800, 60, 180],  # km per charge/tank
+    'Reliability': [0.93, 0.95, 0.88, 0.98, 0.90],  # uptime percentage
+    'Min_Quantity': [10, 0, 0, 0, 0],  # minimum required (green image)
+    'Max_Quantity': [35, 30, 25, 40, 15]  # maximum allowed
+})
+
+print("Vehicle Options for EcoExpress:")
+print(vehicles.to_string(index=False))
+print("\nNotes:")
+print("- Electric Trucks: Minimum 10 required for EU compliance")
+print("- E-Cargo Bikes: Perfect for zero-emission zones")
+print("- Autonomous Pods: Operate 24/7, ideal for night deliveries")
+```
+
+## Operational Requirements
+
+```{python}
+# Delivery zones and requirements for EcoExpress
+zones = pd.DataFrame({
+    'Zone': ['City A (Strict)', 'City B (Balanced)', 'City C (Rural)', 'Urban Centers'],
+    'Daily_Parcels': [8000, 6000, 3000, 5000],
+    'Avg_Distance_per_Day': [200, 350, 500, 150],  # km
+    'Avg_Parcels_per_Day': [8000, 6000, 3000, 5000],  # parcels
+    'Peak_Factor': [3.0, 2.5, 1.8, 2.0],  # Black Friday multiplier
+    'Emission_Limit': [50, 100, 150, 0]  # g/km CO2 limit (0 = zero-emission zone)
+})
+
+print("EcoExpress Delivery Zones:")
+print(zones.to_string(index=False))
+
+# Daily operation parameters
+daily_operations = {
+    'total_distance': 1200,  # km average per day
+    'total_parcels': 22000,  # number of parcels daily
+    'operating_days': 360,  # days per year
+    'driver_cost_per_hour': 28,  # €/hour (shortage premium)
+    'fuel_price': 2.1,  # €/liter (current high prices)
+    'electricity_price': 0.35,  # €/kWh
+    'carbon_tax_per_ton': 100,  # €/ton CO2 (EU regulation)
+}
+
+print(f"\nDaily Operations:")
+for key, value in daily_operations.items():
+    print(f"  {key}: {value}")
+```
+
+## Helper Functions
+
+```{python}
+def calculate_fleet_metrics(fleet_composition: Dict[str, int], 
+                           vehicles_df: pd.DataFrame,
+                           zones_df: pd.DataFrame,
+                           operations: Dict) -> Dict:
+    """
+    Calculate comprehensive metrics for a fleet composition.
+    
+    Args:
+        fleet_composition: Dict mapping vehicle type to quantity
+        vehicles_df: DataFrame with vehicle specifications
+        zones_df: DataFrame with zone requirements
+        operations: Dict with operational parameters
+    
+    Returns:
+        Dict with calculated metrics
+    """
+    metrics = {}
+    
+    # Total vehicles and capacity
+    total_vehicles = sum(fleet_composition.values())
+    metrics['total_vehicles'] = total_vehicles
+    
+    # Calculate costs
+    purchase_cost = 0
+    total_capacity = 0
+    total_range = 0
+    weighted_speed = 0
+    weighted_co2 = 0
+    weighted_reliability = 0
+    
+    for vehicle_type, quantity in fleet_composition.items():
+        if quantity > 0:
+            vehicle = vehicles_df[vehicles_df['Type'] == vehicle_type].iloc[0]
+            
+            # Purchase cost
+            purchase_cost += vehicle['Purchase_Cost'] * quantity
+            
+            # Capacity and operational metrics
+            total_capacity += vehicle['Capacity'] * quantity
+            total_range += vehicle['Range'] * quantity
+            weighted_speed += vehicle['Speed'] * quantity
+            weighted_co2 += vehicle['CO2_per_km'] * quantity
+            weighted_reliability += vehicle['Reliability'] * quantity
+    
+    metrics['purchase_cost'] = purchase_cost
+    metrics['total_capacity'] = total_capacity
+    
+    # Average metrics (weighted by quantity)
+    if total_vehicles > 0:
+        metrics['avg_speed'] = weighted_speed / total_vehicles
+        metrics['avg_co2'] = weighted_co2 / total_vehicles
+        metrics['avg_reliability'] = weighted_reliability / total_vehicles
+        metrics['avg_range'] = total_range / total_vehicles
+    else:
+        metrics['avg_speed'] = 0
+        metrics['avg_co2'] = 0
+        metrics['avg_reliability'] = 0
+        metrics['avg_range'] = 0
+    
+    # Annual operating cost estimation
+    annual_distance = operations['total_distance'] * operations['operating_days']
+    annual_operating_cost = 0
+    
+    for vehicle_type, quantity in fleet_composition.items():
+        if quantity > 0:
+            vehicle = vehicles_df[vehicles_df['Type'] == vehicle_type].iloc[0]
+            vehicle_annual_km = (annual_distance * quantity) / total_vehicles
+            annual_operating_cost += vehicle['Operating_Cost_per_km'] * vehicle_annual_km
+    
+    metrics['annual_operating_cost'] = annual_operating_cost
+    
+    # Service level score (0-100)
+    # Based on capacity, speed, and reliability
+    capacity_score = min(100, (total_capacity / zones_df['Avg_Parcels_per_Day'].sum()) * 100)
+    speed_score = min(100, (metrics['avg_speed'] / 50) * 100)  # 50 km/h as benchmark
+    reliability_score = metrics['avg_reliability'] * 100
+    
+    metrics['service_score'] = (capacity_score * 0.4 + 
+                                speed_score * 0.3 + 
+                                reliability_score * 0.3)
+    
+    # Environmental score (0-100, lower emissions = higher score)
+    metrics['environmental_score'] = max(0, 100 - (metrics['avg_co2'] / 2))
+    
+    # Check constraints
+    metrics['meets_budget'] = purchase_cost <= 3500000
+    metrics['meets_min_vehicles'] = total_vehicles >= 60
+    metrics['meets_max_vehicles'] = total_vehicles <= 120
+    
+    # Fleet diversity score (having multiple vehicle types for flexibility)
+    vehicle_types_used = sum(1 for q in fleet_composition.values() if q > 0)
+    metrics['diversity_score'] = (vehicle_types_used / len(vehicles_df)) * 100
+    
+    return metrics
+
+def visualize_fleet(fleet_composition: Dict[str, int], 
+                   metrics: Dict,
+                   vehicles_df: pd.DataFrame):
+    """
+    Create visualizations for fleet composition and metrics.
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    
+    # 1. Fleet Composition Pie Chart
+    composition_data = [(k, v) for k, v in fleet_composition.items() if v > 0]
+    if composition_data:
+        types, quantities = zip(*composition_data)
+        colors = sns.color_palette("husl", len(types))
+        axes[0, 0].pie(quantities, labels=types, autopct='%1.0f%%', colors=colors)
+        axes[0, 0].set_title('Fleet Composition')
+    
+    # 2. Cost Breakdown
+    cost_data = {
+        'Purchase\n(amortized/year)': metrics['purchase_cost'] / 3,  # 3-year amortization
+        'Operating\n(annual)': metrics['annual_operating_cost']
+    }
+    axes[0, 1].bar(cost_data.keys(), cost_data.values(), color=['#FF6B6B', '#4ECDC4'])
+    axes[0, 1].set_ylabel('Cost (€)')
+    axes[0, 1].set_title('Annual Cost Breakdown')
+    axes[0, 1].yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'€{x/1000:.0f}K'))
+    
+    # 3. Performance Metrics Spider Chart
+    categories = ['Service\nLevel', 'Environmental\nScore', 'Reliability', 'Diversity']
+    values = [
+        metrics['service_score'],
+        metrics['environmental_score'],
+        metrics['avg_reliability'] * 100,
+        metrics['diversity_score']
+    ]
+    
+    angles = np.linspace(0, 2 * np.pi, len(categories), endpoint=False).tolist()
+    values_plot = values + values[:1]  # Complete the circle
+    angles += angles[:1]
+    
+    axes[1, 0].plot(angles, values_plot, 'o-', linewidth=2, color='#FF6B6B')
+    axes[1, 0].fill(angles, values_plot, alpha=0.25, color='#FF6B6B')
+    axes[1, 0].set_xticks(angles[:-1])
+    axes[1, 0].set_xticklabels(categories)
+    axes[1, 0].set_ylim(0, 100)
+    axes[1, 0].set_title('Performance Metrics')
+    axes[1, 0].grid(True)
+    
+    # 4. Vehicle Capabilities
+    vehicle_types = [k for k, v in fleet_composition.items() if v > 0]
+    if vehicle_types:
+        capability_data = []
+        for vtype in vehicle_types:
+            vehicle = vehicles_df[vehicles_df['Type'] == vtype].iloc[0]
+            capability_data.append({
+                'Type': vtype[:15],  # Truncate long names
+                'Capacity': vehicle['Capacity'] * fleet_composition[vtype],
+                'Count': fleet_composition[vtype]
+            })
+        
+        cap_df = pd.DataFrame(capability_data)
+        x = range(len(cap_df))
+        axes[1, 1].bar(x, cap_df['Capacity'], color='#4ECDC4')
+        axes[1, 1].set_xticks(x)
+        axes[1, 1].set_xticklabels(cap_df['Type'], rotation=45, ha='right')
+        axes[1, 1].set_ylabel('Total Capacity (kg)')
+        axes[1, 1].set_title('Fleet Capacity by Vehicle Type')
+        
+        # Add count labels on bars
+        for i, (cap, count) in enumerate(zip(cap_df['Capacity'], cap_df['Count'])):
+            axes[1, 1].text(i, cap, f'{count} vehicles', ha='center', va='bottom')
+    
+    plt.tight_layout()
+    plt.show()
+
+# Example: Test with a sample fleet for EcoExpress
+sample_fleet = {
+    'Electric Truck': 20,
+    'Hybrid Van': 25,
+    'Diesel Van': 10,
+    'E-Cargo Bike': 25,
+    'Autonomous Pod': 5
+}
+
+sample_metrics = calculate_fleet_metrics(sample_fleet, vehicles, zones, daily_operations)
+print("\nSample EcoExpress Fleet Metrics:")
+print(f"Total Vehicles: {sample_metrics['total_vehicles']}")
+print(f"Purchase Cost: €{sample_metrics['purchase_cost']:,.0f}")
+print(f"Service Score: {sample_metrics['service_score']:.1f}/100")
+print(f"Environmental Score: {sample_metrics['environmental_score']:.1f}/100")
+print(f"Meets Budget: {sample_metrics['meets_budget']}")
+print(f"EU Compliance: {'✓' if sample_metrics['avg_co2'] < 111 else '✗'} (Target: <111 g/km)")
+```
+
+## Your Task
+
+### Part 1: Fleet Composition (40 points)
+Design your optimal fleet by specifying the quantity of each vehicle type. Consider:
+- Budget constraint (€3.5M)
+- Vehicle quantity limits (60-120 total)
+- EU emission mandate (40% reduction = <111 g/km average)
+- Black Friday peak capability
+
+```{python}
+# YOUR FLEET COMPOSITION FOR ECOEXPRESS
+# Modify these numbers to create your optimal fleet
+
+my_fleet = {
+    'Electric Truck': 15,     # Min: 10, Max: 35
+    'Hybrid Van': 20,         # Min: 0, Max: 30
+    'Diesel Van': 10,         # Min: 0, Max: 25
+    'E-Cargo Bike': 20,       # Min: 0, Max: 40
+    'Autonomous Pod': 5       # Min: 0, Max: 15
+}
+
+# Calculate and display your fleet metrics
+my_metrics = calculate_fleet_metrics(my_fleet, vehicles, zones, daily_operations)
+
+print("="*60)
+print("ECOEXPRESS FLEET PROPOSAL")
+print("="*60)
+print("\nFleet Composition:")
+for vtype, count in my_fleet.items():
+    if count > 0:
+        print(f"  {vtype}: {count} vehicles")
+
+print(f"\nTotal Vehicles: {my_metrics['total_vehicles']}")
+print(f"\nFinancial Metrics:")
+print(f"  Purchase Cost: €{my_metrics['purchase_cost']:,.0f}")
+print(f"  Annual Operating Cost: €{my_metrics['annual_operating_cost']:,.0f}")
+print(f"  3-Year Total Cost: €{my_metrics['purchase_cost'] + 3*my_metrics['annual_operating_cost']:,.0f}")
+
+print(f"\nPerformance Metrics:")
+print(f"  Service Score: {my_metrics['service_score']:.1f}/100")
+print(f"  Environmental Score: {my_metrics['environmental_score']:.1f}/100")
+print(f"  Average CO2: {my_metrics['avg_co2']:.1f} g/km")
+print(f"  EU Target Achievement: {(185-my_metrics['avg_co2'])/185*100:.1f}% reduction")
+print(f"  Fleet Reliability: {my_metrics['avg_reliability']*100:.1f}%")
+
+print(f"\nConstraint Checks:")
+print(f"  {'✓' if my_metrics['meets_budget'] else '✗'} Meets Budget (€3.5M): {my_metrics['meets_budget']}")
+print(f"  {'✓' if my_metrics['meets_min_vehicles'] else '✗'} Meets Min Vehicles (60): {my_metrics['meets_min_vehicles']}")
+print(f"  {'✓' if my_metrics['meets_max_vehicles'] else '✗'} Meets Max Vehicles (120): {my_metrics['meets_max_vehicles']}")
+print(f"  {'✓' if my_metrics['avg_co2'] < 111 else '✗'} EU Emission Target (<111 g/km): {my_metrics['avg_co2'] < 111}")
+
+# Visualize your fleet
+visualize_fleet(my_fleet, my_metrics, vehicles)
+```
+
+### Part 2: Pareto Analysis (30 points)
+Compare your solution against alternatives on the Pareto frontier:
+
+```{python}
+# Generate alternative fleet compositions
+def generate_fleet_alternatives(n_samples=100):
+    """Generate random fleet compositions for Pareto analysis."""
+    alternatives = []
+    
+    for _ in range(n_samples):
+        fleet = {}
+        remaining_budget = 3500000
+        
+        # Ensure minimum Electric Trucks for EU compliance
+        fleet['Electric Truck'] = np.random.randint(10, min(25, remaining_budget // 75000) + 1)
+        remaining_budget -= fleet['Electric Truck'] * 75000
+        
+        # Random allocation for other vehicles
+        for vtype in ['Hybrid Van', 'Diesel Van', 'E-Cargo Bike', 'Autonomous Pod']:
+            vehicle = vehicles[vehicles['Type'] == vtype].iloc[0]
+            max_afford = int(remaining_budget // vehicle['Purchase_Cost'])
+            max_allowed = int(vehicle['Max_Quantity'])
+            
+            if max_afford > 0:
+                fleet[vtype] = np.random.randint(0, min(max_afford, max_allowed) + 1)
+                remaining_budget -= fleet[vtype] * vehicle['Purchase_Cost']
+        
+        # Check if fleet meets basic constraints
+        total = sum(fleet.values())
+        if 60 <= total <= 120 and remaining_budget >= 0:
+            alternatives.append(fleet)
+    
+    return alternatives
+
+# Generate and evaluate alternatives
+alternatives = generate_fleet_alternatives(150)
+alternative_metrics = []
+
+for fleet in alternatives:
+    metrics = calculate_fleet_metrics(fleet, vehicles, zones, daily_operations)
+    metrics['fleet'] = str(fleet)
+    alternative_metrics.append(metrics)
+
+alt_df = pd.DataFrame(alternative_metrics)
+
+# Add your solution
+my_metrics['fleet'] = str(my_fleet)
+alt_df = pd.concat([alt_df, pd.DataFrame([my_metrics])], ignore_index=True)
+
+# YOUR CODE: Find Pareto frontier
+# Consider objectives: maximize service_score, maximize environmental_score, minimize purchase_cost
+
+def find_pareto_frontier(df):
+    """Find Pareto optimal solutions."""
+    n = len(df)
+    is_pareto = np.ones(n, dtype=bool)
+    
+    for i in range(n):
+        for j in range(n):
+            if i != j:
+                # Check if j dominates i
+                if (df.iloc[j]['service_score'] >= df.iloc[i]['service_score'] and
+                    df.iloc[j]['environmental_score'] >= df.iloc[i]['environmental_score'] and
+                    df.iloc[j]['purchase_cost'] <= df.iloc[i]['purchase_cost'] and
+                    (df.iloc[j]['service_score'] > df.iloc[i]['service_score'] or
+                     df.iloc[j]['environmental_score'] > df.iloc[i]['environmental_score'] or
+                     df.iloc[j]['purchase_cost'] < df.iloc[i]['purchase_cost'])):
+                    is_pareto[i] = False
+                    break
+    
+    return df[is_pareto]
+
+pareto_df = find_pareto_frontier(alt_df)
+
+# Visualize Pareto frontier
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+# Service vs Cost
+axes[0].scatter(alt_df['purchase_cost']/1000, alt_df['service_score'], 
+               alpha=0.3, s=50, label='All alternatives')
+axes[0].scatter(pareto_df['purchase_cost']/1000, pareto_df['service_score'], 
+               alpha=0.8, s=100, color='green', label='Pareto optimal')
+axes[0].scatter(my_metrics['purchase_cost']/1000, my_metrics['service_score'], 
+               s=200, color='red', marker='*', label='My solution', zorder=10)
+axes[0].set_xlabel('Purchase Cost (€1000s)')
+axes[0].set_ylabel('Service Score')
+axes[0].set_title('Service Level vs Cost Trade-off')
+axes[0].legend()
+axes[0].grid(True, alpha=0.3)
+
+# Environmental vs Cost
+axes[1].scatter(alt_df['purchase_cost']/1000, alt_df['environmental_score'], 
+               alpha=0.3, s=50, label='All alternatives')
+axes[1].scatter(pareto_df['purchase_cost']/1000, pareto_df['environmental_score'], 
+               alpha=0.8, s=100, color='green', label='Pareto optimal')
+axes[1].scatter(my_metrics['purchase_cost']/1000, my_metrics['environmental_score'], 
+               s=200, color='red', marker='*', label='My solution', zorder=10)
+axes[1].set_xlabel('Purchase Cost (€1000s)')
+axes[1].set_ylabel('Environmental Score')
+axes[1].set_title('Environmental Impact vs Cost Trade-off')
+axes[1].legend()
+axes[1].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+print(f"Found {len(pareto_df)} Pareto optimal solutions out of {len(alt_df)} alternatives")
+print(f"My solution is {'on' if len(pareto_df[pareto_df['fleet'] == str(my_fleet)]) > 0 else 'NOT on'} the Pareto frontier")
+```
+
+### Part 3: Recommendation Slide (30 points)
+
+Create your one-slide executive summary:
+
+```{python}
+# Create executive summary visualization
+fig = plt.figure(figsize=(16, 10))
+
+# Title
+fig.suptitle('ECOEXPRESS FLEET TRANSFORMATION PLAN', fontsize=20, fontweight='bold', y=0.98)
+
+# Grid layout
+gs = fig.add_gridspec(3, 3, hspace=0.3, wspace=0.3)
+
+# 1. Fleet Composition (top left)
+ax1 = fig.add_subplot(gs[0, 0])
+composition_data = [(k, v) for k, v in my_fleet.items() if v > 0]
+if composition_data:
+    types, quantities = zip(*composition_data)
+    colors = sns.color_palette("husl", len(types))
+    wedges, texts, autotexts = ax1.pie(quantities, labels=types, autopct='%1.0f%%', 
+                                        colors=colors, textprops={'size': 9})
+ax1.set_title('Fleet Mix', fontsize=12, fontweight='bold')
+
+# 2. Key Metrics (top middle)
+ax2 = fig.add_subplot(gs[0, 1])
+ax2.axis('off')
+metrics_text = f"""
+KEY METRICS
+
+Vehicles: {my_metrics['total_vehicles']}
+Investment: €{my_metrics['purchase_cost']/1e6:.1f}M
+
+Service Score: {my_metrics['service_score']:.0f}/100
+Green Score: {my_metrics['environmental_score']:.0f}/100
+Reliability: {my_metrics['avg_reliability']*100:.0f}%
+
+3-Year TCO: €{(my_metrics['purchase_cost'] + 3*my_metrics['annual_operating_cost'])/1e6:.1f}M
+"""
+ax2.text(0.1, 0.5, metrics_text, fontsize=11, verticalalignment='center',
+         bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
+
+# 3. Comparison to Alternatives (top right)
+ax3 = fig.add_subplot(gs[0, 2])
+categories = ['Service', 'Environment', 'Cost Efficiency']
+my_scores = [
+    my_metrics['service_score'],
+    my_metrics['environmental_score'],
+    100 - (my_metrics['purchase_cost']/2500000)*100  # Cost efficiency
+]
+avg_scores = [
+    alt_df['service_score'].mean(),
+    alt_df['environmental_score'].mean(),
+    100 - (alt_df['purchase_cost'].mean()/2500000)*100
+]
+
+x = np.arange(len(categories))
+width = 0.35
+ax3.bar(x - width/2, my_scores, width, label='Our Fleet', color='#FF6B6B')
+ax3.bar(x + width/2, avg_scores, width, label='Average', color='#4ECDC4')
+ax3.set_ylabel('Score')
+ax3.set_title('Performance vs Alternatives', fontsize=12, fontweight='bold')
+ax3.set_xticks(x)
+ax3.set_xticklabels(categories, fontsize=9)
+ax3.legend(fontsize=9)
+ax3.set_ylim(0, 100)
+
+# 4. Zone Coverage (middle left)
+ax4 = fig.add_subplot(gs[1, 0])
+zone_capability = []
+for zone in zones['Zone']:
+    zone_capability.append(np.random.uniform(85, 100))  # Simulated capability
+ax4.barh(zones['Zone'], zone_capability, color='#95E77E')
+ax4.set_xlabel('Coverage Capability (%)')
+ax4.set_title('Zone Service Levels', fontsize=12, fontweight='bold')
+ax4.set_xlim(0, 100)
+
+# 5. Cost Breakdown (middle center)
+ax5 = fig.add_subplot(gs[1, 1])
+annual_costs = {
+    'Vehicle\nAmortization': my_metrics['purchase_cost'] / 3,
+    'Operating\nCosts': my_metrics['annual_operating_cost'],
+    'Maintenance\n(est.)': my_metrics['total_vehicles'] * 2000
+}
+ax5.bar(annual_costs.keys(), annual_costs.values(), color=['#FF6B6B', '#4ECDC4', '#FFE66D'])
+ax5.set_ylabel('Annual Cost (€)')
+ax5.set_title('Annual Cost Structure', fontsize=12, fontweight='bold')
+ax5.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'€{x/1000:.0f}K'))
+
+# 6. Environmental Impact (middle right)
+ax6 = fig.add_subplot(gs[1, 2])
+co2_comparison = {
+    'Current Fleet': 180,  # Diesel average
+    'New Fleet': my_metrics['avg_co2'],
+    'City Target': 100
+}
+colors_co2 = ['red', 'green', 'blue']
+bars = ax6.bar(co2_comparison.keys(), co2_comparison.values(), color=colors_co2, alpha=0.7)
+ax6.set_ylabel('CO2 (g/km)')
+ax6.set_title('Emissions Reduction', fontsize=12, fontweight='bold')
+ax6.axhline(y=100, color='blue', linestyle='--', alpha=0.5)
+
+# Add value labels on bars
+for bar in bars:
+    height = bar.get_height()
+    ax6.text(bar.get_x() + bar.get_width()/2., height,
+            f'{height:.0f}', ha='center', va='bottom')
+
+# 7. Implementation Timeline (bottom)
+ax7 = fig.add_subplot(gs[2, :])
+ax7.axis('off')
+
+timeline_text = """
+IMPLEMENTATION ROADMAP
+
+Phase 1 (Q1 2025): Order Electric Trucks and set up charging infrastructure • Deploy Autonomous Pods for pilot testing • Train staff on new systems
+Phase 2 (Q2 2025): Roll out Hybrid Vans across all cities • Implement E-Cargo Bikes in zero-emission zones • Begin diesel phase-out
+Phase 3 (Q3 2025): Full fleet operational • AI-powered route optimization • Scale autonomous operations • Complete EU compliance
+
+EXPECTED BENEFITS: 40%+ CO2 reduction (EU compliant) • €500K annual savings • 95% on-time delivery • Future-proof autonomous capability
+"""
+
+ax7.text(0.05, 0.5, timeline_text, fontsize=10, verticalalignment='center',
+         bbox=dict(boxstyle='round', facecolor='lightyellow', alpha=0.3),
+         wrap=True)
+
+plt.tight_layout()
+plt.show()
+
+print("\n" + "="*60)
+print("ECOEXPRESS EXECUTIVE SUMMARY")
+print("="*60)
+print(f"\nRecommendation: Deploy {my_metrics['total_vehicles']} vehicle sustainable fleet")
+print(f"\nKey Value Drivers:")
+print(f"  • EU Compliance: {(185 - my_metrics['avg_co2'])/185*100:.1f}% emission reduction achieved")
+print(f"  • Cost Efficiency: €{(80*4500 - my_metrics['annual_operating_cost']):.0f}/year savings")
+print(f"  • Service Excellence: {my_metrics['service_score']:.0f}/100 delivery performance")
+print(f"  • Innovation: {sum(1 for v in my_fleet.values() if v > 0)} vehicle types for flexibility")
+print(f"\nCompetitive Advantages:")
+print(f"  • Beat Amazon with zero-emission urban delivery")
+print(f"  • {my_metrics['avg_reliability']*100:.0f}% fleet reliability")
+print(f"  • Future-ready with autonomous capabilities")
+```
+
+## Deliverables Checklist
+
+### Required Submission Files:
+1. **fleet_optimization.py** - Your code with final fleet composition
+2. **recommendation.pdf** - One-page executive summary
+3. **presentation.pptx** - 3-minute presentation (3 slides max)
+
+### Evaluation Rubric:
+
+| Criterion | Points | Description |
+|-----------|---------|-------------|
+| **Fleet Composition** | 40 | Feasible solution meeting constraints, well-justified choices |
+| **Pareto Analysis** | 30 | Correct implementation, insightful comparison |
+| **Recommendation** | 30 | Clear visualization, compelling business case |
+| **Total** | 100 | |
+
+### Final Tips:
+- There's no single "correct" answer - justify your choices
+- Consider stakeholder perspectives (CFO vs Sustainability Officer)
+- Test sensitivity of your solution to parameter changes
+- Think about implementation practicality, not just numbers
+
+## Your Notes
+
+Use this space to document your decision process:
+
+```{python}
+# YOUR ANALYSIS AND REASONING
+# Document why you chose your specific fleet composition
+
+"""
+EcoExpress Fleet Design Rationale:
+-----------------------------------
+1. Electric Trucks (X units):
+   - Reason: Zero emissions for City A compliance, high capacity
+   
+2. Hybrid Vans (Y units):
+   - Reason: Balance of range and emissions for City B
+   
+3. Autonomous Pods (Z units):
+   - Reason: 24/7 operation without driver costs
+   
+4. E-Cargo Bikes (W units):
+   - Reason: Access zero-emission zones, navigate urban traffic
+
+Key Trade-offs:
+- Prioritized emission reduction over pure cost optimization for EU compliance
+- Accepted higher capital costs for long-term operational savings
+- Mixed fleet for flexibility during Black Friday peaks
+
+Sensitivity Considerations:
+- If carbon tax increases to €150/ton, electric vehicles become even more valuable
+- If driver shortage worsens, autonomous pods provide critical backup capacity
+"""
+```
+
+[Good luck, consultants! EcoExpress's sustainable future is in your hands!]{.highlight}

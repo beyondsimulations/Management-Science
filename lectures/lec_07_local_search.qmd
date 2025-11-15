@@ -180,6 +180,44 @@ TSP optimization where we find minimum cost tour → NP-Hard. This means no know
 Density dramatically affects both problem difficulty and solution approaches!
 :::
 
+## Hamiltonian Cycles and Tours
+
+[Mathematical foundation of the TSP:]{.highlight}
+
+::: incremental
+- **Hamiltonian Path:** Visits each vertex exactly once
+- **Hamiltonian Cycle:** Hamiltonian path that returns to start vertex
+- **TSP Tour:** Minimum weight Hamiltonian cycle
+:::
+
+. . .
+
+**Mathematical Definition:**
+A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
+
+- Each $v_i \in V$ appears exactly once (except start/end)
+- Total weight: $w(T) = \sum_{i=1}^{n} w_{v_i, v_{i+1}}$ (where $v_{n+1} = v_1$)
+
+. . .
+
+[Goal: Find tour $T^*$ such that $w(T^*) = \min_{T \in \mathcal{H}} w(T)$]{.highlight}
+
+## Distance Functions and Metrics
+
+[The weight function can have different properties:]{.highlight}
+
+1. **Identity:** $d(i,i) = 0$ \quad \forall $i \in V$
+2. **Symmetry:** $d(i,j) = d(j,i)$ \quad \forall $i,j \in V$
+3. **Triangle Inequality:** $d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V$
+
+. . .
+
+**Common Distance Functions:**
+
+- **Euclidean:** $d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}$
+- **Manhattan:** $d(i,j) = |x_i - x_j| + |y_i - y_j|$
+- **Real road distances:** Often violate triangle inequality!
+
 # [Greedy Construction]{.flow} {.title}
 
 ## A Bad Start: Random Route
