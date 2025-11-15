@@ -33,6 +33,20 @@ format:
 
 [Question:]{.question} How do we transform our fleet while staying competitive?
 
+## Today's Learning Objectives {.smaller}
+
+[By the end of this lecture, you will be able to:]{.highlight}
+
+::: {.incremental}
+1. Explain why most real business decisions involve multiple competing objectives
+2. Identify and visualize Pareto optimal solutions in multi-objective problems
+3. Apply normalization techniques to make objectives comparable
+4. Implement weighted sum and ε-constraint methods to find trade-off solutions
+5. Choose the appropriate MOO method for different problem types
+6. Make data-driven decisions from a Pareto frontier
+7. Analyze real-world multi-objective trade-offs (Amazon, airlines, Tesla)
+:::
+
 ## Quick Recap: Local Search
 
 [Last week we optimized routes for delivery:]{.highlight}
@@ -646,188 +660,149 @@ print(f"Emissions reduction from cheapest: -{min_cost['Emissions'] - min_emissio
 Each point represents a different allocation strategy!
 :::
 
-# [Solution Methods]{.flow} {.title}
+# [Solution Approaches]{.flow} {.title}
 
-## Extreme Points Analysis
+## Multi-Objective Optimization
 
-**Always solve single objectives FIRST!** They anchor your entire analysis:
+[You can use optimization solvers or heuristics!]{.highlight}
+
+. . .
+
+::: columns
+::: {.column width="50%"}
+**With Optimization Solvers**
+
+- Weighted Sum Method
+- ε-Constraint Method  
+- Goal Programming
+- **Optimal solutions**
+- **Need mathematical model**
+:::
+
+::: {.column width="50%"}
+**With Heuristics**
+
+- Weighted Greedy Construction
+- Multi-Objective Local Search
+- Metaheuristics
+- **Good solutions, fast**
+- **No optimality proof**
+:::
+:::
+
+. . .
+
+::: {.callout-important}
+In this lecture we use heuristic approaches!
+:::
+
+## Foundation: Extreme Points
+
+[First step for BOTH approaches - find the boundaries:]{.highlight}
 
 ```{python}
 #| echo: false
 #| eval: true
 
+# Use the transportation problem Pareto frontier from earlier
 fig, axes = plt.subplots(1, 2)
 
-# Left plot: Show extreme points
+# Left plot: Show extreme points from transportation problem
 ax1 = axes[0]
 
-# Generate sample Pareto frontier
-t = np.linspace(0, 1, 100)
-cost_front = 50 + 100 * (1 - t**1.8)
-emissions_front = 250 * t**1.8 + 40
-
-# Plot frontier
-ax1.plot(cost_front, emissions_front, 'b-', linewidth=2, alpha=0.5, label='Pareto Frontier')
+# Plot the Pareto frontier from transportation problem
+ax1.plot(sol_df['Cost'], sol_df['Emissions'], 
+        '-', linewidth=2.5, alpha=0.7, label='Pareto Frontier', 
+        marker='o', markersize=6, color=BRAND_COLORS["darker"])
 
 # Mark extreme points
-min_cost_idx = np.argmin(cost_front)
-min_emissions_idx = np.argmin(emissions_front)
+min_cost = sol_df.iloc[0]
+min_emissions = sol_df.iloc[-1]
 
-ax1.scatter(cost_front[min_cost_idx], emissions_front[min_emissions_idx], 
-           s=300, color=PLOT_COLORS[2], marker='*', label='Min Cost Only',
+ax1.scatter(min_cost['Cost'], min_cost['Emissions'],
+           s=200, color=PLOT_COLORS[2], marker='*', label=f'Min Cost: €{min_cost["Cost"]:.0f}',
            edgecolors='black', linewidth=2, zorder=10)
-ax1.scatter(cost_front[min_emissions_idx], emissions_front[min_emissions_idx], 
-           s=300, color=PLOT_COLORS[0], marker='*', label='Min Emissions Only',
+ax1.scatter(min_emissions['Cost'], min_emissions['Emissions'],
+           s=200, color=PLOT_COLORS[0], marker='*', label=f'Min Emissions: {min_emissions["Emissions"]:.1f} kg',
            edgecolors='black', linewidth=2, zorder=10)
 
-# Add ideal point (usually infeasible)
-ideal_cost = cost_front.min()
-ideal_emissions = emissions_front.min()
-ax1.scatter(ideal_cost, ideal_emissions, s=200, color='green', marker='D', 
-           label='Ideal (Infeasible)', edgecolors='black', linewidth=2, alpha=0.5)
+# Add ideal point (infeasible - best of both)
+ideal_cost = min_cost['Cost']
+ideal_emissions = min_emissions['Emissions']
+ax1.scatter(ideal_cost, ideal_emissions, s=150, color=PLOT_COLORS[1], marker='D', 
+           label='Ideal (Infeasible)', edgecolors='black', linewidth=2, alpha=0.7)
 
 # Draw box showing trade-off space
-ax1.add_patch(plt.Rectangle((ideal_cost, ideal_emissions), 
-                           cost_front.max() - ideal_cost,
-                           emissions_front.max() - ideal_emissions,
-                           fill=False, edgecolor='gray', linestyle='--', linewidth=1))
+worst_cost = min_emissions['Cost']
+worst_emissions = min_cost['Emissions']
 
-ax1.set_xlabel('Cost (€)', fontsize=12)
-ax1.set_ylabel('Emissions (kg CO₂)', fontsize=12)
+ax1.set_xlabel('Cost (€)', fontsize=12, fontweight='bold')
+ax1.set_ylabel('Emissions (kg CO₂)', fontsize=12, fontweight='bold')
 ax1.set_title('Step 1: Find Extreme Points', fontsize=13, fontweight='bold')
-ax1.legend()
+ax1.legend(fontsize=10)
 ax1.grid(True, alpha=0.3)
 
-# Right plot: Show normalization ranges
+# Right plot: Show normalization (scaled to [0,1])
 ax2 = axes[1]
 
-# Bar chart showing ranges
-objectives = ['Cost', 'Emissions']
-mins = [cost_front.min(), emissions_front.min()]
-maxs = [cost_front.max(), emissions_front.max()]
-ranges = [maxs[i] - mins[i] for i in range(2)]
+# Calculate normalized values
+cost_range = worst_cost - ideal_cost
+emissions_range = worst_emissions - ideal_emissions
+
+# Show normalized ranges
+objectives = ['Cost\n(normalized)', 'Emissions\n(normalized)']
+normalized_mins = [0, 0]
+normalized_maxs = [1, 1]
 
 x = np.arange(len(objectives))
 width = 0.35
 
-bars1 = ax2.bar(x - width/2, mins, width, label='Min (Best)', color=PLOT_COLORS[1], alpha=0.7)
-bars2 = ax2.bar(x + width/2, maxs, width, label='Max (Worst)', color=PLOT_COLORS[0], alpha=0.7)
+bars1 = ax2.bar(x - width/2, normalized_mins, width, label='Min (Best) = 0', 
+               color=PLOT_COLORS[1], alpha=0.7, edgecolor='black', linewidth=1.5)
+bars2 = ax2.bar(x + width/2, normalized_maxs, width, label='Max (Worst) = 1', 
+               color=PLOT_COLORS[0], alpha=0.7, edgecolor='black', linewidth=1.5)
 
-# Add range annotations
-for i, (min_val, max_val, range_val) in enumerate(zip(mins, maxs, ranges)):
-    ax2.annotate(f'Range: {range_val:.0f}', xy=(i, (min_val + max_val)/2),
-                xytext=(i + 0.3, (min_val + max_val)/2),
-                fontsize=11, ha='left',
-                arrowprops=dict(arrowstyle='<->', color='black', lw=2))
+# Add original range annotations
+ax2.text(0, 0.5, f'€{ideal_cost:.0f} → €{worst_cost:.0f}\nRange: €{cost_range:.0f}', 
+        ha='center', va='center', fontsize=10, fontweight='bold',
+        bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+ax2.text(1, 0.5, f'{ideal_emissions:.1f}kg → {worst_emissions:.1f}kg\nRange: {emissions_range:.1f}kg', 
+        ha='center', va='center', fontsize=10, fontweight='bold',
+        bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
 
-ax2.set_ylabel('Value', fontsize=12)
-ax2.set_title('Step 2: Use Ranges for Normalization', fontsize=13, fontweight='bold')
+ax2.set_ylabel('Normalized Value [0, 1]', fontsize=12, fontweight='bold')
+ax2.set_title('Step 2: Normalize to [0,1] Scale', fontsize=13, fontweight='bold')
 ax2.set_xticks(x)
 ax2.set_xticklabels(objectives)
-ax2.legend()
+ax2.set_ylim(-0.1, 1.3)
+ax2.legend(fontsize=10)
+ax2.grid(True, alpha=0.3, axis='y')
 
 plt.tight_layout()
 plt.show()
 ```
 
-::: {.callout-important}
-## Why Extreme Points Matter
+. . .
 
-1. **Define the Trade-off Space**: Min/max values bound your Pareto frontier
-2. **Enable Proper Normalization**: Need ranges for scaling to [0,1]
-3. **Quick Feasibility Check**: If you can't achieve single objectives, problem is infeasible
-4. **Stakeholder Communication**: "Best possible cost is €50k, best emissions is 40kg"
-:::
+[Question:]{.question} Why is normalization essential?
 
-**Implementation Pattern:**
-```python
-# ALWAYS start with this!
-def find_extreme_points(problem):
-    """First step in any MOO analysis"""
-    
-    # Solve for minimum cost (ignore emissions)
-    min_cost_solution = minimize(cost_objective, constraints)
-    
-    # Solve for minimum emissions (ignore cost)
-    min_emissions_solution = minimize(emissions_objective, constraints)
-    
-    # These define your trade-off space!
-    return {
-        'cost_range': (min_cost_solution.cost, min_emissions_solution.cost),
-        'emissions_range': (min_cost_solution.emissions, min_emissions_solution.emissions),
-        'ideal_point': (min_cost_solution.cost, min_emissions_solution.emissions),
-        'nadir_point': (max_cost, max_emissions)
-    }
-```
+## Critical: Normalization
 
-## Why Extreme Points Matter
-
-::: {.callout-important}
-## Why Extreme Points Matter
-
-1. **Define the Trade-off Space**: Min/max values bound your Pareto frontier
-2. **Enable Proper Normalization**: Need ranges for scaling to [0,1]
-3. **Quick Feasibility Check**: If you can't achieve single objectives, problem is infeasible
-4. **Stakeholder Communication**: "Best possible cost is €50k, best emissions is 40kg"
-:::
-
-```python
-# ALWAYS start with this!
-def find_extreme_points(problem):
-    """First step in any MOO analysis"""
-    
-    # Solve for minimum cost (ignore emissions)
-    min_cost_solution = minimize(cost_objective, constraints)
-    
-    # Solve for minimum emissions (ignore cost)
-    min_emissions_solution = minimize(emissions_objective, constraints)
-    
-    # These define your trade-off space!
-    return {
-        'cost_range': (min_cost_solution.cost, min_emissions_solution.cost),
-        'emissions_range': (min_cost_solution.emissions, min_emissions_solution.emissions),
-        'ideal_point': (min_cost_solution.cost, min_emissions_solution.emissions),
-        'nadir_point': (max_cost, max_emissions)
-    }
-```
-
-## Method 1: Weighted Sum
-
-Combine all objectives into one score:
-
-$$\text{Score} = w_1 \cdot f_1(\mathbf{x}) + w_2 \cdot f_2(\mathbf{x}) + ... + w_p \cdot f_p(\mathbf{x})$$
-
-**Intuition:** Like mixing ingredients in a recipe - the weights are your preferences!
-
-```python
-def weighted_score(solution, w_cost=0.6, w_emissions=0.4):
-    # Normalize objectives to [0,1]
-    norm_cost = (solution.cost - min_cost) / (max_cost - min_cost)
-    norm_emissions = (solution.emissions - min_emissions) / (max_emissions - min_emissions)
-    
-    # Weighted combination
-    return w_cost * norm_cost + w_emissions * norm_emissions
-```
-
-::: {.callout-warning}
-## Critical Limitation!
-Weighted Sum **cannot find** solutions in non-convex regions (the "dips" in the frontier)
-:::
-
-## Critical: Normalization Deep Dive
-
-**Why is normalization essential?** Without it, your analysis is meaningless!
+[Without it, your analysis is meaningless]{.highlight}
 
 ```{python}
 #| echo: false
 #| eval: true
 
-# Demonstrate the normalization problem
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+# Demonstrate the normalization problem with trade-offs
+fig, axes = plt.subplots(1, 3)
 
-# Sample data
+# Sample data showing real trade-offs
+# Solution A: Cheap but slow and dirty
+# Solution B: Balanced
+# Solution C: Fast and clean but expensive
 cost_vals = np.array([50000, 75000, 100000])  # In euros
-emissions_vals = np.array([50, 100, 150])      # In g/km
+emissions_vals = np.array([150, 100, 50])      # In g/km (INVERSED - cheaper = dirtier)
 speed_vals = np.array([40, 55, 70])            # In km/h
 
 objectives = ['Solution A', 'Solution B', 'Solution C']
@@ -840,11 +815,12 @@ ax1.bar(x - width, cost_vals, width, label='Cost (€)', color=PLOT_COLORS[0])
 ax1.bar(x, emissions_vals, width, label='Emissions (g/km)', color=PLOT_COLORS[1])
 ax1.bar(x + width, speed_vals, width, label='Speed (km/h)', color=PLOT_COLORS[2])
 ax1.set_ylabel('Raw Values')
-ax1.set_title('❌ WRONG: Different Scales', fontweight='bold')
+ax1.set_title('WRONG: Different Scales', fontweight='bold')
 ax1.set_xticks(x)
 ax1.set_xticklabels(objectives)
+ax1.set_ylim(0, 140000)
 ax1.legend()
-ax1.annotate('Cost dominates everything!', xy=(1, 60000), fontsize=10, color='red')
+ax1.annotate('Cost dominates everything!', xy=(1, 60000), fontsize=10, color='black')
 
 # Plot 2: Min-Max Normalized [0,1]
 ax2 = axes[1]
@@ -856,10 +832,10 @@ ax2.bar(x - width, cost_norm, width, label='Cost', color=PLOT_COLORS[0])
 ax2.bar(x, emissions_norm, width, label='Emissions', color=PLOT_COLORS[1])
 ax2.bar(x + width, speed_norm, width, label='Speed', color=PLOT_COLORS[2])
 ax2.set_ylabel('Normalized [0,1]')
-ax2.set_title('✓ Min-Max Normalization', fontweight='bold')
+ax2.set_title('Min-Max Normalization', fontweight='bold')
 ax2.set_xticks(x)
 ax2.set_xticklabels(objectives)
-ax2.set_ylim(0, 1.2)
+ax2.set_ylim(0, 1.4)
 ax2.legend()
 
 # Plot 3: Z-Score Standardized
@@ -872,490 +848,252 @@ ax3.bar(x - width, cost_std, width, label='Cost', color=PLOT_COLORS[0])
 ax3.bar(x, emissions_std, width, label='Emissions', color=PLOT_COLORS[1])
 ax3.bar(x + width, speed_std, width, label='Speed', color=PLOT_COLORS[2])
 ax3.set_ylabel('Standardized (μ=0, σ=1)')
-ax3.set_title('✓ Z-Score Standardization', fontweight='bold')
+ax3.set_title('Z-Score Standardization', fontweight='bold')
 ax3.set_xticks(x)
 ax3.set_xticklabels(objectives)
 ax3.legend()
+ax3.set_ylim(0, 1.6)
 ax3.axhline(y=0, color='black', linestyle='-', linewidth=0.5)
 
 plt.tight_layout()
 plt.show()
 ```
 
-**The Normalization Formula You Need:**
+. . .
 
-$$\text{Normalized}_i = \frac{x_i - x_{min}}{x_{max} - x_{min}} \quad \text{(scales to [0,1])}$$
+[Question:]{.question} Any intuition on how to do [0,1] normalization?
+
+## How to Normalize
+
+[The Normalization Formula for [0,1]]{.highlight}
+
+$$\text{Normalized}_i = \frac{x_i - x_{min}}{x_{max} - x_{min}}$$
+
+. . .
+
+**In Python, this is rather simple!**
+
+. . .
 
 ```python
-# Always normalize before combining objectives!
 def normalize_objectives(data):
-    """Transform all objectives to same scale [0,1]"""
     return (data - data.min()) / (data.max() - data.min())
 
 # Now weights actually mean something
 weighted_score = w1 * normalize(cost) + w2 * normalize(emissions)
 ```
 
-## Weighted Sum Visualization
+. . .
 
-```{python}
-#| echo: false
-#| eval: true
-
-# Show how different weights lead to different optimal solutions
-fig, axes = plt.subplots(1, 3, figsize=(15, 4))
-
-# Regenerate data for this visualization
-np.random.seed(42)
-n_solutions = 30
-cost = np.random.uniform(20, 100, n_solutions)
-emissions = 150 - cost + np.random.normal(0, 15, n_solutions)
-
-# Identify Pareto front
-pareto_mask = np.ones(n_solutions, dtype=bool)
-for i in range(n_solutions):
-    for j in range(n_solutions):
-        if i != j:
-            if cost[j] <= cost[i] and emissions[j] <= emissions[i]:
-                if cost[j] < cost[i] or emissions[j] < emissions[i]:
-                    pareto_mask[i] = False
-                    break
-
-weights_sets = [
-    {'cost': 0.9, 'emissions': 0.1},
-    {'cost': 0.5, 'emissions': 0.5},
-    {'cost': 0.1, 'emissions': 0.9}
-]
-
-titles = ['Cost-Focused (90/10)', 'Balanced (50/50)', 'Green-Focused (10/90)']
-
-for idx, (weights, title) in enumerate(zip(weights_sets, titles)):
-    ax = axes[idx]
-    
-    # Normalize and calculate scores
-    norm_cost = (cost - cost.min()) / (cost.max() - cost.min())
-    norm_emissions = (emissions - emissions.min()) / (emissions.max() - emissions.min())
-    scores = weights['cost'] * norm_cost + weights['emissions'] * norm_emissions
-    best_idx = np.argmin(scores)  # We want to minimize
-    
-    # Plot
-    ax.scatter(cost, emissions, alpha=0.3, s=50, color=BRAND_COLORS["darker"])
-    ax.scatter(cost[pareto_mask], emissions[pareto_mask], 
-              alpha=0.6, s=50, color=PLOT_COLORS[1])
-    ax.scatter(cost[best_idx], emissions[best_idx], 
-              s=200, color=PLOT_COLORS[0], marker='*', edgecolors=PLOT_COLORS[0], linewidth=2)
-    
-    ax.set_xlabel('Cost (€)')
-    ax.set_ylabel('Emissions (g/km)')
-    ax.set_title(title)
-    ax.grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.show()
-```
-
-Different weights → Different "optimal" solutions!
-
-## Method 2: ε-Constraint Method (Epsilon-Constraint)
-
-**The Superior Approach:** Convert all objectives except one into constraints
-
-**Mathematical Formulation:**
-$$\text{Minimize } f_1(\mathbf{x})$$
-$$\text{Subject to: } f_2(\mathbf{x}) \leq \epsilon_2$$
-$$\quad\quad\quad\quad\quad f_3(\mathbf{x}) \leq \epsilon_3$$
-
-**Intuition:** "Give me the cheapest option that emits less than 100 tons CO₂"
-
-```python
-def epsilon_constraint(max_emissions):
-    """Find minimum cost solution with emission constraint"""
-    feasible = [s for s in all_solutions 
-                if s.emissions <= max_emissions]
-    
-    if feasible:
-        return min(feasible, key=lambda s: s.cost)
-    return None
-
-# Generate Pareto frontier by varying epsilon
-pareto_solutions = []
-for epsilon in range(50, 200, 5):  # Vary emission limit
-    solution = epsilon_constraint(epsilon)
-    if solution:
-        pareto_solutions.append(solution)
-```
-
-::: {.callout-tip}
-## Why ε-Constraint Wins
-✅ Finds ALL Pareto solutions (including non-convex)  
-✅ Works with integer problems  
-✅ Easy to understand: "best X given limit on Y"
+::: callout-tip
+Easy, right?
 :::
 
-## Step-by-Step: ε-Constraint Algorithm
+## Extreme Points
 
-**Follow this recipe to implement ε-constraint:**
+[There are several reasons why extreme points matter:]{.highlight}
 
-```{python}
-#| echo: false
-#| eval: true
+1. **Trade-off Space**: Min/max values bound your Pareto frontier
+2. **Enable Proper Normalization**: Need ranges for scaling to [0,1]
+3. **Feasibility**: If single objectives not achievable, problem infeasible
+4. **Stakeholder**: "Best cost is €50k, best emissions is 40kg"
 
-# Visual algorithm flowchart
-fig, ax = plt.subplots(figsize=(12, 8))
-ax.axis('off')
+. . .
 
-# Define the steps with positions
-steps = [
-    {'text': 'Step 1: Choose Primary\nObjective to Minimize\n(e.g., Cost)', 
-     'pos': (0.2, 0.85), 'color': PLOT_COLORS[0]},
-    {'text': 'Step 2: Find Range for\nSecondary Objectives\nMin(Emissions) to Max(Emissions)', 
-     'pos': (0.5, 0.85), 'color': PLOT_COLORS[1]},
-    {'text': 'Step 3: Create ε Grid\nε = [50, 60, 70, ..., 200]', 
-     'pos': (0.8, 0.85), 'color': PLOT_COLORS[2]},
-    {'text': 'Step 4: For Each ε:\nMin Cost\ns.t. Emissions ≤ ε', 
-     'pos': (0.2, 0.5), 'color': PLOT_COLORS[0]},
-    {'text': 'Step 5: Solve & Store\nEach Solution', 
-     'pos': (0.5, 0.5), 'color': PLOT_COLORS[1]},
-    {'text': 'Step 6: Filter for\nNon-Dominated\n(Remove redundant)', 
-     'pos': (0.8, 0.5), 'color': PLOT_COLORS[2]},
-    {'text': 'Result: Complete\nPareto Frontier!', 
-     'pos': (0.5, 0.15), 'color': BRAND_COLORS["darker"]},
-]
-
-# Draw step boxes
-for i, step in enumerate(steps):
-    if i == len(steps) - 1:  # Final result
-        bbox = dict(boxstyle="round,pad=0.5", facecolor='lightgreen', alpha=0.3, 
-                   edgecolor='black', linewidth=3)
-    else:
-        bbox = dict(boxstyle="round,pad=0.3", facecolor=step['color'], alpha=0.2,
-                   edgecolor='black', linewidth=2)
-    
-    ax.text(step['pos'][0], step['pos'][1], step['text'],
-           ha='center', va='center', fontsize=10, fontweight='bold', bbox=bbox)
-
-# Draw arrows between steps
-arrow_pairs = [(0,1), (1,2), (2,3), (3,4), (4,5), (5,6)]
-for start, end in arrow_pairs:
-    if end < 6:
-        ax.annotate('', xy=steps[end]['pos'], xytext=steps[start]['pos'],
-                   arrowprops=dict(arrowstyle='->', lw=2, color=BRAND_COLORS["darker"]))
-
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-ax.set_title('ε-Constraint Method: Step-by-Step Implementation', 
-            fontsize=14, fontweight='bold')
-plt.tight_layout()
-plt.show()
-```
-
-**Python Implementation You Can Use:**
-
+**Implementation Pattern:**
 ```python
-def epsilon_constraint_method(cost_func, emissions_func, constraints, epsilon_grid):
-    """
-    Complete ε-constraint implementation
-    
-    Args:
-        cost_func: Function to calculate cost
-        emissions_func: Function to calculate emissions
-        constraints: Problem constraints
-        epsilon_grid: List of epsilon values to test
-    
-    Returns:
-        List of Pareto optimal solutions
-    """
-    pareto_solutions = []
-    
-    for epsilon in epsilon_grid:
-        # Add emission constraint to existing constraints
-        current_constraints = constraints + [emissions_func <= epsilon]
-        
-        # Solve single-objective problem
-        solution = minimize(cost_func, constraints=current_constraints)
-        
-        if solution.is_feasible():
-            pareto_solutions.append({
-                'solution': solution,
-                'cost': cost_func(solution),
-                'emissions': emissions_func(solution),
-                'epsilon_used': epsilon
-            })
-    
-    # Filter for non-dominated
-    return filter_dominated(pareto_solutions)
-
-# Example usage:
-epsilon_values = np.linspace(50, 200, 20)  # 20 epsilon values
-pareto_front = epsilon_constraint_method(
-    cost_func=calculate_total_cost,
-    emissions_func=calculate_total_emissions,
-    constraints=supply_demand_constraints,
-    epsilon_grid=epsilon_values
-)
+def find_extreme_points(problem):
+    # Solve for minimum cost (ignore emissions)
+    min_cost_solution = minimize(cost_objective, constraints)
+    # Solve for minimum emissions (ignore cost)
+    min_emissions_solution = minimize(emissions_objective, constraints)
 ```
 
-## Visualizing the Difference: WSM vs ε-Constraint
+## Computational Complexity
+
+[How hard does it get with more objectives?]{.highlight}
+
+. . .
 
 ```{python}
 #| echo: false
 #| eval: true
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+fig, ax = plt.subplots()
 
-# Create a non-convex frontier for demonstration
-np.random.seed(123)
-x = np.linspace(50, 150, 100)
-
-# Create non-convex shape (with a dip)
-y1 = 200 - 1.5*x + 20*np.sin(x/10)
-y2 = 180 - 1.2*x + 15*np.sin(x/8)
-y_frontier = np.minimum(y1, y2)
-
-# Add some noise for realism
-y_frontier += np.random.normal(0, 2, len(x))
-
-# Left plot: Weighted Sum Method
-ax1 = axes[0]
-ax1.scatter(x, y_frontier, s=20, alpha=0.5, color='gray')
-
-# Show what WSM can find (only convex hull)
-from scipy.spatial import ConvexHull
-points = np.column_stack([x, y_frontier])
-hull = ConvexHull(points)
-hull_points = points[hull.vertices]
-hull_points = hull_points[np.argsort(hull_points[:, 0])]
-
-ax1.plot(hull_points[:, 0], hull_points[:, 1], 'b-', linewidth=3, 
-         label='WSM can find these', alpha=0.7)
-ax1.fill_between(x, y_frontier, 250, where=(y_frontier < np.interp(x, hull_points[:, 0], hull_points[:, 1])),
-                  color='red', alpha=0.3, label='WSM misses these!')
-
-ax1.set_xlabel('Cost (€)', fontsize=11)
-ax1.set_ylabel('Emissions (kg CO₂)', fontsize=11)
-ax1.set_title('Weighted Sum Method Limitation', fontsize=12, fontweight='bold')
-ax1.legend()
-ax1.grid(True, alpha=0.3)
-
-# Right plot: Epsilon-Constraint Method
-ax2 = axes[1]
-ax2.scatter(x, y_frontier, s=20, alpha=0.5, color='gray')
-
-# Show epsilon constraint lines
-epsilon_values = [60, 80, 100, 120, 140]
-colors = plt.cm.viridis(np.linspace(0.2, 0.8, len(epsilon_values)))
-
-for eps, color in zip(epsilon_values, colors):
-    ax2.axhline(y=eps, color=color, linestyle='--', alpha=0.5)
-    # Find optimal point for this epsilon
-    valid_idx = y_frontier <= eps
-    if np.any(valid_idx):
-        min_cost_idx = np.argmin(x[valid_idx])
-        optimal_x = x[valid_idx][min_cost_idx]
-        optimal_y = y_frontier[valid_idx][min_cost_idx]
-        ax2.scatter(optimal_x, optimal_y, s=100, color=color, 
-                   edgecolors='black', linewidth=2, zorder=10)
-
-ax2.plot(x, y_frontier, 'g-', linewidth=3, 
-         label='ε-Constraint finds ALL', alpha=0.7)
-
-ax2.set_xlabel('Cost (€)', fontsize=11)
-ax2.set_ylabel('Emissions (kg CO₂)', fontsize=11)
-ax2.set_title('ε-Constraint Method Success', fontsize=12, fontweight='bold')
-ax2.legend()
-ax2.grid(True, alpha=0.3)
-
-plt.suptitle('Why ε-Constraint > Weighted Sum for Non-Convex Problems', 
-             fontsize=14, fontweight='bold', y=1.02)
-plt.tight_layout()
-plt.show()
-```
-
-[The red "dip" contains valid solutions that weighted sum will never find!]{.highlight}
-
-## Method 3: Goal Programming
-
-Set targets for each objective, minimize deviations:
-
-$$\text{Minimize: } \sum_{i} w_i \cdot |value_i - target_i|$$
-
-Example targets:
-- Cost: 80k€ target
-- Emissions: 50 g/km target
-- Speed: 50 km/h target
-
-Find solution closest to **all** targets
-
-## Computational Complexity Reality Check
-
-**How hard does it get with more objectives?**
-
-```{python}
-#| echo: false
-#| eval: true
-
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-
-# Left: Pareto front complexity growth
-ax1 = axes[0]
+# Pareto front complexity growth
 n_objectives = np.array([2, 3, 4, 5])
 pareto_points = np.array([100, 1000, 10000, 100000])  # Exponential growth
 
-ax1.semilogy(n_objectives, pareto_points, 'o-', linewidth=3, 
-             markersize=12, color=PLOT_COLORS[0])
-ax1.set_xlabel('Number of Objectives', fontsize=12)
-ax1.set_ylabel('Typical Pareto Points (log scale)', fontsize=12)
-ax1.set_title('Complexity Explosion', fontsize=14, fontweight='bold')
-ax1.grid(True, alpha=0.3)
+ax.semilogy(n_objectives, pareto_points, 'o-', linewidth=3, 
+            markersize=12, color=PLOT_COLORS[0])
+ax.set_xlabel('Number of Objectives', fontsize=12)
+ax.set_ylabel('Potential Pareto Points (log scale)', fontsize=12)
+ax.set_title('Complexity Explosion', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.3)
 
 # Add annotations
 for i, (n, p) in enumerate(zip(n_objectives, pareto_points)):
     if n == 2:
-        ax1.annotate('Manageable\n(curve)', xy=(n, p), xytext=(n-0.3, p*3),
-                    fontsize=10, ha='center', color=PLOT_COLORS[1])
+        ax.annotate('Manageable\n(curve)', xy=(n, p), xytext=(n+0.15, p*3),
+                   fontsize=10, ha='center', color=PLOT_COLORS[1])
     elif n == 3:
-        ax1.annotate('Challenging\n(surface)', xy=(n, p), xytext=(n, p*3),
-                    fontsize=10, ha='center', color=PLOT_COLORS[2])
+        ax.annotate('Challenging\n(surface)', xy=(n, p), xytext=(n+0.2, p*3),
+                   fontsize=10, ha='center', color=PLOT_COLORS[2])
     elif n >= 4:
-        ax1.annotate('Very Hard!\n(hypersurface)', xy=(n, p), xytext=(n+0.3, p*0.3),
-                    fontsize=10, ha='center', color='red')
-
-# Right: Visualization difficulty
-ax2 = axes[1]
-categories = ['2 Objectives', '3 Objectives', '4+ Objectives']
-difficulty = [20, 60, 95]
-colors = [PLOT_COLORS[1], PLOT_COLORS[2], 'red']
-
-bars = ax2.bar(categories, difficulty, color=colors, alpha=0.7)
-ax2.set_ylabel('Difficulty Level (%)', fontsize=12)
-ax2.set_title('Why Industry Uses 2-3 Objectives Max', fontsize=14, fontweight='bold')
-ax2.set_ylim(0, 100)
-
-# Add text on bars
-for bar, diff in zip(bars, difficulty):
-    height = bar.get_height()
-    label = 'Easy' if diff < 30 else 'Hard' if diff < 70 else 'Expert Only!'
-    ax2.text(bar.get_x() + bar.get_width()/2., height + 2,
-            label, ha='center', fontsize=11, fontweight='bold')
+        ax.annotate('Very Hard!\n(hypersurface)', xy=(n, p), xytext=(n+0.3, p*0.3),
+                   fontsize=10, ha='center', color='red')
 
 plt.tight_layout()
 plt.show()
 ```
 
-::: {.callout-tip}
-## Industry Best Practice
-- **2 objectives:** Standard (cost vs quality)
-- **3 objectives:** Advanced (add sustainability)
-- **4+ objectives:** Research territory ("many-objective optimization")
+. . .
 
-**Pro tip:** Combine related objectives (e.g., combine different costs into "total cost")
+::: callout-tip
+Why? Because there are just way more potential solutions to check!
 :::
 
-## Which Method Should You Use? Decision Tree
+## Solver-Based Methods
+
+[Quick overview - you won't implement these in assignments]{.highlight}
+
+
+::: incremental
+1. **Weighted Sum:** Minimize $w_1 \times \text{cost} + w_2 \times \text{emissions}$
+   - Simple, fast for convex problems
+   
+2. **ε-Constraint:** Minimize cost subject to emissions $\leq \varepsilon$
+   - Systematically vary $\varepsilon$ to find complete frontier
+   
+3. **Goal Programming:** Minimize deviations from targets
+   - Set target for each objective, minimize weighted deviations
+:::
+
+. . .
+
+::: {.callout-note}
+**For your fleet optimization:** You'll use **heuristic approaches** instead!
+:::
+
+# [Heuristic Approach]{.flow} {.title}
+
+## The Heuristic Strategy
+
+[For problems without mathematical models]{.highlight}
+
+. . .
+
+::: incremental
+1. **Construction:** Build initial solutions with weighted greedy
+2. **Improvement:** Multi-objective local search
+3. **Selection:** Filter dominated solutions to find Pareto frontier
+:::
+
+. . .
+
+::: {.callout-important}
+**Key difference from solvers:**
+
+- **Solvers:** Need mathematical model, guarantee optimality
+- **Heuristics:** Work with any evaluation function, find good solutions fast
+:::
+
+## Why Heuristics?
+
+[Depending on the problem:]{.highlight}
+
+::: incremental
+  - **Combinatorial explosion**
+  - Huge solution space even for one problem
+  - Evaluating one solution might thus take too long
+  - Need diverse Pareto frontier, not just one "optimal" solution
+  - Open Source Solvers too slow
+  - Commercial solvers too expensive
+
+:::
+
+. . .
+
+[Question:]{.question} How do we build good solutions without a solver?
+
+## The Three-Stage Heuristic Process
 
 ```{python}
 #| echo: false
 #| eval: true
 
-fig, ax = plt.subplots(figsize=(14, 8))
-ax.axis('off')
+fig, ax = plt.subplots()
 
-# Define decision tree structure
-decisions = {
-    'root': {'text': 'START:\nMulti-Objective\nProblem', 'pos': (0.5, 0.9), 'color': BRAND_COLORS["darker"]},
-    'q1': {'text': 'Integer/Discrete\nVariables?', 'pos': (0.5, 0.75), 'color': PLOT_COLORS[2]},
-    'q2_yes': {'text': 'Non-convex\nSuspected?', 'pos': (0.3, 0.55), 'color': PLOT_COLORS[2]},
-    'q2_no': {'text': 'Have Specific\nTargets?', 'pos': (0.7, 0.55), 'color': PLOT_COLORS[2]},
-    'a1': {'text': 'Use ε-Constraint\n✓ Handles non-convex\n✓ Works with integers', 'pos': (0.15, 0.3), 'color': PLOT_COLORS[1]},
-    'a2': {'text': 'Try Weighted Sum\nThen ε-Constraint\nif gaps found', 'pos': (0.45, 0.3), 'color': PLOT_COLORS[1]},
-    'a3': {'text': 'Use Goal Programming\n✓ Satisficing approach\n✓ Handles targets', 'pos': (0.7, 0.3), 'color': PLOT_COLORS[0]},
-    'a4': {'text': 'Use Weighted Sum\n✓ Simple & fast\n✓ Good for continuous', 'pos': (0.9, 0.3), 'color': PLOT_COLORS[1]},
-}
-
-# Draw nodes
-for key, node in decisions.items():
-    if key.startswith('a'):  # Answer nodes
-        bbox = dict(boxstyle="round,pad=0.3", facecolor=node['color'], alpha=0.3, edgecolor='black', linewidth=2)
-    elif key == 'root':
-        bbox = dict(boxstyle="round,pad=0.3", facecolor='lightgray', alpha=0.5, edgecolor='black', linewidth=3)
-    else:  # Question nodes
-        bbox = dict(boxstyle="round,pad=0.3", facecolor=node['color'], alpha=0.2, edgecolor='black', linewidth=1)
-    
-    ax.text(node['pos'][0], node['pos'][1], node['text'], 
-           ha='center', va='center', fontsize=10, fontweight='bold', bbox=bbox)
-
-# Draw arrows
-arrows = [
-    ('root', 'q1', ''),
-    ('q1', 'q2_yes', 'YES'),
-    ('q1', 'q2_no', 'NO'),
-    ('q2_yes', 'a1', 'YES'),
-    ('q2_yes', 'a2', 'NO'),
-    ('q2_no', 'a3', 'YES'),
-    ('q2_no', 'a4', 'NO'),
+# Visualization showing the three-stage process
+stages_y = [0.8, 0.5, 0.2]
+stage_names = [
+    'Stage 1: Construction',
+    'Stage 2: Improvement',
+    'Stage 3: Selection'
 ]
+stage_colors = [PLOT_COLORS[0], PLOT_COLORS[1], PLOT_COLORS[2]]
 
-for start, end, label in arrows:
-    start_pos = decisions[start]['pos']
-    end_pos = decisions[end]['pos']
+for i, (y, name, color) in enumerate(zip(stages_y, stage_names, stage_colors)):
+    # Stage box
+    rect = plt.Rectangle((0.1, y-0.08), 0.8, 0.12, 
+                         facecolor=color, edgecolor='black', 
+                         linewidth=2, alpha=0.6)
+    ax.add_patch(rect)
     
-    ax.annotate('', xy=end_pos, xytext=start_pos,
-                arrowprops=dict(arrowstyle='->', lw=2, color=BRAND_COLORS["darker"]))
+    # Stage text
+    ax.text(0.5, y, name, ha='center', va='center', 
+           fontsize=13, fontweight='bold')
     
-    if label:
-        mid_x = (start_pos[0] + end_pos[0]) / 2
-        mid_y = (start_pos[1] + end_pos[1]) / 2
-        ax.text(mid_x, mid_y, label, fontsize=9, fontweight='bold', 
-               bbox=dict(boxstyle="round,pad=0.2", facecolor='white', alpha=0.8))
+    # Arrow to next stage
+    if i < len(stages_y) - 1:
+        ax.arrow(0.5, y-0.08, 0, -0.06, head_width=0.05, 
+                head_length=0.02, fc='black', ec='black', linewidth=2)
 
-ax.set_xlim(-0.05, 1.05)
+# Add outcome visualization on right side
+# Generate example Pareto front
+np.random.seed(42)
+cost_range = np.linspace(60, 140, 20)
+emissions_range = 180 - cost_range + np.random.normal(0, 8, 20)
+
+# Normalize for plotting in figure coordinates
+cost_norm = 0.1 + 0.35 * (cost_range - cost_range.min()) / (cost_range.max() - cost_range.min())
+emissions_norm = 0.1 + 0.7 * (emissions_range - emissions_range.min()) / (emissions_range.max() - emissions_range.min())
+
+# Transform to axis coordinates  
+ax_cost = 0.55 + cost_norm
+ax_emissions = emissions_norm
+
+ax.plot(ax_cost, ax_emissions, 'o-', color='grey', 
+       markersize=6, linewidth=2, label='Your Pareto Frontier')
+ax.text(0.75, 0.85, 'Output:\nPareto Frontier', 
+       ha='center', fontsize=11, fontweight='bold',
+       bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+
+ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
-ax.set_title('Method Selection Decision Tree', fontsize=16, fontweight='bold', pad=20)
-
-# Add quick reference at bottom
-reference_text = "Quick Rules: Integer problems → ε-constraint | Specific targets → Goal Programming | Simple continuous → Try Weighted Sum first"
-ax.text(0.5, 0.05, reference_text, ha='center', fontsize=10, 
-       style='italic', bbox=dict(boxstyle="round,pad=0.3", facecolor='lightyellow', alpha=0.5))
-
+ax.axis('off')
+ax.set_title('Heuristic Multi-Objective Optimization Workflow', 
+            fontsize=15, fontweight='bold', pad=20)
 plt.tight_layout()
 plt.show()
 ```
 
-## Quick Check 2: Which Method to Use? 🤔
+. . .
 
-::: {.callout-note}
-## Poll Question 2: Method Selection
-
-Your transportation problem has:
-- 12 distribution centers (integer assignment)
-- Cost and emissions objectives
-- Suspected non-convex frontier
-
-Which method should you use?
-
-A) Weighted Sum (simple and fast)  
-B) ε-Constraint (handles complexity)  
-C) Goal Programming (have targets)
-
-[Think before revealing...]{.fragment}
-
-[**Answer: B) ε-Constraint!**]{.fragment .highlight}
-- [Integer variables → Non-convex likely]{.fragment}
-- [ε-Constraint finds ALL solutions]{.fragment}
-- [Weighted sum would miss solutions!]{.fragment}
-:::
+[This is what you'll implement in your assignments!]{.highlight}
 
 # [Construction & Improvement]{.flow} {.title}
 
 ## Construction Methods for MOO
 
-**How to build initial solutions when you have multiple objectives?**
+[How to build initial solutions when you have multiple objectives?]{.highlight}
 
 ```{python}
 #| echo: false
 #| eval: true
 
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+fig, axes = plt.subplots(1, 3)
 
 # Method 1: Weighted Greedy
 ax1 = axes[0]
@@ -1382,7 +1120,7 @@ ax1.grid(True, alpha=0.3)
 # Method 2: Sequential Objectives
 ax2 = axes[1]
 # Show progression
-stages = ['Stage 1:\nOptimize Cost', 'Stage 2:\nFix Cost,\nOptimize Emissions', 'Stage 3:\nLocal adjustments']
+stages = ['Stage 1:\nOptimize\nCost', 'Stage 2:\nFix Cost,\nOptimize\nEmissions', 'Stage 3:\nLocal\nadjustments']
 y_pos = np.arange(len(stages))
 colors_seq = [PLOT_COLORS[0], PLOT_COLORS[1], PLOT_COLORS[2]]
 
@@ -1400,73 +1138,103 @@ random_emissions = np.random.uniform(50, 250, 50)
 
 # Mark dominated
 dominated_mask = np.random.choice([True, False], 50, p=[0.7, 0.3])
-ax3.scatter(random_cost[dominated_mask], random_emissions[dominated_mask], 
-           s=30, alpha=0.3, color='gray', label='Dominated')
 ax3.scatter(random_cost[~dominated_mask], random_emissions[~dominated_mask], 
-           s=80, alpha=0.7, color=PLOT_COLORS[1], label='Non-dominated')
+           s=80, alpha=0.7, color=PLOT_COLORS[1])
 
 ax3.set_xlabel('Cost (€)', fontsize=10)
 ax3.set_ylabel('Emissions (kg CO₂)', fontsize=10)
 ax3.set_title('Method 3: Generate & Filter', fontsize=11, fontweight='bold')
-ax3.legend(fontsize=9)
 ax3.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.show()
 ```
 
-**Implementation Strategies:**
+. . .
 
-```python
-# Strategy 1: Weighted Greedy Construction
-def construct_weighted_greedy(weights):
-    """Build solution using weighted objective"""
-    solution = []
-    while not complete:
-        next_choice = min(options, 
-            key=lambda x: weights[0]*cost(x) + weights[1]*emissions(x))
-        solution.append(next_choice)
-    return solution
+::: callout-note
+Three choices (for starters). Let's check them out!
+:::
 
-# Strategy 2: Lexicographic Construction  
-def construct_sequential():
-    """Optimize objectives one at a time"""
-    # First: minimize primary objective
-    solution = optimize_single(primary_obj)
-    # Then: improve secondary without hurting primary much
-    solution = refine_secondary(solution, tolerance=0.1)
-    return solution
+## Weighted Greedy Construction
 
-# Strategy 3: Multiple Random Starts
-def construct_diverse_pool(n_solutions=100):
-    """Generate many, keep non-dominated"""
-    pool = [random_solution() for _ in range(n_solutions)]
-    return filter_dominated(pool)
-```
+[Making greedy choices on a weighted objective]{.highlight}
+
+::: {.incremental}
+1. **Choose weight vector** w = (w₁, w₂)
+2. **At each step, pick the choice that minimizes:**
+   $$w_1 \cdot \text{cost}(x) + w_2 \cdot \text{emissions}(x)$$
+3. **Build complete solution greedily**
+4. **Repeat** with different weights to explore frontier
+:::
+
+. . .
+
+::: callout-tip
+Different weights explore different trade-offs! Easy, right?
+:::
+
+## Sequential Greedy (Lexicographic)
+
+[Optimize one objective at a time, in priority order]{.highlight}
+
+::: {.incremental}
+1. **Rank objectives by priority**
+   - E.g. cost (most important) and then emissions (tie-breaker)
+2. **At each step:**
+   - Find choices that minimize **primary** objective
+   - If tie → use **secondary** objective
+3. **Build one working solution**
+:::
+
+. . .
+
+::: callout-tip
+We could also accept primary values within 10% of best so secondary has more influence!
+:::
+
+## Diverse Starting Pool
+
+[Generate many random solutions, keep the non-dominated ones]{.highlight}
+
+::: {.incremental}
+1. **Generate N random solutions (e.g., N=100)**
+2. **Evaluate all solutions on both objectives**
+3. **Filter to keep only non-dominated solutions**
+4. **Result:** A diverse set of Pareto-optimal solutions
+:::
+
+. . .
+
+::: callout-tip
+- Explores **entire** solution space
+- No bias toward specific weights
+- Great for **warm-starting** local search
+:::
 
 ## Local Search for Multi-Objective
 
-**Special moves that improve multiple objectives:**
+[Special moves that improve multiple objectives:]{.highlight}
 
 ```{python}
 #| echo: false
 #| eval: true
 
-fig, ax = plt.subplots(figsize=(12, 7))
+fig, ax = plt.subplots()
 
-# Current solution
-current_cost = 100
-current_emissions = 150
-ax.scatter(current_cost, current_emissions, s=300, color='black', 
-          marker='*', label='Current Solution', zorder=10)
+# Current solution (normalized space)
+current_cost = 0.5
+current_emissions = 0.5
+ax.scatter(current_cost, current_emissions, s=400, color=BRAND_COLORS['darker'], 
+          marker='*', label='Current Solution', zorder=10, edgecolors='white', linewidth=2)
 
-# Show different move types
+# Show different move types (normalized deltas)
 moves = [
-    {'name': 'Trade-off Move', 'dcost': 20, 'demissions': -30, 'color': PLOT_COLORS[0]},
-    {'name': 'Win-Win Move', 'dcost': -10, 'demissions': -20, 'color': 'green'},
-    {'name': 'Cost Move', 'dcost': -15, 'demissions': 5, 'color': PLOT_COLORS[1]},
-    {'name': 'Green Move', 'dcost': 5, 'demissions': -25, 'color': PLOT_COLORS[2]},
-    {'name': 'Bad Move', 'dcost': 15, 'demissions': 20, 'color': 'red', 'style': '--'}
+    {'name': 'Trade-off', 'dcost': 0.15, 'demissions': -0.12, 'color': PLOT_COLORS[0]},
+    {'name': 'Win-Win', 'dcost': -0.08, 'demissions': -0.08, 'color': PLOT_COLORS[1]},
+    {'name': 'Cost Focus', 'dcost': -0.12, 'demissions': 0.04, 'color': PLOT_COLORS[2]},
+    {'name': 'Green Focus', 'dcost': 0.04, 'demissions': -0.15, 'color': PLOT_COLORS[3]},
+    {'name': 'Bad Move', 'dcost': 0.12, 'demissions': 0.15, 'color': PLOT_COLORS[0], 'style': '--'}
 ]
 
 for move in moves:
@@ -1478,87 +1246,68 @@ for move in moves:
     ax.annotate('', xy=(new_cost, new_emissions), 
                 xytext=(current_cost, current_emissions),
                 arrowprops=dict(arrowstyle='->', color=move['color'], 
-                              lw=2, linestyle=style, alpha=0.7))
+                              lw=2.5, linestyle=style, alpha=0.8))
     
-    # Add label
-    ax.scatter(new_cost, new_emissions, s=150, color=move['color'], 
-              alpha=0.6, edgecolors='black')
-    ax.text(new_cost, new_emissions-8, move['name'], 
-           fontsize=9, ha='center', fontweight='bold')
+    # Add endpoint
+    ax.scatter(new_cost, new_emissions, s=200, color=move['color'], 
+              alpha=0.7, edgecolors=BRAND_COLORS['darker'], linewidth=1.5)
+    ax.text(new_cost, new_emissions - 0.06, move['name'], 
+           fontsize=10, ha='center', fontweight='bold')
 
-# Add acceptance regions
-circle_accept = plt.Circle((current_cost, current_emissions), 35, 
-                           color='green', fill=False, linestyle=':', 
-                           linewidth=2, alpha=0.3, label='Acceptable region')
-ax.add_patch(circle_accept)
-
-ax.set_xlabel('Cost (€)', fontsize=12)
-ax.set_ylabel('Emissions (kg CO₂)', fontsize=12)
-ax.set_title('Multi-Objective Local Search: Not All Moves Are Equal!', 
-            fontsize=14, fontweight='bold')
-ax.legend()
-ax.grid(True, alpha=0.3)
-ax.set_xlim(70, 130)
-ax.set_ylim(110, 190)
-
+ax.set_xlabel('Normalized Cost')
+ax.set_ylabel('Normalized Emissions')
+ax.set_title('Multi-Objective Local Search: Not All Moves Are Equal!', fontweight='bold')
+ax.legend(loc='upper right')
+ax.grid(True, alpha=0.2)
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
 plt.tight_layout()
 plt.show()
 ```
 
-::: {.callout-tip}
+. . .
+
+[Question:]{.question} Which moves are acceptable?
+
 ## MOO Local Search Rules
 
-**Accept a move if:**
+[Accept a move if:]{.highlight}
+
 1. **Dominance**: New solution dominates current (win-win!)
-2. **Trade-off**: Improves primary objective, acceptable loss in secondary
+2. **Trade-off**: Improves primary, acceptable loss in secondary
 3. **Diversity**: Fills gap in current Pareto front
 4. **Probabilistic**: Use temperature (like simulated annealing)
 
-**Special MOO Moves:**
-- **2-opt for routes**: Consider both distance AND time windows
-- **Swap for assignments**: Evaluate cost AND workload balance  
-- **Relocate**: Move considering capacity AND emissions
+. . .
+
+::: callout-important
+Always keep all your objectives in mind when making decisions.
 :::
 
-```python
-def multi_objective_local_search(solution, objectives):
-    """Local search considering multiple objectives"""
-    
-    current_values = evaluate_all(solution, objectives)
-    improved = True
-    
-    while improved:
-        improved = False
-        neighbors = generate_neighbors(solution)
-        
-        for neighbor in neighbors:
-            neighbor_values = evaluate_all(neighbor, objectives)
-            
-            # Accept if dominates or good trade-off
-            if dominates(neighbor_values, current_values):
-                solution = neighbor
-                current_values = neighbor_values
-                improved = True
-                break
-            elif acceptable_tradeoff(neighbor_values, current_values):
-                # Probabilistic acceptance for diversity
-                if random.random() < acceptance_probability():
-                    solution = neighbor
-                    current_values = neighbor_values
-                    improved = True
-                    break
-    
-    return solution
-```
+# [From Pareto Front to Decision]{.flow} {.title}
 
-## How Weighted Sum "Slides" Along the Frontier
+## How to Choose!
+
+::: incremental
+1. [The Knee Point:]{.highlight} Find the "elbow" where improvement slows
+1. [Satisficing Levels:]{.highlight} Set minimum acceptable thresholds
+   - **Cost** must be < €100k (budget constraint)
+   - **Emissions** must be < 100 kg (regulatory limit)
+   - **Service level** must be > 90% (customer requirement)
+3. [Stakeholder Preferences:]{.highlight} Let business priorities guide
+   - **Sustainability:** Minimum emissions that meets constraints
+   - **Operations:** Maximum service level within budget
+:::
+  
+## Weighted Sum Along the Frontier
+
+[The weight influences the final choice:]{.highlight}
 
 ```{python}
 #| echo: false
 #| eval: true
 
-# Animated-style visualization showing weighted sum movement
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+fig, axes = plt.subplots(1, 3, figsize=(14, 4))
 
 # Generate smooth Pareto frontier
 t = np.linspace(0, 1, 100)
@@ -1572,77 +1321,77 @@ weight_scenarios = [
     (0.1, 0.9, 'Green Focus (10/90)')
 ]
 
+# Normalize for all plots
+norm_cost = (pareto_cost - pareto_cost.min()) / (pareto_cost.max() - pareto_cost.min())
+norm_emissions = (pareto_emissions - pareto_emissions.min()) / (pareto_emissions.max() - pareto_emissions.min())
+
 for idx, (w_cost, w_emissions, title) in enumerate(weight_scenarios):
     ax = axes[idx]
     
-    # Plot Pareto frontier
-    ax.plot(pareto_cost, pareto_emissions, 'b-', linewidth=2, alpha=0.5, label='Pareto Frontier')
-    
-    # Normalize for weighted sum
-    norm_cost = (pareto_cost - pareto_cost.min()) / (pareto_cost.max() - pareto_cost.min())
-    norm_emissions = (pareto_emissions - pareto_emissions.min()) / (pareto_emissions.max() - pareto_emissions.min())
+    # Plot Pareto frontier in normalized space
+    ax.plot(norm_cost, norm_emissions, color=PLOT_COLORS[1], 
+            linewidth=2.5, alpha=0.7, label='Pareto Frontier')
     
     # Calculate weighted scores
     weighted_scores = w_cost * norm_cost + w_emissions * norm_emissions
-    
-    # Find optimal point
     optimal_idx = np.argmin(weighted_scores)
     
     # Plot optimal point
-    ax.scatter(pareto_cost[optimal_idx], pareto_emissions[optimal_idx], 
-              s=200, color=PLOT_COLORS[0], marker='*', edgecolors='black', 
+    ax.scatter(norm_cost[optimal_idx], norm_emissions[optimal_idx], 
+              s=250, color=PLOT_COLORS[0], marker='*', edgecolors=BRAND_COLORS['darker'], 
               linewidth=2, zorder=10, label='Selected')
     
-    # Draw contour lines (iso-score lines)
-    for score_level in np.linspace(weighted_scores.min(), weighted_scores.max(), 5):
-        # For visualization: show lines of equal weighted score
-        # These are perpendicular to the weight vector
-        x_range = np.array([pareto_cost.min(), pareto_cost.max()])
-        # This is simplified for visualization
-        y_from_score = pareto_emissions.min() + (pareto_emissions.max() - pareto_emissions.min()) * \
-                      (score_level - w_cost * np.linspace(0, 1, 2)) / w_emissions
-        ax.plot(x_range, y_from_score, '--', alpha=0.2, color='gray')
+    # Draw iso-cost lines (lines of equal weighted sum)
+    for level in np.linspace(0, 1, 7):
+        # Line equation: w_cost * x + w_emissions * y = level
+        # Solve for y: y = (level - w_cost * x) / w_emissions
+        x_line = np.linspace(-0.1, 1.1, 100)
+        if w_emissions > 0:
+            y_line = (level - w_cost * x_line) / w_emissions
+            ax.plot(x_line, y_line, '--', alpha=0.15, color=BRAND_COLORS['darker'], linewidth=1)
     
-    # Annotations
-    ax.set_xlabel('Cost (€)', fontsize=10)
-    ax.set_ylabel('Emissions (kg CO₂)', fontsize=10)
-    ax.set_title(title, fontsize=11, fontweight='bold')
-    ax.grid(True, alpha=0.2)
-    ax.legend(fontsize=9)
-    
-    # Add weight vector visualization
-    vector_scale = 30
-    ax.arrow(pareto_cost[optimal_idx], pareto_emissions[optimal_idx],
+    # Add weight vector (gradient direction)
+    vector_scale = 0.25
+    ax.arrow(norm_cost[optimal_idx], norm_emissions[optimal_idx],
             -w_cost * vector_scale, -w_emissions * vector_scale,
-            head_width=3, head_length=2, fc=PLOT_COLORS[2], ec=PLOT_COLORS[2],
+            head_width=0.03, head_length=0.02, fc=PLOT_COLORS[2], ec=PLOT_COLORS[2],
             alpha=0.7, linewidth=2)
-    ax.text(pareto_cost[optimal_idx] - w_cost * vector_scale/2, 
-           pareto_emissions[optimal_idx] - w_emissions * vector_scale/2,
-           'Weight\nDirection', fontsize=8, ha='center', 
-           bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.7))
+    
+    ax.set_xlabel('Normalized Cost')
+    ax.set_ylabel('Normalized Emissions')
+    ax.set_title(title, fontweight='bold')
+    ax.set_xlim(-0.05, 1.05)
+    ax.set_ylim(-0.05, 1.05)
+    ax.set_aspect('equal', adjustable='box')
+    ax.grid(True, alpha=0.2)
+    ax.legend()
 
-plt.suptitle('Weighted Sum Method: Different Weights = Different Solutions', 
-            fontsize=14, fontweight='bold', y=1.02)
 plt.tight_layout()
 plt.show()
 ```
 
-[The weight vector determines which point on the frontier is selected!]{.highlight}
+. . .
 
-## Interactive Weighting
+::: callout-note
+The iso-cost lines show the trade-offs between cost and emissions.
+:::
+
+## Weighting has an Impact
+
+[The weights thus reflect your values!]{.highlight}
 
 ```{python}
 #| echo: false
 #| eval: true
 
-# Create interactive-style visualization showing weight impact
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots()
 
-# Generate fleet combinations
+# Generate diverse fleet combinations with clear trade-offs
 np.random.seed(456)
-n_fleets = 20
+n_fleets = 25
 fleet_cost = np.random.uniform(60, 140, n_fleets)
-fleet_emissions = 180 - fleet_cost + np.random.normal(0, 15, n_fleets)
+# Add non-linear relationship so different weights pick different points
+fleet_emissions = 50 + 150 * (1 - (fleet_cost - 60) / 80)**1.5 + np.random.normal(0, 12, n_fleets)
 
 # Normalize for scoring
 norm_cost = (fleet_cost - fleet_cost.min()) / (fleet_cost.max() - fleet_cost.min())
@@ -1655,274 +1404,78 @@ weight_scenarios = [
     (0.1, 0.9, 'Environmental Focus')
 ]
 
-colors = ['red', 'orange', 'green']
-for (w_cost, w_emissions, label), color in zip(weight_scenarios, colors):
-    scores = (1-w_cost) * norm_cost + (1-w_emissions) * norm_emissions
-    best = np.argmax(scores)
+scenario_colors = [PLOT_COLORS[0], PLOT_COLORS[2], PLOT_COLORS[1]]
+for (w_cost, w_emissions, label), color in zip(weight_scenarios, scenario_colors):
+    # Minimize weighted sum
+    scores = w_cost * norm_cost + w_emissions * norm_emissions
+    best = np.argmin(scores)
     ax.scatter(fleet_cost[best], fleet_emissions[best], 
-              s=300, color=color, alpha=0.6, label=label,
-              edgecolors='black', linewidth=2)
+              s=300, color=color, alpha=0.7, label=label,
+              edgecolors=BRAND_COLORS['darker'], linewidth=2, zorder=5)
 
 # Plot all options
-ax.scatter(fleet_cost, fleet_emissions, alpha=0.2, s=50, color='gray')
+ax.scatter(fleet_cost, fleet_emissions, alpha=0.3, s=60, 
+          color=BRAND_COLORS['darker'], label='Available fleets')
 
-ax.set_xlabel('Total Fleet Cost (k€)', fontsize=12)
-ax.set_ylabel('Annual Emissions (tons CO2)', fontsize=12)
-ax.set_title('Different Priorities → Different Optimal Fleets', fontsize=14)
+ax.set_xlabel('Total Fleet Cost (k€)')
+ax.set_ylabel('Annual Emissions (tons CO₂)')
+ax.set_title('Different Priorities → Different Optimal Fleets', fontweight='bold')
 ax.legend()
-ax.grid(True, alpha=0.3)
+ax.grid(True, alpha=0.2)
 plt.tight_layout()
 plt.show()
 ```
 
-[Your weights reflect your values!]{.highlight}
+. . .
 
-## From Pareto Front to Decision
-
-**You have the Pareto front - now what?** How do you choose ONE solution?
-
-### Method 1: The Knee Point
-Find the "elbow" where improvement slows dramatically:
-
-```{python}
-#| echo: false
-#| eval: true
-
-# Demonstrate knee point finding
-fig, ax = plt.subplots(figsize=(10, 6))
-
-# Create a Pareto frontier with clear knee
-t = np.linspace(0, 1, 50)
-cost = 50 + 100 * (1 - t**2)
-emissions = 200 * t**2 + 50
-
-# Plot frontier
-ax.plot(cost, emissions, 'b-', linewidth=2, label='Pareto Frontier')
-ax.scatter(cost, emissions, s=20, alpha=0.5, color=BRAND_COLORS["darker"])
-
-# Identify knee point (roughly where curvature is maximum)
-knee_idx = 20  # Approximate knee location
-ax.scatter(cost[knee_idx], emissions[knee_idx], s=300, color=PLOT_COLORS[0], 
-          marker='*', label='Knee Point', edgecolors='black', linewidth=2, zorder=10)
-
-# Add annotations
-ax.annotate('Small cost increase →\nLarge emission reduction', 
-           xy=(cost[knee_idx-5], emissions[knee_idx-5]),
-           xytext=(cost[knee_idx-5]+20, emissions[knee_idx-5]+20),
-           arrowprops=dict(arrowstyle='->', color=PLOT_COLORS[1]),
-           fontsize=10, ha='center')
-
-ax.annotate('Large cost increase →\nSmall emission reduction', 
-           xy=(cost[knee_idx+10], emissions[knee_idx+10]),
-           xytext=(cost[knee_idx+10]+15, emissions[knee_idx+10]-30),
-           arrowprops=dict(arrowstyle='->', color=PLOT_COLORS[2]),
-           fontsize=10, ha='center')
-
-ax.set_xlabel('Cost (€)', fontsize=12)
-ax.set_ylabel('Emissions (kg CO₂)', fontsize=12)
-ax.set_title('The Knee Point: Best "Bang for Buck"', fontsize=14, fontweight='bold')
-ax.legend()
-ax.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-```
-
-### Method 2: Satisficing Levels
-Set minimum acceptable thresholds:
-
-- Cost must be < €100k (budget constraint)
-- Emissions must be < 100 kg (regulatory limit)
-- Service level must be > 90% (customer requirement)
-
-### Method 3: Stakeholder Preferences
-Let business priorities guide the choice:
-
-- **CFO Priority:** Minimum cost from acceptable solutions
-- **Sustainability Officer:** Minimum emissions that meets other constraints
-- **Operations Manager:** Maximum service level within budget
+::: callout-tip
+Depending on your weight, the choice will vary.
+:::
 
 ## Common Pitfalls to Avoid
 
-::: {.callout-warning}
-## The Top 5 Mistakes Students Make
-
-**❌ Mistake 1: Forgetting to Normalize**
-```python
-# WRONG - Cost dominates due to scale
-score = 0.5 * cost_in_euros + 0.5 * emissions_in_grams
-```
-**✓ Fix:** Always normalize to [0,1] first!
-
-**❌ Mistake 2: Using Weighted Sum for Integer Problems**
-- Weighted sum misses solutions in non-convex regions
-- Integer problems often create non-convex frontiers
-
-**✓ Fix:** Use ε-constraint for discrete variables
-
-**❌ Mistake 3: Assuming Equal Weights = Equal Importance**
-```python
-# WRONG - Ignores scale differences
-w1 = 0.5  # for cost ranging 0-1000
-w2 = 0.5  # for emissions ranging 0-10
-```
-**✓ Fix:** Normalize first, THEN apply weights
-
-**❌ Mistake 4: Optimizing Too Many Objectives**
-- 2-3 objectives: Manageable
-- 4+ objectives: Exponentially harder
-
-**✓ Fix:** Combine related objectives or use constraints
-
-**❌ Mistake 5: Not Checking Solution Feasibility**
-- Pareto optimal ≠ Feasible for your constraints
-
-**✓ Fix:** Always verify constraints after optimization
+::: incremental
+1. **Forgetting to Normalize**
+   - Always normalize to [0,1] first!
+2. **Optimizing Too Many Objectives**
+   - 2-3: Manageable, 4+: Exponentially harder
+   - Combine related objectives or use constraints
+3. **Not Checking Solution Feasibility**
+   - Pareto optimal ≠ Feasible for your constraints
+   - Always verify constraints after optimization
 :::
 
-# [Case Studies]{.flow} {.title}
+# [Advanced]{.flow} {.title}
 
-## Amazon's Speed vs Sustainability Dilemma
+## Speed vs Sustainability Dilemma
 
-**The Three-Way Trade-off:**
+[The Three-Way Trade-off in E-Commerce]{.highlight}
+
 1. **Minimize Delivery Time** (1-day/2-hour promise)
 2. **Minimize Cost** (fuel, labor, fulfillment)
 3. **Minimize Environmental Impact** (carbon footprint)
 
-```{python}
-#| echo: false
-#| eval: true
+. . .
 
-# Amazon's trade-off visualization
-fig, ax = plt.subplots(figsize=(10, 6))
+[Faster delivery = More vehicles less full = Higher emissions]{.highlight}
 
-# Create data points representing different strategies
-strategies = {
-    'Standard (3-5 days)': {'speed': 20, 'cost': 30, 'emissions': 25},
-    '2-Day Prime': {'speed': 50, 'cost': 45, 'emissions': 40},
-    '1-Day Prime': {'speed': 80, 'cost': 70, 'emissions': 75},
-    'Same Day': {'speed': 95, 'cost': 90, 'emissions': 95}
-}
+. . .
 
-for name, values in strategies.items():
-    size = 500 - values['emissions']*3  # Bigger = greener
-    ax.scatter(values['cost'], values['speed'], s=size, alpha=0.6, label=name)
-    ax.annotate(f"{values['emissions']}g CO₂", 
-                (values['cost'], values['speed']),
-                fontsize=9, ha='center')
+[Question:]{.question} What could retailers do?
 
-ax.set_xlabel('Cost Index', fontsize=12)
-ax.set_ylabel('Speed Index', fontsize=12)
-ax.set_title("Amazon's Delivery Options: The Hidden Trade-off", fontsize=14)
-ax.legend(title='Delivery Option')
-ax.grid(True, alpha=0.3)
+## Moving the Frontier
 
-plt.tight_layout()
-plt.show()
-```
+[Instead of point on the frontier, move the entire frontier:]{.highlight}
 
-[Faster delivery = More vehicles dispatched less full = Higher emissions]{.highlight}
+. . .
 
-## Airlines: The Cost Index Solution
+[Question:]{.question} Any idea of examples?
 
-Airlines solve this **in real-time** using the **Cost Index**:
+. . .
 
-$$\text{Cost Index} = \frac{\text{Cost of Time (€/min)}}{\text{Cost of Fuel (€/kg)}}$$
-
-```{python}
-#| echo: false
-#| eval: true
-
-# Airline cost index visualization
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# Flight speed vs fuel consumption
-speeds = np.linspace(400, 600, 50)  # km/h
-fuel_consumption = 3000 + (speeds - 500)**2 / 20  # kg
-
-ax1 = axes[0]
-ax1.plot(speeds, fuel_consumption, 'b-', linewidth=2)
-ax1.scatter([450, 500, 550], [3112.5, 3000, 3112.5], 
-            s=150, color=['green', 'gold', 'red'],
-            label=['CI=0 (Min fuel)', 'CI=50 (Balanced)', 'CI=100 (Min time)'])
-ax1.set_xlabel('Cruise Speed (km/h)', fontsize=11)
-ax1.set_ylabel('Fuel Consumption (kg)', fontsize=11)
-ax1.set_title('Flight Speed Decision', fontsize=12)
-ax1.grid(True, alpha=0.3)
-
-# Different scenarios
-scenarios = ['On-time\nCheap fuel', 'Normal\nOperations', 'Running late\nExpensive fuel']
-ci_values = [20, 50, 80]
-colors = ['green', 'gold', 'red']
-
-ax2 = axes[1]
-bars = ax2.bar(scenarios, ci_values, color=colors, alpha=0.7)
-ax2.set_ylabel('Cost Index Setting', fontsize=11)
-ax2.set_title('Adaptive Strategy Based on Conditions', fontsize=12)
-ax2.set_ylim(0, 100)
-
-for bar, ci in zip(bars, ci_values):
-    height = bar.get_height()
-    ax2.text(bar.get_x() + bar.get_width()/2., height + 2,
-            f'CI={ci}', ha='center', fontsize=10, fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-```
-
-**Real Example:** If flight delayed → High time cost → High CI → Fly faster!
-
-## Tesla's Strategy: Moving the Frontier
-
-Instead of choosing a point on the Pareto frontier, Tesla **moved the entire frontier**:
-
-```{python}
-#| echo: false
-#| eval: true
-
-fig, ax = plt.subplots(figsize=(10, 6))
-
-# Original frontier (2010)
-cost_2010 = np.linspace(30, 120, 50)
-range_2010 = 600 - 4*cost_2010
-
-# New frontier (2024)
-cost_2024 = np.linspace(25, 100, 50)
-range_2024 = 700 - 3*cost_2024
-
-# Plot frontiers
-ax.plot(cost_2010, range_2010, 'r--', linewidth=2, label='2010 Technology', alpha=0.7)
-ax.plot(cost_2024, range_2024, 'g-', linewidth=2, label='2024 Technology', alpha=0.7)
-
-# Show specific models
-models = {
-    '2010 Roadster': (100, 400, 'red'),
-    '2024 Model 3': (40, 580, 'green'),
-    '2024 Model S': (90, 650, 'green')
-}
-
-for name, (cost, range_val, color) in models.items():
-    ax.scatter(cost, range_val, s=200, color=color, edgecolors='black', linewidth=2)
-    ax.annotate(name, (cost, range_val), xytext=(5, 5), textcoords='offset points')
-
-# Add arrow showing frontier shift
-ax.annotate('', xy=(50, 550), xytext=(65, 400),
-            arrowprops=dict(arrowstyle='->', lw=3, color='blue'))
-ax.text(57, 475, 'R&D Innovation\nShifts Frontier', fontsize=11, 
-        ha='center', color='blue', fontweight='bold')
-
-ax.set_xlabel('Vehicle Cost (€1000s)', fontsize=12)
-ax.set_ylabel('Range (km)', fontsize=12)
-ax.set_title('Tesla Strategy: Don\'t Accept Trade-offs, Change Them!', fontsize=14)
-ax.legend()
-ax.grid(True, alpha=0.3)
-ax.set_xlim(20, 125)
-ax.set_ylim(100, 700)
-
-plt.tight_layout()
-plt.show()
-```
-
-[Key Insight: R&D can fundamentally change what's possible]{.highlight}
+::: callout-tip
+R&D can fundamentally change what's possible!
+:::
 
 # [Real-World Application]{.flow} {.title}
 
@@ -2006,18 +1559,6 @@ ax.set_title('Multi-Objective Decision Process', fontsize=16, fontweight='bold',
 plt.tight_layout()
 plt.show()
 ```
-
-## Common Pitfalls
-
-::: {.callout-warning}
-## Watch Out For These Mistakes
-
-1. **Forgetting to normalize** - Can't compare € to g/km directly
-2. **Ignoring feasibility** - Check constraints first
-3. **Over-optimizing** - Perfect is enemy of good
-4. **Analysis paralysis** - Set deadline for decision
-5. **Stakeholder alignment** - Get weight agreement upfront
-:::
 
 # [Mission Briefing]{.flow} {.title}
 
