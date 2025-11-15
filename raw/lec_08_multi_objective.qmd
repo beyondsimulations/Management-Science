@@ -486,13 +486,13 @@ Where:
 #| echo: false
 #| eval: true
 
-# Emissions data
+# Emissions data (designed to conflict with cost structure)
 emissions_data = pd.DataFrame({
     'From/To': ['DC Berlin', 'DC Hamburg', 'DC Munich'],
-    'Zone A': [50, 80, 120],  # g CO2/parcel
-    'Zone B': [70, 60, 100],
-    'Zone C': [75, 45, 85],
-    'Zone D': [110, 55, 70]
+    'Zone A': [120, 45, 60],  # g CO2/parcel - Hamburg is greenest (but expensive)
+    'Zone B': [95, 110, 50],   # Munich is greenest for Zone B
+    'Zone C': [85, 100, 115],  # Berlin is greenest (but expensive)
+    'Zone D': [70, 90, 105]    # Berlin is greenest (but most expensive)
 })
 
 display(HTML(emissions_data.to_html(index=False, classes='table table-striped')))
@@ -538,91 +538,113 @@ Where $e_{ij}$ = emissions per parcel from $i$ to $j$
 - **Formula**: `Emissions = Distance × Weight × EmissionFactor`
 :::
 
-## Example Calculation:**
-
-```python
-# Real emission calculation
-distance_km = 100  # From Google Maps API
-weight_tons = 2.5  # Your shipment
-emission_factor = 0.162  # kg CO₂/ton-km (EU truck)
-
-emissions = distance_km * weight_tons * emission_factor
-# Result: 40.5 kg CO₂
-```
-
-**Add Uncertainty Buffer:**
-
-- Costs: ±10% (fuel price variation)
-- Emissions: ±15% (traffic, weather effects)
-- Always run sensitivity analysis!
-:::
-
 ## The Transportation Trade-off
 
 ```{python}
 #| echo: false
 #| eval: true
 
-# Simulate different solutions
-np.random.seed(42)
-n_solutions = 50
+from scipy.optimize import linprog
 
-# Generate random allocations and calculate objectives
+# Cost and emissions matrices (from our data)
+costs = np.array([[8, 10, 11, 14],    # DC Berlin
+                  [12, 9, 7, 8],       # DC Hamburg
+                  [15, 13, 10, 9]])    # DC Munich
+
+# Updated emissions to create actual trade-off
+emissions = np.array([[120, 95, 85, 70],   # DC Berlin (g CO2/parcel)
+                      [45, 110, 100, 90],  # DC Hamburg
+                      [60, 50, 115, 105]]) # DC Munich
+
+supply = np.array([300, 250, 200])
+demand = np.array([200, 180, 220, 150])
+
+# Solve for different weights (0 = cost only, 1 = emissions only)
 solutions = []
-for _ in range(n_solutions):
-    # Random allocation respecting constraints
-    allocation = np.random.dirichlet(np.ones(12), 1)[0] * 750
+weights = np.linspace(0, 1, 15)
+
+for w in weights:
+    # Combined objective: (1-w)*cost + w*emissions
+    # Normalize to make them comparable
+    c_combined = (1-w) * costs.flatten() / 10 + w * emissions.flatten() / 100
     
-    # Calculate cost and emissions (simplified)
-    cost = np.sum(allocation * np.array([8,10,11,14,12,9,7,8,15,13,10,9])) * 10
-    emissions = np.sum(allocation * np.array([50,70,75,110,80,60,45,55,120,100,85,70]))
+    # Constraints: supply and demand
+    A_eq = []
+    b_eq = []
     
-    solutions.append({'Cost': cost, 'Emissions': emissions})
+    # Supply constraints (one per DC)
+    for i in range(3):
+        constraint = np.zeros(12)
+        constraint[i*4:(i+1)*4] = 1
+        A_eq.append(constraint)
+        b_eq.append(supply[i])
+    
+    # Demand constraints (one per Zone)
+    for j in range(4):
+        constraint = np.zeros(12)
+        for i in range(3):
+            constraint[i*4 + j] = 1
+        A_eq.append(constraint)
+        b_eq.append(demand[j])
+    
+    # Solve
+    result = linprog(c_combined, A_eq=A_eq, b_eq=b_eq, 
+                     bounds=(0, None), method='highs')
+    
+    if result.success:
+        x = result.x.reshape(3, 4)
+        total_cost = np.sum(costs * x) * 10  # Cost per 100 parcels
+        total_emissions = np.sum(emissions * x) / 1000  # Convert to kg
+        solutions.append({'Cost': total_cost, 'Emissions': total_emissions, 'Weight': w})
 
 sol_df = pd.DataFrame(solutions)
 
-# Find Pareto frontier
-pareto_mask = np.ones(len(sol_df), dtype=bool)
-for i in range(len(sol_df)):
-    for j in range(len(sol_df)):
-        if i != j:
-            if (sol_df.iloc[j]['Cost'] <= sol_df.iloc[i]['Cost'] and
-                sol_df.iloc[j]['Emissions'] <= sol_df.iloc[i]['Emissions'] and
-                (sol_df.iloc[j]['Cost'] < sol_df.iloc[i]['Cost'] or
-                 sol_df.iloc[j]['Emissions'] < sol_df.iloc[i]['Emissions'])):
-                pareto_mask[i] = False
-                break
+fig, ax = plt.subplots()
 
-fig, ax = plt.subplots(figsize=(10, 6))
-
-# Plot all solutions
-ax.scatter(sol_df['Cost'], sol_df['Emissions'], 
-          alpha=0.3, s=100, color=BRAND_COLORS["darker"], label='Feasible allocations')
-
-# Plot Pareto optimal
-ax.scatter(sol_df[pareto_mask]['Cost'], sol_df[pareto_mask]['Emissions'],
-          alpha=0.8, s=150, color=PLOT_COLORS[1], label='Pareto optimal', edgecolors=PLOT_COLORS[1], linewidth=2)
+# Plot Pareto frontier
+ax.plot(sol_df['Cost'], sol_df['Emissions'], 
+        '-o', linewidth=2.5, markersize=5, color=BRAND_COLORS["darker"], 
+        label='Pareto frontier', alpha=0.7)
 
 # Highlight extremes
-min_cost_idx = sol_df['Cost'].idxmin()
-min_emissions_idx = sol_df['Emissions'].idxmin()
+min_cost = sol_df.iloc[0]
+min_emissions = sol_df.iloc[-1]
 
-ax.scatter(sol_df.loc[min_cost_idx, 'Cost'], sol_df.loc[min_cost_idx, 'Emissions'],
-          s=300, color=PLOT_COLORS[2], marker='*', label='Min Cost', edgecolors=PLOT_COLORS[2], linewidth=2)
-ax.scatter(sol_df.loc[min_emissions_idx, 'Cost'], sol_df.loc[min_emissions_idx, 'Emissions'],
-          s=300, color=PLOT_COLORS[0], marker='*', label='Min Emissions', edgecolors=PLOT_COLORS[0], linewidth=2)
+ax.scatter(min_cost['Cost'], min_cost['Emissions'],
+          s=200, color=PLOT_COLORS[2], marker='*', 
+          label=f'Min Cost: €{min_cost["Cost"]:.0f}', 
+          edgecolors='black', linewidth=1.5, zorder=5)
+ax.scatter(min_emissions['Cost'], min_emissions['Emissions'],
+          s=200, color=PLOT_COLORS[0], marker='*', 
+          label=f'Min Emissions: {min_emissions["Emissions"]:.1f} kg', 
+          edgecolors='black', linewidth=1.5, zorder=5)
 
-ax.set_xlabel('Total Cost (€)', fontsize=12)
-ax.set_ylabel('Total Emissions (kg CO₂)', fontsize=12)
-ax.set_title('Transportation Problem: Cost vs Emissions Trade-off', fontsize=14)
-ax.legend()
+# Add a balanced solution
+balanced_idx = len(sol_df) // 2
+balanced = sol_df.iloc[balanced_idx]
+ax.scatter(balanced['Cost'], balanced['Emissions'],
+          s=200, color=PLOT_COLORS[1], marker='D', 
+          label='Balanced solution', 
+          edgecolors='black', linewidth=1.5, zorder=5)
+
+ax.set_xlabel('Total Cost (€)', fontsize=13, fontweight='bold')
+ax.set_ylabel('Total CO₂ Emissions (kg)', fontsize=13, fontweight='bold')
+ax.legend(fontsize=10, loc='best')
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.show()
+
+# Print key insights
+print(f"Cost increase for greenest solution: +€{min_emissions['Cost'] - min_cost['Cost']:.0f} ({(min_emissions['Cost']/min_cost['Cost']-1)*100:.1f}%)")
+print(f"Emissions reduction from cheapest: -{min_cost['Emissions'] - min_emissions['Emissions']:.1f} kg ({(1-min_emissions['Emissions']/min_cost['Emissions'])*100:.1f}%)")
 ```
 
+. . .
+
+::: callout-important
 Each point represents a different allocation strategy!
+:::
 
 ## Quick Check 2: Which Method to Use? 🤔
 
