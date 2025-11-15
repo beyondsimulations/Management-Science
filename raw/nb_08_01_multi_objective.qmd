@@ -25,15 +25,18 @@ Let's start by importing our libraries:
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+import sys
+sys.path.append('../helpers')
+from plot_utils import setup_clean_style, BRAND_COLORS, PLOT_COLORS
 from typing import List, Tuple, Dict
+
+# Apply consistent brand styling
+setup_clean_style()
 
 # Set random seed for reproducibility
 np.random.seed(2025)
 
-# Configure visualization
-plt.style.use('seaborn-v0_8-darkgrid')
-sns.set_palette("husl")
+# Visualization is already configured by setup_clean_style()
 ```
 
 ## Section 1: Understanding Trade-offs

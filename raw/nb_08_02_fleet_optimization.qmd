@@ -36,9 +36,14 @@ Design the optimal fleet composition by selecting from 5 vehicle types, balancin
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+import sys
+sys.path.append('../helpers')
+from plot_utils import setup_clean_style, BRAND_COLORS, PLOT_COLORS
 from itertools import product
 from typing import Dict, List, Tuple
+
+# Apply consistent brand styling
+setup_clean_style()
 
 # Set random seed
 np.random.seed(2025)
@@ -207,8 +212,8 @@ def visualize_fleet(fleet_composition: Dict[str, int],
     composition_data = [(k, v) for k, v in fleet_composition.items() if v > 0]
     if composition_data:
         types, quantities = zip(*composition_data)
-        colors = sns.color_palette("husl", len(types))
-        axes[0, 0].pie(quantities, labels=types, autopct='%1.0f%%', colors=colors)
+        pie_colors = PLOT_COLORS[:len(types)]
+        axes[0, 0].pie(quantities, labels=types, autopct='%1.0f%%', colors=pie_colors)
         axes[0, 0].set_title('Fleet Composition')
     
     # 2. Cost Breakdown
@@ -216,7 +221,7 @@ def visualize_fleet(fleet_composition: Dict[str, int],
         'Purchase\n(amortized/year)': metrics['purchase_cost'] / 3,  # 3-year amortization
         'Operating\n(annual)': metrics['annual_operating_cost']
     }
-    axes[0, 1].bar(cost_data.keys(), cost_data.values(), color=['#FF6B6B', '#4ECDC4'])
+    axes[0, 1].bar(cost_data.keys(), cost_data.values(), color=[PLOT_COLORS[0], PLOT_COLORS[1]])
     axes[0, 1].set_ylabel('Cost (€)')
     axes[0, 1].set_title('Annual Cost Breakdown')
     axes[0, 1].yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'€{x/1000:.0f}K'))
@@ -234,8 +239,8 @@ def visualize_fleet(fleet_composition: Dict[str, int],
     values_plot = values + values[:1]  # Complete the circle
     angles += angles[:1]
     
-    axes[1, 0].plot(angles, values_plot, 'o-', linewidth=2, color='#FF6B6B')
-    axes[1, 0].fill(angles, values_plot, alpha=0.25, color='#FF6B6B')
+    axes[1, 0].plot(angles, values_plot, 'o-', linewidth=2, color=PLOT_COLORS[0])
+    axes[1, 0].fill(angles, values_plot, alpha=0.25, color=PLOT_COLORS[0])
     axes[1, 0].set_xticks(angles[:-1])
     axes[1, 0].set_xticklabels(categories)
     axes[1, 0].set_ylim(0, 100)
@@ -256,7 +261,7 @@ def visualize_fleet(fleet_composition: Dict[str, int],
         
         cap_df = pd.DataFrame(capability_data)
         x = range(len(cap_df))
-        axes[1, 1].bar(x, cap_df['Capacity'], color='#4ECDC4')
+        axes[1, 1].bar(x, cap_df['Capacity'], color=PLOT_COLORS[1])
         axes[1, 1].set_xticks(x)
         axes[1, 1].set_xticklabels(cap_df['Type'], rotation=45, ha='right')
         axes[1, 1].set_ylabel('Total Capacity (kg)')
@@ -422,11 +427,11 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
 # Service vs Cost
 axes[0].scatter(alt_df['purchase_cost']/1000, alt_df['service_score'], 
-               alpha=0.3, s=50, label='All alternatives')
+               alpha=0.3, s=50, color=BRAND_COLORS["darker"], label='All alternatives')
 axes[0].scatter(pareto_df['purchase_cost']/1000, pareto_df['service_score'], 
-               alpha=0.8, s=100, color='green', label='Pareto optimal')
+               alpha=0.8, s=100, color=PLOT_COLORS[1], label='Pareto optimal')
 axes[0].scatter(my_metrics['purchase_cost']/1000, my_metrics['service_score'], 
-               s=200, color='red', marker='*', label='My solution', zorder=10)
+               s=200, color=PLOT_COLORS[0], marker='*', label='My solution', zorder=10)
 axes[0].set_xlabel('Purchase Cost (€1000s)')
 axes[0].set_ylabel('Service Score')
 axes[0].set_title('Service Level vs Cost Trade-off')
@@ -435,11 +440,11 @@ axes[0].grid(True, alpha=0.3)
 
 # Environmental vs Cost
 axes[1].scatter(alt_df['purchase_cost']/1000, alt_df['environmental_score'], 
-               alpha=0.3, s=50, label='All alternatives')
+               alpha=0.3, s=50, color=BRAND_COLORS["darker"], label='All alternatives')
 axes[1].scatter(pareto_df['purchase_cost']/1000, pareto_df['environmental_score'], 
-               alpha=0.8, s=100, color='green', label='Pareto optimal')
+               alpha=0.8, s=100, color=PLOT_COLORS[1], label='Pareto optimal')
 axes[1].scatter(my_metrics['purchase_cost']/1000, my_metrics['environmental_score'], 
-               s=200, color='red', marker='*', label='My solution', zorder=10)
+               s=200, color=PLOT_COLORS[0], marker='*', label='My solution', zorder=10)
 axes[1].set_xlabel('Purchase Cost (€1000s)')
 axes[1].set_ylabel('Environmental Score')
 axes[1].set_title('Environmental Impact vs Cost Trade-off')
@@ -472,9 +477,9 @@ ax1 = fig.add_subplot(gs[0, 0])
 composition_data = [(k, v) for k, v in my_fleet.items() if v > 0]
 if composition_data:
     types, quantities = zip(*composition_data)
-    colors = sns.color_palette("husl", len(types))
+    pie_colors = PLOT_COLORS[:len(types)]
     wedges, texts, autotexts = ax1.pie(quantities, labels=types, autopct='%1.0f%%', 
-                                        colors=colors, textprops={'size': 9})
+                                        colors=pie_colors, textprops={'size': 9})
 ax1.set_title('Fleet Mix', fontsize=12, fontweight='bold')
 
 # 2. Key Metrics (top middle)
@@ -511,8 +516,8 @@ avg_scores = [
 
 x = np.arange(len(categories))
 width = 0.35
-ax3.bar(x - width/2, my_scores, width, label='Our Fleet', color='#FF6B6B')
-ax3.bar(x + width/2, avg_scores, width, label='Average', color='#4ECDC4')
+ax3.bar(x - width/2, my_scores, width, label='Our Fleet', color=PLOT_COLORS[0])
+ax3.bar(x + width/2, avg_scores, width, label='Average', color=PLOT_COLORS[1])
 ax3.set_ylabel('Score')
 ax3.set_title('Performance vs Alternatives', fontsize=12, fontweight='bold')
 ax3.set_xticks(x)
@@ -525,7 +530,7 @@ ax4 = fig.add_subplot(gs[1, 0])
 zone_capability = []
 for zone in zones['Zone']:
     zone_capability.append(np.random.uniform(85, 100))  # Simulated capability
-ax4.barh(zones['Zone'], zone_capability, color='#95E77E')
+ax4.barh(zones['Zone'], zone_capability, color=PLOT_COLORS[1])
 ax4.set_xlabel('Coverage Capability (%)')
 ax4.set_title('Zone Service Levels', fontsize=12, fontweight='bold')
 ax4.set_xlim(0, 100)
@@ -537,7 +542,7 @@ annual_costs = {
     'Operating\nCosts': my_metrics['annual_operating_cost'],
     'Maintenance\n(est.)': my_metrics['total_vehicles'] * 2000
 }
-ax5.bar(annual_costs.keys(), annual_costs.values(), color=['#FF6B6B', '#4ECDC4', '#FFE66D'])
+ax5.bar(annual_costs.keys(), annual_costs.values(), color=[PLOT_COLORS[0], PLOT_COLORS[1], PLOT_COLORS[2]])
 ax5.set_ylabel('Annual Cost (€)')
 ax5.set_title('Annual Cost Structure', fontsize=12, fontweight='bold')
 ax5.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'€{x/1000:.0f}K'))
