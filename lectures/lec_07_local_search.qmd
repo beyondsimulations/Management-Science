@@ -1778,3 +1778,11 @@ Today's local search foundation makes advanced methods possible!
 - Real constraints (time windows) add complexity
 - Two-phase approach: Build then improve!
 :::
+
+## Break!
+
+[Take 20 minutes, then we start the practice notebook]{.highlight}
+
+**Next up:** You'll become Bean Counter's route planner
+
+**Then:** The Bakery competition

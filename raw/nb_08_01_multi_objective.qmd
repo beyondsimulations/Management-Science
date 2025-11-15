@@ -9,7 +9,7 @@ code-links:
 
 ## Introduction
 
-Welcome back to Bean Counter! As CEO, you're facing a critical decision: which new coffee products should we add to our menu? The challenge: each product has different profit margins, customer appeal, preparation complexity, and sustainability impacts.
+Welcome back to Bean Counter! As CEO, you're facing a critical decision for all stores in the entire Bean Counter portfolio: which new coffee products should we add to our menu? The challenge: each product has different profit margins, customer appeal, preparation complexity, and sustainability impacts.
 
 Unlike previous decisions where we optimized a single metric (like minimizing distance), today we'll learn to balance **multiple competing objectives** simultaneously.
 
@@ -17,7 +17,6 @@ Unlike previous decisions where we optimized a single metric (like minimizing di
 - Run each code cell from top to bottom
 - Complete exercises marked with `# YOUR CODE BELOW`
 - Check your work with the provided assertions
-- Look for 💡 tips and 📝 notes throughout
 
 Let's start by importing our libraries:
 
