@@ -1,10 +1,10 @@
 ---
 title: "Competition - The Bakery Delivery Route"
 subtitle: "Management Science - Artisan Bakery"
-format:
-  html:
-    code-fold: true
-    code-tools: true
+code-links:
+  - text: Python
+    href: nb_08_02_routing.py
+    icon: hand-thumbs-up
 ---
 
 # Client Briefing: Artisan Bakery
@@ -333,7 +333,7 @@ Prepare a one-slide presentation (PDF) containing:
 
 ## Final Checklist
 
-Before submitting your solution, verify:
+Before presenting your solution, verify:
 
 - [ ] All 16 cafés visited exactly once
 - [ ] Route starts and ends at the bakery
