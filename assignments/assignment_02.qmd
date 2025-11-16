@@ -267,11 +267,13 @@ Example: `[0, 3, 1, 13, 2, 5, ...]` means:
 Remember **greedy heuristics** from Lecture 6 (SPT, EDD)? Design your own greedy rule for shift assignment.
 
 **Think about:**
+
 - SPT prioritized shortest jobs
 - EDD prioritized earliest deadlines
 - What should YOU prioritize? Worker flexibility? Number of preferences? Something else?
 
 **Your deliverable:**
+
 1. Implement a function that creates a valid assignment using YOUR greedy strategy
 2. Print the assignment (who gets which shift)
 3. Write 3-4 sentences explaining:
