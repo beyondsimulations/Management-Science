@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Competition - The Bakery Delivery Route
+# # Competition 04 - The Bakery Delivery Route
 #
 # Management Science - Artisan Bakery
 #
@@ -358,7 +358,7 @@ visualize_route([], cafe_info, bakery_location, "Artisan Bakery Delivery Network
 #
 # ## Final Checklist
 #
-# Before submitting your solution, verify:
+# Before presenting your solution, verify:
 #
 # -   [ ] All 16 cafés visited exactly once
 # -   [ ] Route starts and ends at the bakery

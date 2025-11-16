@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Tobias Vlćek">
+
+<title>Dealing with Uncertainty – Management Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-197188da37a79cb9418c4f38e6d23e8d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f088ff709e1277e0222aba4cda41ab4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script defer="" src="https://umi.byndsim.com/script.js" data-website-id="e230d76b-b0a6-477e-8c5d-19a7bd661e68"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_04_monte_carlo.html">04 Monte Carlo</a></li><li class="breadcrumb-item"><a href="../lectures/lec_04_monte_carlo.html">04 Lecture</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">01 Let’s Start</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01 Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_01_variables_data_types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_02_lists_loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Lists</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_03_conditionals_while.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-03 Conditions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">02 Advances</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_02_copilot_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02 Generative AI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_01_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-01 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_02_dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-02 Dictionaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_03_sorting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-03 Sorting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_04_recap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-04 Recap</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">03 Foundation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_03_closing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 Closing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_01_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-01 Numpy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_02_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-02 Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_03_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-03 Plotting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">04 Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_04_monte_carlo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">04 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_01_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-01 Monte Carlo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_02_techventure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">05 Forecasting</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_05_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_01_time_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-01 Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_02_predictor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">06 Greedy</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_06_greedy_algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_01_scheduling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-01 Scheduling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_02_scheduler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 01</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/vote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vote</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literature</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="flow">Introduction</span></a>
+  <ul class="collapse">
+  <li><a href="#client-briefing-techventure-innovation-fund" id="toc-client-briefing-techventure-innovation-fund" class="nav-link" data-scroll-target="#client-briefing-techventure-innovation-fund"><strong><span class="invert-font">Client Briefing: TechVenture Innovation Fund</span></strong></a></li>
+  <li><a href="#business-valuing-uncertainty" id="toc-business-valuing-uncertainty" class="nav-link" data-scroll-target="#business-valuing-uncertainty">Business: Valuing Uncertainty</a></li>
+  <li><a href="#real-world-examples" id="toc-real-world-examples" class="nav-link" data-scroll-target="#real-world-examples">Real-World Examples</a></li>
+  </ul></li>
+  <li><a href="#core-concepts" id="toc-core-concepts" class="nav-link" data-scroll-target="#core-concepts"><span class="flow">Core Concepts</span></a>
+  <ul class="collapse">
+  <li><a href="#rolling-the-dice-10000-times-i" id="toc-rolling-the-dice-10000-times-i" class="nav-link" data-scroll-target="#rolling-the-dice-10000-times-i">Rolling the Dice 10,000 Times I</a></li>
+  <li><a href="#rolling-the-dice-10000-times-ii" id="toc-rolling-the-dice-10000-times-ii" class="nav-link" data-scroll-target="#rolling-the-dice-10000-times-ii">Rolling the Dice 10,000 Times II</a></li>
+  <li><a href="#how-probability-converges" id="toc-how-probability-converges" class="nav-link" data-scroll-target="#how-probability-converges">How Probability Converges</a></li>
+  <li><a href="#the-law-of-large-numbers" id="toc-the-law-of-large-numbers" class="nav-link" data-scroll-target="#the-law-of-large-numbers">The Law of Large Numbers</a></li>
+  <li><a href="#the-central-limit-theorem" id="toc-the-central-limit-theorem" class="nav-link" data-scroll-target="#the-central-limit-theorem">The Central Limit Theorem</a></li>
+  <li><a href="#why-this-matters-for-business" id="toc-why-this-matters-for-business" class="nav-link" data-scroll-target="#why-this-matters-for-business">Why This Matters for Business</a></li>
+  <li><a href="#practical-guidelines" id="toc-practical-guidelines" class="nav-link" data-scroll-target="#practical-guidelines">Practical Guidelines</a></li>
+  </ul></li>
+  <li><a href="#monte-carlo-method" id="toc-monte-carlo-method" class="nav-link" data-scroll-target="#monte-carlo-method"><span class="flow">Monte Carlo Method</span></a>
+  <ul class="collapse">
+  <li><a href="#the-monte-carlo-method" id="toc-the-monte-carlo-method" class="nav-link" data-scroll-target="#the-monte-carlo-method">The Monte Carlo Method</a></li>
+  <li><a href="#step-1-model-the-uncertainty" id="toc-step-1-model-the-uncertainty" class="nav-link" data-scroll-target="#step-1-model-the-uncertainty">Step 1: Model the Uncertainty</a></li>
+  <li><a href="#expected-returns" id="toc-expected-returns" class="nav-link" data-scroll-target="#expected-returns">Expected Returns</a></li>
+  <li><a href="#understanding-the-distribution" id="toc-understanding-the-distribution" class="nav-link" data-scroll-target="#understanding-the-distribution">Understanding the Distribution</a></li>
+  <li><a href="#risk-analysis" id="toc-risk-analysis" class="nav-link" data-scroll-target="#risk-analysis">Risk Analysis</a></li>
+  <li><a href="#different-distributions" id="toc-different-distributions" class="nav-link" data-scroll-target="#different-distributions">Different Distributions</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  </ul></li>
+  <li><a href="#portfolios" id="toc-portfolios" class="nav-link" data-scroll-target="#portfolios"><span class="flow">Portfolios</span></a>
+  <ul class="collapse">
+  <li><a href="#combining-investments" id="toc-combining-investments" class="nav-link" data-scroll-target="#combining-investments">Combining Investments</a></li>
+  <li><a href="#four-startup-profiles" id="toc-four-startup-profiles" class="nav-link" data-scroll-target="#four-startup-profiles">Four Startup Profiles</a></li>
+  <li><a href="#key-metrics-for-decision-making" id="toc-key-metrics-for-decision-making" class="nav-link" data-scroll-target="#key-metrics-for-decision-making">Key Metrics for Decision Making</a></li>
+  <li><a href="#understanding-tail-risk" id="toc-understanding-tail-risk" class="nav-link" data-scroll-target="#understanding-tail-risk">Understanding Tail Risk</a></li>
+  </ul></li>
+  <li><a href="#correlation-dependence" id="toc-correlation-dependence" class="nav-link" data-scroll-target="#correlation-dependence"><span class="flow">Correlation &amp; Dependence</span></a>
+  <ul class="collapse">
+  <li><a href="#the-independence-assumption" id="toc-the-independence-assumption" class="nav-link" data-scroll-target="#the-independence-assumption">The Independence Assumption</a></li>
+  <li><a href="#what-is-correlation" id="toc-what-is-correlation" class="nav-link" data-scroll-target="#what-is-correlation">What is Correlation?</a></li>
+  <li><a href="#correlation-in-practice" id="toc-correlation-in-practice" class="nav-link" data-scroll-target="#correlation-in-practice">Correlation in Practice</a></li>
+  <li><a href="#why-correlation-matters" id="toc-why-correlation-matters" class="nav-link" data-scroll-target="#why-correlation-matters">Why Correlation Matters</a></li>
+  <li><a href="#impact-on-portfolio-risk" id="toc-impact-on-portfolio-risk" class="nav-link" data-scroll-target="#impact-on-portfolio-risk">Impact on Portfolio Risk</a></li>
+  <li><a href="#real-world-correlation-examples" id="toc-real-world-correlation-examples" class="nav-link" data-scroll-target="#real-world-correlation-examples">Real-World Correlation Examples</a></li>
+  <li><a href="#when-diversification-fails" id="toc-when-diversification-fails" class="nav-link" data-scroll-target="#when-diversification-fails">When Diversification Fails</a></li>
+  </ul></li>
+  <li><a href="#when-monte-carlo" id="toc-when-monte-carlo" class="nav-link" data-scroll-target="#when-monte-carlo"><span class="flow">When Monte Carlo?</span></a>
+  <ul class="collapse">
+  <li><a href="#when-to-use-monte-carlo" id="toc-when-to-use-monte-carlo" class="nav-link" data-scroll-target="#when-to-use-monte-carlo">When to Use Monte Carlo</a></li>
+  <li><a href="#necessary-vs.-convenient" id="toc-necessary-vs.-convenient" class="nav-link" data-scroll-target="#necessary-vs.-convenient">Necessary vs.&nbsp;Convenient</a></li>
+  <li><a href="#real-monte-carlo-applications" id="toc-real-monte-carlo-applications" class="nav-link" data-scroll-target="#real-monte-carlo-applications">Real Monte Carlo Applications</a></li>
+  <li><a href="#real-monte-carlo-applications-ii" id="toc-real-monte-carlo-applications-ii" class="nav-link" data-scroll-target="#real-monte-carlo-applications-ii">Real Monte Carlo Applications II</a></li>
+  <li><a href="#real-monte-carlo-applications-iii" id="toc-real-monte-carlo-applications-iii" class="nav-link" data-scroll-target="#real-monte-carlo-applications-iii">Real Monte Carlo Applications III</a></li>
+  <li><a href="#real-monte-carlo-applications-iv" id="toc-real-monte-carlo-applications-iv" class="nav-link" data-scroll-target="#real-monte-carlo-applications-iv">Real Monte Carlo Applications IV</a></li>
+  <li><a href="#real-monte-carlo-applications-v" id="toc-real-monte-carlo-applications-v" class="nav-link" data-scroll-target="#real-monte-carlo-applications-v">Real Monte Carlo Applications V</a></li>
+  <li><a href="#real-monte-carlo-applications-vi" id="toc-real-monte-carlo-applications-vi" class="nav-link" data-scroll-target="#real-monte-carlo-applications-vi">Real Monte Carlo Applications VI</a></li>
+  <li><a href="#example-why-still-useful" id="toc-example-why-still-useful" class="nav-link" data-scroll-target="#example-why-still-useful">Example: Why Still Useful?</a></li>
+  <li><a href="#when-not-to-use-monte-carlo" id="toc-when-not-to-use-monte-carlo" class="nav-link" data-scroll-target="#when-not-to-use-monte-carlo">When NOT to Use Monte Carlo</a></li>
+  </ul></li>
+  <li><a href="#making-smart-decisions" id="toc-making-smart-decisions" class="nav-link" data-scroll-target="#making-smart-decisions"><span class="flow">Making Smart Decisions</span></a>
+  <ul class="collapse">
+  <li><a href="#decision-framework" id="toc-decision-framework" class="nav-link" data-scroll-target="#decision-framework">Decision Framework</a></li>
+  <li><a href="#the-plan-for-the-day" id="toc-the-plan-for-the-day" class="nav-link" data-scroll-target="#the-plan-for-the-day">The Plan for the Day</a></li>
+  <li><a href="#hour-2-simulation" id="toc-hour-2-simulation" class="nav-link" data-scroll-target="#hour-2-simulation">Hour 2: Simulation</a></li>
+  <li><a href="#hours-3-4-the-challenge" id="toc-hours-3-4-the-challenge" class="nav-link" data-scroll-target="#hours-3-4-the-challenge">Hours 3-4: The Challenge</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="flow">Key Takeaways</span></a>
+  <ul class="collapse">
+  <li><a href="#what-youve-learned-today" id="toc-what-youve-learned-today" class="nav-link" data-scroll-target="#what-youve-learned-today">What You’ve Learned Today</a></li>
+  <li><a href="#next-week" id="toc-next-week" class="nav-link" data-scroll-target="#next-week">Next Week</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_04_monte_carlo.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_04_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_04_monte_carlo.html">04 Monte Carlo</a></li><li class="breadcrumb-item"><a href="../lectures/lec_04_monte_carlo.html">04 Lecture</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Dealing with Uncertainty</h1>
+<p class="subtitle lead">Lecture 4 - Management Science</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Tobias Vlćek </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1 title">
+<h1 class="title"><span class="flow">Introduction</span></h1>
+<section id="client-briefing-techventure-innovation-fund" class="level2" data-background-image="https://unsplash.com/photos/K5DY18hy5JQ/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYxNDU4NjYzfA&amp;force=true&amp;w=2400" data-background-size="cover">
+<h2 data-background-image="https://unsplash.com/photos/K5DY18hy5JQ/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYxNDU4NjYzfA&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-techventure-innovation-fund"><strong><span class="invert-font">Client Briefing: TechVenture Innovation Fund</span></strong></h2>
+<p>. . .</p>
+<p><span class="invert-font">CEO’s Dilemma:</span></p>
+<p><span class="invert-font fragment">“We have €2M to invest in <span class="highlight">2 of 4 startups</span>. Each promises great returns, but the future is uncertain. How do we make the best choice without just gambling?”</span></p>
+</section>
+<section id="business-valuing-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="business-valuing-uncertainty">Business: Valuing Uncertainty</h2>
+<p><span class="question">Question</span>: <span class="highlight">Why can’t we just pick the two startups with the highest average returns?</span></p>
+<p>. . .</p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Hidden Risk:</strong> A startup with 30% average return but 50% chance of failure might be worse than 20% return with 5% failure chance</li>
+<li><strong>Portfolio Effects:</strong> Two risky startups together might amplify risk beyond acceptable levels</li>
+<li><strong>Tail Events:</strong> The worst-case scenario can matter as much as the average case</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Common Pitfall:</strong> Optimizing on averages ignores the distribution of outcomes.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="real-world-examples" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-examples">Real-World Examples</h2>
+<p><span class="highlight">Where uncertainty modeling is critical:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Netflix Series Decisions</strong></p>
+<ul>
+<li>Will a show hit 10M viewers?</li>
+<li>Range: 500K to 50M</li>
+<li>Investment: €20M per season</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Pharmaceutical R&amp;D</strong></p>
+<ul>
+<li>Will the drug pass trials?</li>
+<li>Success rate: 10-20%</li>
+<li>Investment: €1B over 10 years</li>
+</ul>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>When decisions are expensive and outcomes are uncertain, <strong>Monte Carlo simulation</strong> can be helpful to <strong>reduce risk</strong> and <strong>maximize value</strong>!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="core-concepts" class="level1 title">
+<h1 class="title"><span class="flow">Core Concepts</span></h1>
+<section id="rolling-the-dice-10000-times-i" class="level2">
+<h2 class="anchored" data-anchor-id="rolling-the-dice-10000-times-i">Rolling the Dice 10,000 Times I</h2>
+<p><span class="question">Question</span>: If you roll two dice, what’s the probability of getting exactly 7 as result?</p>
+<p>. . .</p>
+<p><strong>Method 1: Math</strong></p>
+<ul>
+<li>Count combinations: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1)</li>
+<li>Total combinations: 36</li>
+<li>Probability: 6/36 = 16.67%</li>
+</ul>
+</section>
+<section id="rolling-the-dice-10000-times-ii" class="level2">
+<h2 class="anchored" data-anchor-id="rolling-the-dice-10000-times-ii">Rolling the Dice 10,000 Times II</h2>
+<p><span class="question">Question</span>: If you roll two dice, what’s the probability of getting exactly 7 as result?</p>
+<p>. . .</p>
+<p><strong>Method 2: Simulation</strong></p>
+<div id="25b68a18" class="cell" data-output-location="fragment" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Roll two dice 10,000 times</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dice1 <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>, size<span class="op">=</span><span class="dv">10_000</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dice2 <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>, size<span class="op">=</span><span class="dv">10_000</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> dice1 <span class="op">+</span> dice2</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># What fraction equals 7?</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>probability <span class="op">=</span> (total <span class="op">==</span> <span class="dv">7</span>).mean()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Simulated probability of rolling 7: </span><span class="sc">{</span>probability<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simulated probability of rolling 7: 16.2%</code></pre>
+</div>
+</div>
+</section>
+<section id="how-probability-converges" class="level2">
+<h2 class="anchored" data-anchor-id="how-probability-converges">How Probability Converges</h2>
+<div id="e284262e" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-3-output-1.png" width="1330" height="464" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>As we roll more dice, the estimated probability converges to the true value (16.7%)</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-law-of-large-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="the-law-of-large-numbers">The Law of Large Numbers</h2>
+<p><span class="highlight">Fundamental Principle:</span> <strong>As sample size increases, sample average converges to the true expected value</strong></p>
+<p>. . .</p>
+<p>If <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> are independent random samples from the same distribution with mean <span class="math inline">\(\mu\)</span>:</p>
+<p><span class="math display">\[\text{As } n \to \infty, \quad \bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \to \mu\]</span></p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This is WHY simulations works. More simulations = better estimates!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-central-limit-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="the-central-limit-theorem">The Central Limit Theorem</h2>
+<p><span class="highlight">Another Fundamental Principle:</span> <strong>The sum of many random variables tends toward a normal distribution</strong></p>
+<p>. . .</p>
+<p><strong>What it means:</strong></p>
+<ul>
+<li>Even if individual returns are <span class="highlight">NOT</span> normally distributed…</li>
+<li>The portfolio of many assets <span class="highlight">WILL</span> be approximately normal</li>
+<li>The average of many simulations <span class="highlight">WILL</span> be approximately normal</li>
+</ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>For Business:</strong> This is why we can use normal distributions to model portfolio returns, even when individual assets have skewed or unusual distributions!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-this-matters-for-business" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters-for-business">Why This Matters for Business</h2>
+<p><span class="question">Question</span>: How many simulations do we need for reliable results?</p>
+<p>. . .</p>
+<div id="5c5347f9" class="cell" data-output-location="fragment" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test convergence with different sample sizes</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sample_sizes <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>estimates <span class="op">=</span> []</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> sample_sizes:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    dice1 <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>, size<span class="op">=</span>n)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    dice2 <span class="op">=</span> np.random.randint(<span class="dv">1</span>, <span class="dv">7</span>, size<span class="op">=</span>n)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> dice1 <span class="op">+</span> dice2</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> (total <span class="op">==</span> <span class="dv">7</span>).mean()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    estimates.append(prob)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"n=</span><span class="sc">{</span>n<span class="sc">:6d}</span><span class="ss">: Estimated probability = </span><span class="sc">{</span>prob<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n=    10: Estimated probability = 0.2000
+n=   100: Estimated probability = 0.1900
+n=  1000: Estimated probability = 0.1480
+n= 10000: Estimated probability = 0.1652
+n=100000: Estimated probability = 0.1670</code></pre>
+</div>
+</div>
+</section>
+<section id="practical-guidelines" class="level2">
+<h2 class="anchored" data-anchor-id="practical-guidelines">Practical Guidelines</h2>
+<p><span class="highlight">How many simulations should you run?</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Quick exploration:</strong> 10,000 simulations
+<ul class="incremental">
+<li>Good for initial insights, prototyping</li>
+</ul></li>
+<li><strong>Critical decisions:</strong> 100,000+ simulations
+<ul class="incremental">
+<li>Financial risk models, regulatory compliance</li>
+</ul></li>
+<li><strong>When to stop:</strong> When more simulations <span class="highlight">don’t change</span> conclusion</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>If your decision changes with 10x more simulations, you didn’t run enough!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="monte-carlo-method" class="level1 title">
+<h1 class="title"><span class="flow">Monte Carlo Method</span></h1>
+<section id="the-monte-carlo-method" class="level2">
+<h2 class="anchored" data-anchor-id="the-monte-carlo-method">The Monte Carlo Method</h2>
+<p><span class="highlight">Three Simple Steps:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Model the Uncertainty:</strong>
+<ul class="incremental">
+<li>Define probability distributions for unknown variables</li>
+</ul></li>
+<li><strong>Simulate Many Scenarios:</strong>
+<ul class="incremental">
+<li>Generate thousands of possible outcomes</li>
+</ul></li>
+<li><strong>Analyze the Results:</strong>
+<ul class="incremental">
+<li>Calculate statistics from the simulation</li>
+</ul></li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Monte Carlo Casino in Monaco inspired the method’s development in the 1940s.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1-model-the-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-model-the-uncertainty">Step 1: Model the Uncertainty</h2>
+<p><span class="highlight">Key Function:</span> <code>np.random.normal(loc, scale, size)</code></p>
+<ul>
+<li><strong>loc</strong>: The center (mean/average)</li>
+<li><strong>scale</strong>: The spread (standard deviation)</li>
+<li><strong>size</strong>: How many samples to generate</li>
+</ul>
+<p>. . .</p>
+<div id="743bce39" class="cell" data-output-location="fragment" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI-Growth: average 38% return, ±25% volatility</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="fl">0.38</span>, scale<span class="op">=</span><span class="fl">0.25</span>, size<span class="op">=</span><span class="dv">10_000</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean return: </span><span class="sc">{</span>returns<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Std deviation: </span><span class="sc">{</span>returns<span class="sc">.</span>std()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Minimum: </span><span class="sc">{</span>returns<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Maximum: </span><span class="sc">{</span>returns<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean return: 38.8%
+Std deviation: 24.8%
+Minimum: -67.0%
+Maximum: 125.7%</code></pre>
+</div>
+</div>
+</section>
+<section id="expected-returns" class="level2">
+<h2 class="anchored" data-anchor-id="expected-returns">Expected Returns</h2>
+<p>Let’s calculate percentiles with <code>np.percentile()</code>.</p>
+<p>. . .</p>
+<p><span class="question">Question:</span> Do you still know what a percentile is?</p>
+<p>. . .</p>
+<div id="bbd4b55d" class="cell" data-output-location="fragment" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Percentiles:"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  5th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">5</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 5% of scenarios)"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" 25th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">25</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 25% of scenarios)"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" 50th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">50</span>)<span class="sc">:.1%}</span><span class="ss"> (median)"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" 75th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">75</span>)<span class="sc">:.1%}</span><span class="ss"> (best 25% of scenarios)"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" 95th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">95</span>)<span class="sc">:.1%}</span><span class="ss"> (best 5% of scenarios)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Percentiles:
+  5th: -2.7% (worst 5% of scenarios)
+ 25th: 22.1% (worst 25% of scenarios)
+ 50th: 38.9% (median)
+ 75th: 55.7% (best 25% of scenarios)
+ 95th: 78.6% (best 5% of scenarios)</code></pre>
+</div>
+</div>
+</section>
+<section id="understanding-the-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-the-distribution">Understanding the Distribution</h2>
+<p><span class="question">Question</span>: Before we plot, what shape do you expect for <code>np.random.normal()</code>?</p>
+<p>. . .</p>
+<div id="cbd90c05" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-7-output-1.png" width="821" height="433" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="risk-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="risk-analysis">Risk Analysis</h2>
+<p><span class="question">Question</span>: What’s the probability that AI-Growth loses money?</p>
+<p>. . .</p>
+<div id="c545c77e" class="cell" data-output-location="fragment" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate risk metrics</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>prob_loss <span class="op">=</span> (returns <span class="op">&lt;</span> <span class="dv">0</span>).mean() <span class="co"># proportion of returns that are less than zero</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>prob_double <span class="op">=</span> (returns <span class="op">&gt;</span> <span class="fl">1.0</span>).mean()  <span class="co"># proportion greater than 100%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probability of loss: </span><span class="sc">{</span>prob_loss<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probability of doubling money: </span><span class="sc">{</span>prob_double<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Probability of loss: 6.0%
+Probability of doubling money: 0.8%</code></pre>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>With 6 % chance of loss, AI-Growth is relatively safe. Easy for one startup, right?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="different-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="different-distributions">Different Distributions</h2>
+<p><span class="highlight">Attention: Not everything follows a normal distribution!</span></p>
+<div id="90579b23" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-9-output-1.png" width="1133" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Normal</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Uniform</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Exponential</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="0754b004" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most common in nature/business</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Bell-shaped, symmetric</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> np.random.normal(mean, std, size)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: CloudAI startup returns</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>cloudai <span class="op">=</span> np.random.normal(<span class="fl">0.25</span>, <span class="fl">0.15</span>, <span class="dv">10000</span>)  <span class="co"># 25% ± 15%</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Main Characteristics:</strong></p>
+<ul>
+<li>Symmetric bell curve</li>
+<li>Most values cluster around mean</li>
+<li>Common in nature and business</li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="6f077a6f" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equal probability across range</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: FinFlow returns between 10-35%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> np.random.uniform(<span class="fl">0.10</span>, <span class="fl">0.35</span>, size)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: FinFlow startup returns</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>finflow <span class="op">=</span> np.random.uniform(<span class="fl">0.10</span>, <span class="fl">0.35</span>, <span class="dv">10000</span>)  <span class="co"># 10-35% equally likely</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Main Characteristics:</strong></p>
+<ul>
+<li>All values equally likely</li>
+<li>Hard boundaries (min/max)</li>
+<li>Good for modeling complete uncertainty within range</li>
+</ul>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div id="59ba6592" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Time between events</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Customer arrivals, equipment failure</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>times <span class="op">=</span> np.random.exponential(scale, size)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Time between customer arrivals (minutes)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>arrivals <span class="op">=</span> np.random.exponential(<span class="dv">5</span>, <span class="dv">10000</span>)  <span class="co"># Average 5 minutes</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Main Characteristics:</strong></p>
+<ul>
+<li>Many small values, few large ones</li>
+<li>Always positive</li>
+<li>Common for waiting times and rare events</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="portfolios" class="level1 title">
+<h1 class="title"><span class="flow">Portfolios</span></h1>
+<section id="combining-investments" class="level2">
+<h2 class="anchored" data-anchor-id="combining-investments">Combining Investments</h2>
+<p><strong>Suppose we have the following startups:</strong></p>
+<p><span class="highlight">CloudAI, GreenGrid, HealthTrack, FinFlow</span></p>
+<p>. . .</p>
+<p><span class="question">Question</span>: If we must pick 2 of 4, how many unique pairs exist?</p>
+<p>. . .</p>
+<p><strong>The Math:</strong></p>
+<p><span class="math display">\[\binom{4}{2} = \frac{4!}{2! \times 2!} = \frac{4 \times 3 \times 2 \times 1}{(2 \times 1) \times (2 \times 1)} = \frac{24}{4} = 6\]</span></p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Each combination has different risk-return characteristics!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="four-startup-profiles" class="level2">
+<h2 class="anchored" data-anchor-id="four-startup-profiles">Four Startup Profiles</h2>
+<div id="b49196df" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-14-output-1.png" width="1138" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question</span>: Which startup is the best choice?</p>
+</section>
+<section id="key-metrics-for-decision-making" class="level2">
+<h2 class="anchored" data-anchor-id="key-metrics-for-decision-making">Key Metrics for Decision Making</h2>
+<p><span class="question">Question</span>: Which metrics matter most for investment decisions?</p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Expected Return:</strong> Average outcome across all scenarios</li>
+<li><strong>Volatility (Risk):</strong> Standard deviation of returns</li>
+<li><strong>Probability of Loss:</strong> How often do we lose money?</li>
+<li><strong>Upside Potential:</strong> Chance of exceptional returns (&gt;50%)</li>
+<li><strong>Tail Risk:</strong> What happens in the worst 10% of cases?</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>No metric tells the whole story. Investors consider multiple dimensions of risk and return.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="understanding-tail-risk" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-tail-risk">Understanding Tail Risk</h2>
+<p><span class="highlight">Tail Risk:</span> The danger lurking in worst-case scenarios</p>
+<p><strong>Expected Shortfall (ES)</strong></p>
+<ul>
+<li>Average loss in worst X% of cases</li>
+<li>Goes beyond simple probability</li>
+<li>Measures depth of potential losses</li>
+<li>Critical for risk management</li>
+</ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>A portfolio with higher average returns might have catastrophic tail risk. Always look at the extremes!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="correlation-dependence" class="level1 title">
+<h1 class="title"><span class="flow">Correlation &amp; Dependence</span></h1>
+<section id="the-independence-assumption" class="level2">
+<h2 class="anchored" data-anchor-id="the-independence-assumption">The Independence Assumption</h2>
+<p><span class="highlight">So far, we’ve assumed startups succeed or fail independently.</span></p>
+<p>. . .</p>
+<p><strong>Independent Events:</strong></p>
+<ul>
+<li>CloudAI’s success doesn’t affect GreenGrid’s success</li>
+<li>Each startup faces separate, unrelated risks</li>
+<li>Portfolio risk = Average of individual risks</li>
+</ul>
+<p>. . .</p>
+<p><span class="question">Question</span>: Is this realistic in the real world?</p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Reality Check:</strong> Many business risks are correlated! Economic downturns, market trends, and technology shifts affect multiple companies simultaneously.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="what-is-correlation" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-correlation">What is Correlation?</h2>
+<p><span class="highlight">Correlation measures how two variables move together.</span></p>
+<p><span class="math display">\[\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} \quad \text{where } -1 \leq \rho \leq 1\]</span></p>
+<p>. . .</p>
+<p><strong>Interpreting Correlation:</strong></p>
+<ul>
+<li><strong>ρ = +1:</strong> Perfect positive correlation (move together)</li>
+<li><strong>ρ = 0:</strong> No correlation (independent)</li>
+<li><strong>ρ = -1:</strong> Perfect negative correlation (move opposite)</li>
+</ul>
+</section>
+<section id="correlation-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-in-practice">Correlation in Practice</h2>
+<div id="3c29f04f" class="cell" data-fig-height="4" data-fig-width="12" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-16-output-1.png" width="1138" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In Python: <code>np.corrcoef(returns1, returns2)</code> calculates correlation</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-correlation-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-correlation-matters">Why Correlation Matters</h2>
+<p><span class="highlight">Two AI startups in your portfolio:</span></p>
+<p><strong>Scenario 1: Independent (ρ = 0)</strong></p>
+<ul>
+<li>One fails due to technical issues, other succeeds</li>
+<li>Risk is averaged out</li>
+</ul>
+<p><strong>Scenario 2: Positively Correlated (ρ = 0.8)</strong></p>
+<ul>
+<li>Both rely on same AI infrastructure provider - risk is amplified!</li>
+</ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Diversification only reduces risk when investments are not highly correlated!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="impact-on-portfolio-risk" class="level2">
+<h2 class="anchored" data-anchor-id="impact-on-portfolio-risk">Impact on Portfolio Risk</h2>
+<div id="1337b1cf" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-17-output-1.png" width="948" height="467" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Higher correlation = Wider distribution = More risk!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="real-world-correlation-examples" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-correlation-examples">Real-World Correlation Examples</h2>
+<p><span class="highlight">Common sources of correlation in business:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Industry-specific:</strong> All tech startups affected by downturn</li>
+<li><strong>Geographic:</strong> All European companies affected by EU regulations</li>
+<li><strong>Supply chain:</strong> Multiple companies relying on same supplier</li>
+<li><strong>Macroeconomic:</strong> Interest rates, inflation affect most businesses</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Diversification:</strong> Choose investments with LOW correlation to reduce portfolio risk!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="when-diversification-fails" class="level2">
+<h2 class="anchored" data-anchor-id="when-diversification-fails">When Diversification Fails</h2>
+<div id="30dc77f7" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-18-output-1.png" width="948" height="467" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>2008 Financial Crisis:</strong> Many “diversified” portfolios collapsed due to correlations!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="when-monte-carlo" class="level1 title">
+<h1 class="title"><span class="flow">When Monte Carlo?</span></h1>
+<section id="when-to-use-monte-carlo" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-monte-carlo">When to Use Monte Carlo</h2>
+<p><span class="question">Question</span>: For our simple startup examples so far, do we really NEED Monte Carlo?</p>
+<p>. . .</p>
+<p><strong>Short answer: No!</strong> For basic mean/variance calculations, we can use analytical formulas.</p>
+<p>. . .</p>
+<p><span class="highlight">So when is Monte Carlo truly necessary?</span></p>
+</section>
+<section id="necessary-vs.-convenient" class="level2">
+<h2 class="anchored" data-anchor-id="necessary-vs.-convenient">Necessary vs.&nbsp;Convenient</h2>
+<p><span class="highlight">You can use math (analytical solutions):</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Simple distributions:</strong> Mean and variance of normal distributions</li>
+<li><strong>Linear combinations:</strong> Portfolio of independent assets</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><span class="highlight">You NEED Monte Carlo when:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Complex dependencies:</strong> Nonlinear relationships</li>
+<li><strong>Path-dependent problems:</strong> Outcome depends on a sequence</li>
+<li><strong>No closed-form solution:</strong> The math is intractable</li>
+</ul>
+</div>
+</section>
+<section id="real-monte-carlo-applications" class="level2">
+<h2 class="anchored" data-anchor-id="real-monte-carlo-applications">Real Monte Carlo Applications</h2>
+<p><span class="highlight">Where Monte Carlo is ESSENTIAL, not just convenient:</span></p>
+<p><strong>1. Option Pricing with Path Dependencies</strong></p>
+<div id="4ef5e3db" class="cell" data-output-location="fragment" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Payoff depends on AVERAGE price over time</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> strike_price <span class="op">=</span> <span class="dv">105</span><span class="op">;</span> payoffs <span class="op">=</span> []</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    prices <span class="op">=</span> [<span class="dv">100</span>]  <span class="co"># Starting price</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> day <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">365</span>):</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        prices.append(prices[<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> np.random.normal(<span class="fl">0.001</span>, <span class="fl">0.02</span>)))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    payoff <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, np.mean(prices) <span class="op">-</span> strike_price)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    payoffs.append(payoff)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>payoffs <span class="op">=</span> np.array(payoffs)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average option value: $</span><span class="sc">{</span>payoffs<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probability of profit: </span><span class="sc">{</span>(payoffs <span class="op">&gt;</span> <span class="dv">0</span>)<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average option value: $19.58
+Probability of profit: 68.9%</code></pre>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-ii" class="level2">
+<h2 class="anchored" data-anchor-id="real-monte-carlo-applications-ii">Real Monte Carlo Applications II</h2>
+<div id="20c11ecd" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-20-output-1.png" width="1140" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-iii" class="level2">
+<h2 class="anchored" data-anchor-id="real-monte-carlo-applications-iii">Real Monte Carlo Applications III</h2>
+<p><strong>2. Supply Chain with Cascading Effects</strong></p>
+<div id="7fa3fcaf" class="cell" data-output-location="fragment" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Each stage affects the next (nonlinear dependencies)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> factory_capacity <span class="op">=</span> <span class="dv">150</span><span class="op">;</span> demand <span class="op">=</span> <span class="dv">120</span><span class="op">;</span> price <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>penalty <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> revenues <span class="op">=</span> []</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    parts_delivered <span class="op">=</span> np.random.poisson(<span class="dv">100</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    production <span class="op">=</span> <span class="bu">min</span>(parts_delivered, factory_capacity)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> production <span class="op">&gt;=</span> demand:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        revenue <span class="op">=</span> demand <span class="op">*</span> price</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        revenue <span class="op">=</span> production <span class="op">*</span> price <span class="op">-</span> penalty</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    revenues.append(revenue)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>revenues <span class="op">=</span> np.array(revenues)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average revenue: $</span><span class="sc">{</span>revenues<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Worst-case revenue: $</span><span class="sc">{</span>revenues<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average revenue: $489.22
+Worst-case revenue: $325.00</code></pre>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-iv" class="level2">
+<h2 class="anchored" data-anchor-id="real-monte-carlo-applications-iv">Real Monte Carlo Applications IV</h2>
+<div id="ce624bce" class="cell" data-execution_count="21">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-22-output-1.png" width="1140" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-v" class="level2">
+<h2 class="anchored" data-anchor-id="real-monte-carlo-applications-v">Real Monte Carlo Applications V</h2>
+<p><strong>3. Project Management with Sequential Risks</strong></p>
+<div id="a01cc5c1" class="cell" data-output-location="fragment" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Project phases must happen in order, later phases only if earlier succeed</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> shape <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> scale <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> project_times <span class="op">=</span> []</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    total_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> phase <span class="kw">in</span> [<span class="st">'design'</span>, <span class="st">'build'</span>, <span class="st">'test'</span>, <span class="st">'deploy'</span>]:</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Each phase has uncertain duration</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        phase_time <span class="op">=</span> np.random.gamma(shape, scale)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        total_time <span class="op">+=</span> phase_time</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.random.random() <span class="op">&lt;</span> <span class="fl">0.1</span>:</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>            total_time <span class="op">+=</span> phase_time <span class="op">*</span> <span class="fl">0.5</span>  <span class="co"># Rework time</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    project_times.append(total_time)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>project_times <span class="op">=</span> np.array(project_times)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average project duration: </span><span class="sc">{</span>project_times<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> days"</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"90th percentile: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(project_times, <span class="dv">90</span>)<span class="sc">:.1f}</span><span class="ss"> days"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average project duration: 84.3 days
+90th percentile: 125.2 days</code></pre>
+</div>
+</div>
+</section>
+<section id="real-monte-carlo-applications-vi" class="level2">
+<h2 class="anchored" data-anchor-id="real-monte-carlo-applications-vi">Real Monte Carlo Applications VI</h2>
+<div id="ebf6f2ad" class="cell" data-execution_count="23">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_04_monte_carlo_files/figure-revealjs/cell-24-output-1.png" width="1140" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-why-still-useful" class="level2">
+<h2 class="anchored" data-anchor-id="example-why-still-useful">Example: Why Still Useful?</h2>
+<p><span class="question">Question</span>: If we can calculate variance analytically, why simulate?</p>
+<p>. . .</p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Visualization:</strong> Seeing the full distribution is intuitive</li>
+<li><strong>Flexibility:</strong> When problems become complex, simulation adapts</li>
+<li><strong>Extensions:</strong> Practice for complex problem</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Think of our examples as learning the tool on simple problems so you can solve complex ones where Monte Carlo is required!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="when-not-to-use-monte-carlo" class="level2">
+<h2 class="anchored" data-anchor-id="when-not-to-use-monte-carlo">When NOT to Use Monte Carlo</h2>
+<p><span class="highlight">Even when you CAN use Monte Carlo, sometimes you shouldn’t:</span></p>
+<p>. . .</p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Simple analytical solution exists and suffices</strong>
+<ul class="incremental">
+<li>Use math directly: faster, more precise, easier to understand</li>
+</ul></li>
+<li><strong>Can’t reasonably estimate input distributions</strong>
+<ul class="incremental">
+<li>Garbage in = garbage out; need solid basis for assumptions</li>
+</ul></li>
+<li><strong>Problem is deterministic (no uncertainty)</strong>
+<ul class="incremental">
+<li>Simulation adds complexity without value</li>
+</ul></li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Simulation is a tool for managing uncertainty, not creating false precision!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="making-smart-decisions" class="level1 title">
+<h1 class="title"><span class="flow">Making Smart Decisions</span></h1>
+<section id="decision-framework" class="level2">
+<h2 class="anchored" data-anchor-id="decision-framework">Decision Framework</h2>
+<ol type="1">
+<li><span class="highlight">Define Your Risk Tolerance</span>
+<ul>
+<li>Can you afford to lose money and what’s your time horizon?</li>
+<li>Are you risk-averse or risk-seeking?</li>
+</ul></li>
+<li><span class="highlight">Evaluate Multiple Metrics</span>
+<ul>
+<li>Don’t just maximize returns, consider volatility and risk</li>
+<li>Look at probability of achieving goals</li>
+</ul></li>
+<li><span class="highlight">Scenario Test</span>
+<ul>
+<li>What if distributions change or a company fails?</li>
+</ul></li>
+</ol>
+</section>
+<section id="the-plan-for-the-day" class="level2">
+<h2 class="anchored" data-anchor-id="the-plan-for-the-day">The Plan for the Day</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>Hour 1:</strong></p>
+<p><strong>Lecture</strong></p>
+<ul>
+<li>Concepts</li>
+<li>Examples</li>
+<li>Visualization</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Hour 2:</strong></p>
+<p><strong>Practice Notebook</strong></p>
+<ul>
+<li>Simulation</li>
+<li>Hands-on coding</li>
+<li>Build your skills</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Hours 3-4:</strong></p>
+<p><strong>Competition</strong></p>
+<ul>
+<li>TechVenture</li>
+<li>Team collaboration</li>
+<li>€2M investment</li>
+</ul>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="highlight">Remember:</span> The lecture gives you concepts. The notebook gives you practice. The competition tests your skills!</p>
+</section>
+<section id="hour-2-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="hour-2-simulation">Hour 2: Simulation</h2>
+<p><strong>Your Practice Case: Bean Counter Expansion</strong></p>
+<ul>
+<li>Model uncertain variables (customers, spending)</li>
+<li>Combine multiple uncertainties</li>
+<li>Calculate business metrics (VaR, profit probability)</li>
+<li>Make data-driven recommendations</li>
+</ul>
+</section>
+<section id="hours-3-4-the-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="hours-3-4-the-challenge">Hours 3-4: The Challenge</h2>
+<p><span class="highlight">TechVenture Investment Competition</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Your Budget:</strong> €2 million</li>
+<li><strong>Your Choice:</strong> Pick 2 of 4 startups</li>
+<li><strong>Your Goal:</strong> Maximize risk-adjusted returns</li>
+<li><strong>Your Deliverable:</strong> One-slide recommendation + 3-minute pitch</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout-tips">
+<p>Consider multiple risk metrics and prepare a clear justification!</p>
+</div>
+<p>. . .</p>
+<p><span class="highlight">Prizes:</span> <strong>10 / 6 / 3 bonus points</strong> for top three teams!</p>
+</section>
+</section>
+<section id="key-takeaways" class="level1 title">
+<h1 class="title"><span class="flow">Key Takeaways</span></h1>
+<section id="what-youve-learned-today" class="level2">
+<h2 class="anchored" data-anchor-id="what-youve-learned-today">What You’ve Learned Today</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Concepts</strong></p>
+<ul>
+<li>Monte Carlo simulation</li>
+<li>Probability distributions</li>
+<li>Risk has multiple dimensions</li>
+<li>Expected Value vs.&nbsp;Variance</li>
+<li>Correlation and dependence</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Skills</strong></p>
+<ul>
+<li>Using <code>np.random</code> for simulation</li>
+<li>Calculating risk metrics</li>
+<li>Visualizing uncertainty</li>
+<li>Comparing portfolios</li>
+<li>Understanding correlation</li>
+</ul>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Monte Carlo doesn’t predict <span class="highlight">THE</span> future - it shows possible futures! And correlation can amplify or reduce risk!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="next-week" class="level2">
+<h2 class="anchored" data-anchor-id="next-week">Next Week</h2>
+<p><span class="highlight">Forecasting the Future</span></p>
+<ul>
+<li>Moving from simulation to prediction</li>
+<li>Time series analysis</li>
+<li>Trend and seasonality detection</li>
+<li>Measuring forecast accuracy</li>
+</ul>
+<p>. . .</p>
+<p><span class="highlight">Now, short break and then we start coding!</span></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/beyondsimulations\.github\.io\/Management-Science");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/beyondsimulations/Management-Science">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/tobiasvlcek">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:vlcek@beyondsimulations.com">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://beyondsimulations.github.io/lectures">
+      <i class="bi bi-skip-backward" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../general/privacy.html">
+<p>Privacy Policy</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+<p>Management Science, Tobias Vlćek <br>CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/gh/beyondsimulations/web-embedded-chat@latest/floating-chat.js"></script>
+<script>
+    new UniversalChatWidget({
+        title: "Course Assistant",
+        apiEndpoint: "https://model-proxy.vlcek-4b4.workers.dev/api",
+        model: "management-science",
+        userMessageOpacity: 0.5,
+        assistantMessageOpacity: 0.5,
+        position: "bottom-right",
+        windowHeight: 800
+    });
+</script>
+
+
+
+
+</body></html>

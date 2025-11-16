@@ -272,7 +272,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>The Traveling Salesman Problem</h2>
 <p><span class="highlight">Visit all locations exactly once, minimize total distance.</span></p>
 <div class="fragment">
-<div id="55708daa" class="cell" data-execution_count="1">
+<div id="2e176736" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -386,6 +386,42 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
+</section>
+<section id="hamiltonian-cycles-and-tours" class="slide level2">
+<h2>Hamiltonian Cycles and Tours</h2>
+<p><span class="highlight">Mathematical foundation of the TSP:</span></p>
+<ul>
+<li class="fragment"><strong>Hamiltonian Path:</strong> Visits each vertex exactly once</li>
+<li class="fragment"><strong>Hamiltonian Cycle:</strong> Hamiltonian path that returns to start vertex</li>
+<li class="fragment"><strong>TSP Tour:</strong> Minimum weight Hamiltonian cycle</li>
+</ul>
+<div class="fragment">
+<p><strong>Mathematical Definition:</strong> A tour <span class="math inline">\(T = (v_1, v_2, ..., v_n, v_1)\)</span> where:</p>
+<ul>
+<li>Each <span class="math inline">\(v_i \in V\)</span> appears exactly once (except start/end)</li>
+<li>Total weight: <span class="math inline">\(w(T) = \sum_{i=1}^{n} w_{v_i, v_{i+1}}\)</span> (where <span class="math inline">\(v_{n+1} = v_1\)</span>)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="highlight">Goal: Find tour <span class="math inline">\(T^*\)</span> such that <span class="math inline">\(w(T^*) = \min_{T \in \mathcal{H}} w(T)\)</span></span></p>
+</div>
+</section>
+<section id="distance-functions-and-metrics" class="slide level2">
+<h2>Distance Functions and Metrics</h2>
+<p><span class="highlight">The weight function can have different properties:</span></p>
+<ol type="1">
+<li><strong>Identity:</strong> <span class="math inline">\(d(i,i) = 0\)</span> <span class="math inline">\(i \in V\)</span></li>
+<li><strong>Symmetry:</strong> <span class="math inline">\(d(i,j) = d(j,i)\)</span> <span class="math inline">\(i,j \in V\)</span></li>
+<li><strong>Triangle Inequality:</strong> <span class="math inline">\(d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V\)</span></li>
+</ol>
+<div class="fragment">
+<p><strong>Common Distance Functions:</strong></p>
+<ul>
+<li><strong>Euclidean:</strong> <span class="math inline">\(d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\)</span></li>
+<li><strong>Manhattan:</strong> <span class="math inline">\(d(i,j) = |x_i - x_j| + |y_i - y_j|\)</span></li>
+<li><strong>Real road distances:</strong> Often violate triangle inequality!</li>
+</ul>
+</div>
 </section></section>
 <section>
 <section id="greedy-construction" class="title-slide slide level1 title center">
@@ -396,7 +432,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>A Bad Start: Random Route</h2>
 <p><span class="highlight">What happens if we pick cafés randomly?</span></p>
 <div class="fragment">
-<div id="62c82cae" class="cell" data-execution_count="2">
+<div id="ef128bb5" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -422,7 +458,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-problem" class="slide level2">
 <h2>Nearest Neighbor: The Problem</h2>
 <p><span class="highlight">Given these 8 cafés, which should we visit first?</span></p>
-<div id="9596cbbe" class="cell" data-execution_count="3">
+<div id="52047c60" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -461,7 +497,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-solution" class="slide level2">
 <h2>Nearest Neighbor: The Solution</h2>
 <p><span class="highlight">Let’s see how nearest neighbor builds the route step by step:</span></p>
-<div id="5135ce45" class="cell" data-execution_count="4">
+<div id="37702476" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -486,7 +522,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="furthest-insertion-the-problem" class="slide level2">
 <h2>Furthest Insertion: The Problem</h2>
 <p><span class="highlight">Same 8 cafés - but now we’ll use a different strategy:</span></p>
-<div id="5e7f53d4" class="cell" data-execution_count="5">
+<div id="d177f8e4" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -534,7 +570,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="furthest-insertion-step-by-step" class="slide level2">
 <h2>Furthest Insertion: Step-by-Step</h2>
-<div id="29b3f96f" class="cell" data-execution_count="6">
+<div id="80e7d4f2" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -682,7 +718,7 @@ Dr.&nbsp;Tobias Vlćek
 <p><strong>The Idea:</strong> Take two edges and swap them (to uncross the route)</p>
 </div>
 <div class="fragment">
-<div id="e3a95360" class="cell" data-execution_count="7">
+<div id="41a5f515" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -696,7 +732,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="example-step-by-step" class="slide level2">
 <h2>Example: Step-by-Step</h2>
 <p><span class="highlight">Let’s see exactly how 2-opt fixes a crossing in a real route:</span></p>
-<div id="3ac6949a" class="cell" data-execution_count="8">
+<div id="b9ac578e" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -752,7 +788,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>2-Opt Applied</h2>
 <p><span class="highlight">Let’s see how this changes the route!</span></p>
 <div class="fragment">
-<div id="6f146534" class="cell" data-execution_count="9">
+<div id="7eb34fce" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -800,7 +836,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="what-about-1-opt" class="slide level2">
 <h2>What About 1-Opt?</h2>
-<div id="35e26c0f" class="cell" data-execution_count="10">
+<div id="90d49740" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -825,7 +861,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="or-opt-moving-sequences" class="slide level2">
 <h2>Or-Opt: Moving Sequences</h2>
 <p><span class="highlight">Moves sequence of 1-3 consecutive cities to different position.</span></p>
-<div id="d480a6c5" class="cell" data-execution_count="11">
+<div id="8a786948" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -956,7 +992,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="visualizing-local-optima" class="slide level2">
 <h2>Visualizing Local Optima</h2>
-<div id="4fd9a0e5" class="cell" data-execution_count="12">
+<div id="5315bbf2" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -979,7 +1015,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="the-reality" class="slide level2">
 <h2>The Reality</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="a00ddc89" class="cell" data-execution_count="13">
+<div id="99032c42" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1146,7 +1182,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="opt-with-time-windows" class="slide level2">
 <h2>2-Opt with Time Windows</h2>
 <p><span class="highlight">Problem: 2-opt can break time feasibility!</span></p>
-<div id="b1215fed" class="cell" data-execution_count="14">
+<div id="d2d5b0a6" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1312,6 +1348,12 @@ Dr.&nbsp;Tobias Vlćek
 <li class="fragment">Real constraints (time windows) add complexity</li>
 <li class="fragment">Two-phase approach: Build then improve!</li>
 </ul>
+</section>
+<section id="break" class="slide level2">
+<h2>Break!</h2>
+<p><span class="highlight">Take 20 minutes, then we start the practice notebook</span></p>
+<p><strong>Next up:</strong> You’ll become Bean Counter’s route planner</p>
+<p><strong>Then:</strong> The Bakery competition</p>
 
 
 </section></section>
