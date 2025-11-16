@@ -1432,19 +1432,6 @@ plt.show()
 Depending on your weight, the choice will vary.
 :::
 
-## Common Pitfalls to Avoid
-
-::: incremental
-1. **Forgetting to Normalize**
-   - Always normalize to [0,1] first!
-2. **Optimizing Too Many Objectives**
-   - 2-3: Manageable, 4+: Exponentially harder
-   - Combine related objectives or use constraints
-3. **Not Checking Solution Feasibility**
-   - Pareto optimal ≠ Feasible for your constraints
-   - Always verify constraints after optimization
-:::
-
 # [Advanced]{.flow} {.title}
 
 ## Speed vs Sustainability Dilemma
@@ -1477,211 +1464,106 @@ Depending on your weight, the choice will vary.
 R&D can fundamentally change what's possible!
 :::
 
-# [Real-World Application]{.flow} {.title}
+# [Briefing]{.flow} {.title}
 
-## EcoExpress Requirements
+## Today
 
-For your **regional delivery network**, you need:
+:::: columns
+::: {.column width="33%"}
+**Hour 2: This Lecture**
 
-::: {.incremental}
-- Total budget: €3.5 million
-- Fleet size: 60-120 vehicles
-- Service level: 95% on-time delivery
-- Emission target: 40% reduction from current
-- Handle Black Friday (3x normal volume)
-- Cover 3 cities with different regulations
+- Multi-objective
+- Pareto optimality
+- Weighted greedy
+- Local search MOO
 :::
 
-## Fleet Composition Strategy
+::: {.column width="33%"}
+**Hour 3: Notebook**
 
-Instead of one vehicle type, consider a **mixed fleet**:
+- Bean Counter CEO
+- Find Pareto frontier
+- Apply weighted greedy
+- Normalize objectives
+:::
 
-```{python}
-#| echo: false
-#| eval: true
+::: {.column width="33%"}
+**Hour 4: Competition**
 
-# Example fleet mix
-fleet_mix = pd.DataFrame({
-    'Vehicle Type': ['E-Truck', 'Hybrid Van', 'Diesel Van', 'E-Cargo Bike', 'Autonomous'],
-    'Quantity': [25, 30, 15, 20, 10],
-    'Use Case': ['City A (strict emissions)', 'City B (balanced)', 'City C (rural)', 'Dense urban cores', 'Night shifts'],
-    'Advantage': ['Zero emissions', 'Versatile', 'Long range', 'Agile in traffic', 'No driver needed']
-})
-
-display(HTML(fleet_mix.to_html(index=False, classes='table table-striped')))
-```
-
-Match vehicle strengths to specific delivery zones!
-
-## Decision Framework
-
-```{python}
-#| echo: false
-#| eval: true
-
-# Create decision flowchart visualization
-fig, ax = plt.subplots(figsize=(12, 8))
-
-# Decision steps
-steps = [
-    'Define Objectives\n(Cost, Emissions, Speed, Flexibility)',
-    'Generate Options\n(Fleet combinations)',
-    'Find Pareto Frontier\n(Non-dominated fleets)',
-    'Apply Preferences\n(Weights or constraints)',
-    'Sensitivity Analysis\n(What if weights change?)',
-    'Make Decision\n(Choose fleet mix)'
-]
-
-y_positions = np.linspace(0.9, 0.1, len(steps))
-x_position = 0.5
-
-for i, (step, y_pos) in enumerate(zip(steps, y_positions)):
-    # Box for each step
-    rect = plt.Rectangle((x_position - 0.15, y_pos - 0.06), 
-                         0.3, 0.08, 
-                         facecolor='lightblue' if i % 2 == 0 else 'lightgreen',
-                         edgecolor='black', linewidth=2)
-    ax.add_patch(rect)
-    
-    # Text
-    ax.text(x_position, y_pos - 0.02, step, 
-           ha='center', va='center', fontsize=10, fontweight='bold')
-    
-    # Arrow to next step
-    if i < len(steps) - 1:
-        ax.arrow(x_position, y_pos - 0.06, 0, -0.04, 
-                head_width=0.02, head_length=0.01, fc='black', ec='black')
-
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-ax.axis('off')
-ax.set_title('Multi-Objective Decision Process', fontsize=16, fontweight='bold', pad=20)
-plt.tight_layout()
-plt.show()
-```
-
-# [Mission Briefing]{.flow} {.title}
-
-## Today's Learning Path
-
-### Hour 3: Practice Notebook 
-**Your Role:** Bean Counter CEO
-- Learn to evaluate multi-objective trade-offs
-- Implement Pareto frontier finding
-- Apply weighted sum method
-- Make data-driven recommendations
-
-### Hour 4: Transportation & Fleet Competition
-**Two Challenges to Master:**
-
-**Part A: Multi-Objective Transportation (30 min)**
-- Allocate deliveries between DCs and zones
-- Balance cost vs emissions
-- Use ε-constraint method
-- Find YOUR optimal trade-off point
-
-**Part B: Fleet Selection (30 min)**  
-- Select vehicle mix for EcoExpress
-- Meet EU emission targets
-- Balance 3+ objectives
-- Justify your strategic choice
+- Transportation problem
+- Fleet selection
+- Cost vs emissions
+- Justify choice!
+:::
+::::
 
 ## The Competition Challenge
 
-::: {.callout-important}
-## Fleet Selection Competition
-
-**Objective:** Design EcoExpress's sustainable delivery fleet
-
-**Given:**
-- Vehicle specifications (5 types with different trade-offs)
-- Budget: €3.5M capital investment
-- EU mandate: 40% emission reduction
-- Service requirements per city
-
-**Deliverable:**
-- Fleet composition (quantity per vehicle type)
-- Pareto frontier analysis
-- Business case with 3-year ROI projection
-
-**Evaluation:** Emissions (35%), Cost-efficiency (35%), Service quality (20%), Innovation (10%)
-:::
-
-## Tools You'll Master
-
-::: columns
-::: {.column width="50%"}
-**Analytical Tools**
-- Pareto frontier identification
-- Normalization techniques
-- Weighted scoring
-- Constraint handling
-:::
-
-::: {.column width="50%"}
-**Visualization Tools**
-- Trade-off plots
-- Parallel coordinates
-- Spider/radar charts
-- Decision matrices
-:::
-:::
-
-## Key Takeaways
-
-::: {.incremental}
-1. **Real decisions have multiple objectives** - rarely just "minimize cost"
-2. **Pareto frontier** shows all rational choices
-3. **Weights reflect values** - make them explicit
-4. **No perfect solution** - only good trade-offs
-5. **Visualization crucial** for stakeholder buy-in
-:::
+[EcoExpress Sustainable Fleet Design]{.highlight}
 
 . . .
 
-[Ready to master the art of trade-offs?]{.highlight}
+1. **Solve** multi-objective transportation (DCs → Zones)
+2. **Select** optimal fleet mix (5 vehicle types)
+3. **Balance** cost, emissions, service quality
+4. **Meet** EU emission targets (40% reduction)
+
+. . .
+
+:::{.callout-important}
+Find the best trade-off for your business priorities!
+:::
+
+## Choosing Your MOO Approach
+
+[Different situations call for different methods:]{.highlight}
+
+| Situation | Best | Why |
+|---------|----------|-----|
+| Clear priorities | Sequential greedy | Fast, hierarchy |
+| Exploring | Weighted greedy | Different solutions |
+| Many solutions | Diverse pool | Builds frontier |
+| Quick solution | Single weighted | One good compromise |
+| Improve existing | Multi-objective local | Refines trade-offs |
+
+. . .
+
+:::{.callout-tip}
+**Competition?** Generate diverse pool or weigted, then improve with local search.
+:::
+
+## Implementation Pitfalls to Avoid
+
+[Common bugs that cost you time:]{.highlight}
+
+::: incremental
+1. **Forgetting to Normalize**
+   - Always normalize to [0,1] first!
+2. **Optimizing Too Many Objectives**
+   - 2-3: Manageable, 4+: Exponentially harder
+   - Combine related objectives or use constraints
+3. **Not Checking Solution Feasibility**
+   - Always verify constraints after optimization
+:::
+
+## Summary
+
+[Key Takeaways:]{.highlight}
+
+::: incremental
+- Real decisions have multiple conflicting objectives
+- Pareto frontier shows all rational trade-offs
+- Normalization is essential for fair comparison
+- Weighted sum works for convex frontiers
+- ε-constraint handles non-convex cases
+- Weights reflect values, make them explicit
+- Visualization crucial for decision-making
+:::
 
 ## Break!
 
-```{python}
-#| echo: false
-#| eval: true
+[Take 20 minutes, then we start the practice notebook]{.highlight}
 
-import matplotlib.pyplot as plt
-import numpy as np
+**Next up:** You'll become Bean Counter's expert
 
-fig, ax = plt.subplots(figsize=(10, 6))
-
-# Create a coffee cup
-cup_x = [2, 2, 2.5, 2.5, 3, 3, 3, 2]
-cup_y = [3, 5, 5, 4.5, 4.5, 5, 3, 3]
-ax.fill(cup_x, cup_y, color='brown', alpha=0.7)
-
-# Add steam with curves
-t = np.linspace(0, 4*np.pi, 100)
-for i in range(3):
-    steam_x = 2.5 + 0.1*np.sin(t) + i*0.15
-    steam_y = 5 + t/(2*np.pi) * 0.8
-    ax.plot(steam_x, steam_y, color='gray', alpha=0.5, linewidth=2)
-
-# Add trade-off arrows
-ax.arrow(4, 4, 1, 0, head_width=0.1, head_length=0.1, fc='green', ec='green')
-ax.text(5.5, 4, 'Speed', fontsize=12, ha='center')
-
-ax.arrow(4, 4, 0, 1, head_width=0.1, head_length=0.1, fc='blue', ec='blue')
-ax.text(4, 5.5, 'Quality', fontsize=12, ha='center')
-
-ax.arrow(4, 4, -0.7, -0.7, head_width=0.1, head_length=0.1, fc='red', ec='red')
-ax.text(3, 3, 'Cost', fontsize=12, ha='center')
-
-ax.text(2.5, 2, "Even coffee involves\ntrade-offs!", 
-        fontsize=14, ha='center', style='italic')
-
-ax.set_xlim(1, 6)
-ax.set_ylim(1, 6)
-ax.axis('off')
-plt.tight_layout()
-plt.show()
-```
-
-[Time to practice multi-objective optimization!]{.flow}
+**Then:** The Sustainability competition
