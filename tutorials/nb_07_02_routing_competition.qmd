@@ -1,5 +1,5 @@
 ---
-title: "Competition - The Bakery Delivery Route"
+title: "Competition 04 - The Bakery Delivery Route"
 subtitle: "Management Science - Artisan Bakery"
 code-links:
   - text: Python
