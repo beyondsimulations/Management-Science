@@ -19,6 +19,7 @@ Your consulting firm has landed a major contract with **CityExpress**, a rapidly
 Who is part of your group?
 
 ```{python}
+#| eval: false
 """
 YOUR ANSWER HERE:
 """
@@ -176,6 +177,7 @@ The CEO wants to see the difference visually and understand the cost savings.
 Based on your analysis, prepare a formal recommendation to the CEO about investing in route optimization software.
 
 ```{python}
+#| eval: false
 """
 RECOMMENDATION TO CEO
 
@@ -289,6 +291,7 @@ Remember **greedy heuristics** from Lecture 6 (SPT, EDD)? Design your own greedy
 ```
 
 ```{python}
+#| eval: false
 """
 YOUR EXPLANATION HERE:
 My greedy strategy: [what did you prioritize?]
@@ -323,6 +326,7 @@ You need a way to measure how "good" an assignment is. Design a **satisfaction s
 ```
 
 ```{python}
+#| eval: false
 """
 YOUR EXPLANATION HERE:
 My scoring system: [how do you calculate satisfaction?]
@@ -363,6 +367,7 @@ Your greedy solution is probably not optimal. Use **local search** (like 2-opt f
 ```
 
 ```{python}
+#| eval: false
 """
 YOUR EXPLANATION HERE:
 Results: [how much improvement?]
@@ -378,6 +383,7 @@ Limitations: [what are the downsides of local search?]
 A critical situation has emerged: Worker 2 calls in sick 10 minutes before their shift. Prepare an emergency response to the warehouse manager.
 
 ```{python}
+#| eval: false
 """
 EMERGENCY COVERAGE
 
@@ -399,6 +405,7 @@ Future System Adaptation: [2-3 sentences]
 The warehouse manager is skeptical: *"This is too complicated. I just need bodies in shifts. I don't care about preferences."* Prepare a strategic analysis comparing approaches.
 
 ```{python}
+#| eval: false
 """
 STRATEGIC ANALYSIS
 

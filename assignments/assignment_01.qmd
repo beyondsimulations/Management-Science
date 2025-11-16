@@ -19,6 +19,7 @@ You're a group of junior analysts at a consulting firm. A client needs help with
 Who is part of your group?
 
 ```{python}
+#| eval: false
 """
 YOUR ANSWER HERE:
 """
@@ -169,6 +170,7 @@ Based on your analysis, write a recommendation memo (4-6 sentences) addressing:
 
 
 ```{python}
+#| eval: false
 """
 YOUR RECOMMENDATION HERE:
 
@@ -361,6 +363,7 @@ Your task is to develop, implement, and validate an improved forecasting approac
 Based on your analysis in Task 2, propose a forecasting method that addresses the limitations you identified.
 
 ```{python}
+#| eval: false
 """
 MEMO: Proposed Forecasting Approach
 
@@ -431,6 +434,7 @@ Create a visualization comparing all three methods.
 Write your final recommendation to the client for forecasting months 25, 26, and 27.
 
 ```{python}
+#| eval: false
 """
 FINAL RECOMMENDATION TO CLIENT
 
