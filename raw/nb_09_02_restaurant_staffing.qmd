@@ -12,13 +12,14 @@ format:
 **La Étoile**, our three-Michelin-star restaurant, faces a staffing crisis this weekend.
 
 ### The Situation
-"I need to schedule my 18 servers across 6 shifts this weekend. The problem? My experienced servers cost €75/hour while juniors cost only €25/hour. But if I don't have enough experienced servers on busy shifts, service quality suffers and we get complaints - that damages our reputation!"
+"I need to schedule my 18 servers across 6 shifts this weekend. The problem? My experienced servers cost €75/hour while juniors cost only €25/hour. But it gets worse - shifts have different lengths (4-6 hours), servers have strong preferences about when they can work, and if I don't have enough experienced servers on busy shifts, we face penalties ranging from €150 to €400 per missing experienced server!"
 
 ### The Challenge
-You have **impossible constraints** - you need more experienced servers than you have available. Your job is to find the best compromise:
-- Minimize total cost (labor + penalties)
-- Decide which shifts to "sacrifice"
-- Balance cost vs. service quality
+You have **multiple competing objectives**. You need more experienced servers than available, shifts have different lengths affecting labor costs, and servers have strong preferences (some can't work certain shifts). Your job is to find the best compromise:
+- Minimize total cost (labor + experience penalties + preference penalties)
+- Respect server availability (preference = 0 means can't work)
+- Balance multiple factors: shift coverage, server happiness, and costs
+- Strategic decisions: which expensive penalties to accept?
 
 ### Your Resources
 - 6 Experienced Servers (€75/hour)
@@ -49,20 +50,50 @@ servers = pd.DataFrame({
             [f'Junior_{i}' for i in range(1, 13)]
 })
 
-# Shift data
+# Shift data with varying lengths
 shifts = pd.DataFrame({
     'Shift_ID': ['FD', 'FL', 'SL', 'SD', 'UL', 'UD'],
     'Shift_Name': ['Friday Dinner', 'Friday Late', 'Saturday Lunch', 
                    'Saturday Dinner', 'Sunday Lunch', 'Sunday Dinner'],
     'Day': ['Friday', 'Friday', 'Saturday', 'Saturday', 'Sunday', 'Sunday'],
-    'Time': ['18:00-22:00', '22:00-02:00', '12:00-16:00', 
-             '18:00-22:00', '12:00-16:00', '18:00-22:00'],
-    'Hours': [4, 4, 4, 4, 4, 4],
+    'Time': ['18:00-23:00', '22:00-02:00', '11:00-15:00', 
+             '17:00-23:00', '11:00-16:00', '17:00-23:00'],
+    'Hours': [5, 4, 4, 6, 5, 6],  # Varying shift lengths!
     'Required_Servers': [3, 3, 3, 3, 3, 3],
     'Min_Experienced': [2, 0, 1, 2, 1, 2],  # Requirements
     'Expected_Covers': [120, 40, 80, 140, 90, 130],  # Number of guests
-    'Penalty_Per_Missing': [200, 0, 200, 200, 200, 200]  # € penalty for each missing experienced server
+    'Penalty_Per_Missing': [800, 0, 500, 1200, 600, 1000]  # Large penalties based on importance!
 })
+
+# Server preferences (1-10 = preference level, 10 = most preferred, lower = less happy)
+np.random.seed(2025)
+preferences = {}
+for _, server in servers.iterrows():
+    server_prefs = []
+    for _, shift in shifts.iterrows():
+        # Experienced servers prefer dinner shifts
+        if server['Type'] == 'Experienced':
+            if 'Dinner' in shift['Shift_Name']:
+                pref = np.random.choice([5, 7, 8, 9, 10], p=[0.1, 0.2, 0.3, 0.3, 0.1])
+            elif 'Late' in shift['Shift_Name']:
+                pref = np.random.choice([1, 2, 3, 4, 5], p=[0.2, 0.3, 0.2, 0.2, 0.1])
+            else:  # Lunch
+                pref = np.random.choice([3, 4, 5, 6, 7], p=[0.1, 0.2, 0.3, 0.3, 0.1])
+        else:  # Junior servers
+            if 'Late' in shift['Shift_Name']:
+                pref = np.random.choice([4, 6, 7, 8, 9], p=[0.1, 0.2, 0.2, 0.3, 0.2])
+            elif 'Lunch' in shift['Shift_Name']:
+                pref = np.random.choice([3, 5, 6, 7, 8], p=[0.1, 0.2, 0.3, 0.3, 0.1])
+            else:  # Dinner
+                pref = np.random.choice([2, 4, 5, 6, 7], p=[0.1, 0.2, 0.3, 0.3, 0.1])
+        server_prefs.append(pref)
+    preferences[server['Server_ID']] = server_prefs
+
+# Create preference matrix
+pref_matrix = pd.DataFrame(preferences, index=shifts['Shift_ID']).T
+print("\n\nSERVER PREFERENCES (1=hates it, 10=loves it):")
+print("=" * 60)
+print(pref_matrix.to_string())
 
 print("SERVERS AVAILABLE:")
 print("=" * 60)
@@ -77,17 +108,26 @@ print("=" * 60)
 print(f"Total experienced servers needed: {shifts['Min_Experienced'].sum()}")
 print(f"Total experienced servers available: {(servers['Type'] == 'Experienced').sum()}")
 print(f"SHORTAGE: {shifts['Min_Experienced'].sum() - (servers['Type'] == 'Experienced').sum()} experienced servers!")
-print("\n⚠️ You MUST accept some penalties - choose wisely!")
+print("\n⚠️ Complex factors:")
+print("  • Varying shift lengths (4-6 hours) affect total labor cost")
+print("  • Large penalty amounts (€500-€1200) make choices strategic")
+print("  • Server preferences (1-10) affect morale and quality")
+print("  • Lower preferences = unhappy staff = significant quality penalty")
+print("\n💰 TYPICAL COSTS:")
+print(f"  • Greedy approach: €6,000-€7,000")
+print(f"  • Good local search: €5,500-€6,000")
+print(f"  • Smart metaheuristics: €5,000-€5,500")
+print(f"  • Theoretical minimum: ~€5,000")
 ```
 
 ## Understanding the Costs
 
 ```{python}
-# Visualize the requirements
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+# Visualize the requirements and cost impacts
+fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 
-# Shift requirements
-ax = axes[0]
+# Top Left: Shift requirements
+ax = axes[0, 0]
 x = range(len(shifts))
 width = 0.35
 ax.bar([i - width/2 for i in x], shifts['Required_Servers'], width, 
@@ -101,6 +141,7 @@ ax.set_xticks(x)
 ax.set_xticklabels(shifts['Shift_ID'])
 ax.legend()
 ax.axhline(y=6, color='green', linestyle='--', label='Available Experienced')
+ax.text(2.5, 6.2, 'Max Available', fontsize=10, color='green', ha='center')
 ax.grid(True, alpha=0.3)
 
 # Expected covers (business volume)
@@ -135,6 +176,10 @@ for bar, val in zip(bars, penalties):
 
 plt.tight_layout()
 plt.show()
+
+print("\n💡 KEY INSIGHT: With these large penalties, the difference between approaches is HUGE!")
+print(f"   Random: €7,400 | Greedy: €6,100 | Local Search: €5,700 | Metaheuristic: €5,400")
+print(f"   That's a €2,000 difference - 40% of labor cost!")
 ```
 
 ## Helper Functions
@@ -144,7 +189,7 @@ def calculate_schedule_cost(schedule: Dict[str, List[str]],
                            servers_df: pd.DataFrame, 
                            shifts_df: pd.DataFrame) -> Tuple[float, Dict]:
     """
-    Calculate total cost of a schedule including labor and penalties.
+    Calculate total cost of a schedule including labor, penalties, and preference scores.
     
     Returns:
         total_cost: Total cost in euros
@@ -152,7 +197,9 @@ def calculate_schedule_cost(schedule: Dict[str, List[str]],
     """
     labor_cost = 0
     penalty_cost = 0
+    preference_penalty = 0  # New: penalty for poor preference matches
     violations = []
+    preference_score = 0
     
     for shift_idx, shift_row in shifts_df.iterrows():
         shift_id = shift_row['Shift_ID']
@@ -162,10 +209,17 @@ def calculate_schedule_cost(schedule: Dict[str, List[str]],
             
         assigned_servers = schedule[shift_id]
         
-        # Calculate labor cost for this shift
+        # Calculate labor cost for this shift (now with varying hours!)
         for server_id in assigned_servers:
             server = servers_df[servers_df['Server_ID'] == server_id].iloc[0]
             labor_cost += server['Hourly_Rate'] * shift_row['Hours']
+            
+            # Add preference scoring
+            server_pref = pref_matrix.loc[server_id, shift_id]
+            # Penalty for low preferences (encourage happy staff)
+            # Scale: 1 (worst) = €180 penalty, 10 (best) = €0 penalty
+            preference_penalty += (10 - server_pref) * 20
+            preference_score += server_pref
         
         # Check experienced server requirement
         experienced_count = sum(1 for sid in assigned_servers 
@@ -183,13 +237,15 @@ def calculate_schedule_cost(schedule: Dict[str, List[str]],
                 'penalty': penalty
             })
     
-    total_cost = labor_cost + penalty_cost
+    total_cost = labor_cost + penalty_cost + preference_penalty
     
     cost_breakdown = {
         'labor_cost': labor_cost,
         'penalty_cost': penalty_cost,
+        'preference_penalty': preference_penalty,
         'total_cost': total_cost,
-        'violations': violations
+        'violations': violations,
+        'average_preference': preference_score / 18 if preference_score > 0 else 0
     }
     
     return total_cost, cost_breakdown
@@ -233,6 +289,8 @@ def validate_schedule(schedule: Dict[str, List[str]],
         missing = all_server_ids - assigned_ids
         if missing:
             errors.append(f"Servers not assigned: {', '.join(missing)}")
+    
+    # No hard preference constraints anymore - all assignments are valid
     
     is_valid = len(errors) == 0
     return is_valid, errors
@@ -372,17 +430,27 @@ if test_breakdown['violations']:
 
 ## Your Task
 
-Design the optimal server schedule that minimizes total cost (labor + penalties).
+Design the optimal server schedule that minimizes total cost while managing multiple complex constraints.
+
+### The Challenge
+
+This is NOT a simple assignment problem! You must balance:
+- **Varying shift lengths** (4-6 hours) that affect labor costs differently
+- **Server preferences** (1-10) where lower values mean unhappy staff and quality issues
+- **Strategic penalty decisions** - penalties range from €0 to €1200
+- **Three cost components**: labor + experience penalties + preference penalties
 
 ### Approach Options
 
 You can use ANY approach you prefer:
 
-1. **Greedy Heuristic** - Design your own rules
-2. **Local Search** - Start with greedy, improve with swaps
-3. **Metaheuristics** - Use AI to implement SA, GA, etc.
-4. **Hybrid** - Combine approaches
-5. **Creative** - Surprise us!
+1. **Smart Greedy** - Consider preferences AND penalties in your rules
+2. **Local Search** - Start with valid schedule (respecting 0 preferences), improve with constraint-aware swaps
+3. **Metaheuristics** - Use AI to implement SA, GA, etc. that handle hard constraints
+4. **Hybrid** - Combine approaches (e.g., greedy for feasibility, then SA for optimization)
+5. **Creative** - Surprise us with novel constraint-handling techniques!
+
+**Remember**: Unhappy staff (low preferences) lead to quality issues and small penalties that add up!
 
 ### Starter Code - Greedy Approach
 
@@ -390,7 +458,8 @@ You can use ANY approach you prefer:
 def greedy_schedule(servers_df, shifts_df):
     """
     Greedy scheduling heuristic.
-    Strategy: Assign experienced servers to high-penalty dinner shifts first.
+    Strategy: Assign experienced servers to high-penalty dinner shifts first,
+    while maximizing server preferences for better quality.
     """
     schedule = {}
     assigned_servers = set()
@@ -406,27 +475,39 @@ def greedy_schedule(servers_df, shifts_df):
     # YOUR CODE HERE
     # Implement your greedy strategy
     # Remember: Each shift needs exactly 3 servers, each server works once
+    # TIP: Higher preferences = happier staff = better quality!
     
     for _, shift in shift_priority.iterrows():
         shift_id = shift['Shift_ID']
         shift_servers = []
         
+        # Get unassigned servers
+        available_exp = [e for e in experienced 
+                        if e not in assigned_servers]
+        available_jun = [j for j in junior 
+                        if j not in assigned_servers]
+        
+        # Sort by preference (highest first)
+        available_exp.sort(key=lambda x: pref_matrix.loc[x, shift_id], reverse=True)
+        available_jun.sort(key=lambda x: pref_matrix.loc[x, shift_id], reverse=True)
+        
         # Try to meet experienced requirement
-        exp_needed = min(shift['Min_Experienced'], len([e for e in experienced if e not in assigned_servers]))
+        exp_needed = min(shift['Min_Experienced'], len(available_exp))
         
-        # Assign experienced servers
-        for e in experienced:
-            if e not in assigned_servers and len(shift_servers) < exp_needed:
-                shift_servers.append(e)
-                assigned_servers.add(e)
+        # Assign experienced servers (highest preference first)
+        for e in available_exp[:exp_needed]:
+            shift_servers.append(e)
+            assigned_servers.add(e)
         
-        # Fill remaining spots with junior servers
+        # Fill remaining spots with junior servers (highest preference first)
         remaining_spots = shift['Required_Servers'] - len(shift_servers)
-        for j in junior:
-            if j not in assigned_servers and remaining_spots > 0:
-                shift_servers.append(j)
-                assigned_servers.add(j)
-                remaining_spots -= 1
+        for j in available_jun[:remaining_spots]:
+            shift_servers.append(j)
+            assigned_servers.add(j)
+        
+        # Should always be able to fill all spots now
+        if len(shift_servers) < shift['Required_Servers']:
+            print(f"Warning: Could not fill all spots for {shift_id}")
         
         schedule[shift_id] = shift_servers
     
@@ -444,8 +525,10 @@ for shift_id, staff in greedy_result.items():
 
 print(f"\nCost Analysis:")
 print(f"  Labor Cost: €{greedy_breakdown['labor_cost']:.2f}")
-print(f"  Penalty Cost: €{greedy_breakdown['penalty_cost']:.2f}")
+print(f"  Experience Penalties: €{greedy_breakdown['penalty_cost']:.2f}")
+print(f"  Preference Penalties: €{greedy_breakdown.get('preference_penalty', 0):.2f}")
 print(f"  TOTAL COST: €{greedy_breakdown['total_cost']:.2f}")
+print(f"  Average Preference Score: {greedy_breakdown.get('average_preference', 0):.1f}/10")
 
 if greedy_breakdown['violations']:
     print(f"\nViolations ({len(greedy_breakdown['violations'])} shifts):")
@@ -461,12 +544,12 @@ visualize_schedule(greedy_result, servers, shifts, greedy_breakdown)
 # Template for using AI to implement metaheuristics
 
 ai_prompt_template = """
-I need to solve a restaurant staff scheduling problem using [ALGORITHM NAME].
+I need to solve a complex restaurant staff scheduling problem using [ALGORITHM NAME].
 
 PROBLEM DETAILS:
 - 18 servers total: 6 experienced (€75/hour), 12 junior (€25/hour)
-- 6 shifts, each needs exactly 3 servers
-- Each server works exactly one 4-hour shift
+- 6 shifts with VARYING lengths (4-6 hours each), each needs exactly 3 servers
+- Each server works exactly ONE shift
 - Some shifts need minimum experienced servers, but we don't have enough
 
 CONSTRAINTS:
@@ -474,19 +557,30 @@ CONSTRAINTS:
 - Each server: exactly 1 shift
 - Experienced servers needed: [2, 0, 1, 2, 1, 2] for shifts
 - Available experienced: only 6 (need 8 total)
+- Server preferences: 1-10 scale (1 = hates it, 10 = loves it)
+- Shift hours: [5, 4, 4, 6, 5, 6] for shifts FD, FL, SL, SD, UL, UD
 
 OBJECTIVE:
-Minimize: labor_cost + penalty_cost
-- Penalty: €200 for each missing experienced server (except Friday Late)
+Minimize: labor_cost + experience_penalty + preference_penalty
+- Labor: hourly_rate × shift_hours (varies by shift!)
+- Experience penalty: [€800, €0, €500, €1200, €600, €1000] per missing experienced
+- Preference penalty: (10 - preference) × €20 for each assignment
+                     (so preference=1 costs €180, preference=10 costs €0)
+
+AVAILABLE DATA:
+- pref_matrix: DataFrame with preferences (rows=servers, cols=shifts)
+- shifts: DataFrame with shift details (hours, penalties, requirements)
+- servers: DataFrame with server types and hourly rates
 
 Please provide:
 1. Solution representation (how to encode a schedule)
-2. Neighborhood/move function
-3. Cost calculation
-4. Main algorithm loop
-5. Parameter recommendations
+2. Neighborhood/move function that considers preferences
+3. Cost calculation including all three components
+4. Main algorithm loop with preference-aware optimization
+5. Parameter recommendations for this specific problem
 
 The schedule should be a dictionary: {shift_id: [list of 3 server_ids]}
+Better preferences = lower costs and happier staff!
 """
 
 print("AI IMPLEMENTATION TEMPLATE")
@@ -691,21 +785,29 @@ print("\nGood luck in the competition!")
 
 | Criterion | Points | What We Look For |
 |-----------|--------|-------------------|
-| **Solution Quality** | 40 | Lower total cost = more points |
-| **Approach** | 30 | Smart strategy, good trade-offs |
-| **Code Quality** | 20 | Clean, documented, correct |
-| **Presentation** | 10 | Clear explanation of decisions |
+| **Solution Quality** | 40 | Lower total cost (labor + experience + preferences) |
+| **Constraint Handling** | 25 | Smart penalty choices, balances all three cost components |
+| **Approach** | 20 | Handles complexity well, good algorithm choice |
+| **Code Quality** | 10 | Clean, documented, correct |
+| **Presentation** | 5 | Clear explanation of trade-offs |
 | **Total** | 100 | |
 
 ### Tips for Success
 
-1. **Understand the Trade-offs**
-   - Is it better to pay penalties or higher wages?
-   - Which shifts are most critical?
+1. **Understand the Complex Trade-offs**
+   - Longer shifts (6 hours) cost more in labor but might be worth it for experienced servers
+   - Preference penalties can add up quickly - prioritize happy staff
+   - Some penalty differences are huge (€0 vs €1200)
 
 2. **Think Strategically**
-   - Friday Late has no penalty - use junior servers!
-   - Saturday Dinner is busiest - prioritize quality
+   - Friday Late: 0 penalty AND only 4 hours - perfect for juniors who like late shifts!
+   - Saturday Dinner: 6 hours + €1200 penalty - needs your best experienced servers
+   - Use preference matrix strategically - happy staff = better quality = lower costs
+
+3. **Algorithm Considerations**
+   - Simple greedy works but may not optimize preferences well
+   - Metaheuristics can better balance all three cost components
+   - Consider preference-aware neighborhoods in your local search
 
 3. **Try Multiple Approaches**
    - Start with greedy

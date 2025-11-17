@@ -10,13 +10,13 @@ format:
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: La Étoile Restaurant]{.invert-font}** {background-image="https://unsplash.com/photos/Vd0_Htlb-Kk/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mjh8fHJlc3RhdXJhbnQlMjBtaWNoZWxpbnxlbnwwfHx8fDE3NjMyOTQ2OTR8MA&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: La Étoile]{.invert-font}** {background-image="https://unsplash.com/photos/Vd0_Htlb-Kk/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mjh8fHJlc3RhdXJhbnQlMjBtaWNoZWxpbnxlbnwwfHx8fDE3NjMyOTQ2OTR8MA&force=true&w=2400" background-size="cover"}
 
 . . .
 
 [Restaurant Manager's Crisis:]{.invert-font}
 
-["We need to schedule [18 servers for this weekend]{.highlight}, but we don't have enough experienced staff to meet all quality requirements!"]{.invert-font .fragment}
+["I need to schedule my [18 servers across 6 shifts]{.highlight} this weekend. Shifts have [different lengths (4-6 hours)]{.highlight}, and if I don't have enough experienced servers on busy shifts, we face [penalties ranging from €150 to €400]{.highlight} per missing experienced server!"]{.invert-font .fragment}
 
 ## The Staffing Challenge
 
@@ -25,14 +25,134 @@ format:
 **La Étoile's Problem:**
 
 ::: {.incremental}
-- 18 servers available (6 experienced, 12 junior)
-- 6 shifts this weekend (Fri-Sun, lunch & dinner)
+- 18 servers available (6 experienced @ €75/hr, 12 junior @ €25/hr)
+- 6 shifts with **varying lengths** (4-6 hours each)
 - Each shift needs 3 servers (at least 1 experienced)
+- Server **preferences** matter (1-10 scale, affects quality)
 :::
 
 . . .
 
-[Question]{.question} How to minimize damage while maintaining service?
+[Question:]{.question} How to balance labor costs, penalties, AND staff?
+
+## The Cost Impact: Why This Matters
+
+[The financial stakes are significant with these large penalties:]{.highlight}
+
+::: {.incremental}
+- **Minimum Labor Cost**: ~€3,500 (everyone works once)
+- **Experience Penalties**: €0-€1,200 per missing experienced server
+- **Preference Penalties**: €0-€180 per unhappy assignment
+- **Worst Case**: Over €7,000 if poorly scheduled!
+- **Best Case**: ??? with smart optimization
+:::
+
+. . .
+
+:::{.callout-important}
+Potentially up to **€3,500 difference** between good and bad scheduling!
+:::
+
+## Restaurant Staffing: The Numbers
+
+[The real-world complexity we're dealing with:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+sys.path.append('../helpers')
+from plot_utils import setup_clean_style, create_plot, BRAND_COLORS, PLOT_COLORS
+
+# Apply clean brand style
+setup_clean_style()
+
+# Calculate the combinatorial explosion
+from math import comb
+
+# Problem parameters with new complexity
+n_servers = 18
+n_shifts = 6
+servers_per_shift = 3
+shift_hours = [5, 4, 4, 6, 5, 6]  # Varying shift lengths
+penalties = [800, 0, 500, 1200, 600, 1000]  # Large penalties per shift
+
+# Calculate possibilities
+ways_per_shift = comb(18, 3)
+total_ways = ways_per_shift ** 6
+
+# Create visualization
+fig, axes = plt.subplots(1, 3)
+
+# Left: Shift complexity
+ax = axes[0]
+shift_names = ['Fri D', 'Fri L', 'Sat L', 'Sat D', 'Sun L', 'Sun D']
+x = range(len(shift_names))
+width = 0.35
+bars1 = ax.bar([i - width/2 for i in x], shift_hours, width, 
+               label='Hours', color=BRAND_COLORS["oneDark"], alpha=0.7)
+bars2 = ax.bar([i + width/2 for i in x], [p/100 for p in penalties], width,
+               label='Penalty (€100s)', color=BRAND_COLORS["threeDark"], alpha=0.7)
+ax.set_xlabel('Shift', fontsize=12)
+ax.set_ylabel('Value', fontsize=12)
+ax.set_title('Varying Complexity by Shift', fontsize=14, fontweight='bold')
+ax.set_xticks(x)
+ax.set_xticklabels(shift_names)
+
+# Add value labels
+for bar, val in zip(bars1, shift_hours):
+    height = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2., height,
+            f'{val}h', ha='center', va='bottom', fontsize=10, fontweight='bold')
+for bar, val in zip(bars2, penalties):
+    height = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2., height,
+            f'€{val}', ha='center', va='bottom', fontsize=10, fontweight='bold')
+
+# Middle: Constraint satisfaction
+ax = axes[1]
+categories = ['Total\nServers', 'Experienced\nNeeded', 'Experienced\nAvailable']
+values = [18, 8, 6]
+colors = [BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], BRAND_COLORS["threeDark"]]
+bars = ax.bar(categories, values, color=colors, alpha=0.7)
+ax.set_ylabel('Count', fontsize=12)
+ax.set_title('The Constraint Violation', fontsize=14, fontweight='bold')
+ax.axhline(y=6, color='red', linestyle='--', linewidth=2, alpha=0.5)
+ax.text(1, 6.5, 'Shortage!', ha='center', fontsize=11, color='red', fontweight='bold')
+
+# Add value labels on bars
+for bar, val in zip(bars, values):
+    height = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2., height,
+            f'{val}', ha='center', va='bottom', fontsize=11, fontweight='bold')
+
+# Right: Three cost components
+ax = axes[2]
+components = ['Labor\nCost', 'Experience\nPenalties', 'Preference\nPenalties']
+typical_costs = [3500, 1600, 800]  # Typical costs in euros
+colors = [BRAND_COLORS["oneDark"], BRAND_COLORS["twoDark"], BRAND_COLORS["threeDark"]]
+bars = ax.bar(components, typical_costs, color=colors, alpha=0.7)
+ax.set_ylabel('Cost (€)', fontsize=12)
+ax.set_title('Three-Way Cost Optimization', fontsize=14, fontweight='bold')
+
+# Add value labels
+for bar, val in zip(bars, typical_costs):
+    height = bar.get_height()
+    ax.text(bar.get_x() + bar.get_width()/2., height,
+            f'€{val}', ha='center', va='bottom', fontsize=11, fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-warning
+With varying shifts, preferences, and penalties, this is will be a real challenge!
+:::
 
 ## Today's Objectives
 
@@ -59,7 +179,9 @@ format:
 
 . . .
 
-[This metaphor will guide us through all metaheuristics!]{.highlight}
+::: callout-tip
+This metaphor will guide us through all metaheuristics today!
+:::
 
 ## Recap: Local Optima
 
@@ -149,75 +271,6 @@ plt.show()
 
 
 # [Why Simple Methods Fail]{.flow} {.title}
-
-## Restaurant Staffing: The Numbers
-
-[The combinatorial explosion we're dealing with:]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-import sys
-sys.path.append('../helpers')
-from plot_utils import setup_clean_style, create_plot, BRAND_COLORS, PLOT_COLORS
-
-# Apply clean brand style
-setup_clean_style()
-
-# Calculate the combinatorial explosion
-from math import comb
-
-# Problem parameters
-n_servers = 18
-n_shifts = 6
-servers_per_shift = 3
-
-# Calculate possibilities
-ways_per_shift = comb(18, 3)
-total_ways = ways_per_shift ** 6
-
-# Create visualization
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# Left: Exponential growth
-ax = axes[0]
-shifts = range(1, 7)
-possibilities = [comb(18, 3) ** i for i in shifts]
-ax.semilogy(shifts, possibilities, 'o-', color=BRAND_COLORS["oneDark"], linewidth=3, markersize=10)
-ax.fill_between(shifts, 1, possibilities, alpha=0.3, color=BRAND_COLORS["oneLight"])
-ax.set_xlabel('Number of Shifts', fontsize=12)
-ax.set_ylabel('Total Schedules (log scale)', fontsize=12)
-ax.set_title('Combinatorial Explosion', fontsize=14, fontweight='bold')
-ax.grid(True, alpha=0.3)
-
-# Add annotations
-ax.text(6, possibilities[-1], f'{possibilities[-1]:,.0f}\nschedules!', 
-        ha='center', va='bottom', fontsize=11, fontweight='bold',
-        bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.7))
-
-# Right: Constraint satisfaction
-ax = axes[1]
-categories = ['Total\nServers', 'Experienced\nNeeded', 'Experienced\nAvailable']
-values = [18, 8, 6]
-colors = [BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], BRAND_COLORS["threeDark"]]
-bars = ax.bar(categories, values, color=colors, alpha=0.7)
-ax.set_ylabel('Count', fontsize=12)
-ax.set_title('The Constraint Violation', fontsize=14, fontweight='bold')
-ax.axhline(y=6, color='red', linestyle='--', linewidth=2, alpha=0.5)
-ax.text(1, 6.5, 'Shortage!', ha='center', fontsize=11, color='red', fontweight='bold')
-
-# Add value labels on bars
-for bar, val in zip(bars, values):
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height,
-            f'{val}', ha='center', va='bottom', fontsize=11, fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-```
-
-[With 139 billion possibilities, we need smart exploration!]{.highlight}
 
 ## The Business Silo Problem
 
@@ -589,41 +642,59 @@ print("Key insight: Accepting temporary setbacks enables long-term success!")
 #| echo: true
 #| eval: false
 
-# CONCEPT: The Restaurant Scheduling Problem
+# CONCEPT: The Restaurant Scheduling Problem with Real Complexity
 """
 What we're trying to solve:
-- 18 servers (6 experienced @ €80, 12 junior @ €50)
-- 6 shifts (each needs 3 servers)
-- Problem: Need at least 1 experienced per shift
-- Penalty: €500 if shift has no experienced server
+- 18 servers (6 experienced @ €75/hr, 12 junior @ €25/hr)
+- 6 shifts with DIFFERENT lengths: [5, 4, 4, 6, 5, 6] hours
+- Large penalties per shift: [€800, €0, €500, €1200, €600, €1000]
+- Server preferences (1-10): affects quality & happiness
+- THREE cost components to minimize!
 
-Why it's hard:
+Why it's REALLY hard now:
 - Can't just assign all experienced to early shifts (greedy fails)
 - Need to balance cost vs coverage
 - Too many combinations to check all
 """
 
-def restaurant_cost_concept(schedule):
+def restaurant_cost_concept(schedule, shift_hours, penalties, preferences):
     """
-    Calculate cost (simplified concept)
+    Calculate THREE cost components with varying complexity
     """
-    cost = 0
-    for shift in schedule:
-        cost += count_experienced(shift) * 80
-        cost += count_junior(shift) * 50
-        if no_experienced_in(shift):
-            cost += 500  # Penalty!
-    return cost
+    labor_cost = 0
+    penalty_cost = 0
+    preference_cost = 0
+    
+    for shift_idx, shift_servers in enumerate(schedule):
+        # Component 1: Labor (varies by shift length!)
+        hours = shift_hours[shift_idx]  # 4-6 hours
+        for server in shift_servers:
+            if is_experienced(server):
+                labor_cost += 75 * hours  # €75/hr
+            else:
+                labor_cost += 25 * hours  # €25/hr
+        
+        # Component 2: Experience penalties (strategic choices)
+        if count_experienced(shift_servers) < required:
+            penalty_cost += penalties[shift_idx]  # €0-€1200
+        
+        # Component 3: Preference penalties (happiness matters!)
+        for server in shift_servers:
+            pref = preferences[server][shift_idx]  # 1-10 scale
+            preference_cost += (10 - pref) * 20  # €0-€180 per assignment
+    
+    return labor_cost + penalty_cost + preference_cost
 
-def make_neighbor(schedule):
+def make_neighbor(schedule, preferences):
     """
     Create a 'neighbor' by swapping two servers
-    This is how we explore nearby solutions
+    Smart: Consider preferences when swapping!
     """
-    # Pick two random shifts and swap one server from each
-    return schedule_with_one_swap
+    # Pick two shifts and swap servers
+    # Prefer swaps that improve preferences
+    return schedule_with_preference_aware_swap
 
-print("The challenge: Balance cost vs coverage across all shifts!")
+print("The challenge: Balance THREE competing objectives across varying shifts!")
 ```
 
 ## Visualizing SA Performance
@@ -1376,25 +1447,30 @@ You'll code the full versions and see these concepts in action!
 
 ## Your Restaurant Challenge
 
-[Apply what you've learned to solve La Étoile's problem:]{.highlight}
+[Apply what you've learned to solve La Étoile's complex problem:]{.highlight}
 
 **Scenario**: La Étoile needs weekend staffing schedule
 
 **Resources**:
-- 18 servers (6 experienced @ €80, 12 junior @ €50)
-- 6 shifts (3 servers each, need 1+ experienced)
-- Penalty: €500 per shift without experienced server
+- 18 servers (6 experienced @ €75/hr, 12 junior @ €25/hr)
+- 6 shifts with **different lengths** (4-6 hours each)
+- Large penalties (€0-€1200 per missing experienced)
+- Server preferences (1-10 scale, affects quality)
+
+**Three Cost Components to Balance**:
+1. Labor cost (hourly rate × shift hours)
+2. Experience penalties (strategic choices)
+3. Preference penalties (staff happiness)
 
 **Your Tools**:
-1. Greedy assignment
-2. Local search improvements
-3. Simulated annealing
-4. Genetic algorithm
-5. Your creativity!
+1. Smart greedy (consider all factors)
+2. Local search (preference-aware swaps)
+3. Simulated annealing (escape local optima)
+4. Genetic algorithm (evolve schedules)
 
 . . .
 
-[Remember: Document your approach and reasoning!]{.highlight}
+[Remember: This is genuinely challenging - even greedy won't find the optimal!]{.highlight}
 
 ## Summary: From Local Silos to Global Success
 
@@ -1439,11 +1515,11 @@ Just as SA accepts temporary downhill moves to find the summit, successful organ
 
 | Situation | Use This | Because |
 |-----------|----------|---------|
-| Need answer in < 1 min | Greedy + Local Search | Fast and often good enough |
-| Stuck in local optimum | Simulated Annealing | Controlled chaos escapes traps |
-| Complex with many variables | Genetic Algorithm | Population explores broadly |
+| Need answer in < 1 min | Smart Greedy | Consider all 3 costs upfront |
+| Multiple cost components | Simulated Annealing | Balances competing objectives |
+| Complex preferences | Genetic Algorithm | Evolves good compromises |
 | Keep revisiting same bad solutions | Tabu Search | Memory prevents cycling |
-| Routing/network problem | Ant Colony | Pheromones optimize paths |
+| Varying constraints per shift | Local Search + SA | Adapt to different requirements |
 | Don't know how to code it | GenAI + Template | Bridges the expert gap |
 
 . . .
@@ -1569,22 +1645,23 @@ print("GA = Innovation through recombination and experimentation!")
 ROLE: Expert in OR and Python metaheuristics
 
 PROBLEM: Restaurant staff scheduling
-- Variables: 18 staff to 6 shifts
-- Representation: 2D array [staff][shift]
+- Variables: 18 staff (6 exp @ €75/hr, 12 jr @ €25/hr)
+- 6 shifts with VARYING lengths: [5,4,4,6,5,6] hours
+- Representation: {shift_id: [3 server_ids]}
 
-HARD CONSTRAINTS (penalty: 1000):
-- Coverage: Min 3 staff per shift
-- Skill: 1+ experienced per shift
-- Legal: Max 5 shifts per person
+CONSTRAINTS:
+- Coverage: Exactly 3 staff per shift
+- Skill: Need 1+ experienced per shift
+- Assignment: Each server works exactly once
 
-SOFT CONSTRAINTS (penalty: 10-100):
-- Preferences: +20 per violation
-- Fairness: +10 per imbalance
-- Fatigue: +50 consecutive shifts
+COSTS (3 components):
+- Labor: rate × hours (varies by shift!)
+- Experience penalty: [€800,0,500,1200,600,1000]
+- Preferences: (10-pref)×€20 per assignment
 
 ALGORITHM: Implement SA with:
-- Neighbor: Swap two assignments
-- Initial temp: 1000, cooling: 0.95
+- Neighbor: Swap considering preferences
+- Initial temp: 500, cooling: 0.98
 - Return: Best schedule + cost
 ```
 :::
@@ -1870,19 +1947,19 @@ plt.show()
 
 ## Competition Strategies
 
-[Your roadmap for the consulting competition:]{.highlight}
+[Your roadmap for tackling the complex restaurant problem:]{.highlight}
 
-1. **Start Simple**: Greedy baseline first (5 min)
-2. **Quick Improvement**: Local search (10 min)  
-3. **Smart Enhancement**: Choose ONE metaheuristic (20 min)
-4. **Fine-tune**: Adjust parameters (10 min)
-5. **Document**: Explain choices (5 min)
+1. **Understand Complexity**: Study shift hours, penalties, preferences (5 min)
+2. **Smart Greedy**: Design preference-aware baseline (10 min)  
+3. **Choose Your Weapon**: Pick ONE metaheuristic that handles all 3 costs (15 min)
+4. **Fine-tune**: Balance labor vs penalties vs preferences (15 min)
+5. **Document Trade-offs**: Explain your strategic choices (5 min)
 
 . . .
 
 ::: {.callout-warning}
 ## Competition Tip
-Don't try to implement everything! Pick one approach and do it well.
+This problem has REAL complexity! Focus on balancing all three cost components rather than perfecting just one.
 :::
 
 # [Summary & Resources]{.flow} {.title}
