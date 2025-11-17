@@ -32,11 +32,12 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
+import hashlib
 
 # Sets a random seed for reproducibility (CHANGE THIS HERE!!!)
 group_name = "[THE NAMES OF YOUR GROUP MEMBERS HERE]"
-# Convert string to integer for seeding
-seed = hash(group_name) % (2**31)
+# Convert string to integer for seeding (deterministic across sessions)
+seed = int(hashlib.md5(group_name.encode()).hexdigest(), 16) % (2**31)
 np.random.seed(seed)
 ```
 

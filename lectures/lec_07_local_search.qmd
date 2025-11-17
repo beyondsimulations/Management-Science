@@ -834,7 +834,7 @@ for name, (x, y) in example_coords.items():
         ax1.scatter(x, y, c=BRAND_COLORS["twoDark"], s=500, zorder=3)
         ax1.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
 
-ax1.set_title('1. Problem: Route Crosses Itself', fontsize=13, fontweight='bold')
+ax1.set_title('1. Problem: Several Route Crosses', fontsize=13, fontweight='bold')
 ax1.text(0.5, 0.02, 'B → C1 → C3 → C5 → C2 → C4 → B', transform=ax1.transAxes, 
          ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.3))
 ax1.set_xlim(0, 12)
@@ -919,7 +919,7 @@ for name, (x, y) in example_coords.items():
         ax3.scatter(x, y, c=BRAND_COLORS["twoDark"], s=500, zorder=3)
         ax3.annotate(name, (x, y), ha='center', va='center', color='white', fontweight='bold', fontsize=11)
 
-ax3.set_title('3. Solution: No More Crossings!', fontsize=13, fontweight='bold')
+ax3.set_title('3. Solution: Only 1 Crossing!', fontsize=13, fontweight='bold')
 ax3.text(0.5, 0.02, 'B → C1 → C2 → C5 → C3 → C4 → B ✓', transform=ax3.transAxes,
         ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.3))
 ax3.set_xlim(0, 12)
