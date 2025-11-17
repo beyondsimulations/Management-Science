@@ -37,7 +37,7 @@
     "href": "assignments/assignment_02.html#setup",
     "title": "Assignment 2: Optimization in Practice",
     "section": "Setup",
-    "text": "Setup\n\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport math\nimport hashlib\n\n# Sets a random seed for reproducibility (CHANGE THIS HERE!!!)\ngroup_name = \"[THE NAMES OF YOUR GROUP MEMBERS HERE]\"\n# Convert string to integer for seeding (deterministic across sessions)\nseed = int(hashlib.md5(group_name.encode()).hexdigest(), 16) % (2**31)\nnp.random.seed(seed)\n\n\n\n\n\n\n\nFill in the names of all the members of your group in group_name instead of [THE NAMES OF YOUR GROUP MEMBERS HERE]. If you don’t do so, you will maximally receive half of the points.",
+    "text": "Setup\n\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport math\nimport hashlib\n\n# Replace the random seed in the squared brackets [] for reproducibility (CHANGE THIS HERE!!!)\ngroup_name = \"[THE NAMES OF YOUR GROUP MEMBERS HERE]\"\n# Convert string to integer for seeding (deterministic across sessions)\nseed = int(hashlib.md5(group_name.encode()).hexdigest(), 16) % (2**31)\nnp.random.seed(seed)\n\n\n\n\n\n\n\nFill in the names of all the members of your group in group_name instead of [THE NAMES OF YOUR GROUP MEMBERS HERE]. If you don’t do so, you will maximally receive half of the points.",
     "crumbs": [
       "Assignments",
       "Assignment 02"
@@ -9114,7 +9114,7 @@
     "href": "assignments/assignment_01.html#setup",
     "title": "Assignment 1: Risk Analysis & Forecasting",
     "section": "Setup",
-    "text": "Setup\n\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport hashlib\n\n# Sets a random seed for reproducibility (CHANGE THIS HERE!!!)\ngroup_name = \"[THE NAMES OF YOUR GROUP MEMBERS HERE]\"\n# Convert string to integer for seeding (deterministic across sessions)\nseed = int(hashlib.md5(group_name.encode()).hexdigest(), 16) % (2**31)\nnp.random.seed(seed)\n\n\n\n\n\n\n\nFill in the names of all the members of your group in group_name instead of [THE NAMES OF YOUR GROUP MEMBERS HERE]. If you don’t do so, you will maximally receive half of the points.",
+    "text": "Setup\n\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport hashlib\n\n# Replace the random seed in the squared brackets [] for reproducibility (CHANGE THIS HERE!!!)\ngroup_name = \"[THE NAMES OF YOUR GROUP MEMBERS HERE]\"\n# Convert string to integer for seeding (deterministic across sessions)\nseed = int(hashlib.md5(group_name.encode()).hexdigest(), 16) % (2**31)\nnp.random.seed(seed)\n\n\n\n\n\n\n\nFill in the names of all the members of your group in group_name instead of [THE NAMES OF YOUR GROUP MEMBERS HERE]. If you don’t do so, you will maximally receive half of the points.",
     "crumbs": [
       "Assignments",
       "Assignment 01"

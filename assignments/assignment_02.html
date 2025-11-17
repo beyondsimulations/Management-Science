@@ -584,7 +584,7 @@ window.Quarto = {
 <section id="consultants" class="level2">
 <h2 class="anchored" data-anchor-id="consultants">Consultants</h2>
 <p>Who is part of your group?</p>
-<div id="e3ae60c7" class="cell" data-execution_count="1">
+<div id="4b7ca872" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR ANSWER HERE:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -592,14 +592,14 @@ window.Quarto = {
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="365fa3a8" class="cell" data-execution_count="2">
+<div id="3658707b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sets a random seed for reproducibility (CHANGE THIS HERE!!!)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the random seed in the squared brackets [] for reproducibility (CHANGE THIS HERE!!!)</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>group_name <span class="op">=</span> <span class="st">"[THE NAMES OF YOUR GROUP MEMBERS HERE]"</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert string to integer for seeding (deterministic across sessions)</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="bu">int</span>(hashlib.md5(group_name.encode()).hexdigest(), <span class="dv">16</span>) <span class="op">%</span> (<span class="dv">2</span><span class="op">**</span><span class="dv">31</span>)</span>
@@ -636,7 +636,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="37a49f27" class="cell" data-execution_count="3">
+<div id="f5861870" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING BELOW!</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate customer locations based on your group's seed</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Each group gets unique locations within a 20km × 20km area</span></span>
@@ -714,7 +714,7 @@ Customer locations (x, y in km):
 </div>
 </div>
 </div>
-<div id="6be90acc" class="cell" data-execution_count="4">
+<div id="33c4af15" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build your nearest neighbor route here</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You'll need functions to:</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate distance between two locations</span></span>
@@ -752,7 +752,7 @@ After:   Depot → C → B → A → D → Depot</code></pre>
 </div>
 </div>
 </div>
-<div id="1c383998" class="cell" data-execution_count="5">
+<div id="40eaa84c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement 2-opt improvement here</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -776,13 +776,13 @@ After:   Depot → C → B → A → D → Depot</code></pre>
 <li>Projected monthly savings if applied to all 50 daily routes</li>
 </ul></li>
 </ol>
-<div id="ad0b60f7" class="cell" data-execution_count="6">
+<div id="99a09af6" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create visualizations and calculate business impact</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Business Question: Investment Recommendation</strong></p>
 <p>Based on your analysis, prepare a formal recommendation to the CEO about investing in route optimization software.</p>
-<div id="5ae154ed" class="cell" data-execution_count="7">
+<div id="66314698" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">RECOMMENDATION TO CEO</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -826,7 +826,7 @@ After:   Depot → C → B → A → D → Depot</code></pre>
 </div>
 </div>
 </div>
-<div id="69ac3f7f" class="cell" data-execution_count="8">
+<div id="d2194bb5" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING BELOW!</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available shifts for the week (14 shifts across 7 days, 2 per day)</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>shifts <span class="op">=</span> [</span>
@@ -923,12 +923,12 @@ Average preferences per worker: 3.0
 <li>How it relates to scheduling heuristics from Lecture 6</li>
 </ul></li>
 </ol>
-<div id="f5d8974f" class="cell" data-execution_count="9">
+<div id="d36f085c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement your greedy assignment strategy</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Must produce a valid assignment (all workers assigned, no duplicate shifts)</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b93aaf81" class="cell" data-execution_count="10">
+<div id="a014bab5" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">My greedy strategy: [what did you prioritize?]</span></span>
@@ -956,11 +956,11 @@ Average preferences per worker: 3.0
 <li>Why you chose this approach</li>
 </ul></li>
 </ol>
-<div id="d4b50a25" class="cell" data-execution_count="11">
+<div id="274ccaf2" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement satisfaction calculation</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="bcff8832" class="cell" data-execution_count="12">
+<div id="c2ea6b1a" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">My scoring system: [how do you calculate satisfaction?]</span></span>
@@ -989,15 +989,15 @@ Average preferences per worker: 3.0
 <li>What limitations local search might have</li>
 </ul></li>
 </ol>
-<div id="304bc0cc" class="cell" data-execution_count="13">
+<div id="d80db8f6" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement local search improvement</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="10699c9e" class="cell" data-execution_count="14">
+<div id="627544fe" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the improvement</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="82775471" class="cell" data-execution_count="15">
+<div id="3df203a5" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">Results: [how much improvement?]</span></span>
@@ -1010,7 +1010,7 @@ Average preferences per worker: 3.0
 <h3 class="anchored" data-anchor-id="task-4-business-recommendations-contingency-planning-5">Task 4: Business Recommendations &amp; Contingency Planning (5%)</h3>
 <p><strong>Business Question 1: Emergency Coverage Protocol</strong></p>
 <p>A critical situation has emerged: Worker 2 calls in sick 10 minutes before their shift. Prepare an emergency response to the warehouse manager.</p>
-<div id="d7eec2ac" class="cell" data-execution_count="16">
+<div id="0b7fabb8" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">EMERGENCY COVERAGE</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1028,7 +1028,7 @@ Average preferences per worker: 3.0
 </div>
 <p><strong>Business Question 2: Strategic Workforce Management Analysis</strong></p>
 <p>The warehouse manager is skeptical: <em>“This is too complicated. I just need bodies in shifts. I don’t care about preferences.”</em> Prepare a strategic analysis comparing approaches.</p>
-<div id="62b3d84e" class="cell" data-execution_count="17">
+<div id="79281b8e" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">STRATEGIC ANALYSIS</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
