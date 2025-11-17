@@ -5,7 +5,7 @@ subtitle: "Management Science"
 
 ## Assignment Overview
 
-- **Due:** Start of Lecture 10
+- **Due:** 30.11.2025
 - **Weight:** 30% of final grade
 - **Expected Time:** 5-7 hours
 - **Work:** Groups
@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 import math
 import hashlib
 
-# Sets a random seed for reproducibility (CHANGE THIS HERE!!!)
+# Replace the random seed in the squared brackets [] for reproducibility (CHANGE THIS HERE!!!)
 group_name = "[THE NAMES OF YOUR GROUP MEMBERS HERE]"
 # Convert string to integer for seeding (deterministic across sessions)
 seed = int(hashlib.md5(group_name.encode()).hexdigest(), 16) % (2**31)
@@ -70,6 +70,7 @@ Tomorrow's schedule has **20 customer deliveries**. Your job: build a route that
 locations = {0: (10, 10)}
 
 # Generate 20 customer locations randomly
+np.random.seed(seed)
 for i in range(1, 21):
     x = np.random.uniform(2, 18)  # Between 2-18 km
     y = np.random.uniform(2, 18)  # Between 2-18 km
@@ -191,8 +192,6 @@ Investment Decision: [Should we invest in route optimization software? Yes/No]
 Cost-Benefit Analysis: [2-3 sentences quantifying the monthly and annual savings
 potential based on your results. Include specific numbers from your analysis.]
 
-Implementation Recommendations: [2-3 sentences on how to roll out this solution. Consider pilot testing, training needs, and timeline.]
-
 Limitations & Risk Mitigation: [2-3 sentences acknowledging limitations of the
 2-opt approach and suggesting how to address them]
 
@@ -231,6 +230,7 @@ shifts = [
 ]
 
 # Generate worker preferences randomly for your group
+np.random.seed(seed)
 worker_preferences = {}
 for worker_id in range(14):
     # Each worker gets 2-4 preferred shifts
@@ -414,15 +414,9 @@ To: Warehouse Manager
 From: [Your Consulting Team]
 Re: Cost-Benefit Analysis of Worker Preference System
 
-Current Approach (Random Assignment):
-- Advantages: [2-3 sentences]
-- Hidden Costs: [2-3 sentences]
+Current Approach (Random Assignment): [2-3 sentences]
 
-Proposed Approach (Preference-Based):
-- Implementation Costs: [2-3 sentences]
-- Expected Benefits: [2-3 sentences]
-
-ROI Calculation: [2-3 sentences]
+Proposed Approach (Preference-Based): [2-3 sentences]
 
 Recommendation: [1-2 sentences with your final recommendation based on your
 quantitative analysis above.]

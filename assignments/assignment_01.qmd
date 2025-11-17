@@ -5,7 +5,7 @@ subtitle: "Management Science"
 
 ## Assignment Overview
 
-- **Due:** Start of Lecture 8
+- **Due:** 23.11.2025
 - **Weight:** 30% of final grade
 - **Expected Time:** 4-6 hours
 - **Work:** Groups
@@ -33,7 +33,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import hashlib
 
-# Sets a random seed for reproducibility (CHANGE THIS HERE!!!)
+# Replace the random seed in the squared brackets [] for reproducibility (CHANGE THIS HERE!!!)
 group_name = "[THE NAMES OF YOUR GROUP MEMBERS HERE]"
 # Convert string to integer for seeding (deterministic across sessions)
 seed = int(hashlib.md5(group_name.encode()).hexdigest(), 16) % (2**31)
@@ -199,6 +199,7 @@ A retail client is experiencing growth and needs to forecast demand for the next
 # DON'T CHANGE ANYTHING BELOW!
 # Generate 24 months of sales data with trend and slight seasonality
 # Each group will get slightly different data based on their seed above!
+np.random.seed(seed)
 
 # Generate group-specific parameters (slightly different for each group)
 base_sales = np.random.uniform(95, 105)  # Between 95-105
