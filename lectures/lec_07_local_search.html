@@ -151,7 +151,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Local</a></li><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Lecture</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Local Search</a></li><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Lecture</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -364,7 +364,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">06 Greedy</span></a>
+ <span class="menu-text">06 Greedy Search</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -393,7 +393,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">07 Local</span></a>
+ <span class="menu-text">07 Local Search</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -422,7 +422,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">08 Multi</span></a>
+ <span class="menu-text">08 Multi Objective</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -545,9 +545,9 @@ window.Quarto = {
   <li><a href="#nearest-neighbor-the-problem" id="toc-nearest-neighbor-the-problem" class="nav-link" data-scroll-target="#nearest-neighbor-the-problem">Nearest Neighbor: The Problem</a></li>
   <li><a href="#nearest-neighbor-the-algorithm" id="toc-nearest-neighbor-the-algorithm" class="nav-link" data-scroll-target="#nearest-neighbor-the-algorithm">Nearest Neighbor: The Algorithm</a></li>
   <li><a href="#nearest-neighbor-the-solution" id="toc-nearest-neighbor-the-solution" class="nav-link" data-scroll-target="#nearest-neighbor-the-solution">Nearest Neighbor: The Solution</a></li>
-  <li><a href="#furthest-insertion-the-problem" id="toc-furthest-insertion-the-problem" class="nav-link" data-scroll-target="#furthest-insertion-the-problem">Furthest Insertion: The Problem</a></li>
-  <li><a href="#furthest-insertion-the-algorithm" id="toc-furthest-insertion-the-algorithm" class="nav-link" data-scroll-target="#furthest-insertion-the-algorithm">Furthest Insertion: The Algorithm</a></li>
-  <li><a href="#furthest-insertion-step-by-step" id="toc-furthest-insertion-step-by-step" class="nav-link" data-scroll-target="#furthest-insertion-step-by-step">Furthest Insertion: Step-by-Step</a></li>
+  <li><a href="#farthest-insertion-the-problem" id="toc-farthest-insertion-the-problem" class="nav-link" data-scroll-target="#farthest-insertion-the-problem">Farthest Insertion: The Problem</a></li>
+  <li><a href="#farthest-insertion-the-algorithm" id="toc-farthest-insertion-the-algorithm" class="nav-link" data-scroll-target="#farthest-insertion-the-algorithm">Farthest Insertion: The Algorithm</a></li>
+  <li><a href="#farthest-insertion-step-by-step" id="toc-farthest-insertion-step-by-step" class="nav-link" data-scroll-target="#farthest-insertion-step-by-step">Farthest Insertion: Step-by-Step</a></li>
   <li><a href="#comparison" id="toc-comparison" class="nav-link" data-scroll-target="#comparison">Comparison</a></li>
   <li><a href="#the-problem-with-greedy" id="toc-the-problem-with-greedy" class="nav-link" data-scroll-target="#the-problem-with-greedy">The Problem with Greedy</a></li>
   </ul></li>
@@ -599,7 +599,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Local</a></li><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Lecture</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Local Search</a></li><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Lecture</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Better Routing</h1>
 <p class="subtitle lead">Lecture 7 - Management Science</p>
@@ -687,7 +687,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="the-traveling-salesman-problem">The Traveling Salesman Problem</h2>
 <p><span class="highlight">Visit all locations exactly once, minimize total distance.</span></p>
 <p>. . .</p>
-<div id="2e176736" class="cell" data-execution_count="1">
+<div id="e088d04a" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -846,7 +846,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="a-bad-start-random-route">A Bad Start: Random Route</h2>
 <p><span class="highlight">What happens if we pick cafés randomly?</span></p>
 <p>. . .</p>
-<div id="ef128bb5" class="cell" data-execution_count="2">
+<div id="6ccbafb5" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -870,7 +870,7 @@ window.Quarto = {
 <section id="nearest-neighbor-the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="nearest-neighbor-the-problem">Nearest Neighbor: The Problem</h2>
 <p><span class="highlight">Given these 8 cafés, which should we visit first?</span></p>
-<div id="52047c60" class="cell" data-execution_count="3">
+<div id="4b8f0205" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -907,7 +907,7 @@ window.Quarto = {
 <section id="nearest-neighbor-the-solution" class="level2">
 <h2 class="anchored" data-anchor-id="nearest-neighbor-the-solution">Nearest Neighbor: The Solution</h2>
 <p><span class="highlight">Let’s see how nearest neighbor builds the route step by step:</span></p>
-<div id="37702476" class="cell" data-execution_count="4">
+<div id="60a6d3a5" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -923,15 +923,15 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Furthest insertion builds a more balanced tour by establishing the outer structure first!</p>
+<p>Farthest insertion builds a more balanced tour by establishing the outer structure first!</p>
 </div>
 </div>
 </div>
 </section>
-<section id="furthest-insertion-the-problem" class="level2">
-<h2 class="anchored" data-anchor-id="furthest-insertion-the-problem">Furthest Insertion: The Problem</h2>
+<section id="farthest-insertion-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="farthest-insertion-the-problem">Farthest Insertion: The Problem</h2>
 <p><span class="highlight">Same 8 cafés - but now we’ll use a different strategy:</span></p>
-<div id="d177f8e4" class="cell" data-execution_count="5">
+<div id="c973f9dd" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -952,14 +952,14 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="furthest-insertion-the-algorithm" class="level2">
-<h2 class="anchored" data-anchor-id="furthest-insertion-the-algorithm">Furthest Insertion: The Algorithm</h2>
+<section id="farthest-insertion-the-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="farthest-insertion-the-algorithm">Farthest Insertion: The Algorithm</h2>
 <p><span class="highlight">Build a route by starting with distant points and filling in gaps:</span></p>
 <ol type="1">
 <li>Start at the bakery</li>
-<li>Find the furthest café from bakery - add it to tour</li>
-<li>Create initial tour: Bakery → Furthest → Bakery</li>
-<li><strong>Repeat:</strong> Find the café furthest from current tour</li>
+<li>Find the farthest café from bakery - add it to tour</li>
+<li>Create initial tour: Bakery → Farthest → Bakery</li>
+<li><strong>Repeat:</strong> Find the café farthest from current tour</li>
 <li>Insert it at the position that minimizes tour increase</li>
 <li>Continue until all cafés are in the tour</li>
 </ol>
@@ -975,9 +975,9 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="furthest-insertion-step-by-step" class="level2">
-<h2 class="anchored" data-anchor-id="furthest-insertion-step-by-step">Furthest Insertion: Step-by-Step</h2>
-<div id="80e7d4f2" class="cell" data-execution_count="6">
+<section id="farthest-insertion-step-by-step" class="level2">
+<h2 class="anchored" data-anchor-id="farthest-insertion-step-by-step">Farthest Insertion: Step-by-Step</h2>
+<div id="c2ec7946" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -993,7 +993,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Notice how furthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!</p>
+<p>Notice how farthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!</p>
 </div>
 </div>
 </div>
@@ -1005,7 +1005,7 @@ window.Quarto = {
 <ul class="incremental">
 <li><strong>Random:</strong> Usually worst - no strategy at all!</li>
 <li><strong>Nearest Neighbor:</strong> Fast and decent, but can create long returns</li>
-<li><strong>Furthest:</strong> Often best initial solution, builds good “skeleton”</li>
+<li><strong>Farthest:</strong> Often best initial solution, builds good “skeleton”</li>
 </ul>
 </div>
 <p>. . .</p>
@@ -1124,7 +1124,7 @@ window.Quarto = {
 <p>. . .</p>
 <p><strong>The Idea:</strong> Take two edges and swap them (to uncross the route)</p>
 <p>. . .</p>
-<div id="41a5f515" class="cell" data-execution_count="7">
+<div id="e4f3843c" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1137,7 +1137,7 @@ window.Quarto = {
 <section id="example-step-by-step" class="level2">
 <h2 class="anchored" data-anchor-id="example-step-by-step">Example: Step-by-Step</h2>
 <p><span class="highlight">Let’s see exactly how 2-opt fixes a crossing in a real route:</span></p>
-<div id="b9ac578e" class="cell" data-execution_count="8">
+<div id="43097bd5" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1191,7 +1191,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="opt-applied">2-Opt Applied</h2>
 <p><span class="highlight">Let’s see how this changes the route!</span></p>
 <p>. . .</p>
-<div id="7eb34fce" class="cell" data-execution_count="9">
+<div id="d75cead2" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1233,7 +1233,7 @@ window.Quarto = {
 </section>
 <section id="what-about-1-opt" class="level2">
 <h2 class="anchored" data-anchor-id="what-about-1-opt">What About 1-Opt?</h2>
-<div id="90d49740" class="cell" data-execution_count="10">
+<div id="756ef07c" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1257,7 +1257,7 @@ window.Quarto = {
 <section id="or-opt-moving-sequences" class="level2">
 <h2 class="anchored" data-anchor-id="or-opt-moving-sequences">Or-Opt: Moving Sequences</h2>
 <p><span class="highlight">Moves sequence of 1-3 consecutive cities to different position.</span></p>
-<div id="8a786948" class="cell" data-execution_count="11">
+<div id="4fda8f88" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1381,7 +1381,7 @@ window.Quarto = {
 </section>
 <section id="visualizing-local-optima" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-local-optima">Visualizing Local Optima</h2>
-<div id="5315bbf2" class="cell" data-execution_count="12">
+<div id="e8e5559b" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1404,7 +1404,7 @@ window.Quarto = {
 <section id="the-reality" class="level2">
 <h2 class="anchored" data-anchor-id="the-reality">The Reality</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="99032c42" class="cell" data-execution_count="13">
+<div id="794f37ba" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1563,7 +1563,7 @@ window.Quarto = {
 <section id="opt-with-time-windows" class="level2">
 <h2 class="anchored" data-anchor-id="opt-with-time-windows">2-Opt with Time Windows</h2>
 <p><span class="highlight">Problem: 2-opt can break time feasibility!</span></p>
-<div id="d2d5b0a6" class="cell" data-execution_count="14">
+<div id="8672bc6d" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
