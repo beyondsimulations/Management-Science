@@ -418,17 +418,17 @@ plt.show()
 . . .
 
 :::{.callout-note}
-Furthest insertion builds a more balanced tour by establishing the outer structure first!
+Farthest insertion builds a more balanced tour by establishing the outer structure first!
 :::
 
-## Furthest Insertion: The Problem
+## Farthest Insertion: The Problem
 
 [Same 8 cafés - but now we'll use a different strategy:]{.highlight}
 
 ```{python}
 #| eval: true
 #| echo: false
-# Show the problem again for furthest insertion
+# Show the problem again for farthest insertion
 fig, ax = plt.subplots()
 
 # Draw locations only
@@ -454,14 +454,14 @@ plt.show()
 The farthest point is our start!
 :::
 
-## Furthest Insertion: The Algorithm
+## Farthest Insertion: The Algorithm
 
 [Build a route by starting with distant points and filling in gaps:]{.highlight}
 
 1. Start at the bakery
-2. Find the furthest café from bakery - add it to tour
-3. Create initial tour: Bakery → Furthest → Bakery
-4. **Repeat:** Find the café furthest from current tour
+2. Find the farthest café from bakery - add it to tour
+3. Create initial tour: Bakery → Farthest → Bakery
+4. **Repeat:** Find the café farthest from current tour
 5. Insert it at the position that minimizes tour increase
 6. Continue until all cafés are in the tour
 
@@ -471,7 +471,7 @@ The farthest point is our start!
 **Intuition:** Build the "skeleton" of the route first with distant points, then fill in the gaps.
 :::
 
-## Furthest Insertion: Step-by-Step
+## Farthest Insertion: Step-by-Step
 
 ```{python}
 #| eval: true
@@ -639,7 +639,7 @@ plt.show()
 . . .
 
 :::{.callout-note}
-Notice how furthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!
+Notice how farthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!
 :::
 
 ## Comparison
@@ -649,7 +649,7 @@ Notice how furthest insertion builds a more balanced tour by establishing the ou
 ::: incremental
 - **Random:** Usually worst - no strategy at all!
 - **Nearest Neighbor:** Fast and decent, but can create long returns
-- **Furthest:** Often best initial solution, builds good "skeleton"
+- **Farthest:** Often best initial solution, builds good "skeleton"
 :::
 
 . . .
