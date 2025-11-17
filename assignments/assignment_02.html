@@ -584,7 +584,7 @@ window.Quarto = {
 <section id="consultants" class="level2">
 <h2 class="anchored" data-anchor-id="consultants">Consultants</h2>
 <p>Who is part of your group?</p>
-<div id="4b7ca872" class="cell" data-execution_count="1">
+<div id="4b035dcc" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR ANSWER HERE:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -592,7 +592,7 @@ window.Quarto = {
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="3658707b" class="cell" data-execution_count="2">
+<div id="c21b869b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -636,7 +636,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="f5861870" class="cell" data-execution_count="3">
+<div id="7e46cb8f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING BELOW!</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate customer locations based on your group's seed</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Each group gets unique locations within a 20km × 20km area</span></span>
@@ -645,20 +645,21 @@ window.Quarto = {
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>locations <span class="op">=</span> {<span class="dv">0</span>: (<span class="dv">10</span>, <span class="dv">10</span>)}</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 20 customer locations randomly</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">21</span>):</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.random.uniform(<span class="dv">2</span>, <span class="dv">18</span>)  <span class="co"># Between 2-18 km</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.uniform(<span class="dv">2</span>, <span class="dv">18</span>)  <span class="co"># Between 2-18 km</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    locations[i] <span class="op">=</span> (x, y)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"YOUR GROUP'S UNIQUE CUSTOMER LOCATIONS"</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Depot: </span><span class="sc">{</span>locations[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Customer locations (x, y in km):"</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">21</span>):</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Customer </span><span class="sc">{</span>i<span class="sc">:2d}</span><span class="ss">: (</span><span class="sc">{</span>locations[i][<span class="dv">0</span>]<span class="sc">:5.2f}</span><span class="ss">, </span><span class="sc">{</span>locations[i][<span class="dv">1</span>]<span class="sc">:5.2f}</span><span class="ss">)"</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING ABOVE!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">21</span>):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.random.uniform(<span class="dv">2</span>, <span class="dv">18</span>)  <span class="co"># Between 2-18 km</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.uniform(<span class="dv">2</span>, <span class="dv">18</span>)  <span class="co"># Between 2-18 km</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    locations[i] <span class="op">=</span> (x, y)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"YOUR GROUP'S UNIQUE CUSTOMER LOCATIONS"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Depot: </span><span class="sc">{</span>locations[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Customer locations (x, y in km):"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">21</span>):</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  Customer </span><span class="sc">{</span>i<span class="sc">:2d}</span><span class="ss">: (</span><span class="sc">{</span>locations[i][<span class="dv">0</span>]<span class="sc">:5.2f}</span><span class="ss">, </span><span class="sc">{</span>locations[i][<span class="dv">1</span>]<span class="sc">:5.2f}</span><span class="ss">)"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING ABOVE!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>============================================================
 YOUR GROUP'S UNIQUE CUSTOMER LOCATIONS
@@ -714,7 +715,7 @@ Customer locations (x, y in km):
 </div>
 </div>
 </div>
-<div id="33c4af15" class="cell" data-execution_count="4">
+<div id="358cf397" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build your nearest neighbor route here</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># You'll need functions to:</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate distance between two locations</span></span>
@@ -752,7 +753,7 @@ After:   Depot → C → B → A → D → Depot</code></pre>
 </div>
 </div>
 </div>
-<div id="40eaa84c" class="cell" data-execution_count="5">
+<div id="50122487" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement 2-opt improvement here</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -776,13 +777,13 @@ After:   Depot → C → B → A → D → Depot</code></pre>
 <li>Projected monthly savings if applied to all 50 daily routes</li>
 </ul></li>
 </ol>
-<div id="99a09af6" class="cell" data-execution_count="6">
+<div id="7b552d10" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create visualizations and calculate business impact</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Business Question: Investment Recommendation</strong></p>
 <p>Based on your analysis, prepare a formal recommendation to the CEO about investing in route optimization software.</p>
-<div id="66314698" class="cell" data-execution_count="7">
+<div id="785898e6" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">RECOMMENDATION TO CEO</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -826,7 +827,7 @@ After:   Depot → C → B → A → D → Depot</code></pre>
 </div>
 </div>
 </div>
-<div id="d2194bb5" class="cell" data-execution_count="8">
+<div id="0699b0b8" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING BELOW!</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Available shifts for the week (14 shifts across 7 days, 2 per day)</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>shifts <span class="op">=</span> [</span>
@@ -840,47 +841,48 @@ After:   Depot → C → B → A → D → Depot</code></pre>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate worker preferences randomly for your group</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>worker_preferences <span class="op">=</span> {}</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> worker_id <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">14</span>):</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Each worker gets 2-4 preferred shifts</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    num_prefs <span class="op">=</span> np.random.randint(<span class="dv">2</span>, <span class="dv">5</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly select preferred shifts (without replacement)</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    preferred_indices <span class="op">=</span> np.random.choice(<span class="dv">14</span>, size<span class="op">=</span>num_prefs, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    worker_preferences[worker_id] <span class="op">=</span> [shifts[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">sorted</span>(preferred_indices)]</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"YOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES"</span>)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> worker_id, prefs <span class="kw">in</span> worker_preferences.items():</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Worker </span><span class="sc">{</span>worker_id<span class="sc">:2d}</span><span class="ss">: </span><span class="sc">{</span>prefs<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total preferences across all workers: </span><span class="sc">{</span><span class="bu">sum</span>(<span class="bu">len</span>(p) <span class="cf">for</span> p <span class="kw">in</span> worker_preferences.values())<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average preferences per worker: </span><span class="sc">{</span><span class="bu">sum</span>(<span class="bu">len</span>(p) <span class="cf">for</span> p <span class="kw">in</span> worker_preferences.values()) <span class="op">/</span> <span class="dv">14</span><span class="sc">:.1f}</span><span class="ss">"</span>)</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Each worker works exactly ONE shift</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Each shift must have exactly ONE worker</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING ABOVE!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>np.random.seed(seed)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>worker_preferences <span class="op">=</span> {}</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> worker_id <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">14</span>):</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Each worker gets 2-4 preferred shifts</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    num_prefs <span class="op">=</span> np.random.randint(<span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly select preferred shifts (without replacement)</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    preferred_indices <span class="op">=</span> np.random.choice(<span class="dv">14</span>, size<span class="op">=</span>num_prefs, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    worker_preferences[worker_id] <span class="op">=</span> [shifts[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">sorted</span>(preferred_indices)]</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"YOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES"</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> worker_id, prefs <span class="kw">in</span> worker_preferences.items():</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Worker </span><span class="sc">{</span>worker_id<span class="sc">:2d}</span><span class="ss">: </span><span class="sc">{</span>prefs<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total preferences across all workers: </span><span class="sc">{</span><span class="bu">sum</span>(<span class="bu">len</span>(p) <span class="cf">for</span> p <span class="kw">in</span> worker_preferences.values())<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Average preferences per worker: </span><span class="sc">{</span><span class="bu">sum</span>(<span class="bu">len</span>(p) <span class="cf">for</span> p <span class="kw">in</span> worker_preferences.values()) <span class="op">/</span> <span class="dv">14</span><span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Each worker works exactly ONE shift</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Each shift must have exactly ONE worker</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co"># DON'T CHANGE ANYTHING ABOVE!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>======================================================================
 YOUR GROUP'S UNIQUE WORKER SHIFT PREFERENCES
 ======================================================================
-Worker  0: ['Tuesday-Evening', 'Thursday-Evening', 'Friday-Evening', 'Sunday-Morning']
-Worker  1: ['Tuesday-Morning', 'Wednesday-Morning', 'Wednesday-Evening', 'Friday-Evening']
-Worker  2: ['Monday-Morning', 'Friday-Evening']
-Worker  3: ['Friday-Morning', 'Friday-Evening']
-Worker  4: ['Tuesday-Morning', 'Friday-Evening', 'Sunday-Evening']
-Worker  5: ['Wednesday-Evening', 'Thursday-Morning']
-Worker  6: ['Tuesday-Evening', 'Thursday-Morning', 'Saturday-Evening', 'Sunday-Evening']
-Worker  7: ['Tuesday-Evening', 'Wednesday-Evening', 'Saturday-Morning']
-Worker  8: ['Monday-Evening', 'Wednesday-Evening', 'Friday-Morning', 'Sunday-Morning']
-Worker  9: ['Thursday-Morning', 'Saturday-Morning', 'Saturday-Evening']
-Worker 10: ['Tuesday-Evening', 'Saturday-Evening']
-Worker 11: ['Monday-Morning', 'Saturday-Evening']
-Worker 12: ['Monday-Evening', 'Thursday-Morning', 'Thursday-Evening', 'Friday-Morning']
-Worker 13: ['Tuesday-Morning', 'Thursday-Morning', 'Thursday-Evening']
+Worker  0: ['Thursday-Evening', 'Friday-Morning', 'Saturday-Morning', 'Saturday-Evening']
+Worker  1: ['Tuesday-Evening', 'Sunday-Morning']
+Worker  2: ['Thursday-Morning', 'Thursday-Evening', 'Friday-Morning', 'Saturday-Morning']
+Worker  3: ['Monday-Morning', 'Wednesday-Morning', 'Friday-Evening']
+Worker  4: ['Tuesday-Evening', 'Thursday-Evening', 'Friday-Evening', 'Sunday-Morning']
+Worker  5: ['Wednesday-Evening', 'Thursday-Evening', 'Friday-Evening']
+Worker  6: ['Monday-Evening', 'Wednesday-Morning', 'Friday-Evening', 'Saturday-Morning']
+Worker  7: ['Thursday-Morning', 'Saturday-Evening', 'Sunday-Evening']
+Worker  8: ['Monday-Morning', 'Thursday-Evening', 'Friday-Morning']
+Worker  9: ['Tuesday-Morning', 'Sunday-Evening']
+Worker 10: ['Thursday-Morning', 'Thursday-Evening', 'Saturday-Evening', 'Sunday-Evening']
+Worker 11: ['Monday-Evening', 'Sunday-Morning', 'Sunday-Evening']
+Worker 12: ['Thursday-Evening', 'Saturday-Evening']
+Worker 13: ['Wednesday-Evening', 'Saturday-Evening']
 
-Total preferences across all workers: 42
-Average preferences per worker: 3.0
+Total preferences across all workers: 43
+Average preferences per worker: 3.1
 ======================================================================</code></pre>
 </div>
 </div>
@@ -923,12 +925,12 @@ Average preferences per worker: 3.0
 <li>How it relates to scheduling heuristics from Lecture 6</li>
 </ul></li>
 </ol>
-<div id="d36f085c" class="cell" data-execution_count="9">
+<div id="7e02e4f3" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement your greedy assignment strategy</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Must produce a valid assignment (all workers assigned, no duplicate shifts)</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a014bab5" class="cell" data-execution_count="10">
+<div id="4719ef15" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">My greedy strategy: [what did you prioritize?]</span></span>
@@ -956,11 +958,11 @@ Average preferences per worker: 3.0
 <li>Why you chose this approach</li>
 </ul></li>
 </ol>
-<div id="274ccaf2" class="cell" data-execution_count="11">
+<div id="04bbda2d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement satisfaction calculation</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c2ea6b1a" class="cell" data-execution_count="12">
+<div id="9e33d51d" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">My scoring system: [how do you calculate satisfaction?]</span></span>
@@ -989,15 +991,15 @@ Average preferences per worker: 3.0
 <li>What limitations local search might have</li>
 </ul></li>
 </ol>
-<div id="d80db8f6" class="cell" data-execution_count="13">
+<div id="5490cd84" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Implement local search improvement</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="627544fe" class="cell" data-execution_count="14">
+<div id="2c928faf" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the improvement</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># YOUR CODE HERE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3df203a5" class="cell" data-execution_count="15">
+<div id="10853e31" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">YOUR EXPLANATION HERE:</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">Results: [how much improvement?]</span></span>
@@ -1010,7 +1012,7 @@ Average preferences per worker: 3.0
 <h3 class="anchored" data-anchor-id="task-4-business-recommendations-contingency-planning-5">Task 4: Business Recommendations &amp; Contingency Planning (5%)</h3>
 <p><strong>Business Question 1: Emergency Coverage Protocol</strong></p>
 <p>A critical situation has emerged: Worker 2 calls in sick 10 minutes before their shift. Prepare an emergency response to the warehouse manager.</p>
-<div id="0b7fabb8" class="cell" data-execution_count="16">
+<div id="82094e52" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">EMERGENCY COVERAGE</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1028,7 +1030,7 @@ Average preferences per worker: 3.0
 </div>
 <p><strong>Business Question 2: Strategic Workforce Management Analysis</strong></p>
 <p>The warehouse manager is skeptical: <em>“This is too complicated. I just need bodies in shifts. I don’t care about preferences.”</em> Prepare a strategic analysis comparing approaches.</p>
-<div id="79281b8e" class="cell" data-execution_count="17">
+<div id="3fad13db" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">STRATEGIC ANALYSIS</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
