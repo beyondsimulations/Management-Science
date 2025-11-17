@@ -389,7 +389,9 @@ def calculate_route_distance(route, distance_matrix):
     # YOUR CODE HERE
 
     return total_distance
-
+    
+# Calculate initial route distance
+initial_distance = 
 
 # %%
 # Don't modify below - these test your solution
@@ -399,17 +401,17 @@ test_dist = calculate_route_distance(test_route, distance_matrix)
 assert test_dist > 0, "Distance should be positive"
 
 # Test 2: Full route distance should be reasonable (not too small, not too large)
-full_dist = calculate_route_distance(initial_route, distance_matrix)
-assert full_dist > 10, f"Total distance too small, check if return trip included: {full_dist:.2f} km"
-assert full_dist < 150, f"Total distance too large, check calculation: {full_dist:.2f} km"
+initial_distance = calculate_route_distance(initial_route, distance_matrix)
+assert initial_distance > 10, f"Total distance too small, check if return trip included: {initial_distance:.2f} km"
+assert initial_distance < 150, f"Total distance too large, check calculation: {initial_distance:.2f} km"
 
 # Test 3: Full route should be longer than partial route
-assert full_dist > test_dist, "Full route should be longer than partial route"
+assert initial_distance > test_dist, "Full route should be longer than partial route"
 
 print(f"✓ Route distance calculation correct!")
-print(f"Nearest neighbor route: {full_dist:.2f} km")
-print(f"Fuel cost: €{full_dist * 1.5:.2f}")
-print(f"Time estimate: {full_dist / 30:.1f} hours at 30 km/h average")
+print(f"Nearest neighbor route: {initial_distance:.2f} km")
+print(f"Fuel cost: €{initial_distance * 1.5:.2f}")
+print(f"Time estimate: {initial_distance / 30:.1f} hours at 30 km/h average")
 
 # %% [markdown]
 # # Section 3 - Local Search: 2-Opt Improvement

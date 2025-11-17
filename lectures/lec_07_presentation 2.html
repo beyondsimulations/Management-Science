@@ -272,7 +272,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>The Traveling Salesman Problem</h2>
 <p><span class="highlight">Visit all locations exactly once, minimize total distance.</span></p>
 <div class="fragment">
-<div id="55708daa" class="cell" data-execution_count="1">
+<div id="459cf6e6" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -386,6 +386,42 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
+</section>
+<section id="hamiltonian-cycles-and-tours" class="slide level2">
+<h2>Hamiltonian Cycles and Tours</h2>
+<p><span class="highlight">Mathematical foundation of the TSP:</span></p>
+<ul>
+<li class="fragment"><strong>Hamiltonian Path:</strong> Visits each vertex exactly once</li>
+<li class="fragment"><strong>Hamiltonian Cycle:</strong> Hamiltonian path that returns to start vertex</li>
+<li class="fragment"><strong>TSP Tour:</strong> Minimum weight Hamiltonian cycle</li>
+</ul>
+<div class="fragment">
+<p><strong>Mathematical Definition:</strong> A tour <span class="math inline">\(T = (v_1, v_2, ..., v_n, v_1)\)</span> where:</p>
+<ul>
+<li>Each <span class="math inline">\(v_i \in V\)</span> appears exactly once (except start/end)</li>
+<li>Total weight: <span class="math inline">\(w(T) = \sum_{i=1}^{n} w_{v_i, v_{i+1}}\)</span> (where <span class="math inline">\(v_{n+1} = v_1\)</span>)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="highlight">Goal: Find tour <span class="math inline">\(T^*\)</span> such that <span class="math inline">\(w(T^*) = \min_{T \in \mathcal{H}} w(T)\)</span></span></p>
+</div>
+</section>
+<section id="distance-functions-and-metrics" class="slide level2">
+<h2>Distance Functions and Metrics</h2>
+<p><span class="highlight">The weight function can have different properties:</span></p>
+<ol type="1">
+<li><strong>Identity:</strong> <span class="math inline">\(d(i,i) = 0\)</span> <span class="math inline">\(i \in V\)</span></li>
+<li><strong>Symmetry:</strong> <span class="math inline">\(d(i,j) = d(j,i)\)</span> <span class="math inline">\(i,j \in V\)</span></li>
+<li><strong>Triangle Inequality:</strong> <span class="math inline">\(d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V\)</span></li>
+</ol>
+<div class="fragment">
+<p><strong>Common Distance Functions:</strong></p>
+<ul>
+<li><strong>Euclidean:</strong> <span class="math inline">\(d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\)</span></li>
+<li><strong>Manhattan:</strong> <span class="math inline">\(d(i,j) = |x_i - x_j| + |y_i - y_j|\)</span></li>
+<li><strong>Real road distances:</strong> Often violate triangle inequality!</li>
+</ul>
+</div>
 </section></section>
 <section>
 <section id="greedy-construction" class="title-slide slide level1 title center">
@@ -396,7 +432,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>A Bad Start: Random Route</h2>
 <p><span class="highlight">What happens if we pick cafés randomly?</span></p>
 <div class="fragment">
-<div id="62c82cae" class="cell" data-execution_count="2">
+<div id="3c38cb9c" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -422,7 +458,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-problem" class="slide level2">
 <h2>Nearest Neighbor: The Problem</h2>
 <p><span class="highlight">Given these 8 cafés, which should we visit first?</span></p>
-<div id="9596cbbe" class="cell" data-execution_count="3">
+<div id="0040c525" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -461,7 +497,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-solution" class="slide level2">
 <h2>Nearest Neighbor: The Solution</h2>
 <p><span class="highlight">Let’s see how nearest neighbor builds the route step by step:</span></p>
-<div id="5135ce45" class="cell" data-execution_count="4">
+<div id="70d18186" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -477,16 +513,16 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Furthest insertion builds a more balanced tour by establishing the outer structure first!</p>
+<p>Farthest insertion builds a more balanced tour by establishing the outer structure first!</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="furthest-insertion-the-problem" class="slide level2">
-<h2>Furthest Insertion: The Problem</h2>
+<section id="farthest-insertion-the-problem" class="slide level2">
+<h2>Farthest Insertion: The Problem</h2>
 <p><span class="highlight">Same 8 cafés - but now we’ll use a different strategy:</span></p>
-<div id="5e7f53d4" class="cell" data-execution_count="5">
+<div id="9516e92b" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -508,14 +544,14 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </section>
-<section id="furthest-insertion-the-algorithm" class="slide level2">
-<h2>Furthest Insertion: The Algorithm</h2>
+<section id="farthest-insertion-the-algorithm" class="slide level2">
+<h2>Farthest Insertion: The Algorithm</h2>
 <p><span class="highlight">Build a route by starting with distant points and filling in gaps:</span></p>
 <ol type="1">
 <li>Start at the bakery</li>
-<li>Find the furthest café from bakery - add it to tour</li>
-<li>Create initial tour: Bakery → Furthest → Bakery</li>
-<li><strong>Repeat:</strong> Find the café furthest from current tour</li>
+<li>Find the farthest café from bakery - add it to tour</li>
+<li>Create initial tour: Bakery → Farthest → Bakery</li>
+<li><strong>Repeat:</strong> Find the café farthest from current tour</li>
 <li>Insert it at the position that minimizes tour increase</li>
 <li>Continue until all cafés are in the tour</li>
 </ol>
@@ -532,9 +568,9 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </section>
-<section id="furthest-insertion-step-by-step" class="slide level2">
-<h2>Furthest Insertion: Step-by-Step</h2>
-<div id="29b3f96f" class="cell" data-execution_count="6">
+<section id="farthest-insertion-step-by-step" class="slide level2">
+<h2>Farthest Insertion: Step-by-Step</h2>
+<div id="f888c856" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -550,7 +586,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Notice how furthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!</p>
+<p>Notice how farthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!</p>
 </div>
 </div>
 </div>
@@ -562,7 +598,7 @@ Dr.&nbsp;Tobias Vlćek
 <ul>
 <li class="fragment"><strong>Random:</strong> Usually worst - no strategy at all!</li>
 <li class="fragment"><strong>Nearest Neighbor:</strong> Fast and decent, but can create long returns</li>
-<li class="fragment"><strong>Furthest:</strong> Often best initial solution, builds good “skeleton”</li>
+<li class="fragment"><strong>Farthest:</strong> Often best initial solution, builds good “skeleton”</li>
 </ul>
 <div class="fragment">
 <div class="callout callout-tip callout-style-simple">
@@ -682,7 +718,7 @@ Dr.&nbsp;Tobias Vlćek
 <p><strong>The Idea:</strong> Take two edges and swap them (to uncross the route)</p>
 </div>
 <div class="fragment">
-<div id="e3a95360" class="cell" data-execution_count="7">
+<div id="d94a4aa1" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -696,7 +732,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="example-step-by-step" class="slide level2">
 <h2>Example: Step-by-Step</h2>
 <p><span class="highlight">Let’s see exactly how 2-opt fixes a crossing in a real route:</span></p>
-<div id="3ac6949a" class="cell" data-execution_count="8">
+<div id="6d7ac4ec" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -752,7 +788,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>2-Opt Applied</h2>
 <p><span class="highlight">Let’s see how this changes the route!</span></p>
 <div class="fragment">
-<div id="6f146534" class="cell" data-execution_count="9">
+<div id="51a6d3b8" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -800,7 +836,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="what-about-1-opt" class="slide level2">
 <h2>What About 1-Opt?</h2>
-<div id="35e26c0f" class="cell" data-execution_count="10">
+<div id="5646f189" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -825,7 +861,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="or-opt-moving-sequences" class="slide level2">
 <h2>Or-Opt: Moving Sequences</h2>
 <p><span class="highlight">Moves sequence of 1-3 consecutive cities to different position.</span></p>
-<div id="d480a6c5" class="cell" data-execution_count="11">
+<div id="f5020295" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -956,7 +992,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="visualizing-local-optima" class="slide level2">
 <h2>Visualizing Local Optima</h2>
-<div id="4fd9a0e5" class="cell" data-execution_count="12">
+<div id="2af8cbf9" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -979,7 +1015,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="the-reality" class="slide level2">
 <h2>The Reality</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="a00ddc89" class="cell" data-execution_count="13">
+<div id="9d89972a" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1146,7 +1182,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="opt-with-time-windows" class="slide level2">
 <h2>2-Opt with Time Windows</h2>
 <p><span class="highlight">Problem: 2-opt can break time feasibility!</span></p>
-<div id="b1215fed" class="cell" data-execution_count="14">
+<div id="5b60d790" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1312,6 +1348,12 @@ Dr.&nbsp;Tobias Vlćek
 <li class="fragment">Real constraints (time windows) add complexity</li>
 <li class="fragment">Two-phase approach: Build then improve!</li>
 </ul>
+</section>
+<section id="break" class="slide level2">
+<h2>Break!</h2>
+<p><span class="highlight">Take 20 minutes, then we start the practice notebook</span></p>
+<p><strong>Next up:</strong> You’ll become Bean Counter’s route planner</p>
+<p><strong>Then:</strong> The Bakery competition</p>
 
 
 </section></section>
