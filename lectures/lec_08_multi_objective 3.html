@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Tobias Vlćek">
+
+<title>Multi-Objective Optimization – Management Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-197188da37a79cb9418c4f38e6d23e8d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f088ff709e1277e0222aba4cda41ab4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script defer="" src="https://umi.byndsim.com/script.js" data-website-id="e230d76b-b0a6-477e-8c5d-19a7bd661e68"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_08_multi_objective.html">08 Multi Objective</a></li><li class="breadcrumb-item"><a href="../lectures/lec_08_multi_objective.html">08 Lecture</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">01 Let’s Start</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01 Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_01_variables_data_types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_02_lists_loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Lists</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_03_conditionals_while.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-03 Conditions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">02 Advances</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_02_copilot_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02 Generative AI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_01_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-01 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_02_dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-02 Dictionaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_03_sorting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-03 Sorting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_04_recap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-04 Recap</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">03 Foundation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_03_closing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 Closing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_01_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-01 Numpy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_02_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-02 Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_03_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-03 Plotting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">04 Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_04_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_01_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-01 Monte Carlo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_02_techventure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">05 Forecasting</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_05_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_01_time_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-01 Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_02_predictor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">06 Greedy Search</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_06_greedy_algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_01_scheduling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-01 Scheduling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_02_scheduler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">07 Local Search</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_07_local_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_01_local_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-01 Routing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_02_routing_competition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">08 Multi Objective</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_08_multi_objective.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">08 Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_08_01_multi_objective.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-08-01 Pareto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_08_02_fleet_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-08-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 01</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/vote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vote</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literature</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="flow">Introduction</span></a>
+  <ul class="collapse">
+  <li><a href="#client-briefing-ecoexpress-logistics" id="toc-client-briefing-ecoexpress-logistics" class="nav-link" data-scroll-target="#client-briefing-ecoexpress-logistics"><strong><span class="invert-font">Client Briefing: EcoExpress Logistics</span></strong></a></li>
+  <li><a href="#the-fleet-challenge" id="toc-the-fleet-challenge" class="nav-link" data-scroll-target="#the-fleet-challenge">The Fleet Challenge</a></li>
+  <li><a href="#todays-learning-objectives" id="toc-todays-learning-objectives" class="nav-link" data-scroll-target="#todays-learning-objectives">Today’s Learning Objectives</a></li>
+  <li><a href="#quick-recap-local-search" id="toc-quick-recap-local-search" class="nav-link" data-scroll-target="#quick-recap-local-search">Quick Recap: Local Search</a></li>
+  </ul></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem"><span class="flow">The Problem</span></a>
+  <ul class="collapse">
+  <li><a href="#single-vs-multi-objective" id="toc-single-vs-multi-objective" class="nav-link" data-scroll-target="#single-vs-multi-objective">Single vs Multi-Objective</a></li>
+  <li><a href="#ecoexpress-vehicle-options" id="toc-ecoexpress-vehicle-options" class="nav-link" data-scroll-target="#ecoexpress-vehicle-options">EcoExpress Vehicle Options</a></li>
+  <li><a href="#trade-offs-everywhere" id="toc-trade-offs-everywhere" class="nav-link" data-scroll-target="#trade-offs-everywhere">Trade-offs Everywhere</a></li>
+  <li><a href="#real-business-constraints" id="toc-real-business-constraints" class="nav-link" data-scroll-target="#real-business-constraints">Real Business Constraints</a></li>
+  </ul></li>
+  <li><a href="#pareto-optimality" id="toc-pareto-optimality" class="nav-link" data-scroll-target="#pareto-optimality"><span class="flow">Pareto Optimality</span></a>
+  <ul class="collapse">
+  <li><a href="#dominated-solutions" id="toc-dominated-solutions" class="nav-link" data-scroll-target="#dominated-solutions">Dominated Solutions</a></li>
+  <li><a href="#the-pareto-frontier" id="toc-the-pareto-frontier" class="nav-link" data-scroll-target="#the-pareto-frontier">The Pareto Frontier</a></li>
+  <li><a href="#find-the-non-dominated" id="toc-find-the-non-dominated" class="nav-link" data-scroll-target="#find-the-non-dominated">Find the Non-Dominated</a></li>
+  <li><a href="#three-objectives" id="toc-three-objectives" class="nav-link" data-scroll-target="#three-objectives">Three+ Objectives</a></li>
+  </ul></li>
+  <li><a href="#transportation-problem" id="toc-transportation-problem" class="nav-link" data-scroll-target="#transportation-problem"><span class="flow">Transportation Problem</span></a>
+  <ul class="collapse">
+  <li><a href="#multi-objective-transportation" id="toc-multi-objective-transportation" class="nav-link" data-scroll-target="#multi-objective-transportation">Multi-Objective Transportation</a></li>
+  <li><a href="#classic-transportation" id="toc-classic-transportation" class="nav-link" data-scroll-target="#classic-transportation">Classic Transportation</a></li>
+  <li><a href="#objective-function" id="toc-objective-function" class="nav-link" data-scroll-target="#objective-function">Objective Function</a></li>
+  <li><a href="#second-objective-emissions" id="toc-second-objective-emissions" class="nav-link" data-scroll-target="#second-objective-emissions">Second Objective: Emissions</a></li>
+  <li><a href="#objective-function-ii" id="toc-objective-function-ii" class="nav-link" data-scroll-target="#objective-function-ii">Objective Function II</a></li>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">Data Source</a></li>
+  <li><a href="#the-transportation-trade-off" id="toc-the-transportation-trade-off" class="nav-link" data-scroll-target="#the-transportation-trade-off">The Transportation Trade-off</a></li>
+  </ul></li>
+  <li><a href="#solution-approaches" id="toc-solution-approaches" class="nav-link" data-scroll-target="#solution-approaches"><span class="flow">Solution Approaches</span></a>
+  <ul class="collapse">
+  <li><a href="#multi-objective-optimization" id="toc-multi-objective-optimization" class="nav-link" data-scroll-target="#multi-objective-optimization">Multi-Objective Optimization</a></li>
+  <li><a href="#foundation-extreme-points" id="toc-foundation-extreme-points" class="nav-link" data-scroll-target="#foundation-extreme-points">Foundation: Extreme Points</a></li>
+  <li><a href="#critical-normalization" id="toc-critical-normalization" class="nav-link" data-scroll-target="#critical-normalization">Critical: Normalization</a></li>
+  <li><a href="#how-to-normalize" id="toc-how-to-normalize" class="nav-link" data-scroll-target="#how-to-normalize">How to Normalize</a></li>
+  <li><a href="#extreme-points" id="toc-extreme-points" class="nav-link" data-scroll-target="#extreme-points">Extreme Points</a></li>
+  <li><a href="#computational-complexity" id="toc-computational-complexity" class="nav-link" data-scroll-target="#computational-complexity">Computational Complexity</a></li>
+  <li><a href="#solver-based-methods" id="toc-solver-based-methods" class="nav-link" data-scroll-target="#solver-based-methods">Solver-Based Methods</a></li>
+  </ul></li>
+  <li><a href="#heuristic-approach" id="toc-heuristic-approach" class="nav-link" data-scroll-target="#heuristic-approach"><span class="flow">Heuristic Approach</span></a>
+  <ul class="collapse">
+  <li><a href="#the-heuristic-strategy" id="toc-the-heuristic-strategy" class="nav-link" data-scroll-target="#the-heuristic-strategy">The Heuristic Strategy</a></li>
+  <li><a href="#why-heuristics" id="toc-why-heuristics" class="nav-link" data-scroll-target="#why-heuristics">Why Heuristics?</a></li>
+  <li><a href="#the-three-stage-heuristic-process" id="toc-the-three-stage-heuristic-process" class="nav-link" data-scroll-target="#the-three-stage-heuristic-process">The Three-Stage Heuristic Process</a></li>
+  </ul></li>
+  <li><a href="#construction-improvement" id="toc-construction-improvement" class="nav-link" data-scroll-target="#construction-improvement"><span class="flow">Construction &amp; Improvement</span></a>
+  <ul class="collapse">
+  <li><a href="#construction-methods-for-moo" id="toc-construction-methods-for-moo" class="nav-link" data-scroll-target="#construction-methods-for-moo">Construction Methods for MOO</a></li>
+  <li><a href="#weighted-greedy-construction" id="toc-weighted-greedy-construction" class="nav-link" data-scroll-target="#weighted-greedy-construction">Weighted Greedy Construction</a></li>
+  <li><a href="#sequential-greedy-lexicographic" id="toc-sequential-greedy-lexicographic" class="nav-link" data-scroll-target="#sequential-greedy-lexicographic">Sequential Greedy (Lexicographic)</a></li>
+  <li><a href="#diverse-starting-pool" id="toc-diverse-starting-pool" class="nav-link" data-scroll-target="#diverse-starting-pool">Diverse Starting Pool</a></li>
+  <li><a href="#local-search-for-multi-objective" id="toc-local-search-for-multi-objective" class="nav-link" data-scroll-target="#local-search-for-multi-objective">Local Search for Multi-Objective</a></li>
+  <li><a href="#moo-local-search-rules" id="toc-moo-local-search-rules" class="nav-link" data-scroll-target="#moo-local-search-rules">MOO Local Search Rules</a></li>
+  </ul></li>
+  <li><a href="#from-pareto-front-to-decision" id="toc-from-pareto-front-to-decision" class="nav-link" data-scroll-target="#from-pareto-front-to-decision"><span class="flow">From Pareto Front to Decision</span></a>
+  <ul class="collapse">
+  <li><a href="#how-to-choose" id="toc-how-to-choose" class="nav-link" data-scroll-target="#how-to-choose">How to Choose!</a></li>
+  <li><a href="#weighted-sum-along-the-frontier" id="toc-weighted-sum-along-the-frontier" class="nav-link" data-scroll-target="#weighted-sum-along-the-frontier">Weighted Sum Along the Frontier</a></li>
+  <li><a href="#weighting-has-an-impact" id="toc-weighting-has-an-impact" class="nav-link" data-scroll-target="#weighting-has-an-impact">Weighting has an Impact</a></li>
+  </ul></li>
+  <li><a href="#advanced" id="toc-advanced" class="nav-link" data-scroll-target="#advanced"><span class="flow">Advanced</span></a>
+  <ul class="collapse">
+  <li><a href="#speed-vs-sustainability-dilemma" id="toc-speed-vs-sustainability-dilemma" class="nav-link" data-scroll-target="#speed-vs-sustainability-dilemma">Speed vs Sustainability Dilemma</a></li>
+  <li><a href="#moving-the-frontier" id="toc-moving-the-frontier" class="nav-link" data-scroll-target="#moving-the-frontier">Moving the Frontier</a></li>
+  </ul></li>
+  <li><a href="#briefing" id="toc-briefing" class="nav-link" data-scroll-target="#briefing"><span class="flow">Briefing</span></a>
+  <ul class="collapse">
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#the-competition-challenge" id="toc-the-competition-challenge" class="nav-link" data-scroll-target="#the-competition-challenge">The Competition Challenge</a></li>
+  <li><a href="#choosing-your-moo-approach" id="toc-choosing-your-moo-approach" class="nav-link" data-scroll-target="#choosing-your-moo-approach">Choosing Your MOO Approach</a></li>
+  <li><a href="#implementation-pitfalls-to-avoid" id="toc-implementation-pitfalls-to-avoid" class="nav-link" data-scroll-target="#implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break">Break!</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_08_multi_objective.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_08_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_08_multi_objective.html">08 Multi Objective</a></li><li class="breadcrumb-item"><a href="../lectures/lec_08_multi_objective.html">08 Lecture</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Multi-Objective Optimization</h1>
+<p class="subtitle lead">Lecture 8 - Management Science</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Tobias Vlćek </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1 title">
+<h1 class="title"><span class="flow">Introduction</span></h1>
+<section id="client-briefing-ecoexpress-logistics" class="level2" data-background-image="https://unsplash.com/photos/QqSIuvz94s8/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTF8fHN1c3RhaW5hYmlsaXR5fGVufDB8fHx8MTc2MzE4Nzk0MHww&amp;force=true&amp;w=2400" data-background-size="cover">
+<h2 data-background-image="https://unsplash.com/photos/QqSIuvz94s8/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTF8fHN1c3RhaW5hYmlsaXR5fGVufDB8fHx8MTc2MzE4Nzk0MHww&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-ecoexpress-logistics"><strong><span class="invert-font">Client Briefing: EcoExpress Logistics</span></strong></h2>
+<p>. . .</p>
+<p><span class="invert-font">Operations Director’s Dilemma:</span></p>
+<p><span class="invert-font fragment">“EU regulations demand 40% emission cuts, but we can’t sacrifice <span class="highlight">profitability</span>, <span class="highlight">service quality</span>, or <span class="highlight">reliability</span>!”</span></p>
+</section>
+<section id="the-fleet-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="the-fleet-challenge">The Fleet Challenge</h2>
+<p><span class="highlight">EcoExpress operates regional last-mile delivery across 3 cities</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li>EU Green Deal: 40% emission reduction by 2025</li>
+<li>Rising fuel costs (€2.1/L diesel)</li>
+<li>Amazon entering our market (speed pressure)</li>
+<li>Driver shortage (need automation-friendly vehicles)</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> How do we transform our fleet while staying competitive?</p>
+</section>
+<section id="todays-learning-objectives" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="todays-learning-objectives">Today’s Learning Objectives</h2>
+<p><span class="highlight">By the end of this lecture, you will be able to:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li>Explain why most real business decisions involve multiple competing objectives</li>
+<li>Identify and visualize Pareto optimal solutions in multi-objective problems</li>
+<li>Apply normalization techniques to make objectives comparable</li>
+<li>Implement weighted sum and ε-constraint methods to find trade-off solutions</li>
+<li>Choose the appropriate MOO method for different problem types</li>
+<li>Make data-driven decisions from a Pareto frontier</li>
+<li>Analyze real-world multi-objective trade-offs (Amazon, airlines, Tesla)</li>
+</ol>
+</div>
+</section>
+<section id="quick-recap-local-search" class="level2">
+<h2 class="anchored" data-anchor-id="quick-recap-local-search">Quick Recap: Local Search</h2>
+<p><span class="highlight">Last week we optimized routes for delivery:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li>Started with greedy construction (e.g.&nbsp;Nearest Neighbor)</li>
+<li>Improved with local search (e.g.&nbsp;2-opt)</li>
+<li>Considered time windows</li>
+<li><strong>But: We only optimized distance</strong></li>
+</ul>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> What if we also care about emissions, cost, AND customer satisfaction?</p>
+</section>
+</section>
+<section id="the-problem" class="level1 title">
+<h1 class="title"><span class="flow">The Problem</span></h1>
+<section id="single-vs-multi-objective" class="level2">
+<h2 class="anchored" data-anchor-id="single-vs-multi-objective">Single vs Multi-Objective</h2>
+<p><strong>Single Objective</strong></p>
+<ul>
+<li><span class="highlight">“Minimize total distance”</span></li>
+<li>Clear winner. Easy, right!</li>
+</ul>
+<p>. . .</p>
+<p><strong>Multiple Objectives</strong></p>
+<ul>
+<li><span class="highlight">“Minimize cost AND emissions AND maximize speed”</span></li>
+<li>No clear answer…</li>
+</ul>
+<p>. . .</p>
+<p><span class="question">Question:</span> Any idea how to approach this?</p>
+</section>
+<section id="ecoexpress-vehicle-options" class="level2">
+<h2 class="anchored" data-anchor-id="ecoexpress-vehicle-options">EcoExpress Vehicle Options</h2>
+<div id="8ec90405" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-striped caption-top table-sm small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Purchase Cost (€)</th>
+<th data-quarto-table-cell-role="th">Operating (€/km)</th>
+<th data-quarto-table-cell-role="th">CO2 (g/km)</th>
+<th data-quarto-table-cell-role="th">Speed (km/h)</th>
+<th data-quarto-table-cell-role="th">Capacity (parcels)</th>
+<th data-quarto-table-cell-role="th">Range (km)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>E-Truck</td>
+<td>75000</td>
+<td>0.18</td>
+<td>0</td>
+<td>55</td>
+<td>300</td>
+<td>250</td>
+</tr>
+<tr class="even">
+<td>Hybrid Van</td>
+<td>45000</td>
+<td>0.25</td>
+<td>95</td>
+<td>65</td>
+<td>200</td>
+<td>600</td>
+</tr>
+<tr class="odd">
+<td>Diesel Van</td>
+<td>35000</td>
+<td>0.38</td>
+<td>185</td>
+<td>70</td>
+<td>250</td>
+<td>800</td>
+</tr>
+<tr class="even">
+<td>E-Cargo Bike</td>
+<td>12000</td>
+<td>0.05</td>
+<td>0</td>
+<td>30</td>
+<td>50</td>
+<td>60</td>
+</tr>
+<tr class="odd">
+<td>Autonomous</td>
+<td>95000</td>
+<td>0.12</td>
+<td>0</td>
+<td>40</td>
+<td>150</td>
+<td>180</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> Which vehicle is “best” for EcoExpress?</p>
+</section>
+<section id="trade-offs-everywhere" class="level2">
+<h2 class="anchored" data-anchor-id="trade-offs-everywhere">Trade-offs Everywhere</h2>
+<div id="74fe2332" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-3-output-1.png" width="1139" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Every vehicle excels at something different!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="real-business-constraints" class="level2">
+<h2 class="anchored" data-anchor-id="real-business-constraints">Real Business Constraints</h2>
+<p><span class="highlight">Beyond the numbers, consider:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>EU regulations:</strong> Carbon tax of €100/ton CO₂ starting 2025</li>
+<li><strong>Competition:</strong> Amazon promises 2-hour delivery</li>
+<li><strong>Labor market:</strong> Autonomous vehicles reduce driver dependency</li>
+<li><strong>Urban zones:</strong> Zero-emission zones in city centers</li>
+<li><strong>Peak times:</strong> Black Friday = 3x normal volume</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>There is no single “optimal” solution - only trade-offs</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pareto-optimality" class="level1 title">
+<h1 class="title"><span class="flow">Pareto Optimality</span></h1>
+<section id="dominated-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="dominated-solutions">Dominated Solutions</h2>
+<p><span class="highlight">A solution is dominated if another solution is:</span></p>
+<div id="1e79f7b9" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-4-output-1.png" width="1136" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Better in at least one objective and not worse in any objective!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-pareto-frontier" class="level2">
+<h2 class="anchored" data-anchor-id="the-pareto-frontier">The Pareto Frontier</h2>
+<p><span class="highlight">The Pareto frontier is the set of all non-dominated solutions</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li>No solution is objectively “better”</li>
+<li>Each represents a different trade-off</li>
+<li>Moving along frontier: gain in one objective, loss in another</li>
+<li>Decision makers choose based on <strong>preferences</strong></li>
+</ul>
+</div>
+<p>. . .</p>
+<p><span class="question">Question</span> Do you think you get the idea?</p>
+</section>
+<section id="find-the-non-dominated" class="level2">
+<h2 class="anchored" data-anchor-id="find-the-non-dominated">Find the Non-Dominated</h2>
+<div id="13e32143" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-5-output-1.png" width="1140" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> Which fleets are non-dominated?</p>
+</section>
+<section id="three-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="three-objectives">Three+ Objectives</h2>
+<p><span class="highlight">With 3 objectives, the Pareto frontier becomes a surface:</span></p>
+<div id="b17226d5" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-6-output-1.png" width="400" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Harder to visualize, but same principle applies!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="transportation-problem" class="level1 title">
+<h1 class="title"><span class="flow">Transportation Problem</span></h1>
+<section id="multi-objective-transportation" class="level2">
+<h2 class="anchored" data-anchor-id="multi-objective-transportation">Multi-Objective Transportation</h2>
+<div id="e810ca01" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-7-output-1.png" width="1138" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><span class="highlight">Logistics decisions involve trade-offs:</span> City traffic (slow, high emissions), Night delivery? → Highway (fast, but more distance), Customer priority? → Direct route (expensive)</p>
+</div>
+</div>
+</div>
+</section>
+<section id="classic-transportation" class="level2">
+<h2 class="anchored" data-anchor-id="classic-transportation">Classic Transportation</h2>
+<p><span class="highlight">Let’s understand the foundation</span></p>
+<p>. . .</p>
+<div id="55833730" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-striped caption-top table-sm small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">From/To</th>
+<th data-quarto-table-cell-role="th">Zone A</th>
+<th data-quarto-table-cell-role="th">Zone B</th>
+<th data-quarto-table-cell-role="th">Zone C</th>
+<th data-quarto-table-cell-role="th">Zone D</th>
+<th data-quarto-table-cell-role="th">Supply</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DC Berlin</td>
+<td>8</td>
+<td>10</td>
+<td>11</td>
+<td>14</td>
+<td>300</td>
+</tr>
+<tr class="even">
+<td>DC Hamburg</td>
+<td>12</td>
+<td>9</td>
+<td>7</td>
+<td>8</td>
+<td>250</td>
+</tr>
+<tr class="odd">
+<td>DC Munich</td>
+<td>15</td>
+<td>13</td>
+<td>10</td>
+<td>9</td>
+<td>200</td>
+</tr>
+<tr class="even">
+<td>Demand</td>
+<td>200</td>
+<td>180</td>
+<td>220</td>
+<td>150</td>
+<td>750</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Cost per 100 parcels (€) in the middle of the table!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="objective-function" class="level2">
+<h2 class="anchored" data-anchor-id="objective-function">Objective Function</h2>
+<p><span class="highlight">The foundation of the classical model</span></p>
+<p><span class="math display">\[\text{Minimize } Z = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(x_{ij}\)</span> = parcels shipped from DC <span class="math inline">\(i\)</span> to Zone <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(c_{ij}\)</span> = cost per 100 parcels from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span></li>
+</ul>
+</section>
+<section id="second-objective-emissions" class="level2">
+<h2 class="anchored" data-anchor-id="second-objective-emissions">Second Objective: Emissions</h2>
+<p><span class="highlight">Now the real challenge - each route has different emissions:</span></p>
+<div id="1302ba13" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<table class="dataframe table table-striped caption-top table-sm small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">From/To</th>
+<th data-quarto-table-cell-role="th">Zone A</th>
+<th data-quarto-table-cell-role="th">Zone B</th>
+<th data-quarto-table-cell-role="th">Zone C</th>
+<th data-quarto-table-cell-role="th">Zone D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DC Berlin</td>
+<td>120</td>
+<td>95</td>
+<td>85</td>
+<td>70</td>
+</tr>
+<tr class="even">
+<td>DC Hamburg</td>
+<td>45</td>
+<td>110</td>
+<td>100</td>
+<td>90</td>
+</tr>
+<tr class="odd">
+<td>DC Munich</td>
+<td>60</td>
+<td>50</td>
+<td>115</td>
+<td>105</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Emissions per parcel (g CO₂) in the table</p>
+</div>
+</div>
+</div>
+</section>
+<section id="objective-function-ii" class="level2">
+<h2 class="anchored" data-anchor-id="objective-function-ii">Objective Function II</h2>
+<p><span class="highlight">Now with two objectives!</span></p>
+<p><span class="math display">\[\text{Minimize } Z_1 = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij} \quad \text{(Cost)}\]</span> <span class="math display">\[\text{Minimize } Z_2 = \sum_{i} \sum_{j} e_{ij} \cdot x_{ij} \quad \text{(Emissions)}\]</span></p>
+<p>Where <span class="math inline">\(e_{ij}\)</span> = emissions per parcel from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span></p>
+<p>. . .</p>
+<p><span class="highlight">Notice: Cheapest routes ≠ Greenest routes!</span></p>
+</section>
+<section id="data-source" class="level2">
+<h2 class="anchored" data-anchor-id="data-source">Data Source</h2>
+<p><span class="highlight">Where Do These Numbers Come From?</span></p>
+<p>. . .</p>
+<p><strong>Cost Data:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Historical records</strong>: Your accounting system</li>
+<li><strong>Quotes</strong>: Request from carriers/suppliers<br>
+</li>
+<li><strong>APIs</strong>: Google Maps Distance Matrix (distance → cost)</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><strong>Emissions Data:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>EU Standards or Carrier data</strong></li>
+<li><strong>Formula</strong>: <code>Emissions = Distance × Weight × EmissionFactor</code></li>
+</ul>
+</div>
+</section>
+<section id="the-transportation-trade-off" class="level2">
+<h2 class="anchored" data-anchor-id="the-transportation-trade-off">The Transportation Trade-off</h2>
+<div id="da44e985" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-10-output-1.png" width="1139" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cost increase for greenest solution: +€26800 (42.1%)
+Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Each point represents a different allocation strategy!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="solution-approaches" class="level1 title">
+<h1 class="title"><span class="flow">Solution Approaches</span></h1>
+<section id="multi-objective-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="multi-objective-optimization">Multi-Objective Optimization</h2>
+<p><span class="highlight">You can use optimization solvers or heuristics!</span></p>
+<p>. . .</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>With Optimization Solvers</strong></p>
+<ul>
+<li>Weighted Sum Method</li>
+<li>ε-Constraint Method<br>
+</li>
+<li>Goal Programming</li>
+<li><strong>Optimal solutions</strong></li>
+<li><strong>Need mathematical model</strong></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>With Heuristics</strong></p>
+<ul>
+<li>Weighted Greedy Construction</li>
+<li>Multi-Objective Local Search</li>
+<li>Metaheuristics</li>
+<li><strong>Good solutions, fast</strong></li>
+<li><strong>No optimality proof</strong></li>
+</ul>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In this lecture we use heuristic approaches!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="foundation-extreme-points" class="level2">
+<h2 class="anchored" data-anchor-id="foundation-extreme-points">Foundation: Extreme Points</h2>
+<p><span class="highlight">First step for BOTH approaches - find the boundaries:</span></p>
+<div id="a382ad64" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-11-output-1.png" width="1140" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> Why is normalization essential?</p>
+</section>
+<section id="critical-normalization" class="level2">
+<h2 class="anchored" data-anchor-id="critical-normalization">Critical: Normalization</h2>
+<p><span class="highlight">Without it, your analysis is meaningless</span></p>
+<div id="ae29e496" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-12-output-1.png" width="1138" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> Any intuition on how to do [0,1] normalization?</p>
+</section>
+<section id="how-to-normalize" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-normalize">How to Normalize</h2>
+<p><span class="highlight">The Normalization Formula for [0,1]</span></p>
+<p><span class="math display">\[\text{Normalized}_i = \frac{x_i - x_{min}}{x_{max} - x_{min}}\]</span></p>
+<p>. . .</p>
+<p><strong>In Python, this is rather simple!</strong></p>
+<p>. . .</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize_objectives(data):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (data <span class="op">-</span> data.<span class="bu">min</span>()) <span class="op">/</span> (data.<span class="bu">max</span>() <span class="op">-</span> data.<span class="bu">min</span>())</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Now weights actually mean something</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>weighted_score <span class="op">=</span> w1 <span class="op">*</span> normalize(cost) <span class="op">+</span> w2 <span class="op">*</span> normalize(emissions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Easy, right?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="extreme-points" class="level2">
+<h2 class="anchored" data-anchor-id="extreme-points">Extreme Points</h2>
+<p><span class="highlight">There are several reasons why extreme points matter:</span></p>
+<ol type="1">
+<li><strong>Trade-off Space</strong>: Min/max values bound your Pareto frontier</li>
+<li><strong>Enable Proper Normalization</strong>: Need ranges for scaling to [0,1]</li>
+<li><strong>Feasibility</strong>: If single objectives not achievable, problem infeasible</li>
+<li><strong>Stakeholder</strong>: “Best cost is €50k, best emissions is 40kg”</li>
+</ol>
+<p>. . .</p>
+<p><strong>Implementation Pattern:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_extreme_points(problem):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Solve for minimum cost (ignore emissions)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    min_cost_solution <span class="op">=</span> minimize(cost_objective, constraints)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Solve for minimum emissions (ignore cost)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    min_emissions_solution <span class="op">=</span> minimize(emissions_objective, constraints)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="computational-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="computational-complexity">Computational Complexity</h2>
+<p><span class="highlight">How hard does it get with more objectives?</span></p>
+<p>. . .</p>
+<div id="d96785cd" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-13-output-1.png" width="1142" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Why? Because there are just way more potential solutions to check!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="solver-based-methods" class="level2">
+<h2 class="anchored" data-anchor-id="solver-based-methods">Solver-Based Methods</h2>
+<p><span class="highlight">Quick overview - you won’t implement these in assignments</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Weighted Sum:</strong> Minimize <span class="math inline">\(w_1 \times \text{cost} + w_2 \times \text{emissions}\)</span>
+<ul class="incremental">
+<li>Simple, fast for convex problems</li>
+</ul></li>
+<li><strong>ε-Constraint:</strong> Minimize cost subject to emissions <span class="math inline">\(\leq \varepsilon\)</span>
+<ul class="incremental">
+<li>Systematically vary <span class="math inline">\(\varepsilon\)</span> to find complete frontier</li>
+</ul></li>
+<li><strong>Goal Programming:</strong> Minimize deviations from targets
+<ul class="incremental">
+<li>Set target for each objective, minimize weighted deviations</li>
+</ul></li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>For your fleet optimization:</strong> You’ll use <strong>heuristic approaches</strong> instead!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="heuristic-approach" class="level1 title">
+<h1 class="title"><span class="flow">Heuristic Approach</span></h1>
+<section id="the-heuristic-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="the-heuristic-strategy">The Heuristic Strategy</h2>
+<p><span class="highlight">For problems without mathematical models</span></p>
+<p>. . .</p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Construction:</strong> Build initial solutions with weighted greedy</li>
+<li><strong>Improvement:</strong> Multi-objective local search</li>
+<li><strong>Selection:</strong> Filter dominated solutions to find Pareto frontier</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Key difference from solvers:</strong></p>
+<ul>
+<li><strong>Solvers:</strong> Need mathematical model, guarantee optimality</li>
+<li><strong>Heuristics:</strong> Work with any evaluation function, find good solutions fast</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="why-heuristics" class="level2">
+<h2 class="anchored" data-anchor-id="why-heuristics">Why Heuristics?</h2>
+<p><span class="highlight">Depending on the problem:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Combinatorial explosion</strong></li>
+<li>Huge solution space even for one problem</li>
+<li>Evaluating one solution might thus take too long</li>
+<li>Need diverse Pareto frontier, not just one “optimal” solution</li>
+<li>Open Source Solvers too slow</li>
+<li>Commercial solvers too expensive</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> How do we build good solutions without a solver?</p>
+</section>
+<section id="the-three-stage-heuristic-process" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-stage-heuristic-process">The Three-Stage Heuristic Process</h2>
+<div id="d7ea3df4" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-14-output-1.png" width="1140" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="highlight">This is what you’ll implement in your assignments!</span></p>
+</section>
+</section>
+<section id="construction-improvement" class="level1 title">
+<h1 class="title"><span class="flow">Construction &amp; Improvement</span></h1>
+<section id="construction-methods-for-moo" class="level2">
+<h2 class="anchored" data-anchor-id="construction-methods-for-moo">Construction Methods for MOO</h2>
+<p><span class="highlight">How to build initial solutions when you have multiple objectives?</span></p>
+<div id="9d8090e1" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-15-output-1.png" width="1140" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Three choices (for starters). Let’s check them out!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="weighted-greedy-construction" class="level2">
+<h2 class="anchored" data-anchor-id="weighted-greedy-construction">Weighted Greedy Construction</h2>
+<p><span class="highlight">Making greedy choices on a weighted objective</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Choose weight vector</strong> w = (w₁, w₂)</li>
+<li><strong>At each step, pick the choice that minimizes:</strong> <span class="math display">\[w_1 \cdot \text{cost}(x) + w_2 \cdot \text{emissions}(x)\]</span></li>
+<li><strong>Build complete solution greedily</strong></li>
+<li><strong>Repeat</strong> with different weights to explore frontier</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Different weights explore different trade-offs! Easy, right?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sequential-greedy-lexicographic" class="level2">
+<h2 class="anchored" data-anchor-id="sequential-greedy-lexicographic">Sequential Greedy (Lexicographic)</h2>
+<p><span class="highlight">Optimize one objective at a time, in priority order</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Rank objectives by priority</strong>
+<ul class="incremental">
+<li>E.g. cost (most important) and then emissions (tie-breaker)</li>
+</ul></li>
+<li><strong>At each step:</strong>
+<ul class="incremental">
+<li>Find choices that minimize <strong>primary</strong> objective</li>
+<li>If tie → use <strong>secondary</strong> objective</li>
+</ul></li>
+<li><strong>Build one working solution</strong></li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>We could also accept primary values within 10% of best so secondary has more influence!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="diverse-starting-pool" class="level2">
+<h2 class="anchored" data-anchor-id="diverse-starting-pool">Diverse Starting Pool</h2>
+<p><span class="highlight">Generate many random solutions, keep the non-dominated ones</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Generate N random solutions (e.g., N=100)</strong></li>
+<li><strong>Evaluate all solutions on both objectives</strong></li>
+<li><strong>Filter to keep only non-dominated solutions</strong></li>
+<li><strong>Result:</strong> A diverse set of Pareto-optimal solutions</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li>Explores <strong>entire</strong> solution space</li>
+<li>No bias toward specific weights</li>
+<li>Great for <strong>warm-starting</strong> local search</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="local-search-for-multi-objective" class="level2">
+<h2 class="anchored" data-anchor-id="local-search-for-multi-objective">Local Search for Multi-Objective</h2>
+<p><span class="highlight">Special moves that improve multiple objectives:</span></p>
+<div id="38f7fb7c" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-16-output-1.png" width="1138" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> Which moves are acceptable?</p>
+</section>
+<section id="moo-local-search-rules" class="level2">
+<h2 class="anchored" data-anchor-id="moo-local-search-rules">MOO Local Search Rules</h2>
+<p><span class="highlight">Accept a move if:</span></p>
+<ol type="1">
+<li><strong>Dominance</strong>: New solution dominates current (win-win!)</li>
+<li><strong>Trade-off</strong>: Improves primary, acceptable loss in secondary</li>
+<li><strong>Diversity</strong>: Fills gap in current Pareto front</li>
+<li><strong>Probabilistic</strong>: Use temperature (like simulated annealing)</li>
+</ol>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Always keep all your objectives in mind when making decisions.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="from-pareto-front-to-decision" class="level1 title">
+<h1 class="title"><span class="flow">From Pareto Front to Decision</span></h1>
+<section id="how-to-choose" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-choose">How to Choose!</h2>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><span class="highlight">The Knee Point:</span> Find the “elbow” where improvement slows</li>
+<li><span class="highlight">Satisficing Levels:</span> Set minimum acceptable thresholds
+<ul class="incremental">
+<li><strong>Cost</strong> must be &lt; €100k (budget constraint)</li>
+<li><strong>Emissions</strong> must be &lt; 100 kg (regulatory limit)</li>
+<li><strong>Service level</strong> must be &gt; 90% (customer requirement)</li>
+</ul></li>
+<li><span class="highlight">Stakeholder Preferences:</span> Let business priorities guide
+<ul class="incremental">
+<li><strong>Sustainability:</strong> Minimum emissions that meets constraints</li>
+<li><strong>Operations:</strong> Maximum service level within budget</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="weighted-sum-along-the-frontier" class="level2">
+<h2 class="anchored" data-anchor-id="weighted-sum-along-the-frontier">Weighted Sum Along the Frontier</h2>
+<p><span class="highlight">The weight influences the final choice:</span></p>
+<div id="879d62b8" class="cell" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-17-output-1.png" width="1239" height="369" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The iso-cost lines show the trade-offs between cost and emissions.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="weighting-has-an-impact" class="level2">
+<h2 class="anchored" data-anchor-id="weighting-has-an-impact">Weighting has an Impact</h2>
+<p><span class="highlight">The weights thus reflect your values!</span></p>
+<div id="a215fdf8" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-18-output-1.png" width="1139" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Depending on your weight, the choice will vary.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="advanced" class="level1 title">
+<h1 class="title"><span class="flow">Advanced</span></h1>
+<section id="speed-vs-sustainability-dilemma" class="level2">
+<h2 class="anchored" data-anchor-id="speed-vs-sustainability-dilemma">Speed vs Sustainability Dilemma</h2>
+<p><span class="highlight">The Three-Way Trade-off in E-Commerce</span></p>
+<ol type="1">
+<li><strong>Minimize Delivery Time</strong> (1-day/2-hour promise)</li>
+<li><strong>Minimize Cost</strong> (fuel, labor, fulfillment)</li>
+<li><strong>Minimize Environmental Impact</strong> (carbon footprint)</li>
+</ol>
+<p>. . .</p>
+<p><span class="highlight">Faster delivery = More vehicles less full = Higher emissions</span></p>
+<p>. . .</p>
+<p><span class="question">Question:</span> What could retailers do?</p>
+</section>
+<section id="moving-the-frontier" class="level2">
+<h2 class="anchored" data-anchor-id="moving-the-frontier">Moving the Frontier</h2>
+<p><span class="highlight">Instead of point on the frontier, move the entire frontier:</span></p>
+<p>. . .</p>
+<p><span class="question">Question:</span> Any idea of examples?</p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>R&amp;D can fundamentally change what’s possible!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="briefing" class="level1 title">
+<h1 class="title"><span class="flow">Briefing</span></h1>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>Hour 2: This Lecture</strong></p>
+<ul>
+<li>Multi-objective</li>
+<li>Pareto optimality</li>
+<li>Weighted greedy</li>
+<li>Local search MOO</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Hour 3: Notebook</strong></p>
+<ul>
+<li>Bean Counter CEO</li>
+<li>Find Pareto frontier</li>
+<li>Apply weighted greedy</li>
+<li>Normalize objectives</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Hour 4: Competition</strong></p>
+<ul>
+<li>Transportation problem</li>
+<li>Fleet selection</li>
+<li>Cost vs emissions</li>
+<li>Justify choice!</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-competition-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="the-competition-challenge">The Competition Challenge</h2>
+<p><span class="highlight">EcoExpress Sustainable Fleet Design</span></p>
+<p>. . .</p>
+<ol type="1">
+<li><strong>Solve</strong> multi-objective transportation (DCs → Zones)</li>
+<li><strong>Select</strong> optimal fleet mix (5 vehicle types)</li>
+<li><strong>Balance</strong> cost, emissions, service quality</li>
+<li><strong>Meet</strong> EU emission targets (40% reduction)</li>
+</ol>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Find the best trade-off for your business priorities!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="choosing-your-moo-approach" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-your-moo-approach">Choosing Your MOO Approach</h2>
+<p><span class="highlight">Different situations call for different methods:</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Best</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clear priorities</td>
+<td>Sequential greedy</td>
+<td>Fast, hierarchy</td>
+</tr>
+<tr class="even">
+<td>Exploring</td>
+<td>Weighted greedy</td>
+<td>Different solutions</td>
+</tr>
+<tr class="odd">
+<td>Many solutions</td>
+<td>Diverse pool</td>
+<td>Builds frontier</td>
+</tr>
+<tr class="even">
+<td>Quick solution</td>
+<td>Single weighted</td>
+<td>One good compromise</td>
+</tr>
+<tr class="odd">
+<td>Improve existing</td>
+<td>Multi-objective local</td>
+<td>Refines trade-offs</td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Competition?</strong> Generate diverse pool or weigted, then improve with local search.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="implementation-pitfalls-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</h2>
+<p><span class="highlight">Common bugs that cost you time:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Forgetting to Normalize</strong>
+<ul class="incremental">
+<li>Always normalize to [0,1] first!</li>
+</ul></li>
+<li><strong>Optimizing Too Many Objectives</strong>
+<ul class="incremental">
+<li>2-3: Manageable, 4+: Exponentially harder</li>
+<li>Combine related objectives or use constraints</li>
+</ul></li>
+<li><strong>Not Checking Solution Feasibility</strong>
+<ul class="incremental">
+<li>Always verify constraints after optimization</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><span class="highlight">Key Takeaways:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li>Real decisions have multiple conflicting objectives</li>
+<li>Pareto frontier shows all rational trade-offs</li>
+<li>Normalization is essential for fair comparison</li>
+<li>Weighted sum works for convex frontiers</li>
+<li>ε-constraint handles non-convex cases</li>
+<li>Weights reflect values, make them explicit</li>
+<li>Visualization crucial for decision-making</li>
+</ul>
+</div>
+</section>
+<section id="break" class="level2">
+<h2 class="anchored" data-anchor-id="break">Break!</h2>
+<p><span class="highlight">Take 20 minutes, then we start the practice notebook</span></p>
+<p><strong>Next up:</strong> You’ll become Bean Counter’s expert</p>
+<p><strong>Then:</strong> The Sustainability competition</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/beyondsimulations\.github\.io\/Management-Science");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/beyondsimulations/Management-Science">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/tobiasvlcek">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:vlcek@beyondsimulations.com">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://beyondsimulations.github.io/lectures">
+      <i class="bi bi-skip-backward" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../general/privacy.html">
+<p>Privacy Policy</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+<p>Management Science, Tobias Vlćek <br>CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/gh/beyondsimulations/web-embedded-chat@latest/floating-chat.js"></script>
+<script>
+    new UniversalChatWidget({
+        title: "Course Assistant",
+        apiEndpoint: "https://model-proxy.vlcek-4b4.workers.dev/api",
+        model: "management-science",
+        userMessageOpacity: 0.5,
+        assistantMessageOpacity: 0.5,
+        position: "bottom-right",
+        windowHeight: 800
+    });
+</script>
+
+
+
+
+</body></html>
