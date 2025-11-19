@@ -544,15 +544,17 @@ window.Quarto = {
   <li><a href="#find-the-non-dominated" id="toc-find-the-non-dominated" class="nav-link" data-scroll-target="#find-the-non-dominated">Find the Non-Dominated</a></li>
   <li><a href="#three-objectives" id="toc-three-objectives" class="nav-link" data-scroll-target="#three-objectives">Three+ Objectives</a></li>
   </ul></li>
-  <li><a href="#transportation-problem" id="toc-transportation-problem" class="nav-link" data-scroll-target="#transportation-problem"><span class="flow">Transportation Problem</span></a>
+  <li><a href="#fleet-composition-problem" id="toc-fleet-composition-problem" class="nav-link" data-scroll-target="#fleet-composition-problem"><span class="flow">Fleet Composition Problem</span></a>
   <ul class="collapse">
-  <li><a href="#multi-objective-transportation" id="toc-multi-objective-transportation" class="nav-link" data-scroll-target="#multi-objective-transportation">Multi-Objective Transportation</a></li>
-  <li><a href="#classic-transportation" id="toc-classic-transportation" class="nav-link" data-scroll-target="#classic-transportation">Classic Transportation</a></li>
-  <li><a href="#objective-function" id="toc-objective-function" class="nav-link" data-scroll-target="#objective-function">Objective Function</a></li>
-  <li><a href="#second-objective-emissions" id="toc-second-objective-emissions" class="nav-link" data-scroll-target="#second-objective-emissions">Second Objective: Emissions</a></li>
-  <li><a href="#objective-function-ii" id="toc-objective-function-ii" class="nav-link" data-scroll-target="#objective-function-ii">Objective Function II</a></li>
+  <li><a href="#the-fleet-challenge-1" id="toc-the-fleet-challenge-1" class="nav-link" data-scroll-target="#the-fleet-challenge-1">The Fleet Challenge</a></li>
+  <li><a href="#vehicle-options-recap" id="toc-vehicle-options-recap" class="nav-link" data-scroll-target="#vehicle-options-recap">Vehicle Options Recap</a></li>
+  <li><a href="#fleet-composition-framework" id="toc-fleet-composition-framework" class="nav-link" data-scroll-target="#fleet-composition-framework">Fleet Composition Framework</a></li>
+  <li><a href="#objective-1-total-cost" id="toc-objective-1-total-cost" class="nav-link" data-scroll-target="#objective-1-total-cost">Objective 1: Total Cost</a></li>
+  <li><a href="#objective-2-service-score" id="toc-objective-2-service-score" class="nav-link" data-scroll-target="#objective-2-service-score">Objective 2: Service Score</a></li>
+  <li><a href="#hard-constraint-emissions" id="toc-hard-constraint-emissions" class="nav-link" data-scroll-target="#hard-constraint-emissions">Hard Constraint: Emissions</a></li>
   <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">Data Source</a></li>
-  <li><a href="#the-transportation-trade-off" id="toc-the-transportation-trade-off" class="nav-link" data-scroll-target="#the-transportation-trade-off">The Transportation Trade-off</a></li>
+  <li><a href="#example-fleet-comparison" id="toc-example-fleet-comparison" class="nav-link" data-scroll-target="#example-fleet-comparison">Example Fleet Comparison</a></li>
+  <li><a href="#visualizing-fleet-trade-offs" id="toc-visualizing-fleet-trade-offs" class="nav-link" data-scroll-target="#visualizing-fleet-trade-offs">Visualizing Fleet Trade-offs</a></li>
   </ul></li>
   <li><a href="#solution-approaches" id="toc-solution-approaches" class="nav-link" data-scroll-target="#solution-approaches"><span class="flow">Solution Approaches</span></a>
   <ul class="collapse">
@@ -582,7 +584,6 @@ window.Quarto = {
   <li><a href="#from-pareto-front-to-decision" id="toc-from-pareto-front-to-decision" class="nav-link" data-scroll-target="#from-pareto-front-to-decision"><span class="flow">From Pareto Front to Decision</span></a>
   <ul class="collapse">
   <li><a href="#how-to-choose" id="toc-how-to-choose" class="nav-link" data-scroll-target="#how-to-choose">How to Choose!</a></li>
-  <li><a href="#weighted-sum-along-the-frontier" id="toc-weighted-sum-along-the-frontier" class="nav-link" data-scroll-target="#weighted-sum-along-the-frontier">Weighted Sum Along the Frontier</a></li>
   <li><a href="#weighting-has-an-impact" id="toc-weighting-has-an-impact" class="nav-link" data-scroll-target="#weighting-has-an-impact">Weighting has an Impact</a></li>
   </ul></li>
   <li><a href="#advanced" id="toc-advanced" class="nav-link" data-scroll-target="#advanced"><span class="flow">Advanced</span></a>
@@ -653,18 +654,16 @@ window.Quarto = {
 <p>. . .</p>
 <p><span class="question">Question:</span> How do we transform our fleet while staying competitive?</p>
 </section>
-<section id="todays-learning-objectives" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="todays-learning-objectives">Today’s Learning Objectives</h2>
+<section id="todays-learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="todays-learning-objectives">Today’s Learning Objectives</h2>
 <p><span class="highlight">By the end of this lecture, you will be able to:</span></p>
 <div class="incremental">
 <ol class="incremental" type="1">
-<li>Explain why most real business decisions involve multiple competing objectives</li>
-<li>Identify and visualize Pareto optimal solutions in multi-objective problems</li>
+<li>Explain why most decisions involve competing objectives</li>
+<li>Identify and visualize Pareto optimal solutions</li>
 <li>Apply normalization techniques to make objectives comparable</li>
-<li>Implement weighted sum and ε-constraint methods to find trade-off solutions</li>
-<li>Choose the appropriate MOO method for different problem types</li>
-<li>Make data-driven decisions from a Pareto frontier</li>
-<li>Analyze real-world multi-objective trade-offs (Amazon, airlines, Tesla)</li>
+<li>Implement apporaches to find trade-off solutions</li>
+<li>Make decisions from a Pareto frontier</li>
 </ol>
 </div>
 </section>
@@ -701,9 +700,9 @@ window.Quarto = {
 <p>. . .</p>
 <p><span class="question">Question:</span> Any idea how to approach this?</p>
 </section>
-<section id="ecoexpress-vehicle-options" class="level2">
-<h2 class="anchored" data-anchor-id="ecoexpress-vehicle-options">EcoExpress Vehicle Options</h2>
-<div id="8ec90405" class="cell" data-execution_count="1">
+<section id="ecoexpress-vehicle-options" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="ecoexpress-vehicle-options">EcoExpress Vehicle Options</h2>
+<div id="58ddcd2c" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-striped caption-top table-sm small" data-border="1">
 <thead>
@@ -714,7 +713,7 @@ window.Quarto = {
 <th data-quarto-table-cell-role="th">CO2 (g/km)</th>
 <th data-quarto-table-cell-role="th">Speed (km/h)</th>
 <th data-quarto-table-cell-role="th">Capacity (parcels)</th>
-<th data-quarto-table-cell-role="th">Range (km)</th>
+<th data-quarto-table-cell-role="th">Reliability</th>
 </tr>
 </thead>
 <tbody>
@@ -725,43 +724,43 @@ window.Quarto = {
 <td>0</td>
 <td>55</td>
 <td>300</td>
-<td>250</td>
+<td>0.93</td>
 </tr>
 <tr class="even">
-<td>Hybrid Van</td>
+<td>Hybrid</td>
 <td>45000</td>
 <td>0.25</td>
 <td>95</td>
 <td>65</td>
 <td>200</td>
-<td>600</td>
+<td>0.95</td>
 </tr>
 <tr class="odd">
-<td>Diesel Van</td>
+<td>Diesel</td>
 <td>35000</td>
 <td>0.38</td>
 <td>185</td>
 <td>70</td>
 <td>250</td>
-<td>800</td>
+<td>0.88</td>
 </tr>
 <tr class="even">
-<td>E-Cargo Bike</td>
+<td>E-Bike</td>
 <td>12000</td>
 <td>0.05</td>
 <td>0</td>
 <td>30</td>
 <td>50</td>
-<td>60</td>
+<td>0.98</td>
 </tr>
 <tr class="odd">
-<td>Autonomous</td>
+<td>Auto</td>
 <td>95000</td>
 <td>0.12</td>
 <td>0</td>
 <td>40</td>
 <td>150</td>
-<td>180</td>
+<td>0.94</td>
 </tr>
 </tbody>
 </table>
@@ -772,11 +771,11 @@ window.Quarto = {
 </section>
 <section id="trade-offs-everywhere" class="level2">
 <h2 class="anchored" data-anchor-id="trade-offs-everywhere">Trade-offs Everywhere</h2>
-<div id="74fe2332" class="cell" data-execution_count="2">
+<div id="c61805f7" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-3-output-1.png" width="1139" height="417" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-3-output-1.png" width="1138" height="417" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -823,7 +822,7 @@ window.Quarto = {
 <section id="dominated-solutions" class="level2">
 <h2 class="anchored" data-anchor-id="dominated-solutions">Dominated Solutions</h2>
 <p><span class="highlight">A solution is dominated if another solution is:</span></p>
-<div id="1e79f7b9" class="cell" data-execution_count="3">
+<div id="7301c411" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -860,7 +859,7 @@ window.Quarto = {
 </section>
 <section id="find-the-non-dominated" class="level2">
 <h2 class="anchored" data-anchor-id="find-the-non-dominated">Find the Non-Dominated</h2>
-<div id="13e32143" class="cell" data-execution_count="4">
+<div id="b114470e" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -875,7 +874,7 @@ window.Quarto = {
 <section id="three-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="three-objectives">Three+ Objectives</h2>
 <p><span class="highlight">With 3 objectives, the Pareto frontier becomes a surface:</span></p>
-<div id="b17226d5" class="cell" data-execution_count="5">
+<div id="e557b4ad" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -897,201 +896,200 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="transportation-problem" class="level1 title">
-<h1 class="title"><span class="flow">Transportation Problem</span></h1>
-<section id="multi-objective-transportation" class="level2">
-<h2 class="anchored" data-anchor-id="multi-objective-transportation">Multi-Objective Transportation</h2>
-<div id="e810ca01" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-7-output-1.png" width="1138" height="417" class="figure-img"></p>
-</figure>
-</div>
-</div>
+<section id="fleet-composition-problem" class="level1 title">
+<h1 class="title"><span class="flow">Fleet Composition Problem</span></h1>
+<section id="the-fleet-challenge-1" class="level2">
+<h2 class="anchored" data-anchor-id="the-fleet-challenge-1">The Fleet Challenge</h2>
+<p><span class="highlight">EcoExpress needs to replace their 80 diesel vans</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li>Must meet <strong>EU regulation</strong>: Average emissions ≤ 111 g CO₂/km</li>
+<li>Need capacity for <strong>22,000 parcels/day</strong></li>
+<li>Must balance <strong>cost vs.&nbsp;service quality</strong></li>
+<li>5 vehicle types available, each with trade-offs</li>
+</ul>
 </div>
 <p>. . .</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><span class="highlight">Logistics decisions involve trade-offs:</span> City traffic (slow, high emissions), Night delivery? → Highway (fast, but more distance), Customer priority? → Direct route (expensive)</p>
-</div>
-</div>
-</div>
+<p><span class="question">Question:</span> How do we choose the right mix?</p>
 </section>
-<section id="classic-transportation" class="level2">
-<h2 class="anchored" data-anchor-id="classic-transportation">Classic Transportation</h2>
-<p><span class="highlight">Let’s understand the foundation</span></p>
-<p>. . .</p>
-<div id="55833730" class="cell" data-execution_count="7">
+<section id="vehicle-options-recap" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="vehicle-options-recap">Vehicle Options Recap</h2>
+<div id="c3f757ac" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-striped caption-top table-sm small" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th">From/To</th>
-<th data-quarto-table-cell-role="th">Zone A</th>
-<th data-quarto-table-cell-role="th">Zone B</th>
-<th data-quarto-table-cell-role="th">Zone C</th>
-<th data-quarto-table-cell-role="th">Zone D</th>
-<th data-quarto-table-cell-role="th">Supply</th>
+<th data-quarto-table-cell-role="th">Type</th>
+<th data-quarto-table-cell-role="th">Purchase Cost (€)</th>
+<th data-quarto-table-cell-role="th">Operating (€/km)</th>
+<th data-quarto-table-cell-role="th">CO2 (g/km)</th>
+<th data-quarto-table-cell-role="th">Speed (km/h)</th>
+<th data-quarto-table-cell-role="th">Capacity (parcels)</th>
+<th data-quarto-table-cell-role="th">Reliability</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>DC Berlin</td>
-<td>8</td>
-<td>10</td>
-<td>11</td>
-<td>14</td>
+<td>E-Truck</td>
+<td>75000</td>
+<td>0.18</td>
+<td>0</td>
+<td>55</td>
 <td>300</td>
+<td>0.93</td>
 </tr>
 <tr class="even">
-<td>DC Hamburg</td>
-<td>12</td>
-<td>9</td>
-<td>7</td>
-<td>8</td>
-<td>250</td>
+<td>Hybrid</td>
+<td>45000</td>
+<td>0.25</td>
+<td>95</td>
+<td>65</td>
+<td>200</td>
+<td>0.95</td>
 </tr>
 <tr class="odd">
-<td>DC Munich</td>
-<td>15</td>
-<td>13</td>
-<td>10</td>
-<td>9</td>
-<td>200</td>
+<td>Diesel</td>
+<td>35000</td>
+<td>0.38</td>
+<td>185</td>
+<td>70</td>
+<td>250</td>
+<td>0.88</td>
 </tr>
 <tr class="even">
-<td>Demand</td>
-<td>200</td>
-<td>180</td>
-<td>220</td>
+<td>E-Bike</td>
+<td>12000</td>
+<td>0.05</td>
+<td>0</td>
+<td>30</td>
+<td>50</td>
+<td>0.98</td>
+</tr>
+<tr class="odd">
+<td>Auto</td>
+<td>95000</td>
+<td>0.12</td>
+<td>0</td>
+<td>40</td>
 <td>150</td>
-<td>750</td>
+<td>0.94</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Cost per 100 parcels (€) in the middle of the table!</p>
-</div>
-</div>
+<p>. . .</p>
+<p><span class="highlight">Notice: No single vehicle is “best” at everything!</span></p>
+</section>
+<section id="fleet-composition-framework" class="level2">
+<h2 class="anchored" data-anchor-id="fleet-composition-framework">Fleet Composition Framework</h2>
+<p><span class="highlight">This is a discrete selection problem, not continuous allocation</span></p>
+<p><strong>Decision Variables:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li>Fleet: How many of each vehicle type? (discrete/integer)</li>
+<li><span class="math inline">\(n_i\)</span> = number of vehicles of type <span class="math inline">\(i\)</span> (integers!)</li>
+<li>Example: <span class="math inline">\(n_{\text{E-Truck}} = 20\)</span>, <span class="math inline">\(n_{\text{Hybrid}} = 30\)</span>, etc.</li>
+</ul>
 </div>
 </section>
-<section id="objective-function" class="level2">
-<h2 class="anchored" data-anchor-id="objective-function">Objective Function</h2>
-<p><span class="highlight">The foundation of the classical model</span></p>
-<p><span class="math display">\[\text{Minimize } Z = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij}\]</span></p>
-<p>Where:</p>
+<section id="objective-1-total-cost" class="level2">
+<h2 class="anchored" data-anchor-id="objective-1-total-cost">Objective 1: Total Cost</h2>
+<p><span class="highlight">Purchase cost + Operating cost over 3 years</span></p>
+<p><span class="math display">\[\text{Total Cost} = \sum_{i} n_i \cdot \left( P_i + O_i \cdot d \cdot y \right)\]</span></p>
 <ul>
-<li><span class="math inline">\(x_{ij}\)</span> = parcels shipped from DC <span class="math inline">\(i\)</span> to Zone <span class="math inline">\(j\)</span></li>
-<li><span class="math inline">\(c_{ij}\)</span> = cost per 100 parcels from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(n_i\)</span> = quantity of vehicle type <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(P_i\)</span> = purchase cost of vehicle type <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(O_i\)</span> = operating cost per km for type <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(d\)</span> = daily distance × days per year</li>
+<li><span class="math inline">\(y\)</span> = years</li>
 </ul>
 </section>
-<section id="second-objective-emissions" class="level2">
-<h2 class="anchored" data-anchor-id="second-objective-emissions">Second Objective: Emissions</h2>
-<p><span class="highlight">Now the real challenge - each route has different emissions:</span></p>
-<div id="1302ba13" class="cell" data-execution_count="8">
-<div class="cell-output cell-output-display">
-<table class="dataframe table table-striped caption-top table-sm small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">From/To</th>
-<th data-quarto-table-cell-role="th">Zone A</th>
-<th data-quarto-table-cell-role="th">Zone B</th>
-<th data-quarto-table-cell-role="th">Zone C</th>
-<th data-quarto-table-cell-role="th">Zone D</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>DC Berlin</td>
-<td>120</td>
-<td>95</td>
-<td>85</td>
-<td>70</td>
-</tr>
-<tr class="even">
-<td>DC Hamburg</td>
-<td>45</td>
-<td>110</td>
-<td>100</td>
-<td>90</td>
-</tr>
-<tr class="odd">
-<td>DC Munich</td>
-<td>60</td>
-<td>50</td>
-<td>115</td>
-<td>105</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<section id="objective-2-service-score" class="level2">
+<h2 class="anchored" data-anchor-id="objective-2-service-score">Objective 2: Service Score</h2>
+<p><span class="highlight">Composite measure of fleet performance</span></p>
+<p><span class="math display">\[\text{Service Score} = 0.5 \cdot C_{\text{score}} + 0.3 \cdot R_{\text{score}} + 0.2 \cdot S_{\text{score}}\]</span></p>
+<ul>
+<li><span class="math inline">\(C_{\text{score}} = \min\left(1.0, \frac{\text{Total Capacity}}{22000}\right)\)</span> (capacity adequacy)</li>
+<li><span class="math inline">\(R_{\text{score}} = \frac{\sum n_i \cdot r_i}{\sum n_i}\)</span> (weighted avg. reliability)</li>
+<li><span class="math inline">\(S_{\text{score}} = \frac{\sum n_i \cdot s_i}{70 \cdot \sum n_i}\)</span> (normalized speed)</li>
+</ul>
+<p>. . .</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Emissions per parcel (g CO₂) in the table</p>
+<p>Service score captures multiple performance dimensions in one metric!</p>
 </div>
 </div>
 </div>
 </section>
-<section id="objective-function-ii" class="level2">
-<h2 class="anchored" data-anchor-id="objective-function-ii">Objective Function II</h2>
-<p><span class="highlight">Now with two objectives!</span></p>
-<p><span class="math display">\[\text{Minimize } Z_1 = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij} \quad \text{(Cost)}\]</span> <span class="math display">\[\text{Minimize } Z_2 = \sum_{i} \sum_{j} e_{ij} \cdot x_{ij} \quad \text{(Emissions)}\]</span></p>
-<p>Where <span class="math inline">\(e_{ij}\)</span> = emissions per parcel from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span></p>
+<section id="hard-constraint-emissions" class="level2">
+<h2 class="anchored" data-anchor-id="hard-constraint-emissions">Hard Constraint: Emissions</h2>
+<p><span class="highlight">EU regulation creates a feasibility boundary</span></p>
+<p><span class="math display">\[\text{Average CO}_2 = \frac{\sum_{i} n_i \cdot e_i}{\sum_{i} n_i} \leq 111 \text{ g/km}\]</span></p>
+<p>Where <span class="math inline">\(e_i\)</span> = CO₂ emissions per km for vehicle type <span class="math inline">\(i\)</span></p>
 <p>. . .</p>
-<p><span class="highlight">Notice: Cheapest routes ≠ Greenest routes!</span></p>
+<p><strong>This eliminates some solutions:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li>All diesel vans: 185 g/km &gt; 111</li>
+<li>Mix with too many diesel: Still violates</li>
+<li>Zero-emission + some diesel: Might work</li>
+</ul>
+</div>
 </section>
 <section id="data-source" class="level2">
 <h2 class="anchored" data-anchor-id="data-source">Data Source</h2>
 <p><span class="highlight">Where Do These Numbers Come From?</span></p>
 <p>. . .</p>
-<p><strong>Cost Data:</strong></p>
+<p><strong>Vehicle Specifications:</strong></p>
 <div class="incremental">
 <ul class="incremental">
-<li><strong>Historical records</strong>: Your accounting system</li>
-<li><strong>Quotes</strong>: Request from carriers/suppliers<br>
-</li>
-<li><strong>APIs</strong>: Google Maps Distance Matrix (distance → cost)</li>
-</ul>
-</div>
-<p>. . .</p>
-<p><strong>Emissions Data:</strong></p>
-<div class="incremental">
-<ul class="incremental">
-<li><strong>EU Standards or Carrier data</strong></li>
-<li><strong>Formula</strong>: <code>Emissions = Distance × Weight × EmissionFactor</code></li>
+<li><strong>Purchase costs</strong>: Manufacturer quotes, market research</li>
+<li><strong>Operating costs</strong>: Fuel/electricity prices, maintenance records</li>
+<li><strong>Capacity</strong>: Vehicle specs (cargo volume, weight limits)</li>
+<li><strong>Reliability</strong>: Historical uptime data, manufacturer warranties</li>
+<li><strong>EU Standards</strong>: WLTP certification for vehicles</li>
+<li><strong>Electric vehicles</strong>: Grid carbon intensity (kWh → g CO₂)</li>
 </ul>
 </div>
 </section>
-<section id="the-transportation-trade-off" class="level2">
-<h2 class="anchored" data-anchor-id="the-transportation-trade-off">The Transportation Trade-off</h2>
-<div id="da44e985" class="cell" data-execution_count="9">
+<section id="example-fleet-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="example-fleet-comparison">Example Fleet Comparison</h2>
+<div id="ca7c0879" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>Three Fleet Strategies:
+
+         name    cost  service        co2  capacity  vehicles
+ Cost-Focused 28.9996 0.809705 120.714286     15000        70
+     Balanced 19.0478 0.731840  33.928571     13250        70
+Green-Focused 15.3102 0.695373   0.000000     12750        75
+
+
+Cost-Focused: ✗ VIOLATES (CO2: 120.7 g/km)
+Balanced: ✓ Compliant (CO2: 33.9 g/km)
+Green-Focused: ✓ Compliant (CO2: 0.0 g/km)</code></pre>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> Which strategy would you choose?</p>
+</section>
+<section id="visualizing-fleet-trade-offs" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-fleet-trade-offs">Visualizing Fleet Trade-offs</h2>
+<div id="625a946d" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-10-output-1.png" width="1139" height="418" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-9-output-1.png" width="1052" height="417" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cost increase for greenest solution: +€26800 (42.1%)
-Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
+<pre><code>
+Generated 68 feasible fleet compositions</code></pre>
 </div>
 </div>
 <p>. . .</p>
@@ -1101,7 +1099,7 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Each point represents a different allocation strategy!</p>
+<p>Each point is a different fleet mix, all meeting emissions constraint!</p>
 </div>
 </div>
 </div>
@@ -1150,11 +1148,11 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <section id="foundation-extreme-points" class="level2">
 <h2 class="anchored" data-anchor-id="foundation-extreme-points">Foundation: Extreme Points</h2>
 <p><span class="highlight">First step for BOTH approaches - find the boundaries:</span></p>
-<div id="a382ad64" class="cell" data-execution_count="10">
+<div id="ebda453d" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-11-output-1.png" width="1140" height="419" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-10-output-1.png" width="1140" height="419" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1165,11 +1163,11 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <section id="critical-normalization" class="level2">
 <h2 class="anchored" data-anchor-id="critical-normalization">Critical: Normalization</h2>
 <p><span class="highlight">Without it, your analysis is meaningless</span></p>
-<div id="ae29e496" class="cell" data-execution_count="11">
+<div id="bf57dd6e" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-12-output-1.png" width="1138" height="418" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-11-output-1.png" width="1138" height="418" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1184,11 +1182,11 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <p>. . .</p>
 <p><strong>In Python, this is rather simple!</strong></p>
 <p>. . .</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize_objectives(data):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (data <span class="op">-</span> data.<span class="bu">min</span>()) <span class="op">/</span> (data.<span class="bu">max</span>() <span class="op">-</span> data.<span class="bu">min</span>())</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Now weights actually mean something</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>weighted_score <span class="op">=</span> w1 <span class="op">*</span> normalize(cost) <span class="op">+</span> w2 <span class="op">*</span> normalize(emissions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize_objectives(data):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (data <span class="op">-</span> data.<span class="bu">min</span>()) <span class="op">/</span> (data.<span class="bu">max</span>() <span class="op">-</span> data.<span class="bu">min</span>())</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Now weights actually mean something</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>weighted_score <span class="op">=</span> w1 <span class="op">*</span> normalize(cost) <span class="op">+</span> w2 <span class="op">*</span> normalize(emissions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>. . .</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
@@ -1212,21 +1210,21 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 </ol>
 <p>. . .</p>
 <p><strong>Implementation Pattern:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_extreme_points(problem):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Solve for minimum cost (ignore emissions)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    min_cost_solution <span class="op">=</span> minimize(cost_objective, constraints)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Solve for minimum emissions (ignore cost)</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    min_emissions_solution <span class="op">=</span> minimize(emissions_objective, constraints)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_extreme_points(problem):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Solve for minimum cost (ignore emissions)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    min_cost_solution <span class="op">=</span> minimize(cost_objective, constraints)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Solve for minimum emissions (ignore cost)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    min_emissions_solution <span class="op">=</span> minimize(emissions_objective, constraints)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="computational-complexity" class="level2">
 <h2 class="anchored" data-anchor-id="computational-complexity">Computational Complexity</h2>
 <p><span class="highlight">How hard does it get with more objectives?</span></p>
 <p>. . .</p>
-<div id="d96785cd" class="cell" data-execution_count="12">
+<div id="cb2c91a2" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-13-output-1.png" width="1142" height="419" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-12-output-1.png" width="1142" height="419" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1322,11 +1320,11 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 </section>
 <section id="the-three-stage-heuristic-process" class="level2">
 <h2 class="anchored" data-anchor-id="the-three-stage-heuristic-process">The Three-Stage Heuristic Process</h2>
-<div id="d7ea3df4" class="cell" data-execution_count="13">
+<div id="130056bd" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-14-output-1.png" width="1140" height="420" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-13-output-1.png" width="1140" height="420" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1340,11 +1338,11 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <section id="construction-methods-for-moo" class="level2">
 <h2 class="anchored" data-anchor-id="construction-methods-for-moo">Construction Methods for MOO</h2>
 <p><span class="highlight">How to build initial solutions when you have multiple objectives?</span></p>
-<div id="9d8090e1" class="cell" data-execution_count="14">
+<div id="f541c00b" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-15-output-1.png" width="1140" height="418" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-14-output-1.png" width="1140" height="418" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1443,11 +1441,11 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <section id="local-search-for-multi-objective" class="level2">
 <h2 class="anchored" data-anchor-id="local-search-for-multi-objective">Local Search for Multi-Objective</h2>
 <p><span class="highlight">Special moves that improve multiple objectives:</span></p>
-<div id="38f7fb7c" class="cell" data-execution_count="15">
+<div id="4c575e49" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-16-output-1.png" width="1138" height="417" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-15-output-1.png" width="1138" height="417" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1461,7 +1459,6 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <ol type="1">
 <li><strong>Dominance</strong>: New solution dominates current (win-win!)</li>
 <li><strong>Trade-off</strong>: Improves primary, acceptable loss in secondary</li>
-<li><strong>Diversity</strong>: Fills gap in current Pareto front</li>
 <li><strong>Probabilistic</strong>: Use temperature (like simulated annealing)</li>
 </ol>
 <p>. . .</p>
@@ -1498,38 +1495,14 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 </ol>
 </div>
 </section>
-<section id="weighted-sum-along-the-frontier" class="level2">
-<h2 class="anchored" data-anchor-id="weighted-sum-along-the-frontier">Weighted Sum Along the Frontier</h2>
-<p><span class="highlight">The weight influences the final choice:</span></p>
-<div id="879d62b8" class="cell" data-execution_count="16">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-17-output-1.png" width="1239" height="369" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>The iso-cost lines show the trade-offs between cost and emissions.</p>
-</div>
-</div>
-</div>
-</section>
 <section id="weighting-has-an-impact" class="level2">
 <h2 class="anchored" data-anchor-id="weighting-has-an-impact">Weighting has an Impact</h2>
 <p><span class="highlight">The weights thus reflect your values!</span></p>
-<div id="a215fdf8" class="cell" data-execution_count="17">
+<div id="f941a775" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-18-output-1.png" width="1139" height="417" class="figure-img"></p>
+<p><img src="lec_08_multi_objective_files/figure-revealjs/cell-16-output-1.png" width="1139" height="417" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1604,9 +1577,9 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 </div><div class="column" style="width:33%;">
 <p><strong>Hour 4: Competition</strong></p>
 <ul>
-<li>Transportation problem</li>
-<li>Fleet selection</li>
-<li>Cost vs emissions</li>
+<li>Fleet composition</li>
+<li>Vehicle selection</li>
+<li>Cost vs service</li>
 <li>Justify choice!</li>
 </ul>
 </div>
@@ -1617,10 +1590,10 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <p><span class="highlight">EcoExpress Sustainable Fleet Design</span></p>
 <p>. . .</p>
 <ol type="1">
-<li><strong>Solve</strong> multi-objective transportation (DCs → Zones)</li>
 <li><strong>Select</strong> optimal fleet mix (5 vehicle types)</li>
-<li><strong>Balance</strong> cost, emissions, service quality</li>
-<li><strong>Meet</strong> EU emission targets (40% reduction)</li>
+<li><strong>Balance</strong> cost vs.&nbsp;service score</li>
+<li><strong>Meet</strong> EU emission constraint (≤ 111 g CO₂/km)</li>
+<li><strong>Ensure</strong> sufficient capacity (22,000 parcels/day)</li>
 </ol>
 <p>. . .</p>
 <div class="callout callout-style-simple callout-important">
@@ -1714,8 +1687,6 @@ Emissions reduction from cheapest: -32.2 kg (39.9%)</code></pre>
 <li>Real decisions have multiple conflicting objectives</li>
 <li>Pareto frontier shows all rational trade-offs</li>
 <li>Normalization is essential for fair comparison</li>
-<li>Weighted sum works for convex frontiers</li>
-<li>ε-constraint handles non-convex cases</li>
 <li>Weights reflect values, make them explicit</li>
 <li>Visualization crucial for decision-making</li>
 </ul>
