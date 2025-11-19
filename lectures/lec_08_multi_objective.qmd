@@ -33,18 +33,16 @@ format:
 
 [Question:]{.question} How do we transform our fleet while staying competitive?
 
-## Today's Learning Objectives {.smaller}
+## Today's Learning Objectives
 
 [By the end of this lecture, you will be able to:]{.highlight}
 
 ::: {.incremental}
-1. Explain why most real business decisions involve multiple competing objectives
-2. Identify and visualize Pareto optimal solutions in multi-objective problems
+1. Explain why most decisions involve competing objectives
+2. Identify and visualize Pareto optimal solutions
 3. Apply normalization techniques to make objectives comparable
-4. Implement weighted sum and ε-constraint methods to find trade-off solutions
-5. Choose the appropriate MOO method for different problem types
-6. Make data-driven decisions from a Pareto frontier
-7. Analyze real-world multi-objective trade-offs (Amazon, airlines, Tesla)
+4. Implement apporaches to find trade-off solutions
+5. Make decisions from a Pareto frontier
 :::
 
 ## Quick Recap: Local Search
@@ -82,7 +80,7 @@ format:
 
 [Question:]{.question} Any idea how to approach this?
 
-## EcoExpress Vehicle Options
+## EcoExpress Vehicle Options {.smaller}
 
 ```{python}
 #| echo: false
@@ -99,13 +97,13 @@ from plot_utils import setup_clean_style, BRAND_COLORS, PLOT_COLORS
 setup_clean_style()
 
 vehicles = pd.DataFrame({
-    'Type': ['E-Truck', 'Hybrid Van', 'Diesel Van', 'E-Cargo Bike', 'Autonomous'],
+    'Type': ['E-Truck', 'Hybrid', 'Diesel', 'E-Bike', 'Auto'],
     'Purchase Cost (€)': [75000, 45000, 35000, 12000, 95000],
     'Operating (€/km)': [0.18, 0.25, 0.38, 0.05, 0.12],
     'CO2 (g/km)': [0, 95, 185, 0, 0],
     'Speed (km/h)': [55, 65, 70, 30, 40],
     'Capacity (parcels)': [300, 200, 250, 50, 150],
-    'Range (km)': [250, 600, 800, 60, 180]
+    'Reliability': [0.93, 0.95, 0.88, 0.98, 0.94]
 })
 
 # Display as nice table
@@ -150,18 +148,18 @@ axes[1].set_xlabel('Speed (km/h)')
 axes[1].set_ylabel('Operating (€/km)')
 axes[1].set_title('Speed vs Operating Cost')
 
-# Capacity vs Range
+# Capacity vs Reliability
 axes[2].scatter(vehicles['Capacity (parcels)'], 
-                vehicles['Range (km)'],
+                vehicles['Reliability'],
                 s=vehicles['Purchase Cost (€)']/300,
                 alpha=0.7, color=PLOT_COLORS[2])
 for i, txt in enumerate(vehicles['Type']):
     axes[2].annotate(txt, (vehicles['Capacity (parcels)'].iloc[i], 
-                           vehicles['Range (km)'].iloc[i]),
+                           vehicles['Reliability'].iloc[i]),
                     fontsize=9)
 axes[2].set_xlabel('Capacity (parcels)')
-axes[2].set_ylabel('Range (km)')
-axes[2].set_title('Capacity vs Range')
+axes[2].set_ylabel('Reliability')
+axes[2].set_title('Capacity vs Reliability')
 
 plt.tight_layout()
 plt.show()
@@ -385,149 +383,94 @@ plt.show()
 Harder to visualize, but same principle applies!
 :::
 
-# [Transportation Problem]{.flow} {.title}
+# [Fleet Composition Problem]{.flow} {.title}
 
-## Multi-Objective Transportation
+## The Fleet Challenge
 
-```{python}
-#| echo: false
-#| eval: true
+[EcoExpress needs to replace their 80 diesel vans]{.highlight}
 
-# Visualize transportation trade-offs
-fig, ax = plt.subplots()
-
-# Define routes with their characteristics
-routes = {
-    'Route A: City Center': {'distance': 50, 'time': 90, 'cost': 80, 'emissions': 120},
-    'Route B: Highway': {'distance': 80, 'time': 60, 'cost': 100, 'emissions': 90},
-    'Route C: Suburbs': {'distance': 65, 'time': 75, 'cost': 85, 'emissions': 100}
-}
-
-# Create parallel coordinates plot
-categories = ['Distance\n(km)', 'Time\n(min)', 'Cost\n(€)', 'Emissions\n(kg CO₂)']
-n_cats = len(categories)
-
-for i, (route_name, values) in enumerate(routes.items()):
-    # Normalize values for plotting
-    vals = [values['distance']/80, values['time']/90, 
-            values['cost']/100, values['emissions']/120]
-    
-    x = np.arange(n_cats)
-    ax.plot(x, vals, 'o-', linewidth=2.5, markersize=10, 
-            label=route_name, color=PLOT_COLORS[i], alpha=0.8)
-
-ax.set_xticks(x)
-ax.set_xticklabels(categories)
-ax.set_ylabel('Normalized Value', fontsize=11)
-ax.legend(loc='best')
-ax.grid(True, alpha=0.2)
-ax.set_ylim(0, 1.1)
-
-# Add annotations
-ax.annotate('Short but slow\n& high emissions', xy=(0, 0.6), 
-            xytext=(0, 0.3), fontsize=12, color=PLOT_COLORS[0],
-            arrowprops=dict(arrowstyle='->', color=PLOT_COLORS[0], alpha=0.5))
-ax.annotate('Fast but long\n& expensive', xy=(1, 0.65), 
-            xytext=(1, 0.3), fontsize=12, color=PLOT_COLORS[1],
-            arrowprops=dict(arrowstyle='->', color=PLOT_COLORS[1], alpha=0.5))
-
-plt.tight_layout()
-plt.show()
-```
-
-. . .
-
-::: callout-tip
-[Logistics decisions involve trade-offs:]{.highlight} City traffic (slow, high emissions), Night delivery? → Highway (fast, but more distance), Customer priority? → Direct route (expensive)
+::: incremental
+- Must meet **EU regulation**: Average emissions ≤ 111 g CO₂/km
+- Need capacity for **22,000 parcels/day**
+- Must balance **cost vs. service quality**
+- 5 vehicle types available, each with trade-offs
 :::
 
-## Classic Transportation
-
-[Let's understand the foundation]{.highlight}
-
 . . .
+
+[Question:]{.question} How do we choose the right mix?
+
+## Vehicle Options Recap {.smaller}
 
 ```{python}
 #| echo: false
 #| eval: true
 
-import pandas as pd
-import numpy as np
-
-# Transportation problem data
-supply = [300, 250, 200]  # Parcels available
-demand = [200, 180, 220, 150]  # Parcels needed
-
-# Create comprehensive table with costs, supply, and demand
-transport_table = pd.DataFrame({
-    'From/To': ['DC Berlin', 'DC Hamburg', 'DC Munich', 'Demand'],
-    'Zone A': [8, 12, 15, demand[0]],
-    'Zone B': [10, 9, 13, demand[1]],
-    'Zone C': [11, 7, 10, demand[2]],
-    'Zone D': [14, 8, 9, demand[3]],
-    'Supply': supply + [sum(demand)]
-})
-
-display(HTML(transport_table.to_html(index=False, classes='table table-striped')))
-
-# Check if balanced
-total_supply = sum(supply)
-total_demand = sum(demand)
-if total_supply != total_demand:
-    print(f"\n✗ Unbalanced: Supply ({total_supply}) ≠ Demand ({total_demand})")
+# Display the vehicle specifications again for reference
+display(HTML(vehicles.to_html(index=False, classes='table table-striped')))
 ```
+
+. . .
+
+[Notice: No single vehicle is "best" at everything!]{.highlight}
+
+## Fleet Composition Framework
+
+[This is a discrete selection problem, not continuous allocation]{.highlight}
+
+**Decision Variables:**
+
+::: incremental
+- Fleet: How many of each vehicle type? (discrete/integer)
+- $n_i$ = number of vehicles of type $i$ (integers!)
+- Example: $n_{\text{E-Truck}} = 20$, $n_{\text{Hybrid}} = 30$, etc.
+:::
+
+## Objective 1: Total Cost
+
+[Purchase cost + Operating cost over 3 years]{.highlight}
+
+$$\text{Total Cost} = \sum_{i} n_i \cdot \left( P_i + O_i \cdot d \cdot y \right)$$
+
+- $n_i$ = quantity of vehicle type $i$
+- $P_i$ = purchase cost of vehicle type $i$
+- $O_i$ = operating cost per km for type $i$
+- $d$ = daily distance × days per year
+- $y$ = years
+
+## Objective 2: Service Score
+
+[Composite measure of fleet performance]{.highlight}
+
+$$\text{Service Score} = 0.5 \cdot C_{\text{score}} + 0.3 \cdot R_{\text{score}} + 0.2 \cdot S_{\text{score}}$$
+
+- $C_{\text{score}} = \min\left(1.0, \frac{\text{Total Capacity}}{22000}\right)$ (capacity adequacy)
+- $R_{\text{score}} = \frac{\sum n_i \cdot r_i}{\sum n_i}$ (weighted avg. reliability)
+- $S_{\text{score}} = \frac{\sum n_i \cdot s_i}{70 \cdot \sum n_i}$ (normalized speed)
+
+. . .
 
 ::: callout-note
-Cost per 100 parcels (€) in the middle of the table!
+Service score captures multiple performance dimensions in one metric!
 :::
 
-## Objective Function
+## Hard Constraint: Emissions
 
-[The foundation of the classical model]{.highlight}
+[EU regulation creates a feasibility boundary]{.highlight}
 
-$$\text{Minimize } Z = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij}$$
+$$\text{Average CO}_2 = \frac{\sum_{i} n_i \cdot e_i}{\sum_{i} n_i} \leq 111 \text{ g/km}$$
 
-Where:
-
-- $x_{ij}$ = parcels shipped from DC $i$ to Zone $j$
-- $c_{ij}$ = cost per 100 parcels from $i$ to $j$
-
-## Second Objective: Emissions
-
-[Now the real challenge - each route has different emissions:]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-# Emissions data (designed to conflict with cost structure)
-emissions_data = pd.DataFrame({
-    'From/To': ['DC Berlin', 'DC Hamburg', 'DC Munich'],
-    'Zone A': [120, 45, 60],  # g CO2/parcel - Hamburg is greenest (but expensive)
-    'Zone B': [95, 110, 50],   # Munich is greenest for Zone B
-    'Zone C': [85, 100, 115],  # Berlin is greenest (but expensive)
-    'Zone D': [70, 90, 105]    # Berlin is greenest (but most expensive)
-})
-
-display(HTML(emissions_data.to_html(index=False, classes='table table-striped')))
-```
-
-::: callout-note
-Emissions per parcel (g CO₂) in the table
-:::
-
-## Objective Function II
-
-[Now with two objectives!]{.highlight}
-
-$$\text{Minimize } Z_1 = \sum_{i} \sum_{j} c_{ij} \cdot x_{ij} \quad \text{(Cost)}$$
-$$\text{Minimize } Z_2 = \sum_{i} \sum_{j} e_{ij} \cdot x_{ij} \quad \text{(Emissions)}$$
-
-Where $e_{ij}$ = emissions per parcel from $i$ to $j$
+Where $e_i$ = CO₂ emissions per km for vehicle type $i$
 
 . . .
 
-[Notice: Cheapest routes ≠ Greenest routes!]{.highlight}
+**This eliminates some solutions:**
+
+::: incremental
+- All diesel vans: 185 g/km > 111
+- Mix with too many diesel: Still violates
+- Zero-emission + some diesel: Might work
+:::
 
 ## Data Source
 
@@ -535,129 +478,170 @@ Where $e_{ij}$ = emissions per parcel from $i$ to $j$
 
 . . .
 
-**Cost Data:**
+**Vehicle Specifications:**
 
 ::: incremental
-- **Historical records**: Your accounting system
-- **Quotes**: Request from carriers/suppliers  
-- **APIs**: Google Maps Distance Matrix (distance → cost)
+- **Purchase costs**: Manufacturer quotes, market research
+- **Operating costs**: Fuel/electricity prices, maintenance records
+- **Capacity**: Vehicle specs (cargo volume, weight limits)
+- **Reliability**: Historical uptime data, manufacturer warranties
+- **EU Standards**: WLTP certification for vehicles
+- **Electric vehicles**: Grid carbon intensity (kWh → g CO₂)
 :::
 
-. . .
-
-**Emissions Data:**
-
-::: incremental
-- **EU Standards or Carrier data**
-- **Formula**: `Emissions = Distance × Weight × EmissionFactor`
-:::
-
-## The Transportation Trade-off
+## Example Fleet Comparison
 
 ```{python}
 #| echo: false
 #| eval: true
 
-from scipy.optimize import linprog
+# Define three contrasting fleet strategies
+DAILY_DISTANCE = 1200
+OPERATING_DAYS = 360
+YEARS = 3
 
-# Cost and emissions matrices (from our data)
-costs = np.array([[8, 10, 11, 14],    # DC Berlin
-                  [12, 9, 7, 8],       # DC Hamburg
-                  [15, 13, 10, 9]])    # DC Munich
-
-# Updated emissions to create actual trade-off
-emissions = np.array([[120, 95, 85, 70],   # DC Berlin (g CO2/parcel)
-                      [45, 110, 100, 90],  # DC Hamburg
-                      [60, 50, 115, 105]]) # DC Munich
-
-supply = np.array([300, 250, 200])
-demand = np.array([200, 180, 220, 150])
-
-# Solve for different weights (0 = cost only, 1 = emissions only)
-solutions = []
-weights = np.linspace(0, 1, 15)
-
-for w in weights:
-    # Combined objective: (1-w)*cost + w*emissions
-    # Normalize to make them comparable
-    c_combined = (1-w) * costs.flatten() / 10 + w * emissions.flatten() / 100
+def evaluate_fleet(fleet_dict, name):
+    """Calculate metrics for a fleet composition"""
+    total_purchase = 0
+    total_operating = 0
+    total_capacity = 0
+    weighted_co2 = 0
+    weighted_reliability = 0
+    weighted_speed = 0
+    total_vehicles = sum(fleet_dict.values())
     
-    # Constraints: supply and demand
-    A_eq = []
-    b_eq = []
+    # Use the vehicles DataFrame directly
+    vehicle_map = {}
+    for _, row in vehicles.iterrows():
+        vehicle_map[row['Type']] = {
+            'purchase': row['Purchase Cost (€)'],
+            'op': row['Operating (€/km)'],
+            'co2': row['CO2 (g/km)'],
+            'cap': row['Capacity (parcels)'],
+            'rel': row['Reliability'],
+            'speed': row['Speed (km/h)']
+        }
     
-    # Supply constraints (one per DC)
-    for i in range(3):
-        constraint = np.zeros(12)
-        constraint[i*4:(i+1)*4] = 1
-        A_eq.append(constraint)
-        b_eq.append(supply[i])
+    for vtype, qty in fleet_dict.items():
+        v = vehicle_map[vtype]
+        total_purchase += v['purchase'] * qty
+        total_operating += v['op'] * DAILY_DISTANCE * OPERATING_DAYS * YEARS * qty
+        total_capacity += v['cap'] * qty
+        weighted_co2 += v['co2'] * qty
+        weighted_reliability += v['rel'] * qty
+        weighted_speed += v['speed'] * qty
     
-    # Demand constraints (one per Zone)
-    for j in range(4):
-        constraint = np.zeros(12)
-        for i in range(3):
-            constraint[i*4 + j] = 1
-        A_eq.append(constraint)
-        b_eq.append(demand[j])
+    avg_co2 = weighted_co2 / total_vehicles if total_vehicles > 0 else 999
+    avg_reliability = weighted_reliability / total_vehicles if total_vehicles > 0 else 0
+    avg_speed = weighted_speed / total_vehicles if total_vehicles > 0 else 0
     
-    # Solve
-    result = linprog(c_combined, A_eq=A_eq, b_eq=b_eq, 
-                     bounds=(0, None), method='highs')
+    total_cost = total_purchase + total_operating
     
-    if result.success:
-        x = result.x.reshape(3, 4)
-        total_cost = np.sum(costs * x) * 10  # Cost per 100 parcels
-        total_emissions = np.sum(emissions * x) / 1000  # Convert to kg
-        solutions.append({'Cost': total_cost, 'Emissions': total_emissions, 'Weight': w})
+    capacity_score = min(1.0, total_capacity / 22000)
+    reliability_score = avg_reliability
+    speed_score = avg_speed / 70
+    service_score = 0.5 * capacity_score + 0.3 * reliability_score + 0.2 * speed_score
+    
+    return {
+        'name': name,
+        'cost': total_cost / 1e6,  # in millions
+        'service': service_score,
+        'co2': avg_co2,
+        'capacity': total_capacity,
+        'vehicles': total_vehicles
+    }
 
-sol_df = pd.DataFrame(solutions)
+# Three strategic fleet compositions
+fleet_cheap = {'E-Truck': 0, 'Hybrid': 50, 'Diesel': 20, 'E-Bike': 0, 'Auto': 0}
+fleet_balanced = {'E-Truck': 20, 'Hybrid': 25, 'Diesel': 0, 'E-Bike': 15, 'Auto': 10}
+fleet_green = {'E-Truck': 30, 'Hybrid': 0, 'Diesel': 0, 'E-Bike': 30, 'Auto': 15}
 
+results = [
+    evaluate_fleet(fleet_cheap, 'Cost-Focused'),
+    evaluate_fleet(fleet_balanced, 'Balanced'),
+    evaluate_fleet(fleet_green, 'Green-Focused')
+]
+
+results_df = pd.DataFrame(results)
+print("Three Fleet Strategies:\n")
+print(results_df.to_string(index=False))
+print("\n")
+
+# Check feasibility
+for r in results:
+    compliance = "✓ Compliant" if r['co2'] <= 111 else "✗ VIOLATES"
+    print(f"{r['name']}: {compliance} (CO2: {r['co2']:.1f} g/km)")
+```
+
+. . .
+
+[Question:]{.question} Which strategy would you choose?
+
+## Visualizing Fleet Trade-offs
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Generate diverse fleet compositions
+np.random.seed(42)
+fleet_solutions = []
+
+# Systematic exploration with different strategies
+for _ in range(100):
+    # Random fleet composition
+    fleet = {
+        'E-Truck': np.random.randint(0, 40),
+        'Hybrid': np.random.randint(0, 50),
+        'Diesel': np.random.randint(0, 30),
+        'E-Bike': np.random.randint(0, 40),
+        'Auto': np.random.randint(0, 20)
+    }
+    
+    result = evaluate_fleet(fleet, 'Random')
+    
+    # Only keep feasible solutions (CO2 constraint)
+    if result['co2'] <= 111 and result['vehicles'] >= 50 and result['vehicles'] <= 100:
+        fleet_solutions.append(result)
+
+fleet_df = pd.DataFrame(fleet_solutions)
+
+# Plot cost vs service score
 fig, ax = plt.subplots()
 
-# Plot Pareto frontier
-ax.plot(sol_df['Cost'], sol_df['Emissions'], 
-        '-o', linewidth=2.5, markersize=5, color=BRAND_COLORS["darker"], 
-        label='Pareto frontier', alpha=0.7)
+# Color by CO2 emissions
+scatter = ax.scatter(fleet_df['cost'], fleet_df['service'], 
+                     c=fleet_df['co2'], cmap='RdYlGn_r', 
+                     s=80, alpha=0.6, edgecolors='black', linewidth=0.5)
 
-# Highlight extremes
-min_cost = sol_df.iloc[0]
-min_emissions = sol_df.iloc[-1]
+# Add the three example fleets
+for r, color, marker in zip(results, [PLOT_COLORS[0], PLOT_COLORS[2], PLOT_COLORS[1]], ['o', 's', '^']):
+    if r['co2'] <= 111:  # Only plot if feasible
+        ax.scatter(r['cost'], r['service'], s=300, color=color, 
+                  marker=marker, label=r['name'], 
+                  edgecolors='white', linewidth=2.5, zorder=10)
 
-ax.scatter(min_cost['Cost'], min_cost['Emissions'],
-          s=200, color=PLOT_COLORS[2], marker='*', 
-          label=f'Min Cost: €{min_cost["Cost"]:.0f}', 
-          edgecolors='black', linewidth=1.5, zorder=5)
-ax.scatter(min_emissions['Cost'], min_emissions['Emissions'],
-          s=200, color=PLOT_COLORS[0], marker='*', 
-          label=f'Min Emissions: {min_emissions["Emissions"]:.1f} kg', 
-          edgecolors='black', linewidth=1.5, zorder=5)
-
-# Add a balanced solution
-balanced_idx = len(sol_df) // 2
-balanced = sol_df.iloc[balanced_idx]
-ax.scatter(balanced['Cost'], balanced['Emissions'],
-          s=200, color=PLOT_COLORS[1], marker='D', 
-          label='Balanced solution', 
-          edgecolors='black', linewidth=1.5, zorder=5)
-
-ax.set_xlabel('Total Cost (€)', fontsize=13, fontweight='bold')
-ax.set_ylabel('Total CO₂ Emissions (kg)', fontsize=13, fontweight='bold')
-ax.legend(fontsize=10, loc='best')
+ax.set_xlabel('Total Cost (€ millions)', fontsize=12, fontweight='bold')
+ax.set_ylabel('Service Score', fontsize=12, fontweight='bold')
+ax.set_title('Fleet Composition Trade-offs\n(All solutions meet EU emissions constraint)', 
+             fontsize=13, fontweight='bold')
+ax.legend(loc='best', fontsize=10)
 ax.grid(True, alpha=0.3)
+
+# Add colorbar
+cbar = plt.colorbar(scatter, ax=ax)
+cbar.set_label('Avg CO₂ (g/km)', fontsize=10)
 
 plt.tight_layout()
 plt.show()
 
-# Print key insights
-print(f"Cost increase for greenest solution: +€{min_emissions['Cost'] - min_cost['Cost']:.0f} ({(min_emissions['Cost']/min_cost['Cost']-1)*100:.1f}%)")
-print(f"Emissions reduction from cheapest: -{min_cost['Emissions'] - min_emissions['Emissions']:.1f} kg ({(1-min_emissions['Emissions']/min_cost['Emissions'])*100:.1f}%)")
+print(f"\nGenerated {len(fleet_df)} feasible fleet compositions")
 ```
 
 . . .
 
 ::: callout-important
-Each point represents a different allocation strategy!
+Each point is a different fleet mix, all meeting emissions constraint!
 :::
 
 # [Solution Approaches]{.flow} {.title}
@@ -704,70 +688,66 @@ In this lecture we use heuristic approaches!
 #| echo: false
 #| eval: true
 
-# Use the transportation problem Pareto frontier from earlier
+# Use the fleet problem data from earlier
 fig, axes = plt.subplots(1, 2)
 
-# Left plot: Show extreme points from transportation problem
+# Left plot: Show extreme points from fleet problem
 ax1 = axes[0]
 
-# Plot the Pareto frontier from transportation problem
-ax1.plot(sol_df['Cost'], sol_df['Emissions'], 
-        '-', linewidth=2.5, alpha=0.7, label='Pareto Frontier', 
-        marker='o', markersize=6, color=BRAND_COLORS["darker"])
+# Plot the Pareto frontier from fleet problem
+ax1.scatter(fleet_df['cost'], fleet_df['service'], 
+           s=60, alpha=0.4, color=BRAND_COLORS["darker"], label='All feasible fleets')
 
-# Mark extreme points
-min_cost = sol_df.iloc[0]
-min_emissions = sol_df.iloc[-1]
+# Find extreme points (approximate)
+min_cost_fleet = fleet_df.loc[fleet_df['cost'].idxmin()]
+max_service_fleet = fleet_df.loc[fleet_df['service'].idxmax()]
 
-ax1.scatter(min_cost['Cost'], min_cost['Emissions'],
-           s=200, color=PLOT_COLORS[2], marker='*', label=f'Min Cost: €{min_cost["Cost"]:.0f}',
+ax1.scatter(min_cost_fleet['cost'], min_cost_fleet['service'],
+           s=300, color=PLOT_COLORS[2], marker='*', 
+           label=f'Min Cost: €{min_cost_fleet["cost"]:.1f}M',
            edgecolors='black', linewidth=2, zorder=10)
-ax1.scatter(min_emissions['Cost'], min_emissions['Emissions'],
-           s=200, color=PLOT_COLORS[0], marker='*', label=f'Min Emissions: {min_emissions["Emissions"]:.1f} kg',
+ax1.scatter(max_service_fleet['cost'], max_service_fleet['service'],
+           s=300, color=PLOT_COLORS[0], marker='*', 
+           label=f'Max Service: {max_service_fleet["service"]:.3f}',
            edgecolors='black', linewidth=2, zorder=10)
 
-# Add ideal point (infeasible - best of both)
-ideal_cost = min_cost['Cost']
-ideal_emissions = min_emissions['Emissions']
-ax1.scatter(ideal_cost, ideal_emissions, s=150, color=PLOT_COLORS[1], marker='D', 
-           label='Ideal (Infeasible)', edgecolors='black', linewidth=2, alpha=0.7)
-
-# Draw box showing trade-off space
-worst_cost = min_emissions['Cost']
-worst_emissions = min_cost['Emissions']
-
-ax1.set_xlabel('Cost (€)', fontsize=12, fontweight='bold')
-ax1.set_ylabel('Emissions (kg CO₂)', fontsize=12, fontweight='bold')
+ax1.set_xlabel('Cost (€M)', fontsize=12, fontweight='bold')
+ax1.set_ylabel('Service Score', fontsize=12, fontweight='bold')
 ax1.set_title('Step 1: Find Extreme Points', fontsize=13, fontweight='bold')
-ax1.legend(fontsize=10)
+ax1.legend(fontsize=9)
 ax1.grid(True, alpha=0.3)
 
 # Right plot: Show normalization (scaled to [0,1])
 ax2 = axes[1]
 
-# Calculate normalized values
+# Calculate normalized values using actual fleet data
+ideal_cost = fleet_df['cost'].min()
+worst_cost = fleet_df['cost'].max()
+ideal_service = fleet_df['service'].max()
+worst_service = fleet_df['service'].min()
+
 cost_range = worst_cost - ideal_cost
-emissions_range = worst_emissions - ideal_emissions
+service_range = ideal_service - worst_service
 
 # Show normalized ranges
-objectives = ['Cost\n(normalized)', 'Emissions\n(normalized)']
+objectives = ['Cost\n(normalized)', 'Service\n(normalized)']
 normalized_mins = [0, 0]
 normalized_maxs = [1, 1]
 
 x = np.arange(len(objectives))
 width = 0.35
 
-bars1 = ax2.bar(x - width/2, normalized_mins, width, label='Min (Best) = 0', 
+bars1 = ax2.bar(x - width/2, normalized_mins, width, label='Best = 0', 
                color=PLOT_COLORS[1], alpha=0.7, edgecolor='black', linewidth=1.5)
-bars2 = ax2.bar(x + width/2, normalized_maxs, width, label='Max (Worst) = 1', 
+bars2 = ax2.bar(x + width/2, normalized_maxs, width, label='Worst = 1', 
                color=PLOT_COLORS[0], alpha=0.7, edgecolor='black', linewidth=1.5)
 
 # Add original range annotations
-ax2.text(0, 0.5, f'€{ideal_cost:.0f} → €{worst_cost:.0f}\nRange: €{cost_range:.0f}', 
-        ha='center', va='center', fontsize=10, fontweight='bold',
+ax2.text(0, 0.5, f'€{ideal_cost:.1f}M → €{worst_cost:.1f}M\nRange: €{cost_range:.1f}M', 
+        ha='center', va='center', fontsize=9, fontweight='bold',
         bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
-ax2.text(1, 0.5, f'{ideal_emissions:.1f}kg → {worst_emissions:.1f}kg\nRange: {emissions_range:.1f}kg', 
-        ha='center', va='center', fontsize=10, fontweight='bold',
+ax2.text(1, 0.5, f'{worst_service:.2f} → {ideal_service:.2f}\nRange: {service_range:.2f}', 
+        ha='center', va='center', fontsize=9, fontweight='bold',
         bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
 
 ax2.set_ylabel('Normalized Value [0, 1]', fontsize=12, fontweight='bold')
@@ -1275,8 +1255,7 @@ plt.show()
 
 1. **Dominance**: New solution dominates current (win-win!)
 2. **Trade-off**: Improves primary, acceptable loss in secondary
-3. **Diversity**: Fills gap in current Pareto front
-4. **Probabilistic**: Use temperature (like simulated annealing)
+3. **Probabilistic**: Use temperature (like simulated annealing)
 
 . . .
 
@@ -1297,83 +1276,6 @@ Always keep all your objectives in mind when making decisions.
 3. [Stakeholder Preferences:]{.highlight} Let business priorities guide
    - **Sustainability:** Minimum emissions that meets constraints
    - **Operations:** Maximum service level within budget
-:::
-  
-## Weighted Sum Along the Frontier
-
-[The weight influences the final choice:]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-fig, axes = plt.subplots(1, 3, figsize=(14, 4))
-
-# Generate smooth Pareto frontier
-t = np.linspace(0, 1, 100)
-pareto_cost = 50 + 100 * (1 - t**1.5)
-pareto_emissions = 200 * t**1.5 + 50
-
-# Different weight scenarios
-weight_scenarios = [
-    (0.9, 0.1, 'Cost Focus (90/10)'),
-    (0.5, 0.5, 'Balanced (50/50)'),
-    (0.1, 0.9, 'Green Focus (10/90)')
-]
-
-# Normalize for all plots
-norm_cost = (pareto_cost - pareto_cost.min()) / (pareto_cost.max() - pareto_cost.min())
-norm_emissions = (pareto_emissions - pareto_emissions.min()) / (pareto_emissions.max() - pareto_emissions.min())
-
-for idx, (w_cost, w_emissions, title) in enumerate(weight_scenarios):
-    ax = axes[idx]
-    
-    # Plot Pareto frontier in normalized space
-    ax.plot(norm_cost, norm_emissions, color=PLOT_COLORS[1], 
-            linewidth=2.5, alpha=0.7, label='Pareto Frontier')
-    
-    # Calculate weighted scores
-    weighted_scores = w_cost * norm_cost + w_emissions * norm_emissions
-    optimal_idx = np.argmin(weighted_scores)
-    
-    # Plot optimal point
-    ax.scatter(norm_cost[optimal_idx], norm_emissions[optimal_idx], 
-              s=250, color=PLOT_COLORS[0], marker='*', edgecolors=BRAND_COLORS['darker'], 
-              linewidth=2, zorder=10, label='Selected')
-    
-    # Draw iso-cost lines (lines of equal weighted sum)
-    for level in np.linspace(0, 1, 7):
-        # Line equation: w_cost * x + w_emissions * y = level
-        # Solve for y: y = (level - w_cost * x) / w_emissions
-        x_line = np.linspace(-0.1, 1.1, 100)
-        if w_emissions > 0:
-            y_line = (level - w_cost * x_line) / w_emissions
-            ax.plot(x_line, y_line, '--', alpha=0.15, color=BRAND_COLORS['darker'], linewidth=1)
-    
-    # Add weight vector (gradient direction)
-    vector_scale = 0.25
-    ax.arrow(norm_cost[optimal_idx], norm_emissions[optimal_idx],
-            -w_cost * vector_scale, -w_emissions * vector_scale,
-            head_width=0.03, head_length=0.02, fc=PLOT_COLORS[2], ec=PLOT_COLORS[2],
-            alpha=0.7, linewidth=2)
-    
-    ax.set_xlabel('Normalized Cost')
-    ax.set_ylabel('Normalized Emissions')
-    ax.set_title(title, fontweight='bold')
-    ax.set_xlim(-0.05, 1.05)
-    ax.set_ylim(-0.05, 1.05)
-    ax.set_aspect('equal', adjustable='box')
-    ax.grid(True, alpha=0.2)
-    ax.legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-. . .
-
-::: callout-note
-The iso-cost lines show the trade-offs between cost and emissions.
 :::
 
 ## Weighting has an Impact
@@ -1490,9 +1392,9 @@ R&D can fundamentally change what's possible!
 ::: {.column width="33%"}
 **Hour 4: Competition**
 
-- Transportation problem
-- Fleet selection
-- Cost vs emissions
+- Fleet composition
+- Vehicle selection
+- Cost vs service
 - Justify choice!
 :::
 ::::
@@ -1503,10 +1405,10 @@ R&D can fundamentally change what's possible!
 
 . . .
 
-1. **Solve** multi-objective transportation (DCs → Zones)
-2. **Select** optimal fleet mix (5 vehicle types)
-3. **Balance** cost, emissions, service quality
-4. **Meet** EU emission targets (40% reduction)
+1. **Select** optimal fleet mix (5 vehicle types)
+2. **Balance** cost vs. service score
+3. **Meet** EU emission constraint (≤ 111 g CO₂/km)
+4. **Ensure** sufficient capacity (22,000 parcels/day)
 
 . . .
 
@@ -1554,8 +1456,6 @@ Find the best trade-off for your business priorities!
 - Real decisions have multiple conflicting objectives
 - Pareto frontier shows all rational trade-offs
 - Normalization is essential for fair comparison
-- Weighted sum works for convex frontiers
-- ε-constraint handles non-convex cases
 - Weights reflect values, make them explicit
 - Visualization crucial for decision-making
 :::

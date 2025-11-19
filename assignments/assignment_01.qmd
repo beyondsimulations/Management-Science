@@ -208,7 +208,7 @@ seasonal_amplitude = np.random.uniform(6, 24)  # Between 6-24
 noise_level = np.random.uniform(4, 6)    # Between 4-6
 
 # Generate data
-months = np.arange(1, 25)
+months = np.arange(1, 37)
 trend_component = base_sales + trend * months
 seasonal_component = seasonal_amplitude * np.sin(2 * np.pi * months / 12)
 noise = np.random.normal(0, noise_level, len(months))
