@@ -99,6 +99,24 @@ website:
             href: tutorials/nb_08_01_multi_objective.qmd
           - text: "NB-08-02 Competition"
             href: tutorials/nb_08_02_fleet_optimization.qmd
+      - section: "09 Metaheuristics"
+        contents:
+          - text: "09 Lecture"
+            href: lectures/lec_09_metaheuristics.qmd
+          - text: "NB-09-01 Metaheuristics"
+            href: raw/nb_09_01_metaheuristics.qmd
+          - text: "NB-09-02 Competition"
+            href: raw/nb_09_02_restaurant_staffing.qmd
+      - section: "10 Consulting Projects"
+        contents:
+          - text: "10 Project Introduction"
+            href: lectures/lec_10_consulting_projects.qmd
+          - text: "Project 01: QuickBite"
+            href: tutorials/nb_project_01_quickbite.qmd
+          - text: "Project 02: NurseNext"
+            href: tutorials/nb_project_02_nursenext.qmd
+          - text: "Project 03: TechMart"
+            href: tutorials/nb_project_03_techmart.qmd
       - text: "***"
       - text: "Installation"
         href: general/uv.qmd

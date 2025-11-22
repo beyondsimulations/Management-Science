@@ -1,0 +1,503 @@
+---
+title: "Consulting Project: TechMart Inventory Optimization"
+subtitle: "Management Science - E-commerce Inventory Management"
+code-links:
+  - text: Python
+    href: nb_project_03_techmart.py
+    icon: hand-thumbs-up
+---
+
+# Client Briefing: TechMart Electronics
+
+## Meet Your Client
+
+**Industry:** E-commerce / Electronics Retail
+**Client Contact:** Yola Wang, Chief Operations Officer
+**Company Size:** 200 employees
+**Market:** Consumer electronics in Germany
+
+## The COO's Inventory Crisis
+
+**Yola Wang, COO of TechMart**
+
+*"We're drowning in inventory but constantly out of stock on bestsellers. It makes no sense!*
+
+*Here's our situation: We sell 30 electronics SKUs online: smartphones, laptops, headphones, smartwatches, tablets. We have two warehouses:*
+
+- *Fast Warehouse (Hamburg): Right next to our shipping hub. Orders ship in 1-2 hours. But it's small and has only 8,000 unit capacity.*
+- *Large Warehouse (Poland): Huge storage (50,000+ capacity) but orders take 2-3 days to ship from there.*
+
+*The problem? We're making terrible allocation decisions:*
+
+- *Slow-movers occupy 40% of fast warehouse space*
+- *Shipping delays costing us hundreds of thousands annually in customer refunds*
+- *Customer complaints about "2-day delivery" are up 60%*
+
+*Black Friday is in 3 weeks. Last year was a disaster... We ran out of top items in the fast warehouse on Day 1, then spent a week scrambling with slow shipping from Poland. Lost a lot of potential revenue.*
+
+*Here's the critical constraint: Once Black Friday starts, we CANNOT refill the Hamburg warehouse. All our warehouse staff are 100% busy picking and packing orders and there's zero time for restocking. Whatever allocation we make beforehand is what we're stuck with for the entire weekend!*
+
+*I need you to:*
+
+1. *Forecast Black Friday demand for each SKU (weeks 47-48)*
+2. *Decide which SKUs (and how many units) to pre-position in the fast warehouse (limited to 8,000 units!)*
+3. *Minimize shipping delay costs*
+4. *Show me the business impact in €€€*
+
+*I have 3 years of sales history. Can you help us get this right before Black Friday?"*
+
+## The Business Context
+
+### Warehouse System
+
+#### Fast Warehouse (Hamburg)
+
+- **Capacity:** 8,000 units total
+- **Shipping speed:** 1-2 hours processing, next-day delivery
+- **Storage cost:** €2.50 per unit (for Black Friday period)
+- **Perfect for:** High-demand, fast-moving items
+
+#### Large Warehouse (Poland)
+
+- **Capacity:** 50,000+ units (effectively unlimited for our needs)
+- **Shipping speed:** 2-3 days processing, 2-3 days delivery (4-6 days total!)
+- **Storage cost:** €0.80 per unit (for Black Friday period)
+- **Perfect for:** Slow-movers, bulk storage
+
+### The Allocation Problem
+
+**Before Black Friday:**
+
+You must decide **how many units of each SKU** to pre-position in the fast warehouse (Hamburg) vs. large warehouse (Poland).
+
+**Critical Constraints:**
+
+- Total units in fast warehouse ≤ 8,000
+- **No refilling during Black Friday!** All warehouse staff are busy handling the surge, whatever you allocate is fixed for the entire weekend
+
+**During Black Friday:**
+
+- **Units in Fast Warehouse (Hamburg):** Ship quickly (1-2 days), customers happy, **no delay penalty**
+- **Units in Large Warehouse (Poland):** Ship slowly (4-6 days), customers complain, **delay penalty applies**
+
+**Your Goal:** Decide how many units of each SKU go in Hamburg warehouse to **minimize total delay penalty costs**.
+
+::: callout-note
+Note, we have sufficient total inventory of each SKU. The question is **WHERE to store each unit** before Black Friday!
+:::
+
+**Example Allocation:**
+
+```
+SKU-001: 450 units in Hamburg, rest in Poland
+SKU-002: 380 units in Hamburg, rest in Poland
+SKU-003: 0 units in Hamburg, all in Poland
+...
+SKU-030: 200 units in Hamburg, rest in Poland
+Total: ≤ 8,000 units in Hamburg
+```
+
+This is a classic **knapsack problem**: Which units should we "pack" into the limited Hamburg warehouse capacity?
+
+### Cost Structure
+
+**Delay Penalty (per unit from Poland warehouse):**
+
+- 15% of customers cancel order: lost sale (50 % of product price as opportunity costs)
+- 85% of customers wait but demand partial refund: €10 compensation
+
+### Customer Expectations
+
+- **High-demand items:** Customers expect 1-2 day delivery (Hamburg warehouse)
+- **Low-demand items:** Customers more tolerant of 4-6 day delivery (Poland warehouse)
+- **Black Friday:** Everyone expects fast delivery! High delay costs for all SKUs.
+
+## The Data: 3 Years of Sales History
+
+```{python}
+#| eval: true
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
+
+# Set random seed for reproducibility
+np.random.seed(2025)
+
+def generate_techmart_sales_history():
+    """
+    Generate 3 years of sales history for 30 electronics SKUs.
+
+    Realistic patterns:
+    - Seasonality (Black Friday spike, summer dip)
+    - Product lifecycle (new products, declining products)
+    - Different demand levels (bestsellers vs. niche items)
+    """
+
+    # Define 30 SKUs across 5 categories
+    categories = {
+        'Smartphones': 8,
+        'Laptops': 6,
+        'Headphones': 6,
+        'Smartwatches': 5,
+        'Tablets': 5
+    }
+
+    skus = []
+    sku_id = 1
+    for category, count in categories.items():
+        for i in range(count):
+            # Base demand level (some products are naturally more popular)
+            base_demand = np.random.choice(
+                [30, 80, 150, 250],  # Units per week
+                p=[0.35, 0.35, 0.20, 0.10]  # Distribution of demand levels
+            )
+
+            # Product age (affects lifecycle)
+            launch_date = np.random.choice(['2023-01', '2024-01', '2025-01'])
+
+            skus.append({
+                'sku_id': f'SKU-{sku_id:03d}',
+                'category': category,
+                'base_demand': base_demand,
+                'launch_date': launch_date,
+                'price': np.random.uniform(30, 1200)
+            })
+            sku_id += 1
+
+    skus_df = pd.DataFrame(skus)
+
+    # Generate weekly sales from 2023-01-01 to 2025-11-15 (almost 3 years)
+    start_date = datetime(2023, 1, 1)
+    end_date = datetime(2025, 11, 15)
+    weeks = pd.date_range(start_date, end_date, freq='W')
+
+    sales_data = []
+
+    for _, sku in skus_df.iterrows():
+        sku_launch = datetime.strptime(sku['launch_date'], '%Y-%m')
+
+        for week_start in weeks:
+            # Skip if product not yet launched
+            if week_start < sku_launch:
+                continue
+
+            week_num = week_start.isocalendar()[1]
+            year = week_start.year
+            month = week_start.month
+
+            # Base demand
+            demand = sku['base_demand']
+
+            # Seasonality factors
+            # Black Friday (week 47-48)
+            if week_num in [47, 48]:
+                demand *= np.random.uniform(2.5, 3.5) 
+
+            # Summer dip (June-August)
+            elif month in [6, 7, 8]:
+                demand *= np.random.uniform(0.6, 0.8)
+
+            # December holiday season (except BF weeks)
+            elif month == 12:
+                demand *= np.random.uniform(1.3, 1.7)
+
+            # Product lifecycle
+            weeks_since_launch = (week_start - sku_launch).days / 7
+
+            # Growth phase (first 6 months)
+            if weeks_since_launch < 26:
+                lifecycle_factor = 0.5 + (weeks_since_launch / 26) * 0.5
+            # Maturity (6 months - 2 years)
+            elif weeks_since_launch < 104:
+                lifecycle_factor = 1.0
+            # Decline (after 2 years)
+            else:
+                lifecycle_factor = max(0.3, 1.0 - ((weeks_since_launch - 104) / 52) * 0.3)
+
+            demand *= lifecycle_factor
+
+            # Add random noise
+            demand *= np.random.uniform(0.85, 1.15)
+
+            # Round to integer
+            demand = max(0, int(demand))
+
+            sales_data.append({
+                'sku_id': sku['sku_id'],
+                'week_start': week_start,
+                'year': year,
+                'week': week_num,
+                'month': month,
+                'units_sold': demand
+            })
+
+    sales_df = pd.DataFrame(sales_data)
+
+    return skus_df, sales_df
+
+# Generate data
+skus_df, sales_df = generate_techmart_sales_history()
+
+print("TECHMART ELECTRONICS - SKU CATALOG")
+print("=" * 80)
+print(skus_df.to_string(index=False))
+print("\n" + "=" * 80)
+print(f"Total SKUs: {len(skus_df)}")
+print("\nBy category:")
+for category in skus_df['category'].unique():
+    count = len(skus_df[skus_df['category'] == category])
+    print(f"  {category}: {count} SKUs")
+```
+
+### Sales History Overview
+
+```{python}
+#| eval: true
+print("\nSALES HISTORY SUMMARY")
+print("=" * 80)
+print(f"Date range: {sales_df['week_start'].min().date()} to {sales_df['week_start'].max().date()}")
+print(f"Total weeks: {sales_df['week_start'].nunique()}")
+print(f"Total records: {len(sales_df):,}")
+print(f"Total units sold (3 years): {sales_df['units_sold'].sum():,}")
+
+# Show sample of sales data
+print("\nSample sales data (first 20 records):")
+print(sales_df.head(20).to_string(index=False))
+```
+
+### Black Friday Performance (Historical)
+
+```{python}
+#| eval: true
+# Analyze historical Black Friday weeks (week 47-48)
+black_friday_sales = sales_df[sales_df['week'].isin([47, 48])]
+
+print("\nBLACK FRIDAY PERFORMANCE (Historical)")
+print("=" * 80)
+
+for year in [2023, 2024]:
+    year_bf = black_friday_sales[black_friday_sales['year'] == year]
+    total_units = year_bf['units_sold'].sum()
+
+    # Calculate per-week average for the two BF weeks
+    bf_per_week = total_units / 2
+
+    print(f"\n{year} Black Friday (weeks 47-48 combined):")
+    print(f"  Total units sold: {total_units:,}")
+    print(f"  Average per week: {bf_per_week:.0f}")
+
+    # Top 10 SKUs
+    top_skus = year_bf.groupby('sku_id')['units_sold'].sum().sort_values(ascending=False).head(10)
+    print(f"  Top 10 SKUs by demand: {', '.join(top_skus.index.tolist())}")
+
+# Calculate expected 2024 total
+avg_2023_2024 = black_friday_sales[black_friday_sales['year'].isin([2023, 2024])].groupby('year')['units_sold'].sum().mean()
+print(f"\n2024 Expected Black Friday total (if similar to 2023-2024): ~{avg_2023_2024:.0f} units")
+print(f"Fast warehouse capacity: 8,000 units")
+print(f"Coverage: ~{(8000/avg_2023_2024)*100:.1f}% of expected demand can fit in fast warehouse")
+```
+
+## Warehouse Capacity Analysis
+
+```{python}
+#| eval: true
+# Analyze capacity feasibility
+warehouses = {
+    'Fast Warehouse (Hamburg)': {
+        'capacity': 8000,  # units
+        'description': 'Premium location, fast shipping, limited space'
+    },
+    'Large Warehouse (Poland)': {
+        'capacity': 100000,  # 50000 units (effectively unlimited)
+        'description': 'Cheap storage, slow shipping, huge space'
+    }
+}
+
+print("\nWAREHOUSE SPECIFICATIONS")
+print("=" * 80)
+for warehouse, specs in warehouses.items():
+    print(f"\n{warehouse}:")
+    for key, value in specs.items():
+        if key != 'description':
+            print(f"  {key}: {value}")
+    print(f"  → {specs['description']}")
+
+print("\n" + "=" * 80)
+print("KEY CONSTRAINT: Fast warehouse can only hold 8,000 units total!")
+print("\nALLOCATION DECISION:")
+print("  - You must forecast Black Friday demand for each SKU")
+print("  - Then decide which SKUs to store in fast warehouse")
+print("  - Goal: Minimize total delay costs!")
+```
+
+## Minimal Helper Functions
+
+We provide only basic data access and cost calculation functions. **You must implement forecasting, optimization, and simulation yourself.**
+
+```{python}
+#| eval: true
+def get_sku_sales_history(sku_id, sales_df):
+    """
+    Get sales history for a specific SKU.
+
+    Args:
+        sku_id: SKU identifier (e.g., 'SKU-001')
+        sales_df: DataFrame with sales history
+
+    Returns:
+        DataFrame with weekly sales for the SKU
+    """
+    return sales_df[sales_df['sku_id'] == sku_id].sort_values('week_start').reset_index(drop=True)
+```
+
+```{python}
+#| eval: true
+def plot_sku_sales_trend(sku_id, sales_df, skus_df):
+    """Plot sales trend for a specific SKU."""
+    sku_history = get_sku_sales_history(sku_id, sales_df)
+    sku_info = skus_df[skus_df['sku_id'] == sku_id].iloc[0]
+
+    plt.figure(figsize=(14, 5))
+    plt.plot(sku_history['week_start'], sku_history['units_sold'], linewidth=1.5)
+    plt.axhline(y=sku_info['base_demand'], color='red', linestyle='--',
+                label=f'Base Demand: {sku_info["base_demand"]}', alpha=0.7)
+
+    # Highlight Black Friday weeks
+    bf_weeks = sku_history[sku_history['week'].isin([47, 48])]
+    plt.scatter(bf_weeks['week_start'], bf_weeks['units_sold'],
+                color='orange', s=100, zorder=5, label='Black Friday')
+
+    plt.xlabel('Date', fontsize=12)
+    plt.ylabel('Units Sold', fontsize=12)
+    plt.title(f'{sku_id} Sales History - {sku_info["category"]} (Base: {sku_info["base_demand"]} units/week)',
+              fontsize=14, fontweight='bold')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+
+# Plot example SKUs - one high-demand, one low-demand
+high_demand_sku = skus_df.nlargest(1, 'base_demand').iloc[0]['sku_id']
+low_demand_sku = skus_df.nsmallest(1, 'base_demand').iloc[0]['sku_id']
+
+print("\nHigh-demand SKU example:")
+plot_sku_sales_trend(high_demand_sku, sales_df, skus_df)
+
+print("\nLow-demand SKU example:")
+plot_sku_sales_trend(low_demand_sku, sales_df, skus_df)
+```
+
+## Your Task
+
+You must develop an inventory optimization solution that forecasts Black Friday demand and optimally allocates SKUs to warehouses. Provide:
+
+### 1. Jupyter Notebook with Complete Solution
+
+Your notebook should include:
+
+- **Exploratory Data Analysis:**
+
+  - Seasonality patterns (visualize aggregate sales over time)
+  - Product lifecycle trends
+  - Black Friday spike analysis (2023 vs 2024)
+  - SKU categorization (fast-movers vs. slow-movers)
+
+- **Demand Forecasting:**
+
+  - Forecast Black Friday 2025 demand (weeks 47-48 combined) for all 30 SKUs
+  - Method: Time series forecasting
+  - Validation: Test your model to assess accuracy
+
+- **Inventory Allocation Optimization:**
+
+  - Decision: **How many units of each SKU** to allocate to Hamburg warehouse (total ≤ 8,000 units!)
+  - Objective: Minimize total delay cost
+  - This is a **knapsack problem**: Rank SKUs and allocate greedily, or use optimization
+
+- **Monte Carlo Simulation:**
+
+  - Generate 10,000 demand scenarios with ±20% variation from your forecast
+  - For each scenario, calculate total delay cost using your fixed allocation
+  - Analyze: Mean cost, standard deviation, 95th percentile (worst-case)
+  - Insight: How robust is your allocation to forecast errors?
+
+- **Results & Business Impact:**
+
+  - Total expected delay cost
+  - Allocation breakdown: How many units of each SKU in Hamburg vs. Poland
+  - Comparison to baseline (e.g., equal allocation across all SKUs, or random)
+  - Cost savings in €€€
+
+### 2. Presentation (8 minutes maximum)
+
+- **Problem understanding** (1 min): Yola's crisis in your own words
+- **Your approach** (2 min): Forecasting method + allocation logic
+- **Results** (3 min): Forecasts, allocation decision, Monte Carlo analysis
+- **Business impact** (1 min): €€€ savings, recommendations
+- **Q&A preparation** (1 min): Trade-offs, limitations
+
+### 3. Key Metrics to Report
+
+**Forecasting:**
+
+- Forecast accuracy (MAE, RMSE, or similar)
+- Total forecasted demand for 2025 Black Friday
+
+**Allocation:**
+
+- Total units allocated to fast warehouse (must be ≤ 8,000!)
+- Number of SKUs in each warehouse and expected total delay cost
+
+**Monte Carlo Risk Analysis:**
+
+- Mean delay cost across 10,000 simulations
+- Standard deviation (risk measure)
+- 95th percentile cost (worst-case scenario)
+
+**Business Impact:**
+
+- Cost savings vs. baseline allocation
+
+## Constraints and Requirements
+
+::: {.callout-important}
+## Hard Constraints (Must Satisfy)
+
+1. **Capacity:** Total forecasted demand allocated to fast warehouse ≤ 8,000 units
+
+## Soft Constraints (Optimize)
+
+1. **Minimize delay costs:** Fewer units in Poland = lower total cost
+2. **Robustness:** Allocation should perform reasonably under demand uncertainty (Monte Carlo)
+:::
+
+## Tips for Success
+
+1. **No refilling during Black Friday!** Your allocation is fixed for the entire weekend.
+2. **Forecasting is critical:** A 10% forecast error can shift which SKUs get priority.
+3. **Monte Carlo reveals risk:** Your allocation might have same expected cost but higher variance.
+4. **Start simple, iterate:** Get a working forecast → simple allocation → validate → Monte Carlo
+
+## Common Pitfalls to Avoid
+
+- **Overfitting forecast:** Don't overfit to historical data. Use simple, robust methods.
+- **Ignoring capacity:** Double-check that total allocated to fast warehouse ≤ 8,000!
+- **Poor visualization:** Make your allocation decision clear (how many units of each SKU where?)
+- **No baseline comparison:** Always compare to a baseline (e.g., random allocation) to show improvement
+
+## Data Access
+
+All data is provided in this notebook:
+
+- `skus_df`: DataFrame with 30 SKUs and their attributes
+- `sales_df`: DataFrame with 3 years of weekly sales history
+- `warehouses`: Dict with warehouse specifications
+- Helper functions: `get_sku_sales_history()`, `calculate_allocation_cost()`
+
+**You must implement forecasting, allocation optimization, and Monte Carlo simulation yourself!**
+
+## Deadline
+
+- **Notebook submission & Presentation:** Lecture 12
+- **Good luck, consultants!**
