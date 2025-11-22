@@ -1368,7 +1368,9 @@ plt.show()
 Mutation adds random exploration, like trying something completely new occasionally!
 :::
 
-## Stage 4: Population Evolution
+## Stage 4. Replacement
+
+## Population Evolution
 
 [How the population improves over generations:]{.highlight}
 
@@ -1676,9 +1678,86 @@ Tabu Search's memory prevents revisiting bad solutions!
 
 # [Metaheuristic #4: Ant Colony Optimization]{.flow} {.title}
 
-## The Concept
+## The Core Idea
 
-[How ants find the shortest path to food:]{.highlight}
+[Collective intelligence through chemical signals:]{.highlight}
+
+::: columns
+::: {.column width="50%"}
+**Reviews:**
+
+- Popular choices get more 5-star reviews
+- More reviews → more visibility
+- But old reviews fade over time
+- New patterns can emerge
+:::
+
+::: {.column width="50%"}
+**In Optimization:**
+
+- Good assignments get "pheromones"
+- Stronger choosen more likely
+- Evaporation against stagnation
+- Colony finds patterns
+:::
+:::
+
+::: {.callout-tip}
+Imagine each server-shift pairing has a "rating" that increases when it works well in a schedule. Over time, the best pairings naturally get chosen more often!
+:::
+
+## How ACO Works on Scheduling
+
+[Four key stages in each iteration:]{.highlight}
+
+::: incremental
+1. **Construction:** Each ant builds a schedule probabilistically
+2. **Evaluation & Evaporation:** Measure quality, then fade all pheromones
+3. **Reinforcement:** Good schedules deposit pheromones
+4. **Evolution:** Repeat until colony converges
+:::
+
+. . .
+
+::: callout-tip
+Let's see each stage visually!
+:::
+
+## ACO: Key Parameters
+
+[Two critical parameters control the balance:]{.highlight}
+
+::: columns
+::: {.column width="50%"}
+**Evaporation Rate (ρ)**
+
+- Higher ρ → More forgetting
+- Lower ρ → Stronger memory
+- Typical: 0.1 - 0.5
+- **Too high**: Colony never learns
+- **Too low**: Gets stuck early
+:::
+
+::: {.column width="50%"}
+**Number of Ants**
+
+- More ants → More exploration
+- Fewer ants → Faster iterations
+- Typical: 10 - 50
+- **Too many**: Slow, redundant
+- **Too few**: Miss good patterns
+:::
+:::
+
+. . .
+
+::: {.callout-tip}
+Start with ρ=0.3 and n_ants=20, then tune based on problem size.
+:::
+
+## Stage 1: Pheromone Construction
+
+[Ants don't pick randomly, they follow the chemical trails]{.highlight}
 
 ```{python}
 #| echo: false
@@ -1687,72 +1766,178 @@ Tabu Search's memory prevents revisiting bad solutions!
 import sys
 sys.path.append('../helpers')
 from plot_utils import setup_clean_style, BRAND_COLORS
-
-# Apply clean brand style
 setup_clean_style()
 
-# Visualize ACO pheromone trails
-fig, axes = plt.subplots(1, 3)
+# Simulate pheromone strengths for visualization
+servers = ['E1', 'E2', 'E3', 'E4', 'J1', 'J2', 'J3', 'J4']
+shifts_short = ['Fri\nDinner', 'Fri\nLate', 'Sat\nLunch', 'Sat\nDinner', 'Sun\nLunch', 'Sun\nDinner']
 
-# Create nodes for TSP
-np.random.seed(123)
-n_nodes = 8
-node_x = np.random.uniform(0, 10, n_nodes)
-node_y = np.random.uniform(0, 10, n_nodes)
+# Create pheromone matrix (higher = stronger signal)
+np.random.seed(42)
+pheromone_matrix = np.random.uniform(0.5, 3.0, size=(len(servers), len(shifts_short)))
 
-titles = ['Initial: Equal Pheromones', 
-          'After 10 Iterations: Trails Forming',
-          'After 50 Iterations: Converged']
+# Make experienced servers slightly preferred for high-penalty shifts
+pheromone_matrix[0:4, [0, 3, 5]] *= 1.5  # E1-E4 preferred for Fri/Sat/Sun Dinner
 
-for idx, (ax, title) in enumerate(zip(axes, titles)):
-    # Draw edges with pheromone intensity
-    for i in range(n_nodes):
-        for j in range(i+1, n_nodes):
-            if idx == 0:
-                # Initial: all equal
-                alpha = 0.2
-                width = 1
-            elif idx == 1:
-                # Forming: some stronger
-                dist = np.sqrt((node_x[i]-node_x[j])**2 + (node_y[i]-node_y[j])**2)
-                alpha = 0.1 + 0.5 * np.exp(-dist/5)
-                width = alpha * 5
-            else:
-                # Converged: clear path
-                # Define good path
-                good_edges = [(0,1), (1,3), (3,5), (5,7), (7,6), (6,4), (4,2), (2,0)]
-                if (i,j) in good_edges or (j,i) in good_edges:
-                    alpha = 0.8
-                    width = 5
-                else:
-                    alpha = 0.1
-                    width = 0.5
-            
-            ax.plot([node_x[i], node_x[j]], [node_y[i], node_y[j]], 
-                   color=BRAND_COLORS["darker"], alpha=alpha, linewidth=width)
-    
-    # Draw nodes
-    ax.scatter(node_x, node_y, s=200, c=BRAND_COLORS["oneDark"], zorder=5)
-    for i, (x, y) in enumerate(zip(node_x, node_y)):
-        ax.text(x, y, str(i), ha='center', va='center', color='white', fontweight='bold')
-    
-    ax.set_title(title, fontsize=12, fontweight='bold')
-    ax.set_xlim(-1, 11)
-    ax.set_ylim(-1, 11)
-    ax.set_aspect('equal')
-    ax.grid(True, alpha=0.3)
+fig, ax = plt.subplots()
+
+# Create heatmap
+im = ax.imshow(pheromone_matrix, cmap='YlOrRd', aspect='auto', vmin=0, vmax=4)
+
+# Add colorbar
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label('Pheromone Strength\n(Higher = More Attractive)', 
+               rotation=270, labelpad=25, fontsize=12, fontweight='bold')
+
+# Set ticks
+ax.set_xticks(range(len(shifts_short)))
+ax.set_yticks(range(len(servers)))
+ax.set_xticklabels(shifts_short, fontsize=11)
+ax.set_yticklabels(servers, fontsize=11)
+
+# Add values
+for i in range(len(servers)):
+    for j in range(len(shifts_short)):
+        text = ax.text(j, i, f'{pheromone_matrix[i, j]:.1f}',
+                      ha="center", va="center", color="black", fontsize=9,
+                      fontweight='bold' if pheromone_matrix[i, j] > 2.5 else 'normal')
+
+# Highlight one ant's probabilistic choice for Sat Dinner
+sat_dinner_idx = 3
+ax.add_patch(plt.Rectangle((sat_dinner_idx - 0.5, -0.5), 1, len(servers), 
+                          fill=False, edgecolor=BRAND_COLORS["threeDark"], linewidth=4))
+
+ax.set_xlabel('Shifts', fontsize=13, fontweight='bold')
+ax.set_ylabel('Servers', fontsize=13, fontweight='bold')
+ax.set_title('ACO Stage 1: Pheromone Matrix Guides Construction\n(Each ant probabilistically selects servers based on pheromone strength)', 
+             fontsize=14, fontweight='bold', pad=15)
 
 plt.tight_layout()
 plt.show()
 ```
 
-[Ants deposit pheromones, creating emergent intelligence!]{.highlight}
+. . .
 
----
+::: callout-tip
+To build the initial pheromone matrix, each cell is initialized with a small positive value.
+:::
 
-## ACO on Restaurant Problem
+## Stage 2: Evaluation & Evaporation
 
-[Pheromone-guided construction of schedules:]{.highlight}
+[After all ants build schedules:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, (ax1, ax2) = plt.subplots(1, 2)
+
+# Left: Ant solutions distribution
+n_ants = 20
+ant_costs = np.random.normal(4200, 300, n_ants)
+ant_costs = np.clip(ant_costs, 3600, 4800)
+ant_costs = sorted(ant_costs)
+
+colors = [BRAND_COLORS["threeDark"] if cost < 3900 else 
+          BRAND_COLORS["oneDark"] if cost < 4200 else 
+          BRAND_COLORS["darker"] for cost in ant_costs]
+
+ax1.barh(range(n_ants), ant_costs, color=colors, alpha=0.8)
+ax1.set_xlabel('Cost (€)', fontsize=12, fontweight='bold')
+ax1.set_ylabel('Ant #', fontsize=12, fontweight='bold')
+ax1.set_title('EVALUATION\nAll 20 ants build schedules', fontsize=12, fontweight='bold')
+ax1.grid(True, alpha=0.3, axis='x')
+
+# Right: Evaporation visualization
+evaporation_rate = 0.3
+before_levels = [3.0, 2.5, 1.8, 1.2, 0.8]
+after_levels = [x * (1 - evaporation_rate) for x in before_levels]
+
+x_pos = np.arange(len(before_levels))
+width = 0.35
+
+ax2.bar(x_pos - width/2, before_levels, width, label='Before Evaporation',
+        color=BRAND_COLORS["oneLight"], alpha=0.9, edgecolor='black', linewidth=1.5)
+ax2.bar(x_pos + width/2, after_levels, width, label='After Evaporation (ρ=0.3)',
+        color=BRAND_COLORS["oneDark"], alpha=0.9, edgecolor='black', linewidth=1.5)
+
+# Add arrows showing reduction
+for i, (before, after) in enumerate(zip(before_levels, after_levels)):
+    ax2.annotate('', xy=(i + width/2, after + 0.1), xytext=(i - width/2, before - 0.1),
+                arrowprops=dict(arrowstyle='->', color='red', lw=2))
+
+ax2.set_xlabel('Server-Shift Pairing', fontsize=12, fontweight='bold')
+ax2.set_ylabel('Pheromone Level', fontsize=12, fontweight='bold')
+ax2.set_title('EVAPORATION\nAll pheromones fade 30%', fontsize=12, fontweight='bold')
+ax2.set_xticks(x_pos)
+ax2.set_xticklabels(['E1-Fri\nDinner', 'E2-Sat\nDinner', 'J1-Fri\nLate', 'J3-Sun\nLunch', 'J5-Sun\nDinner'], 
+                    fontsize=9)
+ax2.legend(fontsize=10, loc='upper right')
+ax2.grid(True, alpha=0.3, axis='y')
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-tip
+Evaporation prevents premature convergence as old patterns can fade away!
+:::
+
+## Stage 3: Reinforcement
+
+[Good ants deposit more pheromones:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, ax = plt.subplots()
+
+# Three ants with different quality
+ant_data = [
+    {'id': 'Ant #7', 'cost': 3800, 'deposit': 0.42, 'color': BRAND_COLORS["threeDark"]},
+    {'id': 'Ant #12', 'cost': 4100, 'deposit': 0.36, 'color': BRAND_COLORS["oneDark"]},
+    {'id': 'Ant #18', 'cost': 4400, 'deposit': 0.29, 'color': BRAND_COLORS["darker"]},
+]
+
+# Show pheromone deposits for one pairing
+pairing_name = "E1 → Sat Dinner"
+y_positions = [2, 1, 0]
+
+for i, (ant, y_pos) in enumerate(zip(ant_data, y_positions)):
+    # Bar showing deposit amount
+    ax.barh(y_pos, ant['deposit'], color=ant['color'], alpha=0.8, height=0.6,
+           edgecolor='black', linewidth=2)
+    
+    # Ant emoji and label
+    ax.text(0.5, y_pos, f"{ant['id']}\n€{ant['cost']}", fontsize=10, 
+           ha='right', va='center', fontweight='bold')
+    
+    # Deposit value
+    ax.text(ant['deposit'] + 0.01, y_pos, f"+{ant['deposit']:.2f}", 
+           fontsize=11, va='center', fontweight='bold', color=ant['color'])
+
+# Formula annotation
+ax.text(0.21, -1.5, 'Deposit Formula: Δτ = Q / cost\n(Q=1000, so better solutions deposit more)', 
+       fontsize=11, ha='center', style='italic')
+
+ax.set_xlabel('Pheromone Deposited', fontsize=13, fontweight='bold')
+ax.set_title(f'ACO Stage 3: Reinforcement', 
+            fontsize=14, fontweight='bold', pad=15)
+ax.set_yticks([])
+ax.grid(True, alpha=0.3, axis='x')
+
+plt.tight_layout()
+plt.show()
+```
+
+[The best solutions leave the strongest trails for future iterations!]{.highlight}
+
+## Stage 4: Evolution Over Iterations
+
+[Full ACO implementation on restaurant staffing:]{.highlight}
 
 ```{python}
 #| echo: false
@@ -1774,6 +1959,7 @@ def ant_colony_optimization(n_ants=20, n_iterations=100, evaporation=0.5, alpha=
     best_schedule = None
     best_cost = float('inf')
     cost_history = []
+    avg_history = []  # Track average colony cost in each iteration
     
     random.seed(42)
     np.random.seed(42)
@@ -1832,7 +2018,9 @@ def ant_colony_optimization(n_ants=20, n_iterations=100, evaporation=0.5, alpha=
                 best_schedule = [shift[:] for shift in schedule]
                 best_cost = cost
         
+        # Track best and average in this iteration
         cost_history.append(best_cost)
+        avg_history.append(np.mean(iteration_costs))
         
         # Evaporate pheromones
         for key in pheromones:
@@ -1845,100 +2033,103 @@ def ant_colony_optimization(n_ants=20, n_iterations=100, evaporation=0.5, alpha=
                 for server in servers_in_shift:
                     pheromones[(server, shift_idx)] += deposit_amount
     
-    return best_schedule, best_cost, cost_history
+    return best_schedule, best_cost, cost_history, avg_history
 
 # Run ACO
 np.random.seed(42)
 random.seed(42)
-aco_best, aco_best_cost, aco_history = ant_colony_optimization(
-    n_ants=20, n_iterations=100, evaporation=0.3, alpha=1.0, beta=2.0
+aco_best, aco_best_cost, aco_history, aco_avg_history = ant_colony_optimization(
+    n_ants=20, n_iterations=500, evaporation=0.3, alpha=1.0, beta=2.0
 )
 
-# Visualize ACO performance
-fig, ax = plt.subplots(1, 1, figsize=(12, 7))
+# Visualize ACO convergence with phase annotations
+fig, ax = plt.subplots(1, 1)
 
 iterations = list(range(len(aco_history)))
-ax.plot(iterations, aco_history, color=BRAND_COLORS["threeDark"], linewidth=3,
-        label=f'ACO Best (€{aco_best_cost:.0f})', alpha=0.9)
 
-# Add other algorithms for comparison
-ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, 
-           label=f'Greedy (€{greedy_cost_value:.0f})', alpha=0.6)
-ax.axhline(y=best_cost_sa, color=BRAND_COLORS["twoDark"], linestyle='--', linewidth=2,
-           label=f'SA (€{best_cost_sa:.0f})', alpha=0.6)
-ax.axhline(y=ga_best_cost, color=BRAND_COLORS["oneDark"], linestyle='--', linewidth=2,
-           label=f'GA (€{ga_best_cost:.0f})', alpha=0.6)
+# Plot best and average (like GA visualization)
+ax.plot(iterations, aco_history, color=BRAND_COLORS["threeDark"], linewidth=3,
+        label=f'Best Ant (€{aco_best_cost:.0f})', alpha=0.9, zorder=3)
+ax.plot(iterations, aco_avg_history, color=BRAND_COLORS["threeLight"], linewidth=2,
+        label=f'Colony Average', alpha=0.7, linestyle='--', zorder=2)
+
+# Phase annotations (similar to GA style)
+ax.axvspan(0, 125, alpha=0.1, color=BRAND_COLORS["threeDark"])
+ax.axvspan(125, 300, alpha=0.1, color=BRAND_COLORS["oneDark"])
+ax.axvspan(300, 500, alpha=0.1, color=BRAND_COLORS["twoDark"])
+
+ax.text(62, max(aco_avg_history)*0.98, 'EXPLORATION\nHigh diversity, trails forming', 
+        ha='center', fontsize=10, fontweight='bold', color=BRAND_COLORS["threeDark"])
+ax.text(212, max(aco_avg_history)*0.98, 'INTENSIFICATION\nAverage improves, strong trails', 
+        ha='center', fontsize=10, fontweight='bold', color=BRAND_COLORS["oneDark"])
+ax.text(400, max(aco_avg_history)*0.98, 'CONVERGENCE\nColony consensus', 
+        ha='center', fontsize=10, fontweight='bold', color=BRAND_COLORS["twoDark"])
 
 ax.set_xlabel('Iteration', fontsize=14, fontweight='bold')
-ax.set_ylabel('Best Cost Found (€)', fontsize=14, fontweight='bold')
-ax.set_title('Ant Colony Optimization on Restaurant Staffing\n(Pheromones guide ants toward good server-shift assignments)', 
+ax.set_ylabel('Cost (€)', fontsize=14, fontweight='bold')
+ax.set_title('ACO Stage 4: Evolution Through Collective Learning\n(Average colony performance improves as pheromones strengthen)', 
              fontsize=16, fontweight='bold', pad=15)
 ax.legend(fontsize=12, loc='upper right', framealpha=0.95)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.show()
-
-print(f"\n{'='*60}")
-print(f"All Algorithms Comparison:")
-print(f"{'='*60}")
-print(f"Greedy:      €{greedy_cost_value:,.0f}  (baseline)")
-print(f"SA:          €{best_cost_sa:,.0f}  ({100*(greedy_cost_value-best_cost_sa)/greedy_cost_value:.1f}% better)")
-print(f"GA:          €{ga_best_cost:,.0f}  ({100*(greedy_cost_value-ga_best_cost)/greedy_cost_value:.1f}% better)")
-print(f"Tabu Search: €{tabu_best_cost:,.0f}  ({100*(greedy_cost_value-tabu_best_cost)/greedy_cost_value:.1f}% better)")
-print(f"ACO:         €{aco_best_cost:,.0f}  ({100*(greedy_cost_value-aco_best_cost)/greedy_cost_value:.1f}% better)")
-```
-
-[ACO's collective intelligence emerges from simple ant behavior!]{.highlight}
-
-## Try It Yourself!
-
-[Put your knowledge into practice with ACO:]{.highlight}
-
-::: {.callout-note}
-In **Tutorial 9.1**, you'll implement ACO for Bean Counter's delivery routing. You'll see how digital ants find optimal paths!
-:::
-
-## ACO: The Pheromone Evaporation Trick
-
-[Why forgetting old paths helps find better ones:]{.highlight}
-
-```python
-#| echo: true
-#| eval: false
-
-# CONCEPT: Why Pheromones Work
-def pheromone_update_concept():
-    """
-    The ant colony's learning mechanism
-    """
-    # Step 1: Evaporation (forgetting old paths)
-    # Like how old customer reviews become less relevant
-    for path in all_paths:
-        pheromone[path] = pheromone[path] * 0.5  # Fade away
-    
-    # Step 2: Reinforcement (strengthening good paths)  
-    # Like how popular restaurants get more customers
-    for ant_route in this_iteration:
-        if route_is_short:
-            add_more_pheromone(route)  # Attract more ants!
 ```
 
 . . .
 
-## Why Evaporation Matters
+::: callout-tip
+The colony learns collectively step by step.
+:::
 
-[The power of forgetting in optimization:]{.highlight}
+## ACO vs Other Algorithms
 
-::: {.callout-important}
-Without evaporation, the first decent path found becomes permanent. With evaporation, the colony can adapt when conditions change - just like businesses must forget outdated "best practices"!
+[How does the ant colony compare?]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, ax = plt.subplots(1, 1)
+
+# Plot all algorithms
+iterations_sa = list(range(len(best_costs)))
+iterations_ga = list(range(len(ga_best_hist)))
+iterations_aco = list(range(len(aco_history)))
+
+ax.plot(iterations_sa, best_costs, color=BRAND_COLORS["twoDark"], linewidth=2.5,
+        label=f'SA (€{best_cost_sa:.0f})', alpha=0.85)
+ax.plot(iterations_ga, ga_best_hist, color=BRAND_COLORS["oneDark"], linewidth=2.5,
+        label=f'GA (€{ga_best_cost:.0f})', alpha=0.85)
+ax.plot(iterations_aco, aco_history, color=BRAND_COLORS["threeDark"], linewidth=2.5,
+        label=f'ACO (€{aco_best_cost:.0f})', alpha=0.85)
+
+# Add greedy baseline
+ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, 
+           label=f'Greedy (€{greedy_cost_value:.0f})', alpha=0.6)
+
+ax.set_xlabel('Iteration', fontsize=14, fontweight='bold')
+ax.set_ylabel('Best Cost Found (€)', fontsize=14, fontweight='bold')
+ax.set_title('ACO vs SA vs GA on Restaurant Staffing\n(Three different search philosophies, one problem)', 
+             fontsize=16, fontweight='bold', pad=15)
+ax.legend(fontsize=12, loc='upper right', framealpha=0.95)
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-tip
+Any idea why ACO fares worse?
 :::
 
 # [Decision Framework]{.flow} {.title}
 
 ## When to Use Which Metaheuristic?
 
-[A practical decision guide for algorithm selection:]{.highlight}
+[A decision guide for algorithm selection:]{.highlight}
 
 ```{python}
 #| echo: false
@@ -1948,14 +2139,13 @@ import pandas as pd
 
 # Create comprehensive comparison table
 comparison_data = {
-    'Method': ['Random', 'Greedy', 'Local Search', 'Simulated Annealing', 
-               'Genetic Algorithm', 'Tabu Search', 'Ant Colony'],
-    'Time': ['⚡⚡⚡⚡', '⚡⚡⚡', '⚡⚡', '⚡⚡', '⚡', '⚡⚡', '⚡'],
-    'Quality': ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐'],
+    'Method': ['Random', 'Greedy', 'LS', 'SA', 
+               'GA', 'TS', 'ACO'],
+    'Time': ['xxxx', 'xxx', 'xx', 'xx', 'x', 'xx', 'x'],
+    'Quality': ['x', 'xx', 'xxx', 'xxxx', 'xxxx', 'xxx', 'xxxx'],
     'Complexity': ['Trivial', 'Simple', 'Medium', 'Medium', 'High', 'Medium', 'High'],
     'Best For': ['Baseline', 'Quick decisions', 'Improvement', 'Single solution',
-                 'Population-based', 'Avoiding cycles', 'Path problems'],
-    'Parameters': ['None', '1-2', '2-3', '3-4', '5-6', '2-3', '4-5']
+                 'Population', 'Avoid cycles', 'Paths'],
 }
 
 df = pd.DataFrame(comparison_data)
@@ -1970,992 +2160,143 @@ from IPython.display import HTML, display
 display(HTML(df.to_html(index=False, classes='table table-striped')))
 ```
 
-. . .
-
-[Choose based on: time available, solution quality needed, and problem structure]{.highlight}
-
----
-
-## All Four Metaheuristics: Side-by-Side
-
-[How do they compare on our restaurant problem?]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-# Create comprehensive 4-way comparison
-fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-
-# Top Left: Convergence comparison
-ax = axes[0, 0]
-max_len = max(len(best_costs), len(ga_best_hist), len(tabu_best_hist), len(aco_history))
-
-# Pad all to same length
-def pad_to_length(lst, target_len):
-    if len(lst) >= target_len:
-        return lst[:target_len]
-    return lst + [lst[-1]] * (target_len - len(lst))
-
-sa_padded = pad_to_length(best_costs, max_len)
-ga_padded = pad_to_length(ga_best_hist, max_len)
-tabu_padded = pad_to_length(tabu_best_hist, max_len)
-aco_padded = pad_to_length(aco_history, max_len)
-
-iterations = list(range(max_len))
-ax.plot(iterations, sa_padded, color=BRAND_COLORS["twoDark"], linewidth=3, label='Simulated Annealing', alpha=0.9)
-ax.plot(iterations, ga_padded, color=BRAND_COLORS["oneDark"], linewidth=3, label='Genetic Algorithm', alpha=0.9)
-ax.plot(iterations, tabu_padded, color=BRAND_COLORS["threeDark"], linewidth=3, label='Tabu Search', alpha=0.9)
-ax.plot(iterations, aco_padded, color=BRAND_COLORS["twoLight"], linewidth=3, label='Ant Colony', alpha=0.9)
-ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, label='Greedy', alpha=0.6)
-
-ax.set_xlabel('Iteration', fontsize=13, fontweight='bold')
-ax.set_ylabel('Best Cost (€)', fontsize=13, fontweight='bold')
-ax.set_title('Convergence Speed Comparison', fontsize=15, fontweight='bold')
-ax.legend(fontsize=11, loc='upper right')
-ax.grid(True, alpha=0.3)
-
-# Top Right: Final results bar chart
-ax = axes[0, 1]
-algorithms = ['Greedy', 'SA', 'GA', 'Tabu', 'ACO']
-costs = [greedy_cost_value, best_cost_sa, ga_best_cost, tabu_best_cost, aco_best_cost]
-colors = ['gray', BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], 
-          BRAND_COLORS["threeDark"], BRAND_COLORS["twoLight"]]
-
-bars = ax.barh(algorithms, costs, color=colors, alpha=0.8, edgecolor='black', linewidth=2)
-ax.set_xlabel('Total Cost (€)', fontsize=13, fontweight='bold')
-ax.set_title('Final Solution Quality', fontsize=15, fontweight='bold')
-ax.grid(True, alpha=0.3, axis='x')
-
-# Add cost labels
-for i, (bar, cost) in enumerate(zip(bars, costs)):
-    improvement = 100 * (greedy_cost_value - cost) / greedy_cost_value if i > 0 else 0
-    label = f'€{cost:.0f}' if i == 0 else f'€{cost:.0f} ({improvement:.1f}% better)'
-    ax.text(cost + 50, i, label, va='center', fontsize=10, fontweight='bold')
-
-# Bottom Left: Exploration patterns (conceptual)
-ax = axes[1, 0]
-categories = ['Single\nSolution', 'Population\nBased', 'Memory\nBased', 'Collective\nIntelligence']
-sa_score = [5, 1, 2, 1]
-ga_score = [1, 5, 2, 3]
-tabu_score = [4, 1, 5, 1]
-aco_score = [2, 4, 3, 5]
-
-x = np.arange(len(categories))
-width = 0.2
-
-ax.bar(x - 1.5*width, sa_score, width, label='SA', color=BRAND_COLORS["twoDark"], alpha=0.8)
-ax.bar(x - 0.5*width, ga_score, width, label='GA', color=BRAND_COLORS["oneDark"], alpha=0.8)
-ax.bar(x + 0.5*width, tabu_score, width, label='Tabu', color=BRAND_COLORS["threeDark"], alpha=0.8)
-ax.bar(x + 1.5*width, aco_score, width, label='ACO', color=BRAND_COLORS["twoLight"], alpha=0.8)
-
-ax.set_ylabel('Strength (1-5)', fontsize=13, fontweight='bold')
-ax.set_title('Algorithm Characteristics', fontsize=15, fontweight='bold')
-ax.set_xticks(x)
-ax.set_xticklabels(categories, fontsize=10)
-ax.set_ylim(0, 6)
-ax.legend(fontsize=11)
-ax.grid(True, alpha=0.3, axis='y')
-
-# Bottom Right: Parameter complexity
-ax = axes[1, 1]
-algorithm_names = ['SA', 'GA', 'Tabu', 'ACO']
-param_counts = [3, 5, 2, 4]
-impl_complexity = [2, 4, 3, 5]  # Implementation complexity (1-5)
-
-x_pos = np.arange(len(algorithm_names))
-ax.scatter(param_counts, impl_complexity, s=[500, 500, 500, 500], 
-           c=[BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], 
-              BRAND_COLORS["threeDark"], BRAND_COLORS["twoLight"]], 
-           alpha=0.7, edgecolors='black', linewidth=2)
-
-for i, name in enumerate(algorithm_names):
-    ax.annotate(name, (param_counts[i], impl_complexity[i]), 
-                fontsize=13, fontweight='bold', ha='center', va='center')
-
-ax.set_xlabel('Number of Parameters to Tune', fontsize=13, fontweight='bold')
-ax.set_ylabel('Implementation Complexity (1-5)', fontsize=13, fontweight='bold')
-ax.set_title('Ease of Use vs Flexibility', fontsize=15, fontweight='bold')
-ax.grid(True, alpha=0.3)
-ax.set_xlim(1, 6)
-ax.set_ylim(1, 6)
-
-# Add regions
-ax.axhspan(1, 3, alpha=0.05, color='green')
-ax.text(5.5, 2, 'Easy', fontsize=10, color='green', fontweight='bold')
-ax.axhspan(4, 6, alpha=0.05, color='red')
-ax.text(5.5, 5, 'Complex', fontsize=10, color='red', fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-```
-
-[Each algorithm excels in different aspects - choose based on your priorities!]{.highlight}
-
-## Algorithm Selection: The No Free Lunch Theorem
+## The No Free Lunch Theorem
 
 [Why there's no universal best algorithm:]{.highlight}
 
-::: {.callout-note}
-## No Universal Best
-"No Free Lunch Theorem": No single algorithm is best for all problems. Your choice must match your problem structure:
+**"No Free Lunch Theorem":** No single algorithm is best for all problems. Your choice must match your problem structure:
 
 - **Path/Network Problems** → ACO (pheromones for paths)
 - **Scheduling Problems** → SA or Tabu (neighborhood swaps)
 - **Complex Design** → GA (population diversity)
-- **Continuous Optimization** → PSO (particle dynamics)
-:::
 
-## Implementation Strategy: Start Simple
 
-[The recommended progression for solving optimization problems:]{.highlight}
+## Implementation Strategy
 
-```{python}
-#| echo: false
-#| eval: true
-
-import sys
-sys.path.append('../helpers')
-from plot_utils import setup_clean_style, BRAND_COLORS
-
-# Apply clean brand style
-setup_clean_style()
-
-fig, ax = plt.subplots(figsize=(12, 8))
-
-# Create decision flow
-# Start
-ax.add_patch(plt.Rectangle((4.5, 8.5), 3, 1, fill=True, 
-                          facecolor=BRAND_COLORS["oneLight"], edgecolor='black', linewidth=2))
-ax.text(6, 9, 'START HERE', ha='center', va='center', fontsize=12, fontweight='bold')
-
-# Time check
-ax.add_patch(plt.Rectangle((1, 6.5), 3, 1, fill=True, 
-                          facecolor='lightyellow', edgecolor='black', linewidth=1))
-ax.text(2.5, 7, 'Time < 1 min?', ha='center', va='center', fontsize=11)
-
-ax.add_patch(plt.Rectangle((8, 6.5), 3, 1, fill=True, 
-                          facecolor='lightyellow', edgecolor='black', linewidth=1))
-ax.text(9.5, 7, 'Problem type?', ha='center', va='center', fontsize=11)
-
-# Recommendations
-ax.add_patch(plt.Rectangle((0, 4), 2, 1, fill=True, 
-                          facecolor='lightgreen', edgecolor='green', linewidth=2))
-ax.text(1, 4.5, 'Use Greedy', ha='center', va='center', fontsize=10, fontweight='bold')
-
-ax.add_patch(plt.Rectangle((2.5, 4), 2.5, 1, fill=True, 
-                          facecolor='lightblue', edgecolor='blue', linewidth=2))
-ax.text(3.75, 4.5, 'Greedy + Local', ha='center', va='center', fontsize=10, fontweight='bold')
-
-ax.add_patch(plt.Rectangle((6, 4), 2, 1, fill=True, 
-                          facecolor='orange', edgecolor='darkorange', linewidth=2))
-ax.text(7, 4.5, 'Use SA', ha='center', va='center', fontsize=10, fontweight='bold')
-
-ax.add_patch(plt.Rectangle((8.5, 4), 2, 1, fill=True, 
-                          facecolor='lightcoral', edgecolor='red', linewidth=2))
-ax.text(9.5, 4.5, 'Use GA', ha='center', va='center', fontsize=10, fontweight='bold')
-
-ax.add_patch(plt.Rectangle((11, 4), 2, 1, fill=True, 
-                          facecolor='plum', edgecolor='purple', linewidth=2))
-ax.text(12, 4.5, 'Use ACO', ha='center', va='center', fontsize=10, fontweight='bold')
-
-# Draw arrows
-# From start
-ax.arrow(6, 8.5, -3.3, -1.3, head_width=0.1, head_length=0.1, fc='black', ec='black')
-ax.arrow(6, 8.5, 3.3, -1.3, head_width=0.1, head_length=0.1, fc='black', ec='black')
-
-# From time check
-ax.arrow(1.5, 6.5, -0.4, -1.3, head_width=0.1, head_length=0.1, fc='green', ec='green')
-ax.text(1, 5.5, 'YES', ha='center', fontsize=9, color='green', fontweight='bold')
-
-ax.arrow(3.5, 6.5, 0.2, -1.3, head_width=0.1, head_length=0.1, fc='blue', ec='blue')
-ax.text(4, 5.5, 'NO', ha='center', fontsize=9, color='blue', fontweight='bold')
-
-# From problem type
-ax.arrow(8.5, 6.5, -1.4, -1.3, head_width=0.1, head_length=0.1, fc='orange', ec='orange')
-ax.text(7.5, 5.5, 'Simple', ha='center', fontsize=9, color='orange')
-
-ax.arrow(9.5, 6.5, 0, -1.3, head_width=0.1, head_length=0.1, fc='red', ec='red')
-ax.text(9.5, 5.5, 'Complex', ha='center', fontsize=9, color='red')
-
-ax.arrow(10.5, 6.5, 1.4, -1.3, head_width=0.1, head_length=0.1, fc='purple', ec='purple')
-ax.text(11.5, 5.5, 'Routing', ha='center', fontsize=9, color='purple')
-
-# Additional notes
-ax.text(6, 2.5, 'Always start simple and add complexity only if needed!', 
-        ha='center', fontsize=12, style='italic',
-        bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.3))
-
-ax.text(6, 1.5, 'Use AI tools (ChatGPT/Copilot) to implement chosen method', 
-        ha='center', fontsize=11, color='blue')
-
-ax.set_xlim(-0.5, 13.5)
-ax.set_ylim(0, 10)
-ax.axis('off')
-ax.set_title('Metaheuristic Selection Guide', fontsize=16, fontweight='bold', pad=20)
-
-plt.tight_layout()
-plt.show()
-```
-
-## Implementation Strategy: Practical Tips
-
-[Essential guidelines for successful implementation:]{.highlight}
+[Guidelines for successful implementation:]{.highlight}
 
 ::: {.incremental}
 1. **Start Simple**: Always try greedy first as baseline
 2. **Profile Your Problem**: Understand constraints before choosing
 3. **Tune Incrementally**: Don't optimize all parameters at once
-   - SA: Initial temp ≈ max expected Δ
-   - GA: Population ≈ 10 × variables
-   - Tabu: Tenure ≈ √problem_size
 4. **Track Progress**: Monitor convergence to know when to stop
 5. **Hybrid Approaches**: Combine methods (e.g., GA + Local Search)
-6. **Use AI Assistance**: Bridge the "expert gap" with GenAI
+6. **Use AI Assistance**: Bridge the "knowledge gap" with GenAI
 :::
+
+# [Today's Briefing]{.flow} {.title}
+
+## Today
+
+:::: columns
+::: {.column width="33%"}
+**Hour 2: This Lecture**
+
+- Metaheuristics
+- Simulated annealing
+- Genetic algorithms
+- Tabu search & ACO
+:::
+
+::: {.column width="33%"}
+**Hour 3: Notebook**
+
+- Bean Counter delivery
+- Implement SA & GA
+- Tune parameters
+- Compare performance
+:::
+
+::: {.column width="33%"}
+**Hour 4: Competition**
+
+- Restaurant staffing
+- Multi-objective
+- Schedule optimization
+- Justify choice!
+:::
+::::
+
+## The Competition Challenge
+
+[La Étoile Restaurant Weekend Staffing]{.highlight}
 
 . . .
 
-::: {.callout-tip}
-## Pro Tip
-Most real-world problems are solved with greedy + local search. Only use metaheuristics when these fail!
-:::
-
-# [Mission Briefing]{.flow} {.title}
-
-## Now It's Your Turn!
-
-::: {.callout-important}
-## Tutorial Practice
-**Tutorial 9.1**: Implement these algorithms for Bean Counter's problems  
-**Tutorial 9.2**: Apply them to the restaurant staffing competition  
-
-You'll code the full versions and see these concepts in action!
-:::
-
-## Your Restaurant Challenge
-
-[Apply what you've learned to solve La Étoile's complex problem:]{.highlight}
-
-**Scenario**: La Étoile needs weekend staffing schedule
-
-**Resources**:
-- 18 servers (6 experienced @ €75/hr, 12 junior @ €25/hr)
-- 6 shifts with **different lengths** (4-6 hours each)
-- Large penalties (€0-€1200 per missing experienced)
-- Server preferences (1-10 scale, affects quality)
-
-**Three Cost Components to Balance**:
-1. Labor cost (hourly rate × shift hours)
-2. Experience penalties (strategic choices)
-3. Preference penalties (staff happiness)
-
-**Your Tools**:
-1. Smart greedy (consider all factors)
-2. Local search (preference-aware swaps)
-3. Simulated annealing (escape local optima)
-4. Genetic algorithm (evolve schedules)
+1. **Schedule** 18 servers across 6 shifts (different lengths)
+2. **Minimize** labor + experience penalties + preference costs
+3. **Ensure** experienced coverage (strategic placement)
+4. **Respect** 2 servers per shift requirement
 
 . . .
 
-[Remember: This is genuinely challenging - even greedy won't find the optimal!]{.highlight}
-
-## Summary: From Local Silos to Global Success
-
-[The transformation metaheuristics enable:]{.highlight}
-
-::: columns
-::: {.column width="50%"}
-**The Journey**
-- Started trapped in fog (local optima)
-- Learned why greedy climbers fail
-- Discovered intelligent escape mechanisms
-- Mastered four metaheuristic strategies
-- Connected algorithms to business thinking
+:::{.callout-important}
+Choose your metaheuristic wisely as this is a tough problem!
 :::
 
-::: {.column width="50%"}
-**The Transformation**
-- From department silos → system thinking
-- From local peaks → global optimum
-- From rigid rules → adaptive exploration
-- From single solutions → population wisdom
-- From expert-only → AI-accessible tools
-:::
-:::
+## Implementation Pitfalls to Avoid
 
-. . .
+[Common bugs that cost you time:]{.highlight}
 
-::: {.callout-tip}
-## The Management Lesson
-Just as SA accepts temporary downhill moves to find the summit, successful organizations accept short-term disruptions (new CRM, process changes) to achieve long-term excellence. 
-
-**Remember**: The sum of optimized silos ≠ an optimized system!
+::: incremental
+1. **Wrong Cooling Schedule (SA)**
+   - Too fast = stuck in local optimum
+   - Too slow = wastes computation time
+2. **Poor Population Management (GA)**
+   - Too small = no diversity
+   - Too large = slow evolution
+4. **Not Tracking Best**
+   - Current solution ≠ best ever found
 :::
 
-. . .
+## Parameter Tuning Strategies
 
-[You now have both the algorithms AND the mindset to solve complex optimization challenges!]{.success}
+[How to find good parameters without wasting time:]{.highlight}
 
-## Your Metaheuristics Cheat Sheet
-
-[Quick reference for algorithm selection:]{.highlight}
-
-| Situation | Use This | Because |
-|-----------|----------|---------|
-| Need answer in < 1 min | Smart Greedy | Consider all 3 costs upfront |
-| Multiple cost components | Simulated Annealing | Balances competing objectives |
-| Complex preferences | Genetic Algorithm | Evolves good compromises |
-| Keep revisiting same bad solutions | Tabu Search | Memory prevents cycling |
-| Varying constraints per shift | Local Search + SA | Adapt to different requirements |
-| Don't know how to code it | GenAI + Template | Bridges the expert gap |
-
-. . .
-
-[Remember: Perfect is the enemy of good. Start simple, iterate, improve!]{.highlight}
-
-## Break Time!
-
-[Let's take a break before diving into tutorials!]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-fig, ax = plt.subplots(figsize=(10, 8))
-
-# Restaurant scene
-# Tables
-tables_x = [2, 5, 8, 2, 5, 8]
-tables_y = [6, 6, 6, 3, 3, 3]
-for x, y in zip(tables_x, tables_y):
-    rect = plt.Rectangle((x-0.7, y-0.5), 1.4, 1, 
-                         facecolor=BRAND_COLORS["oneLight"], edgecolor=BRAND_COLORS["darker"], linewidth=2)
-    ax.add_patch(rect)
-    ax.text(x, y, '🍽️', ha='center', va='center', fontsize=20)
-
-# Servers with optimization paths
-np.random.seed(456)
-colors = [BRAND_COLORS["oneDark"], BRAND_COLORS["threeDark"], BRAND_COLORS["twoDark"]]
-methods = ['Greedy Path', 'SA Path', 'GA Best']
-
-for idx, (color, method) in enumerate(zip(colors, methods)):
-    # Create different paths
-    if idx == 0:  # Greedy - straight lines
-        path_x = [1, 2, 5, 8, 8]
-        path_y = [1, 3, 3, 3, 6]
-    elif idx == 1:  # SA - wandering
-        path_x = [1, 2.5, 4, 5, 7, 8]
-        path_y = [1, 2, 4, 6, 5, 6]
-    else:  # GA - optimal
-        path_x = [1, 2, 2, 5, 5, 8, 8]
-        path_y = [1, 3, 6, 6, 3, 3, 6]
-    
-    ax.plot(path_x, path_y, color=color, linewidth=2, alpha=0.6, label=method)
-    ax.scatter(path_x[-1], path_y[-1], color=color, s=100, marker='o', zorder=5)
-
-# Title and labels
-ax.text(5, 8, "La Étoile Restaurant", fontsize=18, fontweight='bold', ha='center')
-ax.text(5, 7.3, 'Optimized Staffing Routes', fontsize=12, ha='center', style='italic')
-
-ax.legend(loc='lower right', fontsize=10)
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 9)
-ax.axis('off')
-
-plt.tight_layout()
-plt.show()
-```
-
-[Time to practice with real problems!]{.flow}
-
-## Genetic Algorithm Implementation
-
-[The complete GA algorithm in Python:]{.highlight}
-
-```{python}
-#| echo: true
-#| eval: false
-
-# CONCEPT: How Genetic Algorithms Work (Simplified)
-def genetic_algorithm_concept():
-    """
-    Evolution-inspired optimization
-    """
-    # Step 1: Create initial population (like random product designs)
-    population = [create_random_schedule() for _ in range(50)]
-    
-    for generation in range(100):
-        # Step 2: Evaluate fitness (like market testing)
-        # Better schedules = higher fitness
-        fitness_scores = [1/cost(schedule) for schedule in population]
-        
-        # Step 3: Selection (survival of the fittest)
-        # Keep the best performers
-        survivors = select_best_half(population)
-        
-        # Step 4: Crossover (combine successful features)
-        # Like combining features from two successful products
-        child1 = combine_schedules(parent1, parent2)
-        
-        # Step 5: Mutation (innovation)
-        # Random small changes for diversity
-        if random() < 0.1:  # 10% chance
-            randomly_change(child1)
-    
-        # The cycle continues: evolve toward excellence!
-        new_population = next_generation
-    
-    return best_schedule_ever_found
-
-print("GA = Innovation through recombination and experimentation!")
-```
-
-# [Practical Implementation]{.flow} {.title}
-
-## Using AI Tools Effectively: The Expert Gap
-
-[How GenAI bridges the gap between business knowledge and technical implementation:]{.highlight}
-
-::: {.callout-important}
-## The Revolution
-[The breakthrough that democratizes optimization:]{.highlight}
-
-**The Problem**: Business managers understand constraints but can't code. Data scientists can code but don't understand the business.
-
-**The Solution**: GenAI bridges this "expert gap" by translating business requirements into working code!
+::: incremental
+1. **Start with Rules of Thumb**
+   - SA: Initial temp = max cost difference you'd accept
+   - GA: Population = 10-20× number of decision variables
+   - Tabu: Tenure (limit) = √(problem size)
+   
+2. **Grid Search on Small Instance**
+   - Test 3-4 values per parameter
+   - Use 10% of full dataset
+   - Example: `temps = [100, 500]`, `cooling = [0.95, 0.99]`
 :::
-
-::: columns
-::: {.column width="50%"}
-**The 5-Element Prompt Template:**
-```text
-ROLE: Expert in OR and Python metaheuristics
-
-PROBLEM: Restaurant staff scheduling
-- Variables: 18 staff (6 exp @ €75/hr, 12 jr @ €25/hr)
-- 6 shifts with VARYING lengths: [5,4,4,6,5,6] hours
-- Representation: {shift_id: [3 server_ids]}
-
-CONSTRAINTS:
-- Coverage: Exactly 3 staff per shift
-- Skill: Need 1+ experienced per shift
-- Assignment: Each server works exactly once
-
-COSTS (3 components):
-- Labor: rate × hours (varies by shift!)
-- Experience penalty: [€800,0,500,1200,600,1000]
-- Preferences: (10-pref)×€20 per assignment
-
-ALGORITHM: Implement SA with:
-- Neighbor: Swap considering preferences
-- Initial temp: 500, cooling: 0.98
-- Return: Best schedule + cost
-```
-:::
-
-::: {.column width="50%"}
-**Why This Works:**
-
-✅ **Clear role** sets AI expertise  
-✅ **Problem structure** defines scope  
-✅ **Hard vs soft** constraints separated  
-✅ **Penalties** quantify trade-offs  
-✅ **Algorithm specifics** prevent generic code  
-
-**Bad Prompt Example:**
-```text
-"Make a scheduler with metaheuristics"
-```
-
-❌ No problem structure  
-❌ No constraints  
-❌ No algorithm choice  
-❌ AI will produce useless generic code  
-
-[GenAI makes optimization accessible to non-programmers!]{.highlight}
-:::
-:::
-
-## Debugging Metaheuristics: Strategy
-
-[Essential debugging strategies for complex algorithms:]{.highlight}
-
-```python
-#| echo: true
-#| eval: false
-
-# CONCEPT: How to Debug Your Metaheuristic
-def debug_tips():
-    """
-    Common problems and solutions
-    """
-    if solution_not_improving:
-        # Problem: Stuck in local optimum
-        # Fix: Increase temperature (SA) or mutation (GA)
-        
-    if all_solutions_look_same:
-        # Problem: Lost diversity
-        # Fix: Start with more random solutions
-        
-    if takes_forever:
-        # Problem: Too many iterations
-        # Fix: Better stopping criteria
-        
-    # You'll practice debugging in the tutorials!
-```
 
 ## Real-World Considerations
 
-[Practical issues when deploying metaheuristics:]{.highlight}
+[Technical realities when putting metaheuristics into production:]{.highlight}
 
-::: columns
-::: {.column width="50%"}
-**Computational Budget**
-- Wall-clock time matters
-- Memory constraints
-- Parallel processing opportunities
-- Cloud vs local execution
-
-**Solution Quality Requirements**
-- "Good enough" vs optimal
-- Consistency vs best possible
-- Explainability needs
-:::
-
-::: {.column width="50%"}
-**Problem Characteristics**
-- Static vs dynamic
-- Deterministic vs stochastic
-- Single vs multi-objective
-- Hard vs soft constraints
-
-**Implementation Reality**
-- Development time
-- Maintenance burden
-- Team expertise
-- Integration complexity
-:::
-:::
-
-# [Advanced Topics]{.flow} {.title}
-
-## Hybrid Metaheuristics
-
-[Combining methods for superior performance:]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-import sys
-sys.path.append('../helpers')
-from plot_utils import setup_clean_style, BRAND_COLORS
-
-# Apply clean brand style
-setup_clean_style()
-
-fig, ax = plt.subplots(figsize=(12, 6))
-
-# Create hybrid approach visualization
-methods = ['Greedy\nStart', 'Local\nSearch', 'SA\nEscape', 'GA\nDiversify', 'Final\nSolution']
-x_pos = np.arange(len(methods))
-costs = [1640, 1520, 1450, 1400, 1380]
-colors = [BRAND_COLORS["darker"], BRAND_COLORS["oneLight"], BRAND_COLORS["twoLight"], 
-          BRAND_COLORS["oneDark"], BRAND_COLORS["twoDark"]]
-
-bars = ax.bar(x_pos, costs, color=colors, alpha=0.7, edgecolor='black', linewidth=2)
-
-# Add arrows between stages
-for i in range(len(methods)-1):
-    ax.annotate('', xy=(i+1, costs[i+1]+20), xytext=(i+0.2, costs[i]-20),
-                arrowprops=dict(arrowstyle='->', lw=2, color='black'))
-
-ax.set_xlabel('Optimization Stage', fontsize=12)
-ax.set_ylabel('Solution Cost (€)', fontsize=12)
-ax.set_title('Hybrid Approach: Combining Methods', fontsize=14, fontweight='bold')
-ax.set_xticks(x_pos)
-ax.set_xticklabels(methods)
-ax.set_ylim(1300, 1700)
-
-# Add improvement labels
-for i in range(1, len(costs)):
-    improvement = costs[i-1] - costs[i]
-    ax.text(i-0.5, 1650, f'-€{improvement}', ha='center', fontsize=10, 
-            color=BRAND_COLORS["twoDark"], fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-```
-
-[Combine methods sequentially for best results!]{.highlight}
-
-## Parameter Tuning: Basic Strategies
-
-[Start with these proven approaches:]{.highlight}
-
-::: columns
-::: {.column width="50%"}
-**Grid Search**
-```python
-temps = [100, 500, 1000, 2000]
-coolings = [0.9, 0.95, 0.99]
-for T in temps:
-    for alpha in coolings:
-        run_SA(T, alpha)
-```
-
-**Adaptive Parameters**
-```python
-# Self-adjusting temperature
-if no_improvement > 50:
-    temperature *= 1.5  # Reheat
-```
-:::
-
-::: {.column width="50%"}
-**Rules of Thumb**
-- SA: T₀ ≈ max expected delta
-- GA: pop_size ≈ 10 × variables
-- Tabu: tenure ≈ √problem_size
-- Mutation: 1/chromosome_length
-
-**Performance Metrics**
-- Convergence speed
-- Solution quality
-- Robustness (variance)
-- Computational time
-:::
-:::
-
-## Real-World Case Studies
-
-[How major companies use metaheuristics in production:]{.highlight}
-
-### Case Study 1: Amazon's Last-Mile Delivery
-
-::: columns
-::: {.column width="50%"}
-**The Problem:**
-- 30-40% of delivery trucks returning empty
-- Massive fuel waste and emissions
-- Complex dynamic routing with time windows
-
-**The Solution (ACO):**
-- Digital ants explore route combinations
-- Pheromones reinforce efficient paths
-- Dynamic adaptation to traffic/delays
-:::
-
-::: {.column width="50%"}
-**The Results:**
-- **27% reduction** in empty miles
-- **$43M annual savings** in fuel costs
-- **15% faster** average delivery times
-- **22% reduction** in CO₂ emissions
-
-[ACO's pheromone trails naturally optimize network paths!]{.highlight}
-:::
-:::
-
-## Case Study 2: Hospital Nurse Scheduling
-
-[Combining GA and SA for complex staff scheduling:]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-import matplotlib.pyplot as plt
-import numpy as np
-import sys
-sys.path.append('../helpers')
-from plot_utils import setup_clean_style, BRAND_COLORS
-
-# Apply clean brand style
-setup_clean_style()
-
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# Left: Performance comparison
-ax = axes[0]
-methods = ['Manual', 'Greedy', 'SA', 'GA', 'Hybrid\n(GA+SA)']
-satisfaction = [45, 52, 68, 71, 85]  # Employee satisfaction %
-coverage = [78, 95, 92, 93, 98]  # Shift coverage %
-
-x = np.arange(len(methods))
-width = 0.35
-
-bars1 = ax.bar(x - width/2, satisfaction, width, label='Staff Satisfaction %', 
-               color=BRAND_COLORS["oneDark"], alpha=0.8)
-bars2 = ax.bar(x + width/2, coverage, width, label='Coverage Quality %',
-               color=BRAND_COLORS["twoDark"], alpha=0.8)
-
-ax.set_xlabel('Scheduling Method', fontsize=11)
-ax.set_ylabel('Performance (%)', fontsize=11)
-ax.set_title('Hospital Scheduling: Method Comparison', fontsize=13, fontweight='bold')
-ax.set_xticks(x)
-ax.set_xticklabels(methods, fontsize=10)
-ax.legend()
-ax.grid(axis='y', alpha=0.3)
-
-# Add value labels
-for bar in bars1:
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height,
-            f'{height:.0f}%', ha='center', va='bottom', fontsize=9)
-for bar in bars2:
-    height = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2., height,
-            f'{height:.0f}%', ha='center', va='bottom', fontsize=9)
-
-# Right: Cost breakdown
-ax = axes[1]
-categories = ['Labor\nCost', 'Overtime\nPenalty', 'Turnover\nCost', 'Total\nSavings']
-manual_cost = [100, 100, 100, 0]
-optimized_cost = [95, 40, 25, 140]
-colors = [BRAND_COLORS["darker"], BRAND_COLORS["threeDark"], BRAND_COLORS["oneDark"], BRAND_COLORS["twoDark"]]
-
-x = np.arange(len(categories))
-bars = ax.bar(x, manual_cost, color='lightgray', alpha=0.5, label='Manual')
-bars2 = ax.bar(x, optimized_cost, color=colors, alpha=0.8, label='GA+SA')
-
-ax.set_ylabel('Relative Cost (Manual = 100)', fontsize=11)
-ax.set_title('Cost Impact of Optimization', fontsize=13, fontweight='bold')
-ax.set_xticks(x)
-ax.set_xticklabels(categories)
-ax.axhline(y=100, color='black', linestyle='--', alpha=0.3)
-ax.legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-**Key Results**: 37% reduction in scheduling time, 25% reduction in violations, 85% staff satisfaction (up from 45%)
-
-## Competition Strategies
-
-[Your roadmap for tackling the complex restaurant problem:]{.highlight}
-
-1. **Understand Complexity**: Study shift hours, penalties, preferences (5 min)
-2. **Smart Greedy**: Design preference-aware baseline (10 min)  
-3. **Choose Your Weapon**: Pick ONE metaheuristic that handles all 3 costs (15 min)
-4. **Fine-tune**: Balance labor vs penalties vs preferences (15 min)
-5. **Document Trade-offs**: Explain your strategic choices (5 min)
+| Factor | Questions to Ask |
+|--------|-----------------|
+| **Time Budget** | How long can optimization run? |
+| **Solution Quality** | Need optimal or "good enough"? |
+| **Explainability** | Must justify decisions? |
+| **Problem Changes** | Static or dynamic data? |
+| **Team Skills** | Who maintains this code? |
 
 . . .
 
-::: {.callout-warning}
-## Competition Tip
-This problem has REAL complexity! Focus on balancing all three cost components rather than perfecting just one.
+:::{.callout-important}
+Use the **simplest method** that meets your quality target. Complex metaheuristics are great but more costly to maintain!
 :::
 
-# [Summary & Resources]{.flow} {.title}
+## Summary
 
-## Key Concepts to Remember
+[Key Takeaways:]{.highlight}
 
-[The essential takeaways from this lecture:]{.highlight}
-
-::: {.incremental}
-- **Local Optima**: Simple methods get trapped
-- **Acceptance Probability**: P = exp(-Δ/T) enables escape
-- **Population Search**: Parallel exploration beats sequential
-- **Memory**: Prevents cycling and guides search
-- **Hybrid Approaches**: Combine methods for best results
-- **AI Tools**: Implementation helpers, not decision makers
+::: incremental
+- Metaheuristics escape local optima when exact methods fail
+- SA uses temperature, GA uses evolution, Tabu uses memory
+- Parameter tuning is critical for performance
+- No universal best - problem structure matters
+- Start simple, add complexity only if needed
 :::
-
-## Your Optimization Hierarchy
-
-[When to escalate to more complex methods:]{.highlight}
-
-```{python}
-#| echo: false
-#| eval: true
-
-import sys
-sys.path.append('../helpers')
-from plot_utils import setup_clean_style, BRAND_COLORS
-
-# Apply clean brand style
-setup_clean_style()
-
-fig, ax = plt.subplots(figsize=(10, 8))
-
-# Create pyramid
-levels = [
-    ('Random', 0, 5, BRAND_COLORS["darker"]),
-    ('Greedy', 1, 4, BRAND_COLORS["oneLight"]),
-    ('Local Search', 2, 3, BRAND_COLORS["twoLight"]),
-    ('Metaheuristics', 3, 2, BRAND_COLORS["oneDark"]),
-    ('Exact Methods', 4, 1, BRAND_COLORS["twoDark"])
-]
-
-for name, bottom, width, color in levels:
-    # Draw trapezoid
-    left = (5 - width/2)
-    right = (5 + width/2)
-    vertices = [(left, bottom), (right, bottom), 
-                (right-0.5, bottom+1), (left+0.5, bottom+1)]
-    poly = plt.Polygon(vertices, facecolor=color, edgecolor='black', 
-                       alpha=0.7, linewidth=2)
-    ax.add_patch(poly)
-    
-    # Add text
-    ax.text(5, bottom + 0.5, name, ha='center', va='center', 
-            fontsize=12, fontweight='bold', color='white' if name != 'Random' else 'black')
-
-# Add labels
-ax.text(1, 0.5, '⚡ FAST', fontsize=10, fontweight='bold', color='green')
-ax.text(1, 4.5, '🎯 OPTIMAL', fontsize=10, fontweight='bold', color='red')
-ax.text(9, 0.5, '😊 SIMPLE', fontsize=10, fontweight='bold', color='blue')
-ax.text(9, 4.5, '🤯 COMPLEX', fontsize=10, fontweight='bold', color='purple')
-
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 6)
-ax.axis('off')
-ax.set_title('Always Start at the Bottom!', fontsize=16, fontweight='bold', pad=20)
-
-plt.tight_layout()
-plt.show()
-```
-
-## Additional Resources
-
-[Expand your knowledge with these curated resources:]{.highlight}
-
-::: columns
-::: {.column width="50%"}
-**Learn More:**
-- [Essentials of Metaheuristics](https://cs.gmu.edu/~sean/book/metaheuristics/) (free book)
-- [Google OR-Tools](https://developers.google.com/optimization)
-- [DEAP Python Library](https://deap.readthedocs.io/) for GA
-- [SimPy](https://simpy.readthedocs.io/) for simulation
-
-**Practice Problems:**
-- Vehicle Routing (VRP)
-- Job Shop Scheduling
-- Knapsack variants
-- Portfolio optimization
-:::
-
-::: {.column width="50%"}
-**AI Assistant Prompts:**
-```text
-# Template for any problem:
-"I need to solve [problem type] with:
-- Variables: [list them]
-- Constraints: [list them]  
-- Objective: [minimize/maximize what]
-- Data: [provide sample]
-
-Implement [specific algorithm] with:
-- [Parameter 1]: [value]
-- [Parameter 2]: [value]
-Please include comments."
-```
-:::
-:::
-
-## Final Thoughts
-
-[The journey from local to global optimization:]{.highlight}
-
-> "All models are wrong, but some are useful" - George Box
-
-. . .
-
-> "Perfect is the enemy of good" - Voltaire
-
-. . .
-
-> "Start where you are. Use what you have. Do what you can." - Arthur Ashe
-
-. . .
-
-[You now have a complete optimization toolkit. Use it wisely!]{.success}
 
 ## Break!
 
-[Great work! Time for a well-deserved break!]{.highlight}
+[Take 20 minutes, then we start the practice notebook]{.highlight}
 
-```{python}
-#| echo: false
-#| eval: true
-
-import sys
-sys.path.append('../helpers')
-from plot_utils import setup_clean_style, BRAND_COLORS
-
-# Apply clean brand style
-setup_clean_style()
-
-fig, ax = plt.subplots(figsize=(10, 8))
-
-# Fun visualization of all methods working together
-np.random.seed(789)
-
-# Create solution landscape
-x = np.linspace(0, 10, 100)
-y = 1500 - 100*np.sin(x) - 50*np.sin(3*x) - 30*np.sin(5*x)
-
-ax.fill_between(x, 1200, y, alpha=0.1, color='blue')
-ax.plot(x, y, 'b-', linewidth=2, alpha=0.5)
-
-# Show different algorithm paths
-# Random jumps
-random_x = np.random.uniform(0, 10, 10)
-random_y = [1500 - 100*np.sin(xi) - 50*np.sin(3*xi) - 30*np.sin(5*xi) + np.random.randn()*20 
-            for xi in random_x]
-ax.scatter(random_x, random_y, color='gray', s=30, alpha=0.5, label='Random')
-
-# Greedy path
-greedy_x = [2]
-greedy_y = [1500 - 100*np.sin(2) - 50*np.sin(6) - 30*np.sin(10)]
-ax.scatter(greedy_x, greedy_y, color='orange', s=100, marker='o', label='Greedy')
-
-# Local search
-local_x = [3.5]
-local_y = [1420]
-ax.scatter(local_x, local_y, color='red', s=100, marker='s', label='Local Search')
-
-# SA path
-sa_x = np.linspace(3.5, 7.5, 20)
-sa_y = [1420 - (xi-3.5)*20 + np.random.randn()*10 for xi in sa_x]
-ax.plot(sa_x, sa_y, 'b-', alpha=0.5, linewidth=2, label='SA Path')
-
-# GA population
-ga_x = np.random.normal(7.5, 0.5, 10)
-ga_y = [1380 + np.random.randn()*5 for _ in ga_x]
-ax.scatter(ga_x, ga_y, color='green', s=50, alpha=0.7, label='GA Population')
-
-# Global optimum
-ax.scatter([7.5], [1350], color='gold', s=300, marker='*', 
-          edgecolor='black', linewidth=2, zorder=10, label='Global Optimum')
-
-ax.set_xlabel('Solution Space', fontsize=12)
-ax.set_ylabel('Cost (€)', fontsize=12)
-ax.set_title('The Complete Optimization Journey', fontsize=16, fontweight='bold')
-ax.legend(loc='upper right')
-ax.grid(True, alpha=0.3)
-ax.set_ylim(1300, 1700)
-
-# Add annotations
-ax.annotate('Start', xy=(2, 1600), xytext=(1, 1650),
-            arrowprops=dict(arrowstyle='->', color='orange'),
-            fontsize=10, color='orange')
-ax.annotate('Trapped!', xy=(3.5, 1420), xytext=(2.5, 1350),
-            arrowprops=dict(arrowstyle='->', color='red'),
-            fontsize=10, color='red')
-ax.annotate('Escape!', xy=(5.5, 1400), xytext=(5.5, 1500),
-            arrowprops=dict(arrowstyle='->', color='blue'),
-            fontsize=10, color='blue')
-ax.annotate('Success!', xy=(7.5, 1350), xytext=(8.5, 1450),
-            arrowprops=dict(arrowstyle='->', color='gold'),
-            fontsize=12, color='gold', fontweight='bold')
-
-plt.tight_layout()
-plt.show()
-```
-
-[Ready to optimize? Let's tackle the restaurant challenge!]{.flow}
+**Next up:** You'll implement metaheuristics for Bean Counter
