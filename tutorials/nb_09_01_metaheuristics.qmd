@@ -309,9 +309,6 @@ def calculate_network_cost(selected_centers: List[int],
     return total_cost
 ```
 
-::: callout-tip
-
-
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
@@ -432,7 +429,7 @@ for center_idx, cafe_indices in random_assignments.items():
     for cafe_idx in cafe_indices:
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
-                'gray', alpha=0.1, linewidth=1.5, zorder=1)
+                'gray', alpha=0.3, linewidth=1.5, zorder=1)
 
 # Plot cafés
 cafe_lats = [loc[0] for loc in cafe_locations]
@@ -603,7 +600,7 @@ for center_idx, cafe_indices in greedy_assignments.items():
     for cafe_idx in cafe_indices:
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
-                'lightgreen', alpha=0.15, linewidth=1.5, zorder=1)
+                'lightgreen', alpha=0.3, linewidth=1.5, zorder=1)
 
 # Plot all cafés
 plt.scatter(cafe_lons, cafe_lats, s=8, alpha=0.6, color='steelblue', 
@@ -621,7 +618,7 @@ selected_lats = [potential_centers[i][0] for i in greedy_solution]
 selected_lons = [potential_centers[i][1] for i in greedy_solution]
 plt.scatter(selected_lons, selected_lats, s=150, alpha=1.0, color='green',
            marker='*', label='Greedy Selected (50)', edgecolors='darkgreen', 
-           linewidth=2, zorder=3)
+           linewidth=1, zorder=3)
 
 plt.xlabel('Longitude (°)', fontsize=12)
 plt.ylabel('Latitude (°)', fontsize=12)
@@ -726,10 +723,65 @@ assert len(test_neighbor) == 50, "Neighbor should have 50 centers"
 assert len(set(test_neighbor)) == 50, "No duplicates"
 assert len(set(test_neighbor) & set(greedy_solution)) == 49, "Should differ by exactly 1 center"
 
-print("Swap neighbor generation working!")
-print(f"Original had center {[c for c in greedy_solution if c not in test_neighbor][0]}")
-print(f"Neighbor has center {[c for c in test_neighbor if c not in greedy_solution][0]}")
+print("✓ 1-opt neighbor generation working!")
+print(f"Changed 1 center from the solution")
 ```
+
+## Bonus: 2-Opt Neighborhood (Advanced)
+
+::: {.callout-tip}
+## Why Try 2-Opt?
+
+**2-opt** swaps TWO centers simultaneously, creating a richer neighborhood:
+
+- **1-opt**: 50 × 150 = 7,500 possible neighbors
+- **2-opt**: C(50,2) × C(150,2) ≈ 13.7 million possible neighbors!
+
+This larger neighborhood can help escape local optima that trap 1-opt. Try both in your SA implementation to see which finds better solutions!
+:::
+
+```{python}
+#| eval: true
+#| echo: false
+def generate_2opt_neighbor(current_selection: List[int],
+                          n_centers: int = 200) -> List[int]:
+    """Generate a neighbor by swapping TWO selected centers with TWO unselected (2-opt)."""
+    # Get unselected centers
+    unselected = [i for i in range(n_centers) if i not in current_selection]
+    
+    # Pick 2 random selected centers to remove
+    if len(current_selection) >= 2 and len(unselected) >= 2:
+        remove_indices = random.sample(range(len(current_selection)), 2)
+        add_centers = random.sample(unselected, 2)
+    else:
+        # Fallback to 1-opt if not enough centers
+        return generate_swap_neighbor(current_selection, n_centers)
+    
+    # Create new selection
+    new_selection = current_selection.copy()
+    
+    # Remove the selected centers (in reverse order to maintain indices)
+    for idx in sorted(remove_indices, reverse=True):
+        new_selection.pop(idx)
+    
+    # Add the new centers
+    new_selection.extend(add_centers)
+    
+    return new_selection
+```
+
+::: {.callout-note}
+You now have TWO neighborhood functions:
+- `generate_swap_neighbor` (1-opt): Simple, fast, good for local refinement
+- `generate_2opt_neighbor` (2-opt): Richer, better escape from local optima
+
+**Challenge**: Try both in your Local Search and SA implementations! 
+
+- Replace `generate_swap_neighbor` with `generate_2opt_neighbor` in the algorithms
+- Which finds better solutions? 
+- Is 2-opt worth the extra complexity?
+- Does SA benefit more from 2-opt than Local Search?
+:::
 
 ## Exercise 3.2: Implement Local Search
 
@@ -871,7 +923,7 @@ for center_idx, cafe_indices in ls_assignments.items():
     for cafe_idx in cafe_indices:
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
-                'mediumseagreen', alpha=0.15, linewidth=1.5, zorder=1)
+                'mediumseagreen', alpha=0.3, linewidth=1.5, zorder=1)
 
 # Plot all cafés
 plt.scatter(cafe_lons, cafe_lats, s=8, alpha=0.6, color='steelblue', 
@@ -882,7 +934,7 @@ selected_lats = [potential_centers[i][0] for i in ls_solution]
 selected_lons = [potential_centers[i][1] for i in ls_solution]
 plt.scatter(selected_lons, selected_lats, s=150, alpha=1.0, color='mediumseagreen',
            marker='*', label='Local Search Selected (50)', edgecolors='darkgreen', 
-           linewidth=2, zorder=3)
+           linewidth=1, zorder=3)
 
 plt.xlabel('Longitude (°)', fontsize=12)
 plt.ylabel('Latitude (°)', fontsize=12)
@@ -1154,9 +1206,9 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
 
 # Cost evolution
 ax1.plot(sa_history, alpha=0.7, linewidth=1, color='steelblue')
-ax1.axhline(y=greedy_cost, color='orange', linestyle='--', linewidth=2, label=f'Greedy: €{greedy_cost/1e6:.1f}M')
-ax1.axhline(y=ls_cost, color='green', linestyle='--', linewidth=2, label=f'Local Search: €{ls_cost/1e6:.1f}M')
-ax1.axhline(y=sa_cost, color='red', linestyle='--', linewidth=2, label=f'SA Best: €{sa_cost/1e6:.1f}M')
+ax1.axhline(y=greedy_cost, color='orange', linestyle='--', linewidth=1, label=f'Greedy: €{greedy_cost/1e6:.1f}M')
+ax1.axhline(y=ls_cost, color='green', linestyle='--', linewidth=1, label=f'Local Search: €{ls_cost/1e6:.1f}M')
+ax1.axhline(y=sa_cost, color='red', linestyle='--', linewidth=1, label=f'SA Best: €{sa_cost/1e6:.1f}M')
 
 ax1.set_xlabel('Iteration', fontsize=12)
 ax1.set_ylabel('Cost (€)', fontsize=12)
@@ -1202,7 +1254,7 @@ for center_idx, cafe_indices in sa_assignments.items():
     for cafe_idx in cafe_indices:
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
-                'gold', alpha=0.15, linewidth=1.5, zorder=1)
+                'gold', alpha=0.3, linewidth=1.5, zorder=1)
 
 # Plot all cafés
 plt.scatter(cafe_lons, cafe_lats, s=8, alpha=0.6, color='steelblue', 
@@ -1213,7 +1265,7 @@ selected_lats = [potential_centers[i][0] for i in sa_solution]
 selected_lons = [potential_centers[i][1] for i in sa_solution]
 plt.scatter(selected_lons, selected_lats, s=150, alpha=1.0, color='gold',
            marker='*', label='SA Selected (50)', edgecolors='black', 
-           linewidth=2, zorder=3)
+           linewidth=1, zorder=3)
 
 plt.xlabel('Longitude (°)', fontsize=12)
 plt.ylabel('Latitude (°)', fontsize=12)
