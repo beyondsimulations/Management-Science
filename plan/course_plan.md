@@ -999,15 +999,15 @@ def bean_counter_score(location, w_profit=0.5, w_carbon=0.5):
 **CEO Persona:** "We're bleeding money on delivery costs while customers complain about cold food"
 
 **The Problem:**
-"We deliver 50 meals daily in Berlin. Current system: drivers choose their own routes. Result: way too high average cost per delivery hour, 75% late deliveries, cold food complaints. We need smart routing that keeps food hot."
+"We deliver 100 meals daily in Berlin. Current system: drivers choose their own routes. Result: way too high average cost per delivery hour, 75% late deliveries, cold food complaints. We need smart routing that keeps food hot."
 
 **Technical Requirements:**
 - Time windows for all deliveries, which can be violated
 - Violations mean cold food and a penalty
-- 3 drivers from one depot
+- 4 drivers from one depot
 
 **Deliverables Required:**
-1. Routing algorithm for 50 orders
+1. Routing algorithm for 100 orders
 2. Visualization of the routes
 3. Performance metrics
 4. Cost savings projection
@@ -1017,7 +1017,7 @@ def bean_counter_score(location, w_profit=0.5, w_carbon=0.5):
 **COO Message:** "Our nurses are burning out, and overtime is killing our budget"
 
 **The Problem:**
-- 20 nurses, 2 departments, complex requirements
+- 20 nurses, 3 different departments, complex requirements
 - Current: €300K monthly overtime, 25% sick leave, high turnover
 - Need: automated fair scheduling
 
@@ -1041,10 +1041,11 @@ def bean_counter_score(location, w_profit=0.5, w_carbon=0.5):
 "We sell 50 electronics SKUs online with two warehouses. One fast warehouse for shipping with a low capacity and one large warehouse to store slow-movers. Problem: 20% stockout rate on popular items while slow-movers occupy most of the fast warehouses space. Black Friday is coming - we need smart inventory positioning NOW."
 
 **The Data:**
-- 2 years sales history
+- 3 years sales history
 - Warehouse capacities
 - Cost estimation associated with each shipping delay due to wrong warehouse allocation
 - SKUs must be fully allocated to either warehouse
+- Uncertainty regarding some things to make monte carlo useful
 
 **Core Techniques Needed:**
 - Demand forecasting

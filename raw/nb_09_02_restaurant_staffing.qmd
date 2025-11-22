@@ -12,16 +12,24 @@ format:
 **La Étoile**, our three-Michelin-star restaurant, faces a staffing crisis this weekend.
 
 ### The Situation
-"I need to schedule my 18 servers across 6 shifts this weekend. The problem? My experienced servers cost €75/hour while juniors cost only €25/hour. But it gets worse - shifts have different lengths (4-6 hours), servers have strong preferences about when they can work, and if I don't have enough experienced servers on busy shifts, we face penalties ranging from €150 to €400 per missing experienced server!"
+
+"I need to schedule my 18 servers across 6 shifts this weekend. The problem? My experienced servers cost €75/hour while juniors cost only €25/hour. But it gets worse! Shifts have different lengths (4-6 hours), servers have strong preferences about when they can work, and if I don't have enough experienced servers on busy shifts, we face penalties ranging from €150 to €400 per missing experienced server from our parent company!"
 
 ### The Challenge
+
 You have **multiple competing objectives**. You need more experienced servers than available, shifts have different lengths affecting labor costs, and servers have strong preferences (some can't work certain shifts). Your job is to find the best compromise:
+
 - Minimize total cost (labor + experience penalties + preference penalties)
 - Respect server availability (preference = 0 means can't work)
 - Balance multiple factors: shift coverage, server happiness, and costs
 - Strategic decisions: which expensive penalties to accept?
 
+::: callout-tip
+Fortunately, La Étoile has already clearly quantified the weight of all objectives for you, so you don't need to involve a pareto frontier in the optimization process.
+:::
+
 ### Your Resources
+
 - 6 Experienced Servers (€75/hour)
 - 12 Junior Servers (€25/hour)
 - 6 Shifts to cover (3 servers each)
@@ -108,16 +116,11 @@ print("=" * 60)
 print(f"Total experienced servers needed: {shifts['Min_Experienced'].sum()}")
 print(f"Total experienced servers available: {(servers['Type'] == 'Experienced').sum()}")
 print(f"SHORTAGE: {shifts['Min_Experienced'].sum() - (servers['Type'] == 'Experienced').sum()} experienced servers!")
-print("\n⚠️ Complex factors:")
-print("  • Varying shift lengths (4-6 hours) affect total labor cost")
-print("  • Large penalty amounts (€500-€1200) make choices strategic")
-print("  • Server preferences (1-10) affect morale and quality")
-print("  • Lower preferences = unhappy staff = significant quality penalty")
-print("\n💰 TYPICAL COSTS:")
-print(f"  • Greedy approach: €6,000-€7,000")
-print(f"  • Good local search: €5,500-€6,000")
-print(f"  • Smart metaheuristics: €5,000-€5,500")
-print(f"  • Theoretical minimum: ~€5,000")
+print("\nComplex factors:")
+print(" • Varying shift lengths (4-6 hours) affect total labor cost")
+print(" • Large penalty amounts (€500-€1200) make choices strategic")
+print(" • Server preferences (1-10) affect morale and quality")
+print(" • Lower preferences = unhappy staff = significant quality penalty")
 ```
 
 ## Understanding the Costs
@@ -176,10 +179,6 @@ for bar, val in zip(bars, penalties):
 
 plt.tight_layout()
 plt.show()
-
-print("\n💡 KEY INSIGHT: With these large penalties, the difference between approaches is HUGE!")
-print(f"   Random: €7,400 | Greedy: €6,100 | Local Search: €5,700 | Metaheuristic: €5,400")
-print(f"   That's a €2,000 difference - 40% of labor cost!")
 ```
 
 ## Helper Functions
@@ -435,6 +434,7 @@ Design the optimal server schedule that minimizes total cost while managing mult
 ### The Challenge
 
 This is NOT a simple assignment problem! You must balance:
+
 - **Varying shift lengths** (4-6 hours) that affect labor costs differently
 - **Server preferences** (1-10) where lower values mean unhappy staff and quality issues
 - **Strategic penalty decisions** - penalties range from €0 to €1200

@@ -10,13 +10,13 @@ format:
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: La Étoile]{.invert-font}** {background-image="https://unsplash.com/photos/Vd0_Htlb-Kk/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mjh8fHJlc3RhdXJhbnQlMjBtaWNoZWxpbnxlbnwwfHx8fDE3NjMyOTQ2OTR8MA&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: La Étoile]{.invert-font}** {background-image="https://unsplash.com/photos/N_Y88TWmGwA/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHx8fDE3NjM3OTIzNjZ8MA&force=true&w=2400" background-size="cover"}
 
 . . .
 
 [Restaurant Manager's Crisis:]{.invert-font}
 
-["I need to schedule my [18 servers across 6 shifts]{.highlight} this weekend. Shifts have [different lengths (4-6 hours)]{.highlight}, and if I don't have enough experienced servers on busy shifts, we face [penalties ranging from €150 to €400]{.highlight} per missing experienced server!"]{.invert-font .fragment}
+["I need to schedule my [18 servers across 6 shifts]{.highlight} this weekend. Shifts have [different lengths (4-6 hours)]{.highlight}, and if I don't have enough experienced servers on busy shifts, we face [penalties ranging from €150 to €400]{.highlight} per missing experienced server from our parent company!"]{.invert-font .fragment}
 
 ## The Staffing Challenge
 
@@ -159,19 +159,19 @@ With varying shifts, preferences, and penalties, this is will be a real challeng
 [What you'll understand after this lecture:]{.highlight}
 
 ::: {.incremental}
-1. **Why local search fails** - The local optima trap
-2. **Escape mechanisms** - How to accept worse solutions strategically
-3. **Four powerful metaheuristics** - SA, GA, Tabu Search, ACO
-4. **Selection criteria** - When to use which algorithm
+1. **Why local search fails:** Recap on the local optima trap
+2. **Escape mechanisms:** How to accept worse solutions strategically
+3. **Four powerful metaheuristics:** SA, GA, Tabu Search, ACO
+4. **Selection criteria:** When to use which algorithm
 :::
 
 ## Hiking in Fog
 
-[Remember the concept from our lecture?]{.highlight}
+[Remember the metaphor with blindfolded eyes from last lecture?]{.highlight}
 
 ::: incremental
 - **Goal**: Find the highest peak in a mountain range
-- **Challenge**: You're hiking in thick fog (can only see 10 feet)
+- **Challenge**: You're hiking in thick fog (can only see 10 meters)
 - **Position**: Your X,Y coordinates = your decisions
 - **Altitude**: Your current solution quality
 - **Problem**: You might climb a small hill and think it's the summit!
@@ -267,47 +267,48 @@ plt.show()
 
 . . .
 
-[Question:]{.question} Any idea on how to escape local optima?
+[Question:]{.question} Any idea how to escape local optima?
 
 
 # [Why Simple Methods Fail]{.flow} {.title}
 
-## The Business Silo Problem
+## The Silo Problem
 
-[Why department-level optimization fails at the company level:]{.highlight}
+[Why neighborhood optimization fails:]{.highlight}
 
 ::: columns
 ::: {.column width="50%"}
 **Technical View: Local Optima**
+
 - Algorithm climbs nearest hill
 - Gets stuck on "foothill"
 - Can't see the mountain beyond
 - Every move looks worse
-- Believes it found the best solution
+- Believes it found the best
 :::
 
 ::: {.column width="50%"}
-**Business View: Department Silos**
+**Analogy: Department Silos**
+
 - Sales optimizes sales metrics
 - Engineering optimizes quality
 - Finance optimizes costs
 - Each department "wins"
-- **But company performance suffers!**
+- **Company performance looses!**
 :::
 :::
 
 . . .
 
-::: {.callout-warning}
-## Theory of Constraints Insight
-A company is like connected pipes. Optimizing one section (Sales) while ignoring the bottleneck (Engineering) floods the system and makes everything worse. 
-
-**Key Lesson**: Sum of local bests ≠ Global best
+::: {.callout-important}
+Sum of local bests ≠ Global best
 :::
 
 ## Why Greedy Gets Stuck
 
-[Visualizing how greedy algorithms trap themselves:]{.highlight}
+[Greedy algorithms can simply trap themselves:]{.highlight}
+
+. . .
 
 ```{python}
 #| echo: false
@@ -324,7 +325,7 @@ setup_clean_style()
 np.random.seed(42)
 
 # Create schedule visualization
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+fig, axes = plt.subplots(1, 2)
 
 # Left: Greedy assignment
 ax = axes[0]
@@ -374,9 +375,17 @@ plt.tight_layout()
 plt.show()
 ```
 
-[Greedy allocates resources early, creating problems later!]{.warning}
+. . .
+
+::: callout-warning
+Greedy allocates resources early, creating problems later!
+:::
 
 ## Local Search Also Struggles
+
+[Because we only ever accept better solutions during search:]{.highlight}
+
+. . .
 
 ```{python}
 #| echo: false
@@ -390,20 +399,40 @@ from plot_utils import setup_clean_style, BRAND_COLORS
 setup_clean_style()
 
 # Visualize local search getting stuck
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+fig, axes = plt.subplots(1, 2)
 
 # Left: Solution landscape
 ax = axes[0]
 x = np.linspace(0, 10, 200)
-y = 1600 - 100*np.sin(x) - 50*np.sin(3*x) - 30*np.sin(5*x)
+
+# Define the cost function - more complex landscape with multiple local minima
+def cost_func(x_val):
+    return (1600 
+            - 120*np.sin(x_val) 
+            - 80*np.sin(2.5*x_val) 
+            - 60*np.sin(4*x_val) 
+            - 40*np.sin(6.5*x_val)
+            + 15*np.cos(8*x_val))
+
+y = cost_func(x)
 
 ax.plot(x, y, color=BRAND_COLORS["twoDark"], linewidth=2, alpha=0.7)
 ax.fill_between(x, 1200, y, alpha=0.1, color=BRAND_COLORS["twoLight"])
 
-# Mark positions
-greedy_x, greedy_y = 3.5, 1640
-local_x, local_y = 4.8, 1520  
-global_x, global_y = 7.5, 1380
+# Mark positions - compute actual y-values from the function
+greedy_x = 4.8
+greedy_y = cost_func(greedy_x)
+
+# Find actual local minimum around x=4.8
+from scipy.optimize import minimize_scalar
+local_result = minimize_scalar(cost_func, bounds=(4.0, 6.0), method='bounded')
+local_x = local_result.x
+local_y = local_result.fun
+
+# Find global minimum
+global_result = minimize_scalar(cost_func, bounds=(0, 10), method='bounded')
+global_x = global_result.x
+global_y = global_result.fun
 
 ax.scatter([greedy_x], [greedy_y], color=BRAND_COLORS["oneDark"], s=200, marker='o', zorder=5, label='Greedy Start')
 ax.scatter([local_x], [local_y], color=BRAND_COLORS["threeDark"], s=200, marker='*', zorder=5, label='Local Optimum')
@@ -434,7 +463,7 @@ neighbors = [(0.3, 0.7), (0.7, 0.7), (0.3, 0.3), (0.7, 0.3),
              (0.5, 0.8), (0.5, 0.2), (0.2, 0.5), (0.8, 0.5)]
 
 # Draw center
-circle = Circle(center, 0.08, color=BRAND_COLORS["threeDark"], alpha=0.7)
+circle = Circle(center, 0.08, color=BRAND_COLORS["twoDark"])
 ax.add_patch(circle)
 ax.text(center[0], center[1], 'Current\n€1520', ha='center', va='center', 
         fontsize=9, fontweight='bold', color='white')
@@ -442,12 +471,12 @@ ax.text(center[0], center[1], 'Current\n€1520', ha='center', va='center',
 # Draw neighbors
 for i, (x, y) in enumerate(neighbors):
     cost = 1520 + np.random.randint(10, 100)
-    circle = Circle((x, y), 0.06, color=BRAND_COLORS["darker"], alpha=0.3)
+    circle = Circle((x, y), 0.06, color=BRAND_COLORS["threeLight"])
     ax.add_patch(circle)
     ax.text(x, y, f'€{cost}', ha='center', va='center', fontsize=8)
     
     # Draw edge
-    ax.plot([center[0], x], [center[1], y], 'k-', alpha=0.2, linewidth=1)
+    ax.plot([center[0], x], [center[1], y], 'k-', alpha=0.1, linewidth=1)
 
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
@@ -459,89 +488,66 @@ plt.tight_layout()
 plt.show()
 ```
 
-[We need mechanisms to accept temporary degradation!]{.highlight}
+. . .
 
-# [Mathematical Foundations]{.flow} {.title}
+[Question:]{.question} What can we do to cope with this situation?
 
-## Core Concepts: The Toolbox
+# [Metaheuristic #1: Simulated Annealing]{.flow} {.title}
 
-[The fundamental components of all metaheuristics:]{.highlight}
+## Core Concepts
 
-::: columns
-::: {.column width="50%"}
-**What We're Working With**
+[The fundamental components:]{.highlight}
+
+::: incremental
 - **Solution** = One complete schedule/route/plan
 - **Neighbor** = A slightly modified version
 - **Cost** = How good/bad the solution is
-- **Temperature** = How adventurous we are
+:::
+
+. . .
 
 **The Strategy**
-- Always accept improvements ✓
-- Sometimes accept worse solutions (the trick!)
-- Start adventurous, become conservative
-:::
 
-::: {.column width="50%"}
-**Business Parallel**
-- **Startup Phase**: Try risky pivots (high temp)
-- **Growth Phase**: Selective risks (medium temp)
-- **Mature Phase**: Only proven improvements (low temp)
-
-**Why It Works**
-- Escapes local traps
-- Explores broadly first
-- Exploits good areas later
-- Balances risk and reward
-:::
-:::
+- Always accept improvements
+- Sometimes accept worse solutions (the change!)
 
 . . .
 
 [Think of it as strategic risk-taking that decreases over time!]{.highlight}
 
-# [Metaheuristic #1: Simulated Annealing]{.flow} {.title}
-
 ## The Metallurgy Metaphor
 
-[How annealing steel inspired a powerful optimization algorithm:]{.highlight}
+[How annealing steel inspired an optimization algorithm:]{.highlight}
 
 ::: columns
 ::: {.column width="50%"}
 **Annealing Metal:**
+
 1. Heat to high temperature
 2. Atoms move freely
 3. Slowly cool down
-4. Forms perfect crystal structure
-
-**Key insight**: Temperature controls randomness
+4. Forms crystal structure
 :::
 
 ::: {.column width="50%"}
 **Optimization:**
+
 1. Start with high "temperature"
 2. Accept bad moves often
 3. Gradually reduce temperature
 4. Converge to good solution
-
-**Key insight**: Escape local optima early
 :::
 :::
 
 . . .
 
-[The Key Insight:]{.highlight}
-
-**Hot temperature** = Accept almost any change (exploring)  
-**Warm temperature** = Sometimes accept worse (selective)  
-**Cold temperature** = Only accept improvements (exploiting)
-
-. . .
-
-[The willingness to temporarily accept worse solutions is what enables finding the true summit!]{.highlight}
+::: callout-important
+The willingness to temporarily accept worse solutions is what enables finding the summit!
+:::
 
 ## Temperature Controls Acceptance
 
-[The probability of accepting worse solutions decreases with temperature:]{.highlight}
+[Probability of accepting worse solutions lowers with temp:]{.highlight}
 
 ```{python}
 #| echo: false
@@ -554,58 +560,65 @@ from plot_utils import setup_clean_style, BRAND_COLORS
 # Apply clean brand style
 setup_clean_style()
 
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+fig, ax = plt.subplots(1, 1)
 
-temperatures = [1000, 100, 10]
-titles = ['Hot (T=1000): Accept Almost Anything', 
-          'Warm (T=100): Getting Pickier', 
-          'Cold (T=10): Only Improvements']
+# Cost increases we might encounter (worse solutions)
+delta_costs = np.linspace(0, 300, 200)
 
-for ax, T, title in zip(axes, temperatures, titles):
-    delta_costs = np.linspace(-500, 500, 100)
-    probabilities = np.exp(-np.maximum(0, delta_costs) / T)
-    
-    ax.plot(delta_costs, probabilities, linewidth=3, color=BRAND_COLORS["twoDark"])
-    ax.fill_between(delta_costs, 0, probabilities, alpha=0.3, color=BRAND_COLORS["twoLight"])
-    ax.set_xlabel('Cost Change (Δ)', fontsize=11)
-    ax.set_ylabel('Acceptance Probability', fontsize=11)
-    ax.set_title(title, fontsize=12, fontweight='bold')
-    ax.set_ylim(0, 1.1)
-    ax.grid(True, alpha=0.3)
-    ax.axvline(x=0, color='red', linestyle='--', alpha=0.5)
-    ax.axhline(y=0.5, color='gray', linestyle=':', alpha=0.3)
-    
-    # Add annotations with acceptance probabilities
-    if T == 1000:
-        ax.text(200, 0.82, f'P = {np.exp(-200/T):.2f}', 
-                ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.3))
-        ax.plot([200], [np.exp(-200/T)], 'ro', markersize=8)
-    elif T == 100:
-        ax.text(200, 0.14, f'P = {np.exp(-200/T):.2f}', 
-                ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='orange', alpha=0.3))
-        ax.plot([200], [np.exp(-200/T)], 'ro', markersize=8)
-    else:
-        ax.text(200, 0.05, f'P ≈ 0', 
-                ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
+# Three temperature scenarios
+temperatures = [500, 100, 10]
+colors = [BRAND_COLORS["threeDark"], BRAND_COLORS["oneDark"], BRAND_COLORS["twoDark"]]
+labels = ['HOT (T=500)', 
+          'WARM (T=100)', 
+          'COLD (T=10)']
+alphas = [0.9, 0.7, 0.5]
+
+for T, color, label, alpha in zip(temperatures, colors, labels, alphas):
+    probabilities = np.exp(-delta_costs / T)
+    ax.plot(delta_costs, probabilities, linewidth=4, color=color, label=label, alpha=alpha)
+
+# Mark specific examples
+example_cost = 150
+for T, color in zip(temperatures, colors):
+    prob = np.exp(-example_cost / T)
+    ax.plot([example_cost], [prob], 'o', markersize=12, color=color, 
+            markeredgewidth=2, markeredgecolor='white', zorder=5)
+    ax.annotate(f'{prob:.0%}', xy=(example_cost, prob), 
+                xytext=(example_cost + 30, prob + 0.05),
+                fontsize=11, fontweight='bold', color=color,
+                bbox=dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor=color, linewidth=2),
+                arrowprops=dict(arrowstyle='->', color=color, linewidth=2))
+
+# Styling
+ax.set_xlabel('Cost Increase (€)', fontsize=14)
+ax.set_ylabel('Acceptance Probability', fontsize=14)
+ax.set_title('Formula: P(accept) = exp(-Δcost / T)', 
+             fontsize=16, fontweight='bold', pad=20)
+ax.set_ylim(-0.05, 1.1)
+ax.set_xlim(0, 300)
+ax.grid(True, alpha=0.3, linestyle='--')
+ax.legend(fontsize=12, loc='upper right', framealpha=0.95)
+
+# Add reference line
+ax.axvline(x=example_cost, color='gray', linestyle=':', alpha=0.5, linewidth=2)
 
 plt.tight_layout()
 plt.show()
 ```
 
-## Simulated Annealing: Implementation
+. . .
 
-[The core algorithm in Python:]{.highlight}
+::: callout-tip
+We essentially compare the cost of the new schedule to the current cost and decide whether to accept the change based on the temperature and the difference in cost.
+:::
+
+## Concept
+
+[How Simulated Annealing Works (Pseudocode)]{.highlight}
 
 ```python
-#| echo: true
-#| eval: false
-
-# CONCEPT: How Simulated Annealing Works (Pseudocode)
 def simulated_annealing_concept(current_schedule):
-    """
-    The 'smart hiking' algorithm that can go downhill
-    """
-    temperature = 1000  # Start "hot" (very adventurous)
+    temperature = 500  # Start "hot" (adventurous)
     best_schedule = current_schedule
     
     while temperature > 1:
@@ -616,7 +629,7 @@ def simulated_annealing_concept(current_schedule):
         if cost(new_schedule) < cost(current_schedule):
             current_schedule = new_schedule  # Always accept improvements
         else:
-            # THE MAGIC: Sometimes accept worse solutions!
+            # NEW: Sometimes accept worse solutions!
             # Hot temperature = more likely to accept
             # Cold temperature = less likely to accept
             if random() < acceptance_probability(temperature):
@@ -630,72 +643,119 @@ def simulated_annealing_concept(current_schedule):
             best_schedule = current_schedule
     
     return best_schedule
-
-print("Key insight: Accepting temporary setbacks enables long-term success!")
 ```
 
 ## SA in Action: Restaurant Staffing
 
-[Calculating the cost of a staffing schedule:]{.highlight}
+[A simplified weekend scheduling problem we'll use throughout:]{.highlight}
 
 ```{python}
 #| echo: true
 #| eval: false
 
-# CONCEPT: The Restaurant Scheduling Problem with Real Complexity
+# SIMPLIFIED PROBLEM (used across ALL metaheuristics today)
 """
-What we're trying to solve:
-- 18 servers (6 experienced @ €75/hr, 12 junior @ €25/hr)
-- 6 shifts with DIFFERENT lengths: [5, 4, 4, 6, 5, 6] hours
-- Large penalties per shift: [€800, €0, €500, €1200, €600, €1000]
-- Server preferences (1-10): affects quality & happiness
-- THREE cost components to minimize!
-
-Why it's REALLY hard now:
-- Can't just assign all experienced to early shifts (greedy fails)
-- Need to balance cost vs coverage
-- Too many combinations to check all
+La Étoile's Weekend Challenge:
+- 12 servers: 4 experienced (E1-E4), 8 junior (J1-J8)
+- 6 shifts: Need 2 servers each
+- Everyone works exactly 1 shift
 """
+```
 
-def restaurant_cost_concept(schedule, shift_hours, penalties, preferences):
+. . .
+
+**The initial greedy schedule has the following results:**
+
+. . .
+
+```{python}
+#| echo: false
+#| eval: true
+import numpy as np
+import random
+
+# Server costs (per shift, varying shift lengths!)
+COSTS = {
+    'E1': 375, 'E2': 375, 'E3': 300, 'E4': 300,  # Experienced: €75/hr × 4-5hr
+    'J1': 100, 'J2': 100, 'J3': 125, 'J4': 125,  # Junior: €25/hr × 4-5hr
+    'J5': 100, 'J6': 100, 'J7': 125, 'J8': 125
+}
+
+# Shift requirements & penalties (tighter constraints now!)
+SHIFTS = {
+    'Fri_Dinner': {'min_exp': 1, 'penalty': 500},
+    'Fri_Late':   {'min_exp': 0, 'penalty': 0},
+    'Sat_Lunch':  {'min_exp': 1, 'penalty': 400},
+    'Sat_Dinner': {'min_exp': 2, 'penalty': 800},
+    'Sun_Lunch':  {'min_exp': 1, 'penalty': 400},
+    'Sun_Dinner': {'min_exp': 1, 'penalty': 600}
+}
+
+# Server preferences (1-10 scale, 10=loves this shift)
+# More conflicting preferences to make optimization harder!
+PREFERENCES = {
+    'E1': [9, 2, 7, 8, 5, 6],  # Loves Fri dinner, hates Fri late
+    'E2': [6, 4, 5, 9, 7, 8],  # Prefers Sat/Sun dinners
+    'E3': [5, 8, 9, 4, 8, 5],  # Loves lunches and late shift
+    'E4': [7, 3, 6, 7, 6, 9],  # Prefers Sun dinner
+    'J1': [4, 7, 8, 3, 9, 5],  # Prefers lunches
+    'J2': [8, 9, 5, 6, 4, 7],  # Loves late shifts
+    'J3': [6, 5, 9, 4, 8, 6],  # Loves Sat lunch
+    'J4': [7, 8, 6, 7, 5, 8],  # Flexible
+    'J5': [5, 9, 4, 8, 6, 7],  # Loves Fri late, Sat dinner
+    'J6': [9, 6, 7, 5, 8, 4],  # Loves Fri dinner
+    'J7': [4, 7, 8, 6, 9, 5],  # Loves Sun lunch
+    'J8': [6, 8, 5, 7, 6, 9]   # Prefers late/dinner shifts
+}
+
+def calculate_cost(schedule):
     """
-    Calculate THREE cost components with varying complexity
+    Schedule = [[shift1_servers], [shift2_servers], ...]
+    Returns: (total_cost, labor, penalties, preference_cost)
     """
     labor_cost = 0
     penalty_cost = 0
     preference_cost = 0
+    shift_names = list(SHIFTS.keys())
     
-    for shift_idx, shift_servers in enumerate(schedule):
-        # Component 1: Labor (varies by shift length!)
-        hours = shift_hours[shift_idx]  # 4-6 hours
-        for server in shift_servers:
-            if is_experienced(server):
-                labor_cost += 75 * hours  # €75/hr
-            else:
-                labor_cost += 25 * hours  # €25/hr
+    for shift_idx, servers in enumerate(schedule):
+        # Labor costs
+        for server in servers:
+            labor_cost += COSTS[server]
         
-        # Component 2: Experience penalties (strategic choices)
-        if count_experienced(shift_servers) < required:
-            penalty_cost += penalties[shift_idx]  # €0-€1200
+        # Experience penalties
+        exp_count = sum(1 for s in servers if s.startswith('E'))
+        min_exp = SHIFTS[shift_names[shift_idx]]['min_exp']
+        if exp_count < min_exp:
+            penalty_cost += SHIFTS[shift_names[shift_idx]]['penalty']
         
-        # Component 3: Preference penalties (happiness matters!)
-        for server in shift_servers:
-            pref = preferences[server][shift_idx]  # 1-10 scale
-            preference_cost += (10 - pref) * 20  # €0-€180 per assignment
+        # Preference penalties (unhappiness cost)
+        for server in servers:
+            pref = PREFERENCES[server][shift_idx]
+            preference_cost += (10 - pref) * 30  # €30 per unhappiness point
     
-    return labor_cost + penalty_cost + preference_cost
+    return labor_cost + penalty_cost + preference_cost, labor_cost, penalty_cost, preference_cost
 
-def make_neighbor(schedule, preferences):
-    """
-    Create a 'neighbor' by swapping two servers
-    Smart: Consider preferences when swapping!
-    """
-    # Pick two shifts and swap servers
-    # Prefer swaps that improve preferences
-    return schedule_with_preference_aware_swap
+# Example: Greedy schedule (assign cheapest available, ignoring preferences)
+greedy_schedule = [
+    ['J1', 'J2'],  # Fri Dinner (need 1 exp - PENALTY!)
+    ['J3', 'J4'],  # Fri Late
+    ['J5', 'J6'],  # Sat Lunch (need 1 exp - PENALTY!)
+    ['J7', 'E1'],  # Sat Dinner (need 2 exp, only have 1 - PENALTY!)
+    ['J8', 'E2'],  # Sun Lunch
+    ['E3', 'E4']   # Sun Dinner
+]
 
-print("The challenge: Balance THREE competing objectives across varying shifts!")
+cost, labor, penalty, pref = calculate_cost(greedy_schedule)
+print(f"Greedy Schedule Cost: €{cost:,.0f}")
+print(f"  Labor: €{labor}, Penalties: €{penalty}, Unhappiness: €{pref}")
 ```
+
+. . .
+
+::: callout-tip
+Let's see how Simulated Annealing can improve the solution!
+:::
 
 ## Visualizing SA Performance
 
@@ -708,95 +768,148 @@ print("The challenge: Balance THREE competing objectives across varying shifts!"
 import sys
 sys.path.append('../helpers')
 from plot_utils import setup_clean_style, BRAND_COLORS
+import math
 
 # Apply clean brand style
 setup_clean_style()
 
-# Simulate SA performance on restaurant problem
-np.random.seed(456)
-
-# Run simulated annealing (simplified for visualization)
-iterations = range(0, 101, 5)
-greedy_cost = [1640] * len(iterations)
-sa_costs = []
-temperatures = []
-best_costs = []
-
-current_cost = 1640
-best_cost = 1640
-temp = 1000
-
-for i in iterations:
-    temp = 1000 * (0.95 ** i)
-    temperatures.append(temp)
+# Helper function: Make a neighbor by swapping two servers
+def make_neighbor(schedule):
+    """Swap two random servers from different shifts"""
+    new_schedule = [shift[:] for shift in schedule]  # Deep copy
     
-    # Simulate cost evolution
-    if i < 20:
-        # High temp: exploring wildly
-        current_cost = 1640 + np.random.randn() * 100
-    elif i < 60:
-        # Medium temp: converging
-        current_cost = 1540 - (i-20) * 2 + np.random.randn() * 30
-    else:
-        # Low temp: fine-tuning
-        current_cost = 1420 + np.random.randn() * 10
+    # Pick two different shifts
+    num_shifts = len(schedule)
+    shift1, shift2 = random.sample(range(num_shifts), 2)
+    # Pick random servers from each
+    pos1, pos2 = random.randint(0, 1), random.randint(0, 1)
     
-    current_cost = max(1380, min(1700, current_cost))
-    best_cost = min(best_cost, current_cost)
-    sa_costs.append(current_cost)
-    best_costs.append(best_cost)
+    # Swap them
+    new_schedule[shift1][pos1], new_schedule[shift2][pos2] = \
+        new_schedule[shift2][pos2], new_schedule[shift1][pos1]
+    
+    return new_schedule
 
-fig, axes = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+# Simulated Annealing Implementation
+def simulated_annealing(initial_schedule, max_iterations=500, initial_temp=1000, cooling_rate=0.99):
+    """Run SA and track cost history"""
+    current = [shift[:] for shift in initial_schedule]
+    current_cost = calculate_cost(current)[0]
+    
+    best = [shift[:] for shift in current]
+    best_cost = current_cost
+    
+    temperature = initial_temp
+    cost_history = [current_cost]
+    temp_history = [temperature]
+    best_history = [best_cost]
+    
+    random.seed(42)
+    
+    for iteration in range(max_iterations):
+        # Generate neighbor
+        neighbor = make_neighbor(current)
+        neighbor_cost = calculate_cost(neighbor)[0]
+        
+        # Acceptance criterion
+        delta = neighbor_cost - current_cost
+        
+        if delta < 0:  # Better solution
+            current = neighbor
+            current_cost = neighbor_cost
+        else:  # Worse solution - maybe accept
+            acceptance_prob = math.exp(-delta / temperature) if temperature > 0 else 0
+            if random.random() < acceptance_prob:
+                current = neighbor
+                current_cost = neighbor_cost
+        
+        # Track best ever seen
+        if current_cost < best_cost:
+            best = [shift[:] for shift in current]
+            best_cost = current_cost
+        
+        # Cool down
+        temperature *= cooling_rate
+        
+        # Record history
+        cost_history.append(current_cost)
+        temp_history.append(temperature)
+        best_history.append(best_cost)
+    
+    return best, best_cost, cost_history, temp_history, best_history
+
+# Run SA from greedy starting point
+np.random.seed(42)
+random.seed(42)
+best_schedule, best_cost_sa, costs, temps, best_costs = simulated_annealing(greedy_schedule)
+
+# Create visualization
+fig, axes = plt.subplots(2, 1, sharex=True)
+
+greedy_cost_value = calculate_cost(greedy_schedule)[0]
+iterations = list(range(len(costs)))
 
 # Top: Cost over time
 ax = axes[0]
-ax.plot(iterations, greedy_cost, color=BRAND_COLORS["threeDark"], linestyle='--', linewidth=2, label='Greedy (stuck)', alpha=0.7)
-ax.plot(iterations, sa_costs, color=BRAND_COLORS["twoLight"], linewidth=1, alpha=0.5, label='SA Current')
-ax.plot(iterations, best_costs, color=BRAND_COLORS["twoDark"], linewidth=3, label='SA Best')
-ax.fill_between(iterations, greedy_cost, best_costs, 
-                 where=[b < g for b, g in zip(best_costs, greedy_cost)],
-                 color=BRAND_COLORS["twoDark"], alpha=0.2, label='Improvement')
+ax.axhline(y=greedy_cost_value, color=BRAND_COLORS["threeDark"], linestyle='--', 
+           linewidth=2, label=f'Greedy Start', alpha=0.7)
+ax.plot(iterations, costs, color=BRAND_COLORS["twoLight"], linewidth=2, 
+        alpha=0.7, label='SA Current Solution')
+ax.plot(iterations, best_costs, color=BRAND_COLORS["twoDark"], linewidth=2, 
+        label=f'SA Best')
 ax.set_ylabel('Total Cost (€)', fontsize=12)
-ax.set_title('Simulated Annealing Escapes Local Optimum', fontsize=14, fontweight='bold')
 ax.legend(loc='upper right')
 ax.grid(True, alpha=0.3)
-ax.set_ylim(1350, 1750)
 
 # Add annotations for phases
-ax.axvspan(0, 20, alpha=0.1, color=BRAND_COLORS["threeDark"], label='Exploration')
-ax.axvspan(20, 60, alpha=0.1, color=BRAND_COLORS["oneDark"], label='Transition')
-ax.axvspan(60, 100, alpha=0.1, color=BRAND_COLORS["twoDark"], label='Exploitation')
+total_iters = len(iterations)
+ax.axvspan(0, total_iters*0.3, alpha=0.1, color=BRAND_COLORS["threeDark"])
+ax.axvspan(total_iters*0.3, total_iters*0.7, alpha=0.1, color=BRAND_COLORS["oneDark"])
+ax.axvspan(total_iters*0.7, total_iters, alpha=0.1, color=BRAND_COLORS["twoDark"])
 
 # Bottom: Temperature
 ax = axes[1]
-ax.plot(iterations, temperatures, color=BRAND_COLORS["twoDark"], linewidth=3)
-ax.fill_between(iterations, 0, temperatures, color=BRAND_COLORS["twoLight"], alpha=0.3)
+ax.plot(iterations, temps, color=BRAND_COLORS["twoDark"], linewidth=3)
+ax.axvspan(0, total_iters*0.3, alpha=0.1, color=BRAND_COLORS["threeDark"])
+ax.axvspan(total_iters*0.3, total_iters*0.7, alpha=0.1, color=BRAND_COLORS["oneDark"])
+ax.axvspan(total_iters*0.7, total_iters, alpha=0.1, color=BRAND_COLORS["twoDark"])
 ax.set_xlabel('Iteration', fontsize=12)
 ax.set_ylabel('Temperature', fontsize=12)
-ax.set_title('Cooling Schedule (Geometric: T = T₀ × 0.95ᵗ)', fontsize=12)
 ax.grid(True, alpha=0.3)
-ax.set_yscale('log')
 
 # Add phase labels
-ax.text(10, 500, 'EXPLORE\n(Accept bad)', ha='center', fontsize=10, fontweight='bold', color='red')
-ax.text(40, 50, 'TRANSITION\n(Balance)', ha='center', fontsize=10, fontweight='bold', color='orange')
-ax.text(80, 5, 'EXPLOIT\n(Refine)', ha='center', fontsize=10, fontweight='bold', color='blue')
+ax.text(total_iters*0.15, max(temps)*0.2, 'EXPLORE\n(Accept bad moves)', 
+        ha='center', fontsize=10, fontweight='bold', color=BRAND_COLORS["threeDark"])
+ax.text(total_iters*0.5, max(temps)*0.2, 'TRANSITION\n(Balance)', 
+        ha='center', fontsize=10, fontweight='bold', color=BRAND_COLORS["oneDark"])
+ax.text(total_iters*0.85, max(temps)*0.2, 'EXPLOIT\n(Refine best)', 
+        ha='center', fontsize=10, fontweight='bold', color=BRAND_COLORS["twoDark"])
 
 plt.tight_layout()
 plt.show()
-```
+``` 
 
-[Notice: SA accepts worse solutions early, enabling escape from local optima!]{.highlight}
+. . .
 
-## Common SA Mistakes: Implementation
+::: callout-important
+See how SA accepts worse solutions early, enabling escape from local optima!
+:::
+
+## Common SA Mistakes
 
 [Avoid these common implementation errors:]{.highlight}
 
+. . .
+
 **Mistake #1: Starting Too Cold**
+
 - If temperature is too low → Acts like greedy (no exploration)
-- Fix: Start hot enough to accept bad moves (test with 50% acceptance rate initially)
+- Fix: Start hot enough to accept bad moves
+
+. . .
 
 **Mistake #2: Cooling Too Quickly**
+
 - If you cool fast → Get stuck early
 - Fix: Cool slowly (multiply by 0.95-0.99, not 0.5)
 
@@ -806,22 +919,58 @@ plt.show()
 Quick cooling is tempting for speed, but defeats the purpose of SA!
 :::
 
-## Common SA Mistakes: Conceptual
+## Temperature Parameter Impact
 
-[Understanding why SA works prevents these errors:]{.highlight}
+```{python}
+#| echo: false
+#| eval: true
 
-**Mistake #3: Forgetting the Best**
-- Current solution might get worse near the end
-- Fix: Always track the best ever found separately from current
+# Compare different temperature settings
+np.random.seed(42)
 
-**Mistake #4: Not Understanding "Why"**
-- SA works because it escapes local traps through controlled randomness
-- Without bad move acceptance, it's just expensive hill climbing!
+# Run SA with different parameters
+configs = [
+    {'name': 'Too Cold Start', 'temp': 100, 'cooling': 0.99, 'color': BRAND_COLORS["threeDark"]},
+    {'name': 'Too Fast Cooling', 'temp': 1000, 'cooling': 0.1, 'color': BRAND_COLORS["oneDark"]},
+    {'name': 'Good Balance', 'temp': 1000, 'cooling': 0.99, 'color': BRAND_COLORS["twoDark"]},
+]
+
+fig, ax = plt.subplots(1, 1)
+
+greedy_cost_value = calculate_cost(greedy_schedule)[0]
+
+for config in configs:
+    random.seed(42)
+    _, best_cost, costs, temps, best_costs = simulated_annealing(
+        greedy_schedule, 
+        max_iterations=500, 
+        initial_temp=config['temp'], 
+        cooling_rate=config['cooling']
+    )
+    
+    iterations = list(range(len(best_costs)))
+    ax.plot(iterations, best_costs, linewidth=3, color=config['color'], 
+            label=f"{config['name']}: Final €{best_cost:.0f}", alpha=0.8)
+
+# Add greedy baseline
+ax.axhline(y=greedy_cost_value, color='gray', linestyle='--', 
+           linewidth=2, label=f'Greedy Baseline: €{greedy_cost_value:.0f}', alpha=0.6)
+
+ax.set_xlabel('Iteration', fontsize=14, fontweight='bold')
+ax.set_ylabel('Best Cost Found (€)', fontsize=14, fontweight='bold')
+ax.set_title('Impact of Temperature Parameters on SA Performance (Same problem, different settings)', 
+             fontsize=16, fontweight='bold', pad=15)
+ax.legend(fontsize=12, loc='best', framealpha=0.95)
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+```
 
 . . .
 
-::: {.callout-note}
-In Tutorial 9.2, you'll tune these parameters for the restaurant problem!
+::: callout-tip
+The "Good Balance" explores widely early, then refines carefully. Often you need to balance exploration and exploitation by experimenting with different parameters.
 :::
 
 # [Metaheuristic #2: Genetic Algorithms]{.flow} {.title}
@@ -833,36 +982,162 @@ In Tutorial 9.2, you'll tune these parameters for the restaurant problem!
 ::: columns
 ::: {.column width="50%"}
 **Natural Selection:**
+
 1. Population of individuals
 2. Fittest survive & reproduce
 3. Offspring inherit traits
 4. Mutations create diversity
 5. Evolution finds adaptation
-
-**Darwin's insight**: Survival of the fittest
 :::
 
 ::: {.column width="50%"}
 **Optimization:**
+
 1. Population of solutions
 2. Best solutions selected
 3. Crossover combines solutions
 4. Mutation adds variation
 5. Evolution finds optimum
-
-**Our insight**: Parallel exploration
 :::
 :::
 
 . . .
 
-[The Business Analogy:]{.highlight}
+::: callout-tip
+Just like successful products get more market share, better solutions get more "offspring" in the next generation. It's survival of the fittest, but for schedules, routes, or designs!
+:::
 
-Just like successful products get more market share, better solutions get more "offspring" in the next generation. It's survival of the fittest - but for schedules, routes, or designs!
+---
 
-## The Genetic Process
+## GA Implementation on Restaurant Problem
 
-[The four stages of genetic algorithm evolution:]{.highlight}
+[Let's run a genetic algorithm first, then see how it works:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Genetic Algorithm Implementation (run early so data is available for later slides)
+def create_random_schedule():
+    """Create a random valid schedule"""
+    servers = list(COSTS.keys())
+    random.shuffle(servers)
+    return [servers[i:i+2] for i in range(0, 12, 2)]
+
+def tournament_selection(population, pop_costs, tournament_size=3):
+    """Select parent via tournament selection"""
+    tournament = random.sample(list(zip(population, pop_costs)), tournament_size)
+    return min(tournament, key=lambda x: x[1])[0]
+
+def crossover(parent1, parent2):
+    """Order crossover - maintain valid assignments"""
+    # Flatten parents
+    p1_flat = [s for shift in parent1 for s in shift]
+    p2_flat = [s for shift in parent2 for s in shift]
+    
+    # Take first 3 shifts from parent1, fill rest from parent2
+    child_flat = p1_flat[:6]  # First 3 shifts (6 servers)
+    for server in p2_flat:
+        if server not in child_flat:
+            child_flat.append(server)
+    
+    # Reconstruct schedule
+    return [child_flat[i:i+2] for i in range(0, 12, 2)]
+
+def mutate(schedule, mutation_rate=0.2):
+    """Swap two servers with some probability"""
+    if random.random() < mutation_rate:
+        return make_neighbor(schedule)
+    return schedule
+
+def genetic_algorithm(pop_size=20, generations=100, mutation_rate=0.2):
+    """Run GA and track best/average fitness"""
+    # Initialize population
+    population = [create_random_schedule() for _ in range(pop_size)]
+    
+    best_history = []
+    avg_history = []
+    best_overall = None
+    best_overall_cost = float('inf')
+    
+    random.seed(42)
+    
+    for gen in range(generations):
+        # Evaluate fitness
+        pop_costs = [calculate_cost(ind)[0] for ind in population]
+        
+        # Track statistics
+        best_idx = np.argmin(pop_costs)
+        best_history.append(pop_costs[best_idx])
+        avg_history.append(np.mean(pop_costs))
+        
+        if pop_costs[best_idx] < best_overall_cost:
+            best_overall = [shift[:] for shift in population[best_idx]]
+            best_overall_cost = pop_costs[best_idx]
+        
+        # Create next generation
+        new_population = []
+        
+        # Elitism: keep best 2
+        sorted_pop = sorted(zip(population, pop_costs), key=lambda x: x[1])
+        new_population.extend([ind for ind, _ in sorted_pop[:2]])
+        
+        # Generate offspring
+        while len(new_population) < pop_size:
+            parent1 = tournament_selection(population, pop_costs)
+            parent2 = tournament_selection(population, pop_costs)
+            child = crossover(parent1, parent2)
+            child = mutate(child, mutation_rate)
+            new_population.append(child)
+        
+        population = new_population
+    
+    return best_overall, best_overall_cost, best_history, avg_history
+
+# Run GA
+np.random.seed(42)
+random.seed(42)
+ga_best_schedule, ga_best_cost, ga_best_hist, ga_avg_hist = genetic_algorithm(
+    pop_size=20, generations=500, mutation_rate=0.2
+)
+
+print(f"GA found solution: €{ga_best_cost:.0f}")
+print(f"Improvement over greedy: {100*(greedy_cost_value-ga_best_cost)/greedy_cost_value:.1f}%")
+```
+
+[Now let's understand HOW it works by examining each stage...]{.highlight}
+
+## The Genetic Process: Overview
+
+[Four stages repeat each generation:]{.highlight}
+
+::: columns
+::: {.column width="50%"}
+**1. Selection**  
+Choose parents based on fitness
+
+**2. Crossover**  
+Combine parents to create children
+:::
+
+::: {.column width="50%"}
+**3. Mutation**  
+Randomly modify children
+
+**4. Replacement**  
+New generation replaces old
+:::
+:::
+
+. . .
+
+[Let's see each stage in detail with our restaurant problem...]{.highlight}
+
+---
+
+## Stage 1: Selection (Tournament)
+
+[How to choose which schedules get to "reproduce":]{.highlight}
 
 ```{python}
 #| echo: false
@@ -875,63 +1150,257 @@ from plot_utils import setup_clean_style, BRAND_COLORS
 # Apply clean brand style
 setup_clean_style()
 
-fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+# Create realistic population costs
+np.random.seed(42)
+population_size = 20
+costs = np.random.randint(1400, 1900, population_size)
+costs = sorted(costs)
 
-# 1. Selection
-ax = axes[0, 0]
-fitness_scores = [1380, 1420, 1460, 1500, 1540, 1580, 1620, 1660, 1700, 1740]
-colors = [BRAND_COLORS["oneDark"] if f <= 1500 else BRAND_COLORS["threeDark"] for f in fitness_scores]
-bars = ax.bar(range(10), fitness_scores, color=colors, alpha=0.7)
-ax.set_title('1. Selection: Tournament Selection', fontsize=12, fontweight='bold')
-ax.set_ylabel('Cost (€)')
-ax.set_xlabel('Solution in Population')
-ax.axhline(y=1500, color='red', linestyle='--', label='Selection threshold')
-ax.legend()
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
-# Highlight tournament
-ax.add_patch(plt.Rectangle((2.5, 1350), 3, 400, fill=False, 
-                          edgecolor=BRAND_COLORS["twoDark"], linewidth=3))
-ax.text(4, 1750, 'Tournament\n(pick best)', ha='center', color=BRAND_COLORS["twoDark"], fontweight='bold')
+# Left: Full population
+ax = axes[0]
+colors = [BRAND_COLORS["twoLight"] for _ in range(population_size)]
+bars = ax.barh(range(population_size), costs, color=colors, alpha=0.6, edgecolor='black', linewidth=1)
 
-# 2. Crossover
-ax = axes[0, 1]
+ax.set_ylabel('Individual Schedule ID', fontsize=12)
+ax.set_xlabel('Cost (€)', fontsize=12)
+ax.set_title('Current Population (20 schedules)', fontsize=14, fontweight='bold')
+ax.set_yticks(range(0, population_size, 5))
+ax.grid(True, alpha=0.3, axis='x')
+
+# Add best/worst labels
+ax.text(costs[0] + 30, 0, f'Best: €{costs[0]}', va='center', fontsize=10, fontweight='bold', color='green')
+ax.text(costs[-1] - 30, population_size-1, f'Worst: €{costs[-1]}', va='center', fontsize=10, fontweight='bold', color='red', ha='right')
+
+# Right: Tournament selection
+ax = axes[1]
+
+# Pick 3 random individuals for tournament
+tournament_indices = [5, 12, 17]
+tournament_costs = [costs[i] for i in tournament_indices]
+winner_idx = tournament_indices[np.argmin(tournament_costs)]
+winner_cost = min(tournament_costs)
+
+# Show tournament
+colors_tournament = ['green' if costs[i] == winner_cost else 'orange' for i in tournament_indices]
+ax.barh(range(3), tournament_costs, color=colors_tournament, alpha=0.8, edgecolor='black', linewidth=2)
+
+ax.set_ylabel('Tournament Contestant', fontsize=12)
+ax.set_xlabel('Cost (€)', fontsize=12)
+ax.set_title('Tournament Selection (size=3)', fontsize=14, fontweight='bold')
+ax.set_yticks(range(3))
+ax.set_yticklabels([f'Schedule #{i}' for i in tournament_indices])
+ax.grid(True, alpha=0.3, axis='x')
+
+# Annotate winner
+ax.text(winner_cost + 30, 0, '← WINNER!\nSelected as parent', va='center', fontsize=11, 
+        fontweight='bold', color='green')
+
+plt.tight_layout()
+plt.show()
+```
+
+[Better schedules have higher chance of being selected, but not guaranteed!]{.highlight}
+
+---
+
+## Stage 2: Crossover (Recombination)
+
+[Combine two parent schedules to create offspring:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, ax = plt.subplots(1, 1, figsize=(12, 8))
+ax.set_xlim(0, 10)
+ax.set_ylim(0, 10)
 ax.axis('off')
-ax.text(0.5, 0.85, 'Parent 1: [[0,1,2], [3,4,5], ...]', fontsize=11, ha='center', 
-        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"]))
-ax.text(0.5, 0.70, 'Parent 2: [[6,7,8], [9,10,11], ...]', fontsize=11, ha='center',
-        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["twoLight"]))
-ax.arrow(0.5, 0.65, 0, -0.1, head_width=0.02, head_length=0.02, fc='black', ec='black')
-ax.text(0.5, 0.45, 'Uniform Crossover (50% each)', fontsize=10, ha='center', style='italic')
-ax.text(0.5, 0.30, 'Child: [[0,1,2], [9,10,11], ...]', fontsize=11, ha='center',
-        bbox=dict(boxstyle='round', facecolor='yellow'))
-ax.set_title('2. Crossover: Combine Good Solutions', fontsize=12, fontweight='bold')
 
-# 3. Mutation
-ax = axes[1, 0]
+# Parent 1
+parent1_shifts = ['Fri_Din', 'Fri_Late', 'Sat_Lun', 'Sat_Din', 'Sun_Lun', 'Sun_Din']
+parent1_servers = [['E1','J6'], ['J2','J4'], ['E3','J1'], ['E2','J5'], ['J7','J8'], ['E4','J3']]
+parent1_cost = 1450
+
+y_start = 9
+ax.text(1, y_start, 'Parent 1', fontsize=14, fontweight='bold', 
+        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], edgecolor='black', linewidth=2))
+ax.text(9, y_start, f'€{parent1_cost}', fontsize=12, fontweight='bold')
+
+for i, (shift, servers) in enumerate(zip(parent1_shifts, parent1_servers)):
+    y = y_start - 0.7 - i*0.6
+    ax.text(1, y, f'{shift}:', fontsize=10, ha='left')
+    ax.text(3, y, f'{servers[0]}, {servers[1]}', fontsize=10, 
+            bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.3))
+
+# Parent 2
+parent2_servers = [['J6','E1'], ['J3','J5'], ['E2','J7'], ['E3','E4'], ['J1','J2'], ['J8','J4']]
+parent2_cost = 1480
+
+y_start = 9
+ax.text(5.5, y_start, 'Parent 2', fontsize=14, fontweight='bold',
+        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["twoLight"], edgecolor='black', linewidth=2))
+ax.text(9, y_start, f'€{parent2_cost}', fontsize=12, fontweight='bold')
+
+for i, (shift, servers) in enumerate(zip(parent1_shifts, parent2_servers)):
+    y = y_start - 0.7 - i*0.6
+    ax.text(5.5, y, f'{shift}:', fontsize=10, ha='left')
+    ax.text(7.5, y, f'{servers[0]}, {servers[1]}', fontsize=10,
+            bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["twoLight"], alpha=0.5, pad=0.3))
+
+# Arrow down
+ax.annotate('', xy=(5, 3.5), xytext=(5, 4.5),
+            arrowprops=dict(arrowstyle='->', lw=3, color='black'))
+ax.text(5, 4, 'Order Crossover', ha='center', fontsize=11, fontweight='bold',
+        bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.7))
+
+# Child (take first 3 shifts from parent 1, rest from parent 2)
+child_servers = parent1_servers[:3] + parent2_servers[3:]
+child_cost = "???"
+
+y_start = 2.5
+ax.text(3, y_start, 'Child (Offspring)', fontsize=14, fontweight='bold',
+        bbox=dict(boxstyle='round', facecolor='lightgreen', edgecolor='black', linewidth=2))
+ax.text(9, y_start, f'Cost: {child_cost}', fontsize=12, fontweight='bold')
+
+for i, (shift, servers) in enumerate(zip(parent1_shifts, child_servers)):
+    y = y_start - 0.7 - i*0.6
+    # Color based on which parent
+    color = BRAND_COLORS["oneLight"] if i < 3 else BRAND_COLORS["twoLight"]
+    ax.text(3, y, f'{shift}:', fontsize=10, ha='left')
+    ax.text(5, y, f'{servers[0]}, {servers[1]}', fontsize=10,
+            bbox=dict(boxstyle='round', facecolor=color, alpha=0.6, pad=0.3))
+
+# Add legend
+ax.text(0.5, -1, 'From Parent 1', fontsize=10, 
+        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.6))
+ax.text(3, -1, 'From Parent 2', fontsize=10,
+        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["twoLight"], alpha=0.6))
+
+plt.tight_layout()
+plt.show()
+```
+
+[Inherit good features from both parents!]{.highlight}
+
+---
+
+## Stage 3: Mutation
+
+[Random changes maintain diversity and explore new solutions:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 7))
+
+# Left: Before mutation
+ax = axes[0]
+ax.set_xlim(0, 10)
+ax.set_ylim(0, 10)
 ax.axis('off')
-ax.text(0.5, 0.7, 'Before: [[0,1,2], [3,4,5]]', fontsize=11, ha='center',
-        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"]))
-ax.arrow(0.5, 0.6, 0, -0.1, head_width=0.02, head_length=0.02, fc='black', ec='black')
-ax.text(0.5, 0.4, 'After: [[0,4,2], [3,1,5]]', fontsize=11, ha='center',
-        bbox=dict(boxstyle='round', facecolor='orange'))
-ax.text(0.5, 0.25, 'Swap servers between shifts!', fontsize=10, ha='center', color='red')
-ax.set_title('3. Mutation: Explore New Solutions', fontsize=12, fontweight='bold')
-ax.text(0.5, 0.1, f'Probability = {0.1:.0%}', fontsize=10, ha='center', style='italic')
 
-# 4. Population Evolution
-ax = axes[1, 1]
-generations = range(0, 101, 10)
-best = [1640, 1580, 1520, 1480, 1450, 1430, 1415, 1405, 1395, 1385, 1380]
-average = [1750, 1650, 1580, 1520, 1480, 1450, 1430, 1420, 1410, 1400, 1395]
-worst = [1900, 1750, 1650, 1580, 1540, 1500, 1480, 1460, 1450, 1440, 1430]
+before_servers = [['E1','J6'], ['J2','J4'], ['E3','J1'], ['E2','J5'], ['J7','J8'], ['E4','J3']]
+shifts = ['Fri_Din', 'Fri_Late', 'Sat_Lun', 'Sat_Din', 'Sun_Lun', 'Sun_Din']
 
-ax.plot(generations, best, 'g-', linewidth=3, label='Best', marker='o')
-ax.plot(generations, average, 'b-', linewidth=2, label='Average', marker='s')
-ax.plot(generations, worst, 'r-', linewidth=1, label='Worst', marker='^', alpha=0.5)
-ax.set_xlabel('Generation', fontsize=11)
-ax.set_ylabel('Cost (€)', fontsize=11)
-ax.set_title('4. Population Evolution', fontsize=12, fontweight='bold')
-ax.legend()
+ax.text(5, 9.5, 'Before Mutation', fontsize=15, fontweight='bold', ha='center')
+
+for i, (shift, servers) in enumerate(zip(shifts, before_servers)):
+    y = 8.5 - i*1.2
+    ax.text(2, y, f'{shift}:', fontsize=11, ha='left', fontweight='bold')
+    
+    # Highlight the two servers that will be swapped
+    if i == 1:  # Fri_Late
+        ax.text(5, y, f'{servers[0]}', fontsize=11, 
+                bbox=dict(boxstyle='round', facecolor='yellow', edgecolor='red', linewidth=3, pad=0.4))
+        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+    elif i == 4:  # Sun_Lun
+        ax.text(5, y, f'{servers[0]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor='yellow', edgecolor='red', linewidth=3, pad=0.4))
+        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+    else:
+        ax.text(5, y, f'{servers[0]}, {servers[1]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+
+ax.text(5, 1, 'Mutation point: Swap J2 ↔ J7', fontsize=12, ha='center', color='red', fontweight='bold',
+        bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.7, pad=0.5))
+
+# Right: After mutation
+ax = axes[1]
+ax.set_xlim(0, 10)
+ax.set_ylim(0, 10)
+ax.axis('off')
+
+after_servers = [['E1','J6'], ['J7','J4'], ['E3','J1'], ['E2','J5'], ['J2','J8'], ['E4','J3']]
+
+ax.text(5, 9.5, 'After Mutation', fontsize=15, fontweight='bold', ha='center')
+
+for i, (shift, servers) in enumerate(zip(shifts, after_servers)):
+    y = 8.5 - i*1.2
+    ax.text(2, y, f'{shift}:', fontsize=11, ha='left', fontweight='bold')
+    
+    # Highlight the swapped servers
+    if i == 1:  # Fri_Late - now has J7
+        ax.text(5, y, f'{servers[0]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor='lightgreen', edgecolor='green', linewidth=3, pad=0.4))
+        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+    elif i == 4:  # Sun_Lun - now has J2
+        ax.text(5, y, f'{servers[0]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor='lightgreen', edgecolor='green', linewidth=3, pad=0.4))
+        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+    else:
+        ax.text(5, y, f'{servers[0]}, {servers[1]}', fontsize=11,
+                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+
+ax.text(5, 1, f'Mutation rate: 20%\n(happens 1 in 5 offspring)', fontsize=11, ha='center', 
+        style='italic', bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.5, pad=0.5))
+
+plt.tight_layout()
+plt.show()
+```
+
+[Mutation prevents premature convergence to local optima!]{.highlight}
+
+---
+
+## Stage 4: Population Evolution
+
+[How the population improves over generations:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, ax = plt.subplots(1, 1, figsize=(12, 7))
+
+# Use actual GA data from earlier (don't overwrite SA variables!)
+generations = list(range(len(ga_best_hist)))
+
+ax.plot(generations, ga_best_hist, color='green', linewidth=4, label='Best in Population', marker='o', markersize=8)
+ax.plot(generations, ga_avg_hist, color='blue', linewidth=3, label='Population Average', marker='s', markersize=6, linestyle='--')
+
+# Add greedy baseline
+ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, label=f'Greedy (€{greedy_cost_value:.0f})', alpha=0.6)
+
+# Annotate phases
+ax.axvspan(0, 30, alpha=0.1, color='red', label='Exploration Phase')
+ax.axvspan(30, 70, alpha=0.1, color='orange')
+ax.axvspan(70, len(generations), alpha=0.1, color='green')
+
+ax.text(15, max(ga_avg_hist)*0.95, 'EXPLORATION\nHigh diversity', ha='center', fontsize=11, fontweight='bold', color='red')
+ax.text(50, max(ga_avg_hist)*0.95, 'REFINEMENT\nConverging', ha='center', fontsize=11, fontweight='bold', color='orange')
+ax.text(85, max(ga_avg_hist)*0.95, 'EXPLOITATION\nFine-tuning', ha='center', fontsize=11, fontweight='bold', color='green')
+
+ax.set_xlabel('Generation', fontsize=14, fontweight='bold')
+ax.set_ylabel('Cost (€)', fontsize=14, fontweight='bold')
+ax.set_title('Genetic Algorithm: Population Improvement Over Time', fontsize=16, fontweight='bold', pad=15)
+ax.legend(fontsize=12, loc='upper right', framealpha=0.95)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
@@ -942,152 +1411,94 @@ plt.show()
 
 ## GA vs SA: Head-to-Head
 
-[Comparing exploration strategies of both algorithms:]{.highlight}
+[Comparing exploration strategies on the restaurant problem:]{.highlight}
 
 ```{python}
 #| echo: false
 #| eval: true
 
-import sys
-sys.path.append('../helpers')
-from plot_utils import setup_clean_style, BRAND_COLORS
+# GA already ran earlier - just create comparison visualization
+fig, ax = plt.subplots(1, 1)
 
-# Apply clean brand style
-setup_clean_style()
+# Plot both algorithms
+generations = list(range(len(ga_best_hist)))
+ax.plot(generations, ga_best_hist, color=BRAND_COLORS["twoDark"], linewidth=3, 
+        label=f'GA Best (€{ga_best_cost:.0f})', alpha=0.9)
+ax.plot(generations, ga_avg_hist, color=BRAND_COLORS["twoLight"], linewidth=2, 
+        linestyle='--', label='GA Population Average', alpha=0.6)
 
-# Compare GA and SA performance
-np.random.seed(789)
+# SA already ran - use those results (pad to same length for comparison)
+sa_iterations = range(len(best_costs))
+ax.plot(sa_iterations, best_costs, color=BRAND_COLORS["oneDark"], linewidth=3,
+        label=f'SA Best (€{best_cost_sa:.0f})', alpha=0.9)
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+# Greedy baseline
+ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, 
+           label=f'Greedy Start (€{greedy_cost_value:.0f})', alpha=0.6)
 
-# Left: Convergence comparison
-ax = axes[0]
-iterations = range(0, 101, 5)
-
-# SA performance (from earlier)
-sa_best = []
-temp = 1000
-current = 1640
-best_sa = 1640
-for i in iterations:
-    temp *= 0.95
-    if i < 40:
-        current = 1640 - i*5 + np.random.randn() * 30
-    else:
-        current = 1440 - (i-40) + np.random.randn() * 10
-    current = max(1380, min(1700, current))
-    best_sa = min(best_sa, current)
-    sa_best.append(best_sa)
-
-# GA performance
-ga_best = []
-ga_avg = []
-for i in iterations:
-    if i < 30:
-        best = 1640 - i*6
-        avg = 1750 - i*3
-    else:
-        best = 1460 - (i-30)*1.2
-        avg = 1550 - (i-30)*0.8
-    ga_best.append(max(1380, best + np.random.randn() * 5))
-    ga_avg.append(max(1450, avg + np.random.randn() * 10))
-
-ax.plot(iterations, sa_best, color=BRAND_COLORS["oneDark"], linewidth=3, label='SA (single solution)')
-ax.plot(iterations, ga_best, color=BRAND_COLORS["twoDark"], linewidth=3, label='GA (best in population)')
-ax.plot(iterations, ga_avg, color=BRAND_COLORS["twoLight"], linewidth=1, alpha=0.5, label='GA (population average)')
-ax.set_xlabel('Iteration', fontsize=12)
-ax.set_ylabel('Best Cost Found (€)', fontsize=12)
-ax.set_title('Convergence Comparison', fontsize=14, fontweight='bold')
-ax.legend()
+ax.set_xlabel('Iteration / Generation', fontsize=14, fontweight='bold')
+ax.set_ylabel('Best Cost Found (€)', fontsize=14, fontweight='bold')
+ax.set_title('Genetic Algorithm vs Simulated Annealing\n(Same Restaurant Problem)', 
+             fontsize=16, fontweight='bold', pad=15)
+ax.legend(fontsize=12, loc='best', framealpha=0.95)
 ax.grid(True, alpha=0.3)
-ax.set_ylim(1350, 1700)
-
-# Right: Exploration patterns
-ax = axes[1]
-# Create 2D landscape
-x = np.linspace(0, 10, 100)
-y = np.linspace(0, 10, 100)
-X, Y = np.meshgrid(x, y)
-Z = 1500 + 100*np.sin(X/2) + 100*np.cos(Y/2) + 50*np.sin(X*Y/10)
-
-contour = ax.contour(X, Y, Z, levels=15, alpha=0.3)
-ax.clabel(contour, inline=True, fontsize=8)
-
-# SA path (single wandering path)
-sa_x = [2]
-sa_y = [2]
-for _ in range(30):
-    sa_x.append(sa_x[-1] + np.random.randn() * 0.5)
-    sa_y.append(sa_y[-1] + np.random.randn() * 0.5)
-
-ax.plot(sa_x, sa_y, color=BRAND_COLORS["oneDark"], linewidth=2, alpha=0.7, label='SA path')
-ax.scatter(sa_x[-1], sa_y[-1], color=BRAND_COLORS["oneDark"], s=100, marker='*')
-
-# GA population (multiple points converging)
-ga_pop_x = np.random.uniform(0, 10, 20)
-ga_pop_y = np.random.uniform(0, 10, 20)
-ax.scatter(ga_pop_x, ga_pop_y, color=BRAND_COLORS["twoDark"], s=50, alpha=0.5, label='GA population')
-# Show convergence
-ax.scatter([7], [7], color=BRAND_COLORS["twoDark"], s=200, marker='*', label='GA convergence')
-
-ax.set_xlabel('Solution Dimension 1', fontsize=12)
-ax.set_ylabel('Solution Dimension 2', fontsize=12)
-ax.set_title('Exploration Patterns', fontsize=14, fontweight='bold')
-ax.legend()
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 10)
 
 plt.tight_layout()
 plt.show()
 ```
 
-[SA explores sequentially, GA explores in parallel!]{.highlight}
+. . .
 
-## Common GA Mistakes: Population Issues
+::: callout-tip
+GA maintains population diversity, SA explores single solution path!
+:::
+
+## GA Mistakes: Population Issues
 
 [Avoid these population-related errors:]{.highlight}
 
+. . .
+
 **Mistake #1: Everyone Becomes Identical**
+
 - If all solutions look the same → Lost diversity
 - Fix: More mutation, bigger population, tournament selection
 
+. . .
+
 **Mistake #2: Too Greedy in Selection**
+
 - Only keeping the very best → Premature convergence  
 - Fix: Keep some variety, even if not perfect (elitism of 10-20%)
 
-. . .
-
-::: {.callout-warning}
-Diversity loss is the #1 killer of genetic algorithms!
-:::
-
-## Common GA Mistakes: Implementation Issues
+## GA Mistakes: Implementation
 
 [Technical pitfalls to watch out for:]{.highlight}
 
+. . .
+
 **Mistake #3: Breaking the Rules**
+
 - Crossover might create invalid schedules
 - Fix: Always check and repair after crossover/mutation
 
+. . .
+
 **Mistake #4: Evolution Too Slow**
+
 - Population too large or too many generations
 - Fix: Start small (50-100), tune based on convergence
 
-. . .
+# [Metaheuristic #3: Tabu Search]{.flow} {.title}
 
-::: {.callout-tip}
-You'll encounter and fix these issues in Tutorial 9.1!
-:::
-
-# [More Metaheuristics]{.flow} {.title}
-
-## Metaheuristic #3: Tabu Search
+## Core Idea
 
 [Using memory to avoid cycling through bad solutions:]{.highlight}
 
 ::: columns
 ::: {.column width="50%"}
 **The Concept:**
+
 - Keep a "forbidden" list of recent moves
 - Never repeat the same mistake twice (for a while)
 - Forces exploration of new territory
@@ -1096,6 +1507,7 @@ You'll encounter and fix these issues in Tutorial 9.1!
 
 ::: {.column width="50%"}
 **Business Parallel:**
+
 - "Lessons learned" database
 - "We tried that strategy - it failed"
 - "That supplier was unreliable"
@@ -1105,7 +1517,7 @@ You'll encounter and fix these issues in Tutorial 9.1!
 
 . . .
 
-[Tabu = Smart organizations that learn from history!]{.highlight}
+[Tabu = Smart algorithm that learns from history!]{.highlight}
 
 ## Tabu Search: Implementation
 
@@ -1149,6 +1561,120 @@ def tabu_search_concept():
     return best_solution
 ```
 
+## Tabu Search on Restaurant Problem
+
+[Real implementation with memory-based exploration:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+def get_all_neighbors(schedule, sample_size=20):
+    """Generate multiple neighbor solutions"""
+    neighbors = []
+    for _ in range(sample_size):
+        neighbors.append(make_neighbor(schedule))
+    return neighbors
+
+def schedule_to_tuple(schedule):
+    """Convert schedule to hashable tuple for tabu list"""
+    return tuple(tuple(shift) for shift in schedule)
+
+def tabu_search(initial_schedule, max_iterations=150, tabu_tenure=15):
+    """Tabu Search with short-term memory"""
+    current = [shift[:] for shift in initial_schedule]
+    current_cost = calculate_cost(current)[0]
+    
+    best = [shift[:] for shift in current]
+    best_cost = current_cost
+    
+    tabu_list = []
+    cost_history = [current_cost]
+    best_history = [best_cost]
+    
+    random.seed(42)
+    
+    for iteration in range(max_iterations):
+        # Generate neighbors
+        neighbors = get_all_neighbors(current, sample_size=20)
+        
+        # Evaluate and filter by tabu status
+        best_neighbor = None
+        best_neighbor_cost = float('inf')
+        
+        for neighbor in neighbors:
+            neighbor_tuple = schedule_to_tuple(neighbor)
+            neighbor_cost = calculate_cost(neighbor)[0]
+            
+            # Aspiration criterion: accept tabu move if it's better than best ever
+            if neighbor_tuple not in tabu_list or neighbor_cost < best_cost:
+                if neighbor_cost < best_neighbor_cost:
+                    best_neighbor = neighbor
+                    best_neighbor_cost = neighbor_cost
+        
+        # Move to best allowed neighbor (even if worse!)
+        if best_neighbor is not None:
+            current = best_neighbor
+            current_cost = best_neighbor_cost
+            
+            # Add to tabu list
+            tabu_list.append(schedule_to_tuple(current))
+            if len(tabu_list) > tabu_tenure:
+                tabu_list.pop(0)
+            
+            # Update best
+            if current_cost < best_cost:
+                best = [shift[:] for shift in current]
+                best_cost = current_cost
+        
+        cost_history.append(current_cost)
+        best_history.append(best_cost)
+    
+    return best, best_cost, cost_history, best_history
+
+# Run Tabu Search
+np.random.seed(42)
+random.seed(42)
+tabu_best, tabu_best_cost, tabu_costs, tabu_best_hist = tabu_search(
+    greedy_schedule, max_iterations=150, tabu_tenure=15
+)
+
+# Visualize Tabu Search performance
+fig, ax = plt.subplots(1, 1)
+
+iterations = list(range(len(tabu_costs)))
+ax.plot(iterations, tabu_costs, color=BRAND_COLORS["twoLight"], linewidth=1, 
+        alpha=0.5, label='Tabu Current Solution')
+ax.plot(iterations, tabu_best_hist, color=BRAND_COLORS["oneDark"], linewidth=3,
+        label=f'Tabu Best (€{tabu_best_cost:.0f})', alpha=0.9)
+
+# Add greedy baseline and SA/GA results for comparison
+ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, 
+           label=f'Greedy (€{greedy_cost_value:.0f})', alpha=0.6)
+ax.axhline(y=best_cost_sa, color=BRAND_COLORS["twoDark"], linestyle='--', linewidth=2,
+           label=f'SA Best (€{best_cost_sa:.0f})', alpha=0.6)
+
+ax.set_xlabel('Iteration', fontsize=14, fontweight='bold')
+ax.set_ylabel('Cost (€)', fontsize=14, fontweight='bold')
+ax.set_title('Tabu Search on Restaurant Staffing Problem\n(Memory prevents cycling back to poor solutions)', 
+             fontsize=16, fontweight='bold', pad=15)
+ax.legend(fontsize=12, loc='upper right', framealpha=0.95)
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+print(f"\n{'='*60}")
+print(f"Tabu Search Results:")
+print(f"{'='*60}")
+print(f"Greedy:      €{greedy_cost_value:,.0f}")
+print(f"SA:          €{best_cost_sa:,.0f}")
+print(f"GA:          €{ga_best_cost:,.0f}")
+print(f"Tabu Search: €{tabu_best_cost:,.0f}")
+```
+
+[Tabu Search's memory prevents revisiting bad solutions!]{.highlight}
+
 ## Ant Colony Optimization: The Concept
 
 [How ants find the shortest path to food:]{.highlight}
@@ -1165,7 +1691,7 @@ from plot_utils import setup_clean_style, BRAND_COLORS
 setup_clean_style()
 
 # Visualize ACO pheromone trails
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+fig, axes = plt.subplots(1, 3)
 
 # Create nodes for TSP
 np.random.seed(123)
@@ -1220,6 +1746,149 @@ plt.show()
 ```
 
 [Ants deposit pheromones, creating emergent intelligence!]{.highlight}
+
+---
+
+## ACO on Restaurant Problem
+
+[Pheromone-guided construction of schedules:]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+def ant_colony_optimization(n_ants=20, n_iterations=100, evaporation=0.5, alpha=1.0, beta=2.0):
+    """
+    ACO adapted for scheduling problem
+    Pheromones represent desirability of server-shift assignments
+    """
+    # Initialize pheromones for each (server, shift) pair
+    servers = list(COSTS.keys())
+    shifts = list(SHIFTS.keys())
+    pheromones = {}
+    for server in servers:
+        for shift_idx in range(len(shifts)):
+            pheromones[(server, shift_idx)] = 1.0
+    
+    best_schedule = None
+    best_cost = float('inf')
+    cost_history = []
+    
+    random.seed(42)
+    np.random.seed(42)
+    
+    for iteration in range(n_iterations):
+        # Each ant constructs a solution
+        iteration_schedules = []
+        iteration_costs = []
+        
+        for ant in range(n_ants):
+            # Construct schedule shift by shift
+            available_servers = servers[:]
+            schedule = []
+            
+            for shift_idx in range(len(shifts)):
+                # Select 2 servers for this shift based on pheromones
+                shift_servers = []
+                
+                for _ in range(2):
+                    if not available_servers:
+                        break
+                    
+                    # Calculate probabilities based on pheromones and heuristic
+                    probabilities = []
+                    for server in available_servers:
+                        pheromone = pheromones[(server, shift_idx)]
+                        # Heuristic: prefer experienced servers for high-penalty shifts
+                        is_exp = 1 if server.startswith('E') else 0
+                        penalty = SHIFTS[shifts[shift_idx]]['penalty']
+                        heuristic = 1 + (is_exp * penalty / 1000)  # Higher for exp + high penalty
+                        
+                        prob = (pheromone ** alpha) * (heuristic ** beta)
+                        probabilities.append(prob)
+                    
+                    # Normalize probabilities
+                    total = sum(probabilities)
+                    if total > 0:
+                        probabilities = [p / total for p in probabilities]
+                    else:
+                        probabilities = [1/len(available_servers)] * len(available_servers)
+                    
+                    # Select server
+                    selected_server = np.random.choice(available_servers, p=probabilities)
+                    shift_servers.append(selected_server)
+                    available_servers.remove(selected_server)
+                
+                schedule.append(shift_servers)
+            
+            # Evaluate solution
+            cost = calculate_cost(schedule)[0]
+            iteration_schedules.append(schedule)
+            iteration_costs.append(cost)
+            
+            # Track best
+            if cost < best_cost:
+                best_schedule = [shift[:] for shift in schedule]
+                best_cost = cost
+        
+        cost_history.append(best_cost)
+        
+        # Evaporate pheromones
+        for key in pheromones:
+            pheromones[key] *= (1 - evaporation)
+        
+        # Deposit pheromones (stronger for better solutions)
+        for schedule, cost in zip(iteration_schedules, iteration_costs):
+            deposit_amount = 1000 / cost  # Better solutions deposit more
+            for shift_idx, servers_in_shift in enumerate(schedule):
+                for server in servers_in_shift:
+                    pheromones[(server, shift_idx)] += deposit_amount
+    
+    return best_schedule, best_cost, cost_history
+
+# Run ACO
+np.random.seed(42)
+random.seed(42)
+aco_best, aco_best_cost, aco_history = ant_colony_optimization(
+    n_ants=20, n_iterations=100, evaporation=0.3, alpha=1.0, beta=2.0
+)
+
+# Visualize ACO performance
+fig, ax = plt.subplots(1, 1, figsize=(12, 7))
+
+iterations = list(range(len(aco_history)))
+ax.plot(iterations, aco_history, color=BRAND_COLORS["threeDark"], linewidth=3,
+        label=f'ACO Best (€{aco_best_cost:.0f})', alpha=0.9)
+
+# Add other algorithms for comparison
+ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, 
+           label=f'Greedy (€{greedy_cost_value:.0f})', alpha=0.6)
+ax.axhline(y=best_cost_sa, color=BRAND_COLORS["twoDark"], linestyle='--', linewidth=2,
+           label=f'SA (€{best_cost_sa:.0f})', alpha=0.6)
+ax.axhline(y=ga_best_cost, color=BRAND_COLORS["oneDark"], linestyle='--', linewidth=2,
+           label=f'GA (€{ga_best_cost:.0f})', alpha=0.6)
+
+ax.set_xlabel('Iteration', fontsize=14, fontweight='bold')
+ax.set_ylabel('Best Cost Found (€)', fontsize=14, fontweight='bold')
+ax.set_title('Ant Colony Optimization on Restaurant Staffing\n(Pheromones guide ants toward good server-shift assignments)', 
+             fontsize=16, fontweight='bold', pad=15)
+ax.legend(fontsize=12, loc='upper right', framealpha=0.95)
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+print(f"\n{'='*60}")
+print(f"All Algorithms Comparison:")
+print(f"{'='*60}")
+print(f"Greedy:      €{greedy_cost_value:,.0f}  (baseline)")
+print(f"SA:          €{best_cost_sa:,.0f}  ({100*(greedy_cost_value-best_cost_sa)/greedy_cost_value:.1f}% better)")
+print(f"GA:          €{ga_best_cost:,.0f}  ({100*(greedy_cost_value-ga_best_cost)/greedy_cost_value:.1f}% better)")
+print(f"Tabu Search: €{tabu_best_cost:,.0f}  ({100*(greedy_cost_value-tabu_best_cost)/greedy_cost_value:.1f}% better)")
+print(f"ACO:         €{aco_best_cost:,.0f}  ({100*(greedy_cost_value-aco_best_cost)/greedy_cost_value:.1f}% better)")
+```
+
+[ACO's collective intelligence emerges from simple ant behavior!]{.highlight}
 
 ## Try It Yourself!
 
@@ -1303,6 +1972,124 @@ display(HTML(df.to_html(index=False, classes='table table-striped')))
 . . .
 
 [Choose based on: time available, solution quality needed, and problem structure]{.highlight}
+
+---
+
+## All Four Metaheuristics: Side-by-Side
+
+[How do they compare on our restaurant problem?]{.highlight}
+
+```{python}
+#| echo: false
+#| eval: true
+
+# Create comprehensive 4-way comparison
+fig, axes = plt.subplots(2, 2, figsize=(16, 12))
+
+# Top Left: Convergence comparison
+ax = axes[0, 0]
+max_len = max(len(best_costs), len(ga_best_hist), len(tabu_best_hist), len(aco_history))
+
+# Pad all to same length
+def pad_to_length(lst, target_len):
+    if len(lst) >= target_len:
+        return lst[:target_len]
+    return lst + [lst[-1]] * (target_len - len(lst))
+
+sa_padded = pad_to_length(best_costs, max_len)
+ga_padded = pad_to_length(ga_best_hist, max_len)
+tabu_padded = pad_to_length(tabu_best_hist, max_len)
+aco_padded = pad_to_length(aco_history, max_len)
+
+iterations = list(range(max_len))
+ax.plot(iterations, sa_padded, color=BRAND_COLORS["twoDark"], linewidth=3, label='Simulated Annealing', alpha=0.9)
+ax.plot(iterations, ga_padded, color=BRAND_COLORS["oneDark"], linewidth=3, label='Genetic Algorithm', alpha=0.9)
+ax.plot(iterations, tabu_padded, color=BRAND_COLORS["threeDark"], linewidth=3, label='Tabu Search', alpha=0.9)
+ax.plot(iterations, aco_padded, color=BRAND_COLORS["twoLight"], linewidth=3, label='Ant Colony', alpha=0.9)
+ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, label='Greedy', alpha=0.6)
+
+ax.set_xlabel('Iteration', fontsize=13, fontweight='bold')
+ax.set_ylabel('Best Cost (€)', fontsize=13, fontweight='bold')
+ax.set_title('Convergence Speed Comparison', fontsize=15, fontweight='bold')
+ax.legend(fontsize=11, loc='upper right')
+ax.grid(True, alpha=0.3)
+
+# Top Right: Final results bar chart
+ax = axes[0, 1]
+algorithms = ['Greedy', 'SA', 'GA', 'Tabu', 'ACO']
+costs = [greedy_cost_value, best_cost_sa, ga_best_cost, tabu_best_cost, aco_best_cost]
+colors = ['gray', BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], 
+          BRAND_COLORS["threeDark"], BRAND_COLORS["twoLight"]]
+
+bars = ax.barh(algorithms, costs, color=colors, alpha=0.8, edgecolor='black', linewidth=2)
+ax.set_xlabel('Total Cost (€)', fontsize=13, fontweight='bold')
+ax.set_title('Final Solution Quality', fontsize=15, fontweight='bold')
+ax.grid(True, alpha=0.3, axis='x')
+
+# Add cost labels
+for i, (bar, cost) in enumerate(zip(bars, costs)):
+    improvement = 100 * (greedy_cost_value - cost) / greedy_cost_value if i > 0 else 0
+    label = f'€{cost:.0f}' if i == 0 else f'€{cost:.0f} ({improvement:.1f}% better)'
+    ax.text(cost + 50, i, label, va='center', fontsize=10, fontweight='bold')
+
+# Bottom Left: Exploration patterns (conceptual)
+ax = axes[1, 0]
+categories = ['Single\nSolution', 'Population\nBased', 'Memory\nBased', 'Collective\nIntelligence']
+sa_score = [5, 1, 2, 1]
+ga_score = [1, 5, 2, 3]
+tabu_score = [4, 1, 5, 1]
+aco_score = [2, 4, 3, 5]
+
+x = np.arange(len(categories))
+width = 0.2
+
+ax.bar(x - 1.5*width, sa_score, width, label='SA', color=BRAND_COLORS["twoDark"], alpha=0.8)
+ax.bar(x - 0.5*width, ga_score, width, label='GA', color=BRAND_COLORS["oneDark"], alpha=0.8)
+ax.bar(x + 0.5*width, tabu_score, width, label='Tabu', color=BRAND_COLORS["threeDark"], alpha=0.8)
+ax.bar(x + 1.5*width, aco_score, width, label='ACO', color=BRAND_COLORS["twoLight"], alpha=0.8)
+
+ax.set_ylabel('Strength (1-5)', fontsize=13, fontweight='bold')
+ax.set_title('Algorithm Characteristics', fontsize=15, fontweight='bold')
+ax.set_xticks(x)
+ax.set_xticklabels(categories, fontsize=10)
+ax.set_ylim(0, 6)
+ax.legend(fontsize=11)
+ax.grid(True, alpha=0.3, axis='y')
+
+# Bottom Right: Parameter complexity
+ax = axes[1, 1]
+algorithm_names = ['SA', 'GA', 'Tabu', 'ACO']
+param_counts = [3, 5, 2, 4]
+impl_complexity = [2, 4, 3, 5]  # Implementation complexity (1-5)
+
+x_pos = np.arange(len(algorithm_names))
+ax.scatter(param_counts, impl_complexity, s=[500, 500, 500, 500], 
+           c=[BRAND_COLORS["twoDark"], BRAND_COLORS["oneDark"], 
+              BRAND_COLORS["threeDark"], BRAND_COLORS["twoLight"]], 
+           alpha=0.7, edgecolors='black', linewidth=2)
+
+for i, name in enumerate(algorithm_names):
+    ax.annotate(name, (param_counts[i], impl_complexity[i]), 
+                fontsize=13, fontweight='bold', ha='center', va='center')
+
+ax.set_xlabel('Number of Parameters to Tune', fontsize=13, fontweight='bold')
+ax.set_ylabel('Implementation Complexity (1-5)', fontsize=13, fontweight='bold')
+ax.set_title('Ease of Use vs Flexibility', fontsize=15, fontweight='bold')
+ax.grid(True, alpha=0.3)
+ax.set_xlim(1, 6)
+ax.set_ylim(1, 6)
+
+# Add regions
+ax.axhspan(1, 3, alpha=0.05, color='green')
+ax.text(5.5, 2, 'Easy', fontsize=10, color='green', fontweight='bold')
+ax.axhspan(4, 6, alpha=0.05, color='red')
+ax.text(5.5, 5, 'Complex', fontsize=10, color='red', fontweight='bold')
+
+plt.tight_layout()
+plt.show()
+```
+
+[Each algorithm excels in different aspects - choose based on your priorities!]{.highlight}
 
 ## Algorithm Selection: The No Free Lunch Theorem
 
