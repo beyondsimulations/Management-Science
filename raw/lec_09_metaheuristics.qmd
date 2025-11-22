@@ -1007,11 +1007,6 @@ The "Good Balance" explores widely early, then refines carefully. Often you need
 Just like successful products get more market share, better solutions get more "offspring" in the next generation. It's survival of the fittest, but for schedules, routes, or designs!
 :::
 
----
-
-## GA Implementation on Restaurant Problem
-
-[Let's run a genetic algorithm first, then see how it works:]{.highlight}
 
 ```{python}
 #| echo: false
@@ -1101,39 +1096,39 @@ ga_best_schedule, ga_best_cost, ga_best_hist, ga_avg_hist = genetic_algorithm(
     pop_size=20, generations=500, mutation_rate=0.2
 )
 
-print(f"GA found solution: €{ga_best_cost:.0f}")
-print(f"Improvement over greedy: {100*(greedy_cost_value-ga_best_cost)/greedy_cost_value:.1f}%")
 ```
 
-[Now let's understand HOW it works by examining each stage...]{.highlight}
-
-## The Genetic Process: Overview
+## The Genetic Process
 
 [Four stages repeat each generation:]{.highlight}
 
 ::: columns
 ::: {.column width="50%"}
 **1. Selection**  
+
 Choose parents based on fitness
 
 **2. Crossover**  
-Combine parents to create children
+
+Combine to create children
 :::
 
 ::: {.column width="50%"}
 **3. Mutation**  
+
 Randomly modify children
 
 **4. Replacement**  
+
 New generation replaces old
 :::
 :::
 
 . . .
 
-[Let's see each stage in detail with our restaurant problem...]{.highlight}
-
----
+::: callout-tip
+Let's see each stage in detail with our restaurant problem!
+:::
 
 ## Stage 1: Selection (Tournament)
 
@@ -1153,10 +1148,10 @@ setup_clean_style()
 # Create realistic population costs
 np.random.seed(42)
 population_size = 20
-costs = np.random.randint(1400, 1900, population_size)
+costs = np.random.randint(3700, 4600, population_size)
 costs = sorted(costs)
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+fig, axes = plt.subplots(1, 2)
 
 # Left: Full population
 ax = axes[0]
@@ -1168,10 +1163,6 @@ ax.set_xlabel('Cost (€)', fontsize=12)
 ax.set_title('Current Population (20 schedules)', fontsize=14, fontweight='bold')
 ax.set_yticks(range(0, population_size, 5))
 ax.grid(True, alpha=0.3, axis='x')
-
-# Add best/worst labels
-ax.text(costs[0] + 30, 0, f'Best: €{costs[0]}', va='center', fontsize=10, fontweight='bold', color='green')
-ax.text(costs[-1] - 30, population_size-1, f'Worst: €{costs[-1]}', va='center', fontsize=10, fontweight='bold', color='red', ha='right')
 
 # Right: Tournament selection
 ax = axes[1]
@@ -1201,9 +1192,11 @@ plt.tight_layout()
 plt.show()
 ```
 
-[Better schedules have higher chance of being selected, but not guaranteed!]{.highlight}
+. . .
 
----
+::: callout-tip
+Random subset of population and selecting the best one based on their fitness.
+:::
 
 ## Stage 2: Crossover (Recombination)
 
@@ -1213,78 +1206,80 @@ plt.show()
 #| echo: false
 #| eval: true
 
-fig, ax = plt.subplots(1, 1, figsize=(12, 8))
-ax.set_xlim(0, 10)
+fig, ax = plt.subplots(1, 1)
+ax.set_xlim(0, 14)
 ax.set_ylim(0, 10)
 ax.axis('off')
 
-# Parent 1
-parent1_shifts = ['Fri_Din', 'Fri_Late', 'Sat_Lun', 'Sat_Din', 'Sun_Lun', 'Sun_Din']
-parent1_servers = [['E1','J6'], ['J2','J4'], ['E3','J1'], ['E2','J5'], ['J7','J8'], ['E4','J3']]
-parent1_cost = 1450
+# Define shift labels
+shifts = ['Fri\nDinner', 'Fri\nLate', 'Sat\nLunch', 'Sat\nDinner', 'Sun\nLunch', 'Sun\nDinner']
 
-y_start = 9
-ax.text(1, y_start, 'Parent 1', fontsize=14, fontweight='bold', 
-        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], edgecolor='black', linewidth=2))
-ax.text(9, y_start, f'€{parent1_cost}', fontsize=12, fontweight='bold')
+# Parent 1 - shown as colored blocks
+y_parent1 = 8
 
-for i, (shift, servers) in enumerate(zip(parent1_shifts, parent1_servers)):
-    y = y_start - 0.7 - i*0.6
-    ax.text(1, y, f'{shift}:', fontsize=10, ha='left')
-    ax.text(3, y, f'{servers[0]}, {servers[1]}', fontsize=10, 
-            bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.3))
+for i, shift in enumerate(shifts):
+    x = 1 + i * 2
+    # Draw colored block
+    rect = plt.Rectangle((x, y_parent1), 1.5, 0.8, facecolor=BRAND_COLORS["oneLight"], 
+                         edgecolor='black', linewidth=2, alpha=0.7)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_parent1 + 0.4, shift, ha='center', va='center', fontsize=9, fontweight='bold')
 
-# Parent 2
-parent2_servers = [['J6','E1'], ['J3','J5'], ['E2','J7'], ['E3','E4'], ['J1','J2'], ['J8','J4']]
-parent2_cost = 1480
+# Parent 2 - shown as colored blocks
+y_parent2 = 6.5
 
-y_start = 9
-ax.text(5.5, y_start, 'Parent 2', fontsize=14, fontweight='bold',
-        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["twoLight"], edgecolor='black', linewidth=2))
-ax.text(9, y_start, f'€{parent2_cost}', fontsize=12, fontweight='bold')
+for i, shift in enumerate(shifts):
+    x = 1 + i * 2
+    # Draw colored block
+    rect = plt.Rectangle((x, y_parent2), 1.5, 0.8, facecolor=BRAND_COLORS["twoLight"], 
+                         edgecolor='black', linewidth=2, alpha=0.7)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_parent2 + 0.4, shift, ha='center', va='center', fontsize=9, fontweight='bold')
 
-for i, (shift, servers) in enumerate(zip(parent1_shifts, parent2_servers)):
-    y = y_start - 0.7 - i*0.6
-    ax.text(5.5, y, f'{shift}:', fontsize=10, ha='left')
-    ax.text(7.5, y, f'{servers[0]}, {servers[1]}', fontsize=10,
-            bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["twoLight"], alpha=0.5, pad=0.3))
+# Crossover point indicator
+crossover_point = 3  # After 3rd shift
+x_cross = 1 + crossover_point * 2 - 0.1
+ax.plot([x_cross, x_cross], [y_parent2 - 0.5, y_parent1 + 1.2], color=BRAND_COLORS["threeDark"], linewidth=3, alpha=0.7)
+ax.text(x_cross + 0.2, y_parent1 + 1.4, 'Cut here', fontsize=11, color=BRAND_COLORS["threeDark"], fontweight='bold')
 
-# Arrow down
-ax.annotate('', xy=(5, 3.5), xytext=(5, 4.5),
-            arrowprops=dict(arrowstyle='->', lw=3, color='black'))
-ax.text(5, 4, 'Order Crossover', ha='center', fontsize=11, fontweight='bold',
-        bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.7))
+# Arrows showing inheritance
+ax.annotate('', xy=(4, 3.8), xytext=(4, y_parent1 - 0.3),
+            arrowprops=dict(arrowstyle='->', lw=2, color=BRAND_COLORS["oneDark"]))
+ax.annotate('', xy=(10, 3.8), xytext=(10, y_parent2 - 0.3),
+            arrowprops=dict(arrowstyle='->', lw=2, color=BRAND_COLORS["twoDark"]))
 
-# Child (take first 3 shifts from parent 1, rest from parent 2)
-child_servers = parent1_servers[:3] + parent2_servers[3:]
-child_cost = "???"
+# Child - combination
+y_child = 2
 
-y_start = 2.5
-ax.text(3, y_start, 'Child (Offspring)', fontsize=14, fontweight='bold',
-        bbox=dict(boxstyle='round', facecolor='lightgreen', edgecolor='black', linewidth=2))
-ax.text(9, y_start, f'Cost: {child_cost}', fontsize=12, fontweight='bold')
-
-for i, (shift, servers) in enumerate(zip(parent1_shifts, child_servers)):
-    y = y_start - 0.7 - i*0.6
+for i, shift in enumerate(shifts):
+    x = 1 + i * 2
     # Color based on which parent
-    color = BRAND_COLORS["oneLight"] if i < 3 else BRAND_COLORS["twoLight"]
-    ax.text(3, y, f'{shift}:', fontsize=10, ha='left')
-    ax.text(5, y, f'{servers[0]}, {servers[1]}', fontsize=10,
-            bbox=dict(boxstyle='round', facecolor=color, alpha=0.6, pad=0.3))
+    if i < crossover_point:
+        color = BRAND_COLORS["oneLight"]
+        label_color = BRAND_COLORS["oneDark"]
+    else:
+        color = BRAND_COLORS["twoLight"]
+        label_color = BRAND_COLORS["twoDark"]
+    
+    # Draw colored block
+    rect = plt.Rectangle((x, y_child), 1.5, 0.8, facecolor=color, 
+                         edgecolor='black', linewidth=3, alpha=0.8)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_child + 0.4, shift, ha='center', va='center', fontsize=9, fontweight='bold')
 
-# Add legend
-ax.text(0.5, -1, 'From Parent 1', fontsize=10, 
-        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.6))
-ax.text(3, -1, 'From Parent 2', fontsize=10,
-        bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["twoLight"], alpha=0.6))
+# Add explanation
+ax.text(7, 0.5, 'First 3 shifts from Parent 1, last 3 from Parent 2', 
+        ha='center', fontsize=12, style='italic')
 
 plt.tight_layout()
 plt.show()
 ```
 
-[Inherit good features from both parents!]{.highlight}
+. . .
 
----
+::: callout-tip
+Crossover randomly combines good building blocks from both parents!
+:::
 
 ## Stage 3: Mutation
 
@@ -1294,80 +1289,84 @@ plt.show()
 #| echo: false
 #| eval: true
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 7))
-
-# Left: Before mutation
-ax = axes[0]
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 10)
+fig, ax = plt.subplots(1, 1)
+ax.set_xlim(0, 14)
+ax.set_ylim(0, 8)
 ax.axis('off')
 
-before_servers = [['E1','J6'], ['J2','J4'], ['E3','J1'], ['E2','J5'], ['J7','J8'], ['E4','J3']]
-shifts = ['Fri_Din', 'Fri_Late', 'Sat_Lun', 'Sat_Din', 'Sun_Lun', 'Sun_Din']
+# Define shift labels (these stay the same!)
+shifts = ['Fri\nDinner', 'Fri\nLate', 'Sat\nLunch', 'Sat\nDinner', 'Sun\nLunch', 'Sun\nDinner']
 
-ax.text(5, 9.5, 'Before Mutation', fontsize=15, fontweight='bold', ha='center')
+# Color palette for each shift - each shift gets its own distinct color
+shift_colors = [
+    BRAND_COLORS["oneLight"],    
+    BRAND_COLORS["oneDark"],     
+    BRAND_COLORS["twoLight"],   
+    BRAND_COLORS["twoDark"],     
+    BRAND_COLORS["threeDark"],   
+    BRAND_COLORS["threeLight"]   
+]
 
-for i, (shift, servers) in enumerate(zip(shifts, before_servers)):
-    y = 8.5 - i*1.2
-    ax.text(2, y, f'{shift}:', fontsize=11, ha='left', fontweight='bold')
+# Before mutation - original color assignment represents which servers work which shift
+y_before = 5.5
+ax.text(0.5, y_before + 1.7, 'Before Mutation', fontsize=14, fontweight='bold', ha='left')
+
+# Positions that will swap their server assignments (swap colors)
+swap_pos1, swap_pos2 = 1, 4  # Fri Late ↔ Sun Lunch
+
+for i, shift in enumerate(shifts):
+    x = 1 + i * 2
+    color = shift_colors[i]
     
-    # Highlight the two servers that will be swapped
-    if i == 1:  # Fri_Late
-        ax.text(5, y, f'{servers[0]}', fontsize=11, 
-                bbox=dict(boxstyle='round', facecolor='yellow', edgecolor='red', linewidth=3, pad=0.4))
-        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
-    elif i == 4:  # Sun_Lun
-        ax.text(5, y, f'{servers[0]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor='yellow', edgecolor='red', linewidth=3, pad=0.4))
-        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
-    else:
-        ax.text(5, y, f'{servers[0]}, {servers[1]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+    rect = plt.Rectangle((x, y_before), 1.5, 0.8, facecolor=color, 
+                         edgecolor='black', linewidth=2, alpha=0.8)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_before + 0.4, shift, ha='center', va='center', 
+            fontsize=9, fontweight='bold', color='black')
 
-ax.text(5, 1, 'Mutation point: Swap J2 ↔ J7', fontsize=12, ha='center', color='red', fontweight='bold',
-        bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.7, pad=0.5))
+# Draw swap arrows between the highlighted blocks
+x1 = 1 + swap_pos1 * 2 + 0.75
+x2 = 1 + swap_pos2 * 2 + 0.75
+y_arrow = y_before - 0.5
 
-# Right: After mutation
-ax = axes[1]
-ax.set_xlim(0, 10)
-ax.set_ylim(0, 10)
-ax.axis('off')
+# Curved arrow showing swap
+ax.annotate('', xy=(x2, y_arrow), xytext=(x1, y_arrow),
+            arrowprops=dict(arrowstyle='<->', lw=3, color=BRAND_COLORS["threeDark"], 
+                          connectionstyle="arc3,rad=.3"))
+ax.text((x1 + x2) / 2, y_arrow - 0.8, 'SWAP ASSIGNMENTS!', ha='center', fontsize=12, 
+        fontweight='bold', color='red', alpha=0.7)
 
-after_servers = [['E1','J6'], ['J7','J4'], ['E3','J1'], ['E2','J5'], ['J2','J8'], ['E4','J3']]
+# After mutation - COLORS are swapped (representing different server assignments)
+y_after = 1.5
+ax.text(0.5, y_after + 1.7, 'After Mutation', fontsize=14, fontweight='bold', ha='left')
 
-ax.text(5, 9.5, 'After Mutation', fontsize=15, fontweight='bold', ha='center')
+# Create color array with swapped assignments
+after_colors = shift_colors.copy()
+after_colors[swap_pos1], after_colors[swap_pos2] = after_colors[swap_pos2], after_colors[swap_pos1]
 
-for i, (shift, servers) in enumerate(zip(shifts, after_servers)):
-    y = 8.5 - i*1.2
-    ax.text(2, y, f'{shift}:', fontsize=11, ha='left', fontweight='bold')
+for i, shift in enumerate(shifts):
+    x = 1 + i * 2
+    color = after_colors[i]  # Color represents the server assignment
     
-    # Highlight the swapped servers
-    if i == 1:  # Fri_Late - now has J7
-        ax.text(5, y, f'{servers[0]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor='lightgreen', edgecolor='green', linewidth=3, pad=0.4))
-        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
-    elif i == 4:  # Sun_Lun - now has J2
-        ax.text(5, y, f'{servers[0]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor='lightgreen', edgecolor='green', linewidth=3, pad=0.4))
-        ax.text(6.5, y, f'{servers[1]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
-    else:
-        ax.text(5, y, f'{servers[0]}, {servers[1]}', fontsize=11,
-                bbox=dict(boxstyle='round', facecolor=BRAND_COLORS["oneLight"], alpha=0.5, pad=0.4))
+    rect = plt.Rectangle((x, y_after), 1.5, 0.8, facecolor=color, 
+                         edgecolor='black', linewidth=2, alpha=0.8)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_after + 0.4, shift, ha='center', va='center', 
+            fontsize=9, fontweight='bold', color='black')
 
-ax.text(5, 1, f'Mutation rate: 20%\n(happens 1 in 5 offspring)', fontsize=11, ha='center', 
-        style='italic', bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.5, pad=0.5))
+# Add explanation
+ax.text(7, 0, 'Mutation rate: 20% (happens to 1 in 5 offspring)', 
+        ha='center', fontsize=11, style='italic')
 
 plt.tight_layout()
 plt.show()
 ```
 
-[Mutation prevents premature convergence to local optima!]{.highlight}
+. . .
 
----
+::: callout-tip
+Mutation adds random exploration, like trying something completely new occasionally!
+:::
 
 ## Stage 4: Population Evolution
 
@@ -1377,37 +1376,47 @@ plt.show()
 #| echo: false
 #| eval: true
 
-fig, ax = plt.subplots(1, 1, figsize=(12, 7))
+# Use same plot style as head-to-head comparison
+fig, ax = plt.subplots(1, 1)
 
-# Use actual GA data from earlier (don't overwrite SA variables!)
+# Plot GA data
 generations = list(range(len(ga_best_hist)))
+ax.plot(generations, ga_best_hist, color=BRAND_COLORS["twoDark"], linewidth=3, 
+        label=f'GA Best (€{ga_best_cost:.0f})', alpha=0.9)
+ax.plot(generations, ga_avg_hist, color=BRAND_COLORS["twoLight"], linewidth=2, 
+        linestyle='--', label='GA Population Average', alpha=0.6)
 
-ax.plot(generations, ga_best_hist, color='green', linewidth=4, label='Best in Population', marker='o', markersize=8)
-ax.plot(generations, ga_avg_hist, color='blue', linewidth=3, label='Population Average', marker='s', markersize=6, linestyle='--')
-
-# Add greedy baseline
-ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, label=f'Greedy (€{greedy_cost_value:.0f})', alpha=0.6)
+# Greedy baseline
+ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, 
+           label=f'Greedy Start (€{greedy_cost_value:.0f})', alpha=0.6)
 
 # Annotate phases
-ax.axvspan(0, 30, alpha=0.1, color='red', label='Exploration Phase')
-ax.axvspan(30, 70, alpha=0.1, color='orange')
-ax.axvspan(70, len(generations), alpha=0.1, color='green')
+ax.axvspan(0, 30, alpha=0.1, color=BRAND_COLORS["threeDark"])
+ax.axvspan(30, 70, alpha=0.1, color=BRAND_COLORS["oneDark"])
+ax.axvspan(70, len(generations), alpha=0.1, color=BRAND_COLORS["twoDark"])
 
-ax.text(15, max(ga_avg_hist)*0.95, 'EXPLORATION\nHigh diversity', ha='center', fontsize=11, fontweight='bold', color='red')
-ax.text(50, max(ga_avg_hist)*0.95, 'REFINEMENT\nConverging', ha='center', fontsize=11, fontweight='bold', color='orange')
-ax.text(85, max(ga_avg_hist)*0.95, 'EXPLOITATION\nFine-tuning', ha='center', fontsize=11, fontweight='bold', color='green')
+ax.text(15, max(ga_avg_hist)*0.98, 'EXPLORATION\nHigh diversity', ha='center', 
+        fontsize=10, fontweight='bold', color=BRAND_COLORS["threeDark"])
+ax.text(50, max(ga_avg_hist)*0.88, 'REFINEMENT\nConverging', ha='center', 
+        fontsize=10, fontweight='bold', color=BRAND_COLORS["oneDark"])
+ax.text(85, max(ga_avg_hist)*0.78, 'EXPLOITATION\nFine-tuning', ha='center', 
+        fontsize=10, fontweight='bold', color=BRAND_COLORS["twoDark"])
 
 ax.set_xlabel('Generation', fontsize=14, fontweight='bold')
 ax.set_ylabel('Cost (€)', fontsize=14, fontweight='bold')
 ax.set_title('Genetic Algorithm: Population Improvement Over Time', fontsize=16, fontweight='bold', pad=15)
-ax.legend(fontsize=12, loc='upper right', framealpha=0.95)
+ax.legend(fontsize=12, loc='best', framealpha=0.95)
 ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.show()
 ```
 
-[Evolution drives the population toward better solutions!]{.highlight}
+. . .
+
+::: callout-note
+Notice how population average also improves (not just the best)!
+:::
 
 ## GA vs SA: Head-to-Head
 
