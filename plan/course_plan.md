@@ -983,7 +983,7 @@ def bean_counter_score(location, w_profit=0.5, w_carbon=0.5):
 *No mini-competitions - focus on final project*
 **Assignment 2 Due**
 
-### Lecture 9: Client Briefings
+### Lecture 10: Client Briefings
 
 **Hour 1: Student Presentations - Competition Lecture 9**
 - Students present their solutions to the last competition in short 2-3 minute pitches
