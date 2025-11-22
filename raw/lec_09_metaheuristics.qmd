@@ -1506,40 +1506,36 @@ GA maintains population diversity, SA explores single solution path!
 
 ::: columns
 ::: {.column width="50%"}
-**The Concept:**
+**Analogy:**
 
-- Keep a "forbidden" list of recent moves
-- Never repeat the same mistake twice (for a while)
-- Forces exploration of new territory
-- Eventually forgives old moves (short-term memory)
+- Keep a list of recent dates
+- "Not going back there!"
+- Forces you to meet new people
+- After time, memory fades
 :::
 
 ::: {.column width="50%"}
-**Business Parallel:**
+**In Optimization:**
 
-- "Lessons learned" database
-- "We tried that strategy - it failed"
-- "That supplier was unreliable"
-- Institutional memory prevents repeating mistakes!
+- Recent solutions = "tabu"
+- Don't revisit same schedules
+- Forces exploration of new areas
+- Tabu list has limited size
 :::
 :::
 
 . . .
 
-[Tabu = Smart algorithm that learns from history!]{.highlight}
+::: {.callout-tip}
+Like keeping "lessons learned", you remember not to use them again, but after a while, you might reconsider!
+:::
 
-## Tabu Search: Implementation
+## Concept
 
-[The algorithm that remembers its mistakes:]{.highlight}
+[How Tabu Search Works (Pseudocode)]{.highlight}
 
 ```python
-#| echo: true
-#| eval: false
-
 def tabu_search_concept():
-    """
-    The algorithm with memory - avoids repeating mistakes
-    """
     tabu_list = []  # Our "never again" list
     current_solution = initial_schedule
     best_solution = current_solution
@@ -1660,8 +1656,6 @@ ax.plot(iterations, tabu_best_hist, color=BRAND_COLORS["oneDark"], linewidth=3,
 # Add greedy baseline and SA/GA results for comparison
 ax.axhline(y=greedy_cost_value, color='gray', linestyle=':', linewidth=2, 
            label=f'Greedy (€{greedy_cost_value:.0f})', alpha=0.6)
-ax.axhline(y=best_cost_sa, color=BRAND_COLORS["twoDark"], linestyle='--', linewidth=2,
-           label=f'SA Best (€{best_cost_sa:.0f})', alpha=0.6)
 
 ax.set_xlabel('Iteration', fontsize=14, fontweight='bold')
 ax.set_ylabel('Cost (€)', fontsize=14, fontweight='bold')
@@ -1672,19 +1666,17 @@ ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.show()
-
-print(f"\n{'='*60}")
-print(f"Tabu Search Results:")
-print(f"{'='*60}")
-print(f"Greedy:      €{greedy_cost_value:,.0f}")
-print(f"SA:          €{best_cost_sa:,.0f}")
-print(f"GA:          €{ga_best_cost:,.0f}")
-print(f"Tabu Search: €{tabu_best_cost:,.0f}")
 ```
 
-[Tabu Search's memory prevents revisiting bad solutions!]{.highlight}
+. . .
 
-## Ant Colony Optimization: The Concept
+::: callout-tip
+Tabu Search's memory prevents revisiting bad solutions!
+:::
+
+# [Metaheuristic #4: Ant Colony Optimization]{.flow} {.title}
+
+## The Concept
 
 [How ants find the shortest path to food:]{.highlight}
 
