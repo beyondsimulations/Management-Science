@@ -9,11 +9,12 @@ code-links:
 
 ## Introduction
 
-Welcome back, Bean Counter CEO! Today we're learning about **metaheuristics** - advanced optimization techniques that can escape the local optima that trap simpler methods.
+Welcome back, Bean Counter CEO! Today we're learning about **metaheuristics**, advanced optimization techniques that can escape the local optima that trap simpler methods.
 
 You'll see these algorithms in action on Bean Counter problems and learn how to use AI tools to implement them for your own challenges.
 
 ### How to Use This Tutorial
+
 - **Observe and analyze** the provided demonstrations
 - **Answer questions** about algorithm behavior
 - **Adapt solutions** using AI assistance

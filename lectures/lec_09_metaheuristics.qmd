@@ -1102,26 +1102,12 @@ ga_best_schedule, ga_best_cost, ga_best_hist, ga_avg_hist = genetic_algorithm(
 
 [Four stages repeat each generation:]{.highlight}
 
-::: columns
-::: {.column width="50%"}
-**1. Selection**  
-
-Choose parents based on fitness
-
-**2. Crossover**  
-
-Combine to create children
-:::
-
-::: {.column width="50%"}
-**3. Mutation**  
-
-Randomly modify children
-
-**4. Replacement**  
-
-New generation replaces old
-:::
+::: incremental
+1. **Selection:** Choose parents based on fitness
+2. **Crossover:** Combine to create children
+3. **Mutation:** Randomly modify children
+4. **Replacement:** New generation replaces old
+5. **Population Evolution:** Improve population quality
 :::
 
 . . .
@@ -1194,9 +1180,10 @@ plt.show()
 
 . . .
 
-::: callout-tip
-Random subset of population and selecting the best one based on their fitness.
+::: callout-important
+Each tournament selects one parent, then we pair them up sequentially for crossover.
 :::
+
 
 ## Stage 2: Crossover (Recombination)
 
@@ -1368,9 +1355,123 @@ plt.show()
 Mutation adds random exploration, like trying something completely new occasionally!
 :::
 
-## Stage 4. Replacement
+## Stage 4: Replacement I
 
-## Population Evolution
+[How do offspring join the population?]{.highlight}
+
+::: incremental
+- **Generational:** Replace entire population with offspring
+- **Steady-State:** Replace only worst individuals
+- **Elitism:** Always keep the best solutions
+:::
+
+. . .
+
+::: callout-note
+Our approach: **Generational with Elitism**, we create 20 offspring via repeated selection/crossover/mutation, but preserve the 2 best from current generation.
+:::
+
+## Stage 4: Replacement II
+
+```{python}
+#| echo: false
+#| eval: true
+
+fig, ax = plt.subplots(1, 1)
+ax.set_xlim(0, 14)
+ax.set_ylim(0, 11)
+ax.axis('off')
+
+# Arrows showing replacement strategy
+y_next = 2
+y_current = 8.5
+ax.annotate('', xy=(4.25, y_next + 1.0), xytext=(2.25, y_current - 0.8),
+            arrowprops=dict(arrowstyle='->', lw=2, color=BRAND_COLORS["oneDark"], alpha=0.6))
+ax.annotate('', xy=(6.25, y_next + 1.0), xytext=(4.25, y_current - 0.8),
+            arrowprops=dict(arrowstyle='->', lw=2, color=BRAND_COLORS["oneDark"], alpha=0.6))
+
+# Current generation (top)
+ax.text(0.5, y_current + 1.2, 'Current Generation (Population = 6)', fontsize=14, fontweight='bold', ha='left')
+ax.text(6.5, y_current + 1.2, 'After 3 parent pairs → 6 offspring created via crossover/mutation', 
+        fontsize=10, style='italic', ha='left', color='gray')
+
+# Current population with costs
+current_costs = [3800, 3900, 4100, 4200, 4400, 4500]
+for i, cost in enumerate(current_costs):
+    x = 1.5 + i * 2
+    color = BRAND_COLORS["oneLight"] if i < 2 else BRAND_COLORS["twoLight"]  # Best 2 are highlighted
+    rect = plt.Rectangle((x, y_current), 1.5, 0.8, facecolor=color, 
+                         edgecolor='black', linewidth=2, alpha=0.7)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_current + 0.4, f'€{cost}', ha='center', va='center', 
+            fontsize=10, fontweight='bold')
+
+# Mark elite
+ax.text(2.25, y_current - 0.5, 'Elite', ha='center', fontsize=9, 
+        fontweight='bold', color=BRAND_COLORS["oneDark"])
+ax.text(4.25, y_current - 0.5, 'Elite', ha='center', fontsize=9, 
+        fontweight='bold', color=BRAND_COLORS["oneDark"])
+
+# Offspring created (middle)
+y_offspring = 5.5
+ax.text(0.5, y_offspring + 1.2, 'Offspring Created (6 new solutions)', fontsize=14, fontweight='bold', ha='left')
+ax.text(6.5, y_offspring + 1.2, 'Tournament selection ran 6 times to get parents for 3 crossovers', 
+        fontsize=10, style='italic', ha='left', color='gray')
+
+offspring_costs = [3750, 3950, 4050, 4150, 4300, 4600]
+for i, cost in enumerate(offspring_costs):
+    x = 1.5 + i * 2
+    color = BRAND_COLORS["threeDark"] if i == 0 else BRAND_COLORS["threeLight"]  # Best offspring highlighted
+    rect = plt.Rectangle((x, y_offspring), 1.5, 0.8, facecolor=color, 
+                         edgecolor='black', linewidth=2, alpha=0.7)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_offspring + 0.4, f'€{cost}', ha='center', va='center', 
+            fontsize=10, fontweight='bold')
+
+# Mark best new
+ax.text(2.25, y_offspring - 0.5, 'Best new!', ha='center', fontsize=9, 
+        fontweight='bold', color=BRAND_COLORS["threeDark"])
+
+# Next generation (bottom) - with elitism
+y_next = 2
+ax.text(0.5, y_next + 1.2, 'Next Generation (Elitism: keep 2 best)', fontsize=14, fontweight='bold', ha='left')
+ax.text(6.5, y_next + 1.2, '2 elite preserved + 4 best offspring = 6 total (same population size)', 
+        fontsize=10, style='italic', ha='left', color='gray')
+
+next_costs = [3750, 3800, 3900, 3950, 4050, 4150]  # Best offspring + 2 elite
+for i, cost in enumerate(next_costs):
+    x = 1.5 + i * 2
+    # Color coding: elite from previous (oneLight) vs new offspring (threeDark/threeLight)
+    if cost in [3800, 3900]:  # Elite kept
+        color = BRAND_COLORS["oneLight"]
+        marker = '★'
+    elif cost == 3750:  # Best new
+        color = BRAND_COLORS["threeDark"]
+        marker = '✓'
+    else:
+        color = BRAND_COLORS["threeLight"]
+        marker = ''
+    
+    rect = plt.Rectangle((x, y_next), 1.5, 0.8, facecolor=color, 
+                         edgecolor='black', linewidth=2, alpha=0.8)
+    ax.add_patch(rect)
+    ax.text(x + 0.75, y_next + 0.4, f'€{cost}', ha='center', va='center', 
+            fontsize=10, fontweight='bold')
+
+ax.text(13.5, 4, 'Elite preserved ↓', rotation=-90, fontsize=11, 
+        fontweight='bold', color=BRAND_COLORS["oneDark"], va='center')
+
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+::: callout-note
+Elitism ensures we never lose our best solutions while exploring new ones!
+:::
+
+## Stage 5. Population Evolution
 
 [How the population improves over generations:]{.highlight}
 
@@ -1781,8 +1882,16 @@ pheromone_matrix[0:4, [0, 3, 5]] *= 1.5  # E1-E4 preferred for Fri/Sat/Sun Dinne
 
 fig, ax = plt.subplots()
 
+# Create custom colormap using brand colors (light to dark progression)
+from matplotlib.colors import LinearSegmentedColormap
+brand_cmap = LinearSegmentedColormap.from_list(
+    'brand_gradient',
+    [BRAND_COLORS["lighter"], BRAND_COLORS["oneLight"], BRAND_COLORS["oneDark"], BRAND_COLORS["threeDark"]],
+    N=256
+)
+
 # Create heatmap
-im = ax.imshow(pheromone_matrix, cmap='YlOrRd', aspect='auto', vmin=0, vmax=4)
+im = ax.imshow(pheromone_matrix, cmap=brand_cmap, aspect='auto', vmin=0, vmax=4)
 
 # Add colorbar
 cbar = plt.colorbar(im, ax=ax)
