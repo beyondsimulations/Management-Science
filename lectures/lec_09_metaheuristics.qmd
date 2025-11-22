@@ -2311,7 +2311,7 @@ display(HTML(df.to_html(index=False, classes='table table-striped')))
 **Hour 3: Notebook**
 
 - Bean Counter delivery
-- Implement SA & GA
+- Implement SA
 - Tune parameters
 - Compare performance
 :::

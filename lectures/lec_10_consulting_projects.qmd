@@ -1,0 +1,361 @@
+---
+title: "Consulting Projects"
+subtitle: "Lecture 10 - Management Science"
+author: "Dr. Tobias Vlćek"
+format:
+  revealjs:
+    footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_10_consulting_projects.qmd)"
+    output-file: lec_10_presentation.html
+---
+
+# [Introduction]{.flow} {.title}
+
+## Your Final Challenge
+
+[Three major clients need your expertise:]{.highlight}
+
+::: incremental
+- **QuickBite:** Food delivery routing crisis
+- **NurseNext:** Healthcare scheduling nightmare  
+- **TechMart:** Inventory allocation disaster
+- Each group picks **ONE client** to work with
+- This is **40% of your final grade**
+:::
+
+. . .
+
+:::{.callout-note}
+**You're not just students anymore - you're consultants.**
+:::
+
+## Today's Learning Objectives
+
+[By the end of this session, you will:]{.highlight}
+
+::: {.incremental}
+1. Understand three realistic optimization problems
+2. Select a client project aligned with your team's strengths
+3. Begin data exploration and initial solution development
+4. Plan your approach using techniques from the course
+5. Prepare for professional consulting presentations
+:::
+
+## The Expectation
+
+[What makes a successful consulting project?]{.highlight}
+
+::: incremental
+- **Clear recommendations** backed by data
+- **Business impact** quantified in €€€
+- **Confidence** in your approach and results
+- **Actionable insights** clients can implement
+:::
+
+. . .
+
+:::{.callout-tip}
+"Reasonable and well-explained beats perfect and incomprehensible"
+:::
+
+# Meet Your Clients {background-color="#002b36"}
+
+## **[Client Briefing: QuickBite]{.invert-font}** {background-image="https://images.unsplash.com/photo-1526367790999-0150786686a2?w=2400" background-size="cover"}
+
+. . .
+
+[CEO's Morning Crisis:]{.invert-font}
+
+["We're bleeding money on delivery costs while customers complain about [cold food]{.highlight}! Our 4 drivers just 'wing it' every day. Result? [75% late deliveries]{.highlight}, angry customers, and investors getting nervous."]{.invert-font .fragment}
+
+---
+
+## QuickBite: The Delivery Chaos
+
+[QuickBite's daily logistics nightmare:]{.highlight}
+
+::: {.incremental}
+- **100 meal deliveries** across Hamburg every day
+- **4 drivers** starting from one central depot
+- **Current approach:** Drivers choose routes by "intuition"
+- **The damage:** Monthly waste in fuel + penalties
+- **Customer complaints:** Up 40% this quarter
+:::
+
+. . .
+
+:::{.callout-important}
+**The Stakes:** Cut costs AND improve on-time delivery before investors pull funding!
+:::
+
+---
+
+## QuickBite: Your Mission
+
+[What you need to solve:]{.highlight}
+
+::: {.incremental}
+- **Vehicle Routing Problem** with time windows
+- 100 delivery locations across Hamburg
+- 4 drivers with capacity constraints (28 meals each)
+- Time windows for each delivery (violations = penalty)
+- **Trade-offs:** Distance vs. punctuality vs. driver workload balance
+:::
+
+. . .
+
+::: callout-important
+Any questions?
+:::
+
+## **[Client Briefing: NurseNext Hospital]{.invert-font}** {background-image="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=2400" background-size="cover"}
+
+. . .
+
+[COO's Scheduling Crisis:]{.invert-font}
+
+["I spend [8 hours every week]{.highlight} manually scheduling nurses, and they're still terrible! Massive monthly overtime, [25% sick leave]{.highlight} from burnout, nurses quitting citing 'unfair scheduling.'"]{.invert-font .fragment}
+
+## NurseNext: The Burnout Problem
+
+[NurseNext's staffing crisis:]{.highlight}
+
+::: {.incremental}
+- **20 nurses** across 3 departments (ED, Med-Surg, ICU)
+- **Current system:** Manual scheduling by exhausted COO
+- **The damage:** Overtime, 25% sick leave rate
+- **Fairness issues:** Unequal weekend distribution
+- **Turnover:** Losing 3-4 experienced nurses annually
+:::
+
+. . .
+
+:::{.callout-important}
+**The Stakes:** Reduce overtime massively AND improve nurse satisfaction or face staffing collapse!
+:::
+
+---
+
+## NurseNext: Your Mission
+
+[What you need to solve:]{.highlight}
+
+::: {.incremental}
+- **Employee Scheduling** with complex constraints
+- Multiple skill levels (Junior, Senior, Specialist) and departments
+- Shift patterns: Morning (7-15), Evening (15-23), Night (23-7)
+- **Labor law:** Max consecutive shifts, rest periods, weekly hours
+- **Fairness:** Weekend equity, workload balance, distribution
+- **Robustness:** What happens when nurses call in sick?
+:::
+
+. . .
+
+::: callout-important
+Any questions?
+:::
+
+---
+
+## **[Client Briefing: TechMart Electronics]{.invert-font}** {background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" background-size="cover"}
+
+. . .
+
+[COO's Inventory Paradox:]{.invert-font}
+
+["We have [€10M stuck in inventory]{.highlight}, yet we're constantly out of stock on bestsellers! [20% stockout rate]{.highlight} on popular items while slow-movers occupy our fast warehouse. Black Friday is in 3 weeks!"]{.invert-font .fragment}
+
+---
+
+## TechMart: The Allocation Disaster
+
+[TechMart's warehouse crisis:]{.highlight}
+
+::: {.incremental}
+- **50 electronics SKUs:** Smartphones, laptops, ...
+- **Two warehouses:** Fast (Hamburg) and large (Poland)
+- **Current problem:** Wrong products in wrong warehouses
+- **Last Black Friday:** Ran out of top items in Hamburg on Day 1
+:::
+
+. . .
+
+:::{.callout-important}
+**The Stakes:** Optimize inventory allocation before Black Friday or repeat last year's disaster!
+:::
+
+---
+
+## TechMart: Your Mission
+
+[What you need to solve:]{.highlight}
+
+::: {.incremental}
+- **Demand Forecasting** from 3 years of sales history
+- **Identify:** Patterns seasonality , trends, and Black Friday spike
+- **Inventory Optimization:** Which SKUs go in the fast warehouse?
+- **Monte Carlo Simulation:** Test allocation under uncertainty
+- **Trade-offs:** Shipping speed vs. warehouse capacity
+:::
+
+. . .
+
+::: callout-important
+Any questions?
+:::
+
+# [Project Details]{.flow} {.title}
+
+## Timeline
+
+[Your three-session consulting engagement:]{.highlight}
+
+| Session | Focus | What Happens |
+|---------|-------|--------------|
+| **Lecture 10** | Kickoff | Choose client, explore data, start coding |
+| **Lecture 11** | Development | Presentation training + intensive work |
+| **Lecture 12** | Final | Presentations + Q&A |
+
+. . .
+
+:::{.callout-tip}
+You will likely need **6-10 hours outside class** to complete this project. Start early!
+:::
+
+## Grading (40% of Final Grade)
+
+[How your consulting project will be evaluated:]{.highlight}
+
+::: {.columns}
+::: {.column width="50%"}
+### Solution (20%)
+
+- **Correctness** (8%)
+- **Technical Implementation** (7%)
+- **Analysis & Insights** (5%)
+:::
+
+::: {.column width="50%"}
+### Presentation (20%)
+
+- **Clarity** (8%)
+- **Visualization** (7%)
+- **Business Communication** (5%)
+:::
+:::
+
+. . .
+
+::: callout-important
+Any questions here?
+:::
+
+
+## Deliverables
+
+[All groups must submit by lecture 12:]{.highlight}
+
+::: incremental
+1. **Jupyter notebook** with complete solution
+   - Well-commented code and clear explanations
+   - Results and visualizations embedded
+
+2. **Presentation slides** (8 minutes maximum)
+   - Problem understanding & Solution approach
+   - Results, Visualization and validation
+   - Business impact
+:::
+
+## Bonus Points Opportunity
+
+[Student Voting (After Presentations)]{.highlight}
+
+After all presentations, you'll vote for:
+
+- **Best Solution** for each client (3 winners)
+- **Winners receive 5 bonus points** per group member
+
+. . .
+
+::: callout-tip
+Last chance on bonus points!
+:::
+
+
+# [Tips for Success]{.flow} {.title}
+
+## Strategic Advice
+
+[How to approach your project:]{.highlight}
+
+::: incremental
+1. **Choose your client wisely**
+   - Pick based on your team's strengths
+2. **Start with data exploration**
+   - Understand the data BEFORE coding
+3. **Build incrementally**
+   - Simple solution first (greedy)
+   - Then improve (local search, metaheuristics)
+:::
+
+## Common Pitfalls to Avoid
+
+[Watch out for these:]{.highlight}
+
+::: incremental
+- **Scope creep:** Trying to solve everything perfectly
+- **Poor time management:** Coding until the last minute
+- **Ignoring business context:** Technical solution without impact
+- **Bad visualizations:** Unreadable charts or no visuals
+:::
+
+. . .
+
+::: callout-important
+Don't build a solution that you can't explain to the client!
+:::
+
+# [Let's Get Started!]{.flow} {.title}
+
+## Next Steps
+
+[Your roadmap for today's session:]{.highlight}
+
+::: incremental
+1. **Hour 1-2:** Choose your client
+3. **Hour 3-4:**
+   - Open the project notebook
+   - Explore the data
+   - Start coding initial solution
+   - Ask clarifying questions
+:::
+
+. . .
+
+:::{.callout-tip}
+We only see each other again in 2 weeks, use the time!
+:::
+
+## Final Thoughts
+
+[You have all the tools you need:]{.highlight}
+
+::: incremental
+- Monte Carlo simulation
+- Forecasting techniques
+- Greedy heuristics
+- Local search optimization
+- Multi-objective trade-offs
+- Metaheuristics concepts
+:::
+
+. . .
+
+:::{.callout-important}
+**You have ALL the tools you need to succeed.**
+:::
+
+## Break!
+
+[Take 20 minutes, then we start choosing]{.highlight}
+
+**Next up:** You'll choose a project and group and start working on it.
