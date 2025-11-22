@@ -13,14 +13,13 @@ format:
 
 ### The Situation
 
-"I need to schedule my 18 servers across 6 shifts this weekend. The problem? My experienced servers cost €75/hour while juniors cost only €25/hour. But it gets worse! Shifts have different lengths (4-6 hours), servers have strong preferences about when they can work, and if I don't have enough experienced servers on busy shifts, we face penalties ranging from €150 to €400 per missing experienced server from our parent company!"
+"I need to schedule my 18 servers across 6 shifts this weekend. The problem? My experienced servers cost €75/hour while juniors cost only €25/hour. But it gets worse! Shifts have different lengths (4-6 hours), servers have strong preferences about when they can work, and if I don't have enough experienced servers on busy shifts, we face penalties ranging from €0 to €1,200 per missing experienced server from our parent company!"
 
 ### The Challenge
 
-You have **multiple competing objectives**. You need more experienced servers than available, shifts have different lengths affecting labor costs, and servers have strong preferences (some can't work certain shifts). Your job is to find the best compromise:
+You have **multiple competing objectives**. You need more experienced servers than available, shifts have different lengths affecting labor costs, and servers have varying preferences for different shifts. Your job is to find the best compromise:
 
 - Minimize total cost (labor + experience penalties + preference penalties)
-- Respect server availability (preference = 0 means can't work)
 - Balance multiple factors: shift coverage, server happiness, and costs
 - Strategic decisions: which expensive penalties to accept?
 
@@ -148,8 +147,8 @@ ax.text(2.5, 6.2, 'Max Available', fontsize=10, color='green', ha='center')
 ax.grid(True, alpha=0.3)
 
 # Expected covers (business volume)
-ax = axes[1]
-colors = ['red' if covers > 100 else 'orange' if covers > 60 else 'green' 
+ax = axes[0, 1]
+colors = ['red' if covers > 100 else 'orange' if covers > 60 else 'green'
           for covers in shifts['Expected_Covers']]
 bars = ax.bar(shifts['Shift_ID'], shifts['Expected_Covers'], color=colors, alpha=0.7)
 ax.set_xlabel('Shift')
@@ -163,7 +162,7 @@ for bar, val in zip(bars, shifts['Expected_Covers']):
            str(val), ha='center', va='bottom')
 
 # Penalty structure
-ax = axes[2]
+ax = axes[1, 0]
 penalties = shifts['Penalty_Per_Missing'].values
 bars = ax.bar(shifts['Shift_ID'], penalties, color=['red' if p > 0 else 'green' for p in penalties], alpha=0.7)
 ax.set_xlabel('Shift')

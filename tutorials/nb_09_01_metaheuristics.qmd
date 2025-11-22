@@ -742,7 +742,6 @@ This larger neighborhood can help escape local optima that trap 1-opt. Try both 
 
 ```{python}
 #| eval: true
-#| echo: false
 def generate_2opt_neighbor(current_selection: List[int],
                           n_centers: int = 200) -> List[int]:
     """Generate a neighbor by swapping TWO selected centers with TWO unselected (2-opt)."""
@@ -772,6 +771,7 @@ def generate_2opt_neighbor(current_selection: List[int],
 
 ::: {.callout-note}
 You now have TWO neighborhood functions:
+
 - `generate_swap_neighbor` (1-opt): Simple, fast, good for local refinement
 - `generate_2opt_neighbor` (2-opt): Richer, better escape from local optima
 
