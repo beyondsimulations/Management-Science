@@ -398,13 +398,12 @@ Your notebook should include:
 - **Analysis:** Comparison to a baseline (e.g. random assignment)
 - **Code quality:** Well-commented, clear, and reproducible
 
-### 2. Presentation (8 minutes maximum)
+### 2. Presentation
 
-- **Problem understanding** (1 min): Eliza's pain points in your own words
-- **Your approach** (2 min): Algorithm choice and justification
-- **Results** (3 min): Routes visualization, cost savings, on-time improvement
-- **Business impact** (1 min): Recommendations for QuickBite
-- **Q&A preparation** (1 min): Anticipate questions about trade-offs
+- **Problem understanding:** Eliza's pain points in your own words
+- **Your approach:** Algorithm choice and justification
+- **Results:** Routes visualization, cost savings, on-time improvement
+- **Business impact:** Recommendations for QuickBite
 
 ### 3. Key Metrics to Report
 
