@@ -104,9 +104,9 @@ website:
           - text: "09 Lecture"
             href: lectures/lec_09_metaheuristics.qmd
           - text: "NB-09-01 Metaheuristics"
-            href: raw/nb_09_01_metaheuristics.qmd
+            href: tutorials/nb_09_01_metaheuristics.qmd
           - text: "NB-09-02 Competition"
-            href: raw/nb_09_02_restaurant_staffing.qmd
+            href: tutorials/nb_09_02_restaurant_staffing.qmd
       - section: "10 Consulting Projects"
         contents:
           - text: "10 Project Introduction"
