@@ -14,7 +14,7 @@ code-links:
 **Industry:** Healthcare
 **Client Contact:** Dr. Robin Torres, Chief Operating Officer
 **Facility:** Medium-sized hospital with 3 departments
-**Staff:** 20 nurses, 50 beds, 24/7 operations
+**Staff:** 21 nurses, 50 beds, 24/7 operations
 
 ## The COO's Challenge
 
@@ -30,7 +30,7 @@ code-links:
 - *Constant complaints about unfair weekend distribution*
 - *Last month, 2 nurses quit citing 'burnout and unfair scheduling'*
 
-*The manual process is killing us. I try to be fair, but with 20 nurses, 3 departments, different skill levels, shift preferences, and labor laws... I just can't optimize it all in my head.*
+*The manual process is killing us. I try to be fair, but with 21 nurses, 3 departments, different skill levels, shift preferences, and labor laws... I just can't optimize it all in my head.*
 
 *We need an automated scheduling system that:*
 
@@ -131,8 +131,8 @@ def generate_nurse_data():
             'weekend_worked_last_month': np.random.randint(1, 4)
         })
 
-    # ICU nurses (5 nurses)
-    for i in range(16, 21):
+    # ICU nurses (6 nurses)
+    for i in range(16, 22):
         nurses.append({
             'nurse_id': i,
             'name': f'Nurse ICU-{i-15}',
@@ -169,18 +169,18 @@ print(f"By skill level: Junior={len(nurses_df[nurses_df['skill_level']=='Junior'
 
 shift_requirements = {
     'ED': {
-        'Morning': {'min_nurses': 3, 'min_senior': 1},
-        'Evening': {'min_nurses': 3, 'min_senior': 1},
-        'Night': {'min_nurses': 2, 'min_senior': 1}
+        'Morning': {'min_nurses': 2, 'min_senior': 1},
+        'Evening': {'min_nurses': 2, 'min_senior': 1},
+        'Night': {'min_nurses': 1, 'min_senior': 1}
     },
     'Med-Surg': {
-        'Morning': {'min_nurses': 4, 'min_senior': 2},
-        'Evening': {'min_nurses': 3, 'min_senior': 1},
-        'Night': {'min_nurses': 2, 'min_senior': 1}
+        'Morning': {'min_nurses': 3, 'min_senior': 2},
+        'Evening': {'min_nurses': 2, 'min_senior': 1},
+        'Night': {'min_nurses': 1, 'min_senior': 1}
     },
     'ICU': {
         'Morning': {'min_nurses': 2, 'min_senior': 1},
-        'Evening': {'min_nurses': 2, 'min_senior': 1},
+        'Evening': {'min_nurses': 1, 'min_senior': 1},
         'Night': {'min_nurses': 2, 'min_senior': 2}
     }
 }
@@ -201,8 +201,8 @@ for dept in shift_requirements:
 
 print("\n" + "=" * 70)
 print(f"Total shift-slots needed per week: {total_shifts_needed}")
-print(f"Available capacity (20 nurses × 6 shifts max): {20 * 6} shift-slots")
-print(f"Capacity margin: {20 * 6 - total_shifts_needed} shift-slots")
+print(f"Available capacity (21 nurses × 6 shifts max): {21 * 6} shift-slots")
+print(f"Capacity margin: {21 * 6 - total_shifts_needed} shift-slots")
 ```
 
 ## Week Structure
@@ -316,7 +316,7 @@ print("YOU must implement the full logic!")
 ::: {.callout-note icon=false}
 ## Deliverables
 
-You must develop a scheduling solution that creates a one-week schedule for all 20 nurses and provides:
+You must develop a scheduling solution that creates a one-week schedule for all 21 nurses and provides:
 
 ### 1. Jupyter Notebook with Complete Solution
 
@@ -401,7 +401,7 @@ Your notebook should include:
 
 All data is provided in this notebook:
 
-- `nurses_df`: DataFrame with 20 nurses and their attributes
+- `nurses_df`: DataFrame with 21 nurses and their attributes
 - `shift_requirements`: Dict with staffing requirements by department and shift
 - `schedule_template_df`: Week structure (21 shifts)
 - Helper templates: `validate_schedule()`, `calculate_schedule_cost()`
