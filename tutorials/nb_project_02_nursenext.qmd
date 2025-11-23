@@ -410,14 +410,14 @@ Please upload both, presentation and jupyter notebook (or `.py` files) for the f
 2. **Skill requirements:** Each shift has required number of Senior/Expert nurses
 3. **Maximum shifts:** No nurse works more than 6 shifts per week (48 hours)
 4. **Maximum consecutive:** No nurse works more than 5 consecutive days
-5. **Minimum rest:** At least 11 hours between shifts
-   - **No Evening→Morning** (same night transition: 23:00-07:00 = 8 hours rest ❌)
-   - **No Night→Morning** (next day: ends 07:00, starts 07:00 = 0 hours rest ❌)
-   - **No Night→Evening** (next day: ends 07:00, starts 15:00 = 8 hours rest ❌)
+5. **Minimum rest:** At least 11 hours between shifts!
 6. **Department qualification:** Nurses only work in departments they're qualified for
    - **Specialists:** Can only work in their assigned department (check `departments_qualified`)
    - **Flexible nurses:** Can work in any department (ED, Med-Surg, or ICU)
 7. **Night shift eligibility:** Only nurses with `can_work_night=True` on night shifts
+8. **Weekend monthly limit:** No nurse exceeds 2 weekend days per month
+   - Check `weekend_days_worked_this_month` field (shows days already worked in Weeks 1-2)
+   - If a nurse has already worked 2 weekend days, they **cannot** be assigned any weekend shifts this week
 
 **Soft Constraints (Optimize for Fairness)**
 

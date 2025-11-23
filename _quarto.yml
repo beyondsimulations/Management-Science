@@ -28,7 +28,7 @@ website:
       - text: "***"
       - section: "01 Let's Start"
         contents:
-          - text: "01 Introduction"
+          - text: "Leture"
             href: lectures/lec_01_introduction.qmd
           - text: "NB-01-02 Variables"
             href: tutorials/nb_01_01_variables_data_types.qmd
@@ -38,7 +38,7 @@ website:
             href: tutorials/nb_01_03_conditionals_while.qmd
       - section: "02 Advances"
         contents:
-          - text: "02 Generative AI"
+          - text: "Lecture"
             href: lectures/lec_02_copilot_intro.qmd
           - text: "NB-02-01 Functions"
             href: tutorials/nb_02_01_functions.qmd
@@ -51,7 +51,7 @@ website:
 
       - section: "03 Foundation"
         contents:
-          - text: "03 Closing"
+          - text: "Lecture"
             href: lectures/lec_03_closing.qmd
           - text: "NB-03-01 Numpy"
             href: tutorials/nb_03_01_numpy.qmd
@@ -61,7 +61,7 @@ website:
             href: tutorials/nb_03_03_visualization.qmd
       - section: "04 Monte Carlo"
         contents:
-          - text: "04 Lecture"
+          - text: "Lecture"
             href: lectures/lec_04_monte_carlo.qmd
           - text: "NB-04-01 Monte Carlo"
             href: tutorials/nb_04_01_monte_carlo.qmd
@@ -69,7 +69,7 @@ website:
             href: tutorials/nb_04_02_techventure.qmd
       - section: "05 Forecasting"
         contents:
-          - text: "05 Lecture"
+          - text: "Lecture"
             href: lectures/lec_05_forecasting.qmd
           - text: "NB-05-01 Time Series"
             href: tutorials/nb_05_01_time_series.qmd
@@ -77,7 +77,7 @@ website:
             href: tutorials/nb_05_02_predictor.qmd
       - section: "06 Greedy Search"
         contents:
-          - text: "06 Lecture"
+          - text: "Lecture"
             href: lectures/lec_06_greedy_algorithms.qmd
           - text: "NB-06-01 Scheduling"
             href: tutorials/nb_06_01_scheduling.qmd
@@ -85,7 +85,7 @@ website:
             href: tutorials/nb_06_02_scheduler.qmd
       - section: "07 Local Search"
         contents:
-          - text: "07 Lecture"
+          - text: "Lecture"
             href: lectures/lec_07_local_search.qmd
           - text: "NB-07-01 Routing"
             href: tutorials/nb_07_01_local_search.qmd
@@ -93,7 +93,7 @@ website:
             href: tutorials/nb_07_02_routing_competition.qmd
       - section: "08 Multi Objective"
         contents:
-          - text: "08 Lecture"
+          - text: "Lecture"
             href: lectures/lec_08_multi_objective.qmd
           - text: "NB-08-01 Pareto"
             href: tutorials/nb_08_01_multi_objective.qmd
@@ -101,7 +101,7 @@ website:
             href: tutorials/nb_08_02_fleet_optimization.qmd
       - section: "09 Metaheuristics"
         contents:
-          - text: "09 Lecture"
+          - text: "Lecture"
             href: lectures/lec_09_metaheuristics.qmd
           - text: "NB-09-01 Metaheuristics"
             href: tutorials/nb_09_01_metaheuristics.qmd
@@ -109,7 +109,7 @@ website:
             href: tutorials/nb_09_02_restaurant_staffing.qmd
       - section: "10 Consulting Projects"
         contents:
-          - text: "10 Project Introduction"
+          - text: "Project Introduction"
             href: lectures/lec_10_consulting_projects.qmd
           - text: "Project 01: QuickBite"
             href: tutorials/nb_project_01_quickbite.qmd
