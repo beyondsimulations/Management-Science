@@ -11,10 +11,10 @@ code-links:
 
 ## Meet Your Client
 
-**Industry:** Healthcare
-**Client Contact:** Dr. Robin Torres, Chief Operating Officer
-**Facility:** Medium-sized hospital with 3 departments
-**Staff:** 20 nurses, 50 beds, 24/7 operations
+- **Industry:** Healthcare
+- **Client Contact:** Dr. Robin Torres, Chief Operating Officer
+- **Facility:** Medium-sized hospital with 3 departments
+- **Staff:** 20 nurses, 50 beds, 24/7 operations
 
 ## The COO's Challenge
 
@@ -96,6 +96,10 @@ This creates an interesting **resource allocation challenge**: How should flexib
 4. **Weekend work limit:** Maximum 2 weekend days per month
 :::
 
+::: callout-note
+**Important Note on Night Shifts:** Night shifts (23:00-07:00) end at 7:00 AM the *following calendar day*. Therefore, a nurse working Monday Night (ending Tuesday 7:00 AM) **cannot** work Tuesday Morning (0 hours rest) or Tuesday Evening (only 8 hours rest). Both violate the 11-hour minimum rest period.
+:::
+
 ### Fairness Expectations
 
 Nurses' union has negotiated fairness requirements:
@@ -106,6 +110,12 @@ Nurses' union has negotiated fairness requirements:
 - No nurse should work significantly more undesirable shifts than others
 
 ## The Data
+
+::: {.callout-note}
+## Scheduling Context
+
+This schedule is for **Week 3 of the current month**. The `weekend_days_worked_this_month` field shows how many weekend days each nurse has already worked in Weeks 1-2. Since the monthly limit is 2 weekend days per month, nurses may have 0, 1, or 2 weekend days already worked, which constrains how many more weekend shifts they can take in this week's schedule.
+:::
 
 ### Nurse Information
 
@@ -134,7 +144,7 @@ def generate_nurse_data():
             'skill_level': np.random.choice(['Junior', 'Senior', 'Senior', 'Expert'], p=[0.2, 0.5, 0.2, 0.1]),
             'experience_years': np.random.randint(1, 15),
             'can_work_night': np.random.choice([True, True, False], p=[0.6, 0.3, 0.1]),
-            'weekend_worked_last_month': np.random.randint(1, 4)
+            'weekend_days_worked_this_month': np.random.randint(0, 3)
         })
 
     # Med-Surg Specialists (5 nurses) - only work in Med-Surg
@@ -148,7 +158,7 @@ def generate_nurse_data():
             'skill_level': np.random.choice(['Junior', 'Senior', 'Senior'], p=[0.3, 0.5, 0.2]),
             'experience_years': np.random.randint(1, 12),
             'can_work_night': np.random.choice([True, True, False], p=[0.7, 0.2, 0.1]),
-            'weekend_worked_last_month': np.random.randint(1, 4)
+            'weekend_days_worked_this_month': np.random.randint(0, 3)
         })
 
     # ICU Specialists (4 nurses) - only work in ICU
@@ -162,7 +172,7 @@ def generate_nurse_data():
             'skill_level': np.random.choice(['Senior', 'Expert', 'Expert'], p=[0.4, 0.4, 0.2]),
             'experience_years': np.random.randint(3, 20),
             'can_work_night': True,  # ICU nurses must be able to work nights
-            'weekend_worked_last_month': np.random.randint(1, 4)
+            'weekend_days_worked_this_month': np.random.randint(0, 3)
         })
 
     # Flexible Float Pool (7 nurses) - can work in ANY department
@@ -176,7 +186,7 @@ def generate_nurse_data():
             'skill_level': np.random.choice(['Junior', 'Senior', 'Senior', 'Expert'], p=[0.15, 0.5, 0.25, 0.1]),
             'experience_years': np.random.randint(2, 15),
             'can_work_night': np.random.choice([True, True, True, False], p=[0.75, 0.15, 0.05, 0.05]),  # Most can work nights
-            'weekend_worked_last_month': np.random.randint(1, 4)
+            'weekend_days_worked_this_month': np.random.randint(0, 3)
         })
 
     return pd.DataFrame(nurses)
@@ -352,9 +362,6 @@ print("YOU must implement the full logic!")
 
 ## Your Task
 
-::: {.callout-note icon=false}
-## Deliverables
-
 You must develop a scheduling solution that creates a one-week schedule for all 20 nurses and provides:
 
 ### 1. Jupyter Notebook with Complete Solution
@@ -367,15 +374,21 @@ Your notebook should include:
 - **Fairness analysis:** Distribution of weekends, nights, workload across nurses
 - **Cost analysis:** Total cost and breakdown
 - **Robustness testing:** What-if analysis for 1-2 nurses calling in sick
-- **Code quality:** Well-commented, clear, and reproducible
 
-### 2. Presentation (8 minutes maximum)
+::: callout-note
+I won’t judge the code quality in this notebook. It’s just for me to review your final solution and identify any mistakes if your results seem unrealistic. The final project will be graded primarily based on your presentation and the results you have achieved.
+:::
 
-- **Problem understanding** (1 min): Dr. Torres's challenges in your own words
-- **Your approach** (2 min): Algorithm choice, how you handled constraints and fairness
-- **Results** (3 min): Schedule visualization, cost savings, fairness metrics
-- **Business impact** (1 min): Recommendations for NurseNext, implementation plan
-- **Q&A preparation** (1 min): Trade-offs, limitations, next steps
+### 2. Presentation
+
+- **Problem understanding:** Dr. Torres's challenges in your own words
+- **Your approach:**: Algorithm choice, how you handled constraints and fairness
+- **Results:** Schedule visualization, cost savings, fairness metrics
+- **Business impact:** Recommendations for NurseNext, implementation plan
+
+::: callout-note
+Please upload both, presentation and jupyter notebook (or `.py` files) for the final project.
+:::
 
 ### 3. Key Metrics to Report
 
@@ -387,24 +400,26 @@ Your notebook should include:
   - Total shifts per nurse
 - Constraint compliance (labor law violations: should ideally be ZERO!)
 - Robustness: Impact of 1-2 sick nurses
-:::
 
 ## Constraints and Requirements
 
 ::: {.callout-important}
-## Hard Constraints (Should Satisfy!)
+**Hard Constraints (Should Satisfy!)**
 
 1. **Shift coverage:** All shifts meet minimum staffing requirements
 2. **Skill requirements:** Each shift has required number of Senior/Expert nurses
 3. **Maximum shifts:** No nurse works more than 6 shifts per week (48 hours)
 4. **Maximum consecutive:** No nurse works more than 5 consecutive days
-5. **Minimum rest:** At least 11 hours between shifts (no Evening→Morning or Night→Morning/Evening)
+5. **Minimum rest:** At least 11 hours between shifts
+   - **No Evening→Morning** (same night transition: 23:00-07:00 = 8 hours rest ❌)
+   - **No Night→Morning** (next day: ends 07:00, starts 07:00 = 0 hours rest ❌)
+   - **No Night→Evening** (next day: ends 07:00, starts 15:00 = 8 hours rest ❌)
 6. **Department qualification:** Nurses only work in departments they're qualified for
-   - **Specialists:** Can only work in their assigned department (check `departments_qualified` list)
+   - **Specialists:** Can only work in their assigned department (check `departments_qualified`)
    - **Flexible nurses:** Can work in any department (ED, Med-Surg, or ICU)
 7. **Night shift eligibility:** Only nurses with `can_work_night=True` on night shifts
 
-## Soft Constraints (Optimize for Fairness)
+**Soft Constraints (Optimize for Fairness)**
 
 1. **Weekend fairness:** Equal distribution of weekend shifts
 2. **Night shift fairness:** Equal distribution of night shifts among eligible nurses
@@ -415,18 +430,11 @@ Your notebook should include:
 ## Tips for Success
 
 1. **Start with constraints:** Get a feasible schedule first, optimize fairness second
-2. **Use data structures wisely:** Consider using:
-   - Dict: `{(day, shift, dept): [nurse_ids]}`
-   - DataFrame: Rows = nurses, Columns = shifts
-   - Your own structure!
-3. **Fairness is subjective:** Define clear metrics for "fair" distribution
-4. **Visualize the schedule:** A Gantt chart or heat map makes patterns obvious
-5. **Labor laws are non-negotiable:** Zero violations if possible. Check after every change!
-6. **Think like a nurse:** What makes a schedule "good" from their perspective?
-   - Predictable patterns
-   - Fair weekend distribution
-   - No excessive consecutive shifts
-7. **Overtime is expensive:** Keeping nurses under 40 hours saves €100/shift!
+2. **Fairness is subjective:** Define clear metrics for "fair" distribution
+3. **Visualize the schedule:** A Gantt chart or heat map makes patterns obvious
+4. **Labor laws are non-negotiable:** Zero violations if possible. Check after every change!
+5. **Think like a nurse:** What makes a schedule "good" from their perspective?
+6. **Overtime is expensive but inevitable:** You have a structural staff shortage!
 
 ## Common Pitfalls to Avoid
 

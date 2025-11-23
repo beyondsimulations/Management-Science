@@ -411,7 +411,10 @@ Your notebook should include:
 - **Algorithm implementation:** Your routing approach (construction + improvement)
 - **Results:** Final routes for all 4 drivers with cost breakdown
 - **Analysis:** Comparison to a baseline (e.g. random assignment)
-- **Code quality:** Well-commented, clear, and reproducible
+
+::: callout-note
+I won’t judge the code quality in this notebook. It’s just for me to review your final solution and identify any mistakes if your results seem unrealistic. The final project will be graded primarily based on your presentation and the results you have achieved.
+:::
 
 ### 2. Presentation
 
@@ -419,6 +422,10 @@ Your notebook should include:
 - **Your approach:** Algorithm choice and justification
 - **Results:** Routes visualization, cost savings, on-time improvement
 - **Business impact:** Recommendations for QuickBite
+
+::: callout-note
+Please upload both, presentation and jupyter notebook (or `.py` files) for the final project.
+:::
 
 ### 3. Key Metrics to Report
 
