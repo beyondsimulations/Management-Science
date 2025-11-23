@@ -14,7 +14,7 @@ code-links:
 **Industry:** Healthcare
 **Client Contact:** Dr. Robin Torres, Chief Operating Officer
 **Facility:** Medium-sized hospital with 3 departments
-**Staff:** 21 nurses, 50 beds, 24/7 operations
+**Staff:** 20 nurses, 50 beds, 24/7 operations
 
 ## The COO's Challenge
 
@@ -30,7 +30,7 @@ code-links:
 - *Constant complaints about unfair weekend distribution*
 - *Last month, 2 nurses quit citing 'burnout and unfair scheduling'*
 
-*The manual process is killing us. I try to be fair, but with 21 nurses, 3 departments, different skill levels, shift preferences, and labor laws... I just can't optimize it all in my head.*
+*The manual process is killing us. I try to be fair, but with 20 nurses, 3 departments, different skill levels, shift preferences, and labor laws... I just can't optimize it all in my head.*
 
 *We need an automated scheduling system that:*
 
@@ -52,6 +52,22 @@ code-links:
 - **Emergency Department (ED):** High-intensity, requires experienced nurses
 - **Medical-Surgical (Med-Surg):** General care, moderate intensity
 - **Intensive Care Unit (ICU):** Critical patients, highest skill requirements
+
+**Staffing Model:**
+
+NurseNext uses a modern **hybrid staffing model**:
+
+- **Department Specialists (13 nurses):** Core staff assigned to specific departments
+  - 4 ED specialists, 5 Med-Surg specialists, 4 ICU specialists
+  - Deep expertise in their department's specialized care
+  - Only work in their assigned department
+
+- **Flexible Float Pool (7 nurses):** Cross-trained resource nurses
+  - Can work in **any** department (ED, Med-Surg, or ICU)
+  - Provide flexibility for workload balancing across departments
+  - Essential for covering peak demand and sick calls
+
+This creates an interesting **resource allocation challenge**: How should flexible nurses be distributed across departments to minimize cost and maximize fairness?
 
 **Shifts (Each 8 hours):**
 
@@ -107,39 +123,59 @@ np.random.seed(2025)
 def generate_nurse_data():
     nurses = []
 
-    # Emergency Department nurses (7 nurses)
-    for i in range(1, 8):
+    # ED Specialists (4 nurses) - only work in ED
+    for i in range(1, 5):
         nurses.append({
             'nurse_id': i,
             'name': f'Nurse ED-{i}',
             'department': 'ED',
+            'departments_qualified': ['ED'],
+            'nurse_type': 'Specialist',
             'skill_level': np.random.choice(['Junior', 'Senior', 'Senior', 'Expert'], p=[0.2, 0.5, 0.2, 0.1]),
             'experience_years': np.random.randint(1, 15),
             'can_work_night': np.random.choice([True, True, False], p=[0.6, 0.3, 0.1]),
             'weekend_worked_last_month': np.random.randint(1, 4)
         })
 
-    # Med-Surg nurses (8 nurses)
-    for i in range(8, 16):
+    # Med-Surg Specialists (5 nurses) - only work in Med-Surg
+    for i in range(5, 10):
         nurses.append({
             'nurse_id': i,
-            'name': f'Nurse MS-{i-7}',
+            'name': f'Nurse MS-{i-4}',
             'department': 'Med-Surg',
+            'departments_qualified': ['Med-Surg'],
+            'nurse_type': 'Specialist',
             'skill_level': np.random.choice(['Junior', 'Senior', 'Senior'], p=[0.3, 0.5, 0.2]),
             'experience_years': np.random.randint(1, 12),
             'can_work_night': np.random.choice([True, True, False], p=[0.7, 0.2, 0.1]),
             'weekend_worked_last_month': np.random.randint(1, 4)
         })
 
-    # ICU nurses (6 nurses)
-    for i in range(16, 22):
+    # ICU Specialists (4 nurses) - only work in ICU
+    for i in range(10, 14):
         nurses.append({
             'nurse_id': i,
-            'name': f'Nurse ICU-{i-15}',
+            'name': f'Nurse ICU-{i-9}',
             'department': 'ICU',
+            'departments_qualified': ['ICU'],
+            'nurse_type': 'Specialist',
             'skill_level': np.random.choice(['Senior', 'Expert', 'Expert'], p=[0.4, 0.4, 0.2]),
             'experience_years': np.random.randint(3, 20),
             'can_work_night': True,  # ICU nurses must be able to work nights
+            'weekend_worked_last_month': np.random.randint(1, 4)
+        })
+
+    # Flexible Float Pool (7 nurses) - can work in ANY department
+    for i in range(14, 21):
+        nurses.append({
+            'nurse_id': i,
+            'name': f'Nurse FLOAT-{i-13}',
+            'department': 'Float',
+            'departments_qualified': ['ED', 'Med-Surg', 'ICU'],
+            'nurse_type': 'Flexible',
+            'skill_level': np.random.choice(['Junior', 'Senior', 'Senior', 'Expert'], p=[0.15, 0.5, 0.25, 0.1]),
+            'experience_years': np.random.randint(2, 15),
+            'can_work_night': np.random.choice([True, True, True, False], p=[0.75, 0.15, 0.05, 0.05]),  # Most can work nights
             'weekend_worked_last_month': np.random.randint(1, 4)
         })
 
@@ -148,14 +184,17 @@ def generate_nurse_data():
 nurses_df = generate_nurse_data()
 
 print("NURSENEXT HOSPITAL - NURSE ROSTER")
-print("=" * 90)
+print("=" * 100)
 print(nurses_df.to_string(index=False))
-print("\n" + "=" * 90)
+print("\n" + "=" * 100)
 print(f"Total nurses: {len(nurses_df)}")
-print(f"By department: ED={len(nurses_df[nurses_df['department']=='ED'])}, "
-      f"Med-Surg={len(nurses_df[nurses_df['department']=='Med-Surg'])}, "
-      f"ICU={len(nurses_df[nurses_df['department']=='ICU'])}")
-print(f"By skill level: Junior={len(nurses_df[nurses_df['skill_level']=='Junior'])}, "
+print(f"\nBy type:")
+print(f"  Specialists: {len(nurses_df[nurses_df['nurse_type']=='Specialist'])} nurses")
+print(f"    - ED: {len(nurses_df[nurses_df['department']=='ED'])} nurses")
+print(f"    - Med-Surg: {len(nurses_df[nurses_df['department']=='Med-Surg'])} nurses")
+print(f"    - ICU: {len(nurses_df[nurses_df['department']=='ICU'])} nurses")
+print(f"  Flexible (Float Pool): {len(nurses_df[nurses_df['nurse_type']=='Flexible'])} nurses (can work any department)")
+print(f"\nBy skill level: Junior={len(nurses_df[nurses_df['skill_level']=='Junior'])}, "
       f"Senior={len(nurses_df[nurses_df['skill_level']=='Senior'])}, "
       f"Expert={len(nurses_df[nurses_df['skill_level']=='Expert'])}")
 ```
@@ -201,8 +240,8 @@ for dept in shift_requirements:
 
 print("\n" + "=" * 70)
 print(f"Total shift-slots needed per week: {total_shifts_needed}")
-print(f"Available capacity (21 nurses × 6 shifts max): {21 * 6} shift-slots")
-print(f"Capacity margin: {21 * 6 - total_shifts_needed} shift-slots")
+print(f"Available capacity (20 nurses × 6 shifts max): {20 * 6} shift-slots")
+print(f"Capacity margin: {20 * 6 - total_shifts_needed} shift-slots")
 ```
 
 ## Week Structure
@@ -316,7 +355,7 @@ print("YOU must implement the full logic!")
 ::: {.callout-note icon=false}
 ## Deliverables
 
-You must develop a scheduling solution that creates a one-week schedule for all 21 nurses and provides:
+You must develop a scheduling solution that creates a one-week schedule for all 20 nurses and provides:
 
 ### 1. Jupyter Notebook with Complete Solution
 
@@ -360,7 +399,9 @@ Your notebook should include:
 3. **Maximum shifts:** No nurse works more than 6 shifts per week (48 hours)
 4. **Maximum consecutive:** No nurse works more than 5 consecutive days
 5. **Minimum rest:** At least 11 hours between shifts (no Evening→Morning or Night→Morning/Evening)
-6. **Department assignment:** Nurses only work in their assigned department
+6. **Department qualification:** Nurses only work in departments they're qualified for
+   - **Specialists:** Can only work in their assigned department (check `departments_qualified` list)
+   - **Flexible nurses:** Can work in any department (ED, Med-Surg, or ICU)
 7. **Night shift eligibility:** Only nurses with `can_work_night=True` on night shifts
 
 ## Soft Constraints (Optimize for Fairness)
@@ -401,9 +442,9 @@ Your notebook should include:
 
 All data is provided in this notebook:
 
-- `nurses_df`: DataFrame with 21 nurses and their attributes
+- `nurses_df`: DataFrame with 20 nurses and their attributes
 - `shift_requirements`: Dict with staffing requirements by department and shift
-- `schedule_template_df`: Week structure (21 shifts)
+- `schedule_template_df`: Week structure (20 shifts)
 - Helper templates: `validate_schedule()`, `calculate_schedule_cost()`
 
 **You must implement the full scheduling algorithm and constraint checking logic!**
