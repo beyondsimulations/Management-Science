@@ -11,9 +11,9 @@ code-links:
 
 ## Meet Your Client
 
-**Industry:** Food Delivery / Logistics
-**Client Contact:** Eliza Chen, CEO
-**Company Size:** 12 employees, 120+ daily deliveries
+- **Industry:** Food Delivery / Logistics
+- **Client Contact:** Eliza Chen, CEO
+- **Company Size:** 12 employees, 120+ daily deliveries
 
 ## The CEO's Dilemma
 
@@ -49,8 +49,8 @@ code-links:
 
 ### Customer Expectations
 
-Each delivery has a **time window** (requested delivery time ± 15 minutes): 
-**Time window violation = Late penalty + Potential cold food complaint**
+- Each delivery has a **time window** (requested delivery time ± 15 minutes)
+- **Time window violation = Late penalty + Potential cold food complaint**
 
 ## Your Mission
 
@@ -89,12 +89,12 @@ def generate_hamburg_deliveries(n=120):
 
     # Create realistic clusters (residential areas, business districts)
     clusters = [
-        {'lat': 53.5511, 'lon': 10.0063, 'n': 25, 'type': 'city_center'},      # Altstadt
-        {'lat': 53.5534, 'lon': 9.9700, 'n': 20, 'type': 'residential'},       # Altona
+        {'lat': 53.5511, 'lon': 10.0063, 'n': 30, 'type': 'city_center'},      # Altstadt
+        {'lat': 53.5534, 'lon': 9.9700, 'n': 25, 'type': 'residential'},       # Altona
         {'lat': 53.5753, 'lon': 10.0153, 'n': 18, 'type': 'residential'},      # Eppendorf
-        {'lat': 53.5580, 'lon': 10.0742, 'n': 15, 'type': 'business'},         # Wandsbek
+        {'lat': 53.5580, 'lon': 10.0742, 'n': 20, 'type': 'business'},         # Wandsbek
         {'lat': 53.5252, 'lon': 9.9350, 'n': 12, 'type': 'residential'},       # Bahrenfeld
-        {'lat': 53.5440, 'lon': 10.0465, 'n': 10, 'type': 'business'},         # HafenCity
+        {'lat': 53.5440, 'lon': 10.0465, 'n': 15, 'type': 'business'},         # HafenCity
     ]
 
     delivery_id = 1
@@ -162,16 +162,16 @@ def visualize_deliveries(deliveries_df, depot_location, routes=None):
         depot_location: Dict with 'lat' and 'lon' keys
         routes: Optional list of routes, where each route is a list of delivery_ids
     """
-    plt.figure(figsize=(12, 10))
+    plt.figure()
 
     # Plot depot
     plt.scatter(depot_location['lon'], depot_location['lat'],
-                s=500, c='red', marker='s', zorder=5,
+                c='red', marker='s', zorder=5,
                 label='Depot (Hauptbahnhof)', edgecolors='black', linewidths=2)
 
     # Plot all deliveries
     plt.scatter(deliveries_df['lon'], deliveries_df['lat'],
-                s=100, c='#537E8F', alpha=0.6, label='Delivery', zorder=3)
+                c='#537E8F', alpha=0.6, label='Delivery', zorder=3)
 
     # If routes are provided, draw them
     if routes is not None:
@@ -428,19 +428,18 @@ Your notebook should include:
 - Number of late deliveries
 - Driver workload balance (fairness)
 - **Cost savings vs. current system** (estimate baseline first!)
-:::
 
 ## Constraints and Requirements
 
 ::: {.callout-important}
-## Hard Constraints (Must Satisfy)
+**Hard Constraints (Must Satisfy)**
 
 1. **All deliveries assigned:** Every delivery must be assigned to exactly one driver
 2. **Vehicle capacity:** Each driver can carry max 35 meals at once
 3. **Start and end at depot:** All routes begin and end at the depot
 4. **Time feasibility:** Deliveries should be attempted within operating hours (11:00-21:00)
 
-## Soft Constraints (Optimize)
+**Soft Constraints (Optimize)**
 
 1. **Minimize total cost** (driver time + fuel + late penalties + cold food costs)
 2. **Maximize on-time delivery rate**

@@ -11,10 +11,10 @@ code-links:
 
 ## Meet Your Client
 
-**Industry:** E-commerce / Electronics Retail
-**Client Contact:** Yola Wang, Chief Operations Officer
-**Company Size:** 200 employees
-**Market:** Consumer electronics in Germany
+- **Industry:** E-commerce / Electronics Retail
+- **Client Contact:** Yola Wang, Chief Operations Officer
+- **Company Size:** 200 employees
+- **Market:** Consumer electronics in Germany
 
 ## The COO's Inventory Crisis
 
@@ -129,30 +129,34 @@ def generate_techmart_sales_history():
     Generate 3 years of sales history for 30 electronics SKUs.
     """
 
-    # Define 30 SKUs across 5 categories
+    # Define 30 SKUs across 5 categories with category-specific trends
+    # Trend: annual growth/decline rate (e.g., 0.05 = 5% growth per year)
     categories = {
-        'Smartphones': 8,
-        'Laptops': 6,
-        'Headphones': 6,
-        'Smartwatches': 5,
-        'Tablets': 5
+        'Smartphones': {'count': 8, 'trend': -0.15},  # Mature market, slight decline
+        'Laptops': {'count': 6, 'trend': 0.11},       # Stable with slight growth
+        'Headphones': {'count': 6, 'trend': 0.18},    # Growing premium audio market
+        'Smartwatches': {'count': 5, 'trend': 0.22},  # Emerging category, strong growth
+        'Tablets': {'count': 5, 'trend': -0.15}       # Declining market
     }
 
     skus = []
     sku_id = 1
-    for category, count in categories.items():
+    for category, cat_info in categories.items():
+        count = cat_info['count']
+        category_trend = cat_info['trend']
+
         for i in range(count):
             # Each product has unique characteristics
             if category == 'Smartphones':
                 base_demand = np.random.uniform(100, 410)
             elif category == 'Laptops':
-                base_demand = np.random.uniform(90, 320)
+                base_demand = np.random.uniform(90, 220)
             elif category == 'Headphones':
                 base_demand = np.random.uniform(20, 210)
             elif category == 'Smartwatches':
                 base_demand = np.random.uniform(20, 140)
             elif category == 'Tablets':
-                base_demand = np.random.uniform(80, 200)
+                base_demand = np.random.uniform(80, 170)
 
             # Seasonal strength: how much seasonality affects this product (0.1-0.3)
             seasonal_strength = np.random.uniform(0.1, 0.3)
@@ -170,6 +174,7 @@ def generate_techmart_sales_history():
                 'seasonal_strength': seasonal_strength,
                 'noise_std': noise_std,
                 'bf_multiplier': bf_multiplier,
+                'category_trend': category_trend,
                 'price': np.random.uniform(30, 1200)
             })
             sku_id += 1
@@ -192,10 +197,16 @@ def generate_techmart_sales_history():
             # Base demand (unique per product)
             demand = sku['base_demand']
 
-            # Component 1: Annual cycle (52 weeks) - peak in Nov/Dec (Q4), trough in summer (Q3)
+            # Component 1: Category-specific trend (small, linear over time)
+            # Calculate years elapsed from start date (2023-01-01)
+            years_elapsed = (week_start - start_date).days / 365.25
+            trend_multiplier = 1.0 + (sku['category_trend'] * years_elapsed)
+            demand *= trend_multiplier
+
+            # Component 2: Annual cycle (52 weeks) - peak in Nov/Dec (Q4), trough in summer (Q3)
             annual_seasonality = 1.0 + sku['seasonal_strength'] * np.cos(2 * np.pi * (week_num - 47) / 52)
 
-            # Component 2: Quarterly cycle (13 weeks) - shorter-term fluctuations
+            # Component 3: Quarterly cycle (13 weeks) - shorter-term fluctuations
             quarterly_seasonality = 1.0 + (sku['seasonal_strength'] * 0.5) * np.sin(2 * np.pi * week_num / 13)
 
             demand *= annual_seasonality * quarterly_seasonality
@@ -366,26 +377,18 @@ def plot_sku_sales_trend(sku_id, sales_df, skus_df):
     plt.show()
 
 # Plot all SKUs together to visualize the dual seasonality pattern
-plt.figure(figsize=(16, 8))
-
-# Get top 3 highest base_demand products for legend
-top_skus = skus_df.nlargest(3, 'base_demand')['sku_id'].values
+plt.figure()
 
 for sku_id in skus_df['sku_id']:
     sku_history = get_sku_sales_history(sku_id, sales_df)
     sku_info = skus_df[skus_df['sku_id'] == sku_id].iloc[0]
-
-    # Plot with transparency to see overlapping patterns
-    # Only label top 3 SKUs by base demand
-    label = f"{sku_id} (base={sku_info['base_demand']:.0f})" if sku_id in top_skus else ''
     plt.plot(sku_history['week_start'], sku_history['units_sold'],
-            alpha=0.4, linewidth=0.8, label=label)
+            alpha=0.4, linewidth=0.8)
 
 plt.xlabel('Date', fontsize=12)
 plt.ylabel('Units Sold', fontsize=12)
-plt.title('All 30 SKUs Sales History (2023-2025)\nDual Seasonality with Product-Specific Characteristics',
+plt.title('All 30 SKUs Sales History (2023-2025)\nDual Seasonality + Category-Specific Trends',
          fontsize=14, fontweight='bold')
-plt.legend(loc='upper left', fontsize=8)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
@@ -462,11 +465,11 @@ Your notebook should include:
 ## Constraints and Requirements
 
 ::: {.callout-important}
-## Hard Constraints (Must Satisfy)
+**Hard Constraints (Must Satisfy)**
 
 1. **Capacity:** Total forecasted demand allocated to fast warehouse ≤ 8,000 units
 
-## Soft Constraints (Optimize)
+**Soft Constraints (Optimize)**
 
 1. **Minimize delay costs:** Fewer units in Poland = lower total cost
 2. **Robustness:** Allocation should perform reasonably under demand uncertainty (Monte Carlo)
