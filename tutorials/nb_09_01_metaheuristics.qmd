@@ -30,7 +30,7 @@ This is NOT a routing problem with a few trucks. This is a **strategic infrastru
 
 ::: {.callout-note}
 ## How to Use This Tutorial
-Work through each section in order. Write code where marked "YOUR CODE BELOW" and verify with the provided assertions. You'll implement greedy, local search, simulated annealing, and genetic algorithms, the **exact techniques** you'll need for the Restaurant Staffing Competition!
+Work through each section in order. Write code where marked "YOUR CODE BELOW" and verify with the provided assertions. You'll implement greedy, local search, simulated annealing, and genetic algorithms, the techniques you'll need for the Restaurant Staffing Competition!
 :::
 
 ```{python}
@@ -55,6 +55,7 @@ Before we can optimize, we need to understand the scale and structure of Bean Co
 ## Bean Counter's European Footprint
 
 ```{python}
+# DON'T CHANGE ANYTHING BELOW
 # Major European cities (simplified)
 european_cities = {
     'London': (51.5074, -0.1278, 120),
@@ -142,6 +143,7 @@ print(f"  • Each center serves exactly 20 cafés (balanced load)")
 print(f"  • Delivery cost: €2 per km per day")
 print(f"\nTotal annual facility budget: €25,000,000")
 print("Delivery costs depend on your network design!")
+# DON'T CHANGE ANYTHING ABOVE
 ```
 
 ## Visualizing the Network
@@ -194,7 +196,7 @@ Where:
 - $\lambda$ = longitude in radians
 :::
 
-Let's implement this:
+Here it is already implemented, you just need to call it:
 
 ```{python}
 def haversine_distance(loc1: Tuple[float, float], loc2: Tuple[float, float]) -> float:
@@ -232,7 +234,21 @@ Great! Now we can calculate real distances between any two locations in Europe.
 
 ## Exercise 1.1: Implement the Network Cost Function with Balanced Allocation
 
-This is the **heart** of the optimization - the function that determines if a network design is good or bad.
+This is the **heart** of the optimization, the function that determines if a network design is good or bad.
+
+::: {.callout-note}
+## Working with Sets in Python
+A **set** is an unordered collection with no duplicates:
+
+```python
+unassigned = {1, 2, 3, 4, 5}
+unassigned.remove(3)      # Remove element (error if not found)
+len(unassigned)           # Number of elements
+3 in unassigned           # Check membership (fast!)
+```
+
+**Why use sets here?** Fast membership testing and removal. Perfect for tracking which cafés still need assignment!
+:::
 
 ::: {.callout-tip}
 ## Balanced Allocation Strategy
@@ -254,6 +270,20 @@ This is the **heart** of the optimization - the function that determines if a ne
 - **No capacity violations** - each center gets exactly 20 cafés
 - **Realistic** - distribution territories are typically balanced
 - **Simple** - no penalty functions or feasibility checks needed
+:::
+
+::: {.callout-note}
+## Before You Start
+Here's the implementation plan:
+
+1. **Loop through each selected center** to assign its 20 cafés
+2. **For each center**, calculate distances to ALL unassigned cafés using `haversine_distance`
+3. **Store results as tuples**: `[(distance1, cafe_idx1), (distance2, cafe_idx2), ...]`
+4. **Sort the list** by distance using `.sort()` (smallest first)
+5. **Take the first 20** using list slicing `[:cafes_per_center]`
+6. **Add distances to total** and remove assigned cafés from the `unassigned_cafes` set
+
+**Hint**: Loop `for cafe_idx in unassigned_cafes:` to build the distance list!
 :::
 
 ```{python}
@@ -285,18 +315,17 @@ def calculate_network_cost(selected_centers: List[int],
     for center_idx in selected_centers:
         center_loc = center_locs[center_idx]
 
-        # YOUR CODE BELOW
-        # Calculate distances from this center to all unassigned cafés
+        # Step 1: Calculate distances from this center to all unassigned cafés
         distances_to_unassigned = []
         for cafe_idx in unassigned_cafes:
             distance = # YOUR CODE - calculate distance using haversine_distance
             distances_to_unassigned.append((distance, cafe_idx))
 
-        # Sort by distance and take the nearest cafes_per_center cafés
+        # Step 2: Sort by distance and take the nearest cafes_per_center cafés
         distances_to_unassigned.sort()
         nearest_cafes = distances_to_unassigned[:cafes_per_center]
 
-        # Add their distances to the total and mark as assigned
+        # Step 3: Add their distances to the total and mark as assigned
         for distance, cafe_idx in nearest_cafes:
             total_daily_distance += distance
             unassigned_cafes.remove(cafe_idx)
@@ -363,7 +392,7 @@ test_cost = calculate_network_cost(test_centers, cafe_locations, potential_cente
 assert test_cost > 25_000_000, "Cost should be > facility cost alone"
 assert test_cost < 300_000_000, f"Cost seems too high: €{test_cost:,.0f}"
 
-print("✓ Cost function working!")
+print("Cost function working!")
 print(f"Random network cost: €{test_cost:,.0f}")
 print(f"  Facility cost: €25,000,000")
 print(f"  Delivery cost: €{test_cost - 25_000_000:,.0f}")
@@ -372,7 +401,7 @@ print(f"Note: Each center serves exactly 20 cafés - always balanced and feasibl
 
 ## Helper Function: Get Café-Center Assignments
 
-We'll use this function to determine which cafés are assigned to which centers for visualization:
+No need to do anything here, we'll use this function to determine which cafés are assigned to which centers for visualization:
 
 ```{python}
 def get_cafe_assignments(selected_centers: List[int],
@@ -430,6 +459,10 @@ for center_idx, cafe_indices in random_assignments.items():
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
                 'gray', alpha=0.3, linewidth=1.5, zorder=1)
+        
+# Plot all locations        
+plt.scatter(center_lons, center_lats, s=80, alpha=0.1, color='red',
+           marker='s', label='Potential Centers (200)', edgecolors='darkred', linewidth=1)
 
 # Plot cafés
 cafe_lats = [loc[0] for loc in cafe_locations]
@@ -476,6 +509,20 @@ At each step, pick the center that gives the **biggest immediate benefit**:
 
 ## Exercise 2.1: Implement Greedy Center Selection
 
+::: {.callout-note}
+## Before You Start
+The greedy algorithm picks centers one at a time, always choosing the best addition:
+
+1. **Loop 50 times** (one for each center to select)
+2. **For each candidate** in the remaining centers:
+   - Create `temp_selection = selected + [candidate]`
+   - Calculate the cost if we selected this candidate
+   - Track the candidate with the lowest cost
+3. **Add the best candidate** to `selected` and remove from `remaining`
+
+**Key insight**: This is expensive (trying ~150 centers × 50 times = 7,500 cost calculations), but it builds a good initial solution!
+:::
+
 ```{python}
 #| eval: false
 def greedy_center_selection(cafe_locs: List[Tuple[float, float]],
@@ -501,19 +548,18 @@ def greedy_center_selection(cafe_locs: List[Tuple[float, float]],
         best_center = None
         best_cost = float('inf')
 
-        # YOUR CODE BELOW
-        # Try adding each remaining center
+        # Step 1: Try adding each remaining center
         for candidate in remaining:
-            # Create temporary selection with this candidate
+            # Step 2: Create temporary selection with this candidate added
             temp_selection = selected + [candidate]
 
-            # Calculate cost with balanced allocation
-            cost = # YOUR CODE
+            # Step 3: Calculate cost with balanced allocation
+            cost = # YOUR CODE - use calculate_network_cost
 
-            # Track if this is the best so far
+            # Step 4: Track if this is the best so far
             if cost < best_cost:
-                # YOUR CODE
-                pass
+                best_cost = # YOUR CODE
+                best_center = # YOUR CODE
 
         # Add the best center found
         selected.append(best_center)
@@ -579,7 +625,7 @@ baseline_random_cost = test_cost  # Historical random selection
 greedy_savings = baseline_random_cost - greedy_cost
 greedy_improvement_pct = (greedy_savings / baseline_random_cost) * 100
 
-print(f"\n✓ Greedy algorithm complete!")
+print(f"Greedy algorithm complete!")
 print(f"Greedy network cost: €{greedy_cost:,.0f}")
 print(f"vs. Current random network: €{baseline_random_cost:,.0f}")
 print(f"Annual savings: €{greedy_savings:,.0f} ({greedy_improvement_pct:.1f}% improvement)")
@@ -600,7 +646,11 @@ for center_idx, cafe_indices in greedy_assignments.items():
     for cafe_idx in cafe_indices:
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
-                'lightgreen', alpha=0.3, linewidth=1.5, zorder=1)
+                'blue', alpha=0.3, linewidth=1.5, zorder=1)
+
+# Plot all locations        
+plt.scatter(center_lons, center_lats, s=80, alpha=0.1, color='red',
+           marker='s', label='Potential Centers (200)', edgecolors='darkred', linewidth=1)
 
 # Plot all cafés
 plt.scatter(cafe_lons, cafe_lats, s=8, alpha=0.6, color='steelblue', 
@@ -616,13 +666,13 @@ plt.scatter(unselected_lons, unselected_lats, s=40, alpha=0.2, color='gray',
 # Plot selected centers
 selected_lats = [potential_centers[i][0] for i in greedy_solution]
 selected_lons = [potential_centers[i][1] for i in greedy_solution]
-plt.scatter(selected_lons, selected_lats, s=150, alpha=1.0, color='green',
-           marker='*', label='Greedy Selected (50)', edgecolors='darkgreen', 
+plt.scatter(selected_lons, selected_lats, s=150, alpha=1.0, color='blue',
+           marker='*', label='Greedy Selected (50)', edgecolors='black', 
            linewidth=1, zorder=3)
 
 plt.xlabel('Longitude (°)', fontsize=12)
 plt.ylabel('Latitude (°)', fontsize=12)
-plt.title(f'Greedy Solution: €{greedy_cost:,.0f}/year ({greedy_improvement_pct:.1f}% improvement)\n(Green lines show café-to-center assignments)',
+plt.title(f'Greedy Solution: €{greedy_cost:,.0f}/year ({greedy_improvement_pct:.1f}% improvement)\n(Blue lines show café-to-center assignments)',
          fontsize=14, fontweight='bold')
 plt.legend(fontsize=11)
 plt.grid(True, alpha=0.3)
@@ -638,19 +688,21 @@ Greedy saved us some money! But greedy algorithms are **short-sighted**:
 - They never reconsider earlier decisions
 - They can't escape suboptimal patterns
 
-**Can we do better?** Yes! That's where metaheuristics come in.
+**Can we do better?**
 :::
 
-# Section 3: Local Search - Building on Notebook 7.1
+# Section 3: Local Search
 
-Remember **2-opt** from the routing notebook? Let's apply the same concept here!
+Remember **2-opt swaps** from the routing notebook? There, we improved routes by reversing segments. Here, we'll use the **same local search philosophy** but with a different neighborhood:
+
+**Routing:** Swap edges in a route (reverse a segment)  
+**Distribution Network:** Swap centers in/out of the selection
+
+The core idea remains: **make small changes, keep improvements, stop at local optimum**.
 
 ::: {.callout-tip}
-## Local Search Review
+## Local Search
 **Core idea**: Start with a solution, repeatedly make small changes that improve it.
-
-**In Routing**: We swapped edges in a route
-**Here**: We'll swap centers in/out
 
 **The local search pattern**:
 
@@ -665,6 +717,38 @@ Remember **2-opt** from the routing notebook? Let's apply the same concept here!
 ## Exercise 3.1: Implement the Swap Neighborhood
 
 Create a neighbor by swapping one selected center with one unselected center.
+
+::: {.callout-note}
+## List Comprehensions for Filtering
+Create new lists based on conditions in one line:
+
+```python
+# Traditional approach
+unselected = []
+for i in range(200):
+    if i not in current_selection:
+        unselected.append(i)
+
+# List comprehension (same result, cleaner!)
+unselected = [i for i in range(200) if i not in current_selection]
+```
+
+**Pattern:** `[expression for item in iterable if condition]`
+
+This is perfect for finding which centers are NOT currently selected!
+:::
+
+::: {.callout-note}
+## Before You Start
+Your implementation steps:
+
+1. **Find unselected centers**: `[i for i in range(n_centers) if i not in current_selection]`
+2. **Pick a random position** to remove from current_selection: `random.randint(0, len(current_selection) - 1)`
+3. **Pick a random center** to add: `random.choice(unselected)`
+4. **Create a copy** of current_selection and replace the element at the random index with the new center
+
+**Hint**: Use `.copy()` to avoid modifying the original list!
+:::
 
 ```{python}
 #| eval: false
@@ -723,76 +807,35 @@ assert len(test_neighbor) == 50, "Neighbor should have 50 centers"
 assert len(set(test_neighbor)) == 50, "No duplicates"
 assert len(set(test_neighbor) & set(greedy_solution)) == 49, "Should differ by exactly 1 center"
 
-print("✓ 1-opt neighbor generation working!")
+print("1-opt neighbor generation working!")
 print(f"Changed 1 center from the solution")
 ```
-
-## Bonus: 2-Opt Neighborhood (Advanced)
-
-::: {.callout-tip}
-## Why Try 2-Opt?
-
-**2-opt** swaps TWO centers simultaneously, creating a richer neighborhood:
-
-- **1-opt**: 50 × 150 = 7,500 possible neighbors
-- **2-opt**: C(50,2) × C(150,2) ≈ 13.7 million possible neighbors!
-
-This larger neighborhood can help escape local optima that trap 1-opt. Try both in your SA implementation to see which finds better solutions!
-:::
-
-```{python}
-#| eval: true
-def generate_2opt_neighbor(current_selection: List[int],
-                          n_centers: int = 200) -> List[int]:
-    """Generate a neighbor by swapping TWO selected centers with TWO unselected (2-opt)."""
-    # Get unselected centers
-    unselected = [i for i in range(n_centers) if i not in current_selection]
-    
-    # Pick 2 random selected centers to remove
-    if len(current_selection) >= 2 and len(unselected) >= 2:
-        remove_indices = random.sample(range(len(current_selection)), 2)
-        add_centers = random.sample(unselected, 2)
-    else:
-        # Fallback to 1-opt if not enough centers
-        return generate_swap_neighbor(current_selection, n_centers)
-    
-    # Create new selection
-    new_selection = current_selection.copy()
-    
-    # Remove the selected centers (in reverse order to maintain indices)
-    for idx in sorted(remove_indices, reverse=True):
-        new_selection.pop(idx)
-    
-    # Add the new centers
-    new_selection.extend(add_centers)
-    
-    return new_selection
-```
-
-::: {.callout-note}
-You now have TWO neighborhood functions:
-
-- `generate_swap_neighbor` (1-opt): Simple, fast, good for local refinement
-- `generate_2opt_neighbor` (2-opt): Richer, better escape from local optima
-
-**Challenge**: Try both in your Local Search and SA implementations! 
-
-- Replace `generate_swap_neighbor` with `generate_2opt_neighbor` in the algorithms
-- Which finds better solutions? 
-- Is 2-opt worth the extra complexity?
-- Does SA benefit more from 2-opt than Local Search?
-:::
 
 ## Exercise 3.2: Implement Local Search
 
 Now implement the full local search algorithm.
+
+::: {.callout-note}
+## Before You Start
+Local search repeatedly tries to improve the current solution:
+
+1. **Try multiple neighbors** each iteration (parameter: `neighbors_per_iteration`)
+2. **For each neighbor**:
+   - Generate it using `generate_swap_neighbor(current)`
+   - Calculate its cost using `calculate_network_cost(...)`
+   - If better than current, **accept it immediately** and break the inner loop
+3. **Track improvements**: Increment counter when you accept a neighbor
+4. **Stop when stuck**: If you try all neighbors and none improve, you've reached a local optimum
+
+**Key difference from greedy**: Greedy builds from scratch; local search improves an existing solution!
+:::
 
 ```{python}
 #| eval: false
 def local_search(initial_solution: List[int],
                 cafe_locs: List[Tuple[float, float]],
                 center_locs: List[Tuple[float, float]],
-                max_iterations: int = 200,
+                max_iterations: int = 1000,
                 neighbors_per_iteration: int = 20) -> Tuple[List[int], float, int]:
     """
     Improve a solution using local search.
@@ -817,18 +860,19 @@ def local_search(initial_solution: List[int],
     for iteration in range(max_iterations):
         improved = False
 
-        # YOUR CODE BELOW
-        # Try multiple neighbors
+        # Step 1: Try multiple neighbors per iteration
         for _ in range(neighbors_per_iteration):
-            # Generate neighbor
-            neighbor = # YOUR CODE
+            # Step 2: Generate neighbor
+            neighbor = # YOUR CODE - use generate_swap_neighbor
 
-            # Evaluate neighbor
-            neighbor_cost = # YOUR CODE
+            # Step 3: Evaluate neighbor
+            neighbor_cost = # YOUR CODE - use calculate_network_cost
 
-            # If better, keep it
+            # Step 4: If better, keep it and break inner loop
             if neighbor_cost < current_cost:
-                # YOUR CODE: update current, current_cost, improvements
+                current = # YOUR CODE
+                current_cost = # YOUR CODE
+                improvements += 1
                 improved = True
                 break
 
@@ -849,7 +893,7 @@ def local_search(initial_solution: List[int],
 def local_search(initial_solution: List[int],
                 cafe_locs: List[Tuple[float, float]],
                 center_locs: List[Tuple[float, float]],
-                max_iterations: int = 200,
+                max_iterations: int = 1000,
                 neighbors_per_iteration: int = 20) -> Tuple[List[int], float, int]:
     """Improve a solution using local search."""
     current = initial_solution.copy()
@@ -900,7 +944,7 @@ assert ls_improvements >= 0, "Should track improvements"
 ls_savings = baseline_random_cost - ls_cost
 ls_improvement_pct = (ls_savings / baseline_random_cost) * 100
 
-print(f"\n✓ Local search complete!")
+print(f"Local search complete!")
 print(f"Local search cost: €{ls_cost:,.0f}")
 print(f"vs. Greedy: €{greedy_cost:,.0f}")
 print(f"Additional savings: €{greedy_cost - ls_cost:,.0f}")
@@ -924,6 +968,10 @@ for center_idx, cafe_indices in ls_assignments.items():
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
                 'mediumseagreen', alpha=0.3, linewidth=1.5, zorder=1)
+        
+# Plot all locations        
+plt.scatter(center_lons, center_lats, s=80, alpha=0.1, color='red',
+           marker='s', label='Potential Centers (200)', edgecolors='darkred', linewidth=1)
 
 # Plot all cafés
 plt.scatter(cafe_lons, cafe_lats, s=8, alpha=0.6, color='steelblue', 
@@ -954,36 +1002,60 @@ Local search potentially finds a better solution than greedy, but this is not al
 - But a **sequence** of swaps (including temporary bad moves) might lead somewhere better
 - Like hiking: sometimes you must go downhill briefly to reach a higher peak
 
-**This is exactly why we need metaheuristics!**
+**This is why we need metaheuristics!**
 :::
 
 # Section 4: Simulated Annealing - Escaping Local Optima
 
 Simulated Annealing (SA) is inspired by metallurgy: heating metal allows atoms to escape local patterns and find better arrangements as it cools.
 
-::: {.callout-tip}
-## Simulated Annealing Intuition
+## Exercise 4.1: Implement the SA Acceptance Criterion
 
-**The key insight**: Sometimes accept **worse** solutions to escape local optima!
+::: {.callout-note}
+## Before You Start
 
-**Temperature analogy**:
-- **High temperature** (early): Accept bad moves frequently (explore widely)
-- **Low temperature** (late): Accept bad moves rarely (refine solution)
+Idea: Sometimes accept **worse** solutions to escape local optima!
 
-**Acceptance rule**:
-```python
-if new_cost < current_cost:
-    accept = True  # Always accept improvements
-else:
-    delta = new_cost - current_cost
-    probability = exp(-delta / temperature)
-    accept = random.random() < probability  # Sometimes accept worse
-```
+Implementation is straightforward:
 
-**As temperature decreases**: Acceptance probability → 0, SA behaves like local search
+1. **If improvement** (new_cost < current_cost): Always return `True`
+2. **If worse** (new_cost >= current_cost):
+   - Calculate `delta = new_cost - current_cost`
+   - Calculate `probability = math.exp(-delta / temperature)`
+   - Return `True` with that probability: `random.random() < probability`
+
+**Key insight**: As temperature decreases, probability → 0, so SA becomes greedy!
 :::
 
-## Exercise 4.1: Implement the SA Acceptance Criterion
+::: {.callout-tip}
+## Acceptance Probability - Concrete Examples
+
+**Scenario 1: Small cost increase, high temperature**
+
+- Current: €40,000,000
+- Neighbor: €40,100,000 (€100K worse)
+- Temperature: T = 1,000,000
+- Delta = 100,000
+- Probability = exp(-100,000 / 1,000,000) = exp(-0.1) ≈ **90.5%** → Often accept!
+
+**Scenario 2: Same increase, low temperature**
+
+- Current: €40,000,000
+- Neighbor: €40,100,000 (€100K worse)
+- Temperature: T = 1,000
+- Delta = 100,000
+- Probability = exp(-100,000 / 1,000) = exp(-100) ≈ **0.0%** → Reject!
+
+**Scenario 3: Large increase, high temperature**
+
+- Current: €40,000,000
+- Neighbor: €42,000,000 (€2M worse!)
+- Temperature: T = 1,000,000
+- Delta = 2,000,000
+- Probability = exp(-2,000,000 / 1,000,000) = exp(-2) ≈ **13.5%** → Sometimes accept!
+
+**The pattern**: Higher temperature → more exploration. Lower temperature → more exploitation.
+:::
 
 ```{python}
 #| eval: false
@@ -999,13 +1071,12 @@ def accept_move(current_cost: float, new_cost: float, temperature: float) -> boo
     Returns:
         True if move should be accepted
     """
-    # YOUR CODE BELOW
     if new_cost < current_cost:
         return True  # Always accept improvements
     else:
         # Calculate acceptance probability
         delta = # YOUR CODE
-        probability = # YOUR CODE: exp(-delta / temperature)
+        probability = # YOUR CODE
 
         return random.random() < probability
 ```
@@ -1041,14 +1112,14 @@ assert low_temp_accepts < 200, f"Low temp should accept <20% of moves, got {low_
 improvements = sum(accept_move(1000, 900, temperature=100) for _ in range(100))
 assert improvements == 100, "Should always accept improvements"
 
-print("✓ Acceptance criterion working!")
+print("Acceptance criterion working!")
 print(f"High temp (T=500): {high_temp_accepts/10:.1f}% acceptance for +€100 move")
 print(f"Low temp (T=10): {low_temp_accepts/10:.1f}% acceptance for +€100 move")
 ```
 
 ## Exercise 4.2: Implement Simulated Annealing
 
-Now put it all together! We'll provide the cooling schedule, you implement the main loop.
+Now put it all together! I will provide the cooling schedule, you implement the main loop.
 
 ::: {.callout-note}
 ## Cooling Schedule
@@ -1057,8 +1128,26 @@ We'll use **geometric cooling**: `T_new = α × T_old`
 - Initial temperature: `T₀ = 10,000` (accept moves up to ~€10K worse initially)
 - Cooling rate: `α = 0.995` (slow cooling for thorough exploration)
 - Stop when: `T < 1` (essentially greedy behavior)
+:::
 
-This gives us ~1,500 iterations of exploration before becoming pure greedy.
+::: {.callout-note}
+## Before You Start
+SA has TWO solutions to track (unlike local search which only tracks one):
+
+1. **Current solution**: The solution we're currently exploring (can get worse!)
+2. **Best solution**: The best solution ever found (never gets worse)
+
+**Why both?** We need to accept worse moves to escape local optima, but we don't want to forget the best solution we've seen!
+
+**Your implementation steps:**
+
+1. Generate a neighbor using `generate_swap_neighbor(current)`
+2. Calculate its cost using `calculate_network_cost(...)`
+3. Use `accept_move(current_cost, neighbor_cost, temperature)` to decide
+4. **If accepted**: Update `current` and `current_cost` (even if worse!)
+5. **Then check**: If current is better than best ever, update `best` and `best_cost`
+
+**Critical**: Track best separately from current!
 :::
 
 ```{python}
@@ -1096,30 +1185,32 @@ def simulated_annealing(initial_solution: List[int],
     print(f"SA starting from €{current_cost:,.0f} with T={initial_temp:,.0f}")
 
     while temperature > min_temp:
-        # YOUR CODE BELOW
-        # 1. Generate a neighbor
-        neighbor = # YOUR CODE
+        for _ in range(10):  # 10 neighbors per temperature step
 
-        # 2. Calculate its cost
-        neighbor_cost = # YOUR CODE
-
-        # 3. Decide whether to accept using accept_move function
-        if accept_move(current_cost, neighbor_cost, temperature):
-            # YOUR CODE: update current and current_cost
-            pass
-
-            # Track best ever found
-            if current_cost < best_cost:
-                # YOUR CODE: update best and best_cost
-                pass
+            # Step 1: Generate a neighbor
+            neighbor = # YOUR CODE - use generate_swap_neighbor
+    
+            # Step 2: Calculate its cost
+            neighbor_cost = # YOUR CODE - use calculate_network_cost
+    
+            # Step 3: Decide whether to accept using accept_move function
+            if accept_move(current_cost, neighbor_cost, temperature):
+                # Step 4: Update current solution (even if worse!)
+                current = # YOUR CODE
+                current_cost = # YOUR CODE
+    
+                # Step 5: Track best ever found
+                if current_cost < best_cost:
+                    best = # YOUR CODE - use .copy()!
+                    best_cost = # YOUR CODE
+            
+            iteration += 1
+            if iteration % 200 == 0:
+                print(f"  Iteration {iteration}: T={temperature:.1f}, Current=€{current_cost:,.0f}, Best=€{best_cost:,.0f}")
 
         # Cool down
         temperature *= cooling_rate
         cost_history.append(current_cost)
-
-        iteration += 1
-        if iteration % 200 == 0:
-            print(f"  Iteration {iteration}: T={temperature:.1f}, Current=€{current_cost:,.0f}, Best=€{best_cost:,.0f}")
 
     print(f"SA complete after {iteration} iterations")
 
@@ -1150,23 +1241,24 @@ def simulated_annealing(initial_solution: List[int],
     print(f"SA starting from €{current_cost:,.0f} with T={initial_temp:,.0f}")
 
     while temperature > min_temp:
-        neighbor = generate_swap_neighbor(current)
-        neighbor_cost = calculate_network_cost(neighbor, cafe_locs, center_locs)
-
-        if accept_move(current_cost, neighbor_cost, temperature):
-            current = neighbor
-            current_cost = neighbor_cost
-
-            if current_cost < best_cost:
-                best = current.copy()
-                best_cost = current_cost
+        for _ in range(10):  # 10 neighbors per temperature step
+            neighbor = generate_swap_neighbor(current)
+            neighbor_cost = calculate_network_cost(neighbor, cafe_locs, center_locs)
+    
+            if accept_move(current_cost, neighbor_cost, temperature):
+                current = neighbor
+                current_cost = neighbor_cost
+    
+                if current_cost < best_cost:
+                    best = current.copy()
+                    best_cost = current_cost
+                    
+            iteration += 1
+            if iteration % 200 == 0:
+                print(f"  Iteration {iteration}: T={temperature:.1f}, Current=€{current_cost:,.0f}, Best=€{best_cost:,.0f}")
 
         temperature *= cooling_rate
         cost_history.append(current_cost)
-
-        iteration += 1
-        if iteration % 200 == 0:
-            print(f"  Iteration {iteration}: T={temperature:.1f}, Current=€{current_cost:,.0f}, Best=€{best_cost:,.0f}")
 
     print(f"SA complete after {iteration} iterations")
 
@@ -1190,7 +1282,7 @@ assert len(sa_history) > 100, "Should have run many iterations"
 sa_savings = baseline_random_cost - sa_cost
 sa_improvement_pct = (sa_savings / baseline_random_cost) * 100
 
-print(f"\n✓ Simulated Annealing complete!")
+print(f"Simulated Annealing complete!")
 print(f"SA cost: €{sa_cost:,.0f}")
 print(f"vs. Local Search: €{ls_cost:,.0f}")
 print(f"vs. Greedy: €{greedy_cost:,.0f}")
@@ -1254,7 +1346,11 @@ for center_idx, cafe_indices in sa_assignments.items():
     for cafe_idx in cafe_indices:
         cafe_loc = cafe_locations[cafe_idx]
         plt.plot([center_loc[1], cafe_loc[1]], [center_loc[0], cafe_loc[0]], 
-                'gold', alpha=0.3, linewidth=1.5, zorder=1)
+                'gold', alpha=0.8, linewidth=1.5, zorder=1)
+        
+# Plot all locations        
+plt.scatter(center_lons, center_lats, s=80, alpha=0.1, color='red',
+           marker='s', label='Potential Centers (200)', edgecolors='darkred', linewidth=1)
 
 # Plot all cafés
 plt.scatter(cafe_lons, cafe_lats, s=8, alpha=0.6, color='steelblue', 
@@ -1276,14 +1372,14 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-print(f"\n💡 Notice how SA found a different configuration than Local Search!")
-print(f"   By accepting temporary worse moves, SA explored more of the solution space")
-print(f"   This allowed it to escape local optima and find a better global solution")
+print(f"Notice how SA found a different configuration than Local Search!")
+print(f"By accepting temporary worse moves, SA explored more of the solution space")
+print(f"This allowed it to escape local optima and find a better global solution")
 ```
 
 **Why SA beats Local Search:**
 
-- **Early exploration** (high T): SA accepts ~60% of worse moves, exploring far from greedy solution
+- **Early exploration** (high T): SA accepts worse moves, exploring far from greedy solution
 - **Strategic descent** (mid T): SA occasionally climbs small hills to find better valleys
 - **Fine-tuning** (low T): SA behaves like local search to polish the solution
 
@@ -1293,11 +1389,10 @@ The key: **temporary bad decisions enable better long-term outcomes!**
 
 ## The Business Case
 
-Let's calculate the real financial impact:
+Let's calculate the real financial impact, based on your results. Just execute the following code block:
 
 ```{python}
 #| eval: false
-# Create comprehensive comparison
 results = pd.DataFrame({
     'Algorithm': ['Current (Random)', 'Greedy', 'Local Search', 'Simulated Annealing'],
     'Annual Cost (€)': [baseline_random_cost, greedy_cost, ls_cost, sa_cost],
@@ -1313,7 +1408,6 @@ results = pd.DataFrame({
         ((baseline_random_cost - ls_cost) / baseline_random_cost) * 100,
         ((baseline_random_cost - sa_cost) / baseline_random_cost) * 100
     ],
-    'Computation Time': ['0 sec', '~30 sec', '~45 sec', '~60 sec']
 })
 
 print("=" * 80)
@@ -1341,33 +1435,7 @@ print("=" * 80)
 
 # Conclusion
 
-**Congratulations, CEO!** You've mastered metaheuristics and saved Bean Counter millions!
-
-## Key Takeaways
-
-1. **Problem Scale Matters**
-   - 1,000 cafés × 200 centers = 10^74 possible networks
-   - Impossible to try them all, must use smart search
-
-2. **Balanced Allocation Simplifies Everything**
-   - Each center serves exactly 20 cafés
-   - Greedy assignment ensures fairness
-   - No feasibility issues to worry about!
-
-3. **Algorithm Progression**
-   - **Greedy**: Fast, shortsighted
-   - **Local Search**: Gets stuck
-   - **Simulated Annealing**: Escapes traps
-
-4. **The Power of Accepting Worse Moves**
-   - Local search: Never accept worse → stuck
-   - SA: Temporarily accept worse → escape
-   - Temperature controls exploration vs. exploitation
-
-5. **Business Impact**
-   - Millions in annual savings with SA
-   - 10-year contract worth tens of millions
-   - ROI: 1000x+ on optimization effort
+**Congratulations, CEO!** You've mastered metaheuristics and saved Bean Counter millions! Your empire is now more efficient and profitable than ever before, thanks to your knowledge in management science. Your leadership has enabled Bean Counter to thrive in a competitive market, and has set the stage for even greater success!
 
 ## What's Next?
 
