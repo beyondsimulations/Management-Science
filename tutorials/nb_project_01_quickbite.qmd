@@ -49,12 +49,8 @@ code-links:
 
 ### Customer Expectations
 
-Each delivery has a **time window** (requested delivery time ± 15 minutes):
-
-- Orders placed for lunch rush (12:00-13:30)
-- Orders placed for dinner rush (18:00-20:30)
-
-**Time window violation = Late penalty + High chance of cold food complaint**
+Each delivery has a **time window** (requested delivery time ± 15 minutes): 
+**Time window violation = Late penalty + Potential cold food complaint**
 
 ## Your Mission
 

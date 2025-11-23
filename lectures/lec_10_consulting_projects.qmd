@@ -74,7 +74,7 @@ format:
 [QuickBite's daily logistics nightmare:]{.highlight}
 
 ::: {.incremental}
-- **100 meal deliveries** across Hamburg every day
+- **120 meal deliveries** across Hamburg every day
 - **4 drivers** starting from one central depot
 - **Current approach:** Drivers choose routes by "intuition"
 - **The damage:** Monthly waste in fuel + penalties
@@ -95,8 +95,8 @@ format:
 
 ::: {.incremental}
 - **Vehicle Routing Problem** with time windows
-- 100 delivery locations across Hamburg
-- 4 drivers with capacity constraints (28 meals each)
+- 120 delivery locations across Hamburg
+- 4 drivers with capacity constraints
 - Time windows for each delivery (violations = penalty)
 - **Trade-offs:** Distance vs. punctuality vs. driver workload balance
 :::
@@ -171,7 +171,7 @@ Any questions?
 [TechMart's warehouse crisis:]{.highlight}
 
 ::: {.incremental}
-- **50 electronics SKUs:** Smartphones, laptops, ...
+- **30 electronics SKUs:** Smartphones, laptops, ...
 - **Two warehouses:** Fast (Hamburg) and large (Poland)
 - **Current problem:** Wrong products in wrong warehouses
 - **Last Black Friday:** Ran out of top items in Hamburg on Day 1
@@ -256,7 +256,6 @@ Any questions here?
 
 ::: incremental
 1. **Jupyter notebook** with complete solution
-   - Well-commented code and clear explanations
    - Results and visualizations embedded
 
 2. **Presentation slides** (8 minutes maximum)
