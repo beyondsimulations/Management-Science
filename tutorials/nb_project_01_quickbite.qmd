@@ -13,7 +13,7 @@ code-links:
 
 **Industry:** Food Delivery / Logistics
 **Client Contact:** Eliza Chen, CEO
-**Company Size:** 12 employees, 100+ daily deliveries
+**Company Size:** 12 employees, 120+ daily deliveries
 
 ## The CEO's Dilemma
 
@@ -34,11 +34,11 @@ code-links:
 
 ### Current Operations
 
-- **Daily deliveries:** 100 meal orders across Hamburg
+- **Daily deliveries:** 120 meal orders across Hamburg
 - **Fleet:** 4 delivery drivers with insulated cars
 - **Depot:** Central location (Hamburg Hauptbahnhof area)
 - **Service hours:** 11:00 AM - 9:00 PM
-- **Driver capacity:** Each driver can carry up to 28 meals at once
+- **Driver capacity:** Each driver can carry up to 35 meals at once
 - **Average order value:** €10
 
 ### Cost Structure
@@ -64,7 +64,7 @@ Design an optimal routing system for QuickBite's 4 drivers that:
 
 1. **Minimizes total delivery costs** (driver time + fuel + penalties)
 2. **Maximizes on-time deliveries** (arrive within time windows)
-3. **Respects vehicle capacity** (max 8 meals per driver at once)
+3. **Respects vehicle capacity** (max 35 meals per driver at once)
 4. **Ensures fairness** (balanced workload across drivers)
 
 ## The Data
@@ -88,9 +88,9 @@ depot = {
     'lon': 10.0063
 }
 
-# Generate 100 delivery locations across Hamburg
+# Generate 120 delivery locations across Hamburg
 # Hamburg spans roughly: lat 53.45-53.65, lon 9.85-10.15
-def generate_hamburg_deliveries(n=100):
+def generate_hamburg_deliveries(n=120):
     deliveries = []
 
     # Create realistic clusters (residential areas, business districts)
@@ -147,7 +147,7 @@ def generate_hamburg_deliveries(n=100):
     return pd.DataFrame(deliveries)
 
 # Generate delivery data
-deliveries_df = generate_hamburg_deliveries(100)
+deliveries_df = generate_hamburg_deliveries(120)
 
 # Display first 10 deliveries
 print("QUICKBITE DELIVERY DATA - Tuesday, Nov 19, 2024")
@@ -254,7 +254,7 @@ def haversine_distance(lat1, lon1, lat2, lon2):
 def create_distance_matrix(deliveries_df, depot_location):
     """
     Create distance matrix for all locations (depot + all deliveries).
-    Returns numpy array where index 0 is depot, indices 1-100 are deliveries.
+    Returns numpy array where index 0 is depot, indices 1-120 are deliveries.
     """
     n = len(deliveries_df) + 1  # +1 for depot
     distances = np.zeros((n, n))
@@ -386,7 +386,7 @@ for key, value in example_cost.items():
 
 ## Your Task
 
-You must develop a routing solution that assigns all 100 deliveries to 4 drivers and provides:
+You must develop a routing solution that assigns all 120 deliveries to 4 drivers and provides:
 
 ### 1. Jupyter Notebook with Complete Solution
 
@@ -422,7 +422,7 @@ Your notebook should include:
 ## Hard Constraints (Must Satisfy)
 
 1. **All deliveries assigned:** Every delivery must be assigned to exactly one driver
-2. **Vehicle capacity:** Each driver can carry max 28 meals at once
+2. **Vehicle capacity:** Each driver can carry max 35 meals at once
 3. **Start and end at depot:** All routes begin and end at the depot
 4. **Time feasibility:** Deliveries should be attempted within operating hours (11:00-21:00)
 
@@ -436,7 +436,7 @@ Your notebook should include:
 
 ## Tips for Success
 
-1. **Capacity matters:** With 100 deliveries and 28-meal capacity, you will need to use all drivers. This affects your algorithm design!
+1. **Capacity matters:** With 120 deliveries and 35-meal capacity, you will need to use all drivers. This affects your algorithm design!
 2. **Time windows are critical:** Late penalties and cold food complaints are expensive. Sometimes driving extra distance to be on time is worth it.
 3. **Clustering helps:** Hamburg has natural neighborhood clusters. Use them!
 4. **Visualize early:** Plot routes as you develop them. Bad routes are obvious visually.
@@ -457,7 +457,7 @@ Your notebook should include:
 
 All data is provided in this notebook:
 
-- `deliveries_df`: DataFrame with 100 deliveries
+- `deliveries_df`: DataFrame with 120 deliveries
 - `depot`: Dict with depot location
 - `distance_matrix`: Numpy array of distances
 - Helper functions: `calculate_route_cost()`, `visualize_deliveries()`
