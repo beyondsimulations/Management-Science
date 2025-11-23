@@ -80,7 +80,7 @@ You must decide **how many units of each SKU** to pre-position in the fast wareh
 - **Units in Fast Warehouse (Hamburg):** Ship quickly (1-2 days), customers happy, **no delay penalty**
 - **Units in Large Warehouse (Poland):** Ship slowly (4-6 days), customers complain, **delay penalty applies**
 
-**Your Goal:** Decide how many units of each SKU go in Hamburg warehouse to **minimize total delay penalty costs**.
+**Your Goal:** Decide how many units of each SKU go in Hamburg warehouse to minimize total delay penalty costs. *Note: While storage costs differ, Yola cares most about customer satisfaction. Minimize the delay penalties first.*
 
 ::: callout-note
 Note, we have sufficient total inventory of each SKU. The question is **WHERE to store each unit** before Black Friday!
@@ -493,7 +493,7 @@ All data is provided in this notebook:
 - `skus_df`: DataFrame with 30 SKUs and their attributes
 - `sales_df`: DataFrame with 3 years of weekly sales history
 - `warehouses`: Dict with warehouse specifications
-- Helper functions: `get_sku_sales_history()`, `calculate_allocation_cost()`
+- Helper functions: `get_sku_sales_history()`, `plot_sku_sales_trend()`
 
 **You must implement forecasting, allocation optimization, and Monte Carlo simulation yourself!**
 
