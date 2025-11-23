@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr.&nbsp;Tobias Vlćek">
 
-<title>The Metaheuristics Toolkit – Management Science</title>
+<title>Introduction to Metaheuristics – Management Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,35 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -154,7 +125,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The Metaheuristics Toolkit</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_09_metaheuristics.html">09 Metaheuristics</a></li><li class="breadcrumb-item"><a href="../lectures/lec_09_metaheuristics.html">Lecture</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -207,7 +178,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_01_introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">01 Introduction</span></a>
+ <span class="menu-text">Leture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -242,7 +213,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_02_copilot_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">02 Generative AI</span></a>
+ <span class="menu-text">Lecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -283,7 +254,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_03_closing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">03 Closing</span></a>
+ <span class="menu-text">Lecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -318,7 +289,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_04_monte_carlo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">04 Lecture</span></a>
+ <span class="menu-text">Lecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -347,7 +318,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_05_forecasting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">05 Lecture</span></a>
+ <span class="menu-text">Lecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -376,7 +347,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_06_greedy_algorithms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">06 Lecture</span></a>
+ <span class="menu-text">Lecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -405,7 +376,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_07_local_search.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">07 Lecture</span></a>
+ <span class="menu-text">Lecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -434,7 +405,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec_08_multi_objective.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">08 Lecture</span></a>
+ <span class="menu-text">Lecture</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -451,6 +422,70 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">09 Metaheuristics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_09_metaheuristics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_09_01_metaheuristics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-09-01 Metaheuristics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_09_02_restaurant_staffing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-09-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">10 Consulting Projects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_10_consulting_projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_01_quickbite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 01: QuickBite</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_02_nursenext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 02: NurseNext</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_03_techmart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 03: TechMart</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
  <span class="menu-text">***</span>
   </li>
@@ -462,13 +497,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignments/assignment_00.html" class="sidebar-item-text sidebar-link">
@@ -525,73 +560,76 @@ window.Quarto = {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="flow">Introduction</span></a>
   <ul class="collapse">
-  <li><a href="#client-briefing-la-étoile-restaurant" id="toc-client-briefing-la-étoile-restaurant" class="nav-link" data-scroll-target="#client-briefing-la-étoile-restaurant"><strong><span class="invert-font">Client Briefing: La Étoile Restaurant</span></strong></a></li>
+  <li><a href="#client-briefing-la-étoile" id="toc-client-briefing-la-étoile" class="nav-link" data-scroll-target="#client-briefing-la-étoile"><strong><span class="invert-font">Client Briefing: La Étoile</span></strong></a></li>
   <li><a href="#the-staffing-challenge" id="toc-the-staffing-challenge" class="nav-link" data-scroll-target="#the-staffing-challenge">The Staffing Challenge</a></li>
-  <li><a href="#todays-learning-objectives" id="toc-todays-learning-objectives" class="nav-link" data-scroll-target="#todays-learning-objectives">Today’s Learning Objectives</a></li>
-  <li><a href="#quick-recap-our-optimization-journey" id="toc-quick-recap-our-optimization-journey" class="nav-link" data-scroll-target="#quick-recap-our-optimization-journey">Quick Recap: Our Optimization Journey</a></li>
+  <li><a href="#the-cost-impact-why-this-matters" id="toc-the-cost-impact-why-this-matters" class="nav-link" data-scroll-target="#the-cost-impact-why-this-matters">The Cost Impact: Why This Matters</a></li>
+  <li><a href="#restaurant-staffing-the-numbers" id="toc-restaurant-staffing-the-numbers" class="nav-link" data-scroll-target="#restaurant-staffing-the-numbers">Restaurant Staffing: The Numbers</a></li>
+  <li><a href="#todays-objectives" id="toc-todays-objectives" class="nav-link" data-scroll-target="#todays-objectives">Today’s Objectives</a></li>
+  <li><a href="#hiking-in-fog" id="toc-hiking-in-fog" class="nav-link" data-scroll-target="#hiking-in-fog">Hiking in Fog</a></li>
+  <li><a href="#recap-local-optima" id="toc-recap-local-optima" class="nav-link" data-scroll-target="#recap-local-optima">Recap: Local Optima</a></li>
   </ul></li>
   <li><a href="#why-simple-methods-fail" id="toc-why-simple-methods-fail" class="nav-link" data-scroll-target="#why-simple-methods-fail"><span class="flow">Why Simple Methods Fail</span></a>
   <ul class="collapse">
-  <li><a href="#restaurant-staffing-the-numbers" id="toc-restaurant-staffing-the-numbers" class="nav-link" data-scroll-target="#restaurant-staffing-the-numbers">Restaurant Staffing: The Numbers</a></li>
+  <li><a href="#the-silo-problem" id="toc-the-silo-problem" class="nav-link" data-scroll-target="#the-silo-problem">The Silo Problem</a></li>
   <li><a href="#why-greedy-gets-stuck" id="toc-why-greedy-gets-stuck" class="nav-link" data-scroll-target="#why-greedy-gets-stuck">Why Greedy Gets Stuck</a></li>
   <li><a href="#local-search-also-struggles" id="toc-local-search-also-struggles" class="nav-link" data-scroll-target="#local-search-also-struggles">Local Search Also Struggles</a></li>
   </ul></li>
-  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations"><span class="flow">Mathematical Foundations</span></a>
-  <ul class="collapse">
-  <li><a href="#core-metaheuristic-concepts" id="toc-core-metaheuristic-concepts" class="nav-link" data-scroll-target="#core-metaheuristic-concepts">Core Metaheuristic Concepts</a></li>
-  </ul></li>
   <li><a href="#metaheuristic-1-simulated-annealing" id="toc-metaheuristic-1-simulated-annealing" class="nav-link" data-scroll-target="#metaheuristic-1-simulated-annealing"><span class="flow">Metaheuristic #1: Simulated Annealing</span></a>
   <ul class="collapse">
+  <li><a href="#core-concepts" id="toc-core-concepts" class="nav-link" data-scroll-target="#core-concepts">Core Concepts</a></li>
   <li><a href="#the-metallurgy-metaphor" id="toc-the-metallurgy-metaphor" class="nav-link" data-scroll-target="#the-metallurgy-metaphor">The Metallurgy Metaphor</a></li>
   <li><a href="#temperature-controls-acceptance" id="toc-temperature-controls-acceptance" class="nav-link" data-scroll-target="#temperature-controls-acceptance">Temperature Controls Acceptance</a></li>
-  <li><a href="#simulated-annealing-implementation" id="toc-simulated-annealing-implementation" class="nav-link" data-scroll-target="#simulated-annealing-implementation">Simulated Annealing: Implementation</a></li>
+  <li><a href="#concept" id="toc-concept" class="nav-link" data-scroll-target="#concept">Concept</a></li>
   <li><a href="#sa-in-action-restaurant-staffing" id="toc-sa-in-action-restaurant-staffing" class="nav-link" data-scroll-target="#sa-in-action-restaurant-staffing">SA in Action: Restaurant Staffing</a></li>
   <li><a href="#visualizing-sa-performance" id="toc-visualizing-sa-performance" class="nav-link" data-scroll-target="#visualizing-sa-performance">Visualizing SA Performance</a></li>
-  <li><a href="#common-sa-implementation-bugs" id="toc-common-sa-implementation-bugs" class="nav-link" data-scroll-target="#common-sa-implementation-bugs">Common SA Implementation Bugs</a></li>
+  <li><a href="#common-sa-mistakes" id="toc-common-sa-mistakes" class="nav-link" data-scroll-target="#common-sa-mistakes">Common SA Mistakes</a></li>
+  <li><a href="#temperature-parameter-impact" id="toc-temperature-parameter-impact" class="nav-link" data-scroll-target="#temperature-parameter-impact">Temperature Parameter Impact</a></li>
   </ul></li>
   <li><a href="#metaheuristic-2-genetic-algorithms" id="toc-metaheuristic-2-genetic-algorithms" class="nav-link" data-scroll-target="#metaheuristic-2-genetic-algorithms"><span class="flow">Metaheuristic #2: Genetic Algorithms</span></a>
   <ul class="collapse">
   <li><a href="#evolution-as-optimization" id="toc-evolution-as-optimization" class="nav-link" data-scroll-target="#evolution-as-optimization">Evolution as Optimization</a></li>
   <li><a href="#the-genetic-process" id="toc-the-genetic-process" class="nav-link" data-scroll-target="#the-genetic-process">The Genetic Process</a></li>
+  <li><a href="#stage-1-selection-tournament" id="toc-stage-1-selection-tournament" class="nav-link" data-scroll-target="#stage-1-selection-tournament">Stage 1: Selection (Tournament)</a></li>
+  <li><a href="#stage-2-crossover-recombination" id="toc-stage-2-crossover-recombination" class="nav-link" data-scroll-target="#stage-2-crossover-recombination">Stage 2: Crossover (Recombination)</a></li>
+  <li><a href="#stage-3-mutation" id="toc-stage-3-mutation" class="nav-link" data-scroll-target="#stage-3-mutation">Stage 3: Mutation</a></li>
+  <li><a href="#stage-4-replacement-i" id="toc-stage-4-replacement-i" class="nav-link" data-scroll-target="#stage-4-replacement-i">Stage 4: Replacement I</a></li>
+  <li><a href="#stage-4-replacement-ii" id="toc-stage-4-replacement-ii" class="nav-link" data-scroll-target="#stage-4-replacement-ii">Stage 4: Replacement II</a></li>
+  <li><a href="#stage-5.-population-evolution" id="toc-stage-5.-population-evolution" class="nav-link" data-scroll-target="#stage-5.-population-evolution">Stage 5. Population Evolution</a></li>
   <li><a href="#ga-vs-sa-head-to-head" id="toc-ga-vs-sa-head-to-head" class="nav-link" data-scroll-target="#ga-vs-sa-head-to-head">GA vs SA: Head-to-Head</a></li>
-  <li><a href="#common-ga-implementation-pitfalls" id="toc-common-ga-implementation-pitfalls" class="nav-link" data-scroll-target="#common-ga-implementation-pitfalls">Common GA Implementation Pitfalls</a></li>
+  <li><a href="#ga-mistakes-population-issues" id="toc-ga-mistakes-population-issues" class="nav-link" data-scroll-target="#ga-mistakes-population-issues">GA Mistakes: Population Issues</a></li>
+  <li><a href="#ga-mistakes-implementation" id="toc-ga-mistakes-implementation" class="nav-link" data-scroll-target="#ga-mistakes-implementation">GA Mistakes: Implementation</a></li>
   </ul></li>
-  <li><a href="#more-metaheuristics" id="toc-more-metaheuristics" class="nav-link" data-scroll-target="#more-metaheuristics"><span class="flow">More Metaheuristics</span></a>
+  <li><a href="#metaheuristic-3-tabu-search" id="toc-metaheuristic-3-tabu-search" class="nav-link" data-scroll-target="#metaheuristic-3-tabu-search"><span class="flow">Metaheuristic #3: Tabu Search</span></a>
   <ul class="collapse">
-  <li><a href="#metaheuristic-3-tabu-search" id="toc-metaheuristic-3-tabu-search" class="nav-link" data-scroll-target="#metaheuristic-3-tabu-search">Metaheuristic #3: Tabu Search</a></li>
-  <li><a href="#metaheuristic-4-ant-colony-optimization" id="toc-metaheuristic-4-ant-colony-optimization" class="nav-link" data-scroll-target="#metaheuristic-4-ant-colony-optimization">Metaheuristic #4: Ant Colony Optimization</a></li>
+  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea">Core Idea</a></li>
+  <li><a href="#concept-1" id="toc-concept-1" class="nav-link" data-scroll-target="#concept-1">Concept</a></li>
+  <li><a href="#tabu-search-on-restaurant-problem" id="toc-tabu-search-on-restaurant-problem" class="nav-link" data-scroll-target="#tabu-search-on-restaurant-problem">Tabu Search on Restaurant Problem</a></li>
+  </ul></li>
+  <li><a href="#metaheuristic-4-ant-colony-optimization" id="toc-metaheuristic-4-ant-colony-optimization" class="nav-link" data-scroll-target="#metaheuristic-4-ant-colony-optimization"><span class="flow">Metaheuristic #4: Ant Colony Optimization</span></a>
+  <ul class="collapse">
+  <li><a href="#the-core-idea" id="toc-the-core-idea" class="nav-link" data-scroll-target="#the-core-idea">The Core Idea</a></li>
+  <li><a href="#how-aco-works-on-scheduling" id="toc-how-aco-works-on-scheduling" class="nav-link" data-scroll-target="#how-aco-works-on-scheduling">How ACO Works on Scheduling</a></li>
+  <li><a href="#aco-key-parameters" id="toc-aco-key-parameters" class="nav-link" data-scroll-target="#aco-key-parameters">ACO: Key Parameters</a></li>
+  <li><a href="#stage-1-pheromone-construction" id="toc-stage-1-pheromone-construction" class="nav-link" data-scroll-target="#stage-1-pheromone-construction">Stage 1: Pheromone Construction</a></li>
+  <li><a href="#stage-2-evaluation-evaporation" id="toc-stage-2-evaluation-evaporation" class="nav-link" data-scroll-target="#stage-2-evaluation-evaporation">Stage 2: Evaluation &amp; Evaporation</a></li>
+  <li><a href="#stage-3-reinforcement" id="toc-stage-3-reinforcement" class="nav-link" data-scroll-target="#stage-3-reinforcement">Stage 3: Reinforcement</a></li>
+  <li><a href="#stage-4-evolution-over-iterations" id="toc-stage-4-evolution-over-iterations" class="nav-link" data-scroll-target="#stage-4-evolution-over-iterations">Stage 4: Evolution Over Iterations</a></li>
+  <li><a href="#aco-vs-other-algorithms" id="toc-aco-vs-other-algorithms" class="nav-link" data-scroll-target="#aco-vs-other-algorithms">ACO vs Other Algorithms</a></li>
   </ul></li>
   <li><a href="#decision-framework" id="toc-decision-framework" class="nav-link" data-scroll-target="#decision-framework"><span class="flow">Decision Framework</span></a>
   <ul class="collapse">
   <li><a href="#when-to-use-which-metaheuristic" id="toc-when-to-use-which-metaheuristic" class="nav-link" data-scroll-target="#when-to-use-which-metaheuristic">When to Use Which Metaheuristic?</a></li>
+  <li><a href="#the-no-free-lunch-theorem" id="toc-the-no-free-lunch-theorem" class="nav-link" data-scroll-target="#the-no-free-lunch-theorem">The No Free Lunch Theorem</a></li>
   <li><a href="#implementation-strategy" id="toc-implementation-strategy" class="nav-link" data-scroll-target="#implementation-strategy">Implementation Strategy</a></li>
-  <li><a href="#key-implementation-tips" id="toc-key-implementation-tips" class="nav-link" data-scroll-target="#key-implementation-tips">Key Implementation Tips</a></li>
   </ul></li>
-  <li><a href="#mission-briefing" id="toc-mission-briefing" class="nav-link" data-scroll-target="#mission-briefing"><span class="flow">Mission Briefing</span></a>
+  <li><a href="#todays-briefing" id="toc-todays-briefing" class="nav-link" data-scroll-target="#todays-briefing"><span class="flow">Today’s Briefing</span></a>
   <ul class="collapse">
-  <li><a href="#your-restaurant-challenge" id="toc-your-restaurant-challenge" class="nav-link" data-scroll-target="#your-restaurant-challenge">Your Restaurant Challenge</a></li>
-  <li><a href="#summary-the-metaheuristics-toolkit" id="toc-summary-the-metaheuristics-toolkit" class="nav-link" data-scroll-target="#summary-the-metaheuristics-toolkit">Summary: The Metaheuristics Toolkit</a></li>
-  <li><a href="#break-time" id="toc-break-time" class="nav-link" data-scroll-target="#break-time">Break Time!</a></li>
-  <li><a href="#genetic-algorithm-implementation" id="toc-genetic-algorithm-implementation" class="nav-link" data-scroll-target="#genetic-algorithm-implementation">Genetic Algorithm Implementation</a></li>
-  </ul></li>
-  <li><a href="#practical-implementation" id="toc-practical-implementation" class="nav-link" data-scroll-target="#practical-implementation"><span class="flow">Practical Implementation</span></a>
-  <ul class="collapse">
-  <li><a href="#using-ai-tools-effectively" id="toc-using-ai-tools-effectively" class="nav-link" data-scroll-target="#using-ai-tools-effectively">Using AI Tools Effectively</a></li>
-  <li><a href="#debugging-metaheuristics" id="toc-debugging-metaheuristics" class="nav-link" data-scroll-target="#debugging-metaheuristics">Debugging Metaheuristics</a></li>
-  <li><a href="#real-world-considerations" id="toc-real-world-considerations" class="nav-link" data-scroll-target="#real-world-considerations">Real-World Considerations</a></li>
-  </ul></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><span class="flow">Advanced Topics</span></a>
-  <ul class="collapse">
-  <li><a href="#hybrid-metaheuristics" id="toc-hybrid-metaheuristics" class="nav-link" data-scroll-target="#hybrid-metaheuristics">Hybrid Metaheuristics</a></li>
+  <li><a href="#today" id="toc-today" class="nav-link" data-scroll-target="#today">Today</a></li>
+  <li><a href="#the-competition-challenge" id="toc-the-competition-challenge" class="nav-link" data-scroll-target="#the-competition-challenge">The Competition Challenge</a></li>
+  <li><a href="#implementation-pitfalls-to-avoid" id="toc-implementation-pitfalls-to-avoid" class="nav-link" data-scroll-target="#implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</a></li>
   <li><a href="#parameter-tuning-strategies" id="toc-parameter-tuning-strategies" class="nav-link" data-scroll-target="#parameter-tuning-strategies">Parameter Tuning Strategies</a></li>
-  <li><a href="#competition-strategies" id="toc-competition-strategies" class="nav-link" data-scroll-target="#competition-strategies">Competition Strategies</a></li>
-  </ul></li>
-  <li><a href="#summary-resources" id="toc-summary-resources" class="nav-link" data-scroll-target="#summary-resources"><span class="flow">Summary &amp; Resources</span></a>
-  <ul class="collapse">
-  <li><a href="#key-concepts-to-remember" id="toc-key-concepts-to-remember" class="nav-link" data-scroll-target="#key-concepts-to-remember">Key Concepts to Remember</a></li>
-  <li><a href="#your-optimization-hierarchy" id="toc-your-optimization-hierarchy" class="nav-link" data-scroll-target="#your-optimization-hierarchy">Your Optimization Hierarchy</a></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts</a></li>
+  <li><a href="#real-world-considerations" id="toc-real-world-considerations" class="nav-link" data-scroll-target="#real-world-considerations">Real-World Considerations</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break">Break!</a></li>
   </ul></li>
   </ul>
@@ -600,9 +638,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_09_metaheuristics.html">09 Metaheuristics</a></li><li class="breadcrumb-item"><a href="../lectures/lec_09_metaheuristics.html">Lecture</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">The Metaheuristics Toolkit</h1>
+<h1 class="title">Introduction to Metaheuristics</h1>
 <p class="subtitle lead">Lecture 9 - Management Science</p>
 </div>
 
@@ -628,306 +666,420 @@ window.Quarto = {
 
 <section id="introduction" class="level1 title">
 <h1 class="title"><span class="flow">Introduction</span></h1>
-<section id="client-briefing-la-étoile-restaurant" class="level2" data-background-image="https://unsplash.com/photos/Gg5tmm48v0w/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8bWljaGVsaW5lJTIwc3RhciUyMHJlc3RhdXJhbnR8ZW58MHx8fHwxNzMxNTI0MTAxfDA&amp;force=true&amp;w=2400" data-background-size="cover">
-<h2 data-background-image="https://unsplash.com/photos/Gg5tmm48v0w/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8bWljaGVsaW5lJTIwc3RhciUyMHJlc3RhdXJhbnR8ZW58MHx8fHwxNzMxNTI0MTAxfDA&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-la-étoile-restaurant"><strong><span class="invert-font">Client Briefing: La Étoile Restaurant</span></strong></h2>
+<section id="client-briefing-la-étoile" class="level2" data-background-image="https://unsplash.com/photos/N_Y88TWmGwA/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHx8fDE3NjM3OTIzNjZ8MA&amp;force=true&amp;w=2400" data-background-size="cover">
+<h2 data-background-image="https://unsplash.com/photos/N_Y88TWmGwA/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHx8fDE3NjM3OTIzNjZ8MA&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-la-étoile"><strong><span class="invert-font">Client Briefing: La Étoile</span></strong></h2>
 <p>. . .</p>
 <p><span class="invert-font">Restaurant Manager’s Crisis:</span></p>
-<p><span class="invert-font fragment">“We need to schedule 18 servers for this weekend, but we don’t have enough experienced staff to meet all quality requirements!”</span></p>
+<p><span class="invert-font fragment">“I need to schedule my <span class="highlight">18 servers across 6 shifts</span> this weekend. Shifts have <span class="highlight">different lengths (4-6 hours)</span>, and if I don’t have enough experienced servers on busy shifts, we face <span class="highlight">penalties ranging from €150 to €400</span> per missing experienced server from our parent company!”</span></p>
 </section>
 <section id="the-staffing-challenge" class="level2">
 <h2 class="anchored" data-anchor-id="the-staffing-challenge">The Staffing Challenge</h2>
-<p><strong>La Étoile</strong> - Three Michelin star restaurant facing a scheduling crisis:</p>
+<p><span class="highlight">A restaurant facing a weekend scheduling crisis:</span></p>
+<p><strong>La Étoile’s Problem:</strong></p>
 <div class="incremental">
 <ul class="incremental">
-<li>18 servers available (6 experienced, 12 junior)</li>
-<li>6 shifts this weekend (Fri-Sun, lunch &amp; dinner)</li>
+<li>18 servers available (6 experienced @ €75/hr, 12 junior @ €25/hr)</li>
+<li>6 shifts with <strong>varying lengths</strong> (4-6 hours each)</li>
 <li>Each shift needs 3 servers (at least 1 experienced)</li>
-<li><strong>Problem</strong>: Need 8 experienced servers, only have 6!</li>
-<li><strong>Cost</strong>: €50/shift junior, €80/shift experienced, €500 penalty per understaffed experienced position</li>
+<li>Server <strong>preferences</strong> matter (1-10 scale, affects quality)</li>
 </ul>
 </div>
 <p>. . .</p>
-<p><span class="question">How do we minimize the damage while maintaining service quality?</span></p>
+<p><span class="question">Question:</span> How to balance labor costs, penalties, AND staff?</p>
 </section>
-<section id="todays-learning-objectives" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="todays-learning-objectives">Today’s Learning Objectives</h2>
-<p>By the end of this lecture, you will:</p>
+<section id="the-cost-impact-why-this-matters" class="level2">
+<h2 class="anchored" data-anchor-id="the-cost-impact-why-this-matters">The Cost Impact: Why This Matters</h2>
+<p><span class="highlight">The financial stakes are significant with these large penalties:</span></p>
 <div class="incremental">
-<ol class="incremental" type="1">
-<li><strong>Understand</strong> why local search gets trapped and needs help</li>
-<li><strong>Master</strong> four powerful metaheuristics:
 <ul class="incremental">
-<li>Simulated Annealing (SA)</li>
-<li>Genetic Algorithms (GA)</li>
-<li>Tabu Search</li>
-<li>Ant Colony Optimization (ACO)</li>
-</ul></li>
-<li><strong>Implement</strong> working code for each metaheuristic</li>
-<li><strong>Choose</strong> the right metaheuristic for your problem</li>
-<li><strong>Avoid</strong> common implementation pitfalls</li>
-<li><strong>Apply</strong> metaheuristics to real-world problems</li>
-</ol>
+<li><strong>Minimum Labor Cost</strong>: ~€3,500 (everyone works once)</li>
+<li><strong>Experience Penalties</strong>: €0-€1,200 per missing experienced server</li>
+<li><strong>Preference Penalties</strong>: €0-€180 per unhappy assignment</li>
+<li><strong>Worst Case</strong>: Over €7,000 if poorly scheduled!</li>
+<li><strong>Best Case</strong>: ??? with smart optimization</li>
+</ul>
 </div>
 <p>. . .</p>
-<p><span class="highlight">Let’s escape those local optima!</span></p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Potentially up to <strong>€3,500 difference</strong> between good and bad scheduling!</p>
+</div>
+</div>
+</div>
 </section>
-<section id="quick-recap-our-optimization-journey" class="level2">
-<h2 class="anchored" data-anchor-id="quick-recap-our-optimization-journey">Quick Recap: Our Optimization Journey</h2>
-<div id="78f9326b" class="cell" data-execution_count="1">
+<section id="restaurant-staffing-the-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="restaurant-staffing-the-numbers">Restaurant Staffing: The Numbers</h2>
+<p><span class="highlight">The real-world complexity we’re dealing with:</span></p>
+<div id="51954153" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-2-output-1.png" width="1526" height="373" class="figure-img"></p>
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-2-output-1.png" width="1143" height="419" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>With varying shifts, preferences, and penalties, this is will be a real challenge!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="todays-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="todays-objectives">Today’s Objectives</h2>
+<p><span class="highlight">What you’ll understand after this lecture:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Why local search fails:</strong> Recap on the local optima trap</li>
+<li><strong>Escape mechanisms:</strong> How to accept worse solutions strategically</li>
+<li><strong>Four powerful metaheuristics:</strong> SA, GA, Tabu Search, ACO</li>
+<li><strong>Selection criteria:</strong> When to use which algorithm</li>
+</ol>
+</div>
+</section>
+<section id="hiking-in-fog" class="level2">
+<h2 class="anchored" data-anchor-id="hiking-in-fog">Hiking in Fog</h2>
+<p><span class="highlight">Remember the metaphor with blindfolded eyes from last lecture?</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Goal</strong>: Find the highest peak in a mountain range</li>
+<li><strong>Challenge</strong>: You’re hiking in thick fog (can only see 10 meters)</li>
+<li><strong>Position</strong>: Your X,Y coordinates = your decisions</li>
+<li><strong>Altitude</strong>: Your current solution quality</li>
+<li><strong>Problem</strong>: You might climb a small hill and think it’s the summit!</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This metaphor will guide us through all metaheuristics today!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="recap-local-optima" class="level2">
+<h2 class="anchored" data-anchor-id="recap-local-optima">Recap: Local Optima</h2>
+<p><span class="highlight">Real problems often have thousands of local optima!</span></p>
+<div id="a99fc0b1" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-3-output-1.png" width="1140" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> Any idea how to escape local optima?</p>
 </section>
 </section>
 <section id="why-simple-methods-fail" class="level1 title">
 <h1 class="title"><span class="flow">Why Simple Methods Fail</span></h1>
-<section id="restaurant-staffing-the-numbers" class="level2">
-<h2 class="anchored" data-anchor-id="restaurant-staffing-the-numbers">Restaurant Staffing: The Numbers</h2>
-<div id="e3086e03" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-3-output-1.png" width="1333" height="469" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="highlight">With 139 billion possibilities, we need smart exploration!</span></p>
-</section>
-<section id="why-greedy-gets-stuck" class="level2">
-<h2 class="anchored" data-anchor-id="why-greedy-gets-stuck">Why Greedy Gets Stuck</h2>
-<div id="abaf8274" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-4-output-1.png" width="1334" height="566" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="warning">Greedy allocates resources early, creating problems later!</span></p>
-</section>
-<section id="local-search-also-struggles" class="level2">
-<h2 class="anchored" data-anchor-id="local-search-also-struggles">Local Search Also Struggles</h2>
-<div id="9a5a3810" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-5-output-1.png" width="1263" height="565" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="highlight">We need mechanisms to accept temporary degradation!</span></p>
-</section>
-</section>
-<section id="mathematical-foundations" class="level1 title">
-<h1 class="title"><span class="flow">Mathematical Foundations</span></h1>
-<section id="core-metaheuristic-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="core-metaheuristic-concepts">Core Metaheuristic Concepts</h2>
+<section id="the-silo-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-silo-problem">The Silo Problem</h2>
+<p><span class="highlight">Why neighborhood optimization fails:</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Solution Space</strong> - <span class="math inline">\(S\)</span> = set of all feasible solutions - <span class="math inline">\(f(s)\)</span> = objective function value - <span class="math inline">\(N(s)\)</span> = neighborhood of solution <span class="math inline">\(s\)</span></p>
-<p><strong>Acceptance Probability</strong> - Always accept improvements - Sometimes accept degradations - Control randomness systematically</p>
+<p><strong>Technical View: Local Optima</strong></p>
+<ul>
+<li>Algorithm climbs nearest hill</li>
+<li>Gets stuck on “foothill”</li>
+<li>Can’t see the mountain beyond</li>
+<li>Every move looks worse</li>
+<li>Believes it found the best</li>
+</ul>
 </div><div class="column" style="width:50%;">
-<p><strong>Key Mathematical Tools</strong></p>
-<p>Boltzmann Distribution: <span class="math display">\[P(\text{accept}) = e^{-\Delta/T}\]</span></p>
-<p>Fitness Selection: <span class="math display">\[P(\text{select}_i) = \frac{f_i}{\sum_{j=1}^n f_j}\]</span></p>
-<p>Convergence: <span class="math display">\[\lim_{t \to \infty} P(s^* | t) = 1\]</span></p>
+<p><strong>Analogy: Department Silos</strong></p>
+<ul>
+<li>Sales optimizes sales metrics</li>
+<li>Engineering optimizes quality</li>
+<li>Finance optimizes costs</li>
+<li>Each department “wins”</li>
+<li><strong>Company performance looses!</strong></li>
+</ul>
 </div>
 </div>
 <p>. . .</p>
-<p><span class="highlight">These foundations enable systematic exploration!</span></p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Sum of local bests ≠ Global best</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-greedy-gets-stuck" class="level2">
+<h2 class="anchored" data-anchor-id="why-greedy-gets-stuck">Why Greedy Gets Stuck</h2>
+<p><span class="highlight">Greedy algorithms can simply trap themselves:</span></p>
+<p>. . .</p>
+<div id="18d3d8cc" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-4-output-1.png" width="1140" height="415" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Greedy allocates resources early, creating problems later!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="local-search-also-struggles" class="level2">
+<h2 class="anchored" data-anchor-id="local-search-also-struggles">Local Search Also Struggles</h2>
+<p><span class="highlight">Because we only ever accept better solutions during search:</span></p>
+<p>. . .</p>
+<div id="9a965b8a" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-5-output-1.png" width="1038" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question:</span> What can we do to cope with this situation?</p>
 </section>
 </section>
 <section id="metaheuristic-1-simulated-annealing" class="level1 title">
 <h1 class="title"><span class="flow">Metaheuristic #1: Simulated Annealing</span></h1>
+<section id="core-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="core-concepts">Core Concepts</h2>
+<p><span class="highlight">The fundamental components:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Solution</strong> = One complete schedule/route/plan</li>
+<li><strong>Neighbor</strong> = A slightly modified version</li>
+<li><strong>Cost</strong> = How good/bad the solution is</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><strong>The Strategy</strong></p>
+<ul>
+<li>Always accept improvements</li>
+<li>Sometimes accept worse solutions (the change!)</li>
+</ul>
+<p>. . .</p>
+<p><span class="highlight">Think of it as strategic risk-taking that decreases over time!</span></p>
+</section>
 <section id="the-metallurgy-metaphor" class="level2">
 <h2 class="anchored" data-anchor-id="the-metallurgy-metaphor">The Metallurgy Metaphor</h2>
+<p><span class="highlight">How annealing steel inspired an optimization algorithm:</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Annealing Metal:</strong> 1. Heat to high temperature 2. Atoms move freely 3. Slowly cool down 4. Forms perfect crystal structure</p>
-<p><strong>Key insight</strong>: Temperature controls randomness</p>
+<p><strong>Annealing Metal:</strong></p>
+<ol type="1">
+<li>Heat to high temperature</li>
+<li>Atoms move freely</li>
+<li>Slowly cool down</li>
+<li>Forms crystal structure</li>
+</ol>
 </div><div class="column" style="width:50%;">
-<p><strong>Optimization:</strong> 1. Start with high “temperature” 2. Accept bad moves often 3. Gradually reduce temperature 4. Converge to good solution</p>
-<p><strong>Key insight</strong>: Escape local optima early</p>
+<p><strong>Optimization:</strong></p>
+<ol type="1">
+<li>Start with high “temperature”</li>
+<li>Accept bad moves often</li>
+<li>Gradually reduce temperature</li>
+<li>Converge to good solution</li>
+</ol>
 </div>
 </div>
 <p>. . .</p>
-<p><span class="highlight">Mathematical Foundation:</span></p>
-<p><span class="math display">\[P(\text{accept worse solution}) = \begin{cases}
-1 &amp; \text{if } \Delta \leq 0 \\
-e^{-\Delta/T} &amp; \text{if } \Delta &gt; 0
-\end{cases}\]</span></p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The willingness to temporarily accept worse solutions is what enables finding the summit!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="temperature-controls-acceptance" class="level2">
 <h2 class="anchored" data-anchor-id="temperature-controls-acceptance">Temperature Controls Acceptance</h2>
-<div id="5094c473" class="cell" data-execution_count="5">
+<p><span class="highlight">Probability of accepting worse solutions lowers with temp:</span></p>
+<div id="638f589a" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-6-output-1.png" width="1430" height="470" class="figure-img"></p>
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-6-output-1.png" width="1139" height="419" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>We essentially compare the cost of the new schedule to the current cost and decide whether to accept the change based on the temperature and the difference in cost.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="simulated-annealing-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="simulated-annealing-implementation">Simulated Annealing: Implementation</h2>
-<div id="9526c85d" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulated_annealing(initial_solution, cost_function, get_neighbor,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                        initial_temp<span class="op">=</span><span class="dv">1000</span>, cooling_rate<span class="op">=</span><span class="fl">0.95</span>, max_iter<span class="op">=</span><span class="dv">1000</span>):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Simulated Annealing metaheuristic implementation</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    current <span class="op">=</span> initial_solution</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    current_cost <span class="op">=</span> cost_function(current)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    best <span class="op">=</span> current</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    best_cost <span class="op">=</span> current_cost</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    temperature <span class="op">=</span> initial_temp</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    history <span class="op">=</span> []</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> iteration <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get random neighbor</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        neighbor <span class="op">=</span> get_neighbor(current)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        neighbor_cost <span class="op">=</span> cost_function(neighbor)</span>
+<section id="concept" class="level2">
+<h2 class="anchored" data-anchor-id="concept">Concept</h2>
+<p><span class="highlight">How Simulated Annealing Works (Pseudocode)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulated_annealing_concept(current_schedule):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    temperature <span class="op">=</span> <span class="dv">500</span>  <span class="co"># Start "hot" (adventurous)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    best_schedule <span class="op">=</span> current_schedule</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> temperature <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 1: Try a random change (like swapping two shifts)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        new_schedule <span class="op">=</span> make_random_change(current_schedule)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 2: Is it better?</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cost(new_schedule) <span class="op">&lt;</span> cost(current_schedule):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            current_schedule <span class="op">=</span> new_schedule  <span class="co"># Always accept improvements</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="co"># NEW: Sometimes accept worse solutions!</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Hot temperature = more likely to accept</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Cold temperature = less likely to accept</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> random() <span class="op">&lt;</span> acceptance_probability(temperature):</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                current_schedule <span class="op">=</span> new_schedule  <span class="co"># Accept anyway!</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate acceptance probability</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        delta <span class="op">=</span> neighbor_cost <span class="op">-</span> current_cost</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> delta <span class="op">&lt;</span> <span class="dv">0</span>:  <span class="co"># Better solution</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            accept_prob <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:  <span class="co"># Worse solution</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            accept_prob <span class="op">=</span> np.exp(<span class="op">-</span>delta <span class="op">/</span> temperature)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Accept or reject</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.random.random() <span class="op">&lt;</span> accept_prob:</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> neighbor</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            current_cost <span class="op">=</span> neighbor_cost</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Update best if needed</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> current_cost <span class="op">&lt;</span> best_cost:</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>                best <span class="op">=</span> neighbor</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                best_cost <span class="op">=</span> neighbor_cost</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Cool down</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        temperature <span class="op">*=</span> cooling_rate</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        history.append((iteration, current_cost, best_cost, temperature))</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best, best_cost, history</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Simulated Annealing ready to escape local optima!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Simulated Annealing ready to escape local optima!</code></pre>
-</div>
-</div>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Step 3: Cool down (become less adventurous)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        temperature <span class="op">=</span> temperature <span class="op">*</span> <span class="fl">0.95</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Remember the best we've ever seen</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cost(current_schedule) <span class="op">&lt;</span> cost(best_schedule):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            best_schedule <span class="op">=</span> current_schedule</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_schedule</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="sa-in-action-restaurant-staffing" class="level2">
 <h2 class="anchored" data-anchor-id="sa-in-action-restaurant-staffing">SA in Action: Restaurant Staffing</h2>
-<div id="63334e9c" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the restaurant staffing problem</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RestaurantStaffing:</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n_servers <span class="op">=</span> <span class="dv">18</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n_experienced <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n_shifts <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.experienced_cost <span class="op">=</span> <span class="dv">80</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.junior_cost <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.penalty <span class="op">=</span> <span class="dv">500</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> cost(<span class="va">self</span>, schedule):</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calculate total cost including penalties"""</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        total_cost <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> shift <span class="kw">in</span> schedule:</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            experienced_in_shift <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> s <span class="kw">in</span> shift <span class="cf">if</span> s <span class="op">&lt;</span> <span class="va">self</span>.n_experienced)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            junior_in_shift <span class="op">=</span> <span class="bu">len</span>(shift) <span class="op">-</span> experienced_in_shift</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Labor costs</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            total_cost <span class="op">+=</span> experienced_in_shift <span class="op">*</span> <span class="va">self</span>.experienced_cost</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            total_cost <span class="op">+=</span> junior_in_shift <span class="op">*</span> <span class="va">self</span>.junior_cost</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Penalty if no experienced server</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> experienced_in_shift <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                total_cost <span class="op">+=</span> <span class="va">self</span>.penalty</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> total_cost</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_neighbor(<span class="va">self</span>, schedule):</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Swap two server assignments"""</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        new_schedule <span class="op">=</span> [shift.copy() <span class="cf">for</span> shift <span class="kw">in</span> schedule]</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Random swap between shifts</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        shift1, shift2 <span class="op">=</span> np.random.choice(<span class="va">self</span>.n_shifts, <span class="dv">2</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(new_schedule[shift1]) <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">len</span>(new_schedule[shift2]) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>            server1 <span class="op">=</span> np.random.choice(new_schedule[shift1])</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>            server2 <span class="op">=</span> np.random.choice(new_schedule[shift2])</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>            new_schedule[shift1].remove(server1)</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>            new_schedule[shift2].remove(server2)</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>            new_schedule[shift1].append(server2)</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>            new_schedule[shift2].append(server1)</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> new_schedule</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Create initial greedy solution</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>problem <span class="op">=</span> RestaurantStaffing()</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>initial <span class="op">=</span> [[<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">12</span>], [<span class="dv">2</span>,<span class="dv">13</span>,<span class="dv">14</span>], [<span class="dv">3</span>,<span class="dv">15</span>,<span class="dv">16</span>], [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">7</span>], [<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>], [<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">17</span>]]</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Initial greedy cost: €</span><span class="sc">{</span>problem<span class="sc">.</span>cost(initial)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><span class="highlight">A simplified weekend scheduling problem we’ll use throughout:</span></p>
+<div id="abb9abf2" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SIMPLIFIED PROBLEM (used across ALL metaheuristics today)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">La Étoile's Weekend Challenge:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">- 12 servers: 4 experienced (E1-E4), 8 junior (J1-J8)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">- 6 shifts: Need 2 servers each</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">- Everyone works exactly 1 shift</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>. . .</p>
+<p><strong>The initial greedy schedule has the following results:</strong></p>
+<p>. . .</p>
+<div id="c431cd6b" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
-<pre><code>Initial greedy cost: €1580</code></pre>
+<pre><code>Greedy Schedule Cost: €5,240
+  Labor: €2250, Penalties: €1700, Unhappiness: €1290</code></pre>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Let’s see how Simulated Annealing can improve the solution!</p>
+</div>
 </div>
 </div>
 </section>
 <section id="visualizing-sa-performance" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-sa-performance">Visualizing SA Performance</h2>
-<div id="f5b325e6" class="cell" data-execution_count="8">
+<p><span class="highlight">How temperature affects the search behavior:</span></p>
+<div id="b2d732bf" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-9-output-1.png" width="1142" height="757" class="figure-img"></p>
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-9-output-1.png" width="1140" height="419" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="highlight">Notice: SA accepts worse solutions early, enabling escape from local optima!</span></p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>See how SA accepts worse solutions early, enabling escape from local optima!</p>
+</div>
+</div>
+</div>
 </section>
-<section id="common-sa-implementation-bugs" class="level2">
-<h2 class="anchored" data-anchor-id="common-sa-implementation-bugs">Common SA Implementation Bugs</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Bug #1: Temperature Too Low</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>initial_temp <span class="op">=</span> <span class="dv">10</span>  <span class="co"># Too cold!</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>initial_temp <span class="op">=</span> <span class="dv">1000</span>  <span class="co"># Hot start</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Bug #2: Cooling Too Fast</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cooling_rate <span class="op">=</span> <span class="fl">0.5</span>  <span class="co"># 50% drop!</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct  </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cooling_rate <span class="op">=</span> <span class="fl">0.95</span>  <span class="co"># Gentle cooling</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:50%;">
-<p><strong>Bug #3: Wrong Acceptance</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> delta <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    accept <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    accept <span class="op">=</span> <span class="va">False</span>  <span class="co"># Never escape!</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> delta <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    accept <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    accept <span class="op">=</span> random() <span class="op">&lt;</span> exp(<span class="op">-</span>delta<span class="op">/</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Bug #4: No Best Tracking</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> current  <span class="co"># Might be worse!</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> best  <span class="co"># Always return best seen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="common-sa-mistakes" class="level2">
+<h2 class="anchored" data-anchor-id="common-sa-mistakes">Common SA Mistakes</h2>
+<p><span class="highlight">Avoid these common implementation errors:</span></p>
+<p>. . .</p>
+<p><strong>Mistake #1: Starting Too Cold</strong></p>
+<ul>
+<li>If temperature is too low → Acts like greedy (no exploration)</li>
+<li>Fix: Start hot enough to accept bad moves</li>
+</ul>
+<p>. . .</p>
+<p><strong>Mistake #2: Cooling Too Quickly</strong></p>
+<ul>
+<li>If you cool fast → Get stuck early</li>
+<li>Fix: Cool slowly (multiply by 0.95-0.99, not 0.5)</li>
+</ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Quick cooling is tempting for speed, but defeats the purpose of SA!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="temperature-parameter-impact" class="level2">
+<h2 class="anchored" data-anchor-id="temperature-parameter-impact">Temperature Parameter Impact</h2>
+<div id="8cb3664b" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-10-output-1.png" width="1158" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The “Good Balance” explores widely early, then refines carefully. Often you need to balance exploration and exploitation by experimenting with different parameters.</p>
+</div>
 </div>
 </div>
 </section>
@@ -936,163 +1088,568 @@ e^{-\Delta/T} &amp; \text{if } \Delta &gt; 0
 <h1 class="title"><span class="flow">Metaheuristic #2: Genetic Algorithms</span></h1>
 <section id="evolution-as-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="evolution-as-optimization">Evolution as Optimization</h2>
+<p><span class="highlight">How natural selection inspires computational optimization:</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Natural Selection:</strong> 1. Population of individuals 2. Fittest survive &amp; reproduce 3. Offspring inherit traits 4. Mutations create diversity 5. Evolution finds adaptation</p>
-<p><strong>Darwin’s insight</strong>: Survival of the fittest</p>
+<p><strong>Natural Selection:</strong></p>
+<ol type="1">
+<li>Population of individuals</li>
+<li>Fittest survive &amp; reproduce</li>
+<li>Offspring inherit traits</li>
+<li>Mutations create diversity</li>
+<li>Evolution finds adaptation</li>
+</ol>
 </div><div class="column" style="width:50%;">
-<p><strong>Optimization:</strong> 1. Population of solutions 2. Best solutions selected 3. Crossover combines solutions 4. Mutation adds variation 5. Evolution finds optimum</p>
-<p><strong>Our insight</strong>: Parallel exploration</p>
+<p><strong>Optimization:</strong></p>
+<ol type="1">
+<li>Population of solutions</li>
+<li>Best solutions selected</li>
+<li>Crossover combines solutions</li>
+<li>Mutation adds variation</li>
+<li>Evolution finds optimum</li>
+</ol>
 </div>
 </div>
 <p>. . .</p>
-<p><span class="highlight">Mathematical Foundation:</span></p>
-<p><span class="math display">\[P(\text{select}_i) = \frac{fitness_i}{\sum_{j=1}^{pop} fitness_j} \text{ or } P(\text{select}_i) = \frac{rank_i}{\sum_{j=1}^{pop} j}\]</span></p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Just like successful products get more market share, better solutions get more “offspring” in the next generation. It’s survival of the fittest, but for schedules, routes, or designs!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="the-genetic-process" class="level2">
 <h2 class="anchored" data-anchor-id="the-genetic-process">The Genetic Process</h2>
-<div id="07d79251" class="cell" data-execution_count="9">
+<p><span class="highlight">Four stages repeat each generation:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Selection:</strong> Choose parents based on fitness</li>
+<li><strong>Crossover:</strong> Combine to create children</li>
+<li><strong>Mutation:</strong> Randomly modify children</li>
+<li><strong>Replacement:</strong> New generation replaces old</li>
+<li><strong>Population Evolution:</strong> Improve population quality</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Let’s see each stage in detail with our restaurant problem!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-1-selection-tournament" class="level2">
+<h2 class="anchored" data-anchor-id="stage-1-selection-tournament">Stage 1: Selection (Tournament)</h2>
+<p><span class="highlight">How to choose which schedules get to “reproduce”:</span></p>
+<div id="f26a836f" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-10-output-1.png" width="964" height="2218" class="figure-img"></p>
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-12-output-1.png" width="1138" height="419" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="highlight">Evolution drives the population toward better solutions!</span></p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Each tournament selects one parent, then we pair them up sequentially for crossover.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-2-crossover-recombination" class="level2">
+<h2 class="anchored" data-anchor-id="stage-2-crossover-recombination">Stage 2: Crossover (Recombination)</h2>
+<p><span class="highlight">Combine two parent schedules to create offspring:</span></p>
+<div id="e796b419" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-13-output-1.png" width="1140" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Crossover randomly combines good building blocks from both parents!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-3-mutation" class="level2">
+<h2 class="anchored" data-anchor-id="stage-3-mutation">Stage 3: Mutation</h2>
+<p><span class="highlight">Random changes maintain diversity and explore new solutions:</span></p>
+<div id="704dd5e5" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-14-output-1.png" width="1140" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Mutation adds random exploration, like trying something completely new occasionally!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-4-replacement-i" class="level2">
+<h2 class="anchored" data-anchor-id="stage-4-replacement-i">Stage 4: Replacement I</h2>
+<p><span class="highlight">How do offspring join the population?</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Generational:</strong> Replace entire population with offspring</li>
+<li><strong>Steady-State:</strong> Replace only worst individuals</li>
+<li><strong>Elitism:</strong> Always keep the best solutions</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Our approach: <strong>Generational with Elitism</strong>, we create 20 offspring via repeated selection/crossover/mutation, but preserve the 2 best from current generation.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-4-replacement-ii" class="level2">
+<h2 class="anchored" data-anchor-id="stage-4-replacement-ii">Stage 4: Replacement II</h2>
+<div id="6d11d8ef" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-15-output-1.png" width="1140" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Elitism ensures we never lose our best solutions while exploring new ones!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-5.-population-evolution" class="level2">
+<h2 class="anchored" data-anchor-id="stage-5.-population-evolution">Stage 5. Population Evolution</h2>
+<p><span class="highlight">How the population improves over generations:</span></p>
+<div id="d8eced86" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-16-output-1.png" width="1139" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Notice how population average also improves (not just the best)!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="ga-vs-sa-head-to-head" class="level2">
 <h2 class="anchored" data-anchor-id="ga-vs-sa-head-to-head">GA vs SA: Head-to-Head</h2>
-<div id="f34cee83" class="cell" data-execution_count="10">
+<p><span class="highlight">Comparing exploration strategies on the restaurant problem:</span></p>
+<div id="ea068a53" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-11-output-1.png" width="1334" height="565" class="figure-img"></p>
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-17-output-1.png" width="1139" height="420" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="highlight">SA explores sequentially, GA explores in parallel!</span></p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>GA maintains population diversity, SA explores single solution path!</p>
+</div>
+</div>
+</div>
 </section>
-<section id="common-ga-implementation-pitfalls" class="level2">
-<h2 class="anchored" data-anchor-id="common-ga-implementation-pitfalls">Common GA Implementation Pitfalls</h2>
+<section id="ga-mistakes-population-issues" class="level2">
+<h2 class="anchored" data-anchor-id="ga-mistakes-population-issues">GA Mistakes: Population Issues</h2>
+<p><span class="highlight">Avoid these population-related errors:</span></p>
+<p>. . .</p>
+<p><strong>Mistake #1: Everyone Becomes Identical</strong></p>
+<ul>
+<li>If all solutions look the same → Lost diversity</li>
+<li>Fix: More mutation, bigger population, tournament selection</li>
+</ul>
+<p>. . .</p>
+<p><strong>Mistake #2: Too Greedy in Selection</strong></p>
+<ul>
+<li>Only keeping the very best → Premature convergence<br>
+</li>
+<li>Fix: Keep some variety, even if not perfect (elitism of 10-20%)</li>
+</ul>
+</section>
+<section id="ga-mistakes-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="ga-mistakes-implementation">GA Mistakes: Implementation</h2>
+<p><span class="highlight">Technical pitfalls to watch out for:</span></p>
+<p>. . .</p>
+<p><strong>Mistake #3: Breaking the Rules</strong></p>
+<ul>
+<li>Crossover might create invalid schedules</li>
+<li>Fix: Always check and repair after crossover/mutation</li>
+</ul>
+<p>. . .</p>
+<p><strong>Mistake #4: Evolution Too Slow</strong></p>
+<ul>
+<li>Population too large or too many generations</li>
+<li>Fix: Start small (50-100), tune based on convergence</li>
+</ul>
+</section>
+</section>
+<section id="metaheuristic-3-tabu-search" class="level1 title">
+<h1 class="title"><span class="flow">Metaheuristic #3: Tabu Search</span></h1>
+<section id="core-idea" class="level2">
+<h2 class="anchored" data-anchor-id="core-idea">Core Idea</h2>
+<p><span class="highlight">Using memory to avoid cycling through bad solutions:</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Pitfall #1: Premature Convergence</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong: Too much selection pressure</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>tournament_size <span class="op">=</span> <span class="dv">10</span>  <span class="co"># Too large!</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mutation_rate <span class="op">=</span> <span class="fl">0.01</span>  <span class="co"># Too small!</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct: Balance exploration</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>tournament_size <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>mutation_rate <span class="op">=</span> <span class="fl">0.1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Pitfall #2: Invalid Solutions</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong: Crossover breaks constraints</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>child <span class="op">=</span> parent1[:<span class="dv">3</span>] <span class="op">+</span> parent2[<span class="dv">3</span>:]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># May have duplicate servers!</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct: Repair or smart operators</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>child <span class="op">=</span> repair_schedule(child)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Analogy:</strong></p>
+<ul>
+<li>Keep a list of recent dates</li>
+<li>“Not going back there!”</li>
+<li>Forces you to meet new people</li>
+<li>After time, memory fades</li>
+</ul>
 </div><div class="column" style="width:50%;">
-<p><strong>Pitfall #3: Poor Diversity</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong: Clone best solution</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>new_pop <span class="op">=</span> [best] <span class="op">*</span> population_size</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct: Maintain diversity</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>new_pop <span class="op">=</span> [best]  <span class="co"># Elitism</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add varied offspring</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Pitfall #4: Wrong Selection</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ❌ Wrong: Always pick best</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>parent <span class="op">=</span> population[<span class="dv">0</span>]</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ✅ Correct: Probabilistic selection</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>parent <span class="op">=</span> tournament_select(population)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>In Optimization:</strong></p>
+<ul>
+<li>Recent solutions = “tabu”</li>
+<li>Don’t revisit same schedules</li>
+<li>Forces exploration of new areas</li>
+<li>Tabu list has limited size</li>
+</ul>
 </div>
 </div>
-</section>
-</section>
-<section id="more-metaheuristics" class="level1 title">
-<h1 class="title"><span class="flow">More Metaheuristics</span></h1>
-<section id="metaheuristic-3-tabu-search" class="level2">
-<h2 class="anchored" data-anchor-id="metaheuristic-3-tabu-search">Metaheuristic #3: Tabu Search</h2>
-<div id="5e4f18ea" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TabuSearch:</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, tabu_tenure<span class="op">=</span><span class="dv">10</span>):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">        Tabu Search: Memory-based metaheuristic</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tabu_list <span class="op">=</span> []  <span class="co"># List of forbidden moves</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tabu_tenure <span class="op">=</span> tabu_tenure</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_tabu(<span class="va">self</span>, move):</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Check if move is forbidden"""</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> move <span class="kw">in</span> <span class="va">self</span>.tabu_list</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> update_tabu_list(<span class="va">self</span>, move):</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Add move to tabu list and maintain size"""</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tabu_list.append(move)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>.tabu_list) <span class="op">&gt;</span> <span class="va">self</span>.tabu_tenure:</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.tabu_list.pop(<span class="dv">0</span>)  <span class="co"># Remove oldest</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> search(<span class="va">self</span>, initial, get_neighbors, cost_fn, max_iter<span class="op">=</span><span class="dv">100</span>):</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Main tabu search algorithm"""</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        current <span class="op">=</span> initial</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        best <span class="op">=</span> current</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        best_cost <span class="op">=</span> cost_fn(current)</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Get all neighbors</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>            neighbors <span class="op">=</span> get_neighbors(current)</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Filter out tabu moves (unless aspiration)</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>            candidates <span class="op">=</span> []</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> neighbor, move <span class="kw">in</span> neighbors:</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.is_tabu(move) <span class="kw">or</span> cost_fn(neighbor) <span class="op">&lt;</span> best_cost:</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>                    candidates.append((neighbor, move))</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> candidates:</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Select best non-tabu neighbor</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>            best_neighbor <span class="op">=</span> <span class="bu">min</span>(candidates, key<span class="op">=</span><span class="kw">lambda</span> x: cost_fn(x[<span class="dv">0</span>]))</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>            current, move <span class="op">=</span> best_neighbor</span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Update tabu list</span></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.update_tabu_list(move)</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Update best if improved</span></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> cost_fn(current) <span class="op">&lt;</span> best_cost:</span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>                best <span class="op">=</span> current</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>                best_cost <span class="op">=</span> cost_fn(current)</span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> best, best_cost</span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Tabu Search prevents cycling back!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Tabu Search prevents cycling back!</code></pre>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Like keeping “lessons learned”, you remember not to use them again, but after a while, you might reconsider!</p>
+</div>
 </div>
 </div>
 </section>
-<section id="metaheuristic-4-ant-colony-optimization" class="level2">
-<h2 class="anchored" data-anchor-id="metaheuristic-4-ant-colony-optimization">Metaheuristic #4: Ant Colony Optimization</h2>
-<div id="c004e195" class="cell" data-execution_count="12">
+<section id="concept-1" class="level2">
+<h2 class="anchored" data-anchor-id="concept-1">Concept</h2>
+<p><span class="highlight">How Tabu Search Works (Pseudocode)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tabu_search_concept():</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    tabu_list <span class="op">=</span> []  <span class="co"># Our "never again" list</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    current_solution <span class="op">=</span> initial_schedule</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    best_solution <span class="op">=</span> current_solution</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> done:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Look at all possible moves</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        possible_moves <span class="op">=</span> get_all_neighbor_moves(current_solution)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter out the "forbidden" moves</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        allowed_moves <span class="op">=</span> []</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> move <span class="kw">in</span> possible_moves:</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> move <span class="kw">not</span> <span class="kw">in</span> tabu_list:  <span class="co"># Not forbidden</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                allowed_moves.append(move)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Pick the best allowed move (even if worse!)</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        best_move <span class="op">=</span> select_best(allowed_moves)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        current_solution <span class="op">=</span> <span class="bu">apply</span>(best_move)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update best if improved</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> cost(current_solution) <span class="op">&lt;</span> cost(best_solution):</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>            best_solution <span class="op">=</span> current_solution</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Remember this move (add to tabu list)</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        tabu_list.append(best_move)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(tabu_list) <span class="op">&gt;</span> <span class="dv">10</span>:  <span class="co"># Keep list size manageable</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            tabu_list.pop(<span class="dv">0</span>)  <span class="co"># Forget oldest</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_solution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tabu-search-on-restaurant-problem" class="level2">
+<h2 class="anchored" data-anchor-id="tabu-search-on-restaurant-problem">Tabu Search on Restaurant Problem</h2>
+<p><span class="highlight">Real implementation with memory-based exploration:</span></p>
+<div id="91c2d9a4" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-13-output-1.png" width="1430" height="497" class="figure-img"></p>
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-18-output-1.png" width="1139" height="420" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="highlight">Ants deposit pheromones, creating emergent intelligence!</span></p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Tabu Search’s memory prevents revisiting bad solutions!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="metaheuristic-4-ant-colony-optimization" class="level1 title">
+<h1 class="title"><span class="flow">Metaheuristic #4: Ant Colony Optimization</span></h1>
+<section id="the-core-idea" class="level2">
+<h2 class="anchored" data-anchor-id="the-core-idea">The Core Idea</h2>
+<p><span class="highlight">Collective intelligence through chemical signals:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Reviews:</strong></p>
+<ul>
+<li>Popular choices get more 5-star reviews</li>
+<li>More reviews → more visibility</li>
+<li>But old reviews fade over time</li>
+<li>New patterns can emerge</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>In Optimization:</strong></p>
+<ul>
+<li>Good assignments get “pheromones”</li>
+<li>Stronger choosen more likely</li>
+<li>Evaporation against stagnation</li>
+<li>Colony finds patterns</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Imagine each server-shift pairing has a “rating” that increases when it works well in a schedule. Over time, the best pairings naturally get chosen more often!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="how-aco-works-on-scheduling" class="level2">
+<h2 class="anchored" data-anchor-id="how-aco-works-on-scheduling">How ACO Works on Scheduling</h2>
+<p><span class="highlight">Four key stages in each iteration:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Construction:</strong> Each ant builds a schedule probabilistically</li>
+<li><strong>Evaluation &amp; Evaporation:</strong> Measure quality, then fade all pheromones</li>
+<li><strong>Reinforcement:</strong> Good schedules deposit pheromones</li>
+<li><strong>Evolution:</strong> Repeat until colony converges</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Let’s see each stage visually!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="aco-key-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="aco-key-parameters">ACO: Key Parameters</h2>
+<p><span class="highlight">Two critical parameters control the balance:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Evaporation Rate (ρ)</strong></p>
+<ul>
+<li>Higher ρ → More forgetting</li>
+<li>Lower ρ → Stronger memory</li>
+<li>Typical: 0.1 - 0.5</li>
+<li><strong>Too high</strong>: Colony never learns</li>
+<li><strong>Too low</strong>: Gets stuck early</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Number of Ants</strong></p>
+<ul>
+<li>More ants → More exploration</li>
+<li>Fewer ants → Faster iterations</li>
+<li>Typical: 10 - 50</li>
+<li><strong>Too many</strong>: Slow, redundant</li>
+<li><strong>Too few</strong>: Miss good patterns</li>
+</ul>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Start with ρ=0.3 and n_ants=20, then tune based on problem size.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-1-pheromone-construction" class="level2">
+<h2 class="anchored" data-anchor-id="stage-1-pheromone-construction">Stage 1: Pheromone Construction</h2>
+<p><span class="highlight">Ants don’t pick randomly, they follow the chemical trails</span></p>
+<div id="25e6d012" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-19-output-1.png" width="1058" height="415" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>To build the initial pheromone matrix, each cell is initialized with a small positive value.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-2-evaluation-evaporation" class="level2">
+<h2 class="anchored" data-anchor-id="stage-2-evaluation-evaporation">Stage 2: Evaluation &amp; Evaporation</h2>
+<p><span class="highlight">After all ants build schedules:</span></p>
+<div id="87090da1" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-20-output-1.png" width="1140" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Evaporation prevents premature convergence as old patterns can fade away!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="stage-3-reinforcement" class="level2">
+<h2 class="anchored" data-anchor-id="stage-3-reinforcement">Stage 3: Reinforcement</h2>
+<p><span class="highlight">Good ants deposit more pheromones:</span></p>
+<div id="fa1bb23f" class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-21-output-1.png" width="1152" height="384" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="highlight">The best solutions leave the strongest trails for future iterations!</span></p>
+</section>
+<section id="stage-4-evolution-over-iterations" class="level2">
+<h2 class="anchored" data-anchor-id="stage-4-evolution-over-iterations">Stage 4: Evolution Over Iterations</h2>
+<p><span class="highlight">Full ACO implementation on restaurant staffing:</span></p>
+<div id="213d66d2" class="cell" data-execution_count="21">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-22-output-1.png" width="1139" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The colony learns collectively step by step.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="aco-vs-other-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="aco-vs-other-algorithms">ACO vs Other Algorithms</h2>
+<p><span class="highlight">How does the ant colony compare?</span></p>
+<div id="3c55000d" class="cell" data-execution_count="22">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_09_metaheuristics_files/figure-revealjs/cell-23-output-1.png" width="1139" height="420" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Any idea why ACO fares worse?</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="decision-framework" class="level1 title">
 <h1 class="title"><span class="flow">Decision Framework</span></h1>
 <section id="when-to-use-which-metaheuristic" class="level2">
 <h2 class="anchored" data-anchor-id="when-to-use-which-metaheuristic">When to Use Which Metaheuristic?</h2>
-<div id="125bc856" class="cell" data-execution_count="13">
+<p><span class="highlight">A decision guide for algorithm selection:</span></p>
+<div id="64750e60" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-striped caption-top table-sm small" data-border="1">
 <thead>
@@ -1102,444 +1659,246 @@ e^{-\Delta/T} &amp; \text{if } \Delta &gt; 0
 <th data-quarto-table-cell-role="th">Quality</th>
 <th data-quarto-table-cell-role="th">Complexity</th>
 <th data-quarto-table-cell-role="th">Best For</th>
-<th data-quarto-table-cell-role="th">Parameters</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Random</td>
-<td>⚡⚡⚡⚡</td>
-<td>⭐</td>
+<td>xxxx</td>
+<td>x</td>
 <td>Trivial</td>
 <td>Baseline</td>
-<td>None</td>
 </tr>
 <tr class="even">
 <td>Greedy</td>
-<td>⚡⚡⚡</td>
-<td>⭐⭐</td>
+<td>xxx</td>
+<td>xx</td>
 <td>Simple</td>
 <td>Quick decisions</td>
-<td>1-2</td>
 </tr>
 <tr class="odd">
-<td>Local Search</td>
-<td>⚡⚡</td>
-<td>⭐⭐⭐</td>
+<td>LS</td>
+<td>xx</td>
+<td>xxx</td>
 <td>Medium</td>
 <td>Improvement</td>
-<td>2-3</td>
 </tr>
 <tr class="even">
-<td>Simulated Annealing</td>
-<td>⚡⚡</td>
-<td>⭐⭐⭐⭐</td>
+<td>SA</td>
+<td>xx</td>
+<td>xxxx</td>
 <td>Medium</td>
 <td>Single solution</td>
-<td>3-4</td>
 </tr>
 <tr class="odd">
-<td>Genetic Algorithm</td>
-<td>⚡</td>
-<td>⭐⭐⭐⭐</td>
+<td>GA</td>
+<td>x</td>
+<td>xxxx</td>
 <td>High</td>
-<td>Population-based</td>
-<td>5-6</td>
+<td>Population</td>
 </tr>
 <tr class="even">
-<td>Tabu Search</td>
-<td>⚡⚡</td>
-<td>⭐⭐⭐</td>
+<td>TS</td>
+<td>xx</td>
+<td>xxx</td>
 <td>Medium</td>
-<td>Avoiding cycles</td>
-<td>2-3</td>
+<td>Avoid cycles</td>
 </tr>
 <tr class="odd">
-<td>Ant Colony</td>
-<td>⚡</td>
-<td>⭐⭐⭐⭐</td>
+<td>ACO</td>
+<td>x</td>
+<td>xxxx</td>
 <td>High</td>
-<td>Path problems</td>
-<td>4-5</td>
+<td>Paths</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>. . .</p>
-<p><span class="highlight">Choose based on: time available, solution quality needed, and problem structure</span></p>
+</section>
+<section id="the-no-free-lunch-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="the-no-free-lunch-theorem">The No Free Lunch Theorem</h2>
+<p><span class="highlight">Why there’s no universal best algorithm:</span></p>
+<p><strong>“No Free Lunch Theorem”:</strong> No single algorithm is best for all problems. Your choice must match your problem structure:</p>
+<ul>
+<li><strong>Path/Network Problems</strong> → ACO (pheromones for paths)</li>
+<li><strong>Scheduling Problems</strong> → SA or Tabu (neighborhood swaps)</li>
+<li><strong>Complex Design</strong> → GA (population diversity)</li>
+</ul>
 </section>
 <section id="implementation-strategy" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-strategy">Implementation Strategy</h2>
-<div id="c4ef73a0" class="cell" data-execution_count="14">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-15-output-1.png" width="1142" height="759" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="key-implementation-tips" class="level2">
-<h2 class="anchored" data-anchor-id="key-implementation-tips">Key Implementation Tips</h2>
+<p><span class="highlight">Guidelines for successful implementation:</span></p>
 <div class="incremental">
 <ol class="incremental" type="1">
 <li><strong>Start Simple</strong>: Always try greedy first as baseline</li>
 <li><strong>Profile Your Problem</strong>: Understand constraints before choosing</li>
-<li><strong>Tune Parameters</strong>: Default values rarely optimal</li>
+<li><strong>Tune Incrementally</strong>: Don’t optimize all parameters at once</li>
 <li><strong>Track Progress</strong>: Monitor convergence to know when to stop</li>
-<li><strong>Hybrid Approaches</strong>: Combine methods for best results</li>
-<li><strong>Use AI Assistance</strong>: Let tools handle implementation details</li>
+<li><strong>Hybrid Approaches</strong>: Combine methods (e.g., GA + Local Search)</li>
+<li><strong>Use AI Assistance</strong>: Bridge the “knowledge gap” with GenAI</li>
 </ol>
 </div>
+</section>
+</section>
+<section id="todays-briefing" class="level1 title">
+<h1 class="title"><span class="flow">Today’s Briefing</span></h1>
+<section id="today" class="level2">
+<h2 class="anchored" data-anchor-id="today">Today</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>Hour 2: This Lecture</strong></p>
+<ul>
+<li>Metaheuristics</li>
+<li>Simulated annealing</li>
+<li>Genetic algorithms</li>
+<li>Tabu search &amp; ACO</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Hour 3: Notebook</strong></p>
+<ul>
+<li>Bean Counter delivery</li>
+<li>Implement SA</li>
+<li>Tune parameters</li>
+<li>Compare performance</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Hour 4: Competition</strong></p>
+<ul>
+<li>Restaurant staffing</li>
+<li>Multi-objective</li>
+<li>Schedule optimization</li>
+<li>Justify choice!</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-competition-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="the-competition-challenge">The Competition Challenge</h2>
+<p><span class="highlight">La Étoile Restaurant Weekend Staffing</span></p>
 <p>. . .</p>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
+<ol type="1">
+<li><strong>Schedule</strong> 18 servers across 6 shifts (different lengths)</li>
+<li><strong>Minimize</strong> labor + experience penalties + preference costs</li>
+<li><strong>Ensure</strong> experienced coverage (strategic placement)</li>
+<li><strong>Respect</strong> 2 servers per shift requirement</li>
+</ol>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Pro Tip
+<div class="callout-body-container">
+<p>Choose your metaheuristic wisely as this is a tough problem!</p>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Most real-world problems are solved with greedy + local search. Only use metaheuristics when these fail!</p>
 </div>
 </div>
 </section>
-</section>
-<section id="mission-briefing" class="level1 title">
-<h1 class="title"><span class="flow">Mission Briefing</span></h1>
-<section id="your-restaurant-challenge" class="level2">
-<h2 class="anchored" data-anchor-id="your-restaurant-challenge">Your Restaurant Challenge</h2>
-<p><strong>Scenario</strong>: La Étoile needs weekend staffing schedule</p>
-<p><strong>Resources</strong>: - 18 servers (6 experienced @ €80, 12 junior @ €50) - 6 shifts (3 servers each, need 1+ experienced) - Penalty: €500 per shift without experienced server</p>
-<p><strong>Your Tools</strong>: 1. Greedy assignment 2. Local search improvements 3. Simulated annealing 4. Genetic algorithm 5. Your creativity!</p>
-<p>. . .</p>
-<p><span class="highlight">Remember: Document your approach and reasoning!</span></p>
-</section>
-<section id="summary-the-metaheuristics-toolkit" class="level2">
-<h2 class="anchored" data-anchor-id="summary-the-metaheuristics-toolkit">Summary: The Metaheuristics Toolkit</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>What We Learned</strong> - Why simple methods get stuck - How metaheuristics escape local optima - Four powerful techniques (SA, GA, Tabu, ACO) - When to use each approach - Implementation strategies</p>
-</div><div class="column" style="width:50%;">
-<p><strong>Key Takeaways</strong> - Start simple, add complexity as needed - Temperature/randomness enables escape - Population-based search explores broadly - Memory prevents cycling - AI tools are your implementation allies</p>
-</div>
-</div>
-<p>. . .</p>
-<p><span class="success">You now have a complete optimization toolkit - from greedy to genetic algorithms!</span></p>
-</section>
-<section id="break-time" class="level2">
-<h2 class="anchored" data-anchor-id="break-time">Break Time!</h2>
-<div id="8c49aef1" class="cell" data-execution_count="15">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-16-output-1.png" width="950" height="758" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="flow">Time to practice with real problems!</span></p>
-</section>
-<section id="genetic-algorithm-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="genetic-algorithm-implementation">Genetic Algorithm Implementation</h2>
-<div id="20e0a239" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> genetic_algorithm(population_size<span class="op">=</span><span class="dv">50</span>, generations<span class="op">=</span><span class="dv">100</span>, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                     mutation_rate<span class="op">=</span><span class="fl">0.1</span>, crossover_rate<span class="op">=</span><span class="fl">0.8</span>):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Genetic Algorithm implementation for staff scheduling</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> create_individual():</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Create random schedule"""</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        servers <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">18</span>))</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        np.random.shuffle(servers)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [servers[i:i<span class="op">+</span><span class="dv">3</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">18</span>, <span class="dv">3</span>)]</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fitness(individual):</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Fitness = 1 / (1 + cost)"""</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        cost <span class="op">=</span> problem.cost(individual)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">1.0</span> <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">+</span> cost)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> crossover(parent1, parent2):</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Uniform crossover between schedules"""</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.random.random() <span class="op">&gt;</span> crossover_rate:</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> parent1.copy()</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        child <span class="op">=</span> []</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> shift1, shift2 <span class="kw">in</span> <span class="bu">zip</span>(parent1, parent2):</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> np.random.random() <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>                child.append(shift1.copy())</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>                child.append(shift2.copy())</span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> child</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> mutate(individual):</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Swap mutation"""</span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> np.random.random() <span class="op">&lt;</span> mutation_rate:</span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Swap two random servers</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>            shift1, shift2 <span class="op">=</span> np.random.choice(<span class="dv">6</span>, <span class="dv">2</span>, replace<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">len</span>(individual[shift1]) <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">len</span>(individual[shift2]) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>                idx1 <span class="op">=</span> np.random.randint(<span class="bu">len</span>(individual[shift1]))</span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>                idx2 <span class="op">=</span> np.random.randint(<span class="bu">len</span>(individual[shift2]))</span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>                individual[shift1][idx1], individual[shift2][idx2] <span class="op">=</span> <span class="op">\</span></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>                    individual[shift2][idx2], individual[shift1][idx1]</span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> individual</span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize population</span></span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    population <span class="op">=</span> [create_individual() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(population_size)]</span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    best_history <span class="op">=</span> []</span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gen <span class="kw">in</span> <span class="bu">range</span>(generations):</span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Evaluate fitness</span></span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>        fitnesses <span class="op">=</span> [fitness(ind) <span class="cf">for</span> ind <span class="kw">in</span> population]</span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Track best</span></span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>        best_idx <span class="op">=</span> np.argmax(fitnesses)</span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>        best_history.append(<span class="fl">1.0</span> <span class="op">/</span> fitnesses[best_idx] <span class="op">-</span> <span class="fl">1.0</span>)</span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Selection and reproduction</span></span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>        new_population <span class="op">=</span> [population[best_idx]]  <span class="co"># Elitism</span></span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="bu">len</span>(new_population) <span class="op">&lt;</span> population_size:</span>
-<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Tournament selection</span></span>
-<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>            parent1 <span class="op">=</span> tournament_select(population, fitnesses)</span>
-<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>            parent2 <span class="op">=</span> tournament_select(population, fitnesses)</span>
-<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Crossover and mutation</span></span>
-<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>            child <span class="op">=</span> crossover(parent1, parent2)</span>
-<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>            child <span class="op">=</span> mutate(child)</span>
-<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>            new_population.append(child)</span>
-<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>        population <span class="op">=</span> new_population</span>
-<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> population[<span class="dv">0</span>], best_history</span>
-<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tournament_select(population, fitnesses, tournament_size<span class="op">=</span><span class="dv">3</span>):</span>
-<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Tournament selection"""</span></span>
-<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> np.random.choice(<span class="bu">len</span>(population), tournament_size)</span>
-<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>    tournament_fitnesses <span class="op">=</span> [fitnesses[i] <span class="cf">for</span> i <span class="kw">in</span> indices]</span>
-<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>    winner_idx <span class="op">=</span> indices[np.argmax(tournament_fitnesses)]</span>
-<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> population[winner_idx]</span>
-<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Genetic Algorithm with tournament selection ready!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Genetic Algorithm with tournament selection ready!</code></pre>
-</div>
+<section id="implementation-pitfalls-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</h2>
+<p><span class="highlight">Common bugs that cost you time:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Wrong Cooling Schedule (SA)</strong>
+<ul class="incremental">
+<li>Too fast = stuck in local optimum</li>
+<li>Too slow = wastes computation time</li>
+</ul></li>
+<li><strong>Poor Population Management (GA)</strong>
+<ul class="incremental">
+<li>Too small = no diversity</li>
+<li>Too large = slow evolution</li>
+</ul></li>
+<li><strong>Not Tracking Best</strong>
+<ul class="incremental">
+<li>Current solution ≠ best ever found</li>
+</ul></li>
+</ol>
 </div>
 </section>
-</section>
-<section id="practical-implementation" class="level1 title">
-<h1 class="title"><span class="flow">Practical Implementation</span></h1>
-<section id="using-ai-tools-effectively" class="level2">
-<h2 class="anchored" data-anchor-id="using-ai-tools-effectively">Using AI Tools Effectively</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Good Prompts for ChatGPT/Copilot:</strong></p>
-<pre class="text"><code>"Implement simulated annealing for 
-staff scheduling with:
-- 18 staff (6 senior, 12 junior)  
-- 6 shifts needing 3 staff each
-- Cost: senior=$80, junior=$50
-- Penalty: $500 if no senior
-- Use swap neighborhood
-- Temperature: 1000, cooling: 0.95"</code></pre>
-<p>✅ Specific problem details<br>
-✅ Clear constraints<br>
-✅ Algorithm parameters</p>
-</div><div class="column" style="width:50%;">
-<p><strong>Bad Prompts:</strong></p>
-<pre class="text"><code>"Make a metaheuristic for my 
-scheduling problem"</code></pre>
-<p>❌ Vague problem description<br>
-❌ No constraints specified<br>
-❌ No algorithm choice<br>
-❌ Missing parameters</p>
-<p><strong>Remember</strong>: AI tools need context!</p>
-</div>
-</div>
-</section>
-<section id="debugging-metaheuristics" class="level2">
-<h2 class="anchored" data-anchor-id="debugging-metaheuristics">Debugging Metaheuristics</h2>
-<div id="0ee3bd25" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> debug_metaheuristic(algorithm_name, history):</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Helper to diagnose metaheuristic performance</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check convergence</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> history[<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> history[<span class="op">-</span><span class="dv">100</span>]:</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"⚠️ </span><span class="sc">{</span>algorithm_name<span class="sc">}</span><span class="ss"> stuck - try:"</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"  - Increase temperature (SA)"</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"  - Increase mutation rate (GA)"</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"  - Reduce tabu tenure (Tabu)"</span>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check exploration</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    variance <span class="op">=</span> np.var(history[:<span class="dv">50</span>])</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> variance <span class="op">&lt;</span> <span class="fl">0.01</span>:</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"⚠️ </span><span class="sc">{</span>algorithm_name<span class="sc">}</span><span class="ss"> not exploring - try:"</span>)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"  - Higher initial temperature"</span>)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"  - Larger population"</span>)</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"  - More diverse initialization"</span>)</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check improvement rate</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    improvement <span class="op">=</span> (history[<span class="dv">0</span>] <span class="op">-</span> history[<span class="op">-</span><span class="dv">1</span>]) <span class="op">/</span> history[<span class="dv">0</span>]</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"📊 Total improvement: </span><span class="sc">{</span>improvement<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="parameter-tuning-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="parameter-tuning-strategies">Parameter Tuning Strategies</h2>
+<p><span class="highlight">How to find good parameters without wasting time:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Start with Rules of Thumb</strong>
+<ul class="incremental">
+<li>SA: Initial temp = max cost difference you’d accept</li>
+<li>GA: Population = 10-20× number of decision variables</li>
+<li>Tabu: Tenure (limit) = √(problem size)</li>
+</ul></li>
+<li><strong>Grid Search on Small Instance</strong>
+<ul class="incremental">
+<li>Test 3-4 values per parameter</li>
+<li>Use 10% of full dataset</li>
+<li>Example: <code>temps = [100, 500]</code>, <code>cooling = [0.95, 0.99]</code></li>
+</ul></li>
+</ol>
 </div>
 </section>
 <section id="real-world-considerations" class="level2">
 <h2 class="anchored" data-anchor-id="real-world-considerations">Real-World Considerations</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Computational Budget</strong> - Wall-clock time matters - Memory constraints - Parallel processing opportunities - Cloud vs local execution</p>
-<p><strong>Solution Quality Requirements</strong> - “Good enough” vs optimal - Consistency vs best possible - Explainability needs</p>
-</div><div class="column" style="width:50%;">
-<p><strong>Problem Characteristics</strong> - Static vs dynamic - Deterministic vs stochastic - Single vs multi-objective - Hard vs soft constraints</p>
-<p><strong>Implementation Reality</strong> - Development time - Maintenance burden - Team expertise - Integration complexity</p>
-</div>
-</div>
-</section>
-</section>
-<section id="advanced-topics" class="level1 title">
-<h1 class="title"><span class="flow">Advanced Topics</span></h1>
-<section id="hybrid-metaheuristics" class="level2">
-<h2 class="anchored" data-anchor-id="hybrid-metaheuristics">Hybrid Metaheuristics</h2>
-<div id="5e0cc1e0" class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-19-output-1.png" width="1142" height="565" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="highlight">Combine methods sequentially for best results!</span></p>
-</section>
-<section id="parameter-tuning-strategies" class="level2">
-<h2 class="anchored" data-anchor-id="parameter-tuning-strategies">Parameter Tuning Strategies</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Grid Search</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>temps <span class="op">=</span> [<span class="dv">100</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">2000</span>]</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>coolings <span class="op">=</span> [<span class="fl">0.9</span>, <span class="fl">0.95</span>, <span class="fl">0.99</span>]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> T <span class="kw">in</span> temps:</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> alpha <span class="kw">in</span> coolings:</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        run_SA(T, alpha)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Adaptive Parameters</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Self-adjusting temperature</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> no_improvement <span class="op">&gt;</span> <span class="dv">50</span>:</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    temperature <span class="op">*=</span> <span class="fl">1.5</span>  <span class="co"># Reheat</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:50%;">
-<p><strong>Rules of Thumb</strong> - SA: T₀ ≈ max expected delta - GA: pop_size ≈ 10 × variables - Tabu: tenure ≈ √problem_size - Mutation: 1/chromosome_length</p>
-<p><strong>Performance Metrics</strong> - Convergence speed - Solution quality - Robustness (variance) - Computational time</p>
-</div>
-</div>
-</section>
-<section id="competition-strategies" class="level2">
-<h2 class="anchored" data-anchor-id="competition-strategies">Competition Strategies</h2>
-<ol type="1">
-<li><strong>Start Simple</strong>: Greedy baseline first (5 min)</li>
-<li><strong>Quick Improvement</strong>: Local search (10 min)<br>
-</li>
-<li><strong>Smart Enhancement</strong>: Choose ONE metaheuristic (20 min)</li>
-<li><strong>Fine-tune</strong>: Adjust parameters (10 min)</li>
-<li><strong>Document</strong>: Explain choices (5 min)</li>
-</ol>
+<p><span class="highlight">Technical realities when putting metaheuristics into production:</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Questions to Ask</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Time Budget</strong></td>
+<td>How long can optimization run?</td>
+</tr>
+<tr class="even">
+<td><strong>Solution Quality</strong></td>
+<td>Need optimal or “good enough”?</td>
+</tr>
+<tr class="odd">
+<td><strong>Explainability</strong></td>
+<td>Must justify decisions?</td>
+</tr>
+<tr class="even">
+<td><strong>Problem Changes</strong></td>
+<td>Static or dynamic data?</td>
+</tr>
+<tr class="odd">
+<td><strong>Team Skills</strong></td>
+<td>Who maintains this code?</td>
+</tr>
+</tbody>
+</table>
 <p>. . .</p>
-<div class="callout callout-style-simple callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Competition Tip
+<div class="callout-body-container">
+<p>Use the <strong>simplest method</strong> that meets your quality target. Complex metaheuristics are great but more costly to maintain!</p>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Don’t try to implement everything! Pick one approach and do it well.</p>
 </div>
 </div>
 </section>
-</section>
-<section id="summary-resources" class="level1 title">
-<h1 class="title"><span class="flow">Summary &amp; Resources</span></h1>
-<section id="key-concepts-to-remember" class="level2">
-<h2 class="anchored" data-anchor-id="key-concepts-to-remember">Key Concepts to Remember</h2>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><span class="highlight">Key Takeaways:</span></p>
 <div class="incremental">
 <ul class="incremental">
-<li><strong>Local Optima</strong>: Simple methods get trapped</li>
-<li><strong>Acceptance Probability</strong>: P = exp(-Δ/T) enables escape</li>
-<li><strong>Population Search</strong>: Parallel exploration beats sequential</li>
-<li><strong>Memory</strong>: Prevents cycling and guides search</li>
-<li><strong>Hybrid Approaches</strong>: Combine methods for best results</li>
-<li><strong>AI Tools</strong>: Implementation helpers, not decision makers</li>
+<li>Metaheuristics escape local optima when exact methods fail</li>
+<li>SA uses temperature, GA uses evolution, Tabu uses memory</li>
+<li>Parameter tuning is critical for performance</li>
+<li>No universal best - problem structure matters</li>
+<li>Start simple, add complexity only if needed</li>
 </ul>
 </div>
 </section>
-<section id="your-optimization-hierarchy" class="level2">
-<h2 class="anchored" data-anchor-id="your-optimization-hierarchy">Your Optimization Hierarchy</h2>
-<div id="d3d8199a" class="cell" data-execution_count="19">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-20-output-1.png" width="945" height="759" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="additional-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Learn More:</strong> - <a href="https://cs.gmu.edu/~sean/book/metaheuristics/">Essentials of Metaheuristics</a> (free book) - <a href="https://developers.google.com/optimization">Google OR-Tools</a> - <a href="https://deap.readthedocs.io/">DEAP Python Library</a> for GA - <a href="https://simpy.readthedocs.io/">SimPy</a> for simulation</p>
-<p><strong>Practice Problems:</strong> - Vehicle Routing (VRP) - Job Shop Scheduling - Knapsack variants - Portfolio optimization</p>
-</div><div class="column" style="width:50%;">
-<p><strong>AI Assistant Prompts:</strong></p>
-<pre class="text"><code># Template for any problem:
-"I need to solve [problem type] with:
-- Variables: [list them]
-- Constraints: [list them]  
-- Objective: [minimize/maximize what]
-- Data: [provide sample]
-
-Implement [specific algorithm] with:
-- [Parameter 1]: [value]
-- [Parameter 2]: [value]
-Please include comments."</code></pre>
-</div>
-</div>
-</section>
-<section id="final-thoughts" class="level2">
-<h2 class="anchored" data-anchor-id="final-thoughts">Final Thoughts</h2>
-<blockquote class="blockquote">
-<p>“All models are wrong, but some are useful” - George Box</p>
-</blockquote>
-<p>. . .</p>
-<blockquote class="blockquote">
-<p>“Perfect is the enemy of good” - Voltaire</p>
-</blockquote>
-<p>. . .</p>
-<blockquote class="blockquote">
-<p>“Start where you are. Use what you have. Do what you can.” - Arthur Ashe</p>
-</blockquote>
-<p>. . .</p>
-<p><span class="success">You now have a complete optimization toolkit. Use it wisely!</span></p>
-</section>
 <section id="break" class="level2">
 <h2 class="anchored" data-anchor-id="break">Break!</h2>
-<div id="68a58dd9" class="cell" data-execution_count="20">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec_09_metaheuristics_files/figure-html/cell-21-output-1.png" width="950" height="759" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="flow">Ready to optimize? Let’s tackle the restaurant challenge!</span></p>
+<p><span class="highlight">Take 20 minutes, then we start the practice notebook</span></p>
+<p><strong>Next up:</strong> You’ll implement metaheuristics for Bean Counter</p>
 
 
 </section>
