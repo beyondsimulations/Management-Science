@@ -2234,6 +2234,21 @@ plt.show()
 Any idea why ACO fares worse?
 :::
 
+## Why did ACO struggle?
+
+[The Right Tool for the Wrong Job]{.highlight}
+
+ACO is designed for **Sequential Path-Finding** (Graph Traversal).
+
+* **Best For:** "I am at City A, where should I go next?" (TSP) 
+* **Our Problem:** "Who should work Friday Dinner?" (Assignment) 
+
+. . .
+
+::: {.callout-important}
+We forced a "Graph" algorithm onto a "Bin Packing" problem. SA and GA don't care about geometry, so they adapted better!
+:::
+
 # [Decision Framework]{.flow} {.title}
 
 ## When to Use Which Metaheuristic?
@@ -2254,7 +2269,7 @@ comparison_data = {
     'Quality': ['x', 'xx', 'xxx', 'xxxx', 'xxxx', 'xxx', 'xxxx'],
     'Complexity': ['Trivial', 'Simple', 'Medium', 'Medium', 'High', 'Medium', 'High'],
     'Best For': ['Baseline', 'Quick decisions', 'Improvement', 'Single solution',
-                 'Population', 'Avoid cycles', 'Paths'],
+                 'Population', 'Avoid cycles', 'Changing Paths'],
 }
 
 df = pd.DataFrame(comparison_data)
