@@ -818,3 +818,517 @@ def schedule_dynamic(orders):
 
     return scheduled
 ```
+
+# Routing and Local Search
+
+## Distance Calculations
+
+```{python}
+#| eval: false
+# Euclidean distance between two points
+def calculate_distance(point1, point2):
+    """Calculate distance between (x, y) coordinates"""
+    x1, y1 = point1
+    x2, y2 = point2
+    return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+# Example
+depot = (0, 0)
+customer = (3, 4)
+dist = calculate_distance(depot, customer)  # Returns 5.0
+```
+
+## Distance Matrix
+
+**Definition**: Precompute all pairwise distances for efficiency.
+
+```{python}
+#| eval: false
+def create_distance_matrix(locations):
+    """Create matrix where distances[i][j] = distance from i to j"""
+    n = len(locations)
+    distances = np.zeros((n, n))
+
+    for i in range(n):
+        for j in range(n):
+            if i != j:
+                distances[i][j] = calculate_distance(locations[i], locations[j])
+
+    return distances
+```
+
+## Route Distance Calculation
+
+**Critical**: Always include return to depot (location 0)!
+
+```{python}
+#| eval: false
+def calculate_route_distance(route, distance_matrix):
+    """Calculate total distance for a complete route"""
+    total = 0
+
+    # Depot to first location
+    total += distance_matrix[0, route[0]]
+
+    # Between consecutive locations
+    for i in range(len(route) - 1):
+        total += distance_matrix[route[i], route[i+1]]
+
+    # Last location back to depot
+    total += distance_matrix[route[-1], 0]
+
+    return total
+```
+
+## Greedy Construction: Nearest Neighbor
+
+**Strategy**: Always visit closest unvisited location next.
+
+```{python}
+#| eval: false
+def nearest_neighbor_route(distance_matrix):
+    """Build route by always choosing nearest unvisited location"""
+    n = len(distance_matrix)
+    unvisited = list(range(1, n))  # Skip depot (index 0)
+    route = []
+    current = 0  # Start at depot
+
+    while unvisited:
+        # Find nearest unvisited location
+        nearest = min(unvisited, key=lambda x: distance_matrix[current, x])
+        route.append(nearest)
+        unvisited.remove(nearest)
+        current = nearest
+
+    return route
+```
+
+## Local Search: 2-Opt Improvement
+
+**2-Opt Swap**: Reverse a segment of the route to eliminate crossings.
+
+```{python}
+#| eval: false
+def perform_2opt_swap(route, i, j):
+    """Reverse segment between positions i and j"""
+    # Keep start, reverse middle, keep end
+    return route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
+
+# Example: [1, 2, 3, 4, 5] with swap(1, 3) becomes [1, 2, 4, 3, 5]
+```
+
+**2-Opt Algorithm**: Keep improving until no better swap exists.
+
+```{python}
+#| eval: false
+def improve_route_2opt(route, distance_matrix):
+    """Improve route using 2-opt local search"""
+    improved = True
+    current_route = route.copy()
+
+    while improved:
+        improved = False
+        current_dist = calculate_route_distance(current_route, distance_matrix)
+
+        # Try all possible swaps
+        for i in range(len(current_route) - 1):
+            for j in range(i + 2, len(current_route)):
+                new_route = perform_2opt_swap(current_route, i, j)
+                new_dist = calculate_route_distance(new_route, distance_matrix)
+
+                if new_dist < current_dist:
+                    current_route = new_route
+                    current_dist = new_dist
+                    improved = True
+                    break  # Restart search
+
+            if improved:
+                break  # Exit outer loop
+
+    return current_route
+```
+
+## Key Patterns
+
+**List Slicing for Route Reversal:**
+
+```{python}
+#| eval: false
+route = [1, 2, 3, 4, 5, 6]
+
+# Reverse segment from index 2 to 4
+route[:2] + route[2:5][::-1] + route[5:]  # [1, 2, 5, 4, 3, 6]
+```
+
+**Using min() with key parameter:**
+
+```{python}
+#| eval: false
+# Find location with minimum distance
+nearest = min(unvisited, key=lambda x: distance_matrix[current, x])
+```
+
+**Route Representation:**
+
+- Route = list of location indices (not including depot)
+- Example: `[3, 1, 4, 2]` means visit locations 3 → 1 → 4 → 2 → return to depot
+
+# Multi-Objective Optimization
+
+## Dominance and Pareto Frontier
+
+**Definition**: Solution A dominates B if A is better/equal in ALL objectives AND strictly better in at least one.
+
+```{python}
+#| eval: false
+def is_dominated(solution_idx, data):
+    """Check if a solution is dominated by any other solution"""
+    current = data.iloc[solution_idx]
+
+    for idx in range(len(data)):
+        if idx == solution_idx:
+            continue
+
+        other = data.iloc[idx]
+
+        # Example: maximize profit, minimize cost
+        # Other dominates if: profit >= AND cost <= (with at least one strict)
+        if (other['profit'] >= current['profit'] and
+            other['cost'] <= current['cost'] and
+            (other['profit'] > current['profit'] or
+             other['cost'] < current['cost'])):
+            return True
+
+    return False
+```
+
+## Finding Pareto Frontier
+
+**Pareto Frontier**: Set of all non-dominated solutions (the only rational choices).
+
+```{python}
+#| eval: false
+def find_pareto_frontier(data):
+    """Return only non-dominated solutions"""
+    n = len(data)
+    is_pareto = np.ones(n, dtype=bool)
+
+    for i in range(n):
+        if not is_pareto[i]:
+            continue
+
+        for j in range(n):
+            if i == j:
+                continue
+
+            # Check if j dominates i (adjust for your objectives)
+            if (data.iloc[j]['profit'] >= data.iloc[i]['profit'] and
+                data.iloc[j]['cost'] <= data.iloc[i]['cost'] and
+                (data.iloc[j]['profit'] > data.iloc[i]['profit'] or
+                 data.iloc[j]['cost'] < data.iloc[i]['cost'])):
+                is_pareto[i] = False
+                break
+
+    return data[is_pareto]
+```
+
+## Normalization to [0,1]
+
+**Critical**: Always normalize before combining objectives with different scales!
+
+```{python}
+#| eval: false
+def normalize_column(series):
+    """Normalize pandas Series to [0, 1] range"""
+    min_val = series.min()
+    max_val = series.max()
+
+    if max_val > min_val:
+        return (series - min_val) / (max_val - min_val)
+    else:
+        return pd.Series([0.5] * len(series))
+
+# Apply to DataFrame columns
+data['cost_norm'] = normalize_column(data['cost'])
+data['profit_norm'] = normalize_column(data['profit'])
+```
+
+## Weighted Sum Scoring
+
+**Combine objectives** using weights that sum to 1.0.
+
+```{python}
+#| eval: false
+def calculate_weighted_score(data, weights):
+    """
+    Calculate weighted score for multiple normalized objectives.
+
+    weights: dict like {'profit': 0.6, 'speed': 0.4}
+
+    Note: For minimization objectives, use (1 - normalized_value)
+    """
+    score = 0
+
+    # Maximize profit (higher is better)
+    score += weights['profit'] * data['profit_norm']
+
+    # Minimize time (lower is better, so flip it)
+    score += weights['speed'] * (1 - data['time_norm'])
+
+    return score
+
+# Find best solution
+data['score'] = calculate_weighted_score(data, {'profit': 0.6, 'speed': 0.4})
+best_idx = data['score'].idxmax()
+```
+
+## Hard Constraints
+
+**Constraint**: Must be satisfied (feasibility). **Objective**: Something to optimize.
+
+```{python}
+#| eval: false
+# Filter to feasible solutions only
+constraint_threshold = 100
+feasible = data[data['emissions'] <= constraint_threshold]
+
+# Then find Pareto frontier among feasible solutions
+pareto_feasible = find_pareto_frontier(feasible)
+```
+
+## Complete MOO Workflow
+
+**Three-stage process** for multi-objective problems:
+
+```{python}
+#| eval: false
+# Stage 1: Filter by constraints
+feasible = data[data['constraint_column'] <= threshold]
+
+# Stage 2: Find Pareto frontier
+pareto = find_pareto_frontier(feasible)
+
+# Stage 3: Select using weighted scoring
+pareto['obj1_norm'] = normalize_column(pareto['objective1'])
+pareto['obj2_norm'] = normalize_column(pareto['objective2'])
+
+# Calculate scores with your priorities
+pareto['score'] = (0.6 * pareto['obj1_norm'] +
+                   0.4 * (1 - pareto['obj2_norm']))  # if obj2 is minimization
+
+# Choose best
+best_solution = pareto.loc[pareto['score'].idxmax()]
+```
+
+## Key Patterns
+
+**Objective Direction:**
+
+- **Maximize**: Use `normalized_value` directly in score
+- **Minimize**: Use `(1 - normalized_value)` to flip
+
+**Weight Selection:**
+
+- Weights must sum to 1.0 (representing 100% of priorities)
+- Higher weight = more importance
+- Example: `w_cost=0.7, w_speed=0.3` means cost is 70% of priority
+
+**Common Mistakes:**
+
+- Forgetting to normalize (different scales dominate)
+- Not flipping minimization objectives in score
+- Applying weights before normalization
+
+# Metaheuristics
+
+## Simulated Annealing (SA)
+
+**Core Idea**: Accept worse solutions probabilistically to escape local optima, with decreasing probability over time.
+
+**Acceptance Criterion:**
+
+```{python}
+#| eval: false
+def accept_move(current_cost, new_cost, temperature):
+    """Decide whether to accept a move in SA"""
+    if new_cost < current_cost:
+        return True  # Always accept improvements
+    else:
+        # Accept worse moves with probability exp(-delta/T)
+        delta = new_cost - current_cost
+        probability = math.exp(-delta / temperature)
+        return random.random() < probability
+```
+
+## Complete SA Algorithm
+
+**Key Pattern**: Track BOTH current solution (explores) AND best solution (never forget best).
+
+```{python}
+#| eval: false
+def simulated_annealing(initial_solution, cost_function,
+                       initial_temp=1000, cooling_rate=0.95, min_temp=1):
+    """
+    Simulated Annealing template.
+
+    Args:
+        initial_solution: Starting solution
+        cost_function: Function that evaluates solution quality
+        initial_temp: Starting temperature (higher = more exploration)
+        cooling_rate: Temperature multiplier (0.9-0.99, higher = slower)
+        min_temp: Stop when temperature reaches this value
+    """
+    # Initialize BOTH current and best
+    current = initial_solution.copy()
+    current_cost = cost_function(current)
+
+    best = current.copy()
+    best_cost = current_cost
+
+    temperature = initial_temp
+
+    while temperature > min_temp:
+        # Try multiple neighbors per temperature
+        for _ in range(10):
+            # Generate neighbor (problem-specific)
+            neighbor = generate_neighbor(current)
+            neighbor_cost = cost_function(neighbor)
+
+            # Acceptance criterion
+            if accept_move(current_cost, neighbor_cost, temperature):
+                current = neighbor
+                current_cost = neighbor_cost
+
+                # Track best ever found (critical!)
+                if current_cost < best_cost:
+                    best = current.copy()
+                    best_cost = current_cost
+
+        # Cool down (geometric cooling)
+        temperature *= cooling_rate
+
+    return best, best_cost
+```
+
+## Temperature & Cooling
+
+**Temperature Controls Exploration:**
+
+- **High T** (e.g., 1000): Accept worse moves ~90% → Explore widely
+- **Medium T** (e.g., 100): Accept worse moves ~30% → Balance
+- **Low T** (e.g., 10): Accept worse moves <5% → Exploit (greedy-like)
+
+**Common Cooling Schedules:**
+
+```{python}
+#| eval: false
+# Geometric cooling (most common)
+temperature = temperature * 0.95  # Multiply by constant (0.9-0.99)
+
+# Linear cooling
+temperature = temperature - 5  # Subtract constant
+
+# Exponential cooling
+temperature = initial_temp / (1 + iteration)
+```
+
+**Parameter Guidelines:**
+
+- **Initial Temperature**: Start high enough to accept moves ~80% initially
+  - Rule of thumb: T₀ ≈ average cost difference between neighbors
+- **Cooling Rate**:
+  - Fast: α = 0.9 (quick, risk of poor solution)
+  - Balanced: α = 0.95 (good default)
+  - Slow: α = 0.99 (thorough, slow)
+- **Iterations per Temperature**: 10-50 neighbors per temperature step
+
+## Genetic Algorithm Components
+
+**Population-based**: Maintain multiple solutions that evolve together.
+
+**Selection (Tournament):**
+
+```{python}
+#| eval: false
+def tournament_selection(population, costs, tournament_size=3):
+    """Select parent via tournament"""
+    tournament = random.sample(list(zip(population, costs)), tournament_size)
+    return min(tournament, key=lambda x: x[1])[0]  # Return best from tournament
+```
+
+**Crossover (Order Crossover):**
+
+```{python}
+#| eval: false
+def crossover(parent1, parent2, crossover_point):
+    """Combine two parents to create offspring"""
+    # Take first part from parent1, second part from parent2
+    child = parent1[:crossover_point] + parent2[crossover_point:]
+    return child
+
+# For permutations (like routes), need special order crossover to avoid duplicates!
+```
+
+**Mutation:**
+
+```{python}
+#| eval: false
+def mutate(solution, mutation_rate=0.1):
+    """Randomly modify solution with some probability"""
+    if random.random() < mutation_rate:
+        # Make a small random change
+        return make_small_change(solution)
+    return solution
+```
+
+**Population Management:**
+
+```{python}
+#| eval: false
+# Elitism: Always keep best solutions
+elite_size = 2
+new_population = sorted_population[:elite_size]  # Keep best 2
+
+# Generate rest through selection + crossover + mutation
+while len(new_population) < population_size:
+    parent1 = tournament_selection(population, costs)
+    parent2 = tournament_selection(population, costs)
+    child = crossover(parent1, parent2)
+    child = mutate(child)
+    new_population.append(child)
+```
+
+## Key Patterns
+
+**Neighbor Generation:**
+
+- **Swap**: Exchange two elements (works for most problems)
+- **Insert**: Move one element to different position
+- **Reverse**: Reverse a segment (good for routes)
+
+**Stopping Criteria:**
+
+- **Temperature threshold**: When T < 1 (SA)
+- **No improvement**: After N iterations without improvement
+- **Time limit**: Stop after X seconds/minutes
+- **Iteration limit**: Stop after N total iterations
+
+**Multi-start Strategy:**
+
+```{python}
+#| eval: false
+def multi_start_metaheuristic(n_starts=10):
+    """Run metaheuristic from multiple starting points"""
+    best_overall = None
+    best_cost_overall = float('inf')
+
+    for _ in range(n_starts):
+        initial = generate_random_solution()
+        solution, cost = simulated_annealing(initial)
+
+        if cost < best_cost_overall:
+            best_overall = solution
+            best_cost_overall = cost
+
+    return best_overall, best_cost_overall
+```
