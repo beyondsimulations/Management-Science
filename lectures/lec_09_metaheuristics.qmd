@@ -16,7 +16,7 @@ format:
 
 [Restaurant Manager's Crisis:]{.invert-font}
 
-["I need to schedule my [18 servers across 6 shifts]{.highlight} this weekend. Shifts have [different lengths (4-6 hours)]{.highlight}, and if I don't have enough experienced servers on busy shifts, we face [penalties ranging from €150 to €400]{.highlight} per missing experienced server from our parent company!"]{.invert-font .fragment}
+["I need to schedule my [18 servers across 6 shifts]{.highlight} this weekend. Shifts have [different lengths (4-6 hours)]{.highlight}, and if I don't have enough experienced servers on busy shifts, we face [penalties]{.highlight} per missing experienced server from our parent company!"]{.invert-font .fragment}
 
 ## The Staffing Challenge
 
@@ -2356,21 +2356,6 @@ display(HTML(df.to_html(index=False, classes='table table-striped')))
 
 :::{.callout-important}
 Choose your metaheuristic wisely as this is a tough problem!
-:::
-
-## Implementation Pitfalls to Avoid
-
-[Common bugs that cost you time:]{.highlight}
-
-::: incremental
-1. **Wrong Cooling Schedule (SA)**
-   - Too fast = stuck in local optimum
-   - Too slow = wastes computation time
-2. **Poor Population Management (GA)**
-   - Too small = no diversity
-   - Too large = slow evolution
-4. **Not Tracking Best**
-   - Current solution ≠ best ever found
 :::
 
 ## Parameter Tuning Strategies
