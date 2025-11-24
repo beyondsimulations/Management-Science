@@ -642,7 +642,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>Maintains quality of care (right skills at right times)</em></li>
 <li><em>Is robust to sick calls (we always have 1-2 nurses out)</em></li>
 </ol>
-<p><em>Can you build this for us? I have data from last month’s schedules and our staffing requirements.”</em> :::</p>
+<p><em>Can you build this for us? I have data from last month’s schedules and our staffing requirements.”</em></p>
 </section>
 <section id="the-business-context" class="level2">
 <h2 class="anchored" data-anchor-id="the-business-context">The Business Context</h2>
@@ -748,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="nurse-information" class="level3">
 <h3 class="anchored" data-anchor-id="nurse-information">Nurse Information</h3>
-<div id="6c89b9d1" class="cell" data-execution_count="1">
+<div id="8f570920" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -876,7 +876,7 @@ By skill level: Junior=2, Senior=13, Expert=5</code></pre>
 </section>
 <section id="shift-requirements" class="level3">
 <h3 class="anchored" data-anchor-id="shift-requirements">Shift Requirements</h3>
-<div id="905c0a66" class="cell" data-execution_count="2">
+<div id="592bfb8f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define shift requirements for each department and shift type</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Format: (min_nurses, min_senior_nurses)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -946,7 +946,7 @@ Capacity margin: 8 shift-slots</code></pre>
 </section>
 <section id="week-structure" class="level2">
 <h2 class="anchored" data-anchor-id="week-structure">Week Structure</h2>
-<div id="3b817526" class="cell" data-execution_count="3">
+<div id="c0b16086" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the week structure</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>days_of_week <span class="op">=</span> [<span class="st">'Monday'</span>, <span class="st">'Tuesday'</span>, <span class="st">'Wednesday'</span>, <span class="st">'Thursday'</span>, <span class="st">'Friday'</span>, <span class="st">'Saturday'</span>, <span class="st">'Sunday'</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>shift_types <span class="op">=</span> [<span class="st">'Morning'</span>, <span class="st">'Evening'</span>, <span class="st">'Night'</span>]</span>
@@ -1001,7 +1001,7 @@ Wednesday        2   Night       False    Wed_Nig
 <section id="minimal-helper-functions" class="level2">
 <h2 class="anchored" data-anchor-id="minimal-helper-functions">Minimal Helper Functions</h2>
 <p>We provide only basic data structures and a validation function. <strong>You must implement the scheduling algorithm yourself.</strong></p>
-<div id="c61bd46a" class="cell" data-execution_count="4">
+<div id="bbc75257" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> validate_schedule(schedule, nurses_df, shift_requirements):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Validate a schedule against all constraints.</span></span>

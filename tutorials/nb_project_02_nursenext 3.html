@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Consulting Project: NurseNext Scheduling Optimization – Management Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-197188da37a79cb9418c4f38e6d23e8d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f088ff709e1277e0222aba4cda41ab4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script defer="" src="https://umi.byndsim.com/script.js" data-website-id="e230d76b-b0a6-477e-8c5d-19a7bd661e68"></script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_10_consulting_projects.html">10 Consulting Projects</a></li><li class="breadcrumb-item"><a href="../tutorials/nb_project_02_nursenext.html">Project 02: NurseNext</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">01 Let’s Start</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Leture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_01_variables_data_types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_02_lists_loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Lists</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_03_conditionals_while.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-03 Conditions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">02 Advances</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_02_copilot_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_01_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-01 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_02_dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-02 Dictionaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_03_sorting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-03 Sorting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_04_recap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-04 Recap</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">03 Foundation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_03_closing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_01_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-01 Numpy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_02_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-02 Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_03_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-03 Plotting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">04 Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_04_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_01_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-01 Monte Carlo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_02_techventure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">05 Forecasting</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_05_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_01_time_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-01 Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_02_predictor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">06 Greedy Search</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_06_greedy_algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_01_scheduling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-01 Scheduling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_02_scheduler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">07 Local Search</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_07_local_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_01_local_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-01 Routing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_02_routing_competition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">08 Multi Objective</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_08_multi_objective.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_08_01_multi_objective.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-08-01 Pareto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_08_02_fleet_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-08-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">09 Metaheuristics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_09_metaheuristics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_09_01_metaheuristics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-09-01 Metaheuristics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_09_02_restaurant_staffing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-09-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">10 Consulting Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_10_consulting_projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_01_quickbite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 01: QuickBite</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_02_nursenext.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Project 02: NurseNext</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_03_techmart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 03: TechMart</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 01</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/vote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vote</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literature</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#client-briefing-nursenext-hospital" id="toc-client-briefing-nursenext-hospital" class="nav-link active" data-scroll-target="#client-briefing-nursenext-hospital">Client Briefing: NurseNext Hospital</a>
+  <ul class="collapse">
+  <li><a href="#meet-your-client" id="toc-meet-your-client" class="nav-link" data-scroll-target="#meet-your-client">Meet Your Client</a></li>
+  <li><a href="#the-coos-challenge" id="toc-the-coos-challenge" class="nav-link" data-scroll-target="#the-coos-challenge">The COO’s Challenge</a></li>
+  <li><a href="#the-business-context" id="toc-the-business-context" class="nav-link" data-scroll-target="#the-business-context">The Business Context</a>
+  <ul class="collapse">
+  <li><a href="#current-situation" id="toc-current-situation" class="nav-link" data-scroll-target="#current-situation">Current Situation</a></li>
+  <li><a href="#cost-structure" id="toc-cost-structure" class="nav-link" data-scroll-target="#cost-structure">Cost Structure</a></li>
+  <li><a href="#labor-law-constraints" id="toc-labor-law-constraints" class="nav-link" data-scroll-target="#labor-law-constraints">Labor Law Constraints</a></li>
+  <li><a href="#fairness-expectations" id="toc-fairness-expectations" class="nav-link" data-scroll-target="#fairness-expectations">Fairness Expectations</a></li>
+  </ul></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The Data</a>
+  <ul class="collapse">
+  <li><a href="#nurse-information" id="toc-nurse-information" class="nav-link" data-scroll-target="#nurse-information">Nurse Information</a></li>
+  <li><a href="#shift-requirements" id="toc-shift-requirements" class="nav-link" data-scroll-target="#shift-requirements">Shift Requirements</a></li>
+  </ul></li>
+  <li><a href="#week-structure" id="toc-week-structure" class="nav-link" data-scroll-target="#week-structure">Week Structure</a></li>
+  <li><a href="#minimal-helper-functions" id="toc-minimal-helper-functions" class="nav-link" data-scroll-target="#minimal-helper-functions">Minimal Helper Functions</a></li>
+  <li><a href="#your-task" id="toc-your-task" class="nav-link" data-scroll-target="#your-task">Your Task</a>
+  <ul class="collapse">
+  <li><a href="#jupyter-notebook-with-complete-solution" id="toc-jupyter-notebook-with-complete-solution" class="nav-link" data-scroll-target="#jupyter-notebook-with-complete-solution">1. Jupyter Notebook with Complete Solution</a></li>
+  <li><a href="#presentation" id="toc-presentation" class="nav-link" data-scroll-target="#presentation">2. Presentation</a></li>
+  <li><a href="#key-metrics-to-report" id="toc-key-metrics-to-report" class="nav-link" data-scroll-target="#key-metrics-to-report">3. Key Metrics to Report</a></li>
+  </ul></li>
+  <li><a href="#constraints-and-requirements" id="toc-constraints-and-requirements" class="nav-link" data-scroll-target="#constraints-and-requirements">Constraints and Requirements</a></li>
+  <li><a href="#tips-for-success" id="toc-tips-for-success" class="nav-link" data-scroll-target="#tips-for-success">Tips for Success</a></li>
+  <li><a href="#common-pitfalls-to-avoid" id="toc-common-pitfalls-to-avoid" class="nav-link" data-scroll-target="#common-pitfalls-to-avoid">Common Pitfalls to Avoid</a></li>
+  <li><a href="#data-access" id="toc-data-access" class="nav-link" data-scroll-target="#data-access">Data Access</a></li>
+  <li><a href="#deadline" id="toc-deadline" class="nav-link" data-scroll-target="#deadline">Deadline</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="nb_project_02_nursenext.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="nb_project_02_nursenext.ipynb" download="nb_project_02_nursenext.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="nb_project_02_nursenext.py"><i class="bi bi-hand-thumbs-up"></i>Python</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_10_consulting_projects.html">10 Consulting Projects</a></li><li class="breadcrumb-item"><a href="../tutorials/nb_project_02_nursenext.html">Project 02: NurseNext</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Consulting Project: NurseNext Scheduling Optimization</h1>
+<p class="subtitle lead">Management Science - Healthcare Workforce Management</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="client-briefing-nursenext-hospital" class="level1">
+<h1>Client Briefing: NurseNext Hospital</h1>
+<section id="meet-your-client" class="level2">
+<h2 class="anchored" data-anchor-id="meet-your-client">Meet Your Client</h2>
+<ul>
+<li><strong>Industry:</strong> Healthcare</li>
+<li><strong>Client Contact:</strong> Dr.&nbsp;Robin Torres, Chief Operating Officer</li>
+<li><strong>Facility:</strong> Medium-sized hospital with 3 departments</li>
+<li><strong>Staff:</strong> 20 nurses, 50 beds, 24/7 operations</li>
+</ul>
+</section>
+<section id="the-coos-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="the-coos-challenge">The COO’s Challenge</h2>
+<p><strong>Dr.&nbsp;Robin Torres, COO of NurseNext Hospital</strong></p>
+<p><em>“I became a doctor to help people, but now I spend 8 hours every week manually creating nurse schedules and they’re still terrible!</em></p>
+<p><em>The situation is unsustainable:</em></p>
+<ul>
+<li><em>Massive overtime costs</em></li>
+<li><em>25% sick leave rate because nurses are exhausted</em></li>
+<li><em>High turnover, we lose 3-4 experienced nurses annually</em></li>
+<li><em>Constant complaints about unfair weekend distribution</em></li>
+<li><em>Last month, 2 nurses quit citing ‘burnout and unfair scheduling’</em></li>
+</ul>
+<p><em>The manual process is killing us. I try to be fair, but with 20 nurses, 3 departments, different skill levels, shift preferences, and labor laws… I just can’t optimize it all in my head.</em></p>
+<p><em>We need an automated scheduling system that:</em></p>
+<ol type="1">
+<li><em>Cuts overtime massively, if possible</em></li>
+<li><em>Distributes weekends fairly (the biggest complaint)</em></li>
+<li><em>Respects labor laws (consecutive shifts, rest periods)</em></li>
+<li><em>Maintains quality of care (right skills at right times)</em></li>
+<li><em>Is robust to sick calls (we always have 1-2 nurses out)</em></li>
+</ol>
+<p><em>Can you build this for us? I have data from last month’s schedules and our staffing requirements.”</em> :::</p>
+</section>
+<section id="the-business-context" class="level2">
+<h2 class="anchored" data-anchor-id="the-business-context">The Business Context</h2>
+<section id="current-situation" class="level3">
+<h3 class="anchored" data-anchor-id="current-situation">Current Situation</h3>
+<p><strong>Departments:</strong></p>
+<ul>
+<li><strong>Emergency Department (ED):</strong> High-intensity, requires experienced nurses</li>
+<li><strong>Medical-Surgical (Med-Surg):</strong> General care, moderate intensity</li>
+<li><strong>Intensive Care Unit (ICU):</strong> Critical patients, highest skill requirements</li>
+</ul>
+<p><strong>Staffing Model:</strong></p>
+<p>NurseNext uses a modern <strong>hybrid staffing model</strong>:</p>
+<ul>
+<li><strong>Department Specialists (13 nurses):</strong> Core staff assigned to specific departments
+<ul>
+<li>4 ED specialists, 5 Med-Surg specialists, 4 ICU specialists</li>
+<li>Deep expertise in their department’s specialized care</li>
+<li>Only work in their assigned department</li>
+</ul></li>
+<li><strong>Flexible Float Pool (7 nurses):</strong> Cross-trained resource nurses
+<ul>
+<li>Can work in <strong>any</strong> department (ED, Med-Surg, or ICU)</li>
+<li>Provide flexibility for workload balancing across departments</li>
+<li>Essential for covering peak demand and sick calls</li>
+</ul></li>
+</ul>
+<p>This creates an interesting <strong>resource allocation challenge</strong>: How should flexible nurses be distributed across departments to minimize cost and maximize fairness?</p>
+<p><strong>Shifts (Each 8 hours):</strong></p>
+<ul>
+<li><strong>Morning (7:00-15:00):</strong> Highest patient activity</li>
+<li><strong>Evening (15:00-23:00):</strong> Moderate activity</li>
+<li><strong>Night (23:00-7:00):</strong> Lower activity but critical monitoring</li>
+</ul>
+<p><strong>Scheduling Horizon:</strong> 1 week (21 shifts total = 7 days × 3 shifts/day)</p>
+</section>
+<section id="cost-structure" class="level3">
+<h3 class="anchored" data-anchor-id="cost-structure">Cost Structure</h3>
+<ul>
+<li><strong>Regular wage:</strong> €25/hour (€200 per 8-hour shift)</li>
+<li><strong>Overtime wage:</strong> €37.50/hour (€300 per overtime shift, 1.5x multiplier)</li>
+<li><strong>Weekend premium:</strong> +€50 per weekend shift</li>
+<li><strong>Night premium:</strong> +€30 per night shift</li>
+<li><strong>Understaffing penalty:</strong> €500 per understaffed shift (patient safety risk)</li>
+</ul>
+</section>
+<section id="labor-law-constraints" class="level3">
+<h3 class="anchored" data-anchor-id="labor-law-constraints">Labor Law Constraints</h3>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Legal Requirements (Must Comply!)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>Maximum consecutive shifts:</strong> 5 days in a row</li>
+<li><strong>Minimum rest period:</strong> 11 hours between shifts</li>
+<li><strong>Maximum weekly hours:</strong> 48 hours per nurse (6 shifts max)</li>
+<li><strong>Weekend work limit:</strong> Maximum 2 weekend days per month</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Important Note on Night Shifts:</strong> Night shifts (23:00-07:00) end at 7:00 AM the <em>following calendar day</em>. Therefore, a nurse working Monday Night (ending Tuesday 7:00 AM) <strong>cannot</strong> work Tuesday Morning (0 hours rest) or Tuesday Evening (only 8 hours rest). Both violate the 11-hour minimum rest period.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="fairness-expectations" class="level3">
+<h3 class="anchored" data-anchor-id="fairness-expectations">Fairness Expectations</h3>
+<p>Nurses’ union has negotiated fairness requirements:</p>
+<ul>
+<li>Weekend shifts distributed equally across nurses</li>
+<li>Night shifts distributed equally</li>
+<li>Workload (total hours) balanced within ±10%</li>
+<li>No nurse should work significantly more undesirable shifts than others</li>
+</ul>
+</section>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The Data</h2>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Scheduling Context
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This schedule is for <strong>Week 3 of the current month</strong>. The <code>weekend_days_worked_this_month</code> field shows how many weekend days each nurse has already worked in Weeks 1-2. Since the monthly limit is 2 weekend days per month, nurses may have 0, 1, or 2 weekend days already worked, which constrains how many more weekend shifts they can take in this week’s schedule.</p>
+</div>
+</div>
+<section id="nurse-information" class="level3">
+<h3 class="anchored" data-anchor-id="nurse-information">Nurse Information</h3>
+<div id="6c89b9d1" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timedelta</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for reproducibility</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2025</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate nurse data</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_nurse_data():</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    nurses <span class="op">=</span> []</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ED Specialists (4 nurses) - only work in ED</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        nurses.append({</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_id'</span>: i,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'name'</span>: <span class="ss">f'Nurse ED-</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'department'</span>: <span class="st">'ED'</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">'departments_qualified'</span>: [<span class="st">'ED'</span>],</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_type'</span>: <span class="st">'Specialist'</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'skill_level'</span>: np.random.choice([<span class="st">'Junior'</span>, <span class="st">'Senior'</span>, <span class="st">'Senior'</span>, <span class="st">'Expert'</span>], p<span class="op">=</span>[<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>]),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">'experience_years'</span>: np.random.randint(<span class="dv">1</span>, <span class="dv">15</span>),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">'can_work_night'</span>: np.random.choice([<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>], p<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="fl">0.1</span>]),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="st">'weekend_days_worked_this_month'</span>: np.random.randint(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Med-Surg Specialists (5 nurses) - only work in Med-Surg</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>, <span class="dv">10</span>):</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        nurses.append({</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_id'</span>: i,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="st">'name'</span>: <span class="ss">f'Nurse MS-</span><span class="sc">{</span>i<span class="op">-</span><span class="dv">4</span><span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="st">'department'</span>: <span class="st">'Med-Surg'</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="st">'departments_qualified'</span>: [<span class="st">'Med-Surg'</span>],</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_type'</span>: <span class="st">'Specialist'</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">'skill_level'</span>: np.random.choice([<span class="st">'Junior'</span>, <span class="st">'Senior'</span>, <span class="st">'Senior'</span>], p<span class="op">=</span>[<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>]),</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">'experience_years'</span>: np.random.randint(<span class="dv">1</span>, <span class="dv">12</span>),</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="st">'can_work_night'</span>: np.random.choice([<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>], p<span class="op">=</span>[<span class="fl">0.7</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>]),</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            <span class="st">'weekend_days_worked_this_month'</span>: np.random.randint(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ICU Specialists (4 nurses) - only work in ICU</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">14</span>):</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        nurses.append({</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_id'</span>: i,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="st">'name'</span>: <span class="ss">f'Nurse ICU-</span><span class="sc">{</span>i<span class="op">-</span><span class="dv">9</span><span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>            <span class="st">'department'</span>: <span class="st">'ICU'</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="st">'departments_qualified'</span>: [<span class="st">'ICU'</span>],</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_type'</span>: <span class="st">'Specialist'</span>,</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="st">'skill_level'</span>: np.random.choice([<span class="st">'Senior'</span>, <span class="st">'Expert'</span>, <span class="st">'Expert'</span>], p<span class="op">=</span>[<span class="fl">0.4</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>]),</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            <span class="st">'experience_years'</span>: np.random.randint(<span class="dv">3</span>, <span class="dv">20</span>),</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>            <span class="st">'can_work_night'</span>: <span class="va">True</span>,  <span class="co"># ICU nurses must be able to work nights</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>            <span class="st">'weekend_days_worked_this_month'</span>: np.random.randint(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Flexible Float Pool (7 nurses) - can work in ANY department</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">14</span>, <span class="dv">21</span>):</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        nurses.append({</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_id'</span>: i,</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>            <span class="st">'name'</span>: <span class="ss">f'Nurse FLOAT-</span><span class="sc">{</span>i<span class="op">-</span><span class="dv">13</span><span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>            <span class="st">'department'</span>: <span class="st">'Float'</span>,</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>            <span class="st">'departments_qualified'</span>: [<span class="st">'ED'</span>, <span class="st">'Med-Surg'</span>, <span class="st">'ICU'</span>],</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>            <span class="st">'nurse_type'</span>: <span class="st">'Flexible'</span>,</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>            <span class="st">'skill_level'</span>: np.random.choice([<span class="st">'Junior'</span>, <span class="st">'Senior'</span>, <span class="st">'Senior'</span>, <span class="st">'Expert'</span>], p<span class="op">=</span>[<span class="fl">0.15</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>, <span class="fl">0.1</span>]),</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>            <span class="st">'experience_years'</span>: np.random.randint(<span class="dv">2</span>, <span class="dv">15</span>),</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>            <span class="st">'can_work_night'</span>: np.random.choice([<span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>], p<span class="op">=</span>[<span class="fl">0.75</span>, <span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>]),  <span class="co"># Most can work nights</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>            <span class="st">'weekend_days_worked_this_month'</span>: np.random.randint(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(nurses)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>nurses_df <span class="op">=</span> generate_nurse_data()</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"NURSENEXT HOSPITAL - NURSE ROSTER"</span>)</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nurses_df.to_string(index<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total nurses: </span><span class="sc">{</span><span class="bu">len</span>(nurses_df)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">By type:"</span>)</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Specialists: </span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'nurse_type'</span>]<span class="op">==</span><span class="st">'Specialist'</span>])<span class="sc">}</span><span class="ss"> nurses"</span>)</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"    - ED: </span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'department'</span>]<span class="op">==</span><span class="st">'ED'</span>])<span class="sc">}</span><span class="ss"> nurses"</span>)</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"    - Med-Surg: </span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'department'</span>]<span class="op">==</span><span class="st">'Med-Surg'</span>])<span class="sc">}</span><span class="ss"> nurses"</span>)</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"    - ICU: </span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'department'</span>]<span class="op">==</span><span class="st">'ICU'</span>])<span class="sc">}</span><span class="ss"> nurses"</span>)</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Flexible (Float Pool): </span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'nurse_type'</span>]<span class="op">==</span><span class="st">'Flexible'</span>])<span class="sc">}</span><span class="ss"> nurses (can work any department)"</span>)</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">By skill level: Junior=</span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'skill_level'</span>]<span class="op">==</span><span class="st">'Junior'</span>])<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"Senior=</span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'skill_level'</span>]<span class="op">==</span><span class="st">'Senior'</span>])<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"Expert=</span><span class="sc">{</span><span class="bu">len</span>(nurses_df[nurses_df[<span class="st">'skill_level'</span>]<span class="op">==</span><span class="st">'Expert'</span>])<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NURSENEXT HOSPITAL - NURSE ROSTER
+====================================================================================================
+ nurse_id          name department departments_qualified nurse_type skill_level  experience_years  can_work_night  weekend_days_worked_this_month
+        1    Nurse ED-1         ED                  [ED] Specialist      Junior                 3            True                               0
+        2    Nurse ED-2         ED                  [ED] Specialist      Senior                13           False                               0
+        3    Nurse ED-3         ED                  [ED] Specialist      Senior                 2           False                               1
+        4    Nurse ED-4         ED                  [ED] Specialist      Senior                 1            True                               0
+        5    Nurse MS-1   Med-Surg            [Med-Surg] Specialist      Senior                 1            True                               1
+        6    Nurse MS-2   Med-Surg            [Med-Surg] Specialist      Senior                 2            True                               1
+        7    Nurse MS-3   Med-Surg            [Med-Surg] Specialist      Junior                10           False                               0
+        8    Nurse MS-4   Med-Surg            [Med-Surg] Specialist      Senior                 6           False                               0
+        9    Nurse MS-5   Med-Surg            [Med-Surg] Specialist      Senior                10            True                               0
+       10   Nurse ICU-1        ICU                 [ICU] Specialist      Senior                 8            True                               2
+       11   Nurse ICU-2        ICU                 [ICU] Specialist      Expert                10            True                               2
+       12   Nurse ICU-3        ICU                 [ICU] Specialist      Expert                18            True                               2
+       13   Nurse ICU-4        ICU                 [ICU] Specialist      Expert                18            True                               1
+       14 Nurse FLOAT-1      Float   [ED, Med-Surg, ICU]   Flexible      Senior                 4            True                               2
+       15 Nurse FLOAT-2      Float   [ED, Med-Surg, ICU]   Flexible      Senior                 2            True                               0
+       16 Nurse FLOAT-3      Float   [ED, Med-Surg, ICU]   Flexible      Expert                 8            True                               0
+       17 Nurse FLOAT-4      Float   [ED, Med-Surg, ICU]   Flexible      Senior                 5            True                               2
+       18 Nurse FLOAT-5      Float   [ED, Med-Surg, ICU]   Flexible      Senior                 2            True                               1
+       19 Nurse FLOAT-6      Float   [ED, Med-Surg, ICU]   Flexible      Expert                11            True                               0
+       20 Nurse FLOAT-7      Float   [ED, Med-Surg, ICU]   Flexible      Senior                 8            True                               1
+
+====================================================================================================
+Total nurses: 20
+
+By type:
+  Specialists: 13 nurses
+    - ED: 4 nurses
+    - Med-Surg: 5 nurses
+    - ICU: 4 nurses
+  Flexible (Float Pool): 7 nurses (can work any department)
+
+By skill level: Junior=2, Senior=13, Expert=5</code></pre>
+</div>
+</div>
+</section>
+<section id="shift-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="shift-requirements">Shift Requirements</h3>
+<div id="905c0a66" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define shift requirements for each department and shift type</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Format: (min_nurses, min_senior_nurses)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>shift_requirements <span class="op">=</span> {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ED'</span>: {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Morning'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">2</span>, <span class="st">'min_senior'</span>: <span class="dv">1</span>},</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Evening'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">2</span>, <span class="st">'min_senior'</span>: <span class="dv">1</span>},</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Night'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">1</span>, <span class="st">'min_senior'</span>: <span class="dv">1</span>}</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Med-Surg'</span>: {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Morning'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">3</span>, <span class="st">'min_senior'</span>: <span class="dv">2</span>},</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Evening'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">2</span>, <span class="st">'min_senior'</span>: <span class="dv">1</span>},</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Night'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">1</span>, <span class="st">'min_senior'</span>: <span class="dv">1</span>}</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ICU'</span>: {</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Morning'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">2</span>, <span class="st">'min_senior'</span>: <span class="dv">1</span>},</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Evening'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">1</span>, <span class="st">'min_senior'</span>: <span class="dv">1</span>},</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Night'</span>: {<span class="st">'min_nurses'</span>: <span class="dv">2</span>, <span class="st">'min_senior'</span>: <span class="dv">2</span>}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Display requirements</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">SHIFT STAFFING REQUIREMENTS"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dept, shifts <span class="kw">in</span> shift_requirements.items():</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>dept<span class="sc">}</span><span class="ss"> Department:"</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> shift, req <span class="kw">in</span> shifts.items():</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>shift<span class="sc">:8}</span><span class="ss"> - Min </span><span class="sc">{</span>req[<span class="st">'min_nurses'</span>]<span class="sc">}</span><span class="ss"> nurses (at least </span><span class="sc">{</span>req[<span class="st">'min_senior'</span>]<span class="sc">}</span><span class="ss"> Senior/Expert)"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total weekly demand</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>total_shifts_needed <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dept <span class="kw">in</span> shift_requirements:</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> shift <span class="kw">in</span> shift_requirements[dept]:</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        total_shifts_needed <span class="op">+=</span> shift_requirements[dept][shift][<span class="st">'min_nurses'</span>] <span class="op">*</span> <span class="dv">7</span>  <span class="co"># 7 days</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span> <span class="op">*</span> <span class="dv">70</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total shift-slots needed per week: </span><span class="sc">{</span>total_shifts_needed<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Available capacity (20 nurses × 6 shifts max): </span><span class="sc">{</span><span class="dv">20</span> <span class="op">*</span> <span class="dv">6</span><span class="sc">}</span><span class="ss"> shift-slots"</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Capacity margin: </span><span class="sc">{</span><span class="dv">20</span> <span class="op">*</span> <span class="dv">6</span> <span class="op">-</span> total_shifts_needed<span class="sc">}</span><span class="ss"> shift-slots"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SHIFT STAFFING REQUIREMENTS
+======================================================================
+
+ED Department:
+  Morning  - Min 2 nurses (at least 1 Senior/Expert)
+  Evening  - Min 2 nurses (at least 1 Senior/Expert)
+  Night    - Min 1 nurses (at least 1 Senior/Expert)
+
+Med-Surg Department:
+  Morning  - Min 3 nurses (at least 2 Senior/Expert)
+  Evening  - Min 2 nurses (at least 1 Senior/Expert)
+  Night    - Min 1 nurses (at least 1 Senior/Expert)
+
+ICU Department:
+  Morning  - Min 2 nurses (at least 1 Senior/Expert)
+  Evening  - Min 1 nurses (at least 1 Senior/Expert)
+  Night    - Min 2 nurses (at least 2 Senior/Expert)
+
+======================================================================
+Total shift-slots needed per week: 112
+Available capacity (20 nurses × 6 shifts max): 120 shift-slots
+Capacity margin: 8 shift-slots</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="week-structure" class="level2">
+<h2 class="anchored" data-anchor-id="week-structure">Week Structure</h2>
+<div id="3b817526" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the week structure</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>days_of_week <span class="op">=</span> [<span class="st">'Monday'</span>, <span class="st">'Tuesday'</span>, <span class="st">'Wednesday'</span>, <span class="st">'Thursday'</span>, <span class="st">'Friday'</span>, <span class="st">'Saturday'</span>, <span class="st">'Sunday'</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>shift_types <span class="op">=</span> [<span class="st">'Morning'</span>, <span class="st">'Evening'</span>, <span class="st">'Night'</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a schedule template DataFrame</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>schedule_template <span class="op">=</span> []</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> day_num, day <span class="kw">in</span> <span class="bu">enumerate</span>(days_of_week):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> shift <span class="kw">in</span> shift_types:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        is_weekend <span class="op">=</span> day <span class="kw">in</span> [<span class="st">'Saturday'</span>, <span class="st">'Sunday'</span>]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        schedule_template.append({</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">'day'</span>: day,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">'day_num'</span>: day_num,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">'shift'</span>: shift,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">'is_weekend'</span>: is_weekend,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">'shift_code'</span>: <span class="ss">f"</span><span class="sc">{</span>day[:<span class="dv">3</span>]<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>shift[:<span class="dv">3</span>]<span class="sc">}</span><span class="ss">"</span>  <span class="co"># e.g., "Mon_Mor"</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>schedule_template_df <span class="op">=</span> pd.DataFrame(schedule_template)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">WEEK SCHEDULE STRUCTURE (21 shifts total)"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(schedule_template_df.to_string(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+WEEK SCHEDULE STRUCTURE (21 shifts total)
+============================================================
+      day  day_num   shift  is_weekend shift_code
+   Monday        0 Morning       False    Mon_Mor
+   Monday        0 Evening       False    Mon_Eve
+   Monday        0   Night       False    Mon_Nig
+  Tuesday        1 Morning       False    Tue_Mor
+  Tuesday        1 Evening       False    Tue_Eve
+  Tuesday        1   Night       False    Tue_Nig
+Wednesday        2 Morning       False    Wed_Mor
+Wednesday        2 Evening       False    Wed_Eve
+Wednesday        2   Night       False    Wed_Nig
+ Thursday        3 Morning       False    Thu_Mor
+ Thursday        3 Evening       False    Thu_Eve
+ Thursday        3   Night       False    Thu_Nig
+   Friday        4 Morning       False    Fri_Mor
+   Friday        4 Evening       False    Fri_Eve
+   Friday        4   Night       False    Fri_Nig
+ Saturday        5 Morning        True    Sat_Mor
+ Saturday        5 Evening        True    Sat_Eve
+ Saturday        5   Night        True    Sat_Nig
+   Sunday        6 Morning        True    Sun_Mor
+   Sunday        6 Evening        True    Sun_Eve
+   Sunday        6   Night        True    Sun_Nig</code></pre>
+</div>
+</div>
+</section>
+<section id="minimal-helper-functions" class="level2">
+<h2 class="anchored" data-anchor-id="minimal-helper-functions">Minimal Helper Functions</h2>
+<p>We provide only basic data structures and a validation function. <strong>You must implement the scheduling algorithm yourself.</strong></p>
+<div id="c61bd46a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> validate_schedule(schedule, nurses_df, shift_requirements):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Validate a schedule against all constraints.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">        schedule: Dict or DataFrame representing nurse assignments</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">                  Format example: {('Monday', 'Morning', 'ED'): [nurse_id1, nurse_id2, ...], ...}</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">        nurses_df: DataFrame with nurse information</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">        shift_requirements: Dict with staffing requirements</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">        dict with validation results and violations</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    violations <span class="op">=</span> []</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    warnings <span class="op">=</span> []</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This is a TEMPLATE - YOU need to implement the actual validation logic!</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check:</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. All shifts have minimum staff</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Senior/Expert requirements met</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. No nurse works more than 6 shifts per week</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4. No nurse works more than 5 consecutive days</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5. Minimum 11 hours rest between shifts</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 6. Weekend distribution fairness</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Validation function is a template - you must implement full logic!"</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">'is_valid'</span>: <span class="bu">len</span>(violations) <span class="op">==</span> <span class="dv">0</span>,</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="st">'violations'</span>: violations,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">'warnings'</span>: warnings</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_schedule_cost(schedule, nurses_df):</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate total cost of a schedule.</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co">        schedule: Your schedule representation</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co">        nurses_df: DataFrame with nurse information</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co">        dict with cost breakdown</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constants</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    REGULAR_SHIFT_COST <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    OVERTIME_SHIFT_COST <span class="op">=</span> <span class="dv">300</span>  <span class="co"># 1.5x multiplier</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    WEEKEND_PREMIUM <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    NIGHT_PREMIUM <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    UNDERSTAFFING_PENALTY <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># YOU must implement this!</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate costs based on:</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># - Regular shifts vs overtime (&gt;40 hours/week)</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># - Weekend premiums</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># - Night premiums</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># - Understaffing penalties</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Cost calculation function is a template - you must implement!"</span>)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">'total_cost'</span>: <span class="dv">0</span>,</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">'regular_cost'</span>: <span class="dv">0</span>,</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>        <span class="st">'overtime_cost'</span>: <span class="dv">0</span>,</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>        <span class="st">'premium_cost'</span>: <span class="dv">0</span>,</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">'penalty_cost'</span>: <span class="dv">0</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Helper function templates loaded"</span>)</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"YOU must implement the full logic!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Helper function templates loaded
+YOU must implement the full logic!</code></pre>
+</div>
+</div>
+</section>
+<section id="your-task" class="level2">
+<h2 class="anchored" data-anchor-id="your-task">Your Task</h2>
+<p>You must develop a scheduling solution that creates a one-week schedule for all 20 nurses and provides:</p>
+<section id="jupyter-notebook-with-complete-solution" class="level3">
+<h3 class="anchored" data-anchor-id="jupyter-notebook-with-complete-solution">1. Jupyter Notebook with Complete Solution</h3>
+<p>Your notebook should include:</p>
+<ul>
+<li><strong>Data exploration:</strong> Insights about current staffing patterns and constraints</li>
+<li><strong>Algorithm implementation:</strong> Your scheduling approach (construction + improvement)</li>
+<li><strong>Results:</strong> Complete one-week schedule with all assignments</li>
+<li><strong>Fairness analysis:</strong> Distribution of weekends, nights, workload across nurses</li>
+<li><strong>Cost analysis:</strong> Total cost and breakdown</li>
+<li><strong>Robustness testing:</strong> What-if analysis for 1-2 nurses calling in sick</li>
+</ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>I won’t judge the code quality in this notebook. It’s just for me to review your final solution and identify any mistakes if your results seem unrealistic. The final project will be graded primarily based on your presentation and the results you have achieved.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="presentation" class="level3">
+<h3 class="anchored" data-anchor-id="presentation">2. Presentation</h3>
+<ul>
+<li><strong>Problem understanding:</strong> Dr.&nbsp;Torres’s challenges in your own words</li>
+<li><strong>Your approach:</strong>: Algorithm choice, how you handled constraints and fairness</li>
+<li><strong>Results:</strong> Schedule visualization, cost savings, fairness metrics</li>
+<li><strong>Business impact:</strong> Recommendations for NurseNext, implementation plan</li>
+</ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Please upload both, presentation and jupyter notebook (or <code>.py</code> files) for the final project.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="key-metrics-to-report" class="level3">
+<h3 class="anchored" data-anchor-id="key-metrics-to-report">3. Key Metrics to Report</h3>
+<ul>
+<li>Total weekly cost</li>
+<li>Overtime cost reduction vs.&nbsp;simple greedy solution</li>
+<li>Fairness metrics:
+<ul>
+<li>Weekend distribution (mean, std, min, max)</li>
+<li>Night shift distribution</li>
+<li>Total shifts per nurse</li>
+</ul></li>
+<li>Constraint compliance (labor law violations: should ideally be ZERO!)</li>
+<li>Robustness: Impact of 1-2 sick nurses</li>
+</ul>
+</section>
+</section>
+<section id="constraints-and-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="constraints-and-requirements">Constraints and Requirements</h2>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Hard Constraints (Should Satisfy!)</strong></p>
+<ol type="1">
+<li><strong>Shift coverage:</strong> All shifts meet minimum staffing requirements</li>
+<li><strong>Skill requirements:</strong> Each shift has required number of Senior/Expert nurses</li>
+<li><strong>Maximum shifts:</strong> No nurse works more than 6 shifts per week (48 hours)</li>
+<li><strong>Maximum consecutive:</strong> No nurse works more than 5 consecutive days</li>
+<li><strong>Minimum rest:</strong> At least 11 hours between shifts!</li>
+<li><strong>Department qualification:</strong> Nurses only work in departments they’re qualified for
+<ul>
+<li><strong>Specialists:</strong> Can only work in their assigned department (check <code>departments_qualified</code>)</li>
+<li><strong>Flexible nurses:</strong> Can work in any department (ED, Med-Surg, or ICU)</li>
+</ul></li>
+<li><strong>Night shift eligibility:</strong> Only nurses with <code>can_work_night=True</code> on night shifts</li>
+<li><strong>Weekend monthly limit:</strong> No nurse exceeds 2 weekend days per month
+<ul>
+<li>Check <code>weekend_days_worked_this_month</code> field (shows days already worked in Weeks 1-2)</li>
+<li>If a nurse has already worked 2 weekend days, they <strong>cannot</strong> be assigned any weekend shifts this week</li>
+</ul></li>
+</ol>
+<p><strong>Soft Constraints (Optimize for Fairness)</strong></p>
+<ol type="1">
+<li><strong>Weekend fairness:</strong> Equal distribution of weekend shifts</li>
+<li><strong>Night shift fairness:</strong> Equal distribution of night shifts among eligible nurses</li>
+<li><strong>Workload balance:</strong> Total shifts per nurse should be within ±1 shift of average</li>
+<li><strong>Undesirable shift balance:</strong> Fair distribution of “undesirable” shifts (nights, weekends)</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="tips-for-success" class="level2">
+<h2 class="anchored" data-anchor-id="tips-for-success">Tips for Success</h2>
+<ol type="1">
+<li><strong>Start with constraints:</strong> Get a feasible schedule first, optimize fairness second</li>
+<li><strong>Fairness is subjective:</strong> Define clear metrics for “fair” distribution</li>
+<li><strong>Visualize the schedule:</strong> A Gantt chart or heat map makes patterns obvious</li>
+<li><strong>Labor laws are non-negotiable:</strong> Zero violations if possible. Check after every change!</li>
+<li><strong>Think like a nurse:</strong> What makes a schedule “good” from their perspective?</li>
+<li><strong>Overtime is expensive but inevitable:</strong> You have a structural staff shortage!</li>
+</ol>
+</section>
+<section id="common-pitfalls-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="common-pitfalls-to-avoid">Common Pitfalls to Avoid</h2>
+<ul>
+<li><strong>Ignoring labor laws:</strong> Legal violations = instant failure in real world!</li>
+<li><strong>Unfair weekend distribution:</strong> This is nurses’ #1 complaint, track it carefully!</li>
+<li><strong>Not checking 11-hour rest:</strong> Evening→Morning violates rest requirements</li>
+<li><strong>Forgetting skill requirements:</strong> ICU night needs 2 Senior/Expert nurses!</li>
+<li><strong>Over-optimization:</strong> A good, fair schedule beats a “perfect” but unfair one</li>
+<li><strong>No robustness testing:</strong> Real hospitals have sick calls every week!</li>
+<li><strong>Poor visualization:</strong> Make the schedule easy to read for nurses!</li>
+</ul>
+</section>
+<section id="data-access" class="level2">
+<h2 class="anchored" data-anchor-id="data-access">Data Access</h2>
+<p>All data is provided in this notebook:</p>
+<ul>
+<li><code>nurses_df</code>: DataFrame with 20 nurses and their attributes</li>
+<li><code>shift_requirements</code>: Dict with staffing requirements by department and shift</li>
+<li><code>schedule_template_df</code>: Week structure (20 shifts)</li>
+<li>Helper templates: <code>validate_schedule()</code>, <code>calculate_schedule_cost()</code></li>
+</ul>
+<p><strong>You must implement the full scheduling algorithm and constraint checking logic!</strong></p>
+</section>
+<section id="deadline" class="level2">
+<h2 class="anchored" data-anchor-id="deadline">Deadline</h2>
+<ul>
+<li><strong>Notebook submission &amp; Presentation:</strong> Lecture 12</li>
+<li><strong>Good luck, consultants!</strong></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/beyondsimulations\.github\.io\/Management-Science");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/beyondsimulations/Management-Science">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/tobiasvlcek">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:vlcek@beyondsimulations.com">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://beyondsimulations.github.io/lectures">
+      <i class="bi bi-skip-backward" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../general/privacy.html">
+<p>Privacy Policy</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+<p>Management Science, Tobias Vlćek <br>CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/gh/beyondsimulations/web-embedded-chat@latest/floating-chat.js"></script>
+<script>
+    new UniversalChatWidget({
+        title: "Course Assistant",
+        apiEndpoint: "https://model-proxy.vlcek-4b4.workers.dev/api",
+        model: "management-science",
+        userMessageOpacity: 0.5,
+        assistantMessageOpacity: 0.5,
+        position: "bottom-right",
+        windowHeight: 800
+    });
+</script>
+
+
+
+
+</body></html>

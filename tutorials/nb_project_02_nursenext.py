@@ -55,7 +55,7 @@
 # 5.  *Is robust to sick calls (we always have 1-2 nurses out)*
 #
 # *Can you build this for us? I have data from last month’s schedules and
-# our staffing requirements.”* :::
+# our staffing requirements.”*
 #
 # ## The Business Context
 #

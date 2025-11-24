@@ -49,8 +49,6 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 import math
 
-# Set random seed for reproducibility
-np.random.seed(42)
 print("Libraries loaded! Let's optimize Bean Counter's deliveries.")
 
 # %% [markdown]
@@ -63,13 +61,13 @@ print("Libraries loaded! Let's optimize Bean Counter's deliveries.")
 
 # %%
 # Set random seed for reproducibility
-np.random.seed(2025)
+np.random.seed(876)
 
 # Generate franchise locations (x, y coordinates in km)
 n_franchises = 10
 
 # Bean Counter HQ at city center
-hq_location = (5, 5)
+hq_location = (2, 3)
 
 # Generate 10 franchise locations randomly in a 10x10 km area
 franchise_locations = []
@@ -135,24 +133,6 @@ def calculate_distance(point1, point2):
     # Step 2: Calculate differences and apply distance formula
     
     pass  # Remove this and implement
-
-
-# %%
-# SOLUTION
-def calculate_distance(point1, point2):
-    """
-    Calculate Euclidean distance between two points.
-
-    Args:
-        point1: Tuple (x, y) for first location
-        point2: Tuple (x, y) for second location
-
-    Returns:
-        Distance in km
-    """
-    x1, y1 = point1
-    x2, y2 = point2
-    return np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
 
 # %%
@@ -244,40 +224,12 @@ def create_distance_matrix(hq_location, franchise_locations):
 
 
 # %%
-# SOLUTION
-def create_distance_matrix(hq_location, franchise_locations):
-    """
-    Create a distance matrix for all locations.
-
-    Args:
-        hq_location: Tuple (x, y) for HQ
-        franchise_locations: List of tuples for franchises
-
-    Returns:
-        2D numpy array where element [i][j] is distance from location i to j
-        Index 0 is HQ, indices 1-10 are franchises
-    """
-    all_locations = [hq_location] + franchise_locations
-    n = len(all_locations)
-
-    distances = np.zeros((n, n))
-
-    for i in range(n):
-        for j in range(n):
-            if i != j:
-                distances[i][j] = calculate_distance(all_locations[i], all_locations[j])
-
-    return distances
-
-# Create the distance matrix
-distance_matrix = create_distance_matrix(hq_location, franchise_locations)
-
-# %%
 # Don't modify below - these test your solution
 assert distance_matrix.shape == (11, 11), "Matrix should be 11x11 (HQ + 10 franchises)"
 assert np.all(np.diag(distance_matrix) == 0), "Diagonal should be zeros (distance to self)"
 assert np.allclose(distance_matrix, distance_matrix.T), "Matrix should be symmetric"
-assert distance_matrix[0, 1] > 3.5, "HQ to first franchise distance check"
+assert distance_matrix[0, 1] > 0, "HQ to first franchise distance check"
+assert np.mean(distance_matrix[distance_matrix > 0]) > 3.5, "Average distance between locations check"
 
 print("✓ Distance matrix created successfully!")
 print(f"Average distance between locations: {np.mean(distance_matrix[distance_matrix > 0]):.2f} km")
@@ -304,11 +256,11 @@ plt.figure(figsize=(10, 8))
 # Plot franchises
 x_coords = [loc[0] for loc in franchise_locations]
 y_coords = [loc[1] for loc in franchise_locations]
-plt.scatter(x_coords, y_coords, c='#537E8F', s=200, label='Franchises', zorder=3)
+plt.scatter(x_coords, y_coords, c='#537E8F', s=500, zorder=3)
 
 # Plot HQ
-plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=400,
-           marker='s', label='Bean Counter HQ', zorder=3)
+plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=500,
+           marker='s', zorder=3)
 
 # Add labels
 for i, (x, y) in enumerate(franchise_locations):
@@ -321,7 +273,6 @@ plt.xlabel('Distance East-West (km)')
 plt.ylabel('Distance North-South (km)')
 plt.title("Bean Counter's Franchise Network", fontsize=14, fontweight='bold')
 plt.grid(True, alpha=0.3)
-plt.legend()
 plt.tight_layout()
 plt.show()
 
@@ -399,36 +350,6 @@ def nearest_neighbor_route(distance_matrix):
 
 
 # %%
-# SOLUTION
-def nearest_neighbor_route(distance_matrix):
-    """
-    Build a delivery route using nearest neighbor algorithm.
-
-    Args:
-        distance_matrix: 2D array of distances (index 0 is HQ)
-
-    Returns:
-        List of franchise indices in visit order (not including HQ)
-    """
-    n_locations = len(distance_matrix)
-    unvisited = list(range(1, n_locations))  # Franchise indices
-    route = []
-    current = 0  # Start at HQ
-
-    while unvisited:
-        # Find nearest unvisited franchise from current location
-        nearest_idx = min(unvisited,
-                         key=lambda x: distance_matrix[current, x])
-        route.append(nearest_idx)
-        unvisited.remove(nearest_idx)
-        current = nearest_idx
-
-    return route
-
-# Build the initial route
-initial_route = nearest_neighbor_route(distance_matrix)
-
-# %%
 # Don't modify below - these test your solution
 assert len(initial_route) == 10, "Route should visit all 10 franchises"
 assert len(set(initial_route)) == 10, "Each franchise should be visited exactly once"
@@ -468,37 +389,9 @@ def calculate_route_distance(route, distance_matrix):
     # YOUR CODE HERE
 
     return total_distance
-
-
-# %%
-# SOLUTION
-def calculate_route_distance(route, distance_matrix):
-    """
-    Calculate total distance for a delivery route.
-
-    Args:
-        route: List of franchise indices in visit order
-        distance_matrix: 2D array of distances
-
-    Returns:
-        Total distance in km
-    """
-    total_distance = 0
-
-    # HQ to first franchise
-    total_distance += distance_matrix[0, route[0]]
-
-    # Between consecutive franchises
-    for i in range(len(route) - 1):
-        total_distance += distance_matrix[route[i], route[i+1]]
-
-    # Last franchise back to HQ
-    total_distance += distance_matrix[route[-1], 0]
-
-    return total_distance
-
+    
 # Calculate initial route distance
-initial_distance = calculate_route_distance(initial_route, distance_matrix)
+initial_distance = 
 
 # %%
 # Don't modify below - these test your solution
@@ -508,17 +401,17 @@ test_dist = calculate_route_distance(test_route, distance_matrix)
 assert test_dist > 0, "Distance should be positive"
 
 # Test 2: Full route distance should be reasonable (not too small, not too large)
-full_dist = calculate_route_distance(initial_route, distance_matrix)
-assert full_dist > 10, f"Total distance too small, check if return trip included: {full_dist:.2f} km"
-assert full_dist < 150, f"Total distance too large, check calculation: {full_dist:.2f} km"
+initial_distance = calculate_route_distance(initial_route, distance_matrix)
+assert initial_distance > 10, f"Total distance too small, check if return trip included: {initial_distance:.2f} km"
+assert initial_distance < 150, f"Total distance too large, check calculation: {initial_distance:.2f} km"
 
 # Test 3: Full route should be longer than partial route
-assert full_dist > test_dist, "Full route should be longer than partial route"
+assert initial_distance > test_dist, "Full route should be longer than partial route"
 
 print(f"✓ Route distance calculation correct!")
-print(f"Nearest neighbor route: {full_dist:.2f} km")
-print(f"Fuel cost: €{full_dist * 1.5:.2f}")
-print(f"Time estimate: {full_dist / 30:.1f} hours at 30 km/h average")
+print(f"Nearest neighbor route: {initial_distance:.2f} km")
+print(f"Fuel cost: €{initial_distance * 1.5:.2f}")
+print(f"Time estimate: {initial_distance / 30:.1f} hours at 30 km/h average")
 
 # %% [markdown]
 # # Section 3 - Local Search: 2-Opt Improvement
@@ -530,7 +423,6 @@ print(f"Time estimate: {full_dist / 30:.1f} hours at 30 km/h average")
 # 2-opt looks for crossing paths in the route and uncrosses them:
 
 # %%
-# Visualize the initial nearest neighbor route
 plt.figure(figsize=(10, 8))
 
 # Create route coordinates for plotting
@@ -546,8 +438,8 @@ plt.plot(route_x, route_y, 'o-', color='#A0A0A0', linewidth=2,
          markersize=0, alpha=0.7, label='Delivery Route')
 
 # Plot locations
-plt.scatter(x_coords, y_coords, c='#537E8F', s=200, zorder=3)
-plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=400,
+plt.scatter(x_coords, y_coords, c='#537E8F', s=500, zorder=3)
+plt.scatter(hq_location[0], hq_location[1], c='#D73502', s=500,
            marker='s', zorder=3)
 
 # Add labels
@@ -621,25 +513,6 @@ def perform_2opt_swap(route, i, j):
     # YOUR CODE HERE (combine the three parts)
 
     pass  # Remove this
-
-
-# %%
-# SOLUTION
-def perform_2opt_swap(route, i, j):
-    """
-    Perform a 2-opt swap on a route.
-
-    Args:
-        route: Current route (list of indices)
-        i: First position for swap
-        j: Second position for swap (j > i)
-
-    Returns:
-        New route with the swap applied
-    """
-    # Take route from start to i, reverse segment from i+1 to j, then rest
-    new_route = route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]
-    return new_route
 
 
 # %%
@@ -728,54 +601,6 @@ def improve_route_2opt(route, distance_matrix, max_iterations=100):
 
 
 # %%
-# SOLUTION
-def improve_route_2opt(route, distance_matrix, max_iterations=100):
-    """
-    Improve a route using 2-opt local search.
-
-    Args:
-        route: Initial route
-        distance_matrix: Distance matrix
-        max_iterations: Maximum improvement iterations
-
-    Returns:
-        Tuple of (improved_route, final_distance, improvement_count)
-    """
-    current_route = route.copy()
-    current_distance = calculate_route_distance(current_route, distance_matrix)
-    improvement_count = 0
-
-    for iteration in range(max_iterations):
-        improved = False
-
-        for i in range(len(current_route) - 1):
-            for j in range(i + 2, len(current_route)):
-                # Try the swap
-                new_route = perform_2opt_swap(current_route, i, j)
-                new_distance = calculate_route_distance(new_route, distance_matrix)
-
-                # Keep if better
-                if new_distance < current_distance:
-                    current_route = new_route
-                    current_distance = new_distance
-                    improvement_count += 1
-                    improved = True
-                    break
-
-            if improved:
-                break
-
-        if not improved:
-            break  # Local optimum reached
-
-    return current_route, current_distance, improvement_count
-
-# Improve the route
-improved_route, improved_distance, improvements = improve_route_2opt(
-    initial_route, distance_matrix
-)
-
-# %%
 # Don't modify below - these test your solution
 assert len(improved_route) == 10, "Improved route should still visit all franchises"
 assert improved_distance <= initial_distance, "Distance shouldn't increase"
@@ -817,33 +642,6 @@ def create_random_route(n_franchises):
     pass  # Remove this
 
 # Create and improve random route
-random_route = create_random_route(10)
-random_distance = calculate_route_distance(random_route, distance_matrix)
-
-# Improve it with 2-opt
-random_improved, random_final_dist, random_swaps = improve_route_2opt(
-    random_route, distance_matrix
-)
-
-
-# %%
-# SOLUTION
-def create_random_route(n_franchises):
-    """
-    Create a random delivery route.
-
-    Args:
-        n_franchises: Number of franchises
-
-    Returns:
-        Random route (list of indices 1 to n_franchises)
-    """
-    route = list(range(1, n_franchises + 1))
-    np.random.shuffle(route)
-    return route
-
-# Create and improve random route
-np.random.seed(123)  # For reproducibility
 random_route = create_random_route(10)
 random_distance = calculate_route_distance(random_route, distance_matrix)
 
@@ -900,41 +698,6 @@ def multi_start_optimization(distance_matrix, n_starts=10):
     return best_route, best_distance
 
 # Try multi-start optimization
-multi_route, multi_distance = multi_start_optimization(distance_matrix, n_starts=20)
-
-
-# %%
-# SOLUTION
-def multi_start_optimization(distance_matrix, n_starts=10):
-    """
-    Run 2-opt from multiple random starting points.
-
-    Args:
-        distance_matrix: Distance matrix
-        n_starts: Number of random starts to try
-
-    Returns:
-        Best route found and its distance
-    """
-    best_route = None
-    best_distance = float('inf')
-
-    for i in range(n_starts):
-        # Random start
-        initial = create_random_route(10)
-
-        # Improve
-        improved, distance, _ = improve_route_2opt(initial, distance_matrix)
-
-        # Keep if best
-        if distance < best_distance:
-            best_route = improved
-            best_distance = distance
-
-    return best_route, best_distance
-
-# Try multi-start optimization
-np.random.seed(42)
 multi_route, multi_distance = multi_start_optimization(distance_matrix, n_starts=20)
 
 # %%
@@ -1030,50 +793,6 @@ methods_data = [
 
 # Create summary
 summary_df = create_performance_summary(methods_data)
-
-
-# %%
-# SOLUTION
-def create_performance_summary(methods_data):
-    """
-    Create a performance summary DataFrame.
-
-    Args:
-        methods_data: List of tuples (method_name, distance)
-
-    Returns:
-        DataFrame with performance metrics
-    """
-    results = []
-    for method, distance in methods_data:
-        time_hours = distance / 30  # 30 km/h average
-        fuel_cost = distance * 1.50  # €1.50 per km
-        labor_cost = time_hours * 30  # €30 per hour
-        total_cost = fuel_cost + labor_cost
-
-        results.append({
-            'Method': method,
-            'Distance (km)': round(distance, 1),
-            'Time (hours)': round(time_hours, 2),
-            'Fuel Cost (€)': round(fuel_cost, 2),
-            'Labor Cost (€)': round(labor_cost, 2),
-            'Total Cost (€)': round(total_cost, 2)
-        })
-
-    return pd.DataFrame(results)
-
-# Prepare data
-methods_data = [
-    ("Nearest Neighbor", initial_distance),
-    ("NN + 2-Opt", improved_distance),
-    ("Random Initial", random_distance),
-    ("Random + 2-Opt", random_final_dist),
-    ("Multi-Start", multi_distance)
-]
-
-# Create summary
-summary_df = create_performance_summary(methods_data)
-print(summary_df.to_string(index=False))
 
 # %%
 # Don't modify below - these test your solution
@@ -1172,8 +891,10 @@ plt.show()
 #
 # You’ve now mastered the core concepts of routing optimization! In the
 # **Artisan Bakery Competition**, you’ll apply these techniques to a more
-# challenging problem with: - 16 cafés (vs. 10 franchises) - Time window
-# constraints (early deliveries required!)
+# challenging problem with:
+#
+# -   16 cafés (vs. 10 franchises)
+# -   Time window constraints (early deliveries required!)
 #
 # In future lectures, you’ll learn advanced techniques like
 # **metaheuristics** (simulated annealing, genetic algorithms, tabu

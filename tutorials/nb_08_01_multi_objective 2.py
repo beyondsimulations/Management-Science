@@ -68,12 +68,12 @@ products = pd.DataFrame({
                 'Sakura Cherry Coffee', 'Blue Spirulina Smoothie', 'Charcoal Detox Shot', 
                 'Pandan Coconut Cream', 'Lavender Honey Foam', 'Dragon Fruit Frappé',
                 'Cascara Coffee Cherry', 'Nitro Matcha Float'],
-    'Profit_Margin': [3.8, 4.1, 2.8, 4.3, 2.9, 3.5, 4.5, 3.2,
+    'Profit_Margin': [3.8, 4.1, 2.5, 4.3, 2.9, 3.5, 4.5, 3.2,
                       1.8, 3.6, 3.7, 4.8, 2.1, 3.4],  # € per unit
     'Prep_Time': [200, 240, 90, 270, 150, 210, 280, 180,
                   60, 220, 190, 300, 100, 140],  # seconds
     'Sustainability': [65, 40, 80, 55, 85, 62, 35, 60,
-                       45, 68, 72, 50, 82, 78]  # score 0-100
+                       45, 68, 59, 50, 82, 78]  # score 0-100
 })
 
 print("Available Products:")
@@ -118,28 +118,6 @@ print(products.to_string(index=False))
 # YOUR CODE BELOW
 # Create a scatter plot: Profit (x) vs Prep Time (y)
 # Annotate each point with the product name
-
-
-# %%
-# Solution
-plt.figure(figsize=(10, 6))
-
-plt.scatter(products['Profit_Margin'], products['Prep_Time'], 
-           s=150, alpha=0.7, color='steelblue', edgecolors='black', linewidth=1.5)
-
-for i in range(len(products)):
-    plt.annotate(products.iloc[i]['Product'], 
-                (products.iloc[i]['Profit_Margin'], products.iloc[i]['Prep_Time']),
-                fontsize=10, ha='right', va='bottom')
-
-plt.xlabel('Profit Margin (€)', fontsize=12)
-plt.ylabel('Preparation Time (seconds)', fontsize=12)
-plt.title('Product Trade-off: Profit vs Speed', fontsize=14, fontweight='bold')
-plt.grid(True, alpha=0.3)
-plt.axhline(y=180, color='red', linestyle='--', alpha=0.3, label='3-minute threshold')
-plt.legend()
-plt.tight_layout()
-plt.show()
 
 
 # %% [markdown]
@@ -190,29 +168,6 @@ def is_dominated(product_idx: int, products_df: pd.DataFrame) -> bool:
     
     return False
 
-
-# %%
-# Solution
-def is_dominated(product_idx: int, products_df: pd.DataFrame) -> bool:
-    """Check if a product is dominated by any other product."""
-    current = products_df.iloc[product_idx]
-    
-    for idx in range(len(products_df)):
-        if idx == product_idx:
-            continue
-            
-        other = products_df.iloc[idx]
-        
-        # Check dominance: other >= profit AND other <= prep_time
-        if (other['Profit_Margin'] >= current['Profit_Margin'] and
-            other['Prep_Time'] <= current['Prep_Time'] and
-            (other['Profit_Margin'] > current['Profit_Margin'] or
-             other['Prep_Time'] < current['Prep_Time'])):
-            return True
-    
-    return False
-
-
 # %%
 # Test your function with the following
 dominated = []
@@ -225,8 +180,8 @@ print(f"Dominated products: {dominated}")
 # %%
 # Test your implementation
 assert 'is_dominated' in dir(), "Define the is_dominated function"
-assert len(dominated) >= 2, "Should find two dominated products"
-assert 'Chai Tea' in dominated, "Chai Tea should be dominated (lower profit, slower than alternatives)"
+assert len(dominated) >= 5, "Should find five dominated products"
+assert 'Moringa Mint Cooler' in dominated, "Chai Tea should be dominated (lower profit, slower than alternatives)"
 print(f"Excellent! Found {len(dominated)} dominated products")
 print("These should NEVER be chosen - better alternatives exist!")
 
@@ -272,33 +227,6 @@ def find_pareto_frontier(products_df: pd.DataFrame) -> pd.DataFrame:
     
     return products_df[is_pareto]
 
-
-# %%
-# Solution
-def find_pareto_frontier(products_df: pd.DataFrame) -> pd.DataFrame:
-    """Find all non-dominated products."""
-    n = len(products_df)
-    is_pareto = np.ones(n, dtype=bool)
-    
-    for i in range(n):
-        if not is_pareto[i]:  # Already marked as dominated
-            continue
-            
-        for j in range(n):
-            if i == j:
-                continue
-                
-            # Check if j dominates i
-            if (products_df.iloc[j]['Profit_Margin'] >= products_df.iloc[i]['Profit_Margin'] and
-                products_df.iloc[j]['Prep_Time'] <= products_df.iloc[i]['Prep_Time'] and
-                (products_df.iloc[j]['Profit_Margin'] > products_df.iloc[i]['Profit_Margin'] or
-                 products_df.iloc[j]['Prep_Time'] < products_df.iloc[i]['Prep_Time'])):
-                is_pareto[i] = False
-                break
-    
-    return products_df[is_pareto]
-
-
 # %%
 # Find and display Pareto frontier based on your function
 pareto_products = find_pareto_frontier(products)
@@ -309,8 +237,7 @@ print(pareto_products[['Product', 'Profit_Margin', 'Prep_Time']].to_string(index
 # Test your Pareto frontier function
 assert 'find_pareto_frontier' in dir(), "Define find_pareto_frontier function"
 assert len(pareto_products) >= 3, "Should find at least 3 Pareto optimal products"
-assert 'Classic Espresso' in pareto_products['Product'].values, "Classic Espresso (fastest) should be on frontier"
-assert 'Energy Smoothie' in pareto_products['Product'].values, "Energy Smoothie (highest profit) should be on frontier"
+assert 'Saffron Rose Milk' in pareto_products['Product'].values, "Saffron Rose Milk (fastest) should be on frontier"
 print("Perfect! These are the ONLY products worth considering")
 
 # %% [markdown]
@@ -410,19 +337,6 @@ def normalize_column(series: pd.Series) -> pd.Series:
 
 
 # %%
-# Solution
-def normalize_column(series: pd.Series) -> pd.Series:
-    """Normalize a pandas Series to [0, 1] range."""
-    min_val = series.min()
-    max_val = series.max()
-    
-    if max_val > min_val:
-        return (series - min_val) / (max_val - min_val)
-    else:
-        return pd.Series([0.5] * len(series), index=series.index)
-
-
-# %%
 # Normalize objectives with your new normalize_column function
 products_norm = products.copy()
 products_norm['Profit_Norm'] = normalize_column(products['Profit_Margin'])
@@ -461,13 +375,6 @@ def calculate_score(profit_norm, prep_norm, w_profit, w_speed):
     # YOUR CODE BELOW
     # Remember: minimize prep time means use (1 - prep_norm)
 
-
-
-# %%
-# Solution
-def calculate_score(profit_norm, prep_norm, w_profit, w_speed):
-    """Calculate weighted score. Higher is better."""
-    return w_profit * profit_norm + w_speed * (1 - prep_norm)
 
 
 # %%
@@ -532,17 +439,9 @@ print(f"\nFeasible products (sustainability >= {sustainability_threshold}):")
 print(feasible_products[['Product', 'Profit_Margin', 'Prep_Time', 'Sustainability']].to_string(index=False))
 
 # %%
-# Solution
-sustainability_threshold = 60
-feasible_products = products[products['Sustainability'] >= sustainability_threshold]
-
-print(f"\nFeasible products (sustainability >= {sustainability_threshold}):")
-print(feasible_products[['Product', 'Profit_Margin', 'Prep_Time', 'Sustainability']].to_string(index=False))
-
-# %%
 # Test constraint filtering
 assert 'feasible_products' in dir(), "Create feasible_products variable"
-assert len(feasible_products) > 0, "Should have at least one feasible product"
+assert len(feasible_products) >= 9, "Should have at least nine feasible products"
 assert all(feasible_products['Sustainability'] >= 60), "All products should meet constraint"
 print(f"✓ Great! {len(feasible_products)} products meet the sustainability requirement")
 
@@ -555,13 +454,6 @@ print(f"✓ Great! {len(feasible_products)} products meet the sustainability req
 # YOUR CODE BELOW
 # Apply find_pareto_frontier to feasible_products only
 constrained_pareto = # YOUR CODE HERE
-
-print(f"\nConstrained Pareto Frontier ({len(constrained_pareto)} products):")
-print(constrained_pareto[['Product', 'Profit_Margin', 'Prep_Time', 'Sustainability']].to_string(index=False))
-
-# %%
-# Solution
-constrained_pareto = find_pareto_frontier(feasible_products)
 
 print(f"\nConstrained Pareto Frontier ({len(constrained_pareto)} products):")
 print(constrained_pareto[['Product', 'Profit_Margin', 'Prep_Time', 'Sustainability']].to_string(index=False))
@@ -636,31 +528,6 @@ constrained_norm['Score'] = # YOUR CODE HERE
 
 # 3. Find the best product
 best_idx = # YOUR CODE HERE
-best_product = products.loc[best_idx]
-
-print(f"\nRECOMMENDED PRODUCT: {best_product['Product']}")
-print(f"  Profit Margin: €{best_product['Profit_Margin']:.2f}")
-print(f"  Prep Time: {best_product['Prep_Time']:.0f}s")
-print(f"  Sustainability: {best_product['Sustainability']:.0f}")
-print(f"  Weighted Score: {constrained_norm.loc[best_idx, 'Score']:.3f}")
-
-# %%
-# Solution
-# 1. Normalize the constrained Pareto products
-constrained_norm = constrained_pareto.copy()
-constrained_norm['Profit_Norm'] = normalize_column(constrained_pareto['Profit_Margin'])
-constrained_norm['Prep_Norm'] = normalize_column(constrained_pareto['Prep_Time'])
-
-# 2. Calculate weighted scores (60% profit, 40% speed)
-constrained_norm['Score'] = calculate_score(
-    constrained_norm['Profit_Norm'],
-    constrained_norm['Prep_Norm'],
-    w_profit=0.6,
-    w_speed=0.4
-)
-
-# 3. Find the best product
-best_idx = constrained_norm['Score'].idxmax()
 best_product = products.loc[best_idx]
 
 print(f"\nRECOMMENDED PRODUCT: {best_product['Product']}")

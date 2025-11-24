@@ -77,7 +77,7 @@ cafe_info = pd.DataFrame({
         'Sunrise Bistro', 'The Daily Grind', 'Café Europa', 'Corner Coffee',
         'South Side Café', 'West End Espresso', 'Riverside Roast', 'Morning Glory',
         'Hilltop Haven', 'Central Perk', 'Midtown Munch', 'Old Town Oven',
-        'Eastside Express', 'Downtown Deli', 'Westpark Café', 'Plaza Perks'
+        'Eastside Express', 'Downtown Deli', 'Westpark Café', 'Plaza Perks',
     ],
     'x': [loc[0] for loc in cafe_locations],
     'y': [loc[1] for loc in cafe_locations],
@@ -102,7 +102,7 @@ print(cafe_info.to_string(index=False))
 print("\n" + "=" * 60)
 print(f"Bakery location: {bakery_location}")
 print(f"Departure time: 5:00 AM")
-print(f"Average speed: 40 km/h")
+print(f"Average speed: 20 km/h")
 print("\nEARLY cafés (must arrive before opening):")
 for _, row in cafe_info[cafe_info['time_window'] == 'EARLY'].iterrows():
     print(f"  - {row['name']} (Café {row['cafe_id']}): Opens at {row['opening_time']}")
