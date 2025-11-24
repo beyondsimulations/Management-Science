@@ -241,7 +241,7 @@ Dr.&nbsp;Tobias Vlćek
 <li class="fragment"><strong>Minimum Labor Cost</strong>: ~€3,500 (everyone works once)</li>
 <li class="fragment"><strong>Experience Penalties</strong>: €0-€1,200 per missing experienced server</li>
 <li class="fragment"><strong>Preference Penalties</strong>: €0-€180 per unhappy assignment</li>
-<li class="fragment"><strong>Worst Case</strong>: Over €7,000 if poorly scheduled!</li>
+<li class="fragment"><strong>Worst Case</strong>: Over €9,000 if poorly scheduled!</li>
 <li class="fragment"><strong>Best Case</strong>: ??? with smart optimization</li>
 </ul>
 <div class="fragment">
@@ -251,7 +251,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Potentially up to <strong>€3,500 difference</strong> between good and bad scheduling!</p>
+<p>Potentially up to <strong>large difference</strong> between good and bad scheduling!</p>
 </div>
 </div>
 </div>
@@ -260,7 +260,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="restaurant-staffing-the-numbers" class="slide level2">
 <h2>Restaurant Staffing: The Numbers</h2>
 <p><span class="highlight">The real-world complexity we’re dealing with:</span></p>
-<div id="6d7ec54f" class="cell" data-execution_count="1">
+<div id="4263a8b0" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -318,7 +318,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="recap-local-optima" class="slide level2">
 <h2>Recap: Local Optima</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="66bbce30" class="cell" data-execution_count="2">
+<div id="d6ef4b5d" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -376,7 +376,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Why Greedy Gets Stuck</h2>
 <p><span class="highlight">Greedy algorithms can simply trap themselves:</span></p>
 <div class="fragment">
-<div id="9909ea30" class="cell" data-execution_count="3">
+<div id="7e818003" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -403,7 +403,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Local Search Also Struggles</h2>
 <p><span class="highlight">Because we only ever accept better solutions during search:</span></p>
 <div class="fragment">
-<div id="ab2e4855" class="cell" data-execution_count="4">
+<div id="f5d9235a" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -478,7 +478,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="temperature-controls-acceptance" class="slide level2">
 <h2>Temperature Controls Acceptance</h2>
 <p><span class="highlight">Probability of accepting worse solutions lowers with temp:</span></p>
-<div id="f9cd2271" class="cell" data-execution_count="5">
+<div id="ac34ce6f" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -533,7 +533,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="sa-in-action-restaurant-staffing" class="slide level2">
 <h2>SA in Action: Restaurant Staffing</h2>
 <p><span class="highlight">A simplified weekend scheduling problem we’ll use throughout:</span></p>
-<div id="11b89d75" class="cell" data-execution_count="6">
+<div id="ac84d005" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># SIMPLIFIED PROBLEM (used across ALL metaheuristics today)</span></span>
 <span id="cb2-2"><a></a><span class="co">"""</span></span>
 <span id="cb2-3"><a></a><span class="co">La Étoile's Weekend Challenge:</span></span>
@@ -546,7 +546,7 @@ Dr.&nbsp;Tobias Vlćek
 <p><strong>The initial greedy schedule has the following results:</strong></p>
 </div>
 <div class="fragment">
-<div id="419a644f" class="cell" data-execution_count="7">
+<div id="a7b30280" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>Greedy Schedule Cost: €5,240
   Labor: €2250, Penalties: €1700, Unhappiness: €1290</code></pre>
@@ -569,7 +569,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="visualizing-sa-performance" class="slide level2">
 <h2>Visualizing SA Performance</h2>
 <p><span class="highlight">How temperature affects the search behavior:</span></p>
-<div id="fc81bcb4" class="cell" data-execution_count="8">
+<div id="f599ca48" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -623,7 +623,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="temperature-parameter-impact" class="slide level2">
 <h2>Temperature Parameter Impact</h2>
-<div id="5490bc37" class="cell" data-execution_count="9">
+<div id="aec15d1e" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -712,7 +712,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-1-selection-tournament" class="slide level2">
 <h2>Stage 1: Selection (Tournament)</h2>
 <p><span class="highlight">How to choose which schedules get to “reproduce”:</span></p>
-<div id="56ba39bc" class="cell" data-execution_count="11">
+<div id="588bd616" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -737,7 +737,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-2-crossover-recombination" class="slide level2">
 <h2>Stage 2: Crossover (Recombination)</h2>
 <p><span class="highlight">Combine two parent schedules to create offspring:</span></p>
-<div id="47c939da" class="cell" data-execution_count="12">
+<div id="6181ffb7" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -762,7 +762,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-3-mutation" class="slide level2">
 <h2>Stage 3: Mutation</h2>
 <p><span class="highlight">Random changes maintain diversity and explore new solutions:</span></p>
-<div id="0bfd6163" class="cell" data-execution_count="13">
+<div id="be3ea3e5" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -807,7 +807,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="stage-4-replacement-ii" class="slide level2">
 <h2>Stage 4: Replacement II</h2>
-<div id="944f7cd8" class="cell" data-execution_count="14">
+<div id="89f73c91" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -832,7 +832,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-5.-population-evolution" class="slide level2">
 <h2>Stage 5. Population Evolution</h2>
 <p><span class="highlight">How the population improves over generations:</span></p>
-<div id="a0b4dac2" class="cell" data-execution_count="15">
+<div id="e4cf9881" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -857,7 +857,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="ga-vs-sa-head-to-head" class="slide level2">
 <h2>GA vs SA: Head-to-Head</h2>
 <p><span class="highlight">Comparing exploration strategies on the restaurant problem:</span></p>
-<div id="b863ff1e" class="cell" data-execution_count="16">
+<div id="1505055c" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -991,7 +991,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="tabu-search-on-restaurant-problem" class="slide level2">
 <h2>Tabu Search on Restaurant Problem</h2>
 <p><span class="highlight">Real implementation with memory-based exploration:</span></p>
-<div id="7037c9dd" class="cell" data-execution_count="17">
+<div id="8d9e1ef3" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1111,7 +1111,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-1-pheromone-construction" class="slide level2">
 <h2>Stage 1: Pheromone Construction</h2>
 <p><span class="highlight">Ants don’t pick randomly, they follow the chemical trails</span></p>
-<div id="0e2fa26f" class="cell" data-execution_count="18">
+<div id="0f35c34c" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1136,7 +1136,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-2-evaluation-evaporation" class="slide level2">
 <h2>Stage 2: Evaluation &amp; Evaporation</h2>
 <p><span class="highlight">After all ants build schedules:</span></p>
-<div id="b27546e9" class="cell" data-execution_count="19">
+<div id="0a1d4076" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1161,7 +1161,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-3-reinforcement" class="slide level2">
 <h2>Stage 3: Reinforcement</h2>
 <p><span class="highlight">Good ants deposit more pheromones:</span></p>
-<div id="4ab0297c" class="cell" data-execution_count="20">
+<div id="36d9378a" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1175,7 +1175,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-4-evolution-over-iterations" class="slide level2">
 <h2>Stage 4: Evolution Over Iterations</h2>
 <p><span class="highlight">Full ACO implementation on restaurant staffing:</span></p>
-<div id="96a92e82" class="cell" data-execution_count="21">
+<div id="26ede6b4" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1200,7 +1200,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="aco-vs-other-algorithms" class="slide level2">
 <h2>ACO vs Other Algorithms</h2>
 <p><span class="highlight">How does the ant colony compare?</span></p>
-<div id="7d979c9b" class="cell" data-execution_count="22">
+<div id="2e2a4ed4" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1251,7 +1251,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="when-to-use-which-metaheuristic" class="slide level2">
 <h2>When to Use Which Metaheuristic?</h2>
 <p><span class="highlight">A decision guide for algorithm selection:</span></p>
-<div id="d02f36e1" class="cell" data-execution_count="23">
+<div id="83a75d34" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-striped caption-top" data-border="1">
 <thead>
