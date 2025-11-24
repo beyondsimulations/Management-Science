@@ -9158,17 +9158,6 @@
     ]
   },
   {
-    "objectID": "lectures/lec_09_metaheuristics.html#implementation-pitfalls-to-avoid",
-    "href": "lectures/lec_09_metaheuristics.html#implementation-pitfalls-to-avoid",
-    "title": "Introduction to Metaheuristics",
-    "section": "Implementation Pitfalls to Avoid",
-    "text": "Implementation Pitfalls to Avoid\nCommon bugs that cost you time:\n\n\nWrong Cooling Schedule (SA)\n\nToo fast = stuck in local optimum\nToo slow = wastes computation time\n\nPoor Population Management (GA)\n\nToo small = no diversity\nToo large = slow evolution\n\nNot Tracking Best\n\nCurrent solution ≠ best ever found",
-    "crumbs": [
-      "09 Metaheuristics",
-      "Lecture"
-    ]
-  },
-  {
     "objectID": "lectures/lec_09_metaheuristics.html#parameter-tuning-strategies",
     "href": "lectures/lec_09_metaheuristics.html#parameter-tuning-strategies",
     "title": "Introduction to Metaheuristics",
@@ -9533,13 +9522,6 @@
     "title": "Introduction to Metaheuristics",
     "section": "The Competition Challenge",
     "text": "The Competition Challenge\nLa Étoile Restaurant Weekend Staffing\n\n\nSchedule 18 servers across 6 shifts (different lengths)\nMinimize labor + experience penalties + preference costs\nEnsure experienced coverage (strategic placement)\nRespect 2 servers per shift requirement\n\n\n\n\n\n\n\n\n\nChoose your metaheuristic wisely as this is a tough problem!"
-  },
-  {
-    "objectID": "lectures/lec_09_presentation.html#implementation-pitfalls-to-avoid",
-    "href": "lectures/lec_09_presentation.html#implementation-pitfalls-to-avoid",
-    "title": "Introduction to Metaheuristics",
-    "section": "Implementation Pitfalls to Avoid",
-    "text": "Implementation Pitfalls to Avoid\nCommon bugs that cost you time:\n\nWrong Cooling Schedule (SA)\n\nToo fast = stuck in local optimum\nToo slow = wastes computation time\n\nPoor Population Management (GA)\n\nToo small = no diversity\nToo large = slow evolution\n\nNot Tracking Best\n\nCurrent solution ≠ best ever found"
   },
   {
     "objectID": "lectures/lec_09_presentation.html#parameter-tuning-strategies",
