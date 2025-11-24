@@ -294,7 +294,7 @@ plt.show()
 - Engineering optimizes quality
 - Finance optimizes costs
 - Each department "wins"
-- **Company performance looses!**
+- **Company performance loses!**
 :::
 :::
 
