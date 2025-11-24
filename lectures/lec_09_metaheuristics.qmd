@@ -43,14 +43,14 @@ format:
 - **Minimum Labor Cost**: ~€3,500 (everyone works once)
 - **Experience Penalties**: €0-€1,200 per missing experienced server
 - **Preference Penalties**: €0-€180 per unhappy assignment
-- **Worst Case**: Over €7,000 if poorly scheduled!
+- **Worst Case**: Over €9,000 if poorly scheduled!
 - **Best Case**: ??? with smart optimization
 :::
 
 . . .
 
 :::{.callout-important}
-Potentially up to **€3,500 difference** between good and bad scheduling!
+Potentially up to **large difference** between good and bad scheduling!
 :::
 
 ## Restaurant Staffing: The Numbers
