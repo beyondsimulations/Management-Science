@@ -108,9 +108,9 @@ for i in range(20):
         due = np.random.randint(60, 90)
 
     corporate_orders.append({
-        'id': f'C{i+1:02d}',
-        'processing': processing,
-        'due': due
+        'id': f'C{i+1:02d}', # Order-ID
+        'processing': processing, # Time needed to process each order
+        'due': due # Time when each order is due
     })
 
 df_corporate = pd.DataFrame(corporate_orders)
@@ -158,6 +158,19 @@ print("Metrics function ready for comparing scheduling rules!")
 #
 # Why? If an order takes 5 minutes and is due at 20 minutes, you have 15
 # minutes of slack (can start anytime from 0 to 15).
+#
+# > **DataFrame Column Operations**
+# >
+# > ``` python
+# > # Create new column from calculation
+# > df['new_col'] = df['col1'] - df['col2']
+# >
+# > # Find index of minimum value
+# > min_idx = df['column'].idxmin()
+# >
+# > # Get value from specific row
+# > value = df.loc[min_idx, 'column_name']
+# > ```
 
 # %%
 # YOUR CODE BELOW
@@ -167,6 +180,7 @@ print("Metrics function ready for comparing scheduling rules!")
 df_corporate['slack'] = # Calculate: due - processing
 
 # Find the most urgent order (minimum slack)
+# Hint: Use idxmin() to find index, then .loc[] to get the ID
 most_urgent = # Find the order ID with minimum slack
 
 # %%
@@ -330,18 +344,37 @@ print(f"Total tardiness: {total_tardiness:.0f} minutes")
 # >     call it!
 # > -   It returns a dictionary with metrics like
 # >     `{'makespan': 29, 'avg_flow_time': 15.2, ...}`
-# > -   To create a DataFrame from dictionaries, use:
-# >     `pd.DataFrame([DICTIONARY])`
+# > -   Pass the DataFrame to the function: `calculate_metrics(df_fifo)`
+#
+# > **Creating DataFrames from Dictionaries**
+# >
+# > ``` python
+# > # Dictionary of dictionaries
+# > data = {
+# >     'Method_A': {'metric1': 10, 'metric2': 20},
+# >     'Method_B': {'metric1': 15, 'metric2': 18}
+# > }
+# >
+# > # Create DataFrame with .T to transpose (swap rows/columns)
+# > df = pd.DataFrame(data).T
+# >
+# > # Result:
+# > #          metric1  metric2
+# > # Method_A      10       20
+# > # Method_B      15       18
+# > ```
 
 # %%
 # YOUR CODE BELOW
 # Calculate metrics for each schedule
+# Hint: calculate_metrics(df_fifo) returns a dictionary
 
 metrics_fifo = # YOUR CODE
 metrics_spt = # YOUR CODE
 metrics_edd = # YOUR CODE
 
 # Create comparison DataFrame
+# The .T transposes so methods are rows
 comparison = pd.DataFrame({
     'FIFO': metrics_fifo,
     'SPT': metrics_spt,
@@ -528,14 +561,34 @@ print(f"This creates {df_friday_static_spt.iloc[0]['arrival']:.1f} minutes of id
 #
 # Implement SPT with dynamic dispatching for Bean Counter.
 #
-# > **Tip**
+# > **Dynamic Scheduling Logic**
 # >
-# > -   Use a `while remaining:` loop (not a for loop over pre-sorted
+# > **Key difference from static:** You can only schedule orders that have
+# > already arrived!
+# >
+# > 1.  Use a `while remaining:` loop (not a for loop over pre-sorted
 # >     list)
-# > -   Filter to `available = [orders where arrival <= current_time]`
-# > -   If no available orders, jump forward:
+# > 2.  Filter to `available = [orders where arrival <= current_time]`
+# > 3.  If no available orders, jump forward:
 # >     `current_time = min(arrival of remaining)`
-# > -   Then apply SPT to the available pool
+# > 4.  Then apply SPT to the available pool
+#
+# > **List Comprehension for Filtering**
+# >
+# > **List comprehension** creates a new list based on a condition:
+# >
+# > ``` python
+# > # General pattern
+# > new_list = [item for item in old_list if condition]
+# >
+# > # Example: filter numbers > 5
+# > numbers = [3, 7, 2, 9, 1, 6]
+# > big_numbers = [n for n in numbers if n > 5]
+# > # Result: [7, 9, 6]
+# >
+# > # Filter orders by arrival time
+# > available = [order for order in remaining if order['arrival'] <= current_time]
+# > ```
 
 # %%
 # YOUR CODE BELOW
@@ -550,15 +603,19 @@ def schedule_spt_dynamic(orders):
 
     while remaining:
         # Find available orders (already arrived)
+        # Use list comprehension: [o for o in remaining if ...]
         available = # YOUR CODE: list of orders where arrival <= current_time
 
         # If nothing available, jump to next arrival
         if not available:
+            # Find earliest arrival among remaining orders
             current_time = # YOUR CODE: min arrival time of remaining orders
+            # Now re-filter for available orders
             available = # YOUR CODE: update available orders
 
         # Choose shortest processing time among available
-        next_order = # YOUR CODE: min...
+        # Use min() with key=lambda
+        next_order = # YOUR CODE: min(available, key=lambda ...)
 
         # Schedule it
         next_order['start'] = current_time

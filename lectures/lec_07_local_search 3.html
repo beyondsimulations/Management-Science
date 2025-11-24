@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Tobias Vlćek">
+
+<title>Better Routing – Management Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-197188da37a79cb9418c4f38e6d23e8d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-46d4eb725d7d2b8695ccd307f5b3c105.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f088ff709e1277e0222aba4cda41ab4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-22c5f25fcfc5fd5610dfced435a3b672.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script defer="" src="https://umi.byndsim.com/script.js" data-website-id="e230d76b-b0a6-477e-8c5d-19a7bd661e68"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Local Search</a></li><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">Lecture</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="https://images.beyondsimulations.com/lectures/mj_laptops.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">01 Let’s Start</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Leture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_01_variables_data_types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_02_lists_loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-02 Lists</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_01_03_conditionals_while.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-01-03 Conditions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">02 Advances</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_02_copilot_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_01_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-01 Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_02_dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-02 Dictionaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_03_sorting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-03 Sorting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_02_04_recap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-02-04 Recap</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">03 Foundation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_03_closing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_01_numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-01 Numpy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_02_pandas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-02 Pandas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_03_03_visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-03-03 Plotting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">04 Monte Carlo</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_04_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_01_monte_carlo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-01 Monte Carlo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_04_02_techventure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-04-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">05 Forecasting</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_05_forecasting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_01_time_series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-01 Time Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_05_02_predictor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-05-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">06 Greedy Search</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_06_greedy_algorithms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_01_scheduling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-01 Scheduling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_06_02_scheduler.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-06-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">07 Local Search</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_07_local_search.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_01_local_search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-01 Routing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_07_02_routing_competition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-07-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">08 Multi Objective</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_08_multi_objective.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_08_01_multi_objective.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-08-01 Pareto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_08_02_fleet_optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-08-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">09 Metaheuristics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_09_metaheuristics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_09_01_metaheuristics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-09-01 Metaheuristics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_09_02_restaurant_staffing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NB-09-02 Competition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">10 Consulting Projects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec_10_consulting_projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_01_quickbite.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 01: QuickBite</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_02_nursenext.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 02: NurseNext</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/nb_project_03_techmart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 03: TechMart</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">***</span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/uv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 01</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/vote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vote</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../general/literature.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Literature</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="flow">Introduction</span></a>
+  <ul class="collapse">
+  <li><a href="#client-briefing-artisan-bakery" id="toc-client-briefing-artisan-bakery" class="nav-link" data-scroll-target="#client-briefing-artisan-bakery"><strong><span class="invert-font">Client Briefing: Artisan Bakery</span></strong></a></li>
+  <li><a href="#the-delivery-challenge" id="toc-the-delivery-challenge" class="nav-link" data-scroll-target="#the-delivery-challenge">The Delivery Challenge</a></li>
+  <li><a href="#quick-recap-greedy-decisions" id="toc-quick-recap-greedy-decisions" class="nav-link" data-scroll-target="#quick-recap-greedy-decisions">Quick Recap: Greedy Decisions</a></li>
+  </ul></li>
+  <li><a href="#the-routing-problem" id="toc-the-routing-problem" class="nav-link" data-scroll-target="#the-routing-problem"><span class="flow">The Routing Problem</span></a>
+  <ul class="collapse">
+  <li><a href="#the-traveling-salesman-problem" id="toc-the-traveling-salesman-problem" class="nav-link" data-scroll-target="#the-traveling-salesman-problem">The Traveling Salesman Problem</a></li>
+  <li><a href="#compute-everything" id="toc-compute-everything" class="nav-link" data-scroll-target="#compute-everything">Compute Everything?</a></li>
+  <li><a href="#the-cost-of-complexity" id="toc-the-cost-of-complexity" class="nav-link" data-scroll-target="#the-cost-of-complexity">The “Cost” of Complexity</a></li>
+  </ul></li>
+  <li><a href="#graph-theory-foundations" id="toc-graph-theory-foundations" class="nav-link" data-scroll-target="#graph-theory-foundations"><span class="flow">Graph Theory Foundations</span></a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-graph" id="toc-what-is-a-graph" class="nav-link" data-scroll-target="#what-is-a-graph">What is a Graph?</a></li>
+  <li><a href="#complete-vs.-sparse-graphs" id="toc-complete-vs.-sparse-graphs" class="nav-link" data-scroll-target="#complete-vs.-sparse-graphs">Complete vs.&nbsp;Sparse Graphs</a></li>
+  <li><a href="#hamiltonian-cycles-and-tours" id="toc-hamiltonian-cycles-and-tours" class="nav-link" data-scroll-target="#hamiltonian-cycles-and-tours">Hamiltonian Cycles and Tours</a></li>
+  <li><a href="#distance-functions-and-metrics" id="toc-distance-functions-and-metrics" class="nav-link" data-scroll-target="#distance-functions-and-metrics">Distance Functions and Metrics</a></li>
+  </ul></li>
+  <li><a href="#greedy-construction" id="toc-greedy-construction" class="nav-link" data-scroll-target="#greedy-construction"><span class="flow">Greedy Construction</span></a>
+  <ul class="collapse">
+  <li><a href="#a-bad-start-random-route" id="toc-a-bad-start-random-route" class="nav-link" data-scroll-target="#a-bad-start-random-route">A Bad Start: Random Route</a></li>
+  <li><a href="#nearest-neighbor-the-problem" id="toc-nearest-neighbor-the-problem" class="nav-link" data-scroll-target="#nearest-neighbor-the-problem">Nearest Neighbor: The Problem</a></li>
+  <li><a href="#nearest-neighbor-the-algorithm" id="toc-nearest-neighbor-the-algorithm" class="nav-link" data-scroll-target="#nearest-neighbor-the-algorithm">Nearest Neighbor: The Algorithm</a></li>
+  <li><a href="#nearest-neighbor-the-solution" id="toc-nearest-neighbor-the-solution" class="nav-link" data-scroll-target="#nearest-neighbor-the-solution">Nearest Neighbor: The Solution</a></li>
+  <li><a href="#farthest-insertion-the-problem" id="toc-farthest-insertion-the-problem" class="nav-link" data-scroll-target="#farthest-insertion-the-problem">Farthest Insertion: The Problem</a></li>
+  <li><a href="#farthest-insertion-the-algorithm" id="toc-farthest-insertion-the-algorithm" class="nav-link" data-scroll-target="#farthest-insertion-the-algorithm">Farthest Insertion: The Algorithm</a></li>
+  <li><a href="#farthest-insertion-step-by-step" id="toc-farthest-insertion-step-by-step" class="nav-link" data-scroll-target="#farthest-insertion-step-by-step">Farthest Insertion: Step-by-Step</a></li>
+  <li><a href="#comparison" id="toc-comparison" class="nav-link" data-scroll-target="#comparison">Comparison</a></li>
+  <li><a href="#the-problem-with-greedy" id="toc-the-problem-with-greedy" class="nav-link" data-scroll-target="#the-problem-with-greedy">The Problem with Greedy</a></li>
+  </ul></li>
+  <li><a href="#local-search-framework" id="toc-local-search-framework" class="nav-link" data-scroll-target="#local-search-framework"><span class="flow">Local Search Framework</span></a>
+  <ul class="collapse">
+  <li><a href="#the-four-pillars-of-local-search" id="toc-the-four-pillars-of-local-search" class="nav-link" data-scroll-target="#the-four-pillars-of-local-search">The Four Pillars of Local Search</a></li>
+  <li><a href="#solution-space-an-intuitive-view" id="toc-solution-space-an-intuitive-view" class="nav-link" data-scroll-target="#solution-space-an-intuitive-view">Solution Space: An Intuitive View</a></li>
+  <li><a href="#search-strategy" id="toc-search-strategy" class="nav-link" data-scroll-target="#search-strategy">Search Strategy</a></li>
+  </ul></li>
+  <li><a href="#local-search-improvements" id="toc-local-search-improvements" class="nav-link" data-scroll-target="#local-search-improvements"><span class="flow">Local Search Improvements</span></a>
+  <ul class="collapse">
+  <li><a href="#the-2-opt-algorithm" id="toc-the-2-opt-algorithm" class="nav-link" data-scroll-target="#the-2-opt-algorithm">The 2-Opt Algorithm</a></li>
+  <li><a href="#example-step-by-step" id="toc-example-step-by-step" class="nav-link" data-scroll-target="#example-step-by-step">Example: Step-by-Step</a></li>
+  <li><a href="#how-2-opt-works" id="toc-how-2-opt-works" class="nav-link" data-scroll-target="#how-2-opt-works">How 2-Opt Works</a></li>
+  <li><a href="#opt-applied" id="toc-opt-applied" class="nav-link" data-scroll-target="#opt-applied">2-Opt Applied</a></li>
+  <li><a href="#common-2-opt-bugs" id="toc-common-2-opt-bugs" class="nav-link" data-scroll-target="#common-2-opt-bugs">Common 2-Opt Bugs</a></li>
+  <li><a href="#what-about-1-opt" id="toc-what-about-1-opt" class="nav-link" data-scroll-target="#what-about-1-opt">What About 1-Opt?</a></li>
+  <li><a href="#or-opt-moving-sequences" id="toc-or-opt-moving-sequences" class="nav-link" data-scroll-target="#or-opt-moving-sequences">Or-Opt: Moving Sequences</a></li>
+  <li><a href="#beyond-k-opt-neighborhoods" id="toc-beyond-k-opt-neighborhoods" class="nav-link" data-scroll-target="#beyond-k-opt-neighborhoods">Beyond: k-Opt Neighborhoods</a></li>
+  </ul></li>
+  <li><a href="#local-optima" id="toc-local-optima" class="nav-link" data-scroll-target="#local-optima"><span class="flow">Local Optima</span></a>
+  <ul class="collapse">
+  <li><a href="#convergence-and-local-optima" id="toc-convergence-and-local-optima" class="nav-link" data-scroll-target="#convergence-and-local-optima">Convergence and Local Optima</a></li>
+  <li><a href="#the-local-optimum-trap" id="toc-the-local-optimum-trap" class="nav-link" data-scroll-target="#the-local-optimum-trap">The Local Optimum Trap</a></li>
+  <li><a href="#visualizing-local-optima" id="toc-visualizing-local-optima" class="nav-link" data-scroll-target="#visualizing-local-optima">Visualizing Local Optima</a></li>
+  <li><a href="#the-reality" id="toc-the-reality" class="nav-link" data-scroll-target="#the-reality">The Reality</a></li>
+  <li><a href="#escaping-local-optima" id="toc-escaping-local-optima" class="nav-link" data-scroll-target="#escaping-local-optima">Escaping Local Optima</a></li>
+  <li><a href="#how-good-is-good-enough" id="toc-how-good-is-good-enough" class="nav-link" data-scroll-target="#how-good-is-good-enough">How Good is Good Enough?</a></li>
+  </ul></li>
+  <li><a href="#time-constraints" id="toc-time-constraints" class="nav-link" data-scroll-target="#time-constraints"><span class="flow">Time Constraints</span></a>
+  <ul class="collapse">
+  <li><a href="#time-windows" id="toc-time-windows" class="nav-link" data-scroll-target="#time-windows">Time Windows</a></li>
+  <li><a href="#time-windows-practical-approach" id="toc-time-windows-practical-approach" class="nav-link" data-scroll-target="#time-windows-practical-approach">Time Windows: Practical Approach</a></li>
+  <li><a href="#time-windows-nn-modification" id="toc-time-windows-nn-modification" class="nav-link" data-scroll-target="#time-windows-nn-modification">Time Windows: NN Modification</a></li>
+  <li><a href="#opt-with-time-windows" id="toc-opt-with-time-windows" class="nav-link" data-scroll-target="#opt-with-time-windows">2-Opt with Time Windows</a></li>
+  <li><a href="#the-solution" id="toc-the-solution" class="nav-link" data-scroll-target="#the-solution">The Solution</a></li>
+  </ul></li>
+  <li><a href="#briefing" id="toc-briefing" class="nav-link" data-scroll-target="#briefing"><span class="flow">Briefing</span></a>
+  <ul class="collapse">
+  <li><a href="#choosing-your-algorithm" id="toc-choosing-your-algorithm" class="nav-link" data-scroll-target="#choosing-your-algorithm">Choosing Your Algorithm</a></li>
+  <li><a href="#implementation-pitfalls-to-avoid" id="toc-implementation-pitfalls-to-avoid" class="nav-link" data-scroll-target="#implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</a></li>
+  <li><a href="#escaping-local-optima-1" id="toc-escaping-local-optima-1" class="nav-link" data-scroll-target="#escaping-local-optima-1">Escaping Local Optima</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break">Break!</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_07_local_search.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_07_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">07 Local Search</a></li><li class="breadcrumb-item"><a href="../lectures/lec_07_local_search.html">Lecture</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Better Routing</h1>
+<p class="subtitle lead">Lecture 7 - Management Science</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Tobias Vlćek </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1 title">
+<h1 class="title"><span class="flow">Introduction</span></h1>
+<section id="client-briefing-artisan-bakery" class="level2" data-background-image="https://unsplash.com/photos/RndRFJ1v1kk/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyODcwNzAzfA&amp;force=true&amp;w=2400" data-background-size="cover">
+<h2 data-background-image="https://unsplash.com/photos/RndRFJ1v1kk/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyODcwNzAzfA&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-artisan-bakery"><strong><span class="invert-font">Client Briefing: Artisan Bakery</span></strong></h2>
+<p>. . .</p>
+<p><span class="invert-font">Master Baker’s Morning Dilemma:</span></p>
+<p><span class="invert-font fragment">“Every morning at 5:00, our delivery van leaves with fresh bread for <span class="highlight">16 cafés</span> across the city. Our driver currently takes much too long using his ‘intuition’ for the route. The fuel costs are killing us, and worse, some cafés get their bread late.”</span></p>
+</section>
+<section id="the-delivery-challenge" class="level2">
+<h2 class="anchored" data-anchor-id="the-delivery-challenge">The Delivery Challenge</h2>
+<p><span class="highlight">Artisan Bakery’s daily logistics puzzle:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>16 Cafés:</strong> Each expecting fresh bread by 8:00</li>
+<li><strong>One Van:</strong> Unlimited capacity, must visit all locations</li>
+<li><strong>Time Windows:</strong> 3 cafés open early (6:30) and need priority</li>
+<li><strong>Current Problem:</strong> Driver uses “gut feeling” for routing</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>The Stakes:</strong> Poor routing costs plus reputation damage from late deliveries!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="quick-recap-greedy-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="quick-recap-greedy-decisions">Quick Recap: Greedy Decisions</h2>
+<p><span class="highlight">Last week we learned greedy algorithms for scheduling:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>SPT:</strong> Process shortest jobs first</li>
+<li><strong>EDD:</strong> Process by earliest due date</li>
+<li><strong>Fast &amp; Simple:</strong> Made quick decisions, no looking back</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><span class="question">Question</span>: Can we use the same greedy approach for routing?</p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><span class="highlight">Today:</span> We’ll start greedy, then learn how to <span class="highlight">improve</span> solutions with local search!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-routing-problem" class="level1 title">
+<h1 class="title"><span class="flow">The Routing Problem</span></h1>
+<section id="the-traveling-salesman-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-traveling-salesman-problem">The Traveling Salesman Problem</h2>
+<p><span class="highlight">Visit all locations exactly once, minimize total distance.</span></p>
+<p>. . .</p>
+<div id="543100f5" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-2-output-1.png" width="1139" height="357" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="compute-everything" class="level2">
+<h2 class="anchored" data-anchor-id="compute-everything">Compute Everything?</h2>
+<p><span class="highlight">How many unique tours exist? With depot, n!/2 unique tours.</span></p>
+<p>. . .</p>
+<p><strong>If your computer checks 1 million routes per second:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li>4 cafés: 4!/2 = 12 tours → 0.000012 seconds ✓</li>
+<li>8 cafés: 8!/2 = 20,160 tours → 0.02 seconds ✓</li>
+<li>12 cafés: 12!/2 = 239,500,800 tours → 4 minutes ~</li>
+<li>16 cafés: 16!/2 = 10,461,394,944,000 tours → 4 months! ✗</li>
+<li>20 cafés: 20!/2 → 38,573 years! ✗</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>The Reality:</strong> Exact approach would take longer than the universe has existed!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-cost-of-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="the-cost-of-complexity">The “Cost” of Complexity</h2>
+<p><span class="highlight">Why buying a faster computer won’t help:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>P:</strong> Tasks that can be solved in polynomial time
+<ul class="incremental">
+<li>Like sorting a spreadsheet or calculating payroll</li>
+<li>These are safe, predictable, and easy to automate</li>
+</ul></li>
+<li><strong>NP:</strong> Easy to check, hard to solve
+<ul class="incremental">
+<li>Analogy: easy to check if a specific password works</li>
+<li>Very hard to guess a password by trying every combination!</li>
+</ul></li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>TSP optimization where we find minimum cost tour → NP-Hard. This means no known algorithm can find the perfect solution quickly for large problems.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="graph-theory-foundations" class="level1 title">
+<h1 class="title"><span class="flow">Graph Theory Foundations</span></h1>
+<section id="what-is-a-graph" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-graph">What is a Graph?</h2>
+<p><span class="highlight">A graph <span class="math inline">\(G = (V, E)\)</span> consists of:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Vertices (V):</strong> The nodes or points (bakery + cafés)</li>
+<li><strong>Edges (E):</strong> The connections between vertices (roads)</li>
+<li><strong>Weight Function:</strong> <span class="math inline">\(w\)</span> assigns costs to edges (distances)</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><strong>For our bakery problem:</strong></p>
+<div class="incremental">
+<ul class="incremental">
+<li><span class="math inline">\(|V| = 17\)</span> (1 bakery + 17 cafés)</li>
+<li><span class="math inline">\(|E| = \binom{17}{2} = 136\)</span> possible connections</li>
+<li>Each edge <span class="math inline">\((i,j)\)</span> has weight <span class="math inline">\(w_{ij}\)</span> = distance between <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></li>
+</ul>
+</div>
+</section>
+<section id="complete-vs.-sparse-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="complete-vs.-sparse-graphs">Complete vs.&nbsp;Sparse Graphs</h2>
+<p><span class="highlight">Different graph structures lead to different complexities:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Complete Graph:</strong> All vertices connected to each other
+<ul class="incremental">
+<li>TSP: <span class="math inline">\((n-1)!/2\)</span> unique tours</li>
+<li>Real roads: Usually complete (drive between any two points)</li>
+</ul></li>
+<li><strong>Sparse Graph:</strong> Limited connections between vertices
+<ul class="incremental">
+<li>Fewer edges = fewer possible routes</li>
+<li>Examples: Public transit networks, restricted road access</li>
+</ul></li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Density dramatically affects both problem difficulty and solution approaches!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="hamiltonian-cycles-and-tours" class="level2">
+<h2 class="anchored" data-anchor-id="hamiltonian-cycles-and-tours">Hamiltonian Cycles and Tours</h2>
+<p><span class="highlight">Mathematical foundation of the TSP:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Hamiltonian Path:</strong> Visits each vertex exactly once</li>
+<li><strong>Hamiltonian Cycle:</strong> Hamiltonian path that returns to start vertex</li>
+<li><strong>TSP Tour:</strong> Minimum weight Hamiltonian cycle</li>
+</ul>
+</div>
+<p>. . .</p>
+<p><strong>Mathematical Definition:</strong> A tour <span class="math inline">\(T = (v_1, v_2, ..., v_n, v_1)\)</span> where:</p>
+<ul>
+<li>Each <span class="math inline">\(v_i \in V\)</span> appears exactly once (except start/end)</li>
+<li>Total weight: <span class="math inline">\(w(T) = \sum_{i=1}^{n} w_{v_i, v_{i+1}}\)</span> (where <span class="math inline">\(v_{n+1} = v_1\)</span>)</li>
+</ul>
+<p>. . .</p>
+<p><span class="highlight">Goal: Find tour <span class="math inline">\(T^*\)</span> such that <span class="math inline">\(w(T^*) = \min_{T \in \mathcal{H}} w(T)\)</span></span></p>
+</section>
+<section id="distance-functions-and-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="distance-functions-and-metrics">Distance Functions and Metrics</h2>
+<p><span class="highlight">The weight function can have different properties:</span></p>
+<ol type="1">
+<li><strong>Identity:</strong> <span class="math inline">\(d(i,i) = 0\)</span> <span class="math inline">\(i \in V\)</span></li>
+<li><strong>Symmetry:</strong> <span class="math inline">\(d(i,j) = d(j,i)\)</span> <span class="math inline">\(i,j \in V\)</span></li>
+<li><strong>Triangle Inequality:</strong> <span class="math inline">\(d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V\)</span></li>
+</ol>
+<p>. . .</p>
+<p><strong>Common Distance Functions:</strong></p>
+<ul>
+<li><strong>Euclidean:</strong> <span class="math inline">\(d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\)</span></li>
+<li><strong>Manhattan:</strong> <span class="math inline">\(d(i,j) = |x_i - x_j| + |y_i - y_j|\)</span></li>
+<li><strong>Real road distances:</strong> Often violate triangle inequality!</li>
+</ul>
+</section>
+</section>
+<section id="greedy-construction" class="level1 title">
+<h1 class="title"><span class="flow">Greedy Construction</span></h1>
+<section id="a-bad-start-random-route" class="level2">
+<h2 class="anchored" data-anchor-id="a-bad-start-random-route">A Bad Start: Random Route</h2>
+<p><span class="highlight">What happens if we pick cafés randomly?</span></p>
+<p>. . .</p>
+<div id="e850746c" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-3-output-1.png" width="1138" height="417" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Random selection creates routes with many crossings and inefficiencies.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="nearest-neighbor-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="nearest-neighbor-the-problem">Nearest Neighbor: The Problem</h2>
+<p><span class="highlight">Given these 8 cafés, which should we visit first?</span></p>
+<div id="f9431e76" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-4-output-1.png" width="1138" height="395" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<p><span class="question">Question</span>: Using nearest neighbor, which café would you visit first?</p>
+</section>
+<section id="nearest-neighbor-the-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="nearest-neighbor-the-algorithm">Nearest Neighbor: The Algorithm</h2>
+<p><span class="highlight">Build a route by always visiting the closest unvisited location.</span></p>
+<ol type="1">
+<li>Start at the bakery</li>
+<li>Find the nearest unvisited café</li>
+<li>Go there</li>
+<li>Repeat until all visited</li>
+<li>Return to bakery</li>
+</ol>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Intuition:</strong> Like picking low-hanging fruit - grab what’s easiest (nearest) first!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="nearest-neighbor-the-solution" class="level2">
+<h2 class="anchored" data-anchor-id="nearest-neighbor-the-solution">Nearest Neighbor: The Solution</h2>
+<p><span class="highlight">Let’s see how nearest neighbor builds the route step by step:</span></p>
+<div id="10b93282" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-5-output-1.png" width="1140" height="384" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Farthest insertion builds a more balanced tour by establishing the outer structure first!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="farthest-insertion-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="farthest-insertion-the-problem">Farthest Insertion: The Problem</h2>
+<p><span class="highlight">Same 8 cafés - but now we’ll use a different strategy:</span></p>
+<div id="ba46fc96" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-6-output-1.png" width="1138" height="395" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The farthest point is our start!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="farthest-insertion-the-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="farthest-insertion-the-algorithm">Farthest Insertion: The Algorithm</h2>
+<p><span class="highlight">Build a route by starting with distant points and filling in gaps:</span></p>
+<ol type="1">
+<li>Start at the bakery</li>
+<li>Find the farthest café from bakery - add it to tour</li>
+<li>Create initial tour: Bakery → Farthest → Bakery</li>
+<li><strong>Repeat:</strong> Find the café farthest from current tour</li>
+<li>Insert it at the position that minimizes tour increase</li>
+<li>Continue until all cafés are in the tour</li>
+</ol>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Intuition:</strong> Build the “skeleton” of the route first with distant points, then fill in the gaps.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="farthest-insertion-step-by-step" class="level2">
+<h2 class="anchored" data-anchor-id="farthest-insertion-step-by-step">Farthest Insertion: Step-by-Step</h2>
+<div id="0bb65f8f" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-7-output-1.png" width="1140" height="384" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Notice how farthest insertion builds a more balanced tour by establishing the outer structure first, then filling in the gaps!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison" class="level2">
+<h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
+<p><span class="highlight">Let’s compare all three construction methods:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Random:</strong> Usually worst - no strategy at all!</li>
+<li><strong>Nearest Neighbor:</strong> Fast and decent, but can create long returns</li>
+<li><strong>Farthest:</strong> Often best initial solution, builds good “skeleton”</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The better your starting point, the better your final result after local search!</p>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>This is also true for all other problems we are solving!</strong> A good initial heuristic to create a solution will help us later.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-problem-with-greedy" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-with-greedy">The Problem with Greedy</h2>
+<p><span class="highlight">Often obvious inefficiencies in the resulting routes</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Crossing paths:</strong> Route crosses over itself</li>
+<li><strong>Long return:</strong> Far from bakery at the end</li>
+<li><strong>Myopic decisions:</strong> Can’t see the “big picture”</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Can we improve our greedy solutions?</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="local-search-framework" class="level1 title">
+<h1 class="title"><span class="flow">Local Search Framework</span></h1>
+<section id="the-four-pillars-of-local-search" class="level2">
+<h2 class="anchored" data-anchor-id="the-four-pillars-of-local-search">The Four Pillars of Local Search</h2>
+<p><span class="highlight">Any problem can be solved with local search by defining:</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li><strong>Search Space:</strong> All possible solutions (here 10 trillion routes!)</li>
+<li><strong>Initial Solution:</strong> Starting point (our greedy route)</li>
+<li><strong>Objective Function:</strong> How we measure quality (total distance)</li>
+<li><strong>Neighborhood:</strong> How to create “nearby” solutions (2-opt swaps)</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The power of local search: The same “engine” works for routing, scheduling, or any combinatorial problem - just plug in different components!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="solution-space-an-intuitive-view" class="level2">
+<h2 class="anchored" data-anchor-id="solution-space-an-intuitive-view">Solution Space: An Intuitive View</h2>
+<p><span class="highlight">Think of the solution space as a landscape:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Each point:</strong> A different route through the cafés</li>
+<li><strong>Height:</strong> The total distance of that route (lower is better)</li>
+<li><strong>Neighbors:</strong> Routes that differ by small change</li>
+<li><strong>Local optimum:</strong> Best route among nearby alternatives</li>
+<li><strong>Global optimum:</strong> The absolute best route overall</li>
+</ul>
+</div>
+</section>
+<section id="search-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="search-strategy">Search Strategy</h2>
+<p><span class="highlight">How can we search this space?</span></p>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li>Start somewhere (greedy construction)</li>
+<li>Look around at neighboring solutions</li>
+<li>Move to better neighbors</li>
+<li>Stop when no neighbor is better</li>
+</ol>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Local search transforms “quick and dirty” solutions into “pretty good” ones!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="local-search-improvements" class="level1 title">
+<h1 class="title"><span class="flow">Local Search Improvements</span></h1>
+<section id="the-2-opt-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-2-opt-algorithm">The 2-Opt Algorithm</h2>
+<p><span class="highlight">Systematically improve routes by removing crossing paths.</span></p>
+<p>. . .</p>
+<p><strong>The Idea:</strong> Take two edges and swap them (to uncross the route)</p>
+<p>. . .</p>
+<div id="e13bcb7c" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-8-output-1.png" width="1068" height="426" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-step-by-step" class="level2">
+<h2 class="anchored" data-anchor-id="example-step-by-step">Example: Step-by-Step</h2>
+<p><span class="highlight">Let’s see exactly how 2-opt fixes a crossing in a real route:</span></p>
+<div id="f87506ac" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-9-output-1.png" width="1149" height="326" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>The Key Insight:</strong> When you reverse a segment between two crossing edges, you automatically eliminate the crossing and create a shorter route!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="how-2-opt-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-2-opt-works">How 2-Opt Works</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> improved:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    improved <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    best_distance <span class="op">=</span> calculate_route_distance(route, distances)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(route) <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">2</span>, <span class="bu">len</span>(route)):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            new_route <span class="op">=</span> route[:i<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> route[i<span class="op">+</span><span class="dv">1</span>:j<span class="op">+</span><span class="dv">1</span>][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j<span class="op">+</span><span class="dv">1</span>:]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            new_distance <span class="op">=</span> calculate_route_distance(new_route, distances)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> new_distance <span class="op">&lt;</span> best_distance:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                route <span class="op">=</span> new_route</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                best_distance <span class="op">=</span> new_distance</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> improved:</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The <code>[::-1]</code> reverses the segment, eliminating crossings!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="opt-applied" class="level2">
+<h2 class="anchored" data-anchor-id="opt-applied">2-Opt Applied</h2>
+<p><span class="highlight">Let’s see how this changes the route!</span></p>
+<p>. . .</p>
+<div id="adf731d0" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-10-output-1.png" width="1152" height="293" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Notice how 2-opt removed the crossing paths from our nearest neighbor solution, creating a more efficient route!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="common-2-opt-bugs" class="level2">
+<h2 class="anchored" data-anchor-id="common-2-opt-bugs">Common 2-Opt Bugs</h2>
+<p><span class="highlight">Debug these scenarios you’ll encounter:</span></p>
+<p>. . .</p>
+<p><strong>Bug 1: Infinite Loop</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG: Forgot to update route</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> new_distance <span class="op">&lt;</span> current_distance:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    improved <span class="op">=</span> <span class="va">True</span>  <span class="co"># But route never changes!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<p><strong>Bug 2: Missing Return to Start</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG: Only measures cafe-to-cafe</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between stops)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<p><strong>Bug 3: Invalid Segment Reversal</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG: Off-by-one error</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>new_route <span class="op">=</span> route[:i] <span class="op">+</span> route[i:j][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<p><strong>Fix:</strong> <code>route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]</code></p>
+</section>
+<section id="what-about-1-opt" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-1-opt">What About 1-Opt?</h2>
+<div id="6b540cc7" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-11-output-1.png" width="942" height="419" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><span class="highlight">Where 1-opt DOES work:</span> In problems like knapsack (swap 1 item), assignment (reassign 1 person), or facility location (relocate 1 facility).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="or-opt-moving-sequences" class="level2">
+<h2 class="anchored" data-anchor-id="or-opt-moving-sequences">Or-Opt: Moving Sequences</h2>
+<p><span class="highlight">Moves sequence of 1-3 consecutive cities to different position.</span></p>
+<div id="d48e21a6" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-12-output-1.png" width="1149" height="342" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Moving a sequence can satisfy time constraints without breaking tour structure!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="beyond-k-opt-neighborhoods" class="level2">
+<h2 class="anchored" data-anchor-id="beyond-k-opt-neighborhoods">Beyond: k-Opt Neighborhoods</h2>
+<p><span class="highlight">The k-opt family of improvements:</span></p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>2-opt</strong></p>
+<ul>
+<li>Removes 2 edges</li>
+<li>1 way to reconnect</li>
+<li>n² combinations</li>
+<li>Fast, good results</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>3-opt</strong></p>
+<ul>
+<li>Removes 3 edges</li>
+<li>7 ways to reconnect</li>
+<li>n³ combinations</li>
+<li>Better but slower</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Or-opt</strong></p>
+<ul>
+<li>Moves 1-3 nodes</li>
+<li>Good for time windows</li>
+<li>Specialized variant</li>
+</ul>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Start with 2-opt (fast), use 3-opt if you have time! As k increases, solutions improve but computation time grows exponentially.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="local-optima" class="level1 title">
+<h1 class="title"><span class="flow">Local Optima</span></h1>
+<section id="convergence-and-local-optima" class="level2">
+<h2 class="anchored" data-anchor-id="convergence-and-local-optima">Convergence and Local Optima</h2>
+<p><span class="highlight">When does local search stop? Why might it get stuck?</span></p>
+<p>. . .</p>
+<p><strong>Convergence:</strong></p>
+<ul>
+<li>Algorithm stops when no neighboring solution is better</li>
+</ul>
+<p>. . .</p>
+<p><strong>The Local Optimum Problem:</strong></p>
+<div class="increment">
+<ul>
+<li>Algorithm can only “see” neighboring solutions</li>
+<li>Might miss better solutions that require multiple changes</li>
+<li>Like being stuck on a small hill when there’s a mountain nearby</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Local search for improvement but does not guarantee global optimality.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-local-optimum-trap" class="level2">
+<h2 class="anchored" data-anchor-id="the-local-optimum-trap">The Local Optimum Trap</h2>
+<p><span class="highlight">Imagine you’re a hiker dropped in foggy mountains at night…</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><strong>Your Mission:</strong> Find the highest peak (global optimum)</li>
+<li><strong>Your Tool:</strong> An altimeter (objective function)</li>
+<li><strong>Your Vision:</strong> Only the ground at your feet (local neighborhood)</li>
+</ul>
+</div>
+<p>. . .</p>
+<ul>
+<li><strong>The Greedy Strategy:</strong> Always step uphill</li>
+</ul>
+<p>. . .</p>
+<p><span class="question">Question</span>: What happens when you reach the top of a small hill?</p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>You’re stuck! Every step is downhill, but you might be on a tiny hill while a much larger moutain is nearby. This is the <span class="highlight">local optimum trap</span>!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-local-optima" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-local-optima">Visualizing Local Optima</h2>
+<div id="e6a036d6" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-13-output-1.png" width="1138" height="414" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Here, the local minimum is already quite good, but we likely won’t reach the global optimum from here.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-reality" class="level2">
+<h2 class="anchored" data-anchor-id="the-reality">The Reality</h2>
+<p><span class="highlight">Real problems often have thousands of local optima!</span></p>
+<div id="9f6dd76c" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-14-output-1.png" width="1140" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The probability of finding the global optimum with simple local search is nearly zero!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="escaping-local-optima" class="level2">
+<h2 class="anchored" data-anchor-id="escaping-local-optima">Escaping Local Optima</h2>
+<p><span class="highlight">Depending on the problem: Multi-Start Strategy!</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li>Most local minima are much worse than the global optimum</li>
+<li>The global minimum is sometimes isolated and hard to reach</li>
+<li>Starting point dramatically affects final solution quality</li>
+<li>Thus, start with different random solutions</li>
+<li>Use different initial heuristics</li>
+</ul>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>No Free Lunch Theorem:</strong> There’s no universal “best” algorithm for all problems. What works great for routing might fail for scheduling. Always match your tool to your problem!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="how-good-is-good-enough" class="level2">
+<h2 class="anchored" data-anchor-id="how-good-is-good-enough">How Good is Good Enough?</h2>
+<p><span class="highlight">Industry usage for delivery optimization</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Industry Use</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Human intuition</td>
+<td>Still common!</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Start + 2-opt</td>
+<td>Common practice</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Advanced Meta</td>
+<td>Sometimes practice</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Exact (if possible)</td>
+<td>Mostly research</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>A 10% improvement = millions in savings for large logistics companies. Even a 2-opt implementation could literally save a lot of money if not used yet!</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="time-constraints" class="level1 title">
+<h1 class="title"><span class="flow">Time Constraints</span></h1>
+<section id="time-windows" class="level2">
+<h2 class="anchored" data-anchor-id="time-windows">Time Windows</h2>
+<p><span class="highlight">Remember our bakery? Some cafés open earlier than others!</span></p>
+<p>. . .</p>
+<p><strong>Artisan Bakery’s Morning Schedule:</strong></p>
+<ul>
+<li><strong>Bakery opens:</strong> 5:00 (van departs)</li>
+<li><strong>Early Birds (3 cafés):</strong> Must receive by 6:30
+<ul>
+<li>Café Europa, Sunrise Bistro, Morning Glory</li>
+</ul></li>
+<li><strong>Standard (13 cafés):</strong> Must receive by 8:00</li>
+</ul>
+<p>. . .</p>
+<p><span class="question">Question</span>: Can we just find the shortest route?</p>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The shortest route might deliver to early cafés last. <span class="highlight">Feasibility first, optimization second!</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="time-windows-practical-approach" class="level2">
+<h2 class="anchored" data-anchor-id="time-windows-practical-approach">Time Windows: Practical Approach</h2>
+<p><span class="highlight">Each location has a delivery time window:</span></p>
+<p><strong>Key Concepts:</strong></p>
+<ul>
+<li><strong>Earliest time:</strong> When café opens</li>
+<li><strong>Latest time:</strong> Delivery deadline</li>
+<li><strong>Service time:</strong> Time to unload</li>
+</ul>
+<p>. . .</p>
+<p><strong>Arrival Time = Previous departure + Travel time</strong></p>
+<p>. . .</p>
+<ul>
+<li><strong>Feasible route:</strong> All deadlines met</li>
+<li><strong>Infeasible route:</strong> At least one deadline missed (even if shortest!)</li>
+</ul>
+</section>
+<section id="time-windows-nn-modification" class="level2">
+<h2 class="anchored" data-anchor-id="time-windows-nn-modification">Time Windows: NN Modification</h2>
+<p><span class="highlight">Modify greedy construction to prioritize early deadlines:</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>unvisited <span class="op">=</span> <span class="bu">set</span>(<span class="bu">range</span>(<span class="bu">len</span>(locations)))<span class="op">;</span> route <span class="op">=</span> []<span class="op">;</span> current_time <span class="op">=</span> start_time</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> unvisited:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find feasible neighbors (can reach before deadline)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    feasible <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> unvisited</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> current_time <span class="op">+</span> travel_time(current, i)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                    <span class="op">&lt;=</span> time_windows[i][<span class="st">'latest'</span>]]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> feasible:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No feasible route exists!</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Among feasible, choose most urgent</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    next_stop <span class="op">=</span> <span class="bu">min</span>(feasible, key<span class="op">=</span><span class="kw">lambda</span> i: (time_windows[i][<span class="st">'latest'</span>]))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update state</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    route.append(next_stop)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    unvisited.remove(next_stop)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    current_time <span class="op">+=</span> travel_time(current, next_stop) <span class="op">+</span> service_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="opt-with-time-windows" class="level2">
+<h2 class="anchored" data-anchor-id="opt-with-time-windows">2-Opt with Time Windows</h2>
+<p><span class="highlight">Problem: 2-opt can break time feasibility!</span></p>
+<div id="254a7775" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec_07_local_search_files/figure-revealjs/cell-15-output-1.png" width="1138" height="418" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Early2 now arrives at 7:12 AM.</strong> Missed its 6:45 deadline by 27 minutes!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-solution" class="level2">
+<h2 class="anchored" data-anchor-id="the-solution">The Solution</h2>
+<p><span class="highlight">Only accept swaps that maintain feasibility!</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> improved:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    improved <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(route) <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">2</span>, <span class="bu">len</span>(route)):</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            new_route <span class="op">=</span> route[:i<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> route[i<span class="op">+</span><span class="dv">1</span>:j<span class="op">+</span><span class="dv">1</span>][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j<span class="op">+</span><span class="dv">1</span>:]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Check feasibility FIRST</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> is_feasible(new_route, time_windows, start_time):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span>  <span class="co"># Skip infeasible swaps</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Among feasible swaps, take if shorter</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> calculate_distance(new_route) <span class="op">&lt;</span> calculate_distance(route):</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                route <span class="op">=</span> new_route</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> improved:</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Feasibility is a hard constraint, distance is the objective.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="briefing" class="level1 title">
+<h1 class="title"><span class="flow">Briefing</span></h1>
+<section id="choosing-your-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-your-algorithm">Choosing Your Algorithm</h2>
+<p><span class="highlight">Different situations call for different approaches:</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Best Approach</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Solution now</td>
+<td>Nearest Neighbor</td>
+<td>Lightning fast</td>
+</tr>
+<tr class="even">
+<td>Have seconds</td>
+<td>NN + 2-opt</td>
+<td>Good balance</td>
+</tr>
+<tr class="odd">
+<td>Have minutes</td>
+<td>Multi-start + 2-opt</td>
+<td>Explore more options</td>
+</tr>
+<tr class="even">
+<td>Time windows</td>
+<td>NN (early) + Or-opt</td>
+<td>Preserves feasibility</td>
+</tr>
+<tr class="odd">
+<td>Benchmark</td>
+<td>3-opt or meta</td>
+<td>Best solutions</td>
+</tr>
+</tbody>
+</table>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Competition?</strong> Choose whatever you are comfortable with.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="implementation-pitfalls-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-pitfalls-to-avoid">Implementation Pitfalls to Avoid</h2>
+<p><span class="highlight">Common bugs that cost you time.</span></p>
+<p>. . .</p>
+<p><strong>Forgetting return to bakery:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between consecutive stops)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RIGHT</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances) <span class="op">+</span> distance(last_stop, bakery)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<p><strong>Index confusion in 2-opt:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The 2-opt swap reverses route[i+1:j+1], not route[i:j]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>. . .</p>
+<p><strong>Modifying while iterating:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>new_route <span class="op">=</span> current_route.copy()  <span class="co"># Don't modify original</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="escaping-local-optima-1" class="level2">
+<h2 class="anchored" data-anchor-id="escaping-local-optima-1">Escaping Local Optima</h2>
+<p><span class="highlight">When local search gets stuck, we need clever escapes:</span></p>
+<p>. . .</p>
+<p><strong>Advanced Techniques Coming:</strong></p>
+<ul>
+<li><strong>Simulated Annealing:</strong> Sometimes accept worse moves</li>
+<li><strong>Genetic Algorithms:</strong> Combine good routes to make better ones</li>
+<li><strong>Tabu Search:</strong> Remember where you’ve been to avoid circles</li>
+</ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Today’s local search foundation makes advanced methods possible!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><span class="highlight">Key Takeaways:</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li>TSP is computationally hard (factorial growth)</li>
+<li>Local search is a universal framework (4 pillars)</li>
+<li>Greedy construction gives fast initial solutions</li>
+<li>2-opt improves solutions iteratively</li>
+<li>Multi-start helps escape local optima</li>
+<li>Real constraints (time windows) add complexity</li>
+<li>Two-phase approach: Build then improve!</li>
+</ul>
+</div>
+</section>
+<section id="break" class="level2">
+<h2 class="anchored" data-anchor-id="break">Break!</h2>
+<p><span class="highlight">Take 20 minutes, then we start the practice notebook</span></p>
+<p><strong>Next up:</strong> You’ll become Bean Counter’s route planner</p>
+<p><strong>Then:</strong> The Bakery competition</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/beyondsimulations\.github\.io\/Management-Science");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/beyondsimulations/Management-Science">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/tobiasvlcek">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:vlcek@beyondsimulations.com">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://beyondsimulations.github.io/lectures">
+      <i class="bi bi-skip-backward" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../general/privacy.html">
+<p>Privacy Policy</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+<p>Management Science, Tobias Vlćek <br>CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/gh/beyondsimulations/web-embedded-chat@latest/floating-chat.js"></script>
+<script>
+    new UniversalChatWidget({
+        title: "Course Assistant",
+        apiEndpoint: "https://model-proxy.vlcek-4b4.workers.dev/api",
+        model: "management-science",
+        userMessageOpacity: 0.5,
+        assistantMessageOpacity: 0.5,
+        position: "bottom-right",
+        windowHeight: 800
+    });
+</script>
+
+
+
+
+</body></html>
