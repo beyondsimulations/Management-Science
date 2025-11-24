@@ -8553,7 +8553,7 @@
     "href": "lectures/lec_09_metaheuristics.html#the-silo-problem",
     "title": "Introduction to Metaheuristics",
     "section": "The Silo Problem",
-    "text": "The Silo Problem\nWhy neighborhood optimization fails:\n\n\nTechnical View: Local Optima\n\nAlgorithm climbs nearest hill\nGets stuck on “foothill”\nCan’t see the mountain beyond\nEvery move looks worse\nBelieves it found the best\n\n\nAnalogy: Department Silos\n\nSales optimizes sales metrics\nEngineering optimizes quality\nFinance optimizes costs\nEach department “wins”\nCompany performance looses!\n\n\n\n. . .\n\n\n\n\n\n\nSum of local bests ≠ Global best",
+    "text": "The Silo Problem\nWhy neighborhood optimization fails:\n\n\nTechnical View: Local Optima\n\nAlgorithm climbs nearest hill\nGets stuck on “foothill”\nCan’t see the mountain beyond\nEvery move looks worse\nBelieves it found the best\n\n\nAnalogy: Department Silos\n\nSales optimizes sales metrics\nEngineering optimizes quality\nFinance optimizes costs\nEach department “wins”\nCompany performance loses!\n\n\n\n. . .\n\n\n\n\n\n\nSum of local bests ≠ Global best",
     "crumbs": [
       "09 Metaheuristics",
       "Lecture"
@@ -8912,11 +8912,22 @@
     ]
   },
   {
+    "objectID": "lectures/lec_09_metaheuristics.html#why-did-aco-struggle",
+    "href": "lectures/lec_09_metaheuristics.html#why-did-aco-struggle",
+    "title": "Introduction to Metaheuristics",
+    "section": "Why did ACO struggle?",
+    "text": "Why did ACO struggle?\nThe Right Tool for the Wrong Job\nACO is designed for Sequential Path-Finding (Graph Traversal).\n\nBest For: “I am at City A, where should I go next?” (TSP)\nOur Problem: “Who should work Friday Dinner?” (Assignment)\n\n. . .\n\n\n\n\n\n\nWe forced a “Graph” algorithm onto a “Bin Packing” problem. SA and GA don’t care about geometry, so they adapted better!",
+    "crumbs": [
+      "09 Metaheuristics",
+      "Lecture"
+    ]
+  },
+  {
     "objectID": "lectures/lec_09_metaheuristics.html#when-to-use-which-metaheuristic",
     "href": "lectures/lec_09_metaheuristics.html#when-to-use-which-metaheuristic",
     "title": "Introduction to Metaheuristics",
     "section": "When to Use Which Metaheuristic?",
-    "text": "When to Use Which Metaheuristic?\nA decision guide for algorithm selection:\n\n\n\n\n\nMethod\nTime\nQuality\nComplexity\nBest For\n\n\n\n\nRandom\nxxxx\nx\nTrivial\nBaseline\n\n\nGreedy\nxxx\nxx\nSimple\nQuick decisions\n\n\nLS\nxx\nxxx\nMedium\nImprovement\n\n\nSA\nxx\nxxxx\nMedium\nSingle solution\n\n\nGA\nx\nxxxx\nHigh\nPopulation\n\n\nTS\nxx\nxxx\nMedium\nAvoid cycles\n\n\nACO\nx\nxxxx\nHigh\nPaths",
+    "text": "When to Use Which Metaheuristic?\nA decision guide for algorithm selection:\n\n\n\n\n\nMethod\nTime\nQuality\nComplexity\nBest For\n\n\n\n\nRandom\nxxxx\nx\nTrivial\nBaseline\n\n\nGreedy\nxxx\nxx\nSimple\nQuick decisions\n\n\nLS\nxx\nxxx\nMedium\nImprovement\n\n\nSA\nxx\nxxxx\nMedium\nSingle solution\n\n\nGA\nx\nxxxx\nHigh\nPopulation\n\n\nTS\nxx\nxxx\nMedium\nAvoid cycles\n\n\nACO\nx\nxxxx\nHigh\nChanging Paths",
     "crumbs": [
       "09 Metaheuristics",
       "Lecture"
@@ -9075,7 +9086,7 @@
     "href": "lectures/lec_09_presentation.html#the-silo-problem",
     "title": "Introduction to Metaheuristics",
     "section": "The Silo Problem",
-    "text": "The Silo Problem\nWhy neighborhood optimization fails:\n\n\nTechnical View: Local Optima\n\nAlgorithm climbs nearest hill\nGets stuck on “foothill”\nCan’t see the mountain beyond\nEvery move looks worse\nBelieves it found the best\n\n\nAnalogy: Department Silos\n\nSales optimizes sales metrics\nEngineering optimizes quality\nFinance optimizes costs\nEach department “wins”\nCompany performance looses!\n\n\n\n\n\n\n\n\n\nSum of local bests ≠ Global best"
+    "text": "The Silo Problem\nWhy neighborhood optimization fails:\n\n\nTechnical View: Local Optima\n\nAlgorithm climbs nearest hill\nGets stuck on “foothill”\nCan’t see the mountain beyond\nEvery move looks worse\nBelieves it found the best\n\n\nAnalogy: Department Silos\n\nSales optimizes sales metrics\nEngineering optimizes quality\nFinance optimizes costs\nEach department “wins”\nCompany performance loses!\n\n\n\n\n\n\n\n\n\nSum of local bests ≠ Global best"
   },
   {
     "objectID": "lectures/lec_09_presentation.html#why-greedy-gets-stuck",
@@ -9302,11 +9313,18 @@
     "text": "ACO vs Other Algorithms\nHow does the ant colony compare?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAny idea why ACO fares worse?"
   },
   {
+    "objectID": "lectures/lec_09_presentation.html#why-did-aco-struggle",
+    "href": "lectures/lec_09_presentation.html#why-did-aco-struggle",
+    "title": "Introduction to Metaheuristics",
+    "section": "Why did ACO struggle?",
+    "text": "Why did ACO struggle?\nThe Right Tool for the Wrong Job\nACO is designed for Sequential Path-Finding (Graph Traversal).\n\nBest For: “I am at City A, where should I go next?” (TSP)\nOur Problem: “Who should work Friday Dinner?” (Assignment)\n\n\n\n\n\n\n\n\nWe forced a “Graph” algorithm onto a “Bin Packing” problem. SA and GA don’t care about geometry, so they adapted better!"
+  },
+  {
     "objectID": "lectures/lec_09_presentation.html#when-to-use-which-metaheuristic",
     "href": "lectures/lec_09_presentation.html#when-to-use-which-metaheuristic",
     "title": "Introduction to Metaheuristics",
     "section": "When to Use Which Metaheuristic?",
-    "text": "When to Use Which Metaheuristic?\nA decision guide for algorithm selection:\n\n\n\n\n\nMethod\nTime\nQuality\nComplexity\nBest For\n\n\n\n\nRandom\nxxxx\nx\nTrivial\nBaseline\n\n\nGreedy\nxxx\nxx\nSimple\nQuick decisions\n\n\nLS\nxx\nxxx\nMedium\nImprovement\n\n\nSA\nxx\nxxxx\nMedium\nSingle solution\n\n\nGA\nx\nxxxx\nHigh\nPopulation\n\n\nTS\nxx\nxxx\nMedium\nAvoid cycles\n\n\nACO\nx\nxxxx\nHigh\nPaths"
+    "text": "When to Use Which Metaheuristic?\nA decision guide for algorithm selection:\n\n\n\n\n\nMethod\nTime\nQuality\nComplexity\nBest For\n\n\n\n\nRandom\nxxxx\nx\nTrivial\nBaseline\n\n\nGreedy\nxxx\nxx\nSimple\nQuick decisions\n\n\nLS\nxx\nxxx\nMedium\nImprovement\n\n\nSA\nxx\nxxxx\nMedium\nSingle solution\n\n\nGA\nx\nxxxx\nHigh\nPopulation\n\n\nTS\nxx\nxxx\nMedium\nAvoid cycles\n\n\nACO\nx\nxxxx\nHigh\nChanging Paths"
   },
   {
     "objectID": "lectures/lec_09_presentation.html#the-no-free-lunch-theorem",

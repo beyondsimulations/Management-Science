@@ -615,6 +615,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#stage-3-reinforcement" id="toc-stage-3-reinforcement" class="nav-link" data-scroll-target="#stage-3-reinforcement">Stage 3: Reinforcement</a></li>
   <li><a href="#stage-4-evolution-over-iterations" id="toc-stage-4-evolution-over-iterations" class="nav-link" data-scroll-target="#stage-4-evolution-over-iterations">Stage 4: Evolution Over Iterations</a></li>
   <li><a href="#aco-vs-other-algorithms" id="toc-aco-vs-other-algorithms" class="nav-link" data-scroll-target="#aco-vs-other-algorithms">ACO vs Other Algorithms</a></li>
+  <li><a href="#why-did-aco-struggle" id="toc-why-did-aco-struggle" class="nav-link" data-scroll-target="#why-did-aco-struggle">Why did ACO struggle?</a></li>
   </ul></li>
   <li><a href="#decision-framework" id="toc-decision-framework" class="nav-link" data-scroll-target="#decision-framework"><span class="flow">Decision Framework</span></a>
   <ul class="collapse">
@@ -714,7 +715,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="restaurant-staffing-the-numbers" class="level2">
 <h2 class="anchored" data-anchor-id="restaurant-staffing-the-numbers">Restaurant Staffing: The Numbers</h2>
 <p><span class="highlight">The real-world complexity we’re dealing with:</span></p>
-<div id="51954153" class="cell" data-execution_count="1">
+<div id="aee00d9d" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -774,7 +775,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="recap-local-optima" class="level2">
 <h2 class="anchored" data-anchor-id="recap-local-optima">Recap: Local Optima</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="a99fc0b1" class="cell" data-execution_count="2">
+<div id="fcb900ab" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -809,7 +810,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Engineering optimizes quality</li>
 <li>Finance optimizes costs</li>
 <li>Each department “wins”</li>
-<li><strong>Company performance looses!</strong></li>
+<li><strong>Company performance loses!</strong></li>
 </ul>
 </div>
 </div>
@@ -829,7 +830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="why-greedy-gets-stuck">Why Greedy Gets Stuck</h2>
 <p><span class="highlight">Greedy algorithms can simply trap themselves:</span></p>
 <p>. . .</p>
-<div id="18d3d8cc" class="cell" data-execution_count="3">
+<div id="7a1486d7" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -854,7 +855,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="local-search-also-struggles">Local Search Also Struggles</h2>
 <p><span class="highlight">Because we only ever accept better solutions during search:</span></p>
 <p>. . .</p>
-<div id="9a965b8a" class="cell" data-execution_count="4">
+<div id="e7cbb668" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -925,7 +926,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="temperature-controls-acceptance" class="level2">
 <h2 class="anchored" data-anchor-id="temperature-controls-acceptance">Temperature Controls Acceptance</h2>
 <p><span class="highlight">Probability of accepting worse solutions lowers with temp:</span></p>
-<div id="638f589a" class="cell" data-execution_count="5">
+<div id="2e0787d3" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -979,7 +980,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sa-in-action-restaurant-staffing" class="level2">
 <h2 class="anchored" data-anchor-id="sa-in-action-restaurant-staffing">SA in Action: Restaurant Staffing</h2>
 <p><span class="highlight">A simplified weekend scheduling problem we’ll use throughout:</span></p>
-<div id="abb9abf2" class="cell" data-execution_count="6">
+<div id="22fb5bc8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SIMPLIFIED PROBLEM (used across ALL metaheuristics today)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">La Étoile's Weekend Challenge:</span></span>
@@ -991,7 +992,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>. . .</p>
 <p><strong>The initial greedy schedule has the following results:</strong></p>
 <p>. . .</p>
-<div id="c431cd6b" class="cell" data-execution_count="7">
+<div id="d8fbf94c" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>Greedy Schedule Cost: €5,240
   Labor: €2250, Penalties: €1700, Unhappiness: €1290</code></pre>
@@ -1012,7 +1013,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="visualizing-sa-performance" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-sa-performance">Visualizing SA Performance</h2>
 <p><span class="highlight">How temperature affects the search behavior:</span></p>
-<div id="b2d732bf" class="cell" data-execution_count="8">
+<div id="ed992958" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1062,7 +1063,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="temperature-parameter-impact" class="level2">
 <h2 class="anchored" data-anchor-id="temperature-parameter-impact">Temperature Parameter Impact</h2>
-<div id="8cb3664b" class="cell" data-execution_count="9">
+<div id="d2c8caa3" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1149,7 +1150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-1-selection-tournament" class="level2">
 <h2 class="anchored" data-anchor-id="stage-1-selection-tournament">Stage 1: Selection (Tournament)</h2>
 <p><span class="highlight">How to choose which schedules get to “reproduce”:</span></p>
-<div id="f26a836f" class="cell" data-execution_count="11">
+<div id="08b09f39" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1173,7 +1174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-2-crossover-recombination" class="level2">
 <h2 class="anchored" data-anchor-id="stage-2-crossover-recombination">Stage 2: Crossover (Recombination)</h2>
 <p><span class="highlight">Combine two parent schedules to create offspring:</span></p>
-<div id="e796b419" class="cell" data-execution_count="12">
+<div id="08062082" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1197,7 +1198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-3-mutation" class="level2">
 <h2 class="anchored" data-anchor-id="stage-3-mutation">Stage 3: Mutation</h2>
 <p><span class="highlight">Random changes maintain diversity and explore new solutions:</span></p>
-<div id="704dd5e5" class="cell" data-execution_count="13">
+<div id="09619126" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1242,7 +1243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="stage-4-replacement-ii" class="level2">
 <h2 class="anchored" data-anchor-id="stage-4-replacement-ii">Stage 4: Replacement II</h2>
-<div id="6d11d8ef" class="cell" data-execution_count="14">
+<div id="98891e0c" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1266,7 +1267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-5.-population-evolution" class="level2">
 <h2 class="anchored" data-anchor-id="stage-5.-population-evolution">Stage 5. Population Evolution</h2>
 <p><span class="highlight">How the population improves over generations:</span></p>
-<div id="d8eced86" class="cell" data-execution_count="15">
+<div id="e0f93ab0" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1290,7 +1291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ga-vs-sa-head-to-head" class="level2">
 <h2 class="anchored" data-anchor-id="ga-vs-sa-head-to-head">GA vs SA: Head-to-Head</h2>
 <p><span class="highlight">Comparing exploration strategies on the restaurant problem:</span></p>
-<div id="ea068a53" class="cell" data-execution_count="16">
+<div id="306aa4e2" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1417,7 +1418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="tabu-search-on-restaurant-problem" class="level2">
 <h2 class="anchored" data-anchor-id="tabu-search-on-restaurant-problem">Tabu Search on Restaurant Problem</h2>
 <p><span class="highlight">Real implementation with memory-based exploration:</span></p>
-<div id="91c2d9a4" class="cell" data-execution_count="17">
+<div id="32787679" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1536,7 +1537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-1-pheromone-construction" class="level2">
 <h2 class="anchored" data-anchor-id="stage-1-pheromone-construction">Stage 1: Pheromone Construction</h2>
 <p><span class="highlight">Ants don’t pick randomly, they follow the chemical trails</span></p>
-<div id="25e6d012" class="cell" data-execution_count="18">
+<div id="73909881" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1560,7 +1561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-2-evaluation-evaporation" class="level2">
 <h2 class="anchored" data-anchor-id="stage-2-evaluation-evaporation">Stage 2: Evaluation &amp; Evaporation</h2>
 <p><span class="highlight">After all ants build schedules:</span></p>
-<div id="87090da1" class="cell" data-execution_count="19">
+<div id="edd20d69" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1584,7 +1585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-3-reinforcement" class="level2">
 <h2 class="anchored" data-anchor-id="stage-3-reinforcement">Stage 3: Reinforcement</h2>
 <p><span class="highlight">Good ants deposit more pheromones:</span></p>
-<div id="fa1bb23f" class="cell" data-execution_count="20">
+<div id="82290e5b" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1598,7 +1599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="stage-4-evolution-over-iterations" class="level2">
 <h2 class="anchored" data-anchor-id="stage-4-evolution-over-iterations">Stage 4: Evolution Over Iterations</h2>
 <p><span class="highlight">Full ACO implementation on restaurant staffing:</span></p>
-<div id="213d66d2" class="cell" data-execution_count="21">
+<div id="9e289941" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1622,7 +1623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="aco-vs-other-algorithms" class="level2">
 <h2 class="anchored" data-anchor-id="aco-vs-other-algorithms">ACO vs Other Algorithms</h2>
 <p><span class="highlight">How does the ant colony compare?</span></p>
-<div id="3c55000d" class="cell" data-execution_count="22">
+<div id="e1ff0e67" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1643,13 +1644,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="why-did-aco-struggle" class="level2">
+<h2 class="anchored" data-anchor-id="why-did-aco-struggle">Why did ACO struggle?</h2>
+<p><span class="highlight">The Right Tool for the Wrong Job</span></p>
+<p>ACO is designed for <strong>Sequential Path-Finding</strong> (Graph Traversal).</p>
+<ul>
+<li><strong>Best For:</strong> “I am at City A, where should I go next?” (TSP)</li>
+<li><strong>Our Problem:</strong> “Who should work Friday Dinner?” (Assignment)</li>
+</ul>
+<p>. . .</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>We forced a “Graph” algorithm onto a “Bin Packing” problem. SA and GA don’t care about geometry, so they adapted better!</p>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="decision-framework" class="level1 title">
 <h1 class="title"><span class="flow">Decision Framework</span></h1>
 <section id="when-to-use-which-metaheuristic" class="level2">
 <h2 class="anchored" data-anchor-id="when-to-use-which-metaheuristic">When to Use Which Metaheuristic?</h2>
 <p><span class="highlight">A decision guide for algorithm selection:</span></p>
-<div id="64750e60" class="cell" data-execution_count="23">
+<div id="b04ebf99" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-striped caption-top table-sm small" data-border="1">
 <thead>
@@ -1709,7 +1730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>x</td>
 <td>xxxx</td>
 <td>High</td>
-<td>Paths</td>
+<td>Changing Paths</td>
 </tr>
 </tbody>
 </table>
