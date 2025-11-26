@@ -671,7 +671,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The Data</h2>
 <p>Below is real data from last Tuesday, a typical operating day for QuickBite.</p>
-<div id="e208a5dc" class="cell" data-execution_count="1">
+<div id="f0ee4798" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -777,7 +777,7 @@ Total order value: €4189.24</code></pre>
 </section>
 <section id="delivery-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="delivery-visualization">Delivery Visualization</h2>
-<div id="39f7f6c8" class="cell" data-execution_count="2">
+<div id="3d16d3e3" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visualize_deliveries(deliveries_df, depot_location, routes<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Visualize all delivery locations and optional routes.</span></span>
@@ -846,7 +846,7 @@ Total order value: €4189.24</code></pre>
 <section id="helper-functions-minimal-code-provided" class="level2">
 <h2 class="anchored" data-anchor-id="helper-functions-minimal-code-provided">Helper Functions (Minimal Code Provided)</h2>
 <p>I provide only basic helper functions. <strong>You must implement the routing algorithms yourself.</strong></p>
-<div id="dbe3a8fa" class="cell" data-execution_count="3">
+<div id="2d214350" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> haversine_distance(lat1, lon1, lat2, lon2):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate distance between two GPS coordinates using Haversine formula.</span></span>
@@ -903,7 +903,7 @@ Example: Depot to Delivery #1 = 0.59 km</code></pre>
 </section>
 <section id="cost-calculation-function" class="level2">
 <h2 class="anchored" data-anchor-id="cost-calculation-function">Cost Calculation Function</h2>
-<div id="c291d2ef" class="cell" data-execution_count="4">
+<div id="30344c56" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_route_cost(route, deliveries_df, distance_matrix, depot_location):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate total cost for a single route.</span></span>
@@ -1134,7 +1134,7 @@ Example route cost breakdown:
 <li><strong>Clustering helps:</strong> Hamburg has natural neighborhood clusters. Use them!</li>
 <li><strong>Visualize early:</strong> Plot routes as you develop them. Bad routes are obvious visually.</li>
 <li><strong>Start simple:</strong> Get a working solution first, then optimize.</li>
-<li><strong>Fairness counts:</strong> Drivers will quit if workload is unfair. Balance is important. :::</li>
+<li><strong>Fairness counts:</strong> Drivers will quit if workload is unfair. Balance is important.</li>
 </ol>
 </section>
 <section id="common-pitfalls-to-avoid" class="level2">

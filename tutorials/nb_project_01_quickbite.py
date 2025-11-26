@@ -497,7 +497,7 @@ for key, value in example_cost.items():
 #     obvious visually.
 # 5.  **Start simple:** Get a working solution first, then optimize.
 # 6.  **Fairness counts:** Drivers will quit if workload is unfair.
-#     Balance is important. :::
+#     Balance is important.
 #
 # ## Common Pitfalls to Avoid
 #
