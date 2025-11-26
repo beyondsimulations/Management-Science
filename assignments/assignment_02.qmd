@@ -204,7 +204,7 @@ software costs versus fuel savings.]
 
 ### The Challenge
 
-CityExpress warehouse operates with 6 workers across 6 shifts per week. Recently, worker turnover has been high. Exit interviews reveal: *"They never give me the shifts I want."*
+CityExpress warehouse operates with 14 workers across 14 shifts per week. Recently, worker turnover has been high. Exit interviews reveal: *"They never give me the shifts I want."*
 
 The warehouse manager manually assigns shifts each week, often just assigning workers in order without considering preferences. Your job: **create a better assignment system that maximizes worker satisfaction**.
 

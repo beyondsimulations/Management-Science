@@ -24,7 +24,7 @@ deps/src/
 
 # Explicit hidden files
 students/
-exams/
+grading/
 solutions/
 general/header.html
 .DS_Store
