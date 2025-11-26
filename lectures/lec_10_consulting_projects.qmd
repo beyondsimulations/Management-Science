@@ -218,7 +218,7 @@ Any questions?
 . . .
 
 :::{.callout-tip}
-You will likely need **6-10 hours outside class** to complete this project. Start early!
+You will likely need **6-10 hours** to complete this project. If you start today in class and also use Monday in two weeks, everything should be manageable.
 :::
 
 ## Grading (40% of Final Grade)

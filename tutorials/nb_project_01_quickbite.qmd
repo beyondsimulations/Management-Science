@@ -461,7 +461,6 @@ Please upload both, presentation and jupyter notebook (or `.py` files) for the f
 4. **Visualize early:** Plot routes as you develop them. Bad routes are obvious visually.
 5. **Start simple:** Get a working solution first, then optimize.
 6. **Fairness counts:** Drivers will quit if workload is unfair. Balance is important.
-:::
 
 ## Common Pitfalls to Avoid
 
