@@ -32,3 +32,4 @@ notes/
 _repo-md/
 
 **/*.quarto_ipynb
+.claude

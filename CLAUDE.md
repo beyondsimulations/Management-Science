@@ -79,6 +79,8 @@ The project uses Quarto (`.qmd`) files that support:
 - **HTML output** - Primary format for the website
 - **Typst (PDF) output** - Available via format links on pages
 - **Hugo markdown** - For secondary distribution
+- **Jupyter notebooks** - Tutorials also output to `.ipynb` format
+- **reveal.js slides** - Lectures render as interactive presentations
 
 Tutorials are executable Python notebooks embedded in `.qmd` files using `{python}` code blocks.
 
@@ -95,7 +97,8 @@ Tutorials follow the pattern `nb_XX_YY_topic.qmd`:
 
 Lectures use Quarto's reveal.js format for slides:
 - Source: `lec_01_introduction.qmd`
-- Output: `lec_01_presentation.html`
+- HTML output: `lec_01_introduction.html` (readable format)
+- Slides output: `lec_01_introduction-revealjs.html` (presentation format)
 
 ### Post-Render Workflow
 
@@ -120,6 +123,10 @@ Core dependencies (from `pyproject.toml`):
 - `matplotlib` - Plotting and visualization
 - `numpy` - Numerical computing
 - `pandas` - Data analysis
+- `scikit-learn` - Machine learning algorithms
+- `scipy` - Scientific computing
+- `seaborn` - Statistical data visualization
+- `statsmodels` - Statistical modeling
 
 Dev dependencies:
 - `ipykernel` - IPython kernel for Jupyter
