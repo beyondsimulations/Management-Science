@@ -187,7 +187,7 @@ Re: Investment Analysis & Recommendation
 
 ### Scenario
 
-A retail client is experiencing growth and needs to forecast demand for the next 3 months to plan inventory. They've provided 24 months of historical sales data and want your team to recommend the best forecasting approach. The senior partner has asked you to start with standard forecasting methods, evaluate their performance, and then propose an improved approach if needed.
+A retail client is experiencing growth and needs to forecast demand for the next 3 months to plan inventory. They've provided 36 months of historical sales data and want your team to recommend the best forecasting approach. The senior partner has asked you to start with standard forecasting methods, evaluate their performance, and then propose an improved approach if needed.
 
 ### The Data
 
@@ -197,7 +197,7 @@ A retail client is experiencing growth and needs to forecast demand for the next
 
 ```{python}
 # DON'T CHANGE ANYTHING BELOW!
-# Generate 24 months of sales data with trend and slight seasonality
+# Generate 36 months of sales data with trend and slight seasonality
 # Each group will get slightly different data based on their seed above!
 np.random.seed(seed)
 
@@ -246,7 +246,7 @@ The client wants to start with two proven forecasting approaches. As junior anal
 **First, visualize the sales data:**
 
 ```{python}
-# Create a line plot showing all 24 months of sales data
+# Create a line plot showing all 36 months of sales data
 # Include axis labels, title, and grid for readability
 # YOUR CODE HERE
 
@@ -278,12 +278,12 @@ After presenting your implementation to the client, they ask: *"Which method sho
 
 **Testing Approach:**
 
-- Split data: **first 20 months for training**, **last 4 months (21-24) for testing**
+- Split data: **first 32 months for training**, **last 4 months (33-36) for testing**
 - Use **rolling forecasts** on the test period:
-  - Forecast month 21 using months 1-20
-  - Forecast month 22 using months 1-21 (add actual month 21 to training)
-  - Forecast month 23 using months 1-22 (add actual month 22 to training)
-  - Forecast month 24 using months 1-23 (add actual month 23 to training)
+  - Forecast month 33 using months 1-32
+  - Forecast month 34 using months 1-33 (add actual month 33 to training)
+  - Forecast month 35 using months 1-34 (add actual month 34 to training)
+  - Forecast month 36 using months 1-35 (add actual month 35 to training)
 - Calculate Mean Absolute Error (MAE) for both methods
 
 **Parameters to use:**
@@ -292,14 +292,14 @@ After presenting your implementation to the client, they ask: *"Which method sho
 - Exponential Smoothing: alpha = 0.3
 
 ```{python}
-# Split data: first 20 months for training, last 4 for testing
-train_data = df['sales_units'].values[:20].copy()
-test_data = df['sales_units'].values[20:]
+# Split data: first 32 months for training, last 4 for testing
+train_data = df['sales_units'].values[:32].copy()
+test_data = df['sales_units'].values[32:]
 
-print(f"Training on months 1-20, testing on months 21-24")
+print(f"Training on months 1-32, testing on months 33-36")
 print(f"Test data: {test_data}")
 
-# Generate rolling forecasts for test period (months 21-24)
+# Generate rolling forecasts for test period (months 33-36)
 # YOUR CODE HERE
 
 # Calculate Mean Absolute Error (MAE) for both methods
@@ -344,7 +344,7 @@ YOUR ANSWER:
 """
 ```
 
-**(c) Data Pattern Identification:** Looking at the full 24-month sales history, what patterns or characteristics do you observe? Consider whether the data appears flat, trending upward/downward, seasonal, or purely random. (2-3 sentences)
+**(c) Data Pattern Identification:** Looking at the full 36-month sales history, what patterns or characteristics do you observe? Consider whether the data appears flat, trending upward/downward, seasonal, or purely random. (2-3 sentences)
 
 ```{python}
 """
@@ -354,7 +354,7 @@ YOUR ANSWER:
 
 ### Task 3: Propose & Implement Improved Forecast (20%)
 
-After reviewing your analysis, the senior partner calls your team into a meeting: *"Good work on the baseline analysis. But I'm concerned we're not giving the client the best possible forecast. I need you to come back with something better for months 21-24. Use whatever method you think will work—just make sure you can explain why it's an improvement and prove it with the numbers."*
+After reviewing your analysis, the senior partner calls your team into a meeting: *"Good work on the baseline analysis. But I'm concerned we're not giving the client the best possible forecast. I need you to come back with something better for months 33-36. Use whatever method you think will work—just make sure you can explain why it's an improvement and prove it with the numbers."*
 
 Your task is to develop, implement, and validate an improved forecasting approach.
 
@@ -401,10 +401,10 @@ Implement your proposed method. You may:
 
 **Part 3: Testing & Validation**
 
-Test your method on the same test period (months 21-24) using rolling forecasts, just like Task 2.
+Test your method on the same test period (months 33-36) using rolling forecasts, just like Task 2.
 
 ```{python}
-# Generate rolling forecasts for months 21-24 with your improved method
+# Generate rolling forecasts for months 33-36 with your improved method
 # YOUR CODE HERE
 
 # Calculate MAE for your method
@@ -423,9 +423,9 @@ Create a visualization comparing all three methods.
 
 ```{python}
 # Create a plot showing:
-# - All 24 months of actual sales
-# - Vertical line marking train/test split at month 20
-# - Test forecasts (months 21-24) from all THREE methods
+# - All 36 months of actual sales
+# - Vertical line marking train/test split at month 32
+# - Test forecasts (months 33-36) from all THREE methods
 # - Clear legend, labels, and title
 # YOUR CODE HERE
 
@@ -433,7 +433,7 @@ Create a visualization comparing all three methods.
 
 **Part 2: Client Recommendation**
 
-Write your final recommendation to the client for forecasting months 25, 26, and 27.
+Write your final recommendation to the client for forecasting months 37, 38, and 39.
 
 ```{python}
 #| eval: false
@@ -454,7 +454,7 @@ most appropriate for their business needs going forward. Consider accuracy,
 simplicity, reliability, and any limitations they should be aware of.]
 
 Next Steps: [1-2 sentences on what the client should do - e.g., use this
-method for months 25-27, monitor performance, collect more data, etc.]
+method for months 37-39, monitor performance, collect more data, etc.]
 """
 ```
 
