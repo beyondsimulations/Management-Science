@@ -1,0 +1,45 @@
+---
+title: Frequently Asked Questions
+subtitle: Answers to common questions
+---
+
+
+## Unanswered Questions
+
+If you have a question that is not answered here, please let me know by sending me an e-mail to [vlcek@beyondsimulations.com](mailto:vlcek@beyondsimulations.com?subject=ManagementScience).
+
+## Contribution and Mistakes
+
+If you have found a mistake in the course material or if you have any suggestion on how to improve the course, please let me know by sending me an e-mail to [vlcek@beyondsimulations.com](mailto:vlcek@beyondsimulations.com?subject=ManagementScience).
+
+## FAQs
+
+### How can I download PDF slides from the lecture?
+
+1.  First, open the lecture you want to download the slides from.
+2.  Then, click on the `RevealJS` button in the top right corner.
+3.  Now, click on the three stacked bars in the lower left corner.
+4.  Then, click on `Tools` in the upper left corner.
+5.  Now you can select `PDF Export Mode` and then save the slides as a PDF.
+
+> **Note**
+>
+> Unfortunately, this method does not work perfectly on all browsers. If you have a Chrome based browser, you should be fine.
+
+## How does the chatbot work?
+
+The course AI is a chatbot that uses the [Mistral](https://mistral.ai) and some custom code hosted on Hetzner in Germany. If you have any questions about the course, feel free to ask the AI. Note, that the AI is not perfect and sometimes the answers might be incorrect. For more information about how the data is processed, please refer to the [privacy policy](privacy.qmd).
+
+## Is using Copilot cheating?
+
+No! Think of it more like using a calculator. It is allowed and encouraged, but you must understand what it does in the background to check the results.
+
+## Will Copilot make me a worse programmer?
+
+If you don't learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better then just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.
+
+## What if Copilot suggests wrong code?
+
+Copilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.[^1] That's why humans are still very important in the loop.
+
+[^1]: https://machinelearning.apple.com/research/illusion-of-thinking

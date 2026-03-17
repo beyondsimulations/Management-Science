@@ -1,0 +1,114 @@
+---
+title: Lecture 3 - Recap & Copilot Strategy
+subtitle: Management Science
+author: Dr. Tobias Vlćek
+format:
+  revealjs:
+    footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_03_closing.qmd)'
+    output-file: lec_03_presentation.html
+---
+
+
+# <span class="flow">Working with AI Assistants</span>
+
+## Context Engineering
+
+Write clear descriptions of what you want:
+
+``` python
+# Create subplot with 2 rows, 1 column
+# Top: line plot of revenue over time
+# Bottom: bar chart of profit by quarter
+```
+
+. . .
+
+> **Tip**
+>
+> -   **Be specific** in your instructions
+> -   **Review** generated code
+> -   **Test the code** as it might use old syntax
+> -   **Iterate** for better results
+> -   **Force To-Tos** so everything is completed
+
+## Watch Out For
+
+-   **Deprecated methods**: `plt.subplot()` vs `plt.subplots()`
+-   **Missing imports**: Always verify imports are included
+-   **Wrong assumptions**: Might guess your data structure incorrectly
+-   **Over-complexity**: Very often suggests unnecessary features
+
+. . .
+
+<span class="highlight">Remember: Generative AI is stochastic!</span>
+
+# <span class="flow">What We Learned</span>
+
+## Foundation Complete!
+
+<span class="question">Why This Matters?</span>
+
+. . .
+
+<span class="highlight">You now have a good foundation for data-driven decisions!</span>
+
+# <span class="flow">What's Next</span>
+
+## Preview: 4 - Monte Carlo
+
+<span class="highlight">Next Session: Modeling Business Uncertainty</span>
+
+. . .
+
+**We'll combine everything you've learned:**
+
+-   NumPy for random number generation
+-   Visualization for showing probability distributions
+
+. . .
+
+**Real applications:**
+
+-   Predict project completion times
+-   Estimate financial risks
+-   Make decisions under uncertainty
+
+## The End
+
+<span class="highlight">That's it for today!</span> **Make sure you:**
+
+-   [ ] Have completed all the notebooks
+-   [ ] Check whether you could follow so far
+-   [ ] Set up Copilot
+
+. . .
+
+> **Tip**
+>
+> Every line of code you write makes you a better programmer.
+> Every concept you understand makes you a better decision-maker.
+> <span class="highlight">Keep practicing and keep learning!</span>
+
+# <span class="flow">Literature</span>
+
+## Interesting Literature on Algorithms
+
+-   Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^1]
+-   Ferguson, T.S. (1989) 'Who solved the secretary problem?', Statistical Science, 4(3). doi:10.1214/ss/1177012493.
+
+## Books on Programming
+
+-   Downey, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O'Reilly. [Here](https://greenteapress.com/wp/think-python-3rd-edition/)
+-   Elter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.
+
+. . .
+
+> **Note**
+>
+> Think Python is a great book to start with. It's available online for free. Schrödinger Programmiert Python is a great alternative for German students, as it is a very playful introduction to programming with lots of examples.
+
+## More Literature
+
+For more interesting literature, take a look at the [literature list](../general/literature.qmd) of this course.
+
+[^1]: A great inspiration to learn more about Algorithms!
