@@ -27,11 +27,11 @@
 #
 # **The Delivery Challenge:**
 #
-# -   One truck leaves from Bean Counter HQ in a city
-# -   Must deliver coffee beans to all 10 franchises
-# -   Each franchise needs their specific blend
-# -   Fuel costs €1.50 per km
-# -   Driver costs €30 per hour
+# - One truck leaves from Bean Counter HQ in a city
+# - Must deliver coffee beans to all 10 franchises
+# - Each franchise needs their specific blend
+# - Fuel costs €1.50 per km
+# - Driver costs €30 per hour
 #
 # Your board calculated that poor routing costs Bean Counter **€2,500
 # monthly** in excess fuel and labor. Let’s fix this!
@@ -467,9 +467,9 @@ plt.show()
 # > A **2-opt swap** reverses a segment of the route to eliminate
 # > crossings:
 # >
-# > -   **Before:** Route = \[1, 2, 3, 4, 5, 6\]  
-# > -   **Swap(1, 4):** Reverse segment from position 2 to 4  
-# > -   **After:** Route = \[1, 2, **5, 4, 3**, 6\]
+# > - **Before:** Route = \[1, 2, 3, 4, 5, 6\]  
+# > - **Swap(1, 4):** Reverse segment from position 2 to 4  
+# > - **After:** Route = \[1, 2, **5, 4, 3**, 6\]
 # >
 # > This uncrosses paths and usually reduces total distance!
 #
@@ -536,9 +536,9 @@ print("✓ 2-opt swap implemented correctly!")
 # >
 # > 1.  Keep trying swaps until no improvement found
 # > 2.  For each pair of positions (i, j):
-# >     -   Create new route with that swap
-# >     -   Calculate its distance
-# >     -   If better, keep it and mark `improved = True`
+# >     - Create new route with that swap
+# >     - Calculate its distance
+# >     - If better, keep it and mark `improved = True`
 # > 3.  Stop when a full pass finds no improvements
 #
 # > **Breaking Out of Nested Loops**
@@ -864,28 +864,28 @@ plt.show()
 # ## Key Takeaways
 #
 # 1.  **The Traveling Salesman Problem (TSP)**:
-#     -   Visiting all locations with minimum distance
-#     -   Exact solutions impractical for real-world problems
+#     - Visiting all locations with minimum distance
+#     - Exact solutions impractical for real-world problems
 # 2.  **Greedy Construction Algorithms**:
-#     -   **Nearest Neighbor**: Fast, simple, decent quality
-#     -   Start somewhere, always go to closest unvisited location
-#     -   Quick to implement and understand
+#     - **Nearest Neighbor**: Fast, simple, decent quality
+#     - Start somewhere, always go to closest unvisited location
+#     - Quick to implement and understand
 # 3.  **Local Search Improvement**:
-#     -   **2-opt**: Systematically uncross routes to reduce distance
-#     -   Converges to local optimum (best among nearby solutions)
-#     -   Simple yet powerful optimization technique
+#     - **2-opt**: Systematically uncross routes to reduce distance
+#     - Converges to local optimum (best among nearby solutions)
+#     - Simple yet powerful optimization technique
 # 4.  **Multi-start Strategy**:
-#     -   Different starting points → different local optima
-#     -   Random starts help explore solution space
-#     -   Best found solution often much better than single attempt
+#     - Different starting points → different local optima
+#     - Random starts help explore solution space
+#     - Best found solution often much better than single attempt
 # 5.  **Algorithm Performance**:
-#     -   **Nearest Neighbor**: Quick construction, reasonable results
-#     -   **NN + 2-Opt**: Balanced approach, more improvement possible
-#     -   Choice depends on time constraints and quality needs!
+#     - **Nearest Neighbor**: Quick construction, reasonable results
+#     - **NN + 2-Opt**: Balanced approach, more improvement possible
+#     - Choice depends on time constraints and quality needs!
 # 6.  **Business Impact**:
-#     -   Route optimization delivers immediate, measurable savings
-#     -   Better routes = lower fuel costs + faster deliveries
-#     -   Scales to much larger real-world delivery networks
+#     - Route optimization delivers immediate, measurable savings
+#     - Better routes = lower fuel costs + faster deliveries
+#     - Scales to much larger real-world delivery networks
 #
 # ## What’s Next?
 #
@@ -893,8 +893,8 @@ plt.show()
 # **Artisan Bakery Competition**, you’ll apply these techniques to a more
 # challenging problem with:
 #
-# -   16 cafés (vs. 10 franchises)
-# -   Time window constraints (early deliveries required!)
+# - 16 cafés (vs. 10 franchises)
+# - Time window constraints (early deliveries required!)
 #
 # In future lectures, you’ll learn advanced techniques like
 # **metaheuristics** (simulated annealing, genetic algorithms, tabu

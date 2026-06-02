@@ -27,9 +27,9 @@
 # **The Seasonal Challenge:** Bean Counter has expanded beyond regular
 # coffee into seasonal drinks:
 #
-# -   **Iced Coffee** (summer favorite)
-# -   **Pumpkin Spice Latte** (fall special)
-# -   **Peppermint Hot Chocolate** (winter warmer)
+# - **Iced Coffee** (summer favorite)
+# - **Pumpkin Spice Latte** (fall special)
+# - **Peppermint Hot Chocolate** (winter warmer)
 #
 # You have 2 years of daily sales data. The board wants accurate forecasts
 # for next month to optimize inventory. Overstock means waste (drinks
@@ -74,10 +74,10 @@ print(f"  Day of week: {dates.day_name().tolist()}")
 # >
 # > Use `.dt` accessor to extract date parts:
 # >
-# > -   `.dt.month` - Month (1-12)
-# > -   `.dt.day_of_week` - Day (0=Monday, 6=Sunday)
-# > -   `.dt.quarter` - Quarter (1-4)
-# > -   `.dt.is_month_end` - Boolean for month end
+# > - `.dt.month` - Month (1-12)
+# > - `.dt.day_of_week` - Day (0=Monday, 6=Sunday)
+# > - `.dt.quarter` - Quarter (1-4)
+# > - `.dt.is_month_end` - Boolean for month end
 #
 # > **Tip**
 # >
@@ -196,9 +196,9 @@ print(f"Daily average: {mean_sales:.0f} drinks")
 #
 # **Example:** For a 3-day moving average:
 #
-# -   Day 3 average: (Day1 + Day2 + Day3) / 3
-# -   Day 4 average: (Day2 + Day3 + Day4) / 3
-# -   Day 5 average: (Day3 + Day4 + Day5) / 3
+# - Day 3 average: (Day1 + Day2 + Day3) / 3
+# - Day 4 average: (Day2 + Day3 + Day4) / 3
+# - Day 5 average: (Day3 + Day4 + Day5) / 3
 
 # %%
 # Example: 7-day moving average
@@ -362,9 +362,9 @@ print(f"MA forecast (next 3 days): {moving_average_forecast(df['sales'], 7, 3)}"
 #
 # Where α (alpha) is between 0 and 1:
 #
-# -   **α = 0.9:** Very responsive (trust recent data heavily)
-# -   **α = 0.3:** Balanced (typical default)
-# -   **α = 0.1:** Very stable (smooth out noise)
+# - **α = 0.9:** Very responsive (trust recent data heavily)
+# - **α = 0.3:** Balanced (typical default)
+# - **α = 0.1:** Very stable (smooth out noise)
 #
 # > **Tip**
 # >
@@ -381,8 +381,8 @@ print(f"MA forecast (next 3 days): {moving_average_forecast(df['sales'], 7, 3)}"
 # >
 # > Formula: `forecast_new = α × actual_current + (1-α) × forecast_old`
 # >
-# > -   `α = 0.3` → 30% actual, 70% old forecast (smooth)
-# > -   `α = 0.7` → 70% actual, 30% old forecast (reactive)
+# > - `α = 0.3` → 30% actual, 70% old forecast (smooth)
+# > - `α = 0.7` → 70% actual, 30% old forecast (reactive)
 #
 # > **List Operations You’ll Need**
 # >
@@ -504,17 +504,17 @@ plt.show()
 #
 # **The Math (simplified):**
 #
-# -   **Level:**
-#     $L_t = \alpha \times Y_t + (1-\alpha) \times (L_{t-1} + b_{t-1})$
-# -   **Trend:**
-#     $b_t = \beta \times (L_t - L_{t-1}) + (1-\beta) \times b_{t-1}$
-# -   **Forecast:** $\hat{Y}_{t+h} = L_t + h \times b_t$
+# - **Level:**
+#   $L_t = \alpha \times Y_t + (1-\alpha) \times (L_{t-1} + b_{t-1})$
+# - **Trend:**
+#   $b_t = \beta \times (L_t - L_{t-1}) + (1-\beta) \times b_{t-1}$
+# - **Forecast:** $\hat{Y}_{t+h} = L_t + h \times b_t$
 #
 # **In plain English:**
 #
-# -   Level smooths the current position
-# -   Trend smooths the growth rate
-# -   Forecast = Current level + (periods ahead × trend)
+# - Level smooths the current position
+# - Trend smooths the growth rate
+# - Forecast = Current level + (periods ahead × trend)
 #
 # Let’s see Holt’s method in action using Python’s `statsmodels` library:
 
@@ -609,9 +609,9 @@ plt.show()
 #
 # **When to use:**
 #
-# -   Data has trend AND seasonality
-# -   You have ideally 2 full seasonal cycles (e.g., 2 years for yearly
-#     patterns)
+# - Data has trend AND seasonality
+# - You have ideally 2 full seasonal cycles (e.g., 2 years for yearly
+#   patterns)
 #
 # Let’s demonstrate with monthly data:
 
@@ -706,12 +706,12 @@ print(f"RMSE: {calculate_rmse(actual, forecast):.1f} (penalizes big errors)")
 # %% [markdown]
 # > **MAE vs RMSE**
 # >
-# > -   **MAE:** Average error size (easier to interpret, in same units as
-# >     data)
-# > -   **RMSE:** Penalizes large errors more heavily (sensitive to
-# >     outliers)
-# > -   **In business:** MAE often preferred for its simplicity and
-# >     interpretability
+# > - **MAE:** Average error size (easier to interpret, in same units as
+# >   data)
+# > - **RMSE:** Penalizes large errors more heavily (sensitive to
+# >   outliers)
+# > - **In business:** MAE often preferred for its simplicity and
+# >   interpretability
 #
 # ## Exercise 6.1 - Compare All Methods
 #

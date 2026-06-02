@@ -28,10 +28,10 @@
 # unanimously appointed you as **CEO of Bean Counter**! You now lead a
 # coffee empire with:
 #
-# -   50+ locations across the country
-# -   1,000+ employees
-# -   Millions of transactions per month
-# -   Thousands of products and suppliers
+# - 50+ locations across the country
+# - 1,000+ employees
+# - Millions of transactions per month
+# - Thousands of products and suppliers
 #
 # **The Challenge:** As CEO, you’re drowning in data. Your Python lists
 # take minutes to process sales reports. Board meetings are tomorrow, and
@@ -53,11 +53,10 @@
 # As CEO, you wouldn’t build every tool from scratch - you’d use the best
 # tools available. The same applies to Python!
 #
-# -   **Packages are collections of pre-written code** that solve common
-#     problems
-# -   They’re created by experts and shared with the community
-# -   Think of them as apps you can add to Python to extend its
-#     capabilities
+# - **Packages are collections of pre-written code** that solve common
+#   problems
+# - They’re created by experts and shared with the community
+# - Think of them as apps you can add to Python to extend its capabilities
 #
 # > **Why Use Packages?**
 # >
@@ -142,9 +141,9 @@ print(f"NumPy is {python_time/numpy_time:.1f}x faster!")
 # %% [markdown]
 # > **NumPy Arrays vs Python Lists**
 # >
-# > -   **Python lists**: Flexible but slow for math operations
-# > -   **NumPy arrays**: Specialized for numbers, blazing fast
-# > -   Rule of thumb: Use NumPy when doing math on many numbers at once
+# > - **Python lists**: Flexible but slow for math operations
+# > - **NumPy arrays**: Specialized for numbers, blazing fast
+# > - Rule of thumb: Use NumPy when doing math on many numbers at once
 #
 # # Section 3 - Working with NumPy Arrays
 #
@@ -189,12 +188,11 @@ print(f"Total revenue: ${np.sum(revenues)}")
 # %% [markdown]
 # > **Key NumPy Array Operations**
 # >
-# > -   **Create**: `np.array([1, 2, 3])` - Convert list to array
-# > -   **Math**: `array * 2`, `array + 5` - Operations apply to ALL
-# >     elements
-# > -   **Access**: `array[0]`, `array[1:3]` - Works like lists
-# > -   **Aggregate**: `np.sum(array)`, `np.mean(array)` - Quick
-# >     statistics
+# > - **Create**: `np.array([1, 2, 3])` - Convert list to array
+# > - **Math**: `array * 2`, `array + 5` - Operations apply to ALL
+# >   elements
+# > - **Access**: `array[0]`, `array[1:3]` - Works like lists
+# > - **Aggregate**: `np.sum(array)`, `np.mean(array)` - Quick statistics
 #
 # ------------------------------------------------------------------------
 #
@@ -439,13 +437,13 @@ print(f"Total sales per day: {total_per_day}")
 # >
 # > In 2D arrays:
 # >
-# > -   `axis=0` operates DOWN the rows (along columns)
-# > -   `axis=1` operates ACROSS the columns (along rows)
+# > - `axis=0` operates DOWN the rows (along columns)
+# > - `axis=1` operates ACROSS the columns (along rows)
 # >
 # > Think of it this way:
 # >
-# > -   `axis=1` gives you one value per row (e.g., average per store)
-# > -   `axis=0` gives you one value per column (e.g., average per day)
+# > - `axis=1` gives you one value per row (e.g., average per store)
+# > - `axis=0` gives you one value per column (e.g., average per day)
 #
 # ## Boolean Filtering and Binary Vectors
 #
@@ -560,29 +558,27 @@ print("Excellent CEO-level analysis! You understand your company's traffic patte
 #
 # **You’ve learned:**
 #
-# -   **Array Creation** - Initialize data structures for company-wide
-#     metrics
-# -   **Vectorized Operations** - Update thousands of prices/costs
-#     instantly
-# -   **Statistical Analysis** - Get insights from massive datasets in
-#     milliseconds
-# -   **Speed Advantage** - Process millions of data points in seconds
+# - **Array Creation** - Initialize data structures for company-wide
+#   metrics
+# - **Vectorized Operations** - Update thousands of prices/costs instantly
+# - **Statistical Analysis** - Get insights from massive datasets in
+#   milliseconds
+# - **Speed Advantage** - Process millions of data points in seconds
 #
 # **Your Bean Counter CEO toolkit now includes:**
 #
-# -   Lightning-fast analysis of millions of transactions
-# -   Company-wide financial calculations in seconds
-# -   Statistical insights for board presentations
-# -   The ability to handle big data that would crash Excel
+# - Lightning-fast analysis of millions of transactions
+# - Company-wide financial calculations in seconds
+# - Statistical insights for board presentations
+# - The ability to handle big data that would crash Excel
 #
 # **Remember:**
 #
-# -   NumPy arrays are specialized for numerical operations
-# -   Vectorized operations eliminate the need for loops
-# -   Use `np.mean()`, `np.sum()`, `np.std()` for quick statistics
-# -   Random functions help simulate business scenarios
-# -   Always consider using NumPy when dealing with large numerical
-#     datasets
+# - NumPy arrays are specialized for numerical operations
+# - Vectorized operations eliminate the need for loops
+# - Use `np.mean()`, `np.sum()`, `np.std()` for quick statistics
+# - Random functions help simulate business scenarios
+# - Always consider using NumPy when dealing with large numerical datasets
 #
 # **What’s Next:** In the next tutorial, you’ll learn **Pandas**, the
 # ultimate tool for working with structured business data. You’ll import

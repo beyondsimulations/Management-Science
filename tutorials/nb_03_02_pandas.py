@@ -28,10 +28,10 @@
 # challenge: Bean Counter’s data comes in spreadsheets, CSVs, and
 # databases. You have:
 #
-# -   Sales reports from 50+ locations
-# -   Product catalogs with thousands of items
-# -   Customer data with demographics and preferences
-# -   Supplier information across multiple regions
+# - Sales reports from 50+ locations
+# - Product catalogs with thousands of items
+# - Customer data with demographics and preferences
+# - Supplier information across multiple regions
 #
 # **The Problem:** This data has labels, categories, dates, and mixed
 # types. NumPy arrays aren’t enough, you need something more powerful!
@@ -79,9 +79,9 @@ print(f"\nDataFrame shape: {df.shape} (rows, columns)")
 # %% [markdown]
 # > **DataFrames vs NumPy Arrays**
 # >
-# > -   **NumPy arrays**: Great for numerical calculations
-# > -   **Pandas DataFrames**: Perfect for labeled, mixed-type data
-# > -   Think of DataFrames as spreadsheets!
+# > - **NumPy arrays**: Great for numerical calculations
+# > - **Pandas DataFrames**: Perfect for labeled, mixed-type data
+# > - Think of DataFrames as spreadsheets!
 #
 # ## Exercise 1.1 - Create Product Catalog DataFrame
 #
@@ -215,9 +215,9 @@ print(high_performers)
 # %% [markdown]
 # > **Single vs Double Brackets**
 # >
-# > -   `df['column']` returns a Series (single column)
-# > -   `df[['column']]` returns a DataFrame (even with one column)
-# > -   `df[['col1', 'col2']]` selects multiple columns
+# > - `df['column']` returns a Series (single column)
+# > - `df[['column']]` returns a DataFrame (even with one column)
+# > - `df[['col1', 'col2']]` selects multiple columns
 #
 # ## Exercise 3.1 - Filter Strategic Locations
 #
@@ -424,33 +424,32 @@ print("Perfect! You can now load and analyze real business data!")
 #
 # **You’ve learned:**
 #
-# -   **DataFrames** - Creating and working with structured business data
-# -   **Exploration** - Using head(), info(), describe() for quick
-#     insights
-# -   **Selection** - Accessing specific columns and rows of data
-# -   **Filtering** - Finding data that meets business criteria
-# -   **Calculated Columns** - Creating new metrics from existing data
-# -   **Sorting** - Ranking data by any metric
-# -   **File I/O** - Loading data from CSV and Excel files
+# - **DataFrames** - Creating and working with structured business data
+# - **Exploration** - Using head(), info(), describe() for quick insights
+# - **Selection** - Accessing specific columns and rows of data
+# - **Filtering** - Finding data that meets business criteria
+# - **Calculated Columns** - Creating new metrics from existing data
+# - **Sorting** - Ranking data by any metric
+# - **File I/O** - Loading data from CSV and Excel files
 #
 # **Your Bean Counter CEO data toolkit now includes:**
 #
-# -   Ability to work with spreadsheet-like data in Python
-# -   Tools to explore and understand large datasets quickly
-# -   Skills to filter and find exactly the data you need
-# -   Power to create custom metrics and KPIs
-# -   Capability to process data from multiple file formats
+# - Ability to work with spreadsheet-like data in Python
+# - Tools to explore and understand large datasets quickly
+# - Skills to filter and find exactly the data you need
+# - Power to create custom metrics and KPIs
+# - Capability to process data from multiple file formats
 #
 # **Remember:**
 #
-# -   DataFrames are like Excel spreadsheets, but better
-# -   Use `df['column']` for single columns, `df[['col1','col2']]` for
-#     multiple
-# -   Filter with boolean conditions: `df[df['revenue'] > 100000]`
-# -   Create new columns with calculations:
-#     `df['profit'] = df['revenue'] - df['cost']`
-# -   Sort with `sort_values()` to rank your data
-# -   Load real data with `pd.read_csv()` and `pd.read_excel()`
+# - DataFrames are like Excel spreadsheets, but better
+# - Use `df['column']` for single columns, `df[['col1','col2']]` for
+#   multiple
+# - Filter with boolean conditions: `df[df['revenue'] > 100000]`
+# - Create new columns with calculations:
+#   `df['profit'] = df['revenue'] - df['cost']`
+# - Sort with `sort_values()` to rank your data
+# - Load real data with `pd.read_csv()` and `pd.read_excel()`
 #
 # **What’s Next:** In the final session of the Python introduction, you’ll
 # combine NumPy and Pandas with **visualization** to create compelling

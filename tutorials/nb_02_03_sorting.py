@@ -31,10 +31,10 @@
 #
 # **The Challenge:** Every day brings countless decisions:
 #
-# -   Which stores should receive limited supplies first?
-# -   Which tasks should baristas prioritize during rush hour?
-# -   Which locations need emergency support?
-# -   How do we schedule deliveries efficiently?
+# - Which stores should receive limited supplies first?
+# - Which tasks should baristas prioritize during rush hour?
+# - Which locations need emergency support?
+# - How do we schedule deliveries efficiently?
 #
 # Making the wrong choice costs time, money, and customer satisfaction.
 # You need systematic ways to find the best options!
@@ -77,15 +77,15 @@ print(f"Original: {daily_sales}")
 # %% [markdown]
 # Key points about `sorted()`:
 #
-# -   Returns a NEW sorted list (doesn’t change the original)
-# -   Default: sorts lowest to highest
-# -   `reverse=True`: sorts highest to lowest
-# -   Works with numbers, strings, and more
+# - Returns a NEW sorted list (doesn’t change the original)
+# - Default: sorts lowest to highest
+# - `reverse=True`: sorts highest to lowest
+# - Works with numbers, strings, and more
 #
 # > **Sort vs Sorted**
 # >
-# > -   `sorted(list)` - Creates a new sorted list, original unchanged
-# > -   `list.sort()` - Sorts the list in place, modifying the original
+# > - `sorted(list)` - Creates a new sorted list, original unchanged
+# > - `list.sort()` - Sorts the list in place, modifying the original
 # >
 # > Use `sorted()` when you want to keep the original order available!
 #
@@ -236,9 +236,9 @@ for store in by_rating:
 # >
 # > `key=lambda x: x["field"]` tells Python what to sort by:
 # >
-# > -   `lambda x:` means “for each item x in the list”
-# > -   `x["field"]` is the value to sort by
-# > -   Think of it as: “sort by looking at this specific field”
+# > - `lambda x:` means “for each item x in the list”
+# > - `x["field"]` is the value to sort by
+# > - Think of it as: “sort by looking at this specific field”
 #
 # ## Exercise 3.1 - Rank Stores by Efficiency
 #
@@ -352,13 +352,13 @@ print("Excellent decision-making! You've allocated supplies optimally!")
 #
 # **SPT (Shortest Processing Time)**: Do the quickest tasks first
 #
-# -   Minimizes average waiting time
-# -   Reduces work-in-progress
+# - Minimizes average waiting time
+# - Reduces work-in-progress
 #
 # **EDD (Earliest Due Date)**: Do tasks with earliest deadlines first
 #
-# -   Minimizes late deliveries
-# -   Ensures time-sensitive tasks are prioritized
+# - Minimizes late deliveries
+# - Ensures time-sensitive tasks are prioritized
 
 # %%
 # Scheduling coffee orders during morning rush
@@ -446,29 +446,28 @@ print("Outstanding! You've mastered basic scheduling optimization!")
 #
 # **You’ve learned:**
 #
-# -   **Sorting Lists** - Ranking data from best to worst (or vice versa)
-# -   **Finding Min/Max** - Quickly identifying extremes in your data
-# -   **Sorting Dictionaries** - Ranking complex data by any metric
-# -   **Finding Best Options** - Selecting optimal choices from
-#     dictionaries
-# -   **Scheduling Rules** - SPT and EDD for operational efficiency
+# - **Sorting Lists** - Ranking data from best to worst (or vice versa)
+# - **Finding Min/Max** - Quickly identifying extremes in your data
+# - **Sorting Dictionaries** - Ranking complex data by any metric
+# - **Finding Best Options** - Selecting optimal choices from dictionaries
+# - **Scheduling Rules** - SPT and EDD for operational efficiency
 #
 # **Your Bean Counter optimization system can now:**
 #
-# -   Rank stores by any performance metric
-# -   Identify the best and worst performers instantly
-# -   Allocate resources to the most critical locations
-# -   Schedule tasks for maximum efficiency
-# -   Make data-driven operational decisions
+# - Rank stores by any performance metric
+# - Identify the best and worst performers instantly
+# - Allocate resources to the most critical locations
+# - Schedule tasks for maximum efficiency
+# - Make data-driven operational decisions
 #
 # **Remember:**
 #
-# -   `sorted()` creates a new list; the original stays unchanged
-# -   `reverse=True` sorts from highest to lowest
-# -   `min()` and `max()` find extremes quickly
-# -   Use `key=lambda x: x["field"]` to sort dictionaries by any field
-# -   SPT minimizes wait times; EDD minimizes late orders
-# -   Always consider what metric to optimize for your specific goal
+# - `sorted()` creates a new list; the original stays unchanged
+# - `reverse=True` sorts from highest to lowest
+# - `min()` and `max()` find extremes quickly
+# - Use `key=lambda x: x["field"]` to sort dictionaries by any field
+# - SPT minimizes wait times; EDD minimizes late orders
+# - Always consider what metric to optimize for your specific goal
 #
 # **What’s Next:** The CEO is preparing you for the a challenge! In the
 # next tutorial, you’ll integrate everything you’ve learned - functions,

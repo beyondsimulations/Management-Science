@@ -33,9 +33,9 @@
 #
 # **Last Year’s Disaster:**
 #
-# -   **Gaming Console X:** Sold out December 10th, missed €1.2M in sales
-# -   **Fitness Tracker Pro:** 500 units unsold, €150K clearance loss
-# -   **Smart Speaker Mini:** Perfect stock, but pure luck
+# - **Gaming Console X:** Sold out December 10th, missed €1.2M in sales
+# - **Fitness Tracker Pro:** 500 units unsold, €150K clearance loss
+# - **Smart Speaker Mini:** Perfect stock, but pure luck
 #
 # **Operations Director:** “We can’t afford another Christmas like last
 # year. Every stockout means disappointed customers and lost revenue.
@@ -53,30 +53,30 @@
 #
 # #### 1. TechPod Pro (Wireless Earbuds)
 #
-# -   **Category:** Consumer Electronics
-# -   **Price:** €199
-# -   **Margin:** €80 per unit
-# -   **Storage cost:** €2 per unit per week
-# -   **Lead time:** 3 weeks from supplier
-# -   **Last year:** Strong growth, some seasonality
+# - **Category:** Consumer Electronics
+# - **Price:** €199
+# - **Margin:** €80 per unit
+# - **Storage cost:** €2 per unit per week
+# - **Lead time:** 3 weeks from supplier
+# - **Last year:** Strong growth, some seasonality
 #
 # #### 2. FitBand Ultra (Fitness Tracker)
 #
-# -   **Category:** Health & Wellness
-# -   **Price:** €149
-# -   **Margin:** €55 per unit
-# -   **Storage cost:** €1.50 per unit per week
-# -   **Lead time:** 4 weeks from supplier
-# -   **Last year:** Volatile, New Year resolution spike
+# - **Category:** Health & Wellness
+# - **Price:** €149
+# - **Margin:** €55 per unit
+# - **Storage cost:** €1.50 per unit per week
+# - **Lead time:** 4 weeks from supplier
+# - **Last year:** Volatile, New Year resolution spike
 #
 # #### 3. CozyThrow Deluxe (Heated Blanket)
 #
-# -   **Category:** Home & Living
-# -   **Price:** €79
-# -   **Margin:** €30 per unit
-# -   **Storage cost:** €3 per unit per week (bulky)
-# -   **Lead time:** 6 weeks from supplier
-# -   **Last year:** Highly seasonal, winter peak
+# - **Category:** Home & Living
+# - **Price:** €79
+# - **Margin:** €30 per unit
+# - **Storage cost:** €3 per unit per week (bulky)
+# - **Lead time:** 6 weeks from supplier
+# - **Last year:** Highly seasonal, winter peak
 #
 # ### Success Metrics
 #
@@ -92,9 +92,9 @@
 #
 # **Cost of Errors:**
 #
-# -   **Underforecast:** Lost profit margin + customer disappointment
-# -   **Overforecast:** Storage costs + clearance losses (assume 30%
-#     markdown)
+# - **Underforecast:** Lost profit margin + customer disappointment
+# - **Overforecast:** Storage costs + clearance losses (assume 30%
+#   markdown)
 #
 # **Example:** If you forecast 1000 units but actual is 1200: - Lost
 # profit: 200 × €80 = €16,000 (for TechPod Pro)
@@ -287,19 +287,19 @@ print("\nYou can use any of these methods or create your own!")
 #
 # Study the patterns, trends, and seasonality for each product. Consider:
 #
-# -   Is there a clear trend (growing/declining)?
-# -   Is there seasonality? When are the peaks?
-# -   How volatile is the demand?
-# -   What happened last December?
+# - Is there a clear trend (growing/declining)?
+# - Is there seasonality? When are the peaks?
+# - How volatile is the demand?
+# - What happened last December?
 #
 # ## Step 2: Choose Your Methods
 #
 # Select appropriate forecasting methods for each product. You might use:
 #
-# -   Different methods for different products
-# -   Combination of methods
-# -   Adjusted forecasts based on December patterns
-# -   Your own creative approach
+# - Different methods for different products
+# - Combination of methods
+# - Adjusted forecasts based on December patterns
+# - Your own creative approach
 #
 # ## Step 3: Generate Forecasts
 #
@@ -339,17 +339,17 @@ print("\nYou can use any of these methods or create your own!")
 #
 # ## Common Pitfalls
 #
-# -   Using the same method for all products without considering their
-#     differences
-# -   Ignoring obvious seasonality
-# -   Forecasts way outside historical ranges without justification
-# -   Overly complex methods when simple ones work better
+# - Using the same method for all products without considering their
+#   differences
+# - Ignoring obvious seasonality
+# - Forecasts way outside historical ranges without justification
+# - Overly complex methods when simple ones work better
 #
 # ## Final Checklist
 #
-# -   [ ] All 12 forecasts completed (3 products × 4 weeks)
-# -   [ ] Forecasts seem reasonable given history
-# -   [ ] One-slide PDF ready for presentation
+# - [ ] All 12 forecasts completed (3 products × 4 weeks)
+# - [ ] Forecasts seem reasonable given history
+# - [ ] One-slide PDF ready for presentation
 #
 # # Bonus Analysis (Optional)
 #

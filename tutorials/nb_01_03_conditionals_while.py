@@ -27,10 +27,10 @@
 # Bean Counter coffee shop is growing! They need a smarter inventory
 # management system that can:
 #
-# -   Alert when supplies are running low
-# -   Automatically reorder items when needed
-# -   Track which products are selling fastest
-# -   Simulate inventory usage over time
+# - Alert when supplies are running low
+# - Automatically reorder items when needed
+# - Track which products are selling fastest
+# - Simulate inventory usage over time
 #
 # These tasks require your program to make decisions and repeat processes
 # until certain conditions are met. That’s where conditionals and while
@@ -76,25 +76,25 @@ print(f"Uncomfortable conditions: {check_condition}")
 # %% [markdown]
 # > **Comparison Operators:**
 # >
-# > -   `==` equal to
-# > -   `!=` not equal to
-# > -   `>` greater than
-# > -   `<` less than
-# > -   `>=` greater than or equal to
-# > -   `<=` less than or equal to
+# > - `==` equal to
+# > - `!=` not equal to
+# > - `>` greater than
+# > - `<` less than
+# > - `>=` greater than or equal to
+# > - `<=` less than or equal to
 #
 # > **Boolean Operators:**
 # >
-# > -   `and` - both conditions must be True
-# > -   `or` - at least one condition must be True
-# > -   `not` - reverses the condition
+# > - `and` - both conditions must be True
+# > - `or` - at least one condition must be True
+# > - `not` - reverses the condition
 #
 # ## Exercise 1.1 - Coffee Bean Quality Check
 #
 # Check if coffee beans meet quality standards. Beans pass if:
 #
-# -   The moisture level is between 10 and 12 (inclusive)
-# -   AND the defect count is less than 5
+# - The moisture level is between 10 and 12 (inclusive)
+# - AND the defect count is less than 5
 #
 # Create a variable `passes_quality` that is True if both conditions are
 # met.
@@ -117,9 +117,9 @@ print("Excellent! Your quality check system works correctly!")
 #
 # Customers get a special offer if they meet ANY of these conditions:
 #
-# -   They’re a member (is_member = True)
-# -   OR they’ve spent more than \$100
-# -   OR it’s their birthday (is_birthday = True)
+# - They’re a member (is_member = True)
+# - OR they’ve spent more than \$100
+# - OR it’s their birthday (is_birthday = True)
 #
 # Determine if the customer is eligible by storing the result in a
 # variable called `eligible_for_offer`.
@@ -207,9 +207,9 @@ print("Great! Your stock alert system works!")
 #
 # Create a pricing system with multiple tiers. The rules are:
 #
-# -   Orders less than 10 items: \$5 per item
-# -   Orders 10-49 items: \$4.50 per item
-# -   Orders 50 or more items: \$4 per item
+# - Orders less than 10 items: \$5 per item
+# - Orders 10-49 items: \$4.50 per item
+# - Orders 50 or more items: \$4 per item
 #
 # Calculate and print the `price_per_item` and `total_cost` for the given
 # `quantity`.
@@ -340,9 +340,9 @@ print(f"Great! Found {count} high-value orders: {high_value_orders}")
 # Categorize products by stock level and create separate lists for each
 # category:
 #
-# -   Critical: stock \< 10
-# -   Low: stock \>= 10 and stock \< 25
-# -   Good: stock \>= 25
+# - Critical: stock \< 10
+# - Low: stock \>= 10 and stock \< 25
+# - Good: stock \>= 25
 
 # %%
 products = ["Coffee", "Milk", "Sugar", "Cups", "Lids", "Stirrers"]
@@ -411,8 +411,8 @@ print(f"\nReorder needed after {days} days!")
 #
 # Track:
 #
-# -   How many minutes it takes (until queue exceeds 20)
-# -   The final queue size
+# - How many minutes it takes (until queue exceeds 20)
+# - The final queue size
 #
 # > **Tip**
 # >
@@ -520,8 +520,8 @@ print(f"Promotion items (compact): {promotion_items_compact}")
 #
 # Find products eligible for promotion. Products qualify if they are:
 #
-# -   Drinks priced \$4 or more, OR
-# -   Food items priced \$3 or more
+# - Drinks priced \$4 or more, OR
+# - Food items priced \$3 or more
 #
 # Also calculate the total discount if we offer 15% off eligible items.
 
@@ -553,25 +553,25 @@ print(f"Total discount offered: ${total_discount:.2f}")
 #
 # **You’ve learned:**
 #
-# -   **If/Elif/Else** - Making decisions in your code
-# -   **Comparison Operators** - Checking relationships between values
-# -   **Boolean Logic** - Combining conditions with and/or
-# -   **Conditionals in Loops** - Filtering and categorizing data
-# -   **While Loops** - Running processes until conditions are met
+# - **If/Elif/Else** - Making decisions in your code
+# - **Comparison Operators** - Checking relationships between values
+# - **Boolean Logic** - Combining conditions with and/or
+# - **Conditionals in Loops** - Filtering and categorizing data
+# - **While Loops** - Running processes until conditions are met
 #
 # **Your Bean Counter inventory system can now:**
 #
-# -   Alert when supplies run low
-# -   Categorize products by stock level
-# -   Filter products for promotions
+# - Alert when supplies run low
+# - Categorize products by stock level
+# - Filter products for promotions
 #
 # **Remember:**
 #
-# -   Always include colons (:) after if/elif/else/while statements
-# -   Proper indentation is crucial in Python
-# -   While loops need a way to eventually become False
-# -   Combine conditions with `and`/`or` for complex logic
-# -   Build filtered lists by starting empty and appending matches
+# - Always include colons (:) after if/elif/else/while statements
+# - Proper indentation is crucial in Python
+# - While loops need a way to eventually become False
+# - Combine conditions with `and`/`or` for complex logic
+# - Build filtered lists by starting empty and appending matches
 #
 # **What’s Next:** You’ve completed the Python foundation! In the next
 # lecture, you’ll learn about more advanced Python features including

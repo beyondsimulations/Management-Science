@@ -32,10 +32,10 @@
 # **The Challenge:** Each of our baristas currently calculates prices,
 # applies discounts, and prepares drinks their own way. This leads to:
 #
-# -   Inconsistent pricing between stores
-# -   Errors in discount calculations
-# -   Different drink quality at each location
-# -   Frustrated customers who get charged differently at each store
+# - Inconsistent pricing between stores
+# - Errors in discount calculations
+# - Different drink quality at each location
+# - Frustrated customers who get charged differently at each store
 #
 # **Your Task:** Create standardized functions that every Bean Counter
 # location will use. These functions will ensure consistency, reduce
@@ -78,20 +78,20 @@ print(message)
 # %% [markdown]
 # The anatomy of a function:
 #
-# -   `def` - tells Python we’re defining a function
-# -   `greet_customer` - the function’s name (use descriptive names!)
-# -   `(name)` - parameters (inputs) the function needs
-# -   `""" """` - docstring explaining function (optional, but good
-#     practice)
-# -   `return` - sends back the result
+# - `def` - tells Python we’re defining a function
+# - `greet_customer` - the function’s name (use descriptive names!)
+# - `(name)` - parameters (inputs) the function needs
+# - `""" """` - docstring explaining function (optional, but good
+#   practice)
+# - `return` - sends back the result
 #
 # > **Functions are like Coffee Recipes**
 # >
 # > Think of a function like a coffee recipe:
 # >
-# > -   **Inputs (parameters)**: Coffee beans, water, milk
-# > -   **Process**: The brewing instructions
-# > -   **Output (return)**: A delicious coffee drink
+# > - **Inputs (parameters)**: Coffee beans, water, milk
+# > - **Process**: The brewing instructions
+# > - **Output (return)**: A delicious coffee drink
 # >
 # > Once you perfect the recipe, every barista can make the same great
 # > coffee!
@@ -103,15 +103,15 @@ print(message)
 #
 # Bean Counter’s pricing:
 #
-# -   Espresso: Medium \$3.00, Large \$3.50
-# -   Latte: Medium \$4.75, Large \$5.50
-# -   Cappuccino: Medium \$4.25, Large \$5.00
+# - Espresso: Medium \$3.00, Large \$3.50
+# - Latte: Medium \$4.75, Large \$5.50
+# - Cappuccino: Medium \$4.25, Large \$5.00
 #
 # > **Before You Start**
 # >
-# > -   Use if/elif statements to handle different drink types
-# > -   Make sure to return (not print) the price
-# > -   Consider what to return if an invalid drink type is given
+# > - Use if/elif statements to handle different drink types
+# > - Make sure to return (not print) the price
+# > - Consider what to return if an invalid drink type is given
 
 # %%
 # YOUR CODE BELOW
@@ -136,9 +136,9 @@ print("Excellent! Your pricing function works perfectly. No more pricing chaos a
 #
 # Rules:
 #
-# -   Customers earn 1 point per dollar spent (rounded down)
-# -   Purchases over \$10 earn 1.5x points
-# -   Purchases over \$20 earn 2x points
+# - Customers earn 1 point per dollar spent (rounded down)
+# - Purchases over \$10 earn 1.5x points
+# - Purchases over \$20 earn 2x points
 #
 # > **Tip**
 # >
@@ -206,10 +206,10 @@ print(f"Is it happy hour at 6 PM? {check_happy_hour(18)}")
 #
 # Bean Counter’s freshness standards:
 #
-# -   Beans are fresh for 14 days after roasting
-# -   Beans are acceptable for 21 days (but need manager approval)
-# -   After 21 days, beans must be discarded
-# -   Return: “fresh”, “manager_approval”, or “discard”
+# - Beans are fresh for 14 days after roasting
+# - Beans are acceptable for 21 days (but need manager approval)
+# - After 21 days, beans must be discarded
+# - Return: “fresh”, “manager_approval”, or “discard”
 
 # %%
 # YOUR CODE BELOW
@@ -231,10 +231,10 @@ print("Excellent! Quality control is now standardized!")
 # Create a function `apply_discount` that applies Bean Counter’s discount
 # policies:
 #
-# -   Happy hour (use 24-hour format): 15% off
-# -   Senior discount (age 65+): 10% off
-# -   Student discount (with valid ID): 10% off
-# -   Discounts don’t stack - apply the best one!
+# - Happy hour (use 24-hour format): 15% off
+# - Senior discount (age 65+): 10% off
+# - Student discount (with valid ID): 10% off
+# - Discounts don’t stack - apply the best one!
 #
 # Return the discounted price rounded to two decimals.
 #
@@ -293,9 +293,9 @@ print(f"Total with tax: ${calculate_total_with_tax(price)}")
 # > Breaking complex operations into smaller functions is like having
 # > specialized baristas:
 # >
-# > -   One expert at espresso
-# > -   One expert at latte art
-# > -   One expert at customer service
+# > - One expert at espresso
+# > - One expert at latte art
+# > - One expert at customer service
 # >
 # > Together, they create the coffee shop experience!
 #
@@ -304,10 +304,9 @@ print(f"Total with tax: ${calculate_total_with_tax(price)}")
 # Create a function `validate_order` that checks if an order can be
 # fulfilled:
 #
-# -   Check bean freshness (use your `check_bean_freshness` function)
-# -   Verify the drink type is valid (espresso, latte, or cappuccino)
-# -   Return a boolean (True or False) stating if we `can_fulfill` the
-#     order
+# - Check bean freshness (use your `check_bean_freshness` function)
+# - Verify the drink type is valid (espresso, latte, or cappuccino)
+# - Return a boolean (True or False) stating if we `can_fulfill` the order
 #
 # > **Using Previous Functions**
 # >
@@ -387,14 +386,14 @@ print(f"Function len(): {len(morning_orders)} drinks")
 # >
 # > **Functions:**
 # >
-# > -   Stand alone: `function_name(arguments)`
-# > -   Example: `len(my_list)`, `sum(numbers)`, `print(text)`
+# > - Stand alone: `function_name(arguments)`
+# > - Example: `len(my_list)`, `sum(numbers)`, `print(text)`
 # >
 # > **Methods:**
 # >
-# > -   Belong to objects: `object.method_name(arguments)`
-# > -   Example: `my_list.append(item)`, `my_list.remove(item)`,
-# >     `my_list.clear()`
+# > - Belong to objects: `object.method_name(arguments)`
+# > - Example: `my_list.append(item)`, `my_list.remove(item)`,
+# >   `my_list.clear()`
 # >
 # > Think of it this way: - Functions are like Bean Counter tools anyone
 # > can use - Methods are built into the objects themselves
@@ -491,10 +490,10 @@ print(f"Margin: {profit_margin:.1f}%")
 #
 # > **Tuples vs Lists**
 # >
-# > -   **Tuples** use parentheses () and cannot be changed after creation
-# > -   **Lists** use square brackets \[\] and can be modified
-# > -   Use tuples when returning multiple values from functions
-# > -   Use lists when you need to modify the collection
+# > - **Tuples** use parentheses () and cannot be changed after creation
+# > - **Lists** use square brackets \[\] and can be modified
+# > - Use tuples when returning multiple values from functions
+# > - Use lists when you need to modify the collection
 #
 # ## Exercise 5.1 - Daily Sales Analytics
 #
@@ -526,8 +525,8 @@ print("Excellent analytics! You can now track Bean Counter's performance across 
 #
 # Create a function `evaluate_barista_performance` that takes:
 #
-# -   List of drink preparation times (in seconds)
-# -   List of customer ratings (1-5 as integter (customer stars))
+# - List of drink preparation times (in seconds)
+# - List of customer ratings (1-5 as integter (customer stars))
 #
 # Returns a tuple with:
 #
@@ -537,9 +536,9 @@ print("Excellent analytics! You can now track Bean Counter's performance across 
 #
 # Performance levels:
 #
-# -   “excellent”: avg time \< 90 seconds AND rating \>= 4.5
-# -   “good”: avg time \< 120 seconds AND rating \>= 4.0
-# -   “needs_improvement”: otherwise
+# - “excellent”: avg time \< 90 seconds AND rating \>= 4.5
+# - “good”: avg time \< 120 seconds AND rating \>= 4.0
+# - “needs_improvement”: otherwise
 #
 # > **Tip**
 # >
@@ -580,32 +579,32 @@ print("Great job! You can now evaluate and coach baristas across all Bean Counte
 #
 # **You’ve learned:**
 #
-# -   **Functions** - Reusable code blocks that standardize operations
-# -   **Parameters & Return** - How to pass data in and get results back
-# -   **Business Logic** - Adding smart decision-making to functions
-# -   **Functions Calling Functions** - Building complex operations from
-#     simple parts
-# -   **Methods vs Functions** - Understanding the difference and when to
-#     use each
-# -   **Tuples** - Returning multiple values from a single function
+# - **Functions** - Reusable code blocks that standardize operations
+# - **Parameters & Return** - How to pass data in and get results back
+# - **Business Logic** - Adding smart decision-making to functions
+# - **Functions Calling Functions** - Building complex operations from
+#   simple parts
+# - **Methods vs Functions** - Understanding the difference and when to
+#   use each
+# - **Tuples** - Returning multiple values from a single function
 #
 # **Your Bean Counter standardization system can now:**
 #
-# -   Calculate consistent prices across all locations
-# -   Apply discounts fairly and automatically
-# -   Check quality standards for coffee beans
-# -   Validate orders before processing
-# -   Analyze daily performance metrics
-# -   Evaluate barista performance objectively
+# - Calculate consistent prices across all locations
+# - Apply discounts fairly and automatically
+# - Check quality standards for coffee beans
+# - Validate orders before processing
+# - Analyze daily performance metrics
+# - Evaluate barista performance objectively
 #
 # **Remember:**
 #
-# -   Use `def` to create functions with descriptive names
-# -   Functions make code reusable - write once, use many times
-# -   Parameters let functions work with different data
-# -   `return` sends results back for other code to use
-# -   Methods belong to objects (with dots), functions stand alone
-# -   Tuples let you return multiple values at once
+# - Use `def` to create functions with descriptive names
+# - Functions make code reusable - write once, use many times
+# - Parameters let functions work with different data
+# - `return` sends results back for other code to use
+# - Methods belong to objects (with dots), functions stand alone
+# - Tuples let you return multiple values at once
 #
 # **What’s Next:** The CEO is impressed with your work! In the next
 # tutorial, you’ll be promoted to **Regional Manager**, where you’ll use

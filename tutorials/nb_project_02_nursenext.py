@@ -22,10 +22,10 @@
 #
 # ## Meet Your Client
 #
-# -   **Industry:** Healthcare
-# -   **Client Contact:** Dr. Robin Torres, Chief Operating Officer
-# -   **Facility:** Medium-sized hospital with 3 departments
-# -   **Staff:** 20 nurses, 50 beds, 24/7 operations
+# - **Industry:** Healthcare
+# - **Client Contact:** Dr. Robin Torres, Chief Operating Officer
+# - **Facility:** Medium-sized hospital with 3 departments
+# - **Staff:** 20 nurses, 50 beds, 24/7 operations
 #
 # ## The COO’s Challenge
 #
@@ -36,11 +36,11 @@
 #
 # *The situation is unsustainable:*
 #
-# -   *Massive overtime costs*
-# -   *25% sick leave rate because nurses are exhausted*
-# -   *High turnover, we lose 3-4 experienced nurses annually*
-# -   *Constant complaints about unfair weekend distribution*
-# -   *Last month, 2 nurses quit citing ‘burnout and unfair scheduling’*
+# - *Massive overtime costs*
+# - *25% sick leave rate because nurses are exhausted*
+# - *High turnover, we lose 3-4 experienced nurses annually*
+# - *Constant complaints about unfair weekend distribution*
+# - *Last month, 2 nurses quit citing ‘burnout and unfair scheduling’*
 #
 # *The manual process is killing us. I try to be fair, but with 20 nurses,
 # 3 departments, different skill levels, shift preferences, and labor
@@ -63,25 +63,25 @@
 #
 # **Departments:**
 #
-# -   **Emergency Department (ED):** High-intensity, requires experienced
-#     nurses
-# -   **Medical-Surgical (Med-Surg):** General care, moderate intensity
-# -   **Intensive Care Unit (ICU):** Critical patients, highest skill
-#     requirements
+# - **Emergency Department (ED):** High-intensity, requires experienced
+#   nurses
+# - **Medical-Surgical (Med-Surg):** General care, moderate intensity
+# - **Intensive Care Unit (ICU):** Critical patients, highest skill
+#   requirements
 #
 # **Staffing Model:**
 #
 # NurseNext uses a modern **hybrid staffing model**:
 #
-# -   **Department Specialists (13 nurses):** Core staff assigned to
-#     specific departments
-#     -   4 ED specialists, 5 Med-Surg specialists, 4 ICU specialists
-#     -   Deep expertise in their department’s specialized care
-#     -   Only work in their assigned department
-# -   **Flexible Float Pool (7 nurses):** Cross-trained resource nurses
-#     -   Can work in **any** department (ED, Med-Surg, or ICU)
-#     -   Provide flexibility for workload balancing across departments
-#     -   Essential for covering peak demand and sick calls
+# - **Department Specialists (13 nurses):** Core staff assigned to
+#   specific departments
+#   - 4 ED specialists, 5 Med-Surg specialists, 4 ICU specialists
+#   - Deep expertise in their department’s specialized care
+#   - Only work in their assigned department
+# - **Flexible Float Pool (7 nurses):** Cross-trained resource nurses
+#   - Can work in **any** department (ED, Med-Surg, or ICU)
+#   - Provide flexibility for workload balancing across departments
+#   - Essential for covering peak demand and sick calls
 #
 # This creates an interesting **resource allocation challenge**: How
 # should flexible nurses be distributed across departments to minimize
@@ -89,21 +89,21 @@
 #
 # **Shifts (Each 8 hours):**
 #
-# -   **Morning (7:00-15:00):** Highest patient activity
-# -   **Evening (15:00-23:00):** Moderate activity
-# -   **Night (23:00-7:00):** Lower activity but critical monitoring
+# - **Morning (7:00-15:00):** Highest patient activity
+# - **Evening (15:00-23:00):** Moderate activity
+# - **Night (23:00-7:00):** Lower activity but critical monitoring
 #
 # **Scheduling Horizon:** 1 week (21 shifts total = 7 days × 3 shifts/day)
 #
 # ### Cost Structure
 #
-# -   **Regular wage:** €25/hour (€200 per 8-hour shift)
-# -   **Overtime wage:** €37.50/hour (€300 per overtime shift, 1.5x
-#     multiplier)
-# -   **Weekend premium:** +€50 per weekend shift
-# -   **Night premium:** +€30 per night shift
-# -   **Understaffing penalty:** €500 per understaffed shift (patient
-#     safety risk)
+# - **Regular wage:** €25/hour (€200 per 8-hour shift)
+# - **Overtime wage:** €37.50/hour (€300 per overtime shift, 1.5x
+#   multiplier)
+# - **Weekend premium:** +€50 per weekend shift
+# - **Night premium:** +€30 per night shift
+# - **Understaffing penalty:** €500 per understaffed shift (patient safety
+#   risk)
 #
 # ### Labor Law Constraints
 #
@@ -126,11 +126,10 @@
 #
 # Nurses’ union has negotiated fairness requirements:
 #
-# -   Weekend shifts distributed equally across nurses
-# -   Night shifts distributed equally
-# -   Workload (total hours) balanced within ±10%
-# -   No nurse should work significantly more undesirable shifts than
-#     others
+# - Weekend shifts distributed equally across nurses
+# - Night shifts distributed equally
+# - Workload (total hours) balanced within ±10%
+# - No nurse should work significantly more undesirable shifts than others
 #
 # ## The Data
 #
@@ -393,16 +392,16 @@ print("YOU must implement the full logic!")
 #
 # Your notebook should include:
 #
-# -   **Data exploration:** Insights about current staffing patterns and
-#     constraints
-# -   **Algorithm implementation:** Your scheduling approach
-#     (construction + improvement)
-# -   **Results:** Complete one-week schedule with all assignments
-# -   **Fairness analysis:** Distribution of weekends, nights, workload
-#     across nurses
-# -   **Cost analysis:** Total cost and breakdown
-# -   **Robustness testing:** What-if analysis for 1-2 nurses calling in
-#     sick
+# - **Data exploration:** Insights about current staffing patterns and
+#   constraints
+# - **Algorithm implementation:** Your scheduling approach (construction +
+#   improvement)
+# - **Results:** Complete one-week schedule with all assignments
+# - **Fairness analysis:** Distribution of weekends, nights, workload
+#   across nurses
+# - **Cost analysis:** Total cost and breakdown
+# - **Robustness testing:** What-if analysis for 1-2 nurses calling in
+#   sick
 #
 # > **Note**
 # >
@@ -413,12 +412,12 @@ print("YOU must implement the full logic!")
 #
 # ### 2. Presentation
 #
-# -   **Problem understanding:** Dr. Torres’s challenges in your own words
-# -   **Your approach:**: Algorithm choice, how you handled constraints
-#     and fairness
-# -   **Results:** Schedule visualization, cost savings, fairness metrics
-# -   **Business impact:** Recommendations for NurseNext, implementation
-#     plan
+# - **Problem understanding:** Dr. Torres’s challenges in your own words
+# - **Your approach:**: Algorithm choice, how you handled constraints and
+#   fairness
+# - **Results:** Schedule visualization, cost savings, fairness metrics
+# - **Business impact:** Recommendations for NurseNext, implementation
+#   plan
 #
 # > **Note**
 # >
@@ -427,15 +426,14 @@ print("YOU must implement the full logic!")
 #
 # ### 3. Key Metrics to Report
 #
-# -   Total weekly cost
-# -   Overtime cost reduction vs. simple greedy solution
-# -   Fairness metrics:
-#     -   Weekend distribution (mean, std, min, max)
-#     -   Night shift distribution
-#     -   Total shifts per nurse
-# -   Constraint compliance (labor law violations: should ideally be
-#     ZERO!)
-# -   Robustness: Impact of 1-2 sick nurses
+# - Total weekly cost
+# - Overtime cost reduction vs. simple greedy solution
+# - Fairness metrics:
+#   - Weekend distribution (mean, std, min, max)
+#   - Night shift distribution
+#   - Total shifts per nurse
+# - Constraint compliance (labor law violations: should ideally be ZERO!)
+# - Robustness: Impact of 1-2 sick nurses
 #
 # ## Constraints and Requirements
 #
@@ -453,18 +451,18 @@ print("YOU must implement the full logic!")
 # > 5.  **Minimum rest:** At least 11 hours between shifts!
 # > 6.  **Department qualification:** Nurses only work in departments
 # >     they’re qualified for
-# >     -   **Specialists:** Can only work in their assigned department
-# >         (check `departments_qualified`)
-# >     -   **Flexible nurses:** Can work in any department (ED, Med-Surg,
-# >         or ICU)
+# >     - **Specialists:** Can only work in their assigned department
+# >       (check `departments_qualified`)
+# >     - **Flexible nurses:** Can work in any department (ED, Med-Surg,
+# >       or ICU)
 # > 7.  **Night shift eligibility:** Only nurses with
 # >     `can_work_night=True` on night shifts
 # > 8.  **Weekend monthly limit:** No nurse exceeds 2 weekend days per
 # >     month
-# >     -   Check `weekend_days_worked_this_month` field (shows days
-# >         already worked in Weeks 1-2)
-# >     -   If a nurse has already worked 2 weekend days, they **cannot**
-# >         be assigned any weekend shifts this week
+# >     - Check `weekend_days_worked_this_month` field (shows days already
+# >       worked in Weeks 1-2)
+# >     - If a nurse has already worked 2 weekend days, they **cannot** be
+# >       assigned any weekend shifts this week
 # >
 # > **Soft Constraints (Optimize for Fairness)**
 # >
@@ -493,34 +491,33 @@ print("YOU must implement the full logic!")
 #
 # ## Common Pitfalls to Avoid
 #
-# -   **Ignoring labor laws:** Legal violations = instant failure in real
-#     world!
-# -   **Unfair weekend distribution:** This is nurses’ #1 complaint, track
-#     it carefully!
-# -   **Not checking 11-hour rest:** Evening→Morning violates rest
-#     requirements
-# -   **Forgetting skill requirements:** ICU night needs 2 Senior/Expert
-#     nurses!
-# -   **Over-optimization:** A good, fair schedule beats a “perfect” but
-#     unfair one
-# -   **No robustness testing:** Real hospitals have sick calls every
-#     week!
-# -   **Poor visualization:** Make the schedule easy to read for nurses!
+# - **Ignoring labor laws:** Legal violations = instant failure in real
+#   world!
+# - **Unfair weekend distribution:** This is nurses’ #1 complaint, track
+#   it carefully!
+# - **Not checking 11-hour rest:** Evening→Morning violates rest
+#   requirements
+# - **Forgetting skill requirements:** ICU night needs 2 Senior/Expert
+#   nurses!
+# - **Over-optimization:** A good, fair schedule beats a “perfect” but
+#   unfair one
+# - **No robustness testing:** Real hospitals have sick calls every week!
+# - **Poor visualization:** Make the schedule easy to read for nurses!
 #
 # ## Data Access
 #
 # All data is provided in this notebook:
 #
-# -   `nurses_df`: DataFrame with 20 nurses and their attributes
-# -   `shift_requirements`: Dict with staffing requirements by department
-#     and shift
-# -   `schedule_template_df`: Week structure (20 shifts)
-# -   Helper templates: `validate_schedule()`, `calculate_schedule_cost()`
+# - `nurses_df`: DataFrame with 20 nurses and their attributes
+# - `shift_requirements`: Dict with staffing requirements by department
+#   and shift
+# - `schedule_template_df`: Week structure (20 shifts)
+# - Helper templates: `validate_schedule()`, `calculate_schedule_cost()`
 #
 # **You must implement the full scheduling algorithm and constraint
 # checking logic!**
 #
 # ## Deadline
 #
-# -   **Notebook submission & Presentation:** Lecture 12
-# -   **Good luck, consultants!**
+# - **Notebook submission & Presentation:** Lecture 12
+# - **Good luck, consultants!**
