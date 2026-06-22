@@ -25,18 +25,18 @@ Write clear descriptions of what you want:
 
 > **Tip**
 >
-> -   **Be specific** in your instructions
-> -   **Review** generated code
-> -   **Test the code** as it might use old syntax
-> -   **Iterate** for better results
-> -   **Force To-Tos** so everything is completed
+> - **Be specific** in your instructions
+> - **Review** generated code
+> - **Test the code** as it might use old syntax
+> - **Iterate** for better results
+> - **Force To-Tos** so everything is completed
 
 ## Watch Out For
 
--   **Deprecated methods**: `plt.subplot()` vs `plt.subplots()`
--   **Missing imports**: Always verify imports are included
--   **Wrong assumptions**: Might guess your data structure incorrectly
--   **Over-complexity**: Very often suggests unnecessary features
+- **Deprecated methods**: `plt.subplot()` vs `plt.subplots()`
+- **Missing imports**: Always verify imports are included
+- **Wrong assumptions**: Might guess your data structure incorrectly
+- **Over-complexity**: Very often suggests unnecessary features
 
 . . .
 
@@ -62,24 +62,24 @@ Write clear descriptions of what you want:
 
 **We'll combine everything you've learned:**
 
--   NumPy for random number generation
--   Visualization for showing probability distributions
+- NumPy for random number generation
+- Visualization for showing probability distributions
 
 . . .
 
 **Real applications:**
 
--   Predict project completion times
--   Estimate financial risks
--   Make decisions under uncertainty
+- Predict project completion times
+- Estimate financial risks
+- Make decisions under uncertainty
 
 ## The End
 
 <span class="highlight">That's it for today!</span> **Make sure you:**
 
--   [ ] Have completed all the notebooks
--   [ ] Check whether you could follow so far
--   [ ] Set up Copilot
+- [ ] Have completed all the notebooks
+- [ ] Check whether you could follow so far
+- [ ] Set up Copilot
 
 . . .
 
@@ -93,13 +93,13 @@ Write clear descriptions of what you want:
 
 ## Interesting Literature on Algorithms
 
--   Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^1]
--   Ferguson, T.S. (1989) 'Who solved the secretary problem?', Statistical Science, 4(3). doi:10.1214/ss/1177012493.
+- Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^1]
+- Ferguson, T.S. (1989) 'Who solved the secretary problem?', Statistical Science, 4(3). doi:10.1214/ss/1177012493.
 
 ## Books on Programming
 
--   Downey, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O'Reilly. [Here](https://greenteapress.com/wp/think-python-3rd-edition/)
--   Elter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.
+- Downey, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O'Reilly. [Here](https://greenteapress.com/wp/think-python-3rd-edition/)
+- Elter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.
 
 . . .
 

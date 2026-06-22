@@ -6,10 +6,10 @@ subtitle: Management Science
 
 ## Assignment Overview
 
--   **Due:** 30.11.2025
--   **Weight:** 30% of final grade
--   **Expected Time:** 5-7 hours
--   **Work:** Groups
+- **Due:** 30.11.2025
+- **Weight:** 30% of final grade
+- **Expected Time:** 5-7 hours
+- **Work:** Groups
 
 Your consulting firm has landed a major contract with **CityExpress**, a rapidly growing local delivery company. The CEO is concerned about rising operational costs and worker turnover. Your team has been tasked with:
 
@@ -122,14 +122,14 @@ Use the **nearest neighbor heuristic** to create a baseline route.
 
 **The approach:**
 
--   Start at the depot
--   At each step, visit the nearest unvisited customer
--   Return to depot when all customers are visited
+- Start at the depot
+- At each step, visit the nearest unvisited customer
+- Return to depot when all customers are visited
 
 **Your deliverable:**
 
--   Implement functions to calculate distances and build the route
--   Print the route and its total distance
+- Implement functions to calculate distances and build the route
+- Print the route and its total distance
 
 > **Tip**
 >
@@ -163,9 +163,9 @@ The algorithm removes two edges from your route and reconnects them in a differe
 
 **Your deliverable:**
 
--   Implement 2-opt improvement
--   Show the improved route and distance
--   Report how many iterations it took to converge
+- Implement 2-opt improvement
+- Show the improved route and distance
+- Report how many iterations it took to converge
 
 > **Important**
 >
@@ -183,14 +183,14 @@ The CEO wants to see the difference visually and understand the cost savings.
 **Your deliverable:**
 
 1.  **Visualization**: Plot both routes (before and after optimization) showing:
-    -   Customer locations
-    -   Route paths
-    -   Clear labels for depot and customers
+    - Customer locations
+    - Route paths
+    - Clear labels for depot and customers
 2.  **Business metrics**:
-    -   Original distance vs. improved distance
-    -   Percentage improvement
-    -   Cost savings per delivery (assume €2/km fuel cost)
-    -   Projected monthly savings if applied to all 50 daily routes
+    - Original distance vs. improved distance
+    - Percentage improvement
+    - Cost savings per delivery (assume €2/km fuel cost)
+    - Projected monthly savings if applied to all 50 daily routes
 
 ``` python
 # Create visualizations and calculate business impact
@@ -303,11 +303,11 @@ print("=" * 70)
 >
 > Example: `[0, 3, 1, 13, 2, 5, ...]` means:
 >
-> -   Worker 0 → shift 0 (Monday-Morning)
-> -   Worker 1 → shift 3 (Tuesday-Evening)
-> -   Worker 2 → shift 1 (Monday-Evening)
-> -   Worker 3 → shift 13 (Sunday-Evening)
-> -   etc.
+> - Worker 0 → shift 0 (Monday-Morning)
+> - Worker 1 → shift 3 (Tuesday-Evening)
+> - Worker 2 → shift 1 (Monday-Evening)
+> - Worker 3 → shift 13 (Sunday-Evening)
+> - etc.
 
 ### Task 1: Design a Greedy Assignment Strategy (15%)
 
@@ -315,18 +315,18 @@ Remember **greedy heuristics** from Lecture 6 (SPT, EDD)? Design your own greedy
 
 **Think about:**
 
--   SPT prioritized shortest jobs
--   EDD prioritized earliest deadlines
--   What should YOU prioritize? Worker flexibility? Number of preferences? Something else?
+- SPT prioritized shortest jobs
+- EDD prioritized earliest deadlines
+- What should YOU prioritize? Worker flexibility? Number of preferences? Something else?
 
 **Your deliverable:**
 
 1.  Implement a function that creates a valid assignment using YOUR greedy strategy
 2.  Print the assignment (who gets which shift)
 3.  Write 3-4 sentences explaining:
-    -   What attribute you chose to prioritize
-    -   Why this makes sense
-    -   How it relates to scheduling heuristics from Lecture 6
+    - What attribute you chose to prioritize
+    - Why this makes sense
+    - How it relates to scheduling heuristics from Lecture 6
 
 ``` python
 # Implement your greedy assignment strategy
@@ -349,17 +349,17 @@ You need a way to measure how "good" an assignment is. Design a **satisfaction s
 
 **Design questions:**
 
--   Should 1st choice be worth more than 2nd choice? How much more?
--   What if a worker gets a shift they didn't list?
--   Should some workers count more than others?
+- Should 1st choice be worth more than 2nd choice? How much more?
+- What if a worker gets a shift they didn't list?
+- Should some workers count more than others?
 
 **Your deliverable:**
 
 1.  Implement a satisfaction calculation function
 2.  Calculate the satisfaction score for your greedy assignment
 3.  Write 2-3 sentences explaining:
-    -   Your scoring system design
-    -   Why you chose this approach
+    - Your scoring system design
+    - Why you chose this approach
 
 ``` python
 # Implement satisfaction calculation
@@ -380,9 +380,9 @@ Your greedy solution is probably not optimal. Use **local search** (like 2-opt f
 
 **The approach:**
 
--   Try swapping shifts between pairs of workers
--   If a swap improves satisfaction, keep it
--   Repeat until no improvement is found
+- Try swapping shifts between pairs of workers
+- If a swap improves satisfaction, keep it
+- Repeat until no improvement is found
 
 **Your deliverable:**
 
@@ -390,9 +390,9 @@ Your greedy solution is probably not optimal. Use **local search** (like 2-opt f
 2.  Show before/after satisfaction scores
 3.  Create a visualization comparing the solutions (table or chart)
 4.  Write 3-4 sentences explaining:
-    -   How much you improved the greedy solution
-    -   Whether you think you found the optimal solution
-    -   What limitations local search might have
+    - How much you improved the greedy solution
+    - Whether you think you found the optimal solution
+    - What limitations local search might have
 
 ``` python
 # Implement local search improvement
@@ -459,17 +459,17 @@ quantitative analysis above.]
 
 ## Submission Checklist
 
--   [ ] All code cells run without errors
--   [ ] Part A: Routes visualized and business impact calculated
--   [ ] Part B: All three methods implemented (greedy, evaluation, local search)
--   [ ] All written explanations completed with business context
--   [ ] Code is clean and understandable
--   [ ] Group member names listed at top
+- [ ] All code cells run without errors
+- [ ] Part A: Routes visualized and business impact calculated
+- [ ] Part B: All three methods implemented (greedy, evaluation, local search)
+- [ ] All written explanations completed with business context
+- [ ] Code is clean and understandable
+- [ ] Group member names listed at top
 
 ## Tips
 
--   **Use AI tools** to help you understand concepts and write code, but make sure YOU understand the logic
--   **Start simple** - get a basic version working before adding complexity
--   **Test incrementally** - don't write all functions at once
--   **Experiment** - there's no single "correct" greedy strategy or scoring system
--   **Think like a consultant** - your audience is business stakeholders, not just programmers
+- **Use AI tools** to help you understand concepts and write code, but make sure YOU understand the logic
+- **Start simple** - get a basic version working before adding complexity
+- **Test incrementally** - don't write all functions at once
+- **Experiment** - there's no single "correct" greedy strategy or scoring system
+- **Think like a consultant** - your audience is business stakeholders, not just programmers

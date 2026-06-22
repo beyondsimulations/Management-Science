@@ -23,10 +23,10 @@ format:
 
 <span class="highlight">Artisan Bakery's daily logistics puzzle:</span>
 
--   **16 Cafés:** Each expecting fresh bread by 8:00
--   **One Van:** Unlimited capacity, must visit all locations
--   **Time Windows:** 3 cafés open early (6:30) and need priority
--   **Current Problem:** Driver uses "gut feeling" for routing
+- **16 Cafés:** Each expecting fresh bread by 8:00
+- **One Van:** Unlimited capacity, must visit all locations
+- **Time Windows:** 3 cafés open early (6:30) and need priority
+- **Current Problem:** Driver uses "gut feeling" for routing
 
 . . .
 
@@ -38,9 +38,9 @@ format:
 
 <span class="highlight">Last week we learned greedy algorithms for scheduling:</span>
 
--   **SPT:** Process shortest jobs first
--   **EDD:** Process by earliest due date
--   **Fast & Simple:** Made quick decisions, no looking back
+- **SPT:** Process shortest jobs first
+- **EDD:** Process by earliest due date
+- **Fast & Simple:** Made quick decisions, no looking back
 
 . . .
 
@@ -70,11 +70,11 @@ format:
 
 **If your computer checks 1 million routes per second:**
 
--   4 cafés: 4!/2 = 12 tours → 0.000012 seconds ✓
--   8 cafés: 8!/2 = 20,160 tours → 0.02 seconds ✓
--   12 cafés: 12!/2 = 239,500,800 tours → 4 minutes ~
--   16 cafés: 16!/2 = 10,461,394,944,000 tours → 4 months! ✗
--   20 cafés: 20!/2 → 38,573 years! ✗
+- 4 cafés: 4!/2 = 12 tours → 0.000012 seconds ✓
+- 8 cafés: 8!/2 = 20,160 tours → 0.02 seconds ✓
+- 12 cafés: 12!/2 = 239,500,800 tours → 4 minutes ~
+- 16 cafés: 16!/2 = 10,461,394,944,000 tours → 4 months! ✗
+- 20 cafés: 20!/2 → 38,573 years! ✗
 
 . . .
 
@@ -86,12 +86,12 @@ format:
 
 <span class="highlight">Why buying a faster computer won't help:</span>
 
--   **P:** Tasks that can be solved in polynomial time
-    -   Like sorting a spreadsheet or calculating payroll
-    -   These are safe, predictable, and easy to automate
--   **NP:** Easy to check, hard to solve
-    -   Analogy: easy to check if a specific password works
-    -   Very hard to guess a password by trying every combination!
+- **P:** Tasks that can be solved in polynomial time
+  - Like sorting a spreadsheet or calculating payroll
+  - These are safe, predictable, and easy to automate
+- **NP:** Easy to check, hard to solve
+  - Analogy: easy to check if a specific password works
+  - Very hard to guess a password by trying every combination!
 
 . . .
 
@@ -105,28 +105,28 @@ format:
 
 <span class="highlight">A graph $G = (V, E)$ consists of:</span>
 
--   **Vertices (V):** The nodes or points (bakery + cafés)
--   **Edges (E):** The connections between vertices (roads)
--   **Weight Function:** $w$ assigns costs to edges (distances)
+- **Vertices (V):** The nodes or points (bakery + cafés)
+- **Edges (E):** The connections between vertices (roads)
+- **Weight Function:** $w$ assigns costs to edges (distances)
 
 . . .
 
 **For our bakery problem:**
 
--   $|V| = 17$ (1 bakery + 17 cafés)
--   $|E| = \binom{17}{2} = 136$ possible connections
--   Each edge $(i,j)$ has weight $w_{ij}$ = distance between $i$ and $j$
+- $|V| = 17$ (1 bakery + 17 cafés)
+- $|E| = \binom{17}{2} = 136$ possible connections
+- Each edge $(i,j)$ has weight $w_{ij}$ = distance between $i$ and $j$
 
 ## Complete vs. Sparse Graphs
 
 <span class="highlight">Different graph structures lead to different complexities:</span>
 
--   **Complete Graph:** All vertices connected to each other
-    -   TSP: $(n-1)!/2$ unique tours
-    -   Real roads: Usually complete (drive between any two points)
--   **Sparse Graph:** Limited connections between vertices
-    -   Fewer edges = fewer possible routes
-    -   Examples: Public transit networks, restricted road access
+- **Complete Graph:** All vertices connected to each other
+  - TSP: $(n-1)!/2$ unique tours
+  - Real roads: Usually complete (drive between any two points)
+- **Sparse Graph:** Limited connections between vertices
+  - Fewer edges = fewer possible routes
+  - Examples: Public transit networks, restricted road access
 
 . . .
 
@@ -138,17 +138,17 @@ format:
 
 <span class="highlight">Mathematical foundation of the TSP:</span>
 
--   **Hamiltonian Path:** Visits each vertex exactly once
--   **Hamiltonian Cycle:** Hamiltonian path that returns to start vertex
--   **TSP Tour:** Minimum weight Hamiltonian cycle
+- **Hamiltonian Path:** Visits each vertex exactly once
+- **Hamiltonian Cycle:** Hamiltonian path that returns to start vertex
+- **TSP Tour:** Minimum weight Hamiltonian cycle
 
 . . .
 
 **Mathematical Definition:**
 A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 
--   Each $v_i \in V$ appears exactly once (except start/end)
--   Total weight: $w(T) = \sum_{i=1}^{n} w_{v_i, v_{i+1}}$ (where $v_{n+1} = v_1$)
+- Each $v_i \in V$ appears exactly once (except start/end)
+- Total weight: $w(T) = \sum_{i=1}^{n} w_{v_i, v_{i+1}}$ (where $v_{n+1} = v_1$)
 
 . . .
 
@@ -166,9 +166,9 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 
 **Common Distance Functions:**
 
--   **Euclidean:** $d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}$
--   **Manhattan:** $d(i,j) = |x_i - x_j| + |y_i - y_j|$
--   **Real road distances:** Often violate triangle inequality!
+- **Euclidean:** $d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}$
+- **Manhattan:** $d(i,j) = |x_i - x_j| + |y_i - y_j|$
+- **Real road distances:** Often violate triangle inequality!
 
 # <span class="flow">Greedy Construction</span>
 
@@ -267,9 +267,9 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 
 <span class="highlight">Let's compare all three construction methods:</span>
 
--   **Random:** Usually worst - no strategy at all!
--   **Nearest Neighbor:** Fast and decent, but can create long returns
--   **Farthest:** Often best initial solution, builds good "skeleton"
+- **Random:** Usually worst - no strategy at all!
+- **Nearest Neighbor:** Fast and decent, but can create long returns
+- **Farthest:** Often best initial solution, builds good "skeleton"
 
 . . .
 
@@ -287,9 +287,9 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 
 <span class="highlight">Often obvious inefficiencies in the resulting routes</span>
 
--   **Crossing paths:** Route crosses over itself
--   **Long return:** Far from bakery at the end
--   **Myopic decisions:** Can't see the "big picture"
+- **Crossing paths:** Route crosses over itself
+- **Long return:** Far from bakery at the end
+- **Myopic decisions:** Can't see the "big picture"
 
 . . .
 
@@ -318,11 +318,11 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 
 <span class="highlight">Think of the solution space as a landscape:</span>
 
--   **Each point:** A different route through the cafés
--   **Height:** The total distance of that route (lower is better)
--   **Neighbors:** Routes that differ by small change
--   **Local optimum:** Best route among nearby alternatives
--   **Global optimum:** The absolute best route overall
+- **Each point:** A different route through the cafés
+- **Height:** The total distance of that route (lower is better)
+- **Neighbors:** Routes that differ by small change
+- **Local optimum:** Best route among nearby alternatives
+- **Global optimum:** The absolute best route overall
 
 ## Search Strategy
 
@@ -469,23 +469,23 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 **2-opt**
 
--   Removes 2 edges
--   1 way to reconnect
--   n² combinations
--   Fast, good results
+- Removes 2 edges
+- 1 way to reconnect
+- n² combinations
+- Fast, good results
 
 **3-opt**
 
--   Removes 3 edges
--   7 ways to reconnect
--   n³ combinations
--   Better but slower
+- Removes 3 edges
+- 7 ways to reconnect
+- n³ combinations
+- Better but slower
 
 **Or-opt**
 
--   Moves 1-3 nodes
--   Good for time windows
--   Specialized variant
+- Moves 1-3 nodes
+- Good for time windows
+- Specialized variant
 
 . . .
 
@@ -503,15 +503,15 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 **Convergence:**
 
--   Algorithm stops when no neighboring solution is better
+- Algorithm stops when no neighboring solution is better
 
 . . .
 
 **The Local Optimum Problem:**
 
--   Algorithm can only "see" neighboring solutions
--   Might miss better solutions that require multiple changes
--   Like being stuck on a small hill when there's a mountain nearby
+- Algorithm can only "see" neighboring solutions
+- Might miss better solutions that require multiple changes
+- Like being stuck on a small hill when there's a mountain nearby
 
 . . .
 
@@ -523,13 +523,13 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 <span class="highlight">Imagine you're a hiker dropped in foggy mountains at night...</span>
 
--   **Your Mission:** Find the highest peak (global optimum)
--   **Your Tool:** An altimeter (objective function)
--   **Your Vision:** Only the ground at your feet (local neighborhood)
+- **Your Mission:** Find the highest peak (global optimum)
+- **Your Tool:** An altimeter (objective function)
+- **Your Vision:** Only the ground at your feet (local neighborhood)
 
 . . .
 
--   **The Greedy Strategy:** Always step uphill
+- **The Greedy Strategy:** Always step uphill
 
 . . .
 
@@ -565,11 +565,11 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 <span class="highlight">Depending on the problem: Multi-Start Strategy!</span>
 
--   Most local minima are much worse than the global optimum
--   The global minimum is sometimes isolated and hard to reach
--   Starting point dramatically affects final solution quality
--   Thus, start with different random solutions
--   Use different initial heuristics
+- Most local minima are much worse than the global optimum
+- The global minimum is sometimes isolated and hard to reach
+- Starting point dramatically affects final solution quality
+- Thus, start with different random solutions
+- Use different initial heuristics
 
 . . .
 
@@ -605,10 +605,10 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 **Artisan Bakery's Morning Schedule:**
 
--   **Bakery opens:** 5:00 (van departs)
--   **Early Birds (3 cafés):** Must receive by 6:30
-    -   Café Europa, Sunrise Bistro, Morning Glory
--   **Standard (13 cafés):** Must receive by 8:00
+- **Bakery opens:** 5:00 (van departs)
+- **Early Birds (3 cafés):** Must receive by 6:30
+  - Café Europa, Sunrise Bistro, Morning Glory
+- **Standard (13 cafés):** Must receive by 8:00
 
 . . .
 
@@ -626,9 +626,9 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 **Key Concepts:**
 
--   **Earliest time:** When café opens
--   **Latest time:** Delivery deadline
--   **Service time:** Time to unload
+- **Earliest time:** When café opens
+- **Latest time:** Delivery deadline
+- **Service time:** Time to unload
 
 . . .
 
@@ -636,8 +636,8 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 . . .
 
--   **Feasible route:** All deadlines met
--   **Infeasible route:** At least one deadline missed (even if shortest!)
+- **Feasible route:** All deadlines met
+- **Infeasible route:** At least one deadline missed (even if shortest!)
 
 ## Time Windows: NN Modification
 
@@ -760,9 +760,9 @@ new_route = current_route.copy()  # Don't modify original
 
 **Advanced Techniques Coming:**
 
--   **Simulated Annealing:** Sometimes accept worse moves
--   **Genetic Algorithms:** Combine good routes to make better ones
--   **Tabu Search:** Remember where you've been to avoid circles
+- **Simulated Annealing:** Sometimes accept worse moves
+- **Genetic Algorithms:** Combine good routes to make better ones
+- **Tabu Search:** Remember where you've been to avoid circles
 
 . . .
 
@@ -774,13 +774,13 @@ new_route = current_route.copy()  # Don't modify original
 
 <span class="highlight">Key Takeaways:</span>
 
--   TSP is computationally hard (factorial growth)
--   Local search is a universal framework (4 pillars)
--   Greedy construction gives fast initial solutions
--   2-opt improves solutions iteratively
--   Multi-start helps escape local optima
--   Real constraints (time windows) add complexity
--   Two-phase approach: Build then improve!
+- TSP is computationally hard (factorial growth)
+- Local search is a universal framework (4 pillars)
+- Greedy construction gives fast initial solutions
+- 2-opt improves solutions iteratively
+- Multi-start helps escape local optima
+- Real constraints (time windows) add complexity
+- Two-phase approach: Build then improve!
 
 ## Break!
 

@@ -16,9 +16,9 @@ Welcome to your final CEO challenge at Bean Counter!
 
 Tomorrow morning, you're presenting Bean Counter's annual performance to the board of directors and potential investors. You have:
 
--   Massive datasets analyzed with NumPy
--   Complex reports created with Pandas
--   Incredible insights about the business
+- Massive datasets analyzed with NumPy
+- Complex reports created with Pandas
+- Incredible insights about the business
 
 **The Problem:** Numbers alone don't convince boards. They need to SEE the story! A table with 1000 rows won't inspire investment, but a compelling chart will.
 
@@ -73,10 +73,10 @@ plt.show()
 >
 > As CEO, bar charts will be your most-used visualization:
 >
-> -   Compare stores, products, or departments
-> -   Show rankings clearly
-> -   Easy for board members to understand
-> -   Perfect for "top 10" or "bottom 5" analyses
+> - Compare stores, products, or departments
+> - Show rankings clearly
+> - Easy for board members to understand
+> - Perfect for "top 10" or "bottom 5" analyses
 
 ## Exercise 1.1 - Product Performance Bar Chart
 
@@ -245,17 +245,17 @@ plt.show()
 
 Create an integrated dashboard combining NumPy simulation with Pandas analysis and visualization. Create revenue projections for the company:
 
--   Start at \$6M in January
--   Grow approximately 2% each month
--   Add random variation (±25%) to simulate market fluctuations
+- Start at \$6M in January
+- Grow approximately 2% each month
+- Add random variation (±25%) to simulate market fluctuations
 
 > **Tip**
 >
 > To create realistic monthly growth:
 >
-> -   Start with base revenue of 6.0M
-> -   Each month, apply 2% growth: `revenue = previous_revenue * 1.02`
-> -   Add random variation: multiply by `np.random.uniform(0.75, 1.25)`
+> - Start with base revenue of 6.0M
+> - Each month, apply 2% growth: `revenue = previous_revenue * 1.02`
+> - Add random variation: multiply by `np.random.uniform(0.75, 1.25)`
 
 ``` python
 import pandas as pd
@@ -293,39 +293,39 @@ current_revenue = 6.0  # Starting revenue in millions
 
 **You've mastered:**
 
--   **Bar Charts** - Comparing performance across stores and products
--   **Line Plots** - Showing growth trends over time
--   **Histograms** - Understanding distributions of key metrics
--   **Integrated Dashboards** - Combining multiple visualizations for comprehensive insights
--   **NumPy + Pandas + Visualization** - The complete data science toolkit
+- **Bar Charts** - Comparing performance across stores and products
+- **Line Plots** - Showing growth trends over time
+- **Histograms** - Understanding distributions of key metrics
+- **Integrated Dashboards** - Combining multiple visualizations for comprehensive insights
+- **NumPy + Pandas + Visualization** - The complete data science toolkit
 
 **Your Bean Counter CEO visualization toolkit enables you to:**
 
--   Present compelling stories to the board of directors
--   Identify trends and patterns at a glance
--   Compare performance across multiple dimensions
--   Make data-driven decisions with confidence
--   Communicate complex insights simply and effectively
+- Present compelling stories to the board of directors
+- Identify trends and patterns at a glance
+- Compare performance across multiple dimensions
+- Make data-driven decisions with confidence
+- Communicate complex insights simply and effectively
 
 **Remember:**
 
--   Bar charts are best for comparisons
--   Line plots show trends over time
--   Histograms reveal distributions
--   Always label your axes and add titles
--   Use colors consistently across related charts
--   Annotations can highlight key insights
+- Bar charts are best for comparisons
+- Line plots show trends over time
+- Histograms reveal distributions
+- Always label your axes and add titles
+- Use colors consistently across related charts
+- Annotations can highlight key insights
 
 **Your Bean Counter Legacy:**
 
 From Barista Trainee to CEO, you've transformed Bean Counter into a data-driven enterprise.
 
--   Standardized operations with functions
--   Managed complex data with dictionaries
--   Optimized decisions with sorting algorithms
--   Processed big data with NumPy's speed
--   Analyzed business metrics with Pandas
--   Communicated insights with powerful visualizations
+- Standardized operations with functions
+- Managed complex data with dictionaries
+- Optimized decisions with sorting algorithms
+- Processed big data with NumPy's speed
+- Analyzed business metrics with Pandas
+- Communicated insights with powerful visualizations
 
 **What's Next:** Armed with these data science foundations, you're ready for the advanced algorithms in upcoming lectures! You'll tackle Monte Carlo simulations, forecasting, scheduling optimization, and more. The skills you've built here - from basic Python to advanced visualization - will be the foundation for solving complex management science problems!
 

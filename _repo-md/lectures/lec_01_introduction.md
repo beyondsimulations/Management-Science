@@ -13,11 +13,11 @@ format:
 
 ## About me
 
--   **Field:** Optimizing and simulating complex systems
--   **Languages:** of choice: Julia, Python and Rust
--   **Interest:** Modelling, Simulations, Machine Learning
--   **Teaching:** OR, Algorithms, and Programming
--   **Contact:** <vlcek@beyondsimulations.com>
+- **Field:** Optimizing and simulating complex systems
+- **Languages:** of choice: Julia, Python and Rust
+- **Interest:** Modelling, Simulations, Machine Learning
+- **Teaching:** OR, Algorithms, and Programming
+- **Contact:** <vlcek@beyondsimulations.com>
 
 . . .
 
@@ -45,12 +45,12 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## Course Outline
 
--   **Part I:** Python Foundation (Lectures 1-3)
-    -   Variables, loops, functions, data science tools
--   **Part II:** Management Science Tools (Lectures 4-9)
-    -   Monte Carlo, Scheduling, Routing, Metaheuristics
--   **Part III:** Consulting Competition (Lectures 10-12)
-    -   Client briefings, development, final presentations
+- **Part I:** Python Foundation (Lectures 1-3)
+  - Variables, loops, functions, data science tools
+- **Part II:** Management Science Tools (Lectures 4-9)
+  - Monte Carlo, Scheduling, Routing, Metaheuristics
+- **Part III:** Consulting Competition (Lectures 10-12)
+  - Client briefings, development, final presentations
 
 . . .
 
@@ -62,11 +62,11 @@ Management science is an interdisciplinary field that applies research-based met
 
 <span class="highlight">Where Algorithms Make Millions</span>
 
--   **Amazon:** Routing algorithms save millions in delivery costs
--   **Uber:** Real-time matching algorithms connect drivers and riders
--   **Hospitals:** Scheduling algorithms optimize shifts and OR usage
--   **Airlines:** Revenue algorithms price tickets dynamically
--   **Manufacturing:** Production scheduling reduces waste and delays
+- **Amazon:** Routing algorithms save millions in delivery costs
+- **Uber:** Real-time matching algorithms connect drivers and riders
+- **Hospitals:** Scheduling algorithms optimize shifts and OR usage
+- **Airlines:** Revenue algorithms price tickets dynamically
+- **Manufacturing:** Production scheduling reduces waste and delays
 
 . . .
 
@@ -76,10 +76,10 @@ Management science is an interdisciplinary field that applies research-based met
 
 <span class="highlight">The Consultant Mindset</span>
 
--   You'll work on **business problems**
--   Learn to **communicate solutions** to non-technical clients
--   Build **practical tools** that solve actual challenges
--   Compete in a **consulting competition** with real scenarios
+- You'll work on **business problems**
+- Learn to **communicate solutions** to non-technical clients
+- Build **practical tools** that solve actual challenges
+- Compete in a **consulting competition** with real scenarios
 
 . . .
 
@@ -89,13 +89,13 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## Course Structure
 
--   **12 lectures** of intensive learning
--   **3 hours per lecture** (with breaks!)
--   **Interactive format:**
-    -   Concepts & Setup
-    -   Hands-on Python notebooks
-    -   Consulting Competition
--   **Final competition:** Apply everything you've learned
+- **12 lectures** of intensive learning
+- **3 hours per lecture** (with breaks!)
+- **Interactive format:**
+  - Concepts & Setup
+  - Hands-on Python notebooks
+  - Consulting Competition
+- **Final competition:** Apply everything you've learned
 
 . . .
 
@@ -105,9 +105,9 @@ Management science is an interdisciplinary field that applies research-based met
 
 **Grade Composition:**
 
--   Course has 100 points, 50 needed to pass
--   2 Assignments: 30 points each
--   Final Consulting Project: 40 points
+- Course has 100 points, 50 needed to pass
+- 2 Assignments: 30 points each
+- Final Consulting Project: 40 points
 
 . . .
 
@@ -119,10 +119,10 @@ Management science is an interdisciplinary field that applies research-based met
 
 <span class="highlight">Assignment Strategy:</span>
 
--   Start with **easy warm-ups** in tutorials
--   Progress to **real-world problems**
--   All assignments have **clear rubrics**
--   Bonus points for **creative solutions**!
+- Start with **easy warm-ups** in tutorials
+- Progress to **real-world problems**
+- All assignments have **clear rubrics**
+- Bonus points for **creative solutions**!
 
 . . .
 
@@ -132,9 +132,9 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## Learning Python
 
--   In my experience, the best way to learn is by **doing**!
--   Here, we will focus on decision algorithms
--   You will start to learn Python by <span class="highlight">doing the tutorials</span>
+- In my experience, the best way to learn is by **doing**!
+- Here, we will focus on decision algorithms
+- You will start to learn Python by <span class="highlight">doing the tutorials</span>
 
 . . .
 
@@ -144,11 +144,11 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## What to Expect
 
--   **No prior programming required** - we start from zero!
--   <span class="highlight">But experience is helpful!</span>
--   **Fast-paced** but with lots of support
--   **Practical focus** - less theory, more doing
--   **Mistakes are welcome** - they're how we learn
+- **No prior programming required** - we start from zero!
+- <span class="highlight">But experience is helpful!</span>
+- **Fast-paced** but with lots of support
+- **Practical focus** - less theory, more doing
+- **Mistakes are welcome** - they're how we learn
 
 . . .
 
@@ -172,18 +172,18 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## Why Python?
 
--   **Origins**: Conceived in late 1980s as a teaching and scripting language
--   **Simple Syntax**: Python's syntax is mostly straightforward and very easy to learn
--   **Versatility**: Used in web development, data analysis, artificial intelligence, and more
--   **Community Support**: A large community of users worldwide and extensive documentation
+- **Origins**: Conceived in late 1980s as a teaching and scripting language
+- **Simple Syntax**: Python's syntax is mostly straightforward and very easy to learn
+- **Versatility**: Used in web development, data analysis, artificial intelligence, and more
+- **Community Support**: A large community of users worldwide and extensive documentation
 
 ## Help from AI
 
--   You are <span class="highlight">allowed to use AI</span> in the course
--   I use it as well (e.g., Claude, ChatGPT, Gemini, ...)
--   These **tools are great** for learning Python!
--   Can help you a lot **to get started** with programming
--   I will also teach you how to use it effectively
+- You are <span class="highlight">allowed to use AI</span> in the course
+- I use it as well (e.g., Claude, ChatGPT, Gemini, ...)
+- These **tools are great** for learning Python!
+- Can help you a lot **to get started** with programming
+- I will also teach you how to use it effectively
 
 . . .
 
@@ -212,9 +212,9 @@ Management science is an interdisciplinary field that applies research-based met
 
 . . .
 
--   You'll fall a few times
--   It feels impossible at first
--   Then suddenly... it clicks!
+- You'll fall a few times
+- It feels impossible at first
+- Then suddenly... it clicks!
 
 . . .
 
@@ -226,18 +226,18 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## What is an IDE?
 
--   Integrated Development Environment `=` application
--   It allows you to write, run and debug code scripts
--   Other IDEs include for example:
-    -   [PyCharm](https://www.jetbrains.com/pycharm/) from JetBrains
-    -   [Zed](https://zed.dev/)
+- Integrated Development Environment `=` application
+- It allows you to write, run and debug code scripts
+- Other IDEs include for example:
+  - [PyCharm](https://www.jetbrains.com/pycharm/) from JetBrains
+  - [Zed](https://zed.dev/)
 
 ## Install VS Code
 
--   Download and install from the [website](https://code.visualstudio.com/)
--   Built for **Windows, Linux and Mac**
--   Install the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) and [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) extension
--   <span class="highlight">Great! First steps are done</span>
+- Download and install from the [website](https://code.visualstudio.com/)
+- Built for **Windows, Linux and Mac**
+- Install the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) and [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) extension
+- <span class="highlight">Great! First steps are done</span>
 
 . . .
 
@@ -248,10 +248,10 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## Installation of Python with `uv`
 
--   We will use `uv` to install and manage Python versions
--   It works on Windows, Mac and Linux
--   It helps us to manage packages and virtual environments
--   Now, we all [go here](../general/uv.qmd) and install `uv` and Python
+- We will use `uv` to install and manage Python versions
+- It works on Windows, Mac and Linux
+- It helps us to manage packages and virtual environments
+- Now, we all [go here](../general/uv.qmd) and install `uv` and Python
 
 . . .
 
@@ -263,11 +263,11 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## Quick Check
 
--   Have you installed `uv` and initialized the project?
--   **Great! Before we continue, check the following:**
-    -   [ ] You have a folder for the course
-    -   [ ] You have initialized `uv` with `uv init` inside the folder
-    -   [ ] You can see a file called `pyproject.toml` in the folder
+- Have you installed `uv` and initialized the project?
+- **Great! Before we continue, check the following:**
+  - [ ] You have a folder for the course
+  - [ ] You have initialized `uv` with `uv init` inside the folder
+  - [ ] You can see a file called `pyproject.toml` in the folder
 
 . . .
 
@@ -277,19 +277,19 @@ Management science is an interdisciplinary field that applies research-based met
 
 ## Using Notebooks
 
--   Now we need to add a kernel to our project
--   Run `uv add --dev ipykernel` from your terminal
--   Now run `uv add jupyter` in the terminal
--   This allows us to use `uv` Python in notebooks
--   <span class="highlight">Done? Perfect. Now we can start!</span>
+- Now we need to add a kernel to our project
+- Run `uv add --dev ipykernel` from your terminal
+- Now run `uv add jupyter` in the terminal
+- This allows us to use `uv` Python in notebooks
+- <span class="highlight">Done? Perfect. Now we can start!</span>
 
 ## Working with Notebooks
 
--   Now you can download the files from the website
--   Just click on one of the sessions and open it
--   Select `Jupyter` on the right side
--   Download and save the files **to your course folder**
--   Open them and select "Open with Jupyter Notebook"
+- Now you can download the files from the website
+- Just click on one of the sessions and open it
+- Select `Jupyter` on the right side
+- Download and save the files **to your course folder**
+- Open them and select "Open with Jupyter Notebook"
 
 . . .
 
@@ -307,9 +307,9 @@ so far?
 
 <span class="highlight">After the break, we'll dive into:</span>
 
--   **Tutorial 1:** Variables and basic data types
--   **Tutorial 2:** Lists and loops
--   **Tutorial 3:** Conditionals and control flow
+- **Tutorial 1:** Variables and basic data types
+- **Tutorial 2:** Lists and loops
+- **Tutorial 3:** Conditionals and control flow
 
 . . .
 
@@ -324,10 +324,10 @@ so far?
 
 **Make sure you have:**
 
--   [ ] VS Code installed and running
--   [ ] Python environment set up with `uv`
--   [ ] Jupyter notebooks working
--   [ ] The tutorial files downloaded
+- [ ] VS Code installed and running
+- [ ] Python environment set up with `uv`
+- [ ] Jupyter notebooks working
+- [ ] The tutorial files downloaded
 
 . . .
 
@@ -339,13 +339,13 @@ so far?
 
 ## Interesting Literature on Algorithms
 
--   Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^2]
--   Ferguson, T.S. (1989) 'Who solved the secretary problem?', Statistical Science, 4(3). doi:10.1214/ss/1177012493.
+- Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^2]
+- Ferguson, T.S. (1989) 'Who solved the secretary problem?', Statistical Science, 4(3). doi:10.1214/ss/1177012493.
 
 ## Books on Programming
 
--   Downey, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O'Reilly. [Here](https://greenteapress.com/wp/think-python-3rd-edition/)
--   Elter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.
+- Downey, A. B. (2024). Think Python: How to think like a computer scientist (Third edition). O'Reilly. [Here](https://greenteapress.com/wp/think-python-3rd-edition/)
+- Elter, S. (2021). Schrödinger programmiert Python: Das etwas andere Fachbuch (1. Auflage). Rheinwerk Verlag.
 
 . . .
 

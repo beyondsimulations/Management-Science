@@ -16,10 +16,10 @@ Welcome back to Bean Counter, CEO! In the lecture, we saw how Monte Carlo simula
 
 **Key Skills for Competition:**
 
--   Simulating uncertain returns
--   Analyzing risk metrics
--   Comparing portfolio combinations
--   Making data-driven recommendations
+- Simulating uncertain returns
+- Analyzing risk metrics
+- Comparing portfolio combinations
+- Making data-driven recommendations
 
 ``` python
 import numpy as np
@@ -312,14 +312,14 @@ print(sample_df.iloc[random_indices][['customers', 'profit']])
 
 > **Key DataFrame Operations for Simulations**
 >
-> -   `df['column'].mean()` - Calculate average
-> -   `df['column'].std()` - Calculate standard deviation
-> -   `df['column'].min()` / `df['column'].max()` - Find extremes
-> -   `(df['column'] < value).mean()` - Calculate probability
-> -   `(df['column'] >= low) & (df['column'] <= high)` - Range conditions
-> -   `df.iloc[i]` - Access row i by position
-> -   `df.iloc[start:end]` - Access rows from start to end
-> -   `df.iloc[[list]]` - Access specific rows by list of indices
+> - `df['column'].mean()` - Calculate average
+> - `df['column'].std()` - Calculate standard deviation
+> - `df['column'].min()` / `df['column'].max()` - Find extremes
+> - `(df['column'] < value).mean()` - Calculate probability
+> - `(df['column'] >= low) & (df['column'] <= high)` - Range conditions
+> - `df.iloc[i]` - Access row i by position
+> - `df.iloc[start:end]` - Access rows from start to end
+> - `df.iloc[[list]]` - Access specific rows by list of indices
 
 ## Exercise 2.1 - Run Multiple Simulations
 
@@ -644,11 +644,11 @@ print(f"\nYour Recommendation: {final_recommendation}")
 
 **Outstanding work, CEO!** You've successfully applied Monte Carlo simulation to Bean Counter's expansion strategy and mastered the key skills needed for the TechVenture competition:
 
--   **Simulating uncertain returns** using probability distributions
--   **Running thousands of scenarios** with Monte Carlo
--   **Calculating risk metrics** (VaR, Expected Shortfall)
--   **Comparing portfolio combinations** systematically
--   **Making data-driven recommendations** with clear justification
+- **Simulating uncertain returns** using probability distributions
+- **Running thousands of scenarios** with Monte Carlo
+- **Calculating risk metrics** (VaR, Expected Shortfall)
+- **Comparing portfolio combinations** systematically
+- **Making data-driven recommendations** with clear justification
 
 When you tackle the TechVenture challenge, apply what you've learned at Bean Counter:
 
@@ -662,9 +662,9 @@ When you tackle the TechVenture challenge, apply what you've learned at Bean Cou
 
 The competition uses:
 
--   **Investment returns** instead of daily profits
--   **Different distributions** (some normal, one uniform)
--   **Larger scale** (€1M investments vs daily operations)
+- **Investment returns** instead of daily profits
+- **Different distributions** (some normal, one uniform)
+- **Larger scale** (€1M investments vs daily operations)
 
 But the approach is identical! Apply what you've learned here.
 

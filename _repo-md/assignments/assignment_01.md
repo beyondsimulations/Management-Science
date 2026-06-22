@@ -6,10 +6,10 @@ subtitle: Management Science
 
 ## Assignment Overview
 
--   **Due:** 23.11.2025
--   **Weight:** 30% of final grade
--   **Expected Time:** 4-6 hours
--   **Work:** Groups
+- **Due:** 23.11.2025
+- **Weight:** 30% of final grade
+- **Expected Time:** 4-6 hours
+- **Work:** Groups
 
 You're a group of junior analysts at a consulting firm. A client needs help with:
 
@@ -53,9 +53,9 @@ Your client is considering investing €100,000 in a new product launch. Based o
 
 **Initial projections:**
 
--   Best case: €180,000 return (20% probability)
--   Most likely: €140,000 return (60% probability)
--   Worst case: €90,000 return (20% probability)
+- Best case: €180,000 return (20% probability)
+- Most likely: €140,000 return (60% probability)
+- Worst case: €90,000 return (20% probability)
 
 ### Task 1: Simple Monte Carlo Simulation (10%)
 
@@ -87,18 +87,18 @@ After presenting your initial analysis, the client mentions they're also conside
 
 **Option A: Original Product Launch (from Task 1)**
 
--   Best case: €180,000 (20% probability)
--   Most likely: €140,000 (60% probability)
--   Worst case: €90,000 (20% probability)
+- Best case: €180,000 (20% probability)
+- Most likely: €140,000 (60% probability)
+- Worst case: €90,000 (20% probability)
 
 **Option B: Established Market Expansion**
 
--   Returns follow a **normal distribution** with mean €140,000 and standard deviation €20,000
+- Returns follow a **normal distribution** with mean €140,000 and standard deviation €20,000
 
 **Option C: High-Risk Startup Partnership**
 
--   **50% chance**: Double your money (€200,000 return)
--   **50% chance**: Lose everything (€0 return)
+- **50% chance**: Double your money (€200,000 return)
+- **50% chance**: Lose everything (€0 return)
 
 > **Note**
 >
@@ -148,9 +148,9 @@ For each investment option (A, B, and C), calculate:
 
 Create visualizations comparing the three investment options:
 
--   Three histograms (or one figure with 3 subplots) showing the distribution of returns
--   Mark the initial investment (€100,000) on each plot
--   Clear labels and titles
+- Three histograms (or one figure with 3 subplots) showing the distribution of returns
+- Mark the initial investment (€100,000) on each plot
+- Clear labels and titles
 
 ``` python
 # Create visualization comparing all three distributions
@@ -298,18 +298,18 @@ After presenting your implementation to the client, they ask: *"Which method sho
 
 **Testing Approach:**
 
--   Split data: **first 32 months for training**, **last 4 months (33-36) for testing**
--   Use **rolling forecasts** on the test period:
-    -   Forecast month 33 using months 1-32
-    -   Forecast month 34 using months 1-33 (add actual month 33 to training)
-    -   Forecast month 35 using months 1-34 (add actual month 34 to training)
-    -   Forecast month 36 using months 1-35 (add actual month 35 to training)
--   Calculate Mean Absolute Error (MAE) for both methods
+- Split data: **first 32 months for training**, **last 4 months (33-36) for testing**
+- Use **rolling forecasts** on the test period:
+  - Forecast month 33 using months 1-32
+  - Forecast month 34 using months 1-33 (add actual month 33 to training)
+  - Forecast month 35 using months 1-34 (add actual month 34 to training)
+  - Forecast month 36 using months 1-35 (add actual month 35 to training)
+- Calculate Mean Absolute Error (MAE) for both methods
 
 **Parameters to use:**
 
--   Moving Average: window = 3
--   Exponential Smoothing: alpha = 0.3
+- Moving Average: window = 3
+- Exponential Smoothing: alpha = 0.3
 
 ``` python
 # Split data: first 32 months for training, last 4 for testing
@@ -414,9 +414,9 @@ will you build it from scratch, use a Python library, or combine approaches?]
 
 Implement your proposed method. You may:
 
--   Build the method from scratch using NumPy/Pandas
--   Use external forecasting libraries (statsmodels, scikit-learn, etc.)
--   Combine multiple approaches
+- Build the method from scratch using NumPy/Pandas
+- Use external forecasting libraries (statsmodels, scikit-learn, etc.)
+- Combine multiple approaches
 
 ``` python
 # Implement your improved forecasting method here
@@ -484,13 +484,13 @@ method for months 37-39, monitor performance, collect more data, etc.]
 
 Before submitting, verify:
 
--   [ ] All code cells run without errors
--   [ ] Group member names filled in at top
--   [ ] All visualizations have clear labels, titles, and legends
--   [ ] Functions include comments explaining logic
+- [ ] All code cells run without errors
+- [ ] Group member names filled in at top
+- [ ] All visualizations have clear labels, titles, and legends
+- [ ] Functions include comments explaining logic
 
 ## Tips
 
--   Use AI tools to help understand concepts and program, but make sure you understand the code
--   Start simple and get something working before optimizing
--   Remember: the goal is good solutions, not perfect ones
+- Use AI tools to help understand concepts and program, but make sure you understand the code
+- Start simple and get something working before optimizing
+- Remember: the goal is good solutions, not perfect ones

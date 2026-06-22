@@ -23,10 +23,10 @@ format:
 
 <span class="highlight">Custom Cycles faces multiple scheduling decisions:</span>
 
--   **Order Sequencing:** Which bike to build first?
--   **Workstation Management:** Assembly must finish before painting
--   **Deadline Pressure:** Rush orders have steep penalties (€150 each)
--   **Cost Control:** Overtime at €100/hour after Saturday 8 PM
+- **Order Sequencing:** Which bike to build first?
+- **Workstation Management:** Assembly must finish before painting
+- **Deadline Pressure:** Rush orders have steep penalties (€150 each)
+- **Cost Control:** Overtime at €100/hour after Saturday 8 PM
 
 . . .
 
@@ -46,15 +46,15 @@ format:
 
 **Number of Orders**
 
--   5 bikes
--   10 bikes
--   16 bikes
+- 5 bikes
+- 10 bikes
+- 16 bikes
 
 **Possible Schedules**
 
--   120
--   3.6 million
--   20.9 trillion
+- 120
+- 3.6 million
+- 20.9 trillion
 
 . . .
 
@@ -95,10 +95,10 @@ format:
 
 **The Idea:** "Take what looks best right now, don't look back"
 
--   **Fast:** O(n log n)[^1] vs O(n!) for exhaustive search
--   **Simple:** Easy to implement and explain
--   **Good Enough:** Often near-optimal for many problems
--   **But:** No guarantee of global optimality
+- **Fast:** O(n log n)[^1] vs O(n!) for exhaustive search
+- **Simple:** Easy to implement and explain
+- **Good Enough:** Often near-optimal for many problems
+- **But:** No guarantee of global optimality
 
 ## The Greedy Paradigm
 
@@ -108,10 +108,10 @@ format:
 
 **Core Philosophy:**
 
--   Make the **best immediate decision** at each step
--   Never reconsider previous choices (no backtracking)
--   Hope that local optimality leads to global optimality
--   Trade guaranteed optimality for speed and simplicity
+- Make the **best immediate decision** at each step
+- Never reconsider previous choices (no backtracking)
+- Hope that local optimality leads to global optimality
+- Trade guaranteed optimality for speed and simplicity
 
 ## Greedy in Everyday Life
 
@@ -121,11 +121,11 @@ format:
 
 **Common Greedy Decisions:**
 
--   **Making change:** Give the largest coin first (€2 → €1 → €0.50...)
--   **Grocery shopping:** Pick items with best price/value ratio
--   **Route planning:** Take the nearest unvisited landmark
--   **Packing a suitcase:** Put largest items in first
--   **Reading emails:** Answer quick replies first, defer complex ones
+- **Making change:** Give the largest coin first (€2 → €1 → €0.50...)
+- **Grocery shopping:** Pick items with best price/value ratio
+- **Route planning:** Take the nearest unvisited landmark
+- **Packing a suitcase:** Put largest items in first
+- **Reading emails:** Answer quick replies first, defer complex ones
 
 . . .
 
@@ -139,16 +139,16 @@ format:
 
 **Greedy IS Optimal:**
 
--   Kruskal's algorithms (minimum spanning tree)
--   SPT scheduling (minimizes average flow time)
--   EDD scheduling (minimizes maximum lateness)
+- Kruskal's algorithms (minimum spanning tree)
+- SPT scheduling (minimizes average flow time)
+- EDD scheduling (minimizes maximum lateness)
 
 . . .
 
 **Greedy FAILS:**
 
--   Traveling salesman problem (nearest neighbor is worse)
--   0/1 Knapsack (greedy by value/weight ratio fails)
+- Traveling salesman problem (nearest neighbor is worse)
+- 0/1 Knapsack (greedy by value/weight ratio fails)
 
 ## The Two Key Properties
 
@@ -158,15 +158,15 @@ format:
 
 **1. Greedy Choice Property**
 
--   Locally optimal choice leads to globally optimal solution
--   Can make choice without considering future consequences
+- Locally optimal choice leads to globally optimal solution
+- Can make choice without considering future consequences
 
 . . .
 
 **2. Optimal Substructure**
 
--   Optimal solution contains optimal solutions to subproblems
--   After making greedy choice, remaining problem is similar
+- Optimal solution contains optimal solutions to subproblems
+- After making greedy choice, remaining problem is similar
 
 ## Complexity: Why Greedy is Fast
 
@@ -194,9 +194,9 @@ format:
 
 <span class="highlight">Process jobs in the order they arrive, no prioritization.</span>
 
--   **When it's good:** Ensures fairness and prevents "customer favoritism"
--   **When it's optimal:** When all jobs have equal importance and no deadlines
--   **Real-world use:** Bank queues, ticket counters, help desk systems
+- **When it's good:** Ensures fairness and prevents "customer favoritism"
+- **When it's optimal:** When all jobs have equal importance and no deadlines
+- **Real-world use:** Bank queues, ticket counters, help desk systems
 
 . . .
 
@@ -218,9 +218,9 @@ format:
 
 <span class="highlight">The Idea: Process quickest job next to maximize throughput.</span>
 
--   **When it's good:** Minimizes average waiting time for customers
--   **When it's optimal:** <span class="highlight">Proven optimal</span> for minimizing mean completion time
--   **Real-world use:** Express checkout lanes, quick service repairs, email triage
+- **When it's good:** Minimizes average waiting time for customers
+- **When it's optimal:** <span class="highlight">Proven optimal</span> for minimizing mean completion time
+- **Real-world use:** Express checkout lanes, quick service repairs, email triage
 
 . . .
 
@@ -242,9 +242,9 @@ format:
 
 <span class="highlight">The Idea: Jobs by deadline order to tackle urgent work first.</span>
 
--   **When it's good:** Minimizes number of late jobs (tardiness)
--   **When it's optimal:** <span class="highlight">Proven optimal</span> for minimizing maximum lateness
--   **Real-world use:** Project deadlines, delivery logistics, exam grading
+- **When it's good:** Minimizes number of late jobs (tardiness)
+- **When it's optimal:** <span class="highlight">Proven optimal</span> for minimizing maximum lateness
+- **Real-world use:** Project deadlines, delivery logistics, exam grading
 
 . . .
 
@@ -395,9 +395,9 @@ for pizza in edd_order:
 
 ## Key Takeaways
 
--   **FIFO:** Simple and fair, but ignores job characteristics
--   **SPT:** Minimizes average completion time
--   **EDD:** Minimizes maximum lateness
+- **FIFO:** Simple and fair, but ignores job characteristics
+- **SPT:** Minimizes average completion time
+- **EDD:** Minimizes maximum lateness
 
 . . .
 
@@ -413,35 +413,35 @@ for pizza in edd_order:
 
 **Project Management:**
 
--   Task dependencies and precedence constraints
--   Resource allocation across teams
+- Task dependencies and precedence constraints
+- Resource allocation across teams
 
 . . .
 
 **Software Development:**
 
--   CPU process scheduling (operating systems)
--   Thread management and concurrency
+- CPU process scheduling (operating systems)
+- Thread management and concurrency
 
 ## Professional Applications II
 
 **Operations & Manufacturing:**
 
--   Production line scheduling and supply chain optimization
--   Warehouse picking routes and maintenance scheduling
+- Production line scheduling and supply chain optimization
+- Warehouse picking routes and maintenance scheduling
 
 . . .
 
 **Transportation & Logistics:**
 
--   Vehicle routing problems
--   Crew scheduling and maintenance window planning
+- Vehicle routing problems
+- Crew scheduling and maintenance window planning
 
 . . .
 
 **Healthcare:**
 
--   Patient appointment scheduling and staff shift scheduling
+- Patient appointment scheduling and staff shift scheduling
 
 # <span class="flow">Performance Metrics</span>
 
@@ -449,19 +449,19 @@ for pizza in edd_order:
 
 <span class="highlight">If we formalize these:</span>
 
--   **Completion Time ($C_i$):** When job $i$ finishes
--   **Flow Time ($F_i$):** Time job spends in system = $C_i - \text{arrival}_i$
--   **Lateness ($L_i$):** $C_i - \text{due}_i$ (can be negative = early)
--   **Tardiness ($T_i$):** $\max(0, L_i)$ (only counts late jobs)
+- **Completion Time ($C_i$):** When job $i$ finishes
+- **Flow Time ($F_i$):** Time job spends in system = $C_i - \text{arrival}_i$
+- **Lateness ($L_i$):** $C_i - \text{due}_i$ (can be negative = early)
+- **Tardiness ($T_i$):** $\max(0, L_i)$ (only counts late jobs)
 
 ## Aggregate Metric Definitions
 
 <span class="highlight">If we look at several of these:</span>
 
--   **Makespan ($C_{\max}$):** $\max(C_i)$ - when all jobs done
--   **Average Flow Time:** $\sum F_i / n$
--   **Total Tardiness:** $\sum T_i$
--   **Maximum Lateness:** $\max(L_i)$
+- **Makespan ($C_{\max}$):** $\max(C_i)$ - when all jobs done
+- **Average Flow Time:** $\sum F_i / n$
+- **Total Tardiness:** $\sum T_i$
+- **Maximum Lateness:** $\max(L_i)$
 
 . . .
 
@@ -475,11 +475,11 @@ for pizza in edd_order:
 
 **Business Context Matters:**
 
--   **Manufacturing:** Minimize total production time (makespan)
--   **Service:** Minimize average customer wait (flow time)
--   **Delivery:** Minimize late deliveries (tardiness)
--   **Contracts:** Minimize worst-case lateness (maximum lateness)
--   **Customer satisfaction:** Minimize number of late jobs
+- **Manufacturing:** Minimize total production time (makespan)
+- **Service:** Minimize average customer wait (flow time)
+- **Delivery:** Minimize late deliveries (tardiness)
+- **Contracts:** Minimize worst-case lateness (maximum lateness)
+- **Customer satisfaction:** Minimize number of late jobs
 
 . . .
 
@@ -550,10 +550,10 @@ for pizza in edd_order:
 
 **Scenario: 120 hours of consulting capacity this quarter**
 
--   **Revenue/hour approach:** A+B+C = 115h → **€24,000 revenue**
--   **Wrong order (E+D+C):** E+D+C = 155h → Doesn't fit!
--   **Only E+D = 100h** → **€10,350 revenue**
--   **Worst case:** Start with low-revenue/hour projects, waste capacity
+- **Revenue/hour approach:** A+B+C = 115h → **€24,000 revenue**
+- **Wrong order (E+D+C):** E+D+C = 155h → Doesn't fit!
+- **Only E+D = 100h** → **€10,350 revenue**
+- **Worst case:** Start with low-revenue/hour projects, waste capacity
 
 . . .
 
@@ -571,10 +571,10 @@ for pizza in edd_order:
 
 **Flow Shop:** Jobs must visit machines in the **same order**
 
--   Car manufacturing: Welding → Painting → Assembly
--   Bicycle factory: Assembly → Painting
--   Electronics: Circuit board → Component placement → Testing
--   Restaurant: Cooking → Plating → Service
+- Car manufacturing: Welding → Painting → Assembly
+- Bicycle factory: Assembly → Painting
+- Electronics: Circuit board → Component placement → Testing
+- Restaurant: Cooking → Plating → Service
 
 . . .
 
@@ -614,9 +614,9 @@ for pizza in edd_order:
 
 **SPT - Shortest Processing Time:**
 
--   Sort by assembly time? → Favors Z (15 min)
--   Sort by painting time? → Favors X (20 min)
--   Sort by total time? → All tied (50, 50, 30)
+- Sort by assembly time? → Favors Z (15 min)
+- Sort by painting time? → Favors X (20 min)
+- Sort by total time? → All tied (50, 50, 30)
 
 . . .
 
@@ -640,15 +640,15 @@ for pizza in edd_order:
 
 **Think about bottlenecks in a two-stage flow:**
 
--   **Machine 2** sits idle waiting for Machine 1 to finish
--   **Goal:** Minimize that idle time
+- **Machine 2** sits idle waiting for Machine 1 to finish
+- **Goal:** Minimize that idle time
 
 . . .
 
 **Key Observation:**
 
--   If a job is **quick on Machine 1** → Do it **early** (Machine 1 finishes fast, Machine 2 starts sooner!)
--   If a job is **quick on Machine 2** → Do it **late** (Machine 2 can finish quickly at the end, no wasted capacity)
+- If a job is **quick on Machine 1** → Do it **early** (Machine 1 finishes fast, Machine 2 starts sooner!)
+- If a job is **quick on Machine 2** → Do it **late** (Machine 2 can finish quickly at the end, no wasted capacity)
 
 ## Johnson's Algorithm: The Rule
 
@@ -707,15 +707,15 @@ for pizza in edd_order:
 
 **Bad news:**
 
--   3+ machine flow shop is **NP-hard**
--   No polynomial optimal algorithm known
+- 3+ machine flow shop is **NP-hard**
+- No polynomial optimal algorithm known
 
 . . .
 
 **Good news:**
 
--   Heuristics work well in practice
--   Simulated annealing, genetic algorithms
+- Heuristics work well in practice
+- Simulated annealing, genetic algorithms
 
 # <span class="flow">Advanced</span>
 
@@ -727,15 +727,15 @@ for pizza in edd_order:
 
 **Static (Offline):**
 
--   All jobs known upfront
--   Schedule computed once
--   Can often use optimal algorithms
+- All jobs known upfront
+- Schedule computed once
+- Can often use optimal algorithms
 
 **Dynamic (Online):**
 
--   Most real-world scenarios
--   Jobs arrive over time
--   Must make decisions without future knowledge
+- Most real-world scenarios
+- Jobs arrive over time
+- Must make decisions without future knowledge
 
 . . .
 
@@ -747,20 +747,20 @@ for pizza in edd_order:
 
 ## Real-World Considerations
 
--   **Setup Times:**
-    -   Changing requires tool adjustments or cleaning
-    -   Sequence-dependent scheduling (TSP-like)
+- **Setup Times:**
+  - Changing requires tool adjustments or cleaning
+  - Sequence-dependent scheduling (TSP-like)
 
 . . .
 
--   **Resource Constraints:**
-    -   Limited ressources, specialized tools, material shortages
-    -   Worker skill levels and availability
+- **Resource Constraints:**
+  - Limited ressources, specialized tools, material shortages
+  - Worker skill levels and availability
 
 . . .
 
--   **Uncertainty:**
-    -   Processing times, break downs, and other unforeseen events
+- **Uncertainty:**
+  - Processing times, break downs, and other unforeseen events
 
 ## Common Scheduling Mistakes I
 
@@ -774,9 +774,9 @@ for pizza in edd_order:
 
 **Mistake #1: Ignoring Setup Times**
 
--   **Problem:** Changing from between tasks requires adjustments
--   **Impact:** Your "optimal" SPT schedule wastes 3 hours on setups
--   **Fix:** Batch similar tasks together (hybrid rule: SPT within batches)
+- **Problem:** Changing from between tasks requires adjustments
+- **Impact:** Your "optimal" SPT schedule wastes 3 hours on setups
+- **Fix:** Batch similar tasks together (hybrid rule: SPT within batches)
 
 ## Common Scheduling Mistakes II
 
@@ -784,9 +784,9 @@ for pizza in edd_order:
 
 **Mistake #2: Static Scheduling with Dynamic Arrivals**
 
--   **Problem:** Using Johnson's algorithm at 2 PM, never adjusting when urgent orders arrive at 4 PM
--   **Impact:** New rush order sits idle while finishing low-priority work
--   **Fix:** Re-optimize periodically or use priority thresholds
+- **Problem:** Using Johnson's algorithm at 2 PM, never adjusting when urgent orders arrive at 4 PM
+- **Impact:** New rush order sits idle while finishing low-priority work
+- **Fix:** Re-optimize periodically or use priority thresholds
 
 ## Common Scheduling Mistakes III
 
@@ -794,9 +794,9 @@ for pizza in edd_order:
 
 **Mistake #3: Optimizing the Wrong Metric**
 
--   **Problem:** Minimizing makespan when penalty costs dominate
--   **Impact:** You "win" on time but lose €400 on penalties
--   **Fix:** Always align algorithm choice with **total cost function**
+- **Problem:** Minimizing makespan when penalty costs dominate
+- **Impact:** You "win" on time but lose €400 on penalties
+- **Fix:** Always align algorithm choice with **total cost function**
 
 # <span class="flow">Personal Schedules</span>
 
@@ -808,9 +808,9 @@ for pizza in edd_order:
 
 **What is Thrashing?**
 
--   Excessive **context switching** between tasks
--   Organization overhead exceeds actual productivity
--   **Maximum activity, minimum output**
+- Excessive **context switching** between tasks
+- Organization overhead exceeds actual productivity
+- **Maximum activity, minimum output**
 
 . . .
 
@@ -824,11 +824,11 @@ for pizza in edd_order:
 
 **Individual Level:**
 
--   Constant task switching (\< 15 minutes per task)
--   Nothing getting completed despite being "busy"
--   Increasing stress and anxiety
--   Declining quality of work
--   Feeling overwhelmed despite working hard
+- Constant task switching (\< 15 minutes per task)
+- Nothing getting completed despite being "busy"
+- Increasing stress and anxiety
+- Declining quality of work
+- Feeling overwhelmed despite working hard
 
 ## Preventing Thrashing
 
@@ -850,24 +850,24 @@ for pizza in edd_order:
 
 **Hour 2: This Lecture**
 
--   Greedy algorithms
--   FIFO, SPT, EDD rules
--   Trade-offs
--   Gantt charts
+- Greedy algorithms
+- FIFO, SPT, EDD rules
+- Trade-offs
+- Gantt charts
 
 **Hour 3: Notebook**
 
--   Bean Counter CEO
--   Implement rules
--   Visualizations
--   Analyze orders
+- Bean Counter CEO
+- Implement rules
+- Visualizations
+- Analyze orders
 
 **Hour 4: Competition**
 
--   Bike Factory Crisis
--   16 bicycle orders
--   Two-stage process
--   Minimize total costs!
+- Bike Factory Crisis
+- 16 bicycle orders
+- Two-stage process
+- Minimize total costs!
 
 ## The Competition Challenge
 
@@ -908,18 +908,18 @@ for pizza in edd_order:
 
 **The Advantage:**
 
--   Fast O(n log n)
--   Easy to implement
--   Explainable decisions
--   Often near-optimal
--   Practical for real-time
+- Fast O(n log n)
+- Easy to implement
+- Explainable decisions
+- Often near-optimal
+- Practical for real-time
 
 **The Challenge:**
 
--   No global optimality guarantee
--   Different rules, different results
--   Three-stage problems are complex
--   May need hybrid approaches
+- No global optimality guarantee
+- Different rules, different results
+- Three-stage problems are complex
+- May need hybrid approaches
 
 ## Break!
 

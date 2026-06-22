@@ -24,47 +24,47 @@ TechVenture has **€2 million** available for immediate deployment. After exten
 
 #### 1. CloudAI Solutions
 
--   **Industry:** Enterprise AI/SaaS
--   **Product:** AI-powered business intelligence platform
--   **Market Size:** €45B growing at 25% annually
--   **Competition:** Moderate (established players but room for innovation)
--   **Return Distribution:** Normal distribution
-    -   Mean return: 25% per year
-    -   Standard deviation: 15%
--   **Key Risk:** Technology adoption speed, enterprise sales cycles
+- **Industry:** Enterprise AI/SaaS
+- **Product:** AI-powered business intelligence platform
+- **Market Size:** €45B growing at 25% annually
+- **Competition:** Moderate (established players but room for innovation)
+- **Return Distribution:** Normal distribution
+  - Mean return: 25% per year
+  - Standard deviation: 15%
+- **Key Risk:** Technology adoption speed, enterprise sales cycles
 
 #### 2. GreenGrid Energy
 
--   **Industry:** Renewable Energy Technology
--   **Product:** Next-generation solar panel storage systems
--   **Market Size:** €30B growing at 18% annually
--   **Competition:** High (many players, commoditization risk)
--   **Return Distribution:** Normal distribution
-    -   Mean return: 18% per year
-    -   Standard deviation: 8%
--   **Key Risk:** Regulatory changes, commodity price fluctuations
+- **Industry:** Renewable Energy Technology
+- **Product:** Next-generation solar panel storage systems
+- **Market Size:** €30B growing at 18% annually
+- **Competition:** High (many players, commoditization risk)
+- **Return Distribution:** Normal distribution
+  - Mean return: 18% per year
+  - Standard deviation: 8%
+- **Key Risk:** Regulatory changes, commodity price fluctuations
 
 #### 3. HealthTrack Pro
 
--   **Industry:** Medical Devices / Wearables
--   **Product:** FDA-approved continuous health monitoring wearable
--   **Market Size:** €20B growing at 35% annually
--   **Competition:** Low (first-mover in specific medical conditions)
--   **Return Distribution:** Normal distribution
-    -   Mean return: 30% per year
-    -   Standard deviation: 25%
--   **Key Risk:** Regulatory approval delays, clinical trial outcomes
+- **Industry:** Medical Devices / Wearables
+- **Product:** FDA-approved continuous health monitoring wearable
+- **Market Size:** €20B growing at 35% annually
+- **Competition:** Low (first-mover in specific medical conditions)
+- **Return Distribution:** Normal distribution
+  - Mean return: 30% per year
+  - Standard deviation: 25%
+- **Key Risk:** Regulatory approval delays, clinical trial outcomes
 
 #### 4. FinFlow
 
--   **Industry:** B2B Fintech
--   **Product:** Automated payment reconciliation for enterprises
--   **Market Size:** €15B growing at 20% annually
--   **Competition:** Moderate (fragmented market)
--   **Return Distribution:** Uniform distribution
-    -   Minimum return: 10% per year
-    -   Maximum return: 35% per year
--   **Key Risk:** Customer acquisition cost, banking partnerships
+- **Industry:** B2B Fintech
+- **Product:** Automated payment reconciliation for enterprises
+- **Market Size:** €15B growing at 20% annually
+- **Competition:** Moderate (fragmented market)
+- **Return Distribution:** Uniform distribution
+  - Minimum return: 10% per year
+  - Maximum return: 35% per year
+- **Key Risk:** Customer acquisition cost, banking partnerships
 
 ## Success Metrics
 
@@ -78,11 +78,11 @@ The fund evaluates investments based on multiple criteria:
 
 ## Constraints and Requirements
 
--   Must select exactly **2 startups**
--   Must invest **€1 million in each** selected startup
--   Cannot invest in more or fewer than 2 startups
--   Investment horizon is **1 year** for this analysis
--   Assume startups' returns are **independent** (no correlation)
+- Must select exactly **2 startups**
+- Must invest **€1 million in each** selected startup
+- Cannot invest in more or fewer than 2 startups
+- Investment horizon is **1 year** for this analysis
+- Assume startups' returns are **independent** (no correlation)
 
 # The Challenge
 
@@ -101,9 +101,9 @@ Your analysis should:
 
 Your presentation will be evaluated on:
 
--   **Correctness (50%):** Accurate simulation and calculations
--   **Business Reasoning (25%):** Clear justification aligned with fund goals
--   **Presentation (25%):** Clear, professional one-slide summary
+- **Correctness (50%):** Accurate simulation and calculations
+- **Business Reasoning (25%):** Clear justification aligned with fund goals
+- **Presentation (25%):** Clear, professional one-slide summary
 
 ## Time Limit
 
@@ -202,19 +202,19 @@ print("Helper functions loaded and ready to use!")
 
 Create one-slide (PDF) containing:
 
--   **Recommendation:** Which 2 startups to invest in (clearly stated)
--   **Expected Return:** Total expected return in € and %
--   **Risk Assessment:** Your personal risk assessment
--   **Justification:** 2-3 bullet points explaining why this pair
--   **Visual:** One chart comparing the 6 portfolio options (optional but recommended)
+- **Recommendation:** Which 2 startups to invest in (clearly stated)
+- **Expected Return:** Total expected return in € and %
+- **Risk Assessment:** Your personal risk assessment
+- **Justification:** 2-3 bullet points explaining why this pair
+- **Visual:** One chart comparing the 6 portfolio options (optional but recommended)
 
 ### 2. Presentation Preparation
 
 Be ready to present your recommendation in **3 minutes**:
 
--   1 minute: State recommendation and key metrics
--   1 minute: Explain your analysis approach
--   1 minute: Justify why this is the best choice for TechVenture
+- 1 minute: State recommendation and key metrics
+- 1 minute: Explain your analysis approach
+- 1 minute: Justify why this is the best choice for TechVenture
 
 # Tips for Success
 
@@ -228,9 +228,9 @@ Be ready to present your recommendation in **3 minutes**:
 
 ## Common Pitfalls to Avoid
 
--   Don't forget to convert percentages to decimals (25% = 0.25)
--   Remember you're investing €2M total (€1M each in 2 startups)
--   Check that your uniform distribution is implemented correctly
--   Consider that high return often comes with high risk
+- Don't forget to convert percentages to decimals (25% = 0.25)
+- Remember you're investing €2M total (€1M each in 2 startups)
+- Check that your uniform distribution is implemented correctly
+- Consider that high return often comes with high risk
 
 # Good Luck!

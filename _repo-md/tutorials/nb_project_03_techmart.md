@@ -12,10 +12,10 @@ code-links:
 
 ## Meet Your Client
 
--   **Industry:** E-commerce / Electronics Retail
--   **Client Contact:** Yola Wang, Chief Operations Officer
--   **Company Size:** 200 employees
--   **Market:** Consumer electronics in Germany
+- **Industry:** E-commerce / Electronics Retail
+- **Client Contact:** Yola Wang, Chief Operations Officer
+- **Company Size:** 200 employees
+- **Market:** Consumer electronics in Germany
 
 ## The COO's Inventory Crisis
 
@@ -25,14 +25,14 @@ code-links:
 
 *Here's our situation: We sell 30 electronics SKUs online: smartphones, laptops, headphones, smartwatches, tablets. We have two warehouses:*
 
--   *Fast Warehouse (Hamburg): Right next to our shipping hub. Orders ship in 1-2 hours. But it's small and has only 8,000 unit capacity.*
--   *Large Warehouse (Poland): Huge storage (50,000+ capacity) but orders take 2-3 days to ship from there.*
+- *Fast Warehouse (Hamburg): Right next to our shipping hub. Orders ship in 1-2 hours. But it's small and has only 8,000 unit capacity.*
+- *Large Warehouse (Poland): Huge storage (50,000+ capacity) but orders take 2-3 days to ship from there.*
 
 *The problem? We're making terrible allocation decisions:*
 
--   *Slow-movers occupy 40% of fast warehouse space*
--   *Shipping delays costing us hundreds of thousands annually in customer refunds*
--   *Customer complaints about "2-day delivery" are up 60%*
+- *Slow-movers occupy 40% of fast warehouse space*
+- *Shipping delays costing us hundreds of thousands annually in customer refunds*
+- *Customer complaints about "2-day delivery" are up 60%*
 
 *Black Friday is in 3 weeks. Last year was a disaster... We ran out of top items in the fast warehouse on Day 1, then spent a week scrambling with slow shipping from Poland. Lost a lot of potential revenue.*
 
@@ -53,17 +53,17 @@ code-links:
 
 #### Fast Warehouse (Hamburg)
 
--   **Capacity:** 8,000 units total
--   **Shipping speed:** 1-2 hours processing, next-day delivery
--   **Storage cost:** €2.50 per unit (for Black Friday period)
--   **Perfect for:** High-demand, fast-moving items
+- **Capacity:** 8,000 units total
+- **Shipping speed:** 1-2 hours processing, next-day delivery
+- **Storage cost:** €2.50 per unit (for Black Friday period)
+- **Perfect for:** High-demand, fast-moving items
 
 #### Large Warehouse (Poland)
 
--   **Capacity:** 50,000+ units (effectively unlimited for our needs)
--   **Shipping speed:** 2-3 days processing, 2-3 days delivery (4-6 days total!)
--   **Storage cost:** €0.80 per unit (for Black Friday period)
--   **Perfect for:** Slow-movers, bulk storage
+- **Capacity:** 50,000+ units (effectively unlimited for our needs)
+- **Shipping speed:** 2-3 days processing, 2-3 days delivery (4-6 days total!)
+- **Storage cost:** €0.80 per unit (for Black Friday period)
+- **Perfect for:** Slow-movers, bulk storage
 
 ### The Allocation Problem
 
@@ -73,13 +73,13 @@ You must decide **how many units of each SKU** to pre-position in the fast wareh
 
 **Critical Constraints:**
 
--   Total units in fast warehouse ≤ 8,000
--   **No refilling during Black Friday!** All warehouse staff are busy handling the surge, whatever you allocate is fixed for the entire weekend
+- Total units in fast warehouse ≤ 8,000
+- **No refilling during Black Friday!** All warehouse staff are busy handling the surge, whatever you allocate is fixed for the entire weekend
 
 **During Black Friday:**
 
--   **Units in Fast Warehouse (Hamburg):** Ship quickly (1-2 days), customers happy, **no delay penalty**
--   **Units in Large Warehouse (Poland):** Ship slowly (4-6 days), customers complain, **delay penalty applies**
+- **Units in Fast Warehouse (Hamburg):** Ship quickly (1-2 days), customers happy, **no delay penalty**
+- **Units in Large Warehouse (Poland):** Ship slowly (4-6 days), customers complain, **delay penalty applies**
 
 **Your Goal:** Decide how many units of each SKU go in Hamburg warehouse to minimize total delay penalty costs. *Note: While storage costs differ, Yola cares most about customer satisfaction. Minimize the delay penalties first.*
 
@@ -102,14 +102,14 @@ You must decide **how many units of each SKU** to pre-position in the fast wareh
 
 **Delay Penalty (per unit from Poland warehouse):**
 
--   15% of customers cancel order: lost sale (50 % of product price as opportunity costs)
--   85% of customers wait but demand partial refund: €10 compensation
+- 15% of customers cancel order: lost sale (50 % of product price as opportunity costs)
+- 85% of customers wait but demand partial refund: €10 compensation
 
 ### Customer Expectations
 
--   **High-demand items:** Customers expect 1-2 day delivery (Hamburg warehouse)
--   **Low-demand items:** Customers more tolerant of 4-6 day delivery (Poland warehouse)
--   **Black Friday:** Everyone expects fast delivery! High delay costs for all SKUs.
+- **High-demand items:** Customers expect 1-2 day delivery (Hamburg warehouse)
+- **Low-demand items:** Customers more tolerant of 4-6 day delivery (Poland warehouse)
+- **Black Friday:** Everyone expects fast delivery! High delay costs for all SKUs.
 
 ## The Data: 3 Years of Sales History
 
@@ -461,36 +461,36 @@ You must develop an inventory optimization solution that forecasts Black Friday 
 
 Your notebook should include:
 
--   **Exploratory Data Analysis:**
+- **Exploratory Data Analysis:**
 
-    -   Seasonality patterns (visualize aggregate sales over time)
-    -   Product lifecycle trends
-    -   Black Friday spike analysis (2023 vs 2024)
-    -   SKU categorization (fast-movers vs. slow-movers)
+  - Seasonality patterns (visualize aggregate sales over time)
+  - Product lifecycle trends
+  - Black Friday spike analysis (2023 vs 2024)
+  - SKU categorization (fast-movers vs. slow-movers)
 
--   **Demand Forecasting:**
+- **Demand Forecasting:**
 
-    -   Forecast Black Friday 2025 demand (weeks 47-48 combined) for all 30 SKUs
-    -   Report forecast accuracy metrics (MAE, RMSE, or MAPE)
+  - Forecast Black Friday 2025 demand (weeks 47-48 combined) for all 30 SKUs
+  - Report forecast accuracy metrics (MAE, RMSE, or MAPE)
 
--   **Inventory Allocation Optimization:**
+- **Inventory Allocation Optimization:**
 
-    -   Decision: **How many units of each SKU** to allocate to Hamburg warehouse (total ≤ 8,000 units!)
-    -   Objective: Minimize total delay cost
+  - Decision: **How many units of each SKU** to allocate to Hamburg warehouse (total ≤ 8,000 units!)
+  - Objective: Minimize total delay cost
 
--   **Monte Carlo Simulation:**
+- **Monte Carlo Simulation:**
 
-    -   Generate 10,000 demand scenarios from your forecast with a variation defined by you
-    -   For each scenario, calculate total delay cost using your fixed allocation
-    -   Analyze: Mean cost, standard deviation, 95th percentile (worst-case)
-    -   Insight: How robust is your allocation to forecast errors?
+  - Generate 10,000 demand scenarios from your forecast with a variation defined by you
+  - For each scenario, calculate total delay cost using your fixed allocation
+  - Analyze: Mean cost, standard deviation, 95th percentile (worst-case)
+  - Insight: How robust is your allocation to forecast errors?
 
--   **Results & Business Impact:**
+- **Results & Business Impact:**
 
-    -   Total expected delay cost
-    -   Allocation breakdown: How many units of each SKU in Hamburg vs. Poland
-    -   Comparison to baseline (e.g., equal allocation across all SKUs, or random)
-    -   Cost savings in €€€
+  - Total expected delay cost
+  - Allocation breakdown: How many units of each SKU in Hamburg vs. Poland
+  - Comparison to baseline (e.g., equal allocation across all SKUs, or random)
+  - Cost savings in €€€
 
 > **Note**
 >
@@ -498,10 +498,10 @@ Your notebook should include:
 
 ### 2. Presentation
 
--   **Problem understanding:** Yola's crisis in your own words
--   **Your approach:** Forecasting method + allocation logic
--   **Results:** Forecasts, allocation decision, Monte Carlo analysis
--   **Business impact:** savings, recommendations, trade-offs, limitations
+- **Problem understanding:** Yola's crisis in your own words
+- **Your approach:** Forecasting method + allocation logic
+- **Results:** Forecasts, allocation decision, Monte Carlo analysis
+- **Business impact:** savings, recommendations, trade-offs, limitations
 
 > **Note**
 >
@@ -509,11 +509,11 @@ Your notebook should include:
 
 ### 3. Key Metrics to Report
 
--   Forecasting: Forecast accuracy and forecasted demand for 2025 Black Friday
--   Allocation: Total units allocated to fast warehouse (must be ≤ 8,000!)
--   Expected cost: Total delay Costs based on allocation decision
--   Monte Carlo Risk Analysis: Report all important metrics (your choice) and 95th percentile cost
--   Business Impact: Cost savings vs. baseline allocation
+- Forecasting: Forecast accuracy and forecasted demand for 2025 Black Friday
+- Allocation: Total units allocated to fast warehouse (must be ≤ 8,000!)
+- Expected cost: Total delay Costs based on allocation decision
+- Monte Carlo Risk Analysis: Report all important metrics (your choice) and 95th percentile cost
+- Business Impact: Cost savings vs. baseline allocation
 
 ## Constraints and Requirements
 
@@ -537,23 +537,23 @@ Your notebook should include:
 
 ## Common Pitfalls to Avoid
 
--   **Overfitting forecast:** Don't overfit to historical data. Use simple, robust methods.
--   **Ignoring capacity:** Double-check that total allocated to fast warehouse ≤ 8,000!
--   **Poor visualization:** Make your allocation decision clear (how many units of each SKU where?)
--   **No baseline comparison:** Always compare to a baseline (e.g., random allocation) to show improvement
+- **Overfitting forecast:** Don't overfit to historical data. Use simple, robust methods.
+- **Ignoring capacity:** Double-check that total allocated to fast warehouse ≤ 8,000!
+- **Poor visualization:** Make your allocation decision clear (how many units of each SKU where?)
+- **No baseline comparison:** Always compare to a baseline (e.g., random allocation) to show improvement
 
 ## Data Access
 
 All data is provided in this notebook:
 
--   `skus_df`: DataFrame with 30 SKUs and their attributes
--   `sales_df`: DataFrame with 3 years of weekly sales history
--   `warehouses`: Dict with warehouse specifications
--   Helper functions: `get_sku_sales_history()`, `plot_sku_sales_trend()`
+- `skus_df`: DataFrame with 30 SKUs and their attributes
+- `sales_df`: DataFrame with 3 years of weekly sales history
+- `warehouses`: Dict with warehouse specifications
+- Helper functions: `get_sku_sales_history()`, `plot_sku_sales_trend()`
 
 **You must implement forecasting, allocation optimization, and Monte Carlo simulation yourself!**
 
 ## Deadline
 
--   **Notebook submission & Presentation:** Lecture 12
--   **Good luck, consultants!**
+- **Notebook submission & Presentation:** Lecture 12
+- **Good luck, consultants!**

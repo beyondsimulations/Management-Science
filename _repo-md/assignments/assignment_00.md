@@ -36,27 +36,27 @@ Work is in groups for both assignments. Typical time commitment is 4--6 hours fo
 
 ### Technical Implementation (60% of assignment grade)
 
--   **Excellent (90-100%):** Code runs correctly, handles edge cases, well-structured
--   **Good (80-89%):** Code runs with minor issues, mostly well-structured
--   **Satisfactory (70-79%):** Code runs but has some problems, basic structure
--   **Needs Improvement (60-69%):** Code has significant issues but shows understanding
--   **Inadequate (\<60%):** Code doesn't run or shows fundamental misunderstanding
+- **Excellent (90-100%):** Code runs correctly, handles edge cases, well-structured
+- **Good (80-89%):** Code runs with minor issues, mostly well-structured
+- **Satisfactory (70-79%):** Code runs but has some problems, basic structure
+- **Needs Improvement (60-69%):** Code has significant issues but shows understanding
+- **Inadequate (\<60%):** Code doesn't run or shows fundamental misunderstanding
 
 ### Business Insight (20% of assignment grade)
 
--   **Excellent:** Clear actionable recommendations with quantified impact
--   **Good:** Solid insights with some quantification
--   **Satisfactory:** Basic insights communicated clearly
--   **Needs Improvement:** Insights unclear or not business-relevant
--   **Inadequate:** No meaningful insights provided
+- **Excellent:** Clear actionable recommendations with quantified impact
+- **Good:** Solid insights with some quantification
+- **Satisfactory:** Basic insights communicated clearly
+- **Needs Improvement:** Insights unclear or not business-relevant
+- **Inadequate:** No meaningful insights provided
 
 ### Presentation Quality (20% of assignment grade)
 
--   **Excellent:** Compelling visualizations, clear narrative
--   **Good:** Good visuals, mostly clear communication
--   **Satisfactory:** Basic visualizations, understandable presentation
--   **Needs Improvement:** Poor visuals or unclear communication
--   **Inadequate:** No effective communication of results
+- **Excellent:** Compelling visualizations, clear narrative
+- **Good:** Good visuals, mostly clear communication
+- **Satisfactory:** Basic visualizations, understandable presentation
+- **Needs Improvement:** Poor visuals or unclear communication
+- **Inadequate:** No effective communication of results
 
 > **Important**
 >
@@ -64,9 +64,9 @@ Work is in groups for both assignments. Typical time commitment is 4--6 hours fo
 
 ## Tips for Success
 
--   Start simple, then iterate. Get a working baseline first.
--   Check your logic with small tests and intermediate prints.
--   Keep business questions in view---your job is to inform a decision.
+- Start simple, then iterate. Get a working baseline first.
+- Check your logic with small tests and intermediate prints.
+- Keep business questions in view---your job is to inform a decision.
 
 > **Tip**
 >
@@ -76,13 +76,13 @@ Work is in groups for both assignments. Typical time commitment is 4--6 hours fo
 
 Submit one Jupyter notebook per assignment that includes:
 
--   Your commented code with outputs and clear visualizations.
--   Short, direct answers to the business questions.
+- Your commented code with outputs and clear visualizations.
+- Short, direct answers to the business questions.
 
 File naming:
 
--   Assignment 1: Assignment_01\_\[GroupNames\].ipynb
--   Assignment 2: Assignment_02\_\[GroupNames\].ipynb
+- Assignment 1: Assignment_01\_\[GroupNames\].ipynb
+- Assignment 2: Assignment_02\_\[GroupNames\].ipynb
 
 ## Late Policy
 

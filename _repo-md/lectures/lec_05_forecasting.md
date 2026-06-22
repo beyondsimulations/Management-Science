@@ -23,10 +23,10 @@ format:
 
 <span class="question">Question</span>: Why can't we just order the same as last year?
 
--   **Market:** New products, competition
--   **Seasonal Shifts:** Weather, holidays, economic conditions
--   **Trend Changes:** Changing preferences, new technologies
--   **Randomness:** Viral TikToks, supply chain disruptions, pandemics
+- **Market:** New products, competition
+- **Seasonal Shifts:** Weather, holidays, economic conditions
+- **Trend Changes:** Changing preferences, new technologies
+- **Randomness:** Viral TikToks, supply chain disruptions, pandemics
 
 . . .
 
@@ -54,10 +54,10 @@ $$Y_t = T_t + S_t + R_t$$
 
 Where:
 
--   $Y_t$ = Observed value at time t
--   $T_t$ = Trend component
--   $S_t$ = Seasonal component
--   $R_t$ = Random/Residual component
+- $Y_t$ = Observed value at time t
+- $T_t$ = Trend component
+- $S_t$ = Seasonal component
+- $R_t$ = Random/Residual component
 
 ## Additive vs Multiplicative Models
 
@@ -68,16 +68,16 @@ Where:
 **Additive Model**
 $$Y_t = T_t + S_t + R_t$$
 
--   Seasonal fluctuations are constant
--   "We always sell 200 extra in December"
--   Good: Stable, mature products
+- Seasonal fluctuations are constant
+- "We always sell 200 extra in December"
+- Good: Stable, mature products
 
 **Multiplicative Model**
 $$Y_t = T_t \times S_t \times R_t$$
 
--   Seasonal fluctuations scale with trend
--   "December sales are 40% higher"
--   Good: Growing businesses
+- Seasonal fluctuations scale with trend
+- "December sales are 40% higher"
+- Good: Growing businesses
 
 ## Visual Decomposition
 
@@ -105,17 +105,17 @@ $$Y_t = T_t \times S_t \times R_t$$
 
 **Simple Moving Average**
 
--   All days equally important
--   We just take the average
--   \[14, 15, 16, 14, 15, 16, 17\]
--   Forecast: <span class="highlight">15.3</span>
+- All days equally important
+- We just take the average
+- \[14, 15, 16, 14, 15, 16, 17\]
+- Forecast: <span class="highlight">15.3</span>
 
 **Weighted Moving Average**
 
--   Recent days matter more
--   Days closer are weighted more
--   \[0.05, 0.05, 0.1, 0.1, 0.2, 0.2, 0.3\]
--   Forecast: <span class="highlight">15.9</span>
+- Recent days matter more
+- Days closer are weighted more
+- \[0.05, 0.05, 0.1, 0.1, 0.2, 0.2, 0.3\]
+- Forecast: <span class="highlight">15.9</span>
 
 . . .
 
@@ -135,10 +135,10 @@ $$\text{Forecast}_{t+1} = \alpha \times \text{Actual}_t + (1-\alpha) \times \tex
 
 . . .
 
--   **α (alpha) = smoothing parameter** (0 to 1)
--   **α = 0.9:** Trust recent data (reactive)
--   **α = 0.1:** Trust historical patterns (stable)
--   **α = 0.3:** Balanced approach (common default)
+- **α (alpha) = smoothing parameter** (0 to 1)
+- **α = 0.9:** Trust recent data (reactive)
+- **α = 0.1:** Trust historical patterns (stable)
+- **α = 0.3:** Balanced approach (common default)
 
 . . .
 
@@ -169,8 +169,8 @@ $$\text{Forecast}_{t+1} = \alpha \times \text{Actual}_t + (1-\alpha) \times \tex
 
 **Why This Works:**
 
--   Simple ES only tracks level (current position)
--   Holt's also tracks the slope (direction and speed)
+- Simple ES only tracks level (current position)
+- Holt's also tracks the slope (direction and speed)
 
 . . .
 
@@ -197,9 +197,9 @@ $$\hat{Y}_{t+h} = L_t + h \times b_t$$
 
 <span class="highlight">In plain English</span>
 
--   **Level:** "Smooth current observation with previous forecast"
--   **Trend:** "Smooth the change in level with our previous trend"
--   **Forecast:** "Start at current, add trend for each period ahead"
+- **Level:** "Smooth current observation with previous forecast"
+- **Trend:** "Smooth the change in level with our previous trend"
+- **Forecast:** "Start at current, add trend for each period ahead"
 
 . . .
 
@@ -287,17 +287,17 @@ for h in range(1, 4):
 
 **Alpha (Level Smoothing)**
 
--   **High α (0.7-0.9):** Responsive
-    -   Use: Volatile markets
--   **Low α (0.1-0.3):** Stable
-    -   Use: Steady business
+- **High α (0.7-0.9):** Responsive
+  - Use: Volatile markets
+- **Low α (0.1-0.3):** Stable
+  - Use: Steady business
 
 **Beta (Trend Smoothing)**
 
--   **High β (0.5-0.8):** Quickly
-    -   Use: Dynamic growth/decline
--   **Low β (0.1-0.3):** Stable trend
-    -   Use: Consistent growth
+- **High β (0.5-0.8):** Quickly
+  - Use: Dynamic growth/decline
+- **Low β (0.1-0.3):** Stable trend
+  - Use: Consistent growth
 
 . . .
 
@@ -315,16 +315,16 @@ for h in range(1, 4):
 
 . . .
 
--   Clear upward or downward trend
--   No seasonal patterns
+- Clear upward or downward trend
+- No seasonal patterns
 
 . . .
 
 <span class="question">Question:</span> When should you use <span class="highlight">NOT</span> Holt's method?
 
--   Data is flat (use simple ES instead)
--   Strong seasonality present
--   Trend direction changes frequently
+- Data is flat (use simple ES instead)
+- Strong seasonality present
+- Trend direction changes frequently
 
 # <span class="flow">Adding Seasonality</span>
 
@@ -357,16 +357,16 @@ for h in range(1, 4):
 **Additive Model**
 $$Y_t = L_t + b_t + s_t$$
 
--   Seasonal variation is constant
--   "We sell +50 units every December"
--   Pattern: ±constant amount
+- Seasonal variation is constant
+- "We sell +50 units every December"
+- Pattern: ±constant amount
 
 **Multiplicative Model**
 $$Y_t = L_t \times b_t \times s_t$$
 
--   Seasonal variation scales with level
--   "December is 1.5× normal sales"
--   Pattern: ×percentage change
+- Seasonal variation scales with level
+- "December is 1.5× normal sales"
+- Pattern: ×percentage change
 
 ## Holt-Winters: The Math I
 
@@ -385,10 +385,10 @@ $$\hat{Y}_{t+h} = L_t + hb_t + s_{t+h-m}$$
 
 <span class="highlight">In plain English</span>
 
--   **Level:** Remove seasonality from observation, then smooth
--   **Trend:** Same as Holt's method
--   **Seasonal:** Update the seasonal index for this period
--   **Forecast:** Level + trend + seasonal adjustment
+- **Level:** Remove seasonality from observation, then smooth
+- **Trend:** Same as Holt's method
+- **Seasonal:** Update the seasonal index for this period
+- **Forecast:** Level + trend + seasonal adjustment
 
 . . .
 
@@ -404,10 +404,10 @@ $\alpha$ (level), $\beta$ (trend), $\gamma$ (seasonal), m (seasonal period lengt
 
 **Quarterly Sales Pattern:**
 
--   **Q1:** Low season (after holidays) → Factor: 0.85
--   **Q2:** Spring pickup → Factor: 0.95
--   **Q3:** Summer growth → Factor: 1.05
--   **Q4:** Holiday peak! → Factor: 1.15
+- **Q1:** Low season (after holidays) → Factor: 0.85
+- **Q2:** Spring pickup → Factor: 0.95
+- **Q3:** Summer growth → Factor: 1.05
+- **Q4:** Holiday peak! → Factor: 1.15
 
 ## Holt-Winters: Intuition I
 
@@ -440,9 +440,9 @@ $\alpha$ (level), $\beta$ (trend), $\gamma$ (seasonal), m (seasonal period lengt
 
 . . .
 
--   Data with trend AND seasonality
--   At least 1 full seasonal cycle (2 are better!)
--   Regular, repeating patterns
+- Data with trend AND seasonality
+- At least 1 full seasonal cycle (2 are better!)
+- Regular, repeating patterns
 
 . . .
 
@@ -450,9 +450,9 @@ $\alpha$ (level), $\beta$ (trend), $\gamma$ (seasonal), m (seasonal period lengt
 
 . . .
 
--   Irregular or changing seasonal patterns
--   Flat data with no trend
--   Seasonal pattern length unknown
+- Irregular or changing seasonal patterns
+- Flat data with no trend
+- Seasonal pattern length unknown
 
 # <span class="flow">Method Selection & Validation</span>
 
@@ -513,9 +513,9 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 **Example: Winter Coats**
 
--   Cost: €50, Selling Price: €150, Margin: €100
--   Storage cost: €5/month
--   Clearance markdown: 70% off
+- Cost: €50, Selling Price: €150, Margin: €100
+- Storage cost: €5/month
+- Clearance markdown: 70% off
 
 . . .
 
@@ -529,17 +529,17 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 **Underforecast by 100 units:**
 
--   Lost profit: 100 × €100
-    -   **€10,000**
--   Customer disappointment
--   Competitor gains market share
+- Lost profit: 100 × €100
+  - **€10,000**
+- Customer disappointment
+- Competitor gains market share
 
 **Overforecast by 100 units:**
 
--   Storage: 100 × €5 × 3 months
-    -   **€1,500**
--   Clearance loss: 100 × €70
-    -   **€7,000**
+- Storage: 100 × €5 × 3 months
+  - **€1,500**
+- Clearance loss: 100 × €70
+  - **€7,000**
 
 . . .
 
@@ -576,10 +576,10 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 **What AI/ML brings to forecasting:**
 
--   Handle hundreds of variables simultaneously
--   Detect complex non-linear patterns
--   Learn from massive datasets
--   Adapt automatically to changes
+- Handle hundreds of variables simultaneously
+- Detect complex non-linear patterns
+- Learn from massive datasets
+- Adapt automatically to changes
 
 . . .
 
@@ -595,15 +595,15 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 **Traditional ML:**
 
--   **Random Forest:** Ensemble of decision trees
--   **XGBoost:** Gradient boosting (very popular)
--   **Support Vector Machines:** Pattern recognition
+- **Random Forest:** Ensemble of decision trees
+- **XGBoost:** Gradient boosting (very popular)
+- **Support Vector Machines:** Pattern recognition
 
 **Deep Learning:**
 
--   **LSTM (Long Short-Term Memory):** For sequences
--   **Prophet (Facebook):** Automated forecasting
--   **Neural Networks:** Complex patterns
+- **LSTM (Long Short-Term Memory):** For sequences
+- **Prophet (Facebook):** Automated forecasting
+- **Neural Networks:** Complex patterns
 
 . . .
 
@@ -625,9 +625,9 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 <img src="lec_05_forecasting_files/figure-markdown_strict/cell-16-output-1.png" width="751" height="466" />
 
--   **Training Data:** Where the model learns patterns (70-80%)
--   **Validation Data:** Where you tune hyperparameters (10-15%)
--   **Test Data:** The "future", only once for final evaluation (10-15%)
+- **Training Data:** Where the model learns patterns (70-80%)
+- **Validation Data:** Where you tune hyperparameters (10-15%)
+- **Test Data:** The "future", only once for final evaluation (10-15%)
 
 ## Data Leakage: The Silent Problem
 
@@ -636,11 +636,11 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 . . .
 
 1.  **Target leakage**
-    -   Wrong: Including "total_sales" when predicting "monthly_sales"
-    -   Right: Only use information available at prediction time
+    - Wrong: Including "total_sales" when predicting "monthly_sales"
+    - Right: Only use information available at prediction time
 2.  **Temporal leakage**
-    -   Wrong: Random split for time series (mixes past and future)
-    -   Right: Always split chronologically
+    - Wrong: Random split for time series (mixes past and future)
+    - Right: Always split chronologically
 
 . . .
 
@@ -664,17 +664,17 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 . . .
 
--   Sufficient historical data (2+ years)
--   Rich feature data (weather, promotions, events)
--   Non-linear patterns
--   Resources for training/maintenance
+- Sufficient historical data (2+ years)
+- Rich feature data (weather, promotions, events)
+- Non-linear patterns
+- Resources for training/maintenance
 
 . . .
 
 **Examples:**
 
--   Large retailers (Amazon, Walmart)
--   Demand forecasting with many variables
+- Large retailers (Amazon, Walmart)
+- Demand forecasting with many variables
 
 ## When to Use AI/ML Forecasting II
 
@@ -682,17 +682,17 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 . . .
 
--   Limited historical data
--   High noise, low signal
--   Need explainable forecasts
--   Limited expertise
+- Limited historical data
+- High noise, low signal
+- Need explainable forecasts
+- Limited expertise
 
 . . .
 
 **Examples:**
 
--   New products (no history)
--   Regulatory environments
+- New products (no history)
+- Regulatory environments
 
 # <span class="flow">Advanced Topics</span>
 
@@ -780,24 +780,24 @@ print(f"Reorder point: {reorder_point:.0f} units")
 
 **Hour 2: This Lecture**
 
--   Patterns & decomposition
--   Simple ES, Holt's, Holt-Winters
--   Method selection
--   Practical pandas
+- Patterns & decomposition
+- Simple ES, Holt's, Holt-Winters
+- Method selection
+- Practical pandas
 
 **Hour 3: Notebook**
 
--   Bean Counter CEO
--   Daily and weekly aggregation
--   Implement methods
--   Compare accuracy
+- Bean Counter CEO
+- Daily and weekly aggregation
+- Implement methods
+- Compare accuracy
 
 **Hour 4: Competition**
 
--   MegaMart challenge
--   3 real products
--   4-week forecast
--   €10K per error unit!
+- MegaMart challenge
+- 3 real products
+- 4-week forecast
+- €10K per error unit!
 
 ## The Competition Challenge
 
@@ -832,18 +832,18 @@ print(f"Reorder point: {reorder_point:.0f} units")
 
 **The Science:**
 
--   Statistical methods
--   AI based forecasting
--   Error metrics (MAE, RMSE)
--   Confidence intervals
--   Systematic validation
+- Statistical methods
+- AI based forecasting
+- Error metrics (MAE, RMSE)
+- Confidence intervals
+- Systematic validation
 
 **The Art:**
 
--   Choosing the right method
--   Balancing complexity vs simplicity
--   Interpreting context
--   Communicating uncertainty
+- Choosing the right method
+- Balancing complexity vs simplicity
+- Interpreting context
+- Communicating uncertainty
 
 . . .
 

@@ -8,9 +8,9 @@ subtitle: A small guide using uv
 
 `uv` is a new (and very fast) Python tool written in Rust. It:
 
--   Installs Python for you (no manual downloads).
--   Creates isolated *virtual environments* (safe sandboxes per project).
--   Installs and updates packages quickly.
+- Installs Python for you (no manual downloads).
+- Creates isolated *virtual environments* (safe sandboxes per project).
+- Installs and updates packages quickly.
 
 > **Note**
 >
@@ -104,12 +104,12 @@ uv init
 
 `uv init` creates:
 
--   `main.py` (starter script)
--   `pyproject.toml` (project + dependencies config)
--   `.python-version` (records the Python version we chose)
--   `.gitignore` (useful if you ever use Git)
--   `README.md` (you can jot notes here)
--   (A `.venv` folder will appear later once packages are added or synced.)
+- `main.py` (starter script)
+- `pyproject.toml` (project + dependencies config)
+- `.python-version` (records the Python version we chose)
+- `.gitignore` (useful if you ever use Git)
+- `README.md` (you can jot notes here)
+- (A `.venv` folder will appear later once packages are added or synced.)
 
 > **Note**
 >
@@ -141,9 +141,9 @@ if __name__ == "__main__":
     main()
 ```
 
--   `def main():` defines a function (a reusable block of code).
--   `print(...)` shows text in the terminal.
--   The line `if __name__ == "__main__":` ensures this only auto-runs when the file is executed directly.
+- `def main():` defines a function (a reusable block of code).
+- `print(...)` shows text in the terminal.
+- The line `if __name__ == "__main__":` ensures this only auto-runs when the file is executed directly.
 
 Don't worry about this yet, we'll gradually build up to it.
 
@@ -187,10 +187,10 @@ uv self update
 
 ## Best practices for this course
 
--   One folder for the course keeps everything tidy.
--   Never install packages "globally" outside a project.
--   Keep a short personal log in each project's `README.md` (What did I do? What still confuses me?).
--   Ask early for help, guessing usually takes much more time than asking.
+- One folder for the course keeps everything tidy.
+- Never install packages "globally" outside a project.
+- Keep a short personal log in each project's `README.md` (What did I do? What still confuses me?).
+- Ask early for help, guessing usually takes much more time than asking.
 
 You can always see available commands:
 

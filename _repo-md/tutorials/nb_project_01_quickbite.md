@@ -12,9 +12,9 @@ code-links:
 
 ## Meet Your Client
 
--   **Industry:** Food Delivery / Logistics
--   **Client Contact:** Eliza Chen, CEO
--   **Company Size:** 12 employees, 120+ daily deliveries
+- **Industry:** Food Delivery / Logistics
+- **Client Contact:** Eliza Chen, CEO
+- **Company Size:** 12 employees, 120+ daily deliveries
 
 ## The CEO's Dilemma
 
@@ -24,8 +24,8 @@ code-links:
 
 *Right now, our 4 drivers just... wing it. They look at their delivery list each morning and decide their own routes based on 'intuition.' The results are terrible:*
 
--   *75% of deliveries arrive late*
--   *Customer complaints about cold food: Up 40% this quarter*
+- *75% of deliveries arrive late*
+- *Customer complaints about cold food: Up 40% this quarter*
 
 *Our investors are getting nervous. We need to cut delivery costs AND improve on-time delivery. Can you help us design optimal routes that keep food hot and costs low?*
 
@@ -35,23 +35,23 @@ code-links:
 
 ### Current Operations
 
--   **Daily deliveries:** 120 meal orders across Hamburg
--   **Fleet:** 4 delivery drivers with insulated cars
--   **Depot:** Central location (Hamburg Hauptbahnhof area)
--   **Service hours:** 11:00 AM - 9:00 PM
--   **Driver capacity:** Each driver can carry up to 35 meals at once
+- **Daily deliveries:** 120 meal orders across Hamburg
+- **Fleet:** 4 delivery drivers with insulated cars
+- **Depot:** Central location (Hamburg Hauptbahnhof area)
+- **Service hours:** 11:00 AM - 9:00 PM
+- **Driver capacity:** Each driver can carry up to 35 meals at once
 
 ### Cost Structure
 
--   **Driver wages:** €18/hour (including benefits)
--   **Fuel costs:** €0.55 per km
--   **Late delivery penalty:** €5 per late delivery (customer discount)
--   **Cold food complaints:** €10 per complaint
+- **Driver wages:** €18/hour (including benefits)
+- **Fuel costs:** €0.55 per km
+- **Late delivery penalty:** €5 per late delivery (customer discount)
+- **Cold food complaints:** €10 per complaint
 
 ### Customer Expectations
 
--   Each delivery has a **time window** (requested delivery time ± 15 minutes)
--   **Time window violation = Late penalty + Potential cold food complaint**
+- Each delivery has a **time window** (requested delivery time ± 15 minutes)
+- **Time window violation = Late penalty + Potential cold food complaint**
 
 ## Your Mission
 
@@ -443,10 +443,10 @@ You must develop a routing solution that assigns all 120 deliveries to 4 drivers
 
 Your notebook should include:
 
--   **Data exploration:** Visualizations and insights about delivery patterns
--   **Algorithm implementation:** Your routing approach (construction + improvement)
--   **Results:** Final routes for all 4 drivers with cost breakdown
--   **Analysis:** Comparison to a baseline (e.g. random assignment)
+- **Data exploration:** Visualizations and insights about delivery patterns
+- **Algorithm implementation:** Your routing approach (construction + improvement)
+- **Results:** Final routes for all 4 drivers with cost breakdown
+- **Analysis:** Comparison to a baseline (e.g. random assignment)
 
 > **Note**
 >
@@ -454,10 +454,10 @@ Your notebook should include:
 
 ### 2. Presentation
 
--   **Problem understanding:** Eliza's pain points in your own words
--   **Your approach:** Algorithm choice and justification
--   **Results:** Routes visualization, cost savings, on-time improvement
--   **Business impact:** Recommendations for QuickBite
+- **Problem understanding:** Eliza's pain points in your own words
+- **Your approach:** Algorithm choice and justification
+- **Results:** Routes visualization, cost savings, on-time improvement
+- **Business impact:** Recommendations for QuickBite
 
 > **Note**
 >
@@ -465,12 +465,12 @@ Your notebook should include:
 
 ### 3. Key Metrics to Report
 
--   Total cost (all 4 drivers combined)
--   Total distance traveled
--   On-time delivery rate (% within time windows)
--   Number of late deliveries
--   Driver workload balance (fairness)
--   **Cost savings vs. current system** (estimate baseline first!)
+- Total cost (all 4 drivers combined)
+- Total distance traveled
+- On-time delivery rate (% within time windows)
+- Number of late deliveries
+- Driver workload balance (fairness)
+- **Cost savings vs. current system** (estimate baseline first!)
 
 ## Constraints and Requirements
 
@@ -500,25 +500,25 @@ Your notebook should include:
 
 ## Common Pitfalls to Avoid
 
--   **Ignoring capacity:** Don't create routes with 40 deliveries for one driver!
--   **Forgetting to return to depot:** Routes must be round-trips
--   **Not checking time windows:** Validate after every algorithmic change
--   **Over-optimization:** A good solution with clear explanation beats a "perfect" black box
--   **Poor visualization:** Make sure your routes are clearly visible and understandable
--   **No baseline comparison:** Always show improvement vs. current system!
+- **Ignoring capacity:** Don't create routes with 40 deliveries for one driver!
+- **Forgetting to return to depot:** Routes must be round-trips
+- **Not checking time windows:** Validate after every algorithmic change
+- **Over-optimization:** A good solution with clear explanation beats a "perfect" black box
+- **Poor visualization:** Make sure your routes are clearly visible and understandable
+- **No baseline comparison:** Always show improvement vs. current system!
 
 ## Data Access
 
 All data is provided in this notebook:
 
--   `deliveries_df`: DataFrame with 120 deliveries
--   `depot`: Dict with depot location
--   `distance_matrix`: Numpy array of distances
--   Helper functions: `calculate_route_cost()`, `visualize_deliveries()`
+- `deliveries_df`: DataFrame with 120 deliveries
+- `depot`: Dict with depot location
+- `distance_matrix`: Numpy array of distances
+- Helper functions: `calculate_route_cost()`, `visualize_deliveries()`
 
 **You may add additional functions as needed!**
 
 ## Deadline
 
--   **Notebook submission & Presentation:** Lecture 12
--   **Good luck, consultants!**
+- **Notebook submission & Presentation:** Lecture 12
+- **Good luck, consultants!**

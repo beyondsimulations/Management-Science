@@ -17,21 +17,21 @@ By the end of this course, you will be able to:
 
 **Technical Skills:**
 
--   Implement Management Science solutions in Python
--   Work effectively with NumPy and Pandas for analysis and modeling
--   Apply Monte Carlo simulation to model uncertainty and risk
--   Build and evaluate forecasting models for demand and time series
--   Design and analyze scheduling solutions with key performance metrics
--   Solve routing problems using heuristics and local search improvements
--   Handle multi-objective trade-offs and combine decision criteria meaningfully
--   Understand and apply metaheuristics for complex optimization problems
+- Implement Management Science solutions in Python
+- Work effectively with NumPy and Pandas for analysis and modeling
+- Apply Monte Carlo simulation to model uncertainty and risk
+- Build and evaluate forecasting models for demand and time series
+- Design and analyze scheduling solutions with key performance metrics
+- Solve routing problems using heuristics and local search improvements
+- Handle multi-objective trade-offs and combine decision criteria meaningfully
+- Understand and apply metaheuristics for complex optimization problems
 
 **Professional Skills:**
 
--   Collaborate effectively in small teams (3-4 students)
--   Communicate technical insights with clear visualizations and compelling narratives
--   Present solutions in a consulting-style format to business stakeholders
--   Approach complex problems with structured analytical thinking
+- Collaborate effectively in small teams (3-4 students)
+- Communicate technical insights with clear visualizations and compelling narratives
+- Present solutions in a consulting-style format to business stakeholders
+- Approach complex problems with structured analytical thinking
 
 > **Note**
 >
@@ -41,29 +41,29 @@ By the end of this course, you will be able to:
 
 The course is organized into three distinct parts across 12 lectures:
 
--   **Part I:** Python Foundation (Lectures 1-3)
--   **Part II:** Management Science Tools (Lectures 4-9)
--   **Part III:** Consulting Competition (Lectures 10-12)
+- **Part I:** Python Foundation (Lectures 1-3)
+- **Part II:** Management Science Tools (Lectures 4-9)
+- **Part III:** Consulting Competition (Lectures 10-12)
 
 # Grading
 
--   **Assignment 1: Risk & Forecasting** (Due Lecture 8) - 30%
--   **Assignment 2: Full Optimization Toolkit** (Due Lecture 10) - 30%
--   **Final Competition: Client Project** (Lectures 10-12) - 40%
+- **Assignment 1: Risk & Forecasting** (Due Lecture 8) - 30%
+- **Assignment 2: Full Optimization Toolkit** (Due Lecture 10) - 30%
+- **Final Competition: Client Project** (Lectures 10-12) - 40%
 
 > **Tip**
 >
-> -   Win mini-competitions during lectures (Lectures 4-9)
-> -   Best client project in Part III chosen by peer teams
+> - Win mini-competitions during lectures (Lectures 4-9)
+> - Best client project in Part III chosen by peer teams
 
 # Resources & Support
 
 ## Required Tools
 
--   Laptop capable of running Python and Jupyter notebooks
--   Python (installed via uv package manager in class)
--   GitHub Copilot (free with Student Developer Pack)
--   VS Code or similar IDE
+- Laptop capable of running Python and Jupyter notebooks
+- Python (installed via uv package manager in class)
+- GitHub Copilot (free with Student Developer Pack)
+- VS Code or similar IDE
 
 ## Getting Help
 
@@ -86,8 +86,8 @@ You may also use external AI tools (e.g., ChatGPT, Claude, Mistral, Gemini). How
 
 # How to Navigate This Course
 
--   **Slides:** Click "RevealJS" in the top right corner of each lecture page
--   **Notebooks:** Interactive exercises accompany each lecture
+- **Slides:** Click "RevealJS" in the top right corner of each lecture page
+- **Notebooks:** Interactive exercises accompany each lecture
 
 You can find detailed information about course policies, grading rubrics, and expectations in the [syllabus](general/syllabus.qmd).
 

@@ -154,6 +154,8 @@ website:
         href: https://tobiasvlcek.com/lectures/
       - icon: shield-check
         href: general/privacy.qmd
+      - icon: file-text
+        href: general/imprint.qmd
 
 format:
   html:
@@ -177,13 +179,15 @@ format:
       - general/header.html
     include-after-body:
       text: |
-        <script src="https://agents.byndsim.com/static/floating-chat.js"></script>
+        <script defer src="https://oshu.eu/widget.js"></script>
         <script>
-        new UniversalChatWidget({
-          "apiEndpoint": "https://chat.byndsim.com/chat",
-          "model": "management-science",
-          "configUrl": "https://agents.byndsim.com/api/widget-config/management-science"
-        });
+          document.addEventListener('DOMContentLoaded', function () {
+            ChatWidget.init({
+              tenant: "platform",
+              agent: "management-science",
+              layoutMode: "sidebar",
+            });
+          });
         </script>
 
   hugo-md: default

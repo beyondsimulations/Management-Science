@@ -13,8 +13,8 @@ format:
 
 ## Using AI to generate code
 
--   Coding by hand is <span class="highlight">not the only way to generate code</span>
--   Most likely, a lot of you have already used **ChatGPT**
+- Coding by hand is <span class="highlight">not the only way to generate code</span>
+- Most likely, a lot of you have already used **ChatGPT**
 
 . . .
 
@@ -36,19 +36,19 @@ Models work?
 
 ## Large Language Models (LLMs)
 
--   Think of them like <span class="highlight">advanced pattern recognition systems</span>
--   They have "read" **massive amounts of text**
--   Books, websites, articles, code, and more
--   Text is broken into **tokens**, parts of words or punctuation
--   Based on patterns, they can **generate new text**
+- Think of them like <span class="highlight">advanced pattern recognition systems</span>
+- They have "read" **massive amounts of text**
+- Books, websites, articles, code, and more
+- Text is broken into **tokens**, parts of words or punctuation
+- Based on patterns, they can **generate new text**
 
 ## Training LLMs
 
--   Imagine learning a language by <span class="highlight">reading millions of books</span>
--   Learns patterns in **how words and ideas connect** via tokens
--   Interconnected nodes with **weights representing patterns**
--   During training, these **weights are adjusted**
--   Once trained, **applying** them takes much less ressources
+- Imagine learning a language by <span class="highlight">reading millions of books</span>
+- Learns patterns in **how words and ideas connect** via tokens
+- Interconnected nodes with **weights representing patterns**
+- During training, these **weights are adjusted**
+- Once trained, **applying** them takes much less ressources
 
 . . .
 
@@ -58,11 +58,11 @@ Models work?
 
 ## Pattern Recognition
 
--   <span class="highlight">Not like a search engine!</span>
--   When asked, it looks for **relevant patterns** it learned
--   Like having a **huge library** in its "memory" to draw from
--   It can find **patterns between concepts** and your question
--   Knows only limited text at once (**context window**)
+- <span class="highlight">Not like a search engine!</span>
+- When asked, it looks for **relevant patterns** it learned
+- Like having a **huge library** in its "memory" to draw from
+- It can find **patterns between concepts** and your question
+- Knows only limited text at once (**context window**)
 
 . . .
 
@@ -72,23 +72,23 @@ Models work?
 
 ## Probability based responses
 
--   After each written token, it predicts <span class="highlight">"what should come next?"</span>
--   Like a advanced version of the **word prediction** on your phone
--   Chooses the **most likely next token** based on training
--   <span class="highlight">But can't actually "think" or "understand" like humans</span>
+- After each written token, it predicts <span class="highlight">"what should come next?"</span>
+- Like a advanced version of the **word prediction** on your phone
+- Chooses the **most likely next token** based on training
+- <span class="highlight">But can't actually "think" or "understand" like humans</span>
 
 ## Limitations
 
--   **No true understanding** of cause and effect[^1]
--   Sometimes **makes mistakes or "hallucinates"**
--   Mostly only knows what it **was trained on**[^2] and can **reflect biases**
--   No emotional understanding (but <span class="highlight">can simulate responses!</span>)[^3]
+- **No true understanding** of cause and effect[^1]
+- Sometimes **makes mistakes or "hallucinates"**
+- Mostly only knows what it **was trained on**[^2] and can **reflect biases**
+- No emotional understanding (but <span class="highlight">can simulate responses!</span>)[^3]
 
 ## Impact on Jobs
 
--   <span class="question">Question</span>: What do you think about their impact on jobs?
--   <span class="question">Question</span>: What are the implications for us?
--   <span class="question">Question</span>: Can we use them to our advantage?
+- <span class="question">Question</span>: What do you think about their impact on jobs?
+- <span class="question">Question</span>: What are the implications for us?
+- <span class="question">Question</span>: Can we use them to our advantage?
 
 . . .
 
@@ -98,9 +98,9 @@ Models work?
 
 ## A Great Overview by 3Blue1Brown
 
--   **Greg Sanderson provides an excellent explanation of LLMs**
--   Great starting point to understand LLMs
--   Check out his [YouTube channel, 3Blue1Brown](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw) for more
+- **Greg Sanderson provides an excellent explanation of LLMs**
+- Great starting point to understand LLMs
+- Check out his [YouTube channel, 3Blue1Brown](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw) for more
 
 <https://www.youtube.com/embed/LPZh9BOjkQs>
 
@@ -114,9 +114,9 @@ Models work?
 
 **Think of it as:**
 
--   An autocomplete for entire lines or blocks of code
--   A coding assistant that understands context
--   A learning tool that shows you coding patterns
+- An autocomplete for entire lines or blocks of code
+- A coding assistant that understands context
+- A learning tool that shows you coding patterns
 
 . . .
 
@@ -140,9 +140,9 @@ When you type on your phone, it suggests the next word.
 
 **GitHub Copilot does the same for code:**
 
--   You write a comment describing what you want
--   Copilot suggests the code to do it
--   You accept, modify, or reject the suggestion
+- You write a comment describing what you want
+- Copilot suggests the code to do it
+- You accept, modify, or reject the suggestion
 
 . . .
 
@@ -152,10 +152,10 @@ When you type on your phone, it suggests the next word.
 
 <span class="highlight">Benefits you while learning and working with Python:</span>
 
--   **Faster coding:** Less time typing boilerplate code
--   **Learn patterns:** See how experienced programmers code
--   **Understand syntax:** Get correct syntax without memorizing
--   **Stay in flow:** Focus on logic, not syntax errors
+- **Faster coding:** Less time typing boilerplate code
+- **Learn patterns:** See how experienced programmers code
+- **Understand syntax:** Get correct syntax without memorizing
+- **Stay in flow:** Focus on logic, not syntax errors
 
 . . .
 
@@ -169,10 +169,10 @@ When you type on your phone, it suggests the next word.
 
 <span class="highlight">Good uses of Copilot</span>
 
--   Understanding Python syntax you forgot
--   Writing repetitive or boilerplate code
--   Getting unstuck on simple problems
--   Exploring different approaches
+- Understanding Python syntax you forgot
+- Writing repetitive or boilerplate code
+- Getting unstuck on simple problems
+- Exploring different approaches
 
 ## What shouldn't you do with Copilot?
 
@@ -180,10 +180,10 @@ When you type on your phone, it suggests the next word.
 
 <span class="highlight">Not so good uses of Copilot</span>
 
--   Replacing learning fundamentals
--   Accepting code you don't understand
--   Skipping practice exercises
--   Copy-pasting without reading
+- Replacing learning fundamentals
+- Accepting code you don't understand
+- Skipping practice exercises
+- Copy-pasting without reading
 
 . . .
 
@@ -233,9 +233,9 @@ def calculate_shipping_cost(weight, distance):
 
 **What Copilot did:**
 
--   Created function with proper parameters
--   Implemented the calculation logic
--   Used clear variable names
+- Created function with proper parameters
+- Implemented the calculation logic
+- Used clear variable names
 
 . . .
 
@@ -249,11 +249,11 @@ def calculate_shipping_cost(weight, distance):
 
 <span class="highlight">Copilot might suggest code that:</span>
 
--   Works but uses concepts you haven't learned yet
--   Contains subtle bugs or edge cases
--   Doesn't match your specific requirements
--   Uses inefficient approaches
--   Introduce dangerous code in your project
+- Works but uses concepts you haven't learned yet
+- Contains subtle bugs or edge cases
+- Doesn't match your specific requirements
+- Uses inefficient approaches
+- Introduce dangerous code in your project
 
 . . .
 
@@ -305,9 +305,9 @@ def calculate_shipping_cost(weight, distance):
 
 **If working, you'll see:**
 
--   Gray "ghost text" suggesting code
--   Press `Tab` to accept
--   Press `Esc` to reject
+- Gray "ghost text" suggesting code
+- Press `Tab` to accept
+- Press `Esc` to reject
 
 . . .
 
@@ -356,19 +356,19 @@ def calculate_shipping_cost(weight, distance):
 
 **1. Learning Fundamentals**
 
--   You should understand loops, functions, and data types
+- You should understand loops, functions, and data types
 
 . . .
 
 **2. Skipping Problem-Solving**
 
--   Figure out the logic first, then use Copilot for syntax
+- Figure out the logic first, then use Copilot for syntax
 
 . . .
 
 **3. Accepting Without Understanding**
 
--   Ask: "Can I explain what this code does?"
+- Ask: "Can I explain what this code does?"
 
 # <span class="flow">Summary</span>
 

@@ -18,10 +18,10 @@ Your standardized functions from the Assistant Manager role were so successful t
 
 **The Challenge:** Managing 10 locations means tracking large amounts of data:
 
--   Each location has different inventory levels
--   Sales vary by neighborhood
--   Barista teams have different sizes
--   Equipment needs vary by store size
+- Each location has different inventory levels
+- Sales vary by neighborhood
+- Barista teams have different sizes
+- Equipment needs vary by store size
 
 Using simple variables or lists isn't enough anymore. You need a better way to organize all this information!
 
@@ -61,26 +61,26 @@ print(f"Today's sales: ${downtown_store['daily_sales']}")
 
 Dictionary anatomy:
 
--   Curly braces `{}` create a dictionary
--   **Keys** (like "name", "manager") are labels for your data
--   **Values** are the actual data (like "Sarah Chen", 4500.00)
--   Access values using square brackets with the key: `dict['key']`
+- Curly braces `{}` create a dictionary
+- **Keys** (like "name", "manager") are labels for your data
+- **Values** are the actual data (like "Sarah Chen", 4500.00)
+- Access values using square brackets with the key: `dict['key']`
 
 > **Lists vs Dictionaries**
 >
-> -   **Lists** are like numbered storage boxes - you access items by position (0, 1, 2...)
-> -   **Dictionaries** are like labeled filing folders - you access items by name ("sales", "inventory"...)
-> -   Use dictionaries when you want to describe something with multiple attributes!
+> - **Lists** are like numbered storage boxes - you access items by position (0, 1, 2...)
+> - **Dictionaries** are like labeled filing folders - you access items by name ("sales", "inventory"...)
+> - Use dictionaries when you want to describe something with multiple attributes!
 
 ## Exercise 1.1 - Create a Location Profile
 
 Create a dictionary called `airport_store` for the Bean Counter airport location with:
 
--   name: "Bean Counter Airport"
--   manager: "James Wilson"
--   daily_sales: 6200.00
--   staff_count: 12
--   coffee_beans_kg: 62.0
+- name: "Bean Counter Airport"
+- manager: "James Wilson"
+- daily_sales: 6200.00
+- staff_count: 12
+- coffee_beans_kg: 62.0
 
 ``` python
 # YOUR CODE BELOW
@@ -114,9 +114,9 @@ The airport store just received a delivery! Update the dictionary:
 
 > **Updating Dictionaries**
 >
-> -   Update existing values: `dict['key'] = new_value`
-> -   Add new keys: `dict['new_key'] = value`
-> -   Modify values using math: `dict['number'] = dict['number'] + 10`
+> - Update existing values: `dict['key'] = new_value`
+> - Add new keys: `dict['new_key'] = value`
+> - Modify values using math: `dict['number'] = dict['number'] + 10`
 
 ``` python
 # Assuming airport_store exists from previous exercise
@@ -197,10 +197,10 @@ print(f"Second location sales: ${bean_counter_locations[1]['daily_sales']}")
 
 Create a list called `regional_stores` containing 2 Bean Counter locations. Each store dictionary should have:
 
--   location_name (string)
--   monthly_revenue (number)
--   manager_name (string)
--   flagship (boolean - True for one store, False for others)
+- location_name (string)
+- monthly_revenue (number)
+- manager_name (string)
+- flagship (boolean - True for one store, False for others)
 
 ``` python
 # YOUR CODE BELOW
@@ -271,9 +271,9 @@ print(f"\nTotal regional sales: ${total_sales}")
 >
 > When looping through a list of dictionaries:
 >
-> -   The loop variable (like `store`) represents one complete dictionary
-> -   Access values using keys: `store['key_name']`
-> -   You can use the values in calculations, conditions, or function calls
+> - The loop variable (like `store`) represents one complete dictionary
+> - Access values using keys: `store['key_name']`
+> - You can use the values in calculations, conditions, or function calls
 
 ## Exercise 3.1 - Regional Performance Analysis
 
@@ -472,28 +472,28 @@ print("Fantastic! Your reporting system gives clear insights into store performa
 
 **You've learned:**
 
--   **Dictionaries** - Storing structured data with descriptive labels (keys and values)
--   **Accessing & Updating** - Getting and modifying dictionary values using keys
--   **Lists of Dictionaries** - Managing multiple entities with consistent structure
--   **Looping Through Dictionaries** - Analyzing data across all stores
--   **Filtering Dictionary Data** - Finding stores that meet specific criteria
--   **Functions with Dictionaries** - Creating powerful analysis and reporting tools
+- **Dictionaries** - Storing structured data with descriptive labels (keys and values)
+- **Accessing & Updating** - Getting and modifying dictionary values using keys
+- **Lists of Dictionaries** - Managing multiple entities with consistent structure
+- **Looping Through Dictionaries** - Analyzing data across all stores
+- **Filtering Dictionary Data** - Finding stores that meet specific criteria
+- **Functions with Dictionaries** - Creating powerful analysis and reporting tools
 
 **Your Bean Counter regional management system can now:**
 
--   Track detailed information for each location
--   Analyze performance across all stores
--   Identify locations needing supplies or support
--   Generate automated performance reports
+- Track detailed information for each location
+- Analyze performance across all stores
+- Identify locations needing supplies or support
+- Generate automated performance reports
 
 **Remember:**
 
--   Use curly braces `{}` to create dictionaries
--   Access values with square brackets and keys: `dict['key']`
--   Dictionaries are perfect for describing things with multiple attributes
--   Lists of dictionaries let you manage many similar entities
--   Loop through dictionaries to aggregate data or find patterns
--   Combine dictionaries with functions for sophisticated business logic
+- Use curly braces `{}` to create dictionaries
+- Access values with square brackets and keys: `dict['key']`
+- Dictionaries are perfect for describing things with multiple attributes
+- Lists of dictionaries let you manage many similar entities
+- Loop through dictionaries to aggregate data or find patterns
+- Combine dictionaries with functions for sophisticated business logic
 
 **What's Next:** Your data management skills have caught the CEO's attention! In the next tutorial, you'll be promoted to **Operations Director**, where you'll learn about **sorting and optimization** - finding the best options among many choices. You'll optimize scheduling, resource allocation, and discover how to always pick the best option for Bean Counter!
 

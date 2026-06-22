@@ -20,11 +20,11 @@ format:
 
 You have **multiple competing objectives**. You need more experienced servers than available, shifts have different lengths affecting labor costs, and servers have varying preferences for different shifts. **Critically, some servers cannot work certain shifts due to personal commitments** (shown as preference = 0). Your job is to find the best compromise:
 
--   Minimize total cost (labor + experience penalties + preference penalties)
--   **Respect hard availability constraints** (preference = 0 means CANNOT work that shift)
--   Balance multiple factors: shift coverage, server happiness, and costs
--   Strategic decisions: which expensive penalties to accept?
--   Navigate interdependencies created by availability constraints
+- Minimize total cost (labor + experience penalties + preference penalties)
+- **Respect hard availability constraints** (preference = 0 means CANNOT work that shift)
+- Balance multiple factors: shift coverage, server happiness, and costs
+- Strategic decisions: which expensive penalties to accept?
+- Navigate interdependencies created by availability constraints
 
 > **Tip**
 >
@@ -32,10 +32,10 @@ You have **multiple competing objectives**. You need more experienced servers th
 
 ### Your Resources
 
--   6 Experienced Servers (€75/hour)
--   12 Junior Servers (€25/hour)
--   6 Shifts to cover (3 servers each)
--   Everyone works exactly one shift
+- 6 Experienced Servers (€75/hour)
+- 12 Junior Servers (€25/hour)
+- 6 Shifts to cover (3 servers each)
+- Everyone works exactly one shift
 
 ## The Data
 
@@ -573,10 +573,10 @@ Design the optimal server schedule that minimizes total cost while managing mult
 
 This is NOT a simple assignment problem! You must balance:
 
--   **Varying shift lengths** (4-6 hours) that affect labor costs differently
--   **Server preferences** (1-10) where lower values mean unhappy staff and quality issues
--   **Strategic penalty decisions** - penalties range from €0 to €1200
--   **Three cost components**: labor + experience penalties + preference penalties
+- **Varying shift lengths** (4-6 hours) that affect labor costs differently
+- **Server preferences** (1-10) where lower values mean unhappy staff and quality issues
+- **Strategic penalty decisions** - penalties range from €0 to €1200
+- **Three cost components**: labor + experience penalties + preference penalties
 
 ### Approach Options
 
@@ -688,11 +688,11 @@ if is_valid:
 
 Prepare a one-slide presentation (PDF) containing:
 
--   **Your Best Schedule:** Total cost prominently displayed (labor + penalties + preferences)
--   **Approach:** Which solution generation method(s) did you use?
--   **Cost Breakdown:** Visualization showing the three cost components (labor, experience penalties, preference penalties)
--   **Shift Assignments:** Table showing each shift with experienced vs junior server counts
--   **Strategy Justification:** 2-3 sentences explaining why your schedule is optimal
+- **Your Best Schedule:** Total cost prominently displayed (labor + penalties + preferences)
+- **Approach:** Which solution generation method(s) did you use?
+- **Cost Breakdown:** Visualization showing the three cost components (labor, experience penalties, preference penalties)
+- **Shift Assignments:** Table showing each shift with experienced vs junior server counts
+- **Strategy Justification:** 2-3 sentences explaining why your schedule is optimal
 
 ## Tips for Success
 
@@ -704,21 +704,21 @@ Prepare a one-slide presentation (PDF) containing:
 
 ## Common Pitfalls to Avoid
 
--   **Violating availability constraints**: Assigning servers to shifts where preference = 0 triggers massive penalties
--   **Ignoring preferences**: Low-preference assignments (1-3) add up quickly in costs
--   **Missing the shortage**: You need 8 experienced servers but only have 6, plan which penalties to accept
--   **Incorrect cost calculation**: Must include all three components: labor + experience penalties + preference penalties
+- **Violating availability constraints**: Assigning servers to shifts where preference = 0 triggers massive penalties
+- **Ignoring preferences**: Low-preference assignments (1-3) add up quickly in costs
+- **Missing the shortage**: You need 8 experienced servers but only have 6, plan which penalties to accept
+- **Incorrect cost calculation**: Must include all three components: labor + experience penalties + preference penalties
 
 ## Final Checklist
 
 Before submitting your solution, verify:
 
--   [ ] Schedule assigns each server exactly once
--   [ ] Each shift has exactly 3 servers
--   [ ] No availability violations (preference = 0 assignments)
--   [ ] Cost calculation includes all three components
--   [ ] Justification explains your strategic penalty decisions (2-3 sentences)
--   [ ] One-slide presentation ready with cost breakdown and shift assignments
+- [ ] Schedule assigns each server exactly once
+- [ ] Each shift has exactly 3 servers
+- [ ] No availability violations (preference = 0 assignments)
+- [ ] Cost calculation includes all three components
+- [ ] Justification explains your strategic penalty decisions (2-3 sentences)
+- [ ] One-slide presentation ready with cost breakdown and shift assignments
 
 ## Good Luck!
 

@@ -25,9 +25,9 @@ format:
 
 . . .
 
--   **Hidden Risk:** A startup with 30% average return but 50% chance of failure might be worse than 20% return with 5% failure chance
--   **Portfolio Effects:** Two risky startups together might amplify risk beyond acceptable levels
--   **Tail Events:** The worst-case scenario can matter as much as the average case
+- **Hidden Risk:** A startup with 30% average return but 50% chance of failure might be worse than 20% return with 5% failure chance
+- **Portfolio Effects:** Two risky startups together might amplify risk beyond acceptable levels
+- **Tail Events:** The worst-case scenario can matter as much as the average case
 
 . . .
 
@@ -41,15 +41,15 @@ format:
 
 **Netflix Series Decisions**
 
--   Will a show hit 10M viewers?
--   Range: 500K to 50M
--   Investment: €20M per season
+- Will a show hit 10M viewers?
+- Range: 500K to 50M
+- Investment: €20M per season
 
 **Pharmaceutical R&D**
 
--   Will the drug pass trials?
--   Success rate: 10-20%
--   Investment: €1B over 10 years
+- Will the drug pass trials?
+- Success rate: 10-20%
+- Investment: €1B over 10 years
 
 . . .
 
@@ -67,9 +67,9 @@ format:
 
 **Method 1: Math**
 
--   Count combinations: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1)
--   Total combinations: 36
--   Probability: 6/36 = 16.67%
+- Count combinations: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1)
+- Total combinations: 36
+- Probability: 6/36 = 16.67%
 
 ## Rolling the Dice 10,000 Times II
 
@@ -129,9 +129,9 @@ $$\text{As } n \to \infty, \quad \bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \to \mu
 
 **What it means:**
 
--   Even if individual returns are <span class="highlight">NOT</span> normally distributed...
--   The portfolio of many assets <span class="highlight">WILL</span> be approximately normal
--   The average of many simulations <span class="highlight">WILL</span> be approximately normal
+- Even if individual returns are <span class="highlight">NOT</span> normally distributed...
+- The portfolio of many assets <span class="highlight">WILL</span> be approximately normal
+- The average of many simulations <span class="highlight">WILL</span> be approximately normal
 
 . . .
 
@@ -169,11 +169,11 @@ for n in sample_sizes:
 
 <span class="highlight">How many simulations should you run?</span>
 
--   **Quick exploration:** 10,000 simulations
-    -   Good for initial insights, prototyping
--   **Critical decisions:** 100,000+ simulations
-    -   Financial risk models, regulatory compliance
--   **When to stop:** When more simulations <span class="highlight">don't change</span> conclusion
+- **Quick exploration:** 10,000 simulations
+  - Good for initial insights, prototyping
+- **Critical decisions:** 100,000+ simulations
+  - Financial risk models, regulatory compliance
+- **When to stop:** When more simulations <span class="highlight">don't change</span> conclusion
 
 . . .
 
@@ -188,11 +188,11 @@ for n in sample_sizes:
 <span class="highlight">Three Simple Steps:</span>
 
 1.  **Model the Uncertainty:**
-    -   Define probability distributions for unknown variables
+    - Define probability distributions for unknown variables
 2.  **Simulate Many Scenarios:**
-    -   Generate thousands of possible outcomes
+    - Generate thousands of possible outcomes
 3.  **Analyze the Results:**
-    -   Calculate statistics from the simulation
+    - Calculate statistics from the simulation
 
 . . .
 
@@ -204,9 +204,9 @@ for n in sample_sizes:
 
 <span class="highlight">Key Function:</span> `np.random.normal(loc, scale, size)`
 
--   **loc**: The center (mean/average)
--   **scale**: The spread (standard deviation)
--   **size**: How many samples to generate
+- **loc**: The center (mean/average)
+- **scale**: The spread (standard deviation)
+- **size**: How many samples to generate
 
 . . .
 
@@ -304,9 +304,9 @@ cloudai = np.random.normal(0.25, 0.15, 10000)  # 25% ± 15%
 
 **Main Characteristics:**
 
--   Symmetric bell curve
--   Most values cluster around mean
--   Common in nature and business
+- Symmetric bell curve
+- Most values cluster around mean
+- Common in nature and business
 
 ## Uniform
 
@@ -321,9 +321,9 @@ finflow = np.random.uniform(0.10, 0.35, 10000)  # 10-35% equally likely
 
 **Main Characteristics:**
 
--   All values equally likely
--   Hard boundaries (min/max)
--   Good for modeling complete uncertainty within range
+- All values equally likely
+- Hard boundaries (min/max)
+- Good for modeling complete uncertainty within range
 
 ## Exponential
 
@@ -338,9 +338,9 @@ arrivals = np.random.exponential(5, 10000)  # Average 5 minutes
 
 **Main Characteristics:**
 
--   Many small values, few large ones
--   Always positive
--   Common for waiting times and rare events
+- Many small values, few large ones
+- Always positive
+- Common for waiting times and rare events
 
 # <span class="flow">Portfolios</span>
 
@@ -378,11 +378,11 @@ $$\binom{4}{2} = \frac{4!}{2! \times 2!} = \frac{4 \times 3 \times 2 \times 1}{(
 
 <span class="question">Question</span>: Which metrics matter most for investment decisions?
 
--   **Expected Return:** Average outcome across all scenarios
--   **Volatility (Risk):** Standard deviation of returns
--   **Probability of Loss:** How often do we lose money?
--   **Upside Potential:** Chance of exceptional returns (\>50%)
--   **Tail Risk:** What happens in the worst 10% of cases?
+- **Expected Return:** Average outcome across all scenarios
+- **Volatility (Risk):** Standard deviation of returns
+- **Probability of Loss:** How often do we lose money?
+- **Upside Potential:** Chance of exceptional returns (\>50%)
+- **Tail Risk:** What happens in the worst 10% of cases?
 
 . . .
 
@@ -396,10 +396,10 @@ $$\binom{4}{2} = \frac{4!}{2! \times 2!} = \frac{4 \times 3 \times 2 \times 1}{(
 
 **Expected Shortfall (ES)**
 
--   Average loss in worst X% of cases
--   Goes beyond simple probability
--   Measures depth of potential losses
--   Critical for risk management
+- Average loss in worst X% of cases
+- Goes beyond simple probability
+- Measures depth of potential losses
+- Critical for risk management
 
 . . .
 
@@ -417,9 +417,9 @@ $$\binom{4}{2} = \frac{4!}{2! \times 2!} = \frac{4 \times 3 \times 2 \times 1}{(
 
 **Independent Events:**
 
--   CloudAI's success doesn't affect GreenGrid's success
--   Each startup faces separate, unrelated risks
--   Portfolio risk = Average of individual risks
+- CloudAI's success doesn't affect GreenGrid's success
+- Each startup faces separate, unrelated risks
+- Portfolio risk = Average of individual risks
 
 . . .
 
@@ -441,9 +441,9 @@ $$\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} \quad \text{where } -1 
 
 **Interpreting Correlation:**
 
--   **ρ = +1:** Perfect positive correlation (move together)
--   **ρ = 0:** No correlation (independent)
--   **ρ = -1:** Perfect negative correlation (move opposite)
+- **ρ = +1:** Perfect positive correlation (move together)
+- **ρ = 0:** No correlation (independent)
+- **ρ = -1:** Perfect negative correlation (move opposite)
 
 ## Correlation in Practice
 
@@ -461,12 +461,12 @@ $$\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} \quad \text{where } -1 
 
 **Scenario 1: Independent (ρ = 0)**
 
--   One fails due to technical issues, other succeeds
--   Risk is averaged out
+- One fails due to technical issues, other succeeds
+- Risk is averaged out
 
 **Scenario 2: Positively Correlated (ρ = 0.8)**
 
--   Both rely on same AI infrastructure provider - risk is amplified!
+- Both rely on same AI infrastructure provider - risk is amplified!
 
 . . .
 
@@ -488,10 +488,10 @@ $$\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} \quad \text{where } -1 
 
 <span class="highlight">Common sources of correlation in business:</span>
 
--   **Industry-specific:** All tech startups affected by downturn
--   **Geographic:** All European companies affected by EU regulations
--   **Supply chain:** Multiple companies relying on same supplier
--   **Macroeconomic:** Interest rates, inflation affect most businesses
+- **Industry-specific:** All tech startups affected by downturn
+- **Geographic:** All European companies affected by EU regulations
+- **Supply chain:** Multiple companies relying on same supplier
+- **Macroeconomic:** Interest rates, inflation affect most businesses
 
 . . .
 
@@ -527,16 +527,16 @@ $$\rho_{X,Y} = \frac{\text{Cov}(X,Y)}{\sigma_X \sigma_Y} \quad \text{where } -1 
 
 <span class="highlight">You can use math (analytical solutions):</span>
 
--   **Simple distributions:** Mean and variance of normal distributions
--   **Linear combinations:** Portfolio of independent assets
+- **Simple distributions:** Mean and variance of normal distributions
+- **Linear combinations:** Portfolio of independent assets
 
 . . .
 
 <span class="highlight">You NEED Monte Carlo when:</span>
 
--   **Complex dependencies:** Nonlinear relationships
--   **Path-dependent problems:** Outcome depends on a sequence
--   **No closed-form solution:** The math is intractable
+- **Complex dependencies:** Nonlinear relationships
+- **Path-dependent problems:** Outcome depends on a sequence
+- **No closed-form solution:** The math is intractable
 
 ## Real Monte Carlo Applications
 
@@ -631,9 +631,9 @@ print(f"90th percentile: {np.percentile(project_times, 90):.1f} days")
 
 . . .
 
--   **Visualization:** Seeing the full distribution is intuitive
--   **Flexibility:** When problems become complex, simulation adapts
--   **Extensions:** Practice for complex problem
+- **Visualization:** Seeing the full distribution is intuitive
+- **Flexibility:** When problems become complex, simulation adapts
+- **Extensions:** Practice for complex problem
 
 . . .
 
@@ -647,12 +647,12 @@ print(f"90th percentile: {np.percentile(project_times, 90):.1f} days")
 
 . . .
 
--   **Simple analytical solution exists and suffices**
-    -   Use math directly: faster, more precise, easier to understand
--   **Can't reasonably estimate input distributions**
-    -   Garbage in = garbage out; need solid basis for assumptions
--   **Problem is deterministic (no uncertainty)**
-    -   Simulation adds complexity without value
+- **Simple analytical solution exists and suffices**
+  - Use math directly: faster, more precise, easier to understand
+- **Can't reasonably estimate input distributions**
+  - Garbage in = garbage out; need solid basis for assumptions
+- **Problem is deterministic (no uncertainty)**
+  - Simulation adds complexity without value
 
 . . .
 
@@ -665,13 +665,13 @@ print(f"90th percentile: {np.percentile(project_times, 90):.1f} days")
 ## Decision Framework
 
 1.  <span class="highlight">Define Your Risk Tolerance</span>
-    -   Can you afford to lose money and what's your time horizon?
-    -   Are you risk-averse or risk-seeking?
+    - Can you afford to lose money and what's your time horizon?
+    - Are you risk-averse or risk-seeking?
 2.  <span class="highlight">Evaluate Multiple Metrics</span>
-    -   Don't just maximize returns, consider volatility and risk
-    -   Look at probability of achieving goals
+    - Don't just maximize returns, consider volatility and risk
+    - Look at probability of achieving goals
 3.  <span class="highlight">Scenario Test</span>
-    -   What if distributions change or a company fails?
+    - What if distributions change or a company fails?
 
 ## The Plan for the Day
 
@@ -679,25 +679,25 @@ print(f"90th percentile: {np.percentile(project_times, 90):.1f} days")
 
 **Lecture**
 
--   Concepts
--   Examples
--   Visualization
+- Concepts
+- Examples
+- Visualization
 
 **Hour 2:**
 
 **Practice Notebook**
 
--   Simulation
--   Hands-on coding
--   Build your skills
+- Simulation
+- Hands-on coding
+- Build your skills
 
 **Hours 3-4:**
 
 **Competition**
 
--   TechVenture
--   Team collaboration
--   €2M investment
+- TechVenture
+- Team collaboration
+- €2M investment
 
 . . .
 
@@ -707,19 +707,19 @@ print(f"90th percentile: {np.percentile(project_times, 90):.1f} days")
 
 **Your Practice Case: Bean Counter Expansion**
 
--   Model uncertain variables (customers, spending)
--   Combine multiple uncertainties
--   Calculate business metrics (VaR, profit probability)
--   Make data-driven recommendations
+- Model uncertain variables (customers, spending)
+- Combine multiple uncertainties
+- Calculate business metrics (VaR, profit probability)
+- Make data-driven recommendations
 
 ## Hours 3-4: The Challenge
 
 <span class="highlight">TechVenture Investment Competition</span>
 
--   **Your Budget:** €2 million
--   **Your Choice:** Pick 2 of 4 startups
--   **Your Goal:** Maximize risk-adjusted returns
--   **Your Deliverable:** One-slide recommendation + 3-minute pitch
+- **Your Budget:** €2 million
+- **Your Choice:** Pick 2 of 4 startups
+- **Your Goal:** Maximize risk-adjusted returns
+- **Your Deliverable:** One-slide recommendation + 3-minute pitch
 
 . . .
 
@@ -735,19 +735,19 @@ Consider multiple risk metrics and prepare a clear justification!
 
 **Concepts**
 
--   Monte Carlo simulation
--   Probability distributions
--   Risk has multiple dimensions
--   Expected Value vs. Variance
--   Correlation and dependence
+- Monte Carlo simulation
+- Probability distributions
+- Risk has multiple dimensions
+- Expected Value vs. Variance
+- Correlation and dependence
 
 **Skills**
 
--   Using `np.random` for simulation
--   Calculating risk metrics
--   Visualizing uncertainty
--   Comparing portfolios
--   Understanding correlation
+- Using `np.random` for simulation
+- Calculating risk metrics
+- Visualizing uncertainty
+- Comparing portfolios
+- Understanding correlation
 
 . . .
 
@@ -759,10 +759,10 @@ Consider multiple risk metrics and prepare a clear justification!
 
 <span class="highlight">Forecasting the Future</span>
 
--   Moving from simulation to prediction
--   Time series analysis
--   Trend and seasonality detection
--   Measuring forecast accuracy
+- Moving from simulation to prediction
+- Time series analysis
+- Trend and seasonality detection
+- Measuring forecast accuracy
 
 . . .
 

@@ -14,10 +14,10 @@ Welcome back, CEO! Bean Counter has grown to **1,000 cafés across Europe**, and
 
 **The Distribution Crisis:**
 
--   Current network: 50 distribution centers selected **randomly** 10 years ago
--   Annual logistics cost: **€45 million** (facility leases + delivery)
--   Competitors using optimization are **20% more efficient**
--   Board mandate: **Redesign the entire network** or lose market share
+- Current network: 50 distribution centers selected **randomly** 10 years ago
+- Annual logistics cost: **€45 million** (facility leases + delivery)
+- Competitors using optimization are **20% more efficient**
+- Board mandate: **Redesign the entire network** or lose market share
 
 You have 200 potential locations to choose from, and must select exactly 50 for new 10-year leases starting next quarter.
 
@@ -204,9 +204,9 @@ We'll use the Haversine formula to calculate real distances between geographic c
 >
 > Where:
 >
-> -   $r$ = Earth's radius (≈ 6371 km)
-> -   $\phi$ = latitude in radians
-> -   $\lambda$ = longitude in radians
+> - $r$ = Earth's radius (≈ 6371 km)
+> - $\phi$ = latitude in radians
+> - $\lambda$ = longitude in radians
 
 Here it is already implemented, you just need to call it:
 
@@ -271,18 +271,18 @@ This is the **heart** of the optimization, the function that determines if a net
 > **Greedy Assignment Process**:
 >
 > 1.  For each selected center:
->     -   Find the 20 nearest unassigned cafés
->     -   Assign them to this center
->     -   Mark them as assigned
+>     - Find the 20 nearest unassigned cafés
+>     - Assign them to this center
+>     - Mark them as assigned
 > 2.  Sum up all delivery distances
 > 3.  Calculate total cost
 >
 > **Why this is better**:
 >
-> -   **Always feasible** - balanced load by construction
-> -   **No capacity violations** - each center gets exactly 20 cafés
-> -   **Realistic** - distribution territories are typically balanced
-> -   **Simple** - no penalty functions or feasibility checks needed
+> - **Always feasible** - balanced load by construction
+> - **No capacity violations** - each center gets exactly 20 cafés
+> - **Realistic** - distribution territories are typically balanced
+> - **Simple** - no penalty functions or feasibility checks needed
 
 > **Before You Start**
 >
@@ -467,9 +467,9 @@ Let's start with the simplest approach: pick the 50 centers that minimize total 
 >
 > 1.  Start with empty selection
 > 2.  For each of 50 iterations:
->     -   Try adding each remaining center
->     -   Calculate the cost with balanced allocation
->     -   Add the center with the lowest cost
+>     - Try adding each remaining center
+>     - Calculate the cost with balanced allocation
+>     - Add the center with the lowest cost
 > 3.  Return final selection
 >
 > **Note**: With balanced allocation, every solution is automatically feasible!
@@ -482,9 +482,9 @@ Let's start with the simplest approach: pick the 50 centers that minimize total 
 >
 > 1.  **Loop 50 times** (one for each center to select)
 > 2.  **For each candidate** in the remaining centers:
->     -   Create `temp_selection = selected + [candidate]`
->     -   Calculate the cost if we selected this candidate
->     -   Track the candidate with the lowest cost
+>     - Create `temp_selection = selected + [candidate]`
+>     - Calculate the cost if we selected this candidate
+>     - Track the candidate with the lowest cost
 > 3.  **Add the best candidate** to `selected` and remove from `remaining`
 >
 > **Key insight**: This is expensive (trying ~150 centers × 50 times = 7,500 cost calculations), but it builds a good initial solution!
@@ -615,9 +615,9 @@ plt.show()
 >
 > Greedy saved us some money! But greedy algorithms are **short-sighted**:
 >
-> -   They make locally optimal choices
-> -   They never reconsider earlier decisions
-> -   They can't escape suboptimal patterns
+> - They make locally optimal choices
+> - They never reconsider earlier decisions
+> - They can't escape suboptimal patterns
 >
 > **Can we do better?**
 
@@ -731,9 +731,9 @@ Now implement the full local search algorithm.
 >
 > 1.  **Try multiple neighbors** each iteration (parameter: `neighbors_per_iteration`)
 > 2.  **For each neighbor**:
->     -   Generate it using `generate_swap_neighbor(current)`
->     -   Calculate its cost using `calculate_network_cost(...)`
->     -   If better than current, **accept it immediately** and break the inner loop
+>     - Generate it using `generate_swap_neighbor(current)`
+>     - Calculate its cost using `calculate_network_cost(...)`
+>     - If better than current, **accept it immediately** and break the inner loop
 > 3.  **Track improvements**: Increment counter when you accept a neighbor
 > 4.  **Stop when stuck**: If you try all neighbors and none improve, you've reached a local optimum
 >
@@ -865,9 +865,9 @@ plt.show()
 >
 > Local search potentially finds a better solution than greedy, but this is not always the case as it can easily be **stuck at a local optimum**:
 >
-> -   No single swap improves the solution
-> -   But a **sequence** of swaps (including temporary bad moves) might lead somewhere better
-> -   Like hiking: sometimes you must go downhill briefly to reach a higher peak
+> - No single swap improves the solution
+> - But a **sequence** of swaps (including temporary bad moves) might lead somewhere better
+> - Like hiking: sometimes you must go downhill briefly to reach a higher peak
 >
 > **This is why we need metaheuristics!**
 
@@ -885,9 +885,9 @@ Simulated Annealing (SA) is inspired by metallurgy: heating metal allows atoms t
 >
 > 1.  **If improvement** (new_cost \< current_cost): Always return `True`
 > 2.  **If worse** (new_cost \>= current_cost):
->     -   Calculate `delta = new_cost - current_cost`
->     -   Calculate `probability = math.exp(-delta / temperature)`
->     -   Return `True` with that probability: `random.random() < probability`
+>     - Calculate `delta = new_cost - current_cost`
+>     - Calculate `probability = math.exp(-delta / temperature)`
+>     - Return `True` with that probability: `random.random() < probability`
 >
 > **Key insight**: As temperature decreases, probability → 0, so SA becomes greedy!
 
@@ -895,27 +895,27 @@ Simulated Annealing (SA) is inspired by metallurgy: heating metal allows atoms t
 >
 > **Scenario 1: Small cost increase, high temperature**
 >
-> -   Current: €40,000,000
-> -   Neighbor: €40,100,000 (€100K worse)
-> -   Temperature: T = 1,000,000
-> -   Delta = 100,000
-> -   Probability = exp(-100,000 / 1,000,000) = exp(-0.1) ≈ **90.5%** → Often accept!
+> - Current: €40,000,000
+> - Neighbor: €40,100,000 (€100K worse)
+> - Temperature: T = 1,000,000
+> - Delta = 100,000
+> - Probability = exp(-100,000 / 1,000,000) = exp(-0.1) ≈ **90.5%** → Often accept!
 >
 > **Scenario 2: Same increase, low temperature**
 >
-> -   Current: €40,000,000
-> -   Neighbor: €40,100,000 (€100K worse)
-> -   Temperature: T = 1,000
-> -   Delta = 100,000
-> -   Probability = exp(-100,000 / 1,000) = exp(-100) ≈ **0.0%** → Reject!
+> - Current: €40,000,000
+> - Neighbor: €40,100,000 (€100K worse)
+> - Temperature: T = 1,000
+> - Delta = 100,000
+> - Probability = exp(-100,000 / 1,000) = exp(-100) ≈ **0.0%** → Reject!
 >
 > **Scenario 3: Large increase, high temperature**
 >
-> -   Current: €40,000,000
-> -   Neighbor: €42,000,000 (€2M worse!)
-> -   Temperature: T = 1,000,000
-> -   Delta = 2,000,000
-> -   Probability = exp(-2,000,000 / 1,000,000) = exp(-2) ≈ **13.5%** → Sometimes accept!
+> - Current: €40,000,000
+> - Neighbor: €42,000,000 (€2M worse!)
+> - Temperature: T = 1,000,000
+> - Delta = 2,000,000
+> - Probability = exp(-2,000,000 / 1,000,000) = exp(-2) ≈ **13.5%** → Sometimes accept!
 >
 > **The pattern**: Higher temperature → more exploration. Lower temperature → more exploitation.
 
@@ -974,9 +974,9 @@ Now put it all together! I will provide the cooling schedule, you implement the 
 >
 > We'll use **geometric cooling**: `T_new = α × T_old`
 >
-> -   Initial temperature: `T₀ = 10,000` (accept moves up to ~€10K worse initially)
-> -   Cooling rate: `α = 0.995` (slow cooling for thorough exploration)
-> -   Stop when: `T < 1` (essentially greedy behavior)
+> - Initial temperature: `T₀ = 10,000` (accept moves up to ~€10K worse initially)
+> - Cooling rate: `α = 0.995` (slow cooling for thorough exploration)
+> - Stop when: `T < 1` (essentially greedy behavior)
 
 > **Before You Start**
 >
@@ -1176,9 +1176,9 @@ print(f"This allowed it to escape local optima and find a better global solution
 
 **Why SA beats Local Search:**
 
--   **Early exploration** (high T): SA accepts worse moves, exploring far from greedy solution
--   **Strategic descent** (mid T): SA occasionally climbs small hills to find better valleys
--   **Fine-tuning** (low T): SA behaves like local search to polish the solution
+- **Early exploration** (high T): SA accepts worse moves, exploring far from greedy solution
+- **Strategic descent** (mid T): SA occasionally climbs small hills to find better valleys
+- **Fine-tuning** (low T): SA behaves like local search to polish the solution
 
 The key: **temporary bad decisions enable better long-term outcomes!**
 
@@ -1237,9 +1237,9 @@ print("=" * 80)
 
 In the **Restaurant Staffing Competition**, you'll:
 
--   Apply these algorithms to the scheduling problem
--   Optimize labor costs while meeting service requirements
--   Use SA to find the best schedule
--   Visualize and present your solution strategy
+- Apply these algorithms to the scheduling problem
+- Optimize labor costs while meeting service requirements
+- Use SA to find the best schedule
+- Visualize and present your solution strategy
 
 **You're ready! Go optimize that restaurant!**

@@ -47,10 +47,10 @@ print("Libraries loaded! Ready to optimize Bean Counter's operations.")
 
 TechCorp's board meeting starts in 90 minutes. They've pre-ordered 20 specialty drinks with specific requirements. You have:
 
--   **Complete information**: All 20 orders known upfront
--   **One machine**: Must sequence orders optimally
--   **Varying complexity**: From simple espressos (3 min) to complex mochas (12 min)
--   **Deadlines**: Some executives need drinks early (rushed board members), others can wait (relaxed attendees)
+- **Complete information**: All 20 orders known upfront
+- **One machine**: Must sequence orders optimally
+- **Varying complexity**: From simple espressos (3 min) to complex mochas (12 min)
+- **Deadlines**: Some executives need drinks early (rushed board members), others can wait (relaxed attendees)
 
 This is **static scheduling** - you can plan the entire sequence before starting.
 
@@ -58,9 +58,9 @@ This is **static scheduling** - you can plan the entire sequence before starting
 
 Each order contains:
 
--   **Order ID**: Customer identifier
--   **Processing Time**: How long it takes to make
--   **Due Time**: When the customer needs it (measured from start of your shift)
+- **Order ID**: Customer identifier
+- **Processing Time**: How long it takes to make
+- **Due Time**: When the customer needs it (measured from start of your shift)
 
 **Note**: No arrival times! All orders are available at time 0.
 
@@ -208,8 +208,8 @@ Process orders in their original sequence (order ID order).
 
 > **Tip**
 >
-> -   `sorted()` function sorts a list based on a criterion
-> -   `lambda x: x['id']` is a mini-function that is used in `sorted()` saying "sort by the 'id' field"
+> - `sorted()` function sorts a list based on a criterion
+> - `lambda x: x['id']` is a mini-function that is used in `sorted()` saying "sort by the 'id' field"
 
 ``` python
 def schedule_fifo_static(orders):
@@ -367,9 +367,9 @@ Calculate metrics for all three rules to see which performs best.
 
 > **Coding Hints**
 >
-> -   The `calculate_metrics()` function is already defined - you just call it!
-> -   It returns a dictionary with metrics like `{'makespan': 29, 'avg_flow_time': 15.2, ...}`
-> -   Pass the DataFrame to the function: `calculate_metrics(df_fifo)`
+> - The `calculate_metrics()` function is already defined - you just call it!
+> - It returns a dictionary with metrics like `{'makespan': 29, 'avg_flow_time': 15.2, ...}`
+> - Pass the DataFrame to the function: `calculate_metrics(df_fifo)`
 
 > **Creating DataFrames from Dictionaries**
 >
@@ -467,10 +467,10 @@ plt.show()
 
 **Why these results?**
 
--   **SPT minimizes avg flow time**: Short jobs finish quickly, reducing overall wait
--   **EDD minimizes tardiness**: Processing by deadline directly optimizes late penalties
--   **FIFO is neutral**: No optimization, just processes in arbitrary order
--   **Same makespan**: All schedules do the same work, just in different orders
+- **SPT minimizes avg flow time**: Short jobs finish quickly, reducing overall wait
+- **EDD minimizes tardiness**: Processing by deadline directly optimizes late penalties
+- **FIFO is neutral**: No optimization, just processes in arbitrary order
+- **Same makespan**: All schedules do the same work, just in different orders
 
 # Section 5 - The Friday Morning Rush Problem
 
@@ -478,9 +478,9 @@ plt.show()
 
 The corporate event was a **batch problem**, all orders known upfront. But most real operations face **online problems** where:
 
--   Orders arrive over time
--   You can't see future orders
--   You must make decisions with partial information
+- Orders arrive over time
+- You can't see future orders
+- You must make decisions with partial information
 
 **Friday morning at Bean Counter** is this type of problem!
 
@@ -488,9 +488,9 @@ The corporate event was a **batch problem**, all orders known upfront. But most 
 
 It's 6 AM Friday. Your flagship store faces:
 
--   **Orders arriving continuously** over 2 hours
--   **No future visibility** - can't see orders that haven't been placed yet
--   **Real-time decisions** - when the machine is free, which available order should you process?
+- **Orders arriving continuously** over 2 hours
+- **No future visibility** - can't see orders that haven't been placed yet
+- **Real-time decisions** - when the machine is free, which available order should you process?
 
 This requires **dynamic dispatching**: making decisions based only on orders that have already arrived.
 
@@ -603,10 +603,10 @@ Instead of sorting everything upfront, we make decisions **one at a time** as th
 
 1.  Start with `current_time = 0`
 2.  **While there are unscheduled orders:**
-    -   Find which orders have `arrival <= current_time` (the "available pool")
-    -   If no orders available, jump forward to the next arrival
-    -   Apply your rule (FIFO/SPT/EDD) to choose from the available pool
-    -   Schedule that order, update time, repeat
+    - Find which orders have `arrival <= current_time` (the "available pool")
+    - If no orders available, jump forward to the next arrival
+    - Apply your rule (FIFO/SPT/EDD) to choose from the available pool
+    - Schedule that order, update time, repeat
 
 This simulates real-time decision-making!
 
@@ -827,23 +827,23 @@ plt.show()
 ## Key Takeaways
 
 1.  **Static Scheduling** (Corporate Event):
-    -   All orders known upfront
-    -   Sort and sequence optimally
-    -   SPT minimizes flow time, EDD minimizes tardiness
-    -   Simple to implement and understand
+    - All orders known upfront
+    - Sort and sequence optimally
+    - SPT minimizes flow time, EDD minimizes tardiness
+    - Simple to implement and understand
 2.  **Dynamic Scheduling** (Friday Rush):
-    -   Orders arrive over time
-    -   Make real-time decisions with partial information
-    -   Only consider orders that have arrived
-    -   Better machine utilization, more realistic
+    - Orders arrive over time
+    - Make real-time decisions with partial information
+    - Only consider orders that have arrived
+    - Better machine utilization, more realistic
 3.  **Algorithm Performance**:
-    -   **FIFO**: Simple, fair, but not optimized
-    -   **SPT**: Minimizes average wait time
-    -   **EDD**: Minimizes tardiness and late orders
-    -   Choice depends on business priorities!
+    - **FIFO**: Simple, fair, but not optimized
+    - **SPT**: Minimizes average wait time
+    - **EDD**: Minimizes tardiness and late orders
+    - Choice depends on business priorities!
 4.  **When to Use Each**:
-    -   Static: Batch processing, complete information, planning ahead
-    -   Dynamic: Real-time operations, orders arrive continuously, reactive scheduling
+    - Static: Batch processing, complete information, planning ahead
+    - Dynamic: Real-time operations, orders arrive continuously, reactive scheduling
 
 ## What's Next?
 

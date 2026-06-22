@@ -30,10 +30,10 @@ format:
 
 **La Étoile's Problem:**
 
--   18 servers available (6 experienced @ €75/hr, 12 junior @ €25/hr)
--   6 shifts with **varying lengths** (4-6 hours each)
--   Each shift needs 3 servers (at least 1 experienced)
--   Server **preferences** matter (1-10 scale, affects quality)
+- 18 servers available (6 experienced @ €75/hr, 12 junior @ €25/hr)
+- 6 shifts with **varying lengths** (4-6 hours each)
+- Each shift needs 3 servers (at least 1 experienced)
+- Server **preferences** matter (1-10 scale, affects quality)
 
 . . .
 
@@ -43,11 +43,11 @@ format:
 
 <span class="highlight">The financial stakes are significant with these large penalties:</span>
 
--   **Minimum Labor Cost**: ~€3,500 (everyone works once)
--   **Experience Penalties**: €0-€1,200 per missing experienced server
--   **Preference Penalties**: €0-€180 per unhappy assignment
--   **Worst Case**: Over €9,000 if poorly scheduled!
--   **Best Case**: ??? with smart optimization
+- **Minimum Labor Cost**: ~€3,500 (everyone works once)
+- **Experience Penalties**: €0-€1,200 per missing experienced server
+- **Preference Penalties**: €0-€180 per unhappy assignment
+- **Worst Case**: Over €9,000 if poorly scheduled!
+- **Best Case**: ??? with smart optimization
 
 . . .
 
@@ -80,11 +80,11 @@ format:
 
 <span class="highlight">Remember the metaphor with blindfolded eyes from last lecture?</span>
 
--   **Goal**: Find the highest peak in a mountain range
--   **Challenge**: You're hiking in thick fog (can only see 10 meters)
--   **Position**: Your X,Y coordinates = your decisions
--   **Altitude**: Your current solution quality
--   **Problem**: You might climb a small hill and think it's the summit!
+- **Goal**: Find the highest peak in a mountain range
+- **Challenge**: You're hiking in thick fog (can only see 10 meters)
+- **Position**: Your X,Y coordinates = your decisions
+- **Altitude**: Your current solution quality
+- **Problem**: You might climb a small hill and think it's the summit!
 
 . . .
 
@@ -110,19 +110,19 @@ format:
 
 **Technical View: Local Optima**
 
--   Algorithm climbs nearest hill
--   Gets stuck on "foothill"
--   Can't see the mountain beyond
--   Every move looks worse
--   Believes it found the best
+- Algorithm climbs nearest hill
+- Gets stuck on "foothill"
+- Can't see the mountain beyond
+- Every move looks worse
+- Believes it found the best
 
 **Analogy: Department Silos**
 
--   Sales optimizes sales metrics
--   Engineering optimizes quality
--   Finance optimizes costs
--   Each department "wins"
--   **Company performance loses!**
+- Sales optimizes sales metrics
+- Engineering optimizes quality
+- Finance optimizes costs
+- Each department "wins"
+- **Company performance loses!**
 
 . . .
 
@@ -162,16 +162,16 @@ format:
 
 <span class="highlight">The fundamental components:</span>
 
--   **Solution** = One complete schedule/route/plan
--   **Neighbor** = A slightly modified version
--   **Cost** = How good/bad the solution is
+- **Solution** = One complete schedule/route/plan
+- **Neighbor** = A slightly modified version
+- **Cost** = How good/bad the solution is
 
 . . .
 
 **The Strategy**
 
--   Always accept improvements
--   Sometimes accept worse solutions (the change!)
+- Always accept improvements
+- Sometimes accept worse solutions (the change!)
 
 . . .
 
@@ -295,15 +295,15 @@ La Étoile's Weekend Challenge:
 
 **Mistake #1: Starting Too Cold**
 
--   If temperature is too low → Acts like greedy (no exploration)
--   Fix: Start hot enough to accept bad moves
+- If temperature is too low → Acts like greedy (no exploration)
+- Fix: Start hot enough to accept bad moves
 
 . . .
 
 **Mistake #2: Cooling Too Quickly**
 
--   If you cool fast → Get stuck early
--   Fix: Cool slowly (multiply by 0.95-0.99, not 0.5)
+- If you cool fast → Get stuck early
+- Fix: Cool slowly (multiply by 0.95-0.99, not 0.5)
 
 . . .
 
@@ -405,9 +405,9 @@ La Étoile's Weekend Challenge:
 
 <span class="highlight">How do offspring join the population?</span>
 
--   **Generational:** Replace entire population with offspring
--   **Steady-State:** Replace only worst individuals
--   **Elitism:** Always keep the best solutions
+- **Generational:** Replace entire population with offspring
+- **Steady-State:** Replace only worst individuals
+- **Elitism:** Always keep the best solutions
 
 . . .
 
@@ -457,15 +457,15 @@ La Étoile's Weekend Challenge:
 
 **Mistake #1: Everyone Becomes Identical**
 
--   If all solutions look the same → Lost diversity
--   Fix: More mutation, bigger population, tournament selection
+- If all solutions look the same → Lost diversity
+- Fix: More mutation, bigger population, tournament selection
 
 . . .
 
 **Mistake #2: Too Greedy in Selection**
 
--   Only keeping the very best → Premature convergence  
--   Fix: Keep some variety, even if not perfect (elitism of 10-20%)
+- Only keeping the very best → Premature convergence  
+- Fix: Keep some variety, even if not perfect (elitism of 10-20%)
 
 ## GA Mistakes: Implementation
 
@@ -475,15 +475,15 @@ La Étoile's Weekend Challenge:
 
 **Mistake #3: Breaking the Rules**
 
--   Crossover might create invalid schedules
--   Fix: Always check and repair after crossover/mutation
+- Crossover might create invalid schedules
+- Fix: Always check and repair after crossover/mutation
 
 . . .
 
 **Mistake #4: Evolution Too Slow**
 
--   Population too large or too many generations
--   Fix: Start small (50-100), tune based on convergence
+- Population too large or too many generations
+- Fix: Start small (50-100), tune based on convergence
 
 # <span class="flow">Metaheuristic #3: Tabu Search</span>
 
@@ -493,17 +493,17 @@ La Étoile's Weekend Challenge:
 
 **Analogy:**
 
--   Keep a list of recent dates
--   "Not going back there!"
--   Forces you to meet new people
--   After time, memory fades
+- Keep a list of recent dates
+- "Not going back there!"
+- Forces you to meet new people
+- After time, memory fades
 
 **In Optimization:**
 
--   Recent solutions = "tabu"
--   Don't revisit same schedules
--   Forces exploration of new areas
--   Tabu list has limited size
+- Recent solutions = "tabu"
+- Don't revisit same schedules
+- Forces exploration of new areas
+- Tabu list has limited size
 
 . . .
 
@@ -567,17 +567,17 @@ def tabu_search_concept():
 
 **Reviews:**
 
--   Popular choices get more 5-star reviews
--   More reviews → more visibility
--   But old reviews fade over time
--   New patterns can emerge
+- Popular choices get more 5-star reviews
+- More reviews → more visibility
+- But old reviews fade over time
+- New patterns can emerge
 
 **In Optimization:**
 
--   Good assignments get "pheromones"
--   Stronger choosen more likely
--   Evaporation against stagnation
--   Colony finds patterns
+- Good assignments get "pheromones"
+- Stronger choosen more likely
+- Evaporation against stagnation
+- Colony finds patterns
 
 > **Tip**
 >
@@ -604,19 +604,19 @@ def tabu_search_concept():
 
 **Evaporation Rate (ρ)**
 
--   Higher ρ → More forgetting
--   Lower ρ → Stronger memory
--   Typical: 0.1 - 0.5
--   **Too high**: Colony never learns
--   **Too low**: Gets stuck early
+- Higher ρ → More forgetting
+- Lower ρ → Stronger memory
+- Typical: 0.1 - 0.5
+- **Too high**: Colony never learns
+- **Too low**: Gets stuck early
 
 **Number of Ants**
 
--   More ants → More exploration
--   Fewer ants → Faster iterations
--   Typical: 10 - 50
--   **Too many**: Slow, redundant
--   **Too few**: Miss good patterns
+- More ants → More exploration
+- Fewer ants → Faster iterations
+- Typical: 10 - 50
+- **Too many**: Slow, redundant
+- **Too few**: Miss good patterns
 
 . . .
 
@@ -686,8 +686,8 @@ def tabu_search_concept():
 
 ACO is designed for **Sequential Path-Finding** (Graph Traversal).
 
--   **Best For:** "I am at City A, where should I go next?" (TSP)
--   **Our Problem:** "Who should work Friday Dinner?" (Assignment)
+- **Best For:** "I am at City A, where should I go next?" (TSP)
+- **Our Problem:** "Who should work Friday Dinner?" (Assignment)
 
 . . .
 
@@ -717,9 +717,9 @@ ACO is designed for **Sequential Path-Finding** (Graph Traversal).
 
 **"No Free Lunch Theorem":** No single algorithm is best for all problems. Your choice must match your problem structure:
 
--   **Path/Network Problems** → ACO (pheromones for paths)
--   **Scheduling Problems** → SA or Tabu (neighborhood swaps)
--   **Complex Design** → GA (population diversity)
+- **Path/Network Problems** → ACO (pheromones for paths)
+- **Scheduling Problems** → SA or Tabu (neighborhood swaps)
+- **Complex Design** → GA (population diversity)
 
 ## Implementation Strategy
 
@@ -738,24 +738,24 @@ ACO is designed for **Sequential Path-Finding** (Graph Traversal).
 
 **Hour 2: This Lecture**
 
--   Metaheuristics
--   Simulated annealing
--   Genetic algorithms
--   Tabu search & ACO
+- Metaheuristics
+- Simulated annealing
+- Genetic algorithms
+- Tabu search & ACO
 
 **Hour 3: Notebook**
 
--   Bean Counter delivery
--   Implement SA
--   Tune parameters
--   Compare performance
+- Bean Counter delivery
+- Implement SA
+- Tune parameters
+- Compare performance
 
 **Hour 4: Competition**
 
--   Restaurant staffing
--   Multi-objective
--   Schedule optimization
--   Justify choice!
+- Restaurant staffing
+- Multi-objective
+- Schedule optimization
+- Justify choice!
 
 ## The Competition Challenge
 
@@ -779,13 +779,13 @@ ACO is designed for **Sequential Path-Finding** (Graph Traversal).
 <span class="highlight">How to find good parameters without wasting time:</span>
 
 1.  **Start with Rules of Thumb**
-    -   SA: Initial temp = max cost difference you'd accept
-    -   GA: Population = 10-20× number of decision variables
-    -   Tabu: Tenure (limit) = √(problem size)
+    - SA: Initial temp = max cost difference you'd accept
+    - GA: Population = 10-20× number of decision variables
+    - Tabu: Tenure (limit) = √(problem size)
 2.  **Grid Search on Small Instance**
-    -   Test 3-4 values per parameter
-    -   Use 10% of full dataset
-    -   Example: `temps = [100, 500]`, `cooling = [0.95, 0.99]`
+    - Test 3-4 values per parameter
+    - Use 10% of full dataset
+    - Example: `temps = [100, 500]`, `cooling = [0.95, 0.99]`
 
 ## Real-World Considerations
 
@@ -809,11 +809,11 @@ ACO is designed for **Sequential Path-Finding** (Graph Traversal).
 
 <span class="highlight">Key Takeaways:</span>
 
--   Metaheuristics escape local optima when exact methods fail
--   SA uses temperature, GA uses evolution, Tabu uses memory
--   Parameter tuning is critical for performance
--   No universal best - problem structure matters
--   Start simple, add complexity only if needed
+- Metaheuristics escape local optima when exact methods fail
+- SA uses temperature, GA uses evolution, Tabu uses memory
+- Parameter tuning is critical for performance
+- No universal best - problem structure matters
+- Start simple, add complexity only if needed
 
 ## Break!
 

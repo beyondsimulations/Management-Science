@@ -15,11 +15,11 @@ format:
 
 <span class="highlight">Three major clients need your expertise:</span>
 
--   **QuickBite:** Food delivery routing crisis
--   **NurseNext:** Healthcare scheduling nightmare  
--   **TechMart:** Inventory allocation disaster
--   Each group picks **ONE client** to work with
--   This is **40% of your final grade**
+- **QuickBite:** Food delivery routing crisis
+- **NurseNext:** Healthcare scheduling nightmare  
+- **TechMart:** Inventory allocation disaster
+- Each group picks **ONE client** to work with
+- This is **40% of your final grade**
 
 . . .
 
@@ -41,10 +41,10 @@ format:
 
 <span class="highlight">What makes a successful consulting project?</span>
 
--   **Clear recommendations** backed by data
--   **Business impact** quantified in €€€
--   **Confidence** in your approach and results
--   **Actionable insights** clients can implement
+- **Clear recommendations** backed by data
+- **Business impact** quantified in €€€
+- **Confidence** in your approach and results
+- **Actionable insights** clients can implement
 
 . . .
 
@@ -68,11 +68,11 @@ format:
 
 <span class="highlight">QuickBite's daily logistics nightmare:</span>
 
--   **120 meal deliveries** across Hamburg every day
--   **4 drivers** starting from one central depot
--   **Current approach:** Drivers choose routes by "intuition"
--   **The damage:** Monthly waste in fuel + penalties
--   **Customer complaints:** Up 40% this quarter
+- **120 meal deliveries** across Hamburg every day
+- **4 drivers** starting from one central depot
+- **Current approach:** Drivers choose routes by "intuition"
+- **The damage:** Monthly waste in fuel + penalties
+- **Customer complaints:** Up 40% this quarter
 
 . . .
 
@@ -86,11 +86,11 @@ format:
 
 <span class="highlight">What you need to solve:</span>
 
--   **Vehicle Routing Problem** with time windows
--   120 delivery locations across Hamburg
--   4 drivers with capacity constraints
--   Time windows for each delivery (violations = penalty)
--   **Trade-offs:** Distance vs. punctuality vs. driver workload balance
+- **Vehicle Routing Problem** with time windows
+- 120 delivery locations across Hamburg
+- 4 drivers with capacity constraints
+- Time windows for each delivery (violations = penalty)
+- **Trade-offs:** Distance vs. punctuality vs. driver workload balance
 
 . . .
 
@@ -110,11 +110,11 @@ format:
 
 <span class="highlight">NurseNext's staffing crisis:</span>
 
--   **20 nurses** across 3 departments (ED, Med-Surg, ICU)
--   **Current system:** Manual scheduling by exhausted COO
--   **The damage:** Overtime, 25% sick leave rate
--   **Fairness issues:** Unequal weekend distribution
--   **Turnover:** Losing 3-4 experienced nurses annually
+- **20 nurses** across 3 departments (ED, Med-Surg, ICU)
+- **Current system:** Manual scheduling by exhausted COO
+- **The damage:** Overtime, 25% sick leave rate
+- **Fairness issues:** Unequal weekend distribution
+- **Turnover:** Losing 3-4 experienced nurses annually
 
 . . .
 
@@ -128,12 +128,12 @@ format:
 
 <span class="highlight">What you need to solve:</span>
 
--   **Employee Scheduling** with complex constraints
--   Multiple skill levels (Junior, Senior, Specialist) and departments
--   Shift patterns: Morning (7-15), Evening (15-23), Night (23-7)
--   **Labor law:** Max consecutive shifts, rest periods, weekly hours
--   **Fairness:** Weekend equity, workload balance, distribution
--   **Robustness:** What happens when nurses call in sick?
+- **Employee Scheduling** with complex constraints
+- Multiple skill levels (Junior, Senior, Specialist) and departments
+- Shift patterns: Morning (7-15), Evening (15-23), Night (23-7)
+- **Labor law:** Max consecutive shifts, rest periods, weekly hours
+- **Fairness:** Weekend equity, workload balance, distribution
+- **Robustness:** What happens when nurses call in sick?
 
 . . .
 
@@ -157,10 +157,10 @@ format:
 
 <span class="highlight">TechMart's warehouse crisis:</span>
 
--   **30 electronics SKUs:** Smartphones, laptops, ...
--   **Two warehouses:** Fast (Hamburg) and large (Poland)
--   **Current problem:** Wrong products in wrong warehouses
--   **Last Black Friday:** Ran out of top items in Hamburg on Day 1
+- **30 electronics SKUs:** Smartphones, laptops, ...
+- **Two warehouses:** Fast (Hamburg) and large (Poland)
+- **Current problem:** Wrong products in wrong warehouses
+- **Last Black Friday:** Ran out of top items in Hamburg on Day 1
 
 . . .
 
@@ -174,11 +174,11 @@ format:
 
 <span class="highlight">What you need to solve:</span>
 
--   **Demand Forecasting** from 3 years of sales history
--   **Identify:** Patterns seasonality , trends, and Black Friday spike
--   **Inventory Optimization:** Which SKUs go in the fast warehouse?
--   **Monte Carlo Simulation:** Test allocation under uncertainty
--   **Trade-offs:** Shipping speed vs. warehouse capacity
+- **Demand Forecasting** from 3 years of sales history
+- **Identify:** Patterns seasonality , trends, and Black Friday spike
+- **Inventory Optimization:** Which SKUs go in the fast warehouse?
+- **Monte Carlo Simulation:** Test allocation under uncertainty
+- **Trade-offs:** Shipping speed vs. warehouse capacity
 
 . . .
 
@@ -210,15 +210,15 @@ format:
 
 ### Solution (20%)
 
--   **Correctness** (8%)
--   **Technical Implementation** (7%)
--   **Analysis & Insights** (5%)
+- **Correctness** (8%)
+- **Technical Implementation** (7%)
+- **Analysis & Insights** (5%)
 
 ### Presentation (20%)
 
--   **Clarity** (8%)
--   **Visualization** (7%)
--   **Business Communication** (5%)
+- **Clarity** (8%)
+- **Visualization** (7%)
+- **Business Communication** (5%)
 
 . . .
 
@@ -231,11 +231,11 @@ format:
 <span class="highlight">All groups must submit by lecture 12:</span>
 
 1.  **Jupyter notebook** with complete solution
-    -   Results and visualizations embedded
+    - Results and visualizations embedded
 2.  **Presentation slides** (8 minutes maximum)
-    -   Problem understanding & Solution approach
-    -   Results, Visualization and validation
-    -   Business impact
+    - Problem understanding & Solution approach
+    - Results, Visualization and validation
+    - Business impact
 
 ## Bonus Points Opportunity
 
@@ -243,8 +243,8 @@ format:
 
 After all presentations, you'll vote for:
 
--   **Best Solution** for each client (3 winners)
--   **Winners receive 5 bonus points** per group member
+- **Best Solution** for each client (3 winners)
+- **Winners receive 5 bonus points** per group member
 
 . . .
 
@@ -259,21 +259,21 @@ After all presentations, you'll vote for:
 <span class="highlight">How to approach your project:</span>
 
 1.  **Choose your client wisely**
-    -   Pick based on your team's strengths
+    - Pick based on your team's strengths
 2.  **Start with data exploration**
-    -   Understand the data BEFORE coding
+    - Understand the data BEFORE coding
 3.  **Build incrementally**
-    -   Simple solution first (greedy)
-    -   Then improve (local search, metaheuristics)
+    - Simple solution first (greedy)
+    - Then improve (local search, metaheuristics)
 
 ## Common Pitfalls to Avoid
 
 <span class="highlight">Watch out for these:</span>
 
--   **Scope creep:** Trying to solve everything perfectly
--   **Poor time management:** Coding until the last minute
--   **Ignoring business context:** Technical solution without impact
--   **Bad visualizations:** Unreadable charts or no visuals
+- **Scope creep:** Trying to solve everything perfectly
+- **Poor time management:** Coding until the last minute
+- **Ignoring business context:** Technical solution without impact
+- **Bad visualizations:** Unreadable charts or no visuals
 
 . . .
 
@@ -289,10 +289,10 @@ After all presentations, you'll vote for:
 
 1.  **Hour 1-2:** Choose your client
 2.  **Hour 3-4:**
-    -   Open the project notebook
-    -   Explore the data
-    -   Start coding initial solution
-    -   Ask clarifying questions
+    - Open the project notebook
+    - Explore the data
+    - Start coding initial solution
+    - Ask clarifying questions
 
 . . .
 
@@ -304,12 +304,12 @@ After all presentations, you'll vote for:
 
 <span class="highlight">You have all the tools you need:</span>
 
--   Monte Carlo simulation
--   Forecasting techniques
--   Greedy heuristics
--   Local search optimization
--   Multi-objective trade-offs
--   Metaheuristics concepts
+- Monte Carlo simulation
+- Forecasting techniques
+- Greedy heuristics
+- Local search optimization
+- Multi-objective trade-offs
+- Metaheuristics concepts
 
 . . .
 

@@ -51,10 +51,10 @@ print(f"All sales: {daily_sales}")
 
 > **List Indexing:**
 >
-> -   First item: `list[0]`
-> -   Last item: `list[-1]`
-> -   Second to last: `list[-2]`
-> -   Python counts from 0, not 1!
+> - First item: `list[0]`
+> - Last item: `list[-1]`
+> - Second to last: `list[-2]`
+> - Python counts from 0, not 1!
 
 We can also use slicing to access multiple elements at once. For example, to get the sales for Tuesday through Thursday:
 
@@ -122,8 +122,8 @@ week_sales = [1250.50, 1380.25, 1425.00, 1890.75, 2150.00, 2340.50, 1890.25]
 
 Extract:
 
--   `midweek` (Tuesday through Thursday - indices 1, 2, 3)
--   `last_three` (the last three days)
+- `midweek` (Tuesday through Thursday - indices 1, 2, 3)
+- `last_three` (the last three days)
 
 ``` python
 # YOUR CODE BELOW
@@ -180,10 +180,10 @@ print(f"Now tracking {len(coffee_sales)} hours")
 
 Start with an empty list and build up hourly customer counts for the morning shift:
 
--   8 AM: 15 customers
--   9 AM: 32 customers
--   10 AM: 28 customers
--   11 AM: 41 customers
+- 8 AM: 15 customers
+- 9 AM: 32 customers
+- 10 AM: 28 customers
+- 11 AM: 41 customers
 
 Also store the total number of hours tracked as `hours_tracked`.
 
@@ -380,10 +380,10 @@ for order_num in range(1001, 1006):
 
 > **range() Variations:**
 >
-> -   `range(5)` → 0, 1, 2, 3, 4
-> -   `range(1, 6)` → 1, 2, 3, 4, 5
-> -   `range(0, 10, 2)` → 0, 2, 4, 6, 8
-> -   `range(len(list))` → indices for the list
+> - `range(5)` → 0, 1, 2, 3, 4
+> - `range(1, 6)` → 1, 2, 3, 4, 5
+> - `range(0, 10, 2)` → 0, 2, 4, 6, 8
+> - `range(len(list))` → indices for the list
 
 ## Exercise 4.1 - Day-by-Day Changes
 
@@ -486,20 +486,20 @@ Congratulations! You've successfully learned how to work with collections of dat
 
 **You've learned:**
 
--   **Lists** - Storing multiple values in order
--   **List Operations** - Using `append()` and `len()`
--   **For Loops** - Processing each item automatically
--   **range()** - Working with indices and generating sequences
--   **Aggregations** - Calculating totals, averages, and counts
+- **Lists** - Storing multiple values in order
+- **List Operations** - Using `append()` and `len()`
+- **For Loops** - Processing each item automatically
+- **range()** - Working with indices and generating sequences
+- **Aggregations** - Calculating totals, averages, and counts
 
 You can now analyze Bean Counter's sales data like a pro! Whether it's tracking daily performance, finding trends, or calculating key metrics, you have the tools to handle any amount of data efficiently.
 
 **Remember:**
 
--   Lists let you store multiple related values together
--   Loops eliminate repetitive code and process data automatically
--   `range()` gives you precise control over iteration
--   Aggregations help you summarize data into meaningful insights
--   Always initialize aggregation variables before the loop!
+- Lists let you store multiple related values together
+- Loops eliminate repetitive code and process data automatically
+- `range()` gives you precise control over iteration
+- Aggregations help you summarize data into meaningful insights
+- Always initialize aggregation variables before the loop!
 
 **Next up:** In the next tutorial, we'll learn about conditionals and while loops to make even smarter decisions and handle more complex scenarios in your data analysis!

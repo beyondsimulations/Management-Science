@@ -18,10 +18,10 @@ code-links:
 
 The current fleet of 80 diesel vans faces critical challenges:
 
--   EU Green Deal: 40% emission reduction mandate by 2025
--   Rising fuel costs (€2.1/L diesel)
--   Competition entering market with 2-hour delivery promise
--   Driver shortage (15% unfilled positions)
+- EU Green Deal: 40% emission reduction mandate by 2025
+- Rising fuel costs (€2.1/L diesel)
+- Competition entering market with 2-hour delivery promise
+- Driver shortage (15% unfilled positions)
 
 ### The Challenge
 
@@ -35,10 +35,10 @@ The current fleet of 80 diesel vans must be replaced to meet EU regulations and 
 
 ### Key Facts
 
--   Daily demand: 22,000 parcels across 3 cities
--   Average daily distance: 1,200 km
--   Operating days per year: 360
--   Budget guideline: ~€35M capital investment
+- Daily demand: 22,000 parcels across 3 cities
+- Average daily distance: 1,200 km
+- Operating days per year: 360
+- Budget guideline: ~€35M capital investment
 
 ## Available Vehicles
 
@@ -76,11 +76,11 @@ print(vehicles.to_string(index=False))
 
 > **The Vehicles**
 >
-> -   **Electric Truck**: Zero emissions, high capacity, expensive
-> -   **Hybrid Van**: Balanced option, good reliability
-> -   **Diesel Van**: Cheapest, but high emissions (may violate constraint!)
-> -   **E-Cargo Bike**: Zero emissions, perfect for city centers, low capacity
-> -   **Autonomous Pod**: Expensive upfront, low operating cost, 24/7 operation
+> - **Electric Truck**: Zero emissions, high capacity, expensive
+> - **Hybrid Van**: Balanced option, good reliability
+> - **Diesel Van**: Cheapest, but high emissions (may violate constraint!)
+> - **E-Cargo Bike**: Zero emissions, perfect for city centers, low capacity
+> - **Autonomous Pod**: Expensive upfront, low operating cost, 24/7 operation
 
 ## Helper Functions
 
@@ -201,8 +201,8 @@ print(f"  Sufficient Capacity: {'✓ YES' if metrics['total_capacity'] >= 22000 
 >
 > **Capacity score = min(1.0, total_capacity / 22,000)**
 >
-> -   If capacity = 22,000 → capacity_score = 1.0 (perfect)
-> -   If capacity = 11,000 → capacity_score = 0.5 (only 50%!)
+> - If capacity = 22,000 → capacity_score = 1.0 (perfect)
+> - If capacity = 11,000 → capacity_score = 0.5 (only 50%!)
 
 ## Your Task
 
@@ -252,19 +252,19 @@ Generate alternative fleet compositions and find the Pareto frontier.
 >
 > **Approach A: Sequential Greedy**
 >
-> -   Prioritize one objective (e.g., minimize cost first)
-> -   Then optimize the other within acceptable range
+> - Prioritize one objective (e.g., minimize cost first)
+> - Then optimize the other within acceptable range
 >
 > **Approach B: Weighted Greedy**
 >
-> -   Generate solutions with different weight combinations
-> -   Example: 80% cost / 20% service, then 50/50, then 20/80
+> - Generate solutions with different weight combinations
+> - Example: 80% cost / 20% service, then 50/50, then 20/80
 >
 > **Approach C: Random + Filter**
 >
-> -   Generate 100+ random fleet compositions
-> -   Filter for feasibility (CO2 ≤ 111)
-> -   Find Pareto frontier among feasible solutions
+> - Generate 100+ random fleet compositions
+> - Filter for feasibility (CO2 ≤ 111)
+> - Find Pareto frontier among feasible solutions
 
 ``` python
 # GENERATE ALTERNATIVES
@@ -311,11 +311,11 @@ print(f"\nGenerated {len(alternatives)} feasible fleet alternatives")
 
 Prepare a one-slide presentation (PDF) containing:
 
--   **Your Best Fleet:** Total cost and service score (prominently displayed)
--   **Approach:** Which solution generation method(s) did you use?
--   **Visualization:** Scatter plot showing Pareto frontier with your solution marked
--   **Fleet Composition:** Table showing vehicle types and quantities
--   **Strategy Justification:** 2-3 sentences explaining why your fleet is optimal
+- **Your Best Fleet:** Total cost and service score (prominently displayed)
+- **Approach:** Which solution generation method(s) did you use?
+- **Visualization:** Scatter plot showing Pareto frontier with your solution marked
+- **Fleet Composition:** Table showing vehicle types and quantities
+- **Strategy Justification:** 2-3 sentences explaining why your fleet is optimal
 
 # Tips for Success
 
@@ -330,19 +330,19 @@ Prepare a one-slide presentation (PDF) containing:
 
 ## Common Pitfalls to Avoid
 
--   **Forgetting the CO2 constraint**: Filter for feasibility BEFORE evaluating
--   **Ignoring capacity**: Low capacity = low service score, even if cheap
--   **Incorrect dominance check**: Must compare BOTH cost AND service score
--   **Poor visualization**: Make sure your chosen solution is clearly visible
+- **Forgetting the CO2 constraint**: Filter for feasibility BEFORE evaluating
+- **Ignoring capacity**: Low capacity = low service score, even if cheap
+- **Incorrect dominance check**: Must compare BOTH cost AND service score
+- **Poor visualization**: Make sure your chosen solution is clearly visible
 
 ## Final Checklist
 
 Before submitting your solution, verify:
 
--   [ ] Fleet meets CO2 constraint (≤ 111 g/km)
--   [ ] Fleet has reasonable capacity (≥ 22,000 parcels/day recommended)
--   [ ] Correctly implemented Pareto frontier filtering
--   [ ] Justification is clear and concise (2-3 sentences)
--   [ ] One-slide presentation ready with visualization and metrics
+- [ ] Fleet meets CO2 constraint (≤ 111 g/km)
+- [ ] Fleet has reasonable capacity (≥ 22,000 parcels/day recommended)
+- [ ] Correctly implemented Pareto frontier filtering
+- [ ] Justification is clear and concise (2-3 sentences)
+- [ ] One-slide presentation ready with visualization and metrics
 
 ## Good Luck!

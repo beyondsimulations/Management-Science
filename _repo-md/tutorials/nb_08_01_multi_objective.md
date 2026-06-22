@@ -14,8 +14,8 @@ Welcome back to Bean Counter! As CEO, you're facing a critical decision: which n
 
 Unlike previous decisions where we optimized a single metric (like minimizing delivery distance), today we'll learn to balance **multiple competing objectives** simultaneously. Specifically, we want to:
 
--   **Maximize profit margin** (more revenue per cup)
--   **Minimize preparation time** (faster service, more customers)
+- **Maximize profit margin** (more revenue per cup)
+- **Minimize preparation time** (faster service, more customers)
 
 But there's a problem: the most profitable drinks take longest to prepare! This is called a **trade-off**, and it's at the heart of real-world decision-making.
 
@@ -82,8 +82,8 @@ print(products.to_string(index=False))
 >
 > Notice the fundamental conflict:
 >
-> -   **Sakura Cherry Coffee**: Highest profit (€4.5) but slowest to make (280s!)
-> -   **Charcoal Detox Shot**: Fastest (60s = 1 minute) but lowest profit (€1.8)
+> - **Sakura Cherry Coffee**: Highest profit (€4.5) but slowest to make (280s!)
+> - **Charcoal Detox Shot**: Fastest (60s = 1 minute) but lowest profit (€1.8)
 >
 > We can't have both maximum profit AND minimum prep time. We must choose a trade-off.
 
@@ -104,10 +104,10 @@ Create a scatter plot to see this trade-off visually.
 
 > **Before You Start**
 >
-> -   X-axis: Profit Margin (want to maximize → move right)
-> -   Y-axis: Prep Time (want to minimize → move down)
-> -   **Best corner: Lower-right** (high profit, low time)
-> -   Use a for-loop to annotate all products
+> - X-axis: Profit Margin (want to maximize → move right)
+> - Y-axis: Prep Time (want to minimize → move down)
+> - **Best corner: Lower-right** (high profit, low time)
+> - Use a for-loop to annotate all products
 
 ``` python
 # YOUR CODE BELOW
@@ -136,11 +136,11 @@ Write a function to check if a product is dominated by any other product.
 
 > **Before You Start**
 >
-> -   Compare the current product with ALL other products
-> -   For our objectives:
->     -   Profit: higher is better (maximize)
->     -   Prep Time: lower is better (minimize)
-> -   Return `True` if ANY product dominates the current one
+> - Compare the current product with ALL other products
+> - For our objectives:
+>   - Profit: higher is better (maximize)
+>   - Prep Time: lower is better (minimize)
+> - Return `True` if ANY product dominates the current one
 
 ``` python
 def is_dominated(product_idx: int, products_df: pd.DataFrame) -> bool:
@@ -197,10 +197,10 @@ The **Pareto frontier** contains all non-dominated solutions - the only rational
 
 > **Before You Start**
 >
-> -   Create a boolean array `is_pareto` (all True initially)
-> -   For each product i, check if ANY product j dominates it
-> -   If dominated, set `is_pareto[i] = False`
-> -   Return only products where `is_pareto` is True
+> - Create a boolean array `is_pareto` (all True initially)
+> - For each product i, check if ANY product j dominates it
+> - If dominated, set `is_pareto[i] = False`
+> - Return only products where `is_pareto` is True
 
 ``` python
 def find_pareto_frontier(products_df: pd.DataFrame) -> pd.DataFrame:
@@ -277,9 +277,9 @@ plt.show()
 >
 > Each point on the frontier represents a different trade-off:
 >
-> -   **Classic Espresso** (left): Fastest prep, lowest profit → "Speed Strategy"
-> -   **Energy Smoothie** (right): Highest profit, slowest prep → "Profit Strategy"
-> -   **Middle products**: Balanced compromises
+> - **Classic Espresso** (left): Fastest prep, lowest profit → "Speed Strategy"
+> - **Energy Smoothie** (right): Highest profit, slowest prep → "Profit Strategy"
+> - **Middle products**: Balanced compromises
 >
 > **None dominates the others** - your choice depends on your priorities!
 
@@ -291,8 +291,8 @@ How do we choose ONE product from the Pareto frontier? We use **weights** to exp
 >
 > Before combining objectives, we MUST normalize them:
 >
-> -   Profit range: 1.8 to 4.5 (range = 2.7)
-> -   Prep Time range: 60 to 270 (range = 210)
+> - Profit range: 1.8 to 4.5 (range = 2.7)
+> - Prep Time range: 60 to 270 (range = 210)
 >
 > Without normalization, prep time dominates because 210 \>\> 2.7, even with equal weights!
 
@@ -308,17 +308,17 @@ Normalize both objectives to \[0, 1\] scale.
 > products['Profit_Margin']  # This is a Series (one column)
 > ```
 >
-> -   Has built-in methods: `.min()`, `.max()`, `.mean()`
-> -   Supports arithmetic: `series - 5`, `series * 2`
-> -   Returns a new Series when you do math on it
+> - Has built-in methods: `.min()`, `.max()`, `.mean()`
+> - Supports arithmetic: `series - 5`, `series * 2`
+> - Returns a new Series when you do math on it
 
 > **Min-Max Normalization Formula**
 >
 >     normalized_value = (value - min_value) / (max_value - min_value)
 >
-> -   Minimum value → 0
-> -   Maximum value → 1
-> -   Preserves relative distances
+> - Minimum value → 0
+> - Maximum value → 1
+> - Preserves relative distances
 
 ``` python
 def normalize_column(series: pd.Series) -> pd.Series:
@@ -419,8 +419,8 @@ In reality, we often have **hard constraints**, requirements that MUST be met.
 
 > **Constraints vs Objectives**
 >
-> -   **Objective**: Something to optimize (minimize/maximize)
-> -   **Constraint**: A requirement that must be satisfied
+> - **Objective**: Something to optimize (minimize/maximize)
+> - **Constraint**: A requirement that must be satisfied
 >
 > Example: Bean Counter wants sustainability ≥ 60
 
@@ -521,10 +521,10 @@ Now that we have the constrained Pareto frontier, let's use weighted scoring to 
 
 > **Before You Start**
 >
-> -   Normalize the constrained Pareto products (not all products!)
-> -   Apply your `calculate_score` function
-> -   Find the product with the highest score
-> -   Use weights: 60% profit, 40% speed (w_profit=0.6, w_speed=0.4)
+> - Normalize the constrained Pareto products (not all products!)
+> - Apply your `calculate_score` function
+> - Find the product with the highest score
+> - Use weights: 60% profit, 40% speed (w_profit=0.6, w_speed=0.4)
 
 ``` python
 # YOUR CODE BELOW
@@ -567,21 +567,21 @@ Congratulations! You've mastered multi-objective optimization with constraints!
 
 ## Key Takeaways
 
--   **Trade-offs are inevitable** when optimizing multiple objectives
--   **Dominated solutions** should never be chosen
--   **Pareto frontier** contains all rational choices
--   **Normalization** is critical before combining objectives
--   **Weighted sums** let you express priorities
--   **Hard constraints** limit the feasible region
--   **Constrained Pareto frontier** = intersection of Pareto set and feasible region
+- **Trade-offs are inevitable** when optimizing multiple objectives
+- **Dominated solutions** should never be chosen
+- **Pareto frontier** contains all rational choices
+- **Normalization** is critical before combining objectives
+- **Weighted sums** let you express priorities
+- **Hard constraints** limit the feasible region
+- **Constrained Pareto frontier** = intersection of Pareto set and feasible region
 
 ## What's Next?
 
 In the competition, you'll apply these concepts to design EcoExpress's sustainable delivery fleet:
 
--   **2 objectives**: Minimize total cost, Maximize service score
--   **1 constraint**: CO2 emissions ≤ 111 g/km
--   **Your task**: Generate fleet alternatives, find Pareto frontier, recommend the best one
--   **Deliverable**: One-slide visualization showing your analysis
+- **2 objectives**: Minimize total cost, Maximize service score
+- **1 constraint**: CO2 emissions ≤ 111 g/km
+- **Your task**: Generate fleet alternatives, find Pareto frontier, recommend the best one
+- **Deliverable**: One-slide visualization showing your analysis
 
 Good luck!

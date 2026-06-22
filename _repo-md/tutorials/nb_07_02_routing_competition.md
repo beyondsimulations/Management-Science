@@ -22,13 +22,13 @@ code-links:
 
 ### Business Context
 
--   **Current situation:** driver's intuition, frequent late deliveries
--   **Cost structure:**
-    -   Fuel: €1.80 per km
-    -   Driver: €35 per hour
-    -   Late penalty: €50 per late delivery (damages reputation)
--   **Vehicle:** One delivery van, 20 km/h average speed in morning traffic
--   **Service Time:** 2 minutes at each café
+- **Current situation:** driver's intuition, frequent late deliveries
+- **Cost structure:**
+  - Fuel: €1.80 per km
+  - Driver: €35 per hour
+  - Late penalty: €50 per late delivery (damages reputation)
+- **Vehicle:** One delivery van, 20 km/h average speed in morning traffic
+- **Service Time:** 2 minutes at each café
 
 ## Data & Starter Code
 
@@ -280,9 +280,9 @@ Your task is to implement these components for the bakery delivery problem.
 
 > **Important**
 >
-> -   Ensure early cafés are visited before their opening times
-> -   You may need to modify your algorithm to prioritize these
-> -   Use the provided `check_time_windows()` function to verify feasibility
+> - Ensure early cafés are visited before their opening times
+> - You may need to modify your algorithm to prioritize these
+> - Use the provided `check_time_windows()` function to verify feasibility
 
 > **Tip**
 >
@@ -320,30 +320,30 @@ Use one or multiple local search algorithms to improve your initial solution.
 
 Prepare a one-slide presentation (PDF) containing:
 
--   **Your Best Route:** Total cost (potentially compared to random route)
--   **Approach:** Which initial construction and local search methods did you use?
--   **Map:** Visual showing routes (optional but recommended)
--   **Strategy Justification:** 2-3 sentences explaining why your approach works
+- **Your Best Route:** Total cost (potentially compared to random route)
+- **Approach:** Which initial construction and local search methods did you use?
+- **Map:** Visual showing routes (optional but recommended)
+- **Strategy Justification:** 2-3 sentences explaining why your approach works
 
 ## Tips for Success
 
 ### Strategy Suggestions
 
 1.  **Quick Win:** Start with nearest neighbor, it's simple and often good enough
-    -   You practiced this in the tutorial with Bean Counter's 10 franchises
+    - You practiced this in the tutorial with Bean Counter's 10 franchises
 2.  **Time Windows First:** Consider visiting early cafés first, even if slightly suboptimal
-    -   The lecture showed how to modify construction algorithms for time constraints
+    - The lecture showed how to modify construction algorithms for time constraints
 3.  **Improvement Focus:** Even basic 2-opt can save 10-20% distance
-    -   Remember to check feasibility after each swap
+    - Remember to check feasibility after each swap
 4.  **Validation:** Always check time windows!
-    -   Use `check_time_windows()` to verify your solution
+    - Use `check_time_windows()` to verify your solution
 
 ### Common Pitfalls to Avoid
 
--   Forgetting to return to bakery
--   Not checking time windows until the end
--   Over-optimizing distance at the expense of deadlines
--   Starting from a café instead of the bakery
+- Forgetting to return to bakery
+- Not checking time windows until the end
+- Over-optimizing distance at the expense of deadlines
+- Starting from a café instead of the bakery
 
 ### Hints from the Baker
 
@@ -357,12 +357,12 @@ Prepare a one-slide presentation (PDF) containing:
 
 Before presenting your solution, verify:
 
--   [ ] All 16 cafés visited exactly once
--   [ ] Route starts and ends at the bakery
--   [ ] Early cafés (1, 3, 8) arrive before their opening times (if possible!)
--   [ ] No time window violations reported by `check_time_windows()`
--   [ ] Route distance calculated correctly (includes return to bakery)
--   [ ] Improvement shown from initial to final solution
--   [ ] One-slide presentation ready with visualization and metrics
+- [ ] All 16 cafés visited exactly once
+- [ ] Route starts and ends at the bakery
+- [ ] Early cafés (1, 3, 8) arrive before their opening times (if possible!)
+- [ ] No time window violations reported by `check_time_windows()`
+- [ ] Route distance calculated correctly (includes return to bakery)
+- [ ] Improvement shown from initial to final solution
+- [ ] One-slide presentation ready with visualization and metrics
 
 ## Good Luck!

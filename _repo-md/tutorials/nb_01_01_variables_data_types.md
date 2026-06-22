@@ -40,25 +40,25 @@ print(f"Customer {customer_name} ordered {cups_ordered} coffees at ${coffee_pric
 
 > **Why Use Variables?**
 >
-> -   **Reusability**: Once you store a value in a variable, you can use it multiple times without rewriting the value.
-> -   **Readability**: Variables make your code easier to read and understand.
-> -   **Flexibility**: You can easily update the value of a variable without changing the entire code.
+> - **Reusability**: Once you store a value in a variable, you can use it multiple times without rewriting the value.
+> - **Readability**: Variables make your code easier to read and understand.
+> - **Flexibility**: You can easily update the value of a variable without changing the entire code.
 
 > **Variable Naming Rules**
 >
-> -   Use descriptive names (coffee_price is better than cp)
-> -   Use lowercase with underscores for multiple words
-> -   Can't start with numbers
-> -   Can't use Python keywords (like if, for, def)
+> - Use descriptive names (coffee_price is better than cp)
+> - Use lowercase with underscores for multiple words
+> - Can't start with numbers
+> - Can't use Python keywords (like if, for, def)
 
 ## Exercise 1.1 - Your First Variables
 
 Create three variables for a new order:
 
--   `latte_price` should be 5.25
--   `customer` should be "Maria"
--   `quantity` should be 2
--   `shop_closed` = False
+- `latte_price` should be 5.25
+- `customer` should be "Maria"
+- `quantity` should be 2
+- `shop_closed` = False
 
 ``` python
 # YOUR CODE BELOW
@@ -106,10 +106,10 @@ print("Excellent! You can update variables and create new ones from existing val
 
 Python has different types of data. The three most common are:
 
--   **int** (integers): Whole numbers like 1, 42, -10
--   **float** (floating-point): Decimal numbers like 3.14, 2.50, -0.5
--   **str** (strings): Text like "coffee", "Bean Counter", "Order #123"
--   **bool** (boolean): True or False
+- **int** (integers): Whole numbers like 1, 42, -10
+- **float** (floating-point): Decimal numbers like 3.14, 2.50, -0.5
+- **str** (strings): Text like "coffee", "Bean Counter", "Order #123"
+- **bool** (boolean): True or False
 
 ``` python
 # Different data types in our coffee shop
@@ -132,9 +132,9 @@ print(f"is_open is a {type(is_open)}")
 
 > **Why Different Data Types?**
 >
-> -   **Precision**: Different data types allow for different levels of precision. For example, floats can represent decimal numbers, while integers cannot.
-> -   **Operations**: Different data types support different operations. For example, you can add numbers but concatenate strings.
-> -   **Memory**: Different data types use different amounts of memory. For example, integers use less memory than floats.
+> - **Precision**: Different data types allow for different levels of precision. For example, floats can represent decimal numbers, while integers cannot.
+> - **Operations**: Different data types support different operations. For example, you can add numbers but concatenate strings.
+> - **Memory**: Different data types use different amounts of memory. For example, integers use less memory than floats.
 
 > **Warning**
 >
@@ -149,9 +149,9 @@ print(f"is_open is a {type(is_open)}")
 
 Create variables of each type for our coffee shop:
 
--   `daily_customers` (int): 85 customers visited today
--   `average_tip` (float): 2.50 dollars average tip
--   `best_seller` (str): "Caramel Macchiato"
+- `daily_customers` (int): 85 customers visited today
+- `average_tip` (float): 2.50 dollars average tip
+- `best_seller` (str): "Caramel Macchiato"
 
 ``` python
 # YOUR CODE BELOW
@@ -227,26 +227,26 @@ print(f"Price per shot: ${price_per_shot}")
 
 > **Common Errors in Arithmetic**
 >
-> -   **TypeError**: This occurs when you try to perform an operation on incompatible types, like adding a string to a number.
-> -   **ZeroDivisionError**: This occurs when you try to divide by zero.
+> - **TypeError**: This occurs when you try to perform an operation on incompatible types, like adding a string to a number.
+> - **ZeroDivisionError**: This occurs when you try to divide by zero.
 
 > **Python Arithmetic Operators**
 >
-> -   `+` Addition
-> -   `-` Subtraction
-> -   `*` Multiplication
-> -   `/` Division
-> -   `**` Exponentiation (power)
-> -   `//` Floor division (rounds down)
-> -   `%` Modulo (remainder)
+> - `+` Addition
+> - `-` Subtraction
+> - `*` Multiplication
+> - `/` Division
+> - `**` Exponentiation (power)
+> - `//` Floor division (rounds down)
+> - `%` Modulo (remainder)
 
 ## Exercise 3.1 - Calculate the Bill
 
 A group orders:
 
--   3 cappuccinos at \$4.75 each
--   2 muffins at \$3.50 each
--   1 sandwich at \$8.95
+- 3 cappuccinos at \$4.75 each
+- 2 muffins at \$3.50 each
+- 1 sandwich at \$8.95
 
 Calculate the `subtotal`, then add 19% tax to get the `total_with_tax`.
 
@@ -275,8 +275,8 @@ print("Excellent calculation! You've mastered basic arithmetic!")
 
 The group wants to split the bill evenly among 4 people. Calculate:
 
--   How much each person pays (`per_person`)
--   If they pay with exact change, how many dollars (`dollars`) and cents (`cents`) each person needs. Provide each as variable.
+- How much each person pays (`per_person`)
+- If they pay with exact change, how many dollars (`dollars`) and cents (`cents`) each person needs. Provide each as variable.
 
 > **Tip**
 >
@@ -340,24 +340,24 @@ print(formatted_receipt)
 
 > **Common Errors in F-strings**
 >
-> -   **SyntaxError**: This occurs when you forget to use an `f` before the string or use incorrect syntax within the curly braces.
-> -   **TypeError**: This occurs when you try to format a value that is not compatible with the specified format.
+> - **SyntaxError**: This occurs when you forget to use an `f` before the string or use incorrect syntax within the curly braces.
+> - **TypeError**: This occurs when you try to format a value that is not compatible with the specified format.
 
 > **F-string Formatting:**
 >
-> -   `{variable:.2f}` - Show 2 decimal places
-> -   `{variable:10}` - Use 10 characters of space
-> -   `{variable:<10}` - Left align in 10 spaces
-> -   `{variable:>10}` - Right align in 10 spaces
-> -   `{variable:^10}` - Center in 10 spaces
+> - `{variable:.2f}` - Show 2 decimal places
+> - `{variable:10}` - Use 10 characters of space
+> - `{variable:<10}` - Left align in 10 spaces
+> - `{variable:>10}` - Right align in 10 spaces
+> - `{variable:^10}` - Center in 10 spaces
 
 ## Exercise 4.1 - Create a Simple Receipt
 
 Create a formatted receipt for a coffee order with these variables:
 
--   `coffee_type = "Americano"`
--   `size = "Large"`
--   `price = 3.75`
+- `coffee_type = "Americano"`
+- `size = "Large"`
+- `price = 3.75`
 
 Create a variable called `receipt` with the format: "Order: \[size\] \[coffee_type\] - \$\[price with 2 decimal places\]"
 
@@ -386,18 +386,18 @@ Congratulations! You've successfully learned the fundamentals of Python programm
 
 **You've learned:**
 
--   **Variables** - Storing and updating information
--   **Data Types** - Working with integers, floats, and strings
--   **Arithmetic** - Performing calculations
--   **F-strings** - Creating formatted output
+- **Variables** - Storing and updating information
+- **Data Types** - Working with integers, floats, and strings
+- **Arithmetic** - Performing calculations
+- **F-strings** - Creating formatted output
 
 You can now handle any calculation at Bean Counter coffee shop! From calculating bills and splitting checks to creating professional receipts, you have all the basic tools you need.
 
 **Remember:**
 
--   Variables are named containers for storing data
--   Python has different data types (int, float, str) for different kinds of information
--   Arithmetic operations follow standard mathematical rules
--   F-strings make it easy to create formatted, professional output
+- Variables are named containers for storing data
+- Python has different data types (int, float, str) for different kinds of information
+- Arithmetic operations follow standard mathematical rules
+- F-strings make it easy to create formatted, professional output
 
 **Next up:** In the next tutorial, we'll learn about lists and loops to handle multiple orders at once and analyze daily sales data!

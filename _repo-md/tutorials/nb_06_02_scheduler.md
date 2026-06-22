@@ -20,14 +20,14 @@ code-links:
 
 **It's Friday at 06:00 in the morning.** The production manager just quit unexpectedly, leaving you with a major problem:
 
--   **16 custom bicycle orders** received this week - all promised for delivery this Friday
--   **2 workstations** available: Assembly Station and Painting Station
--   **Sequential process:** Every bike MUST go through Assembly first, then Painting
--   **Skeleton crew:** Staffing is minimal - only one technician per station
--   **Cost pressures:**
-    -   Overtime costs **€100/hour** for any work after Friday 19:00 (minute 780)
-    -   Late delivery penalties ranging from **€50 to €150 per order**
-    -   These are one time fees for missed deadlines, the bikes still have to be completed till saturday morning as customers with missed deadlines will collect them then
+- **16 custom bicycle orders** received this week - all promised for delivery this Friday
+- **2 workstations** available: Assembly Station and Painting Station
+- **Sequential process:** Every bike MUST go through Assembly first, then Painting
+- **Skeleton crew:** Staffing is minimal - only one technician per station
+- **Cost pressures:**
+  - Overtime costs **€100/hour** for any work after Friday 19:00 (minute 780)
+  - Late delivery penalties ranging from **€50 to €150 per order**
+  - These are one time fees for missed deadlines, the bikes still have to be completed till saturday morning as customers with missed deadlines will collect them then
 
 **CEO's Message:** "We can't afford to lose these customers before the holiday season. Figure out the optimal schedule and minimize our costs. Our reputation depends on it!"
 
@@ -323,8 +323,8 @@ print("\nThis is just ONE possible schedule. Can you do better?")
 
 Before coding, think through these questions:
 
--   What makes a "good" schedule for this problem?
--   How does the two-stage constraint affect your choices?
+- What makes a "good" schedule for this problem?
+- How does the two-stage constraint affect your choices?
 
 ## Step 2: Implement Different Scheduling Rules
 
@@ -345,11 +345,11 @@ Try multiple approaches and compare them to select the best one.
 
 Prepare a one-slide presentation (PDF) containing:
 
--   **Your Best Schedule:** Total cost achieved (prominently displayed)
--   **Approach:** Which scheduling rule(s) did you use?
--   **Gantt Chart:** Visual showing your two-stage schedule (optional but recommended)
--   **Cost Breakdown:** Overtime vs. penalties
--   **Strategy Justification:** 2-3 sentences explaining why your approach works
+- **Your Best Schedule:** Total cost achieved (prominently displayed)
+- **Approach:** Which scheduling rule(s) did you use?
+- **Gantt Chart:** Visual showing your two-stage schedule (optional but recommended)
+- **Cost Breakdown:** Overtime vs. penalties
+- **Strategy Justification:** 2-3 sentences explaining why your approach works
 
 # Tips for Success
 
@@ -363,18 +363,18 @@ Prepare a one-slide presentation (PDF) containing:
 
 ## Common Pitfalls to Avoid
 
--   **Forgetting the two-stage constraint:** Painting MUST wait for assembly to finish
--   **Overtime calculation:** Only count minutes AFTER 1800, not total time
--   **Penalty logic:** Only charge penalties if completion \> due time
--   **Ignoring order types:** Rush orders have 3x the penalty of standard orders!
+- **Forgetting the two-stage constraint:** Painting MUST wait for assembly to finish
+- **Overtime calculation:** Only count minutes AFTER 1800, not total time
+- **Penalty logic:** Only charge penalties if completion \> due time
+- **Ignoring order types:** Rush orders have 3x the penalty of standard orders!
 
 ## Final Checklist
 
--   [ ] All bikes scheduled through both stations
--   [ ] Painting never starts before assembly ends
--   [ ] No negative times
--   [ ] Overtime only charged after minute 1800
--   [ ] Penalties only for late orders (completion \> due)
--   [ ] Total cost = overtime + penalties
+- [ ] All bikes scheduled through both stations
+- [ ] Painting never starts before assembly ends
+- [ ] No negative times
+- [ ] Overtime only charged after minute 1800
+- [ ] Penalties only for late orders (completion \> due)
+- [ ] Total cost = overtime + penalties
 
 # Good Luck!

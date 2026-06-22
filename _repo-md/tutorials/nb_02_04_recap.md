@@ -12,9 +12,9 @@ code-links:
 
 You've climbed the ranks:
 
--   **Assistant Manager** → Mastered functions for standardized operations
--   **Regional Manager** → Conquered dictionaries for data management
--   **Operations Director** → Optimized with sorting and selection
+- **Assistant Manager** → Mastered functions for standardized operations
+- **Regional Manager** → Conquered dictionaries for data management
+- **Operations Director** → Optimized with sorting and selection
 
 Now the CEO wants to see if you can integrate all these skills. This is your chance to make an impression before potentially taking over as CEO of Bean Counter!
 
@@ -66,9 +66,9 @@ Create a function `evaluate_store` that:
 
 **Success criteria:**
 
--   Daily sales \> 4000 AND
--   Customer rating \>= 4.5 AND
--   Staff efficiency \> 50 customers/staff
+- Daily sales \> 4000 AND
+- Customer rating \>= 4.5 AND
+- Staff efficiency \> 50 customers/staff
 
 > **Tip**
 >
@@ -208,22 +208,22 @@ print("You're ready to become the CEO of Bean Counter!")
 
 **You've successfully integrated:**
 
--   **Functions** - For calculations and business logic
--   **Dictionaries** - For structured data management
--   **Sorting** - For optimization and decision-making
+- **Functions** - For calculations and business logic
+- **Dictionaries** - For structured data management
+- **Sorting** - For optimization and decision-making
 
 **Your complete toolkit demonstrates:**
 
--   Evaluating store performance with custom metrics
--   Ranking and comparing complex business entities
--   Optimizing operational decisions with data
+- Evaluating store performance with custom metrics
+- Ranking and comparing complex business entities
+- Optimizing operational decisions with data
 
 **Remember:**
 
--   Functions make your code reusable and maintainable
--   Dictionaries organize complex business data effectively
--   Sorting and selection help you make optimal choices
--   Combining these tools creates powerful business solutions
+- Functions make your code reusable and maintainable
+- Dictionaries organize complex business data effectively
+- Sorting and selection help you make optimal choices
+- Combining these tools creates powerful business solutions
 
 **What's Next:** You've completed the Python foundations! In Lecture 3, you'll explore advanced data science tools with NumPy and Pandas. These powerful libraries will help you analyze larger datasets and tackle even more complex management science challenges.
 

@@ -28,10 +28,10 @@ format:
 
 <span class="highlight">EcoExpress operates regional last-mile delivery across 3 cities</span>
 
--   EU Green Deal: 40% emission reduction by 2025
--   Rising fuel costs (€2.1/L diesel)
--   Amazon entering our market (speed pressure)
--   Driver shortage (need automation-friendly vehicles)
+- EU Green Deal: 40% emission reduction by 2025
+- Rising fuel costs (€2.1/L diesel)
+- Amazon entering our market (speed pressure)
+- Driver shortage (need automation-friendly vehicles)
 
 . . .
 
@@ -51,10 +51,10 @@ format:
 
 <span class="highlight">Last week we optimized routes for delivery:</span>
 
--   Started with greedy construction (e.g. Nearest Neighbor)
--   Improved with local search (e.g. 2-opt)
--   Considered time windows
--   **But: We only optimized distance**
+- Started with greedy construction (e.g. Nearest Neighbor)
+- Improved with local search (e.g. 2-opt)
+- Considered time windows
+- **But: We only optimized distance**
 
 . . .
 
@@ -66,15 +66,15 @@ format:
 
 **Single Objective**
 
--   <span class="highlight">"Minimize total distance"</span>
--   Clear winner. Easy, right!
+- <span class="highlight">"Minimize total distance"</span>
+- Clear winner. Easy, right!
 
 . . .
 
 **Multiple Objectives**
 
--   <span class="highlight">"Minimize cost AND emissions AND maximize speed"</span>
--   No clear answer...
+- <span class="highlight">"Minimize cost AND emissions AND maximize speed"</span>
+- No clear answer...
 
 . . .
 
@@ -108,11 +108,11 @@ format:
 
 <span class="highlight">Beyond the numbers, consider:</span>
 
--   **EU regulations:** Carbon tax of €100/ton CO₂ starting 2025
--   **Competition:** Amazon promises 2-hour delivery
--   **Labor market:** Autonomous vehicles reduce driver dependency
--   **Urban zones:** Zero-emission zones in city centers
--   **Peak times:** Black Friday = 3x normal volume
+- **EU regulations:** Carbon tax of €100/ton CO₂ starting 2025
+- **Competition:** Amazon promises 2-hour delivery
+- **Labor market:** Autonomous vehicles reduce driver dependency
+- **Urban zones:** Zero-emission zones in city centers
+- **Peak times:** Black Friday = 3x normal volume
 
 . . .
 
@@ -138,10 +138,10 @@ format:
 
 <span class="highlight">The Pareto frontier is the set of all non-dominated solutions</span>
 
--   No solution is objectively "better"
--   Each represents a different trade-off
--   Moving along frontier: gain in one objective, loss in another
--   Decision makers choose based on **preferences**
+- No solution is objectively "better"
+- Each represents a different trade-off
+- Moving along frontier: gain in one objective, loss in another
+- Decision makers choose based on **preferences**
 
 . . .
 
@@ -173,10 +173,10 @@ format:
 
 <span class="highlight">EcoExpress needs to replace their 80 diesel vans</span>
 
--   Must meet **EU regulation**: Average emissions ≤ 111 g CO₂/km
--   Need capacity for **22,000 parcels/day**
--   Must balance **cost vs. service quality**
--   5 vehicle types available, each with trade-offs
+- Must meet **EU regulation**: Average emissions ≤ 111 g CO₂/km
+- Need capacity for **22,000 parcels/day**
+- Must balance **cost vs. service quality**
+- 5 vehicle types available, each with trade-offs
 
 . . .
 
@@ -202,9 +202,9 @@ format:
 
 **Decision Variables:**
 
--   Fleet: How many of each vehicle type? (discrete/integer)
--   $n_i$ = number of vehicles of type $i$ (integers!)
--   Example: $n_{\text{E-Truck}} = 20$, $n_{\text{Hybrid}} = 30$, etc.
+- Fleet: How many of each vehicle type? (discrete/integer)
+- $n_i$ = number of vehicles of type $i$ (integers!)
+- Example: $n_{\text{E-Truck}} = 20$, $n_{\text{Hybrid}} = 30$, etc.
 
 ## Objective 1: Total Cost
 
@@ -212,11 +212,11 @@ format:
 
 $$\text{Total Cost} = \sum_{i} n_i \cdot \left( P_i + O_i \cdot d \cdot y \right)$$
 
--   $n_i$ = quantity of vehicle type $i$
--   $P_i$ = purchase cost of vehicle type $i$
--   $O_i$ = operating cost per km for type $i$
--   $d$ = daily distance × days per year
--   $y$ = years
+- $n_i$ = quantity of vehicle type $i$
+- $P_i$ = purchase cost of vehicle type $i$
+- $O_i$ = operating cost per km for type $i$
+- $d$ = daily distance × days per year
+- $y$ = years
 
 ## Objective 2: Service Score
 
@@ -224,9 +224,9 @@ $$\text{Total Cost} = \sum_{i} n_i \cdot \left( P_i + O_i \cdot d \cdot y \right
 
 $$\text{Service Score} = 0.5 \cdot C_{\text{score}} + 0.3 \cdot R_{\text{score}} + 0.2 \cdot S_{\text{score}}$$
 
--   $C_{\text{score}} = \min\left(1.0, \frac{\text{Total Capacity}}{22000}\right)$ (capacity adequacy)
--   $R_{\text{score}} = \frac{\sum n_i \cdot r_i}{\sum n_i}$ (weighted avg. reliability)
--   $S_{\text{score}} = \frac{\sum n_i \cdot s_i}{70 \cdot \sum n_i}$ (normalized speed)
+- $C_{\text{score}} = \min\left(1.0, \frac{\text{Total Capacity}}{22000}\right)$ (capacity adequacy)
+- $R_{\text{score}} = \frac{\sum n_i \cdot r_i}{\sum n_i}$ (weighted avg. reliability)
+- $S_{\text{score}} = \frac{\sum n_i \cdot s_i}{70 \cdot \sum n_i}$ (normalized speed)
 
 . . .
 
@@ -246,9 +246,9 @@ Where $e_i$ = CO₂ emissions per km for vehicle type $i$
 
 **This eliminates some solutions:**
 
--   All diesel vans: 185 g/km \> 111
--   Mix with too many diesel: Still violates
--   Zero-emission + some diesel: Might work
+- All diesel vans: 185 g/km \> 111
+- Mix with too many diesel: Still violates
+- Zero-emission + some diesel: Might work
 
 ## Data Source
 
@@ -258,12 +258,12 @@ Where $e_i$ = CO₂ emissions per km for vehicle type $i$
 
 **Vehicle Specifications:**
 
--   **Purchase costs**: Manufacturer quotes, market research
--   **Operating costs**: Fuel/electricity prices, maintenance records
--   **Capacity**: Vehicle specs (cargo volume, weight limits)
--   **Reliability**: Historical uptime data, manufacturer warranties
--   **EU Standards**: WLTP certification for vehicles
--   **Electric vehicles**: Grid carbon intensity (kWh → g CO₂)
+- **Purchase costs**: Manufacturer quotes, market research
+- **Operating costs**: Fuel/electricity prices, maintenance records
+- **Capacity**: Vehicle specs (cargo volume, weight limits)
+- **Reliability**: Historical uptime data, manufacturer warranties
+- **EU Standards**: WLTP certification for vehicles
+- **Electric vehicles**: Grid carbon intensity (kWh → g CO₂)
 
 ## Example Fleet Comparison
 
@@ -306,19 +306,19 @@ Where $e_i$ = CO₂ emissions per km for vehicle type $i$
 
 **With Optimization Solvers**
 
--   Weighted Sum Method
--   ε-Constraint Method  
--   Goal Programming
--   **Optimal solutions**
--   **Need mathematical model**
+- Weighted Sum Method
+- ε-Constraint Method  
+- Goal Programming
+- **Optimal solutions**
+- **Need mathematical model**
 
 **With Heuristics**
 
--   Weighted Greedy Construction
--   Multi-Objective Local Search
--   Metaheuristics
--   **Good solutions, fast**
--   **No optimality proof**
+- Weighted Greedy Construction
+- Multi-Objective Local Search
+- Metaheuristics
+- **Good solutions, fast**
+- **No optimality proof**
 
 . . .
 
@@ -412,11 +412,11 @@ def find_extreme_points(problem):
 <span class="highlight">Quick overview - you won't implement these in assignments</span>
 
 1.  **Weighted Sum:** Minimize $w_1 \times \text{cost} + w_2 \times \text{emissions}$
-    -   Simple, fast for convex problems
+    - Simple, fast for convex problems
 2.  **ε-Constraint:** Minimize cost subject to emissions $\leq \varepsilon$
-    -   Systematically vary $\varepsilon$ to find complete frontier
+    - Systematically vary $\varepsilon$ to find complete frontier
 3.  **Goal Programming:** Minimize deviations from targets
-    -   Set target for each objective, minimize weighted deviations
+    - Set target for each objective, minimize weighted deviations
 
 . . .
 
@@ -442,19 +442,19 @@ def find_extreme_points(problem):
 >
 > **Key difference from solvers:**
 >
-> -   **Solvers:** Need mathematical model, guarantee optimality
-> -   **Heuristics:** Work with any evaluation function, find good solutions fast
+> - **Solvers:** Need mathematical model, guarantee optimality
+> - **Heuristics:** Work with any evaluation function, find good solutions fast
 
 ## Why Heuristics?
 
 <span class="highlight">Depending on the problem:</span>
 
--   **Combinatorial explosion**
--   Huge solution space even for one problem
--   Evaluating one solution might thus take too long
--   Need diverse Pareto frontier, not just one "optimal" solution
--   Open Source Solvers too slow
--   Commercial solvers too expensive
+- **Combinatorial explosion**
+- Huge solution space even for one problem
+- Evaluating one solution might thus take too long
+- Need diverse Pareto frontier, not just one "optimal" solution
+- Open Source Solvers too slow
+- Commercial solvers too expensive
 
 . . .
 
@@ -503,10 +503,10 @@ def find_extreme_points(problem):
 <span class="highlight">Optimize one objective at a time, in priority order</span>
 
 1.  **Rank objectives by priority**
-    -   E.g. cost (most important) and then emissions (tie-breaker)
+    - E.g. cost (most important) and then emissions (tie-breaker)
 2.  **At each step:**
-    -   Find choices that minimize **primary** objective
-    -   If tie → use **secondary** objective
+    - Find choices that minimize **primary** objective
+    - If tie → use **secondary** objective
 3.  **Build one working solution**
 
 . . .
@@ -528,9 +528,9 @@ def find_extreme_points(problem):
 
 > **Tip**
 >
-> -   Explores **entire** solution space
-> -   No bias toward specific weights
-> -   Great for **warm-starting** local search
+> - Explores **entire** solution space
+> - No bias toward specific weights
+> - Great for **warm-starting** local search
 
 ## Local Search for Multi-Objective
 
@@ -562,12 +562,12 @@ def find_extreme_points(problem):
 
 1.  <span class="highlight">The Knee Point:</span> Find the "elbow" where improvement slows
 2.  <span class="highlight">Satisficing Levels:</span> Set minimum acceptable thresholds
-    -   **Cost** must be \< €100k (budget constraint)
-    -   **Emissions** must be \< 100 kg (regulatory limit)
-    -   **Service level** must be \> 90% (customer requirement)
+    - **Cost** must be \< €100k (budget constraint)
+    - **Emissions** must be \< 100 kg (regulatory limit)
+    - **Service level** must be \> 90% (customer requirement)
 3.  <span class="highlight">Stakeholder Preferences:</span> Let business priorities guide
-    -   **Sustainability:** Minimum emissions that meets constraints
-    -   **Operations:** Maximum service level within budget
+    - **Sustainability:** Minimum emissions that meets constraints
+    - **Operations:** Maximum service level within budget
 
 ## Weighting has an Impact
 
@@ -619,24 +619,24 @@ def find_extreme_points(problem):
 
 **Hour 2: This Lecture**
 
--   Multi-objective
--   Pareto optimality
--   Weighted greedy
--   Local search MOO
+- Multi-objective
+- Pareto optimality
+- Weighted greedy
+- Local search MOO
 
 **Hour 3: Notebook**
 
--   Bean Counter CEO
--   Find Pareto frontier
--   Apply weighted greedy
--   Normalize objectives
+- Bean Counter CEO
+- Find Pareto frontier
+- Apply weighted greedy
+- Normalize objectives
 
 **Hour 4: Competition**
 
--   Fleet composition
--   Vehicle selection
--   Cost vs service
--   Justify choice!
+- Fleet composition
+- Vehicle selection
+- Cost vs service
+- Justify choice!
 
 ## The Competition Challenge
 
@@ -678,22 +678,22 @@ def find_extreme_points(problem):
 <span class="highlight">Common bugs that cost you time:</span>
 
 1.  **Forgetting to Normalize**
-    -   Always normalize to \[0,1\] first!
+    - Always normalize to \[0,1\] first!
 2.  **Optimizing Too Many Objectives**
-    -   2-3: Manageable, 4+: Exponentially harder
-    -   Combine related objectives or use constraints
+    - 2-3: Manageable, 4+: Exponentially harder
+    - Combine related objectives or use constraints
 3.  **Not Checking Solution Feasibility**
-    -   Always verify constraints after optimization
+    - Always verify constraints after optimization
 
 ## Summary
 
 <span class="highlight">Key Takeaways:</span>
 
--   Real decisions have multiple conflicting objectives
--   Pareto frontier shows all rational trade-offs
--   Normalization is essential for fair comparison
--   Weights reflect values, make them explicit
--   Visualization crucial for decision-making
+- Real decisions have multiple conflicting objectives
+- Pareto frontier shows all rational trade-offs
+- Normalization is essential for fair comparison
+- Weights reflect values, make them explicit
+- Visualization crucial for decision-making
 
 ## Break!
 
