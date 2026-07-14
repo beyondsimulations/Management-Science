@@ -11,13 +11,15 @@ project:
     - tutorials/*.qmd
     - assignments/*.qmd
 website:
+  favicon: images/favicon.svg
   title: "Management Science"
   repo-url: https://github.com/beyondsimulations/Management-Science
   site-url: https://beyondsimulations.github.io/Management-Science
   bread-crumbs: true
   sidebar:
     style: floating
-    logo: https://images.beyondsimulations.com/lectures/mj_laptops.png
+    logo: images/course-logo.svg
+    logo-alt: "Management Science"
     collapse-level: 1
     search: true
     contents:
@@ -177,6 +179,7 @@ format:
       url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     include-in-header:
       - general/header.html
+      - general/favicon.html
     include-after-body:
       text: |
         <script defer src="https://oshu.eu/widget.js"></script>
