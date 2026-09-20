@@ -143,7 +143,7 @@ When modifying tutorial code blocks, the cached results in `_freeze/` will be in
 
 ## Website Features
 
-- **Embedded chat assistant** - Course assistant chatbot using a custom model proxy at `https://model-proxy.vlcek-4b4.workers.dev`
+- **Embedded chat assistant** - Course assistant chatbot via the oshu.eu widget (`https://oshu.eu/widget.js`, tenant `platform`, agent `management-science`), configured in `_quarto.yml`
 - **Code links** - Tutorials include download links to Python scripts
 - **Format links** - HTML and PDF (Typst) versions available for all content
 - **MathJax** - Mathematical expressions rendered via MathJax 3
@@ -181,3 +181,15 @@ When modifying tutorial code blocks, the cached results in `_freeze/` will be in
 - Edit `styles.scss` for custom CSS/SCSS
 - Edit `_brand.yml` for colors, fonts, and typography
 - Changes apply globally after running `quarto render`
+
+## Shared foundations
+
+`../lecture-foundations` holds the cross-course standard (branding,
+slide/tooling conventions, quizkit guides) and shared scripts. Two of them
+need a rendered `_site/` and a one-time `uv add --dev playwright`: the
+revealjs slide overflow gate
+(`uv run ../lecture-foundations/scripts/check_slide_overflow.py`) and the
+slide-deck PDF exporter
+(`uv run ../lecture-foundations/scripts/create_pdf.py --dir _site/ --output-dir pdf-slides/`).
+Check it before solving a problem that smells course-generic — it may
+already be solved there, and generic fixes belong there, not here.
