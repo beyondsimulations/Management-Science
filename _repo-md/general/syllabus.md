@@ -24,7 +24,7 @@ subtitle: Management Science
 - Dictionaries for structured data
 - Tuples and multiple return values
 - Sorting and optimization fundamentals
-- GitHub Copilot integration and best practices
+- AI pair programming: integration and best practices
 
 ### Lecture 3: Data Science Foundation
 

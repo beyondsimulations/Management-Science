@@ -247,7 +247,6 @@ print(f"Days with profit €100-200: {profit_range.sum()}")
 print(f"Percentage in range: {profit_range.mean():.1%}")
 ```
 
-
     Mean profit: €-41.82
     Standard deviation of profit: €128.01
     Minimum profit: €-214.74

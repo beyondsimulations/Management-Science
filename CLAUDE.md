@@ -11,15 +11,23 @@ This is a Quarto-based educational website for a **Management Science** course. 
 ### Building the Website
 
 ```bash
-quarto render
+uv run quarto render
 ```
 
-This renders all `.qmd` files in the project and generates the website in `_site/`.
+This renders all `.qmd` files in the project and generates the website in `_site/`. The slide PDF hook needs the sibling checkout `../Lecture-Foundations`, `uv run playwright install chromium` once per machine, and rendering through `uv run`. A deck that cannot be printed fails the render on purpose, as its page already links the PDF.
+
+### Publishing the Website
+
+```bash
+bash ../Lecture-Foundations/scripts/publish-gh-pages.sh
+```
+
+Run it after a full render. It publishes `_site/` without rendering again and keeps the `gh-pages` branch at one commit. A bare `quarto publish` renders again outside `uv`, where the slide PDF hook cannot run.
 
 ### Preview the Website
 
 ```bash
-quarto preview
+uv run quarto preview
 ```
 
 This starts a local development server with live reload.
@@ -27,8 +35,8 @@ This starts a local development server with live reload.
 ### Render Specific Files
 
 ```bash
-quarto render tutorials/nb_01_01_variables_data_types.qmd
-quarto render lectures/lec_01_introduction.qmd
+uv run quarto render tutorials/nb_01_01_variables_data_types.qmd
+uv run quarto render lectures/lec_01_introduction.qmd
 ```
 
 ### Python Environment Setup
@@ -45,10 +53,12 @@ uv run python main.py
 
 ### Post-Render Processing
 
-The build automatically runs two post-render scripts (configured in `_quarto.yml`):
+The build automatically runs four post-render scripts (configured in `_quarto.yml`):
 
 1. `helpers/convert_pypercent.py` - Converts Jupyter notebooks in `_site/tutorials/` to `.py` files in percent format
 2. `helpers/convert_qmd_to_md.py` - Moves all `.md` files from `_site/` to `_repo-md/` maintaining directory structure
+3. `../Lecture-Foundations/scripts/split_refs_post.py` - Spreads a deck's bibliography over slides of four entries
+4. `../Lecture-Foundations/scripts/create_pdf.py` - Prints each rendered deck to `lec_XX_presentation.pdf` next to it, linked per lecture via `format-links` ("Slides (PDF)")
 
 ## Project Structure
 

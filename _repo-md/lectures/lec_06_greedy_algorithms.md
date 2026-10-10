@@ -6,12 +6,16 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_06_greedy_algorithms.qmd)'
     output-file: lec_06_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_06_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
 # <span class="flow">Introduction</span>
 
-## **<span class="invert-font">Client Briefing: Custom Cycles Manufacturing</span>**
+## **<span class="invert-font">Client Briefing: Custom Cycles</span>**
 
 . . .
 
@@ -68,12 +72,12 @@ format:
 
 . . .
 
-| Order | Arrival | Processing | Due     | Penalty |
-|-------|---------|------------|---------|---------|
-| B12   | 1st     | 90 min     | 180 min | €150    |
-| B08   | 2nd     | 45 min     | 280 min | €150    |
-| B15   | 3rd     | 75 min     | 220 min | €150    |
-| B03   | 4th     | 30 min     | 300 min | €150    |
+| Order | Arrival | Processing |     Due | Penalty |
+|-------|---------|-----------:|--------:|--------:|
+| B12   | 1st     |     90 min | 180 min |    €150 |
+| B08   | 2nd     |     45 min | 280 min |    €150 |
+| B15   | 3rd     |     75 min | 220 min |    €150 |
+| B03   | 4th     |     30 min | 300 min |    €150 |
 
 . . .
 
@@ -345,12 +349,12 @@ for pizza in edd_order:
 
 . . .
 
-| Order | Arrival | Processing | Due     | Penalty |
-|-------|---------|------------|---------|---------|
-| B12   | 1st     | 90 min     | 180 min | €150    |
-| B08   | 2nd     | 45 min     | 280 min | €150    |
-| B15   | 3rd     | 75 min     | 220 min | €150    |
-| B03   | 4th     | 30 min     | 300 min | €150    |
+| Order | Arrival | Processing |     Due | Penalty |
+|-------|---------|-----------:|--------:|--------:|
+| B12   | 1st     |     90 min | 180 min |    €150 |
+| B08   | 2nd     |     45 min | 280 min |    €150 |
+| B15   | 3rd     |     75 min | 220 min |    €150 |
+| B03   | 4th     |     30 min | 300 min |    €150 |
 
 . . .
 
@@ -434,8 +438,7 @@ for pizza in edd_order:
 
 **Transportation & Logistics:**
 
-- Vehicle routing problems
-- Crew scheduling and maintenance window planning
+- Vehicle routing, crew scheduling and maintenance window planning
 
 . . .
 
@@ -507,12 +510,12 @@ for pizza in edd_order:
 <span class="highlight">5 consulting projects with different durations and revenues</span>
 
 | Project | Duration | Revenue | Revenue/Hour |
-|---------|----------|---------|--------------|
-| C       | 55h      | €11,000 | €200         |
-| A       | 25h      | €6,000  | €240         |
-| E       | 55h      | €4,950  | €90          |
-| D       | 45h      | €5,400  | €120         |
-| B       | 35h      | €7,000  | €200         |
+|---------|---------:|--------:|-------------:|
+| C       |      55h | €11,000 |         €200 |
+| A       |      25h |  €6,000 |         €240 |
+| E       |      55h |  €4,950 |          €90 |
+| D       |      45h |  €5,400 |         €120 |
+| B       |      35h |  €7,000 |         €200 |
 
 . . .
 
@@ -531,12 +534,12 @@ for pizza in edd_order:
 **Sorted by Revenue/Hour:**
 
 | Project | Duration | Revenue | Revenue/Hour | Schedule |
-|---------|----------|---------|--------------|----------|
-| A       | 25h      | €6,000  | **€240**     | 1st      |
-| B       | 35h      | €7,000  | **€200**     | 2nd      |
-| C       | 55h      | €11,000 | **€200**     | 3rd      |
-| D       | 45h      | €5,400  | €120         | 4th      |
-| E       | 55h      | €4,950  | €90          | 5th      |
+|---------|---------:|--------:|-------------:|----------|
+| A       |      25h |  €6,000 |     **€240** | 1st      |
+| B       |      35h |  €7,000 |     **€200** | 2nd      |
+| C       |      55h | €11,000 |     **€200** | 3rd      |
+| D       |      45h |  €5,400 |         €120 | 4th      |
+| E       |      55h |  €4,950 |          €90 | 5th      |
 
 . . .
 
@@ -587,10 +590,10 @@ for pizza in edd_order:
 <span class="highlight">3 Bicycles through Assembly → Painting</span>
 
 | Bike | Assembly Time | Painting Time | Total |
-|------|---------------|---------------|-------|
-| X    | 30 min        | 20 min        | 50    |
-| Y    | 20 min        | 30 min        | 50    |
-| Z    | 15 min        | 15 min        | 30    |
+|------|--------------:|--------------:|------:|
+| X    |        30 min |        20 min |    50 |
+| Y    |        20 min |        30 min |    50 |
+| Z    |        15 min |        15 min |    30 |
 
 . . .
 
@@ -647,8 +650,8 @@ for pizza in edd_order:
 
 **Key Observation:**
 
-- If a job is **quick on Machine 1** → Do it **early** (Machine 1 finishes fast, Machine 2 starts sooner!)
-- If a job is **quick on Machine 2** → Do it **late** (Machine 2 can finish quickly at the end, no wasted capacity)
+- **Quick on Machine 1** → Do it **early** (Machine 2 starts sooner!)
+- **Quick on Machine 2** → Do it **late** (Machine 2 can finish quickly at the end, no wasted capacity)
 
 ## Johnson's Algorithm: The Rule
 
@@ -674,10 +677,10 @@ for pizza in edd_order:
 ## Applying Johnson's Algorithm
 
 | Bike | Assembly | Painting | Min Time |
-|------|----------|----------|----------|
-| X    | 30       | 20       | 20 (P)   |
-| Y    | 20       | 30       | 20 (A)   |
-| Z    | 15       | 15       | 15 (A/P) |
+|------|---------:|---------:|----------|
+| X    |       30 |       20 | 20 (P)   |
+| Y    |       20 |       30 | 20 (A)   |
+| Z    |       15 |       15 | 15 (A/P) |
 
 1.  Min time = 15 (Z, assembly) → **Schedule Z first**
 2.  Min time = 20 (Y, assembly) → **Schedule Y second**

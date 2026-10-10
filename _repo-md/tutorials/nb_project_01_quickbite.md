@@ -286,7 +286,6 @@ print(f"\nDistance matrix created: {distance_matrix.shape}")
 print(f"Example: Depot to Delivery #1 = {distance_matrix[0, 1]:.2f} km")
 ```
 
-
     Distance matrix created: (121, 121)
     Example: Depot to Delivery #1 = 0.59 km
 
@@ -421,7 +420,6 @@ print("\nExample route cost breakdown:")
 for key, value in example_cost.items():
     print(f"  {key}: {value:.2f}")
 ```
-
 
     Example route cost breakdown:
       total_cost: 170.40

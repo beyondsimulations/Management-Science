@@ -107,7 +107,7 @@ In the third part of the course, student teams undertake a self-selected project
 
 ### ChatGPT and Other Artificial Intelligence (AI) Tools
 
-*Guidelines to be provided during the course*
+A course chatbot is available on the learning website for exploratory study. It is designed to guide your problem-solving process rather than provide answers directly: use it as a learning tool, not a solution generator. External AI tools (e.g., ChatGPT, Claude, Mistral, Gemini) may be used, but with care: try to understand any generated code, since relying on AI to solve tasks for you weakens your own learning, and running code you do not understand can introduce errors and security risks. The full policy is stated on the course website.
 
 ### Inclusion, Diversity & Equality at KLU
 

@@ -185,7 +185,6 @@ print(f"  - Rush orders have {df_bikes[df_bikes['type']=='Rush']['penalty'].iloc
 
 <img src="nb_06_02_scheduler_files/figure-markdown_strict/cell-4-output-1.png" width="1333" height="950" />
 
-
     Key Insights:
       - Tightest deadline: Order B07 (due at 240 min)
       - Longest processing: Order B05 (150 min total)

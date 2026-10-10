@@ -152,8 +152,6 @@ print(" • Lower preferences = unhappy staff = significant quality penalty")
 print(" • Availability constraints create interdependencies between assignments")
 ```
 
-
-
     SERVER PREFERENCES (0=CANNOT WORK, 1=hates it, 10=loves it):
     ============================================================
     Shift_ID  FD  FL  SL  SD  UL  UD
@@ -556,7 +554,6 @@ print(f"  - Penalties: €{test_breakdown['penalty_cost']:.2f}")
 if test_breakdown['violations']:
     print(f"Violations: {len(test_breakdown['violations'])} shifts understaffed")
 ```
-
 
     RANDOM SCHEDULE TEST:
     Valid: False

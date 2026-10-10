@@ -202,7 +202,6 @@ distance_matrix = create_distance_matrix(bakery_location, cafe_locations)
 print("\nDistance matrix created. Ready to optimize!")
 ```
 
-
     Distance matrix created. Ready to optimize!
 
 ## Visualization Function

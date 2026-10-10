@@ -6,11 +6,15 @@ format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_08_multi_objective.qmd)"
     output-file: lec_08_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_08_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: EcoExpress Logistics]{.invert-font}** {background-image="https://unsplash.com/photos/QqSIuvz94s8/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTF8fHN1c3RhaW5hYmlsaXR5fGVufDB8fHx8MTc2MzE4Nzk0MHww&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: EcoExpress]{.invert-font}** {background-image="https://images.unsplash.com/photo-1597150899069-efb9c8c6010c?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
 
 . . .
 
@@ -383,7 +387,7 @@ plt.show()
 Harder to visualize, but same principle applies!
 :::
 
-# [Fleet Composition Problem]{.flow} {.title}
+# [Fleet Composition]{.flow} {.title}
 
 ## The Fleet Challenge
 
@@ -1063,7 +1067,7 @@ plt.show()
 
 [This is what you'll implement in your assignments!]{.highlight}
 
-# [Construction & Improvement]{.flow} {.title}
+# [Construct & Improve]{.flow} {.title}
 
 ## Construction Methods for MOO
 
@@ -1263,7 +1267,7 @@ plt.show()
 Always keep all your objectives in mind when making decisions.
 :::
 
-# [From Pareto Front to Decision]{.flow} {.title}
+# [Pareto to Decision]{.flow} {.title}
 
 ## How to Choose!
 

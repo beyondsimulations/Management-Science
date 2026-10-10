@@ -6,6 +6,10 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_07_local_search.qmd)'
     output-file: lec_07_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_07_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
@@ -99,7 +103,7 @@ format:
 >
 > TSP optimization where we find minimum cost tour → NP-Hard. This means no known algorithm can find the perfect solution quickly for large problems.
 
-# <span class="flow">Graph Theory Foundations</span>
+# <span class="flow">Graph Theory</span>
 
 ## What is a Graph?
 
@@ -162,9 +166,7 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 2.  **Symmetry:** $d(i,j) = d(j,i)$ $i,j \in V$
 3.  **Triangle Inequality:** $d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V$
 
-. . .
-
-**Common Distance Functions:**
+## Common Distance Functions
 
 - **Euclidean:** $d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}$
 - **Manhattan:** $d(i,j) = |x_i - x_j| + |y_i - y_j|$
@@ -297,7 +299,7 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 >
 > Can we improve our greedy solutions?
 
-# <span class="flow">Local Search Framework</span>
+# <span class="flow">Local Search</span>
 
 ## The Four Pillars of Local Search
 
@@ -339,7 +341,7 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 >
 > Local search transforms "quick and dirty" solutions into "pretty good" ones!
 
-# <span class="flow">Local Search Improvements</span>
+# <span class="flow">Local Improvements</span>
 
 ## The 2-Opt Algorithm
 
@@ -582,12 +584,12 @@ new_route = route[:i] + route[i:j][::-1] + route[j:]
 
 <span class="highlight">Industry usage for delivery optimization</span>
 
-| Method              | Industry Use       |     |
-|---------------------|--------------------|-----|
-| Human intuition     | Still common!      |     |
-| Start + 2-opt       | Common practice    |     |
-| Advanced Meta       | Sometimes practice |     |
-| Exact (if possible) | Mostly research    |     |
+| Method              | Industry Use       |
+|---------------------|--------------------|
+| Human intuition     | Still common!      |
+| Start + 2-opt       | Common practice    |
+| Advanced Meta       | Sometimes practice |
+| Exact (if possible) | Mostly research    |
 
 . . .
 

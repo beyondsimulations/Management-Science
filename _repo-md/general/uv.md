@@ -1,13 +1,12 @@
 ---
 title: Installing Python
-subtitle: A small guide using uv
+subtitle: A short guide using uv
 ---
 
 
 ## Why we use `uv` for this course
 
 `uv` is a new (and very fast) Python tool written in Rust. It:
-
 - Installs Python for you (no manual downloads).
 - Creates isolated *virtual environments* (safe sandboxes per project).
 - Installs and updates packages quickly.
@@ -20,11 +19,11 @@ subtitle: A small guide using uv
 
 ## Install `uv`
 
-Choose the instructions for your operating system. To these, you need to work in your terminal.
+Choose the instructions for your operating system. For these, you need to work in your terminal.
 
 > **Tip**
 >
-> Open the terminal in VS Code by selecting (Terminal → New Terminal).
+> Open the terminal directly in your IDE: in VS Code via (Terminal → New Terminal), in Zed via the terminal panel at the bottom.
 
 ### macOS or Linux (Terminal)
 
@@ -74,7 +73,7 @@ If you see a version number: great!
 > 2.  On Windows: make sure you used PowerShell (not Command Prompt).
 > 3.  Still broken? Ask for help, no need of guessing the error.
 
-## InstallPython
+## Install Python
 
 We want everyone on the **same** Python version for consistency. Thus, we'll use Python 3.12 for the course this year.
 
@@ -99,11 +98,13 @@ Expected output starts with:
 Pick a folder where you keep course work. **If you do not have one, make sure to create one!** Open the course folder in your IDE and then run the following from the terminal:
 
 ``` bash
-uv init
+uv init my-first-project
+cd my-first-project
 ```
 
-`uv init` creates:
+The first line creates a new folder named `my-first-project` (you can name it anything). The second line moves you into that folder. Alternatively, you can create the folder manually before, open it in your IDE and run `uv init .` inside it.
 
+`uv init` creates:
 - `main.py` (starter script)
 - `pyproject.toml` (project + dependencies config)
 - `.python-version` (records the Python version we chose)
@@ -111,15 +112,13 @@ uv init
 - `README.md` (you can jot notes here)
 - (A `.venv` folder will appear later once packages are added or synced.)
 
-> **Note**
->
-> You do **not** need to edit any of these (except maybe `README.md` for your notes and `main.py` if you want to run something different).
+You do **not** need to edit any of these (except maybe `README.md` for your notes and `main.py` if you want to run something different).
 
 ------------------------------------------------------------------------
 
 ## Run the starter script
 
-Inside the project folder **in your terminal**:
+Inside the project folder:
 
 ``` bash
 uv run python main.py
@@ -146,6 +145,37 @@ if __name__ == "__main__":
 - The line `if __name__ == "__main__":` ensures this only auto-runs when the file is executed directly.
 
 Don't worry about this yet, we'll gradually build up to it.
+
+## Run scripts directly in Zed
+
+Instead of switching to the terminal every time, you can set up a **task** in Zed to run the currently open Python file with a single shortcut.
+
+### Create the task file
+
+Inside your project folder, create a `.zed/` directory and add a file called `tasks.json` inside it:
+
+``` json
+[
+  {
+    "label": "Run current Python file",
+    "command": "uv run python $ZED_FILE",
+    "use_new_terminal": false
+  }
+]
+```
+
+`$ZED_FILE` is a variable Zed fills in automatically with the path of the file you have open.
+
+### Run the task
+
+1.  Open any `.py` file in your project.
+2.  Open the task picker with `Cmd+Shift+P` (macOS) / `Ctrl+Shift+P` (Windows/Linux).
+3.  Type **task** and choose **task: spawn**.
+4.  Select **Run current Python file**. Zed will execute `uv run python <your-file>` in the built-in terminal.
+
+> **Tip**
+>
+> You can also bind the task to a keyboard shortcut. Open **Zed → Settings → Key Bindings** and add an entry for `"task: spawn"` to make it even faster.
 
 ## Adding packages (later in the course)
 
@@ -179,9 +209,7 @@ Occasionally:
 uv self update
 ```
 
-> **Tip**
->
-> If it ever errors, you can just reinstall using the same one-liner from earlier.
+(If it ever errors, you can just reinstall using the same one-liner from earlier.)
 
 ------------------------------------------------------------------------
 
@@ -201,10 +229,9 @@ uv --help
 ## Recap
 
 You can now:
-
-1.  Install `uv`.
-2.  Create a project.
-3.  Run a script.
-4.  Add/remove/sync packages.
+1. Install `uv`.
+2. Create a project.
+3. Run a script.
+4. Add/remove/sync packages.
 
 Now, you're set to continue the course.

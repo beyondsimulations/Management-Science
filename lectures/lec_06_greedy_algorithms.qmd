@@ -6,11 +6,15 @@ format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_06_greedy_algorithms.qmd)"
     output-file: lec_06_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_06_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: Custom Cycles Manufacturing]{.invert-font}** {background-image="https://unsplash.com/photos/XwZKcZes8xo/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8Y3VzdG9tJTIwY3ljbGVzfGVufDB8fHx8MTc2MjU5OTU4NXww&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: Custom Cycles]{.invert-font}** {background-image="https://images.unsplash.com/photo-1761634731562-c7a152d89849?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
 
 . . .
 
@@ -76,7 +80,7 @@ Testing all 20.9 trillion possibilities for 16 bikes would take [thousands of ye
 . . .
 
 | Order | Arrival | Processing | Due | Penalty |
-|-------|---------------|----------------|----------|-----------------|
+|-------|---------------|---------------:|---------:|----------------:|
 | B12   | 1st           | 90 min         | 180 min  | €150           |
 | B08   | 2nd           | 45 min         | 280 min  | €150           |
 | B15   | 3rd           | 75 min         | 220 min  | €150           |
@@ -521,7 +525,7 @@ for pizza in edd_order:
 . . .
 
 | Order | Arrival | Processing | Due | Penalty |
-|-------|---------------|----------------|----------|-----------------|
+|-------|---------------|---------------:|---------:|----------------:|
 | B12   | 1st           | 90 min         | 180 min  | €150           |
 | B08   | 2nd           | 45 min         | 280 min  | €150           |
 | B15   | 3rd           | 75 min         | 220 min  | €150           |
@@ -699,8 +703,7 @@ ELSE:
 
 **Transportation & Logistics:**
 
-- Vehicle routing problems
-- Crew scheduling and maintenance window planning
+- Vehicle routing, crew scheduling and maintenance window planning
 
 . . .
 
@@ -778,7 +781,7 @@ You can't optimize what you don't measure! Choose metrics that align with busine
 [5 consulting projects with different durations and revenues]{.highlight}
 
 | Project | Duration | Revenue | Revenue/Hour |
-|---------|----------|---------|--------------|
+|---------|---------:|--------:|-------------:|
 | C       | 55h      | €11,000 | €200         |
 | A       | 25h      | €6,000  | €240         |
 | E       | 55h      | €4,950  | €90          |
@@ -802,7 +805,7 @@ You can't optimize what you don't measure! Choose metrics that align with busine
 **Sorted by Revenue/Hour:**
 
 | Project | Duration | Revenue | Revenue/Hour | Schedule |
-|---------|----------|---------|--------------|----------|
+|---------|---------:|--------:|-------------:|----------|
 | A       | 25h      | €6,000  | **€240**     | 1st      |
 | B       | 35h      | €7,000  | **€200**     | 2nd      |
 | C       | 55h      | €11,000 | **€200**     | 3rd      |
@@ -862,7 +865,7 @@ This is [Smith's Rule]{.highlight} in action: Sort by (value / time) to maximize
 [3 Bicycles through Assembly → Painting]{.highlight}
 
 | Bike | Assembly Time | Painting Time | Total |
-|------|---------------|---------------|-------|
+|------|--------------:|--------------:|------:|
 | X    | 30 min        | 20 min        | 50    |
 | Y    | 20 min        | 30 min        | 50    |
 | Z    | 15 min        | 15 min        | 30    |
@@ -980,8 +983,8 @@ Painting station waits 30 minutes for first bike! Total time = **95 minutes**
 **Key Observation:**
 
 ::: incremental
-- If a job is **quick on Machine 1** → Do it **early** (Machine 1 finishes fast, Machine 2 starts sooner!)
-- If a job is **quick on Machine 2** → Do it **late** (Machine 2 can finish quickly at the end, no wasted capacity)
+- **Quick on Machine 1** → Do it **early** (Machine 2 starts sooner!)
+- **Quick on Machine 2** → Do it **late** (Machine 2 can finish quickly at the end, no wasted capacity)
 :::
 
 ## Johnson's Algorithm: The Rule
@@ -1010,7 +1013,7 @@ Johnson proved this **greedy choice property** guarantees global optimum for mak
 ## Applying Johnson's Algorithm
 
 | Bike | Assembly | Painting | Min Time |
-|------|----------|----------|----------|
+|------|---------:|---------:|----------|
 | X    | 30       | 20       | 20 (P)   |
 | Y    | 20       | 30       | 20 (A)   |
 | Z    | 15       | 15       | 15 (A/P) |

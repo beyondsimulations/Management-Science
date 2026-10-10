@@ -6,6 +6,10 @@ format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_10_consulting_projects.qmd)"
     output-file: lec_10_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_10_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 # [Introduction]{.flow} {.title}
@@ -156,7 +160,7 @@ Any questions?
 
 ---
 
-## **[Client Briefing: TechMart Electronics]{.invert-font}** {background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" background-size="cover"}
+## **[Client Briefing: TechMart]{.invert-font}** {background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" background-size="cover"}
 
 . . .
 

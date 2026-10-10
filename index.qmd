@@ -61,7 +61,7 @@ The course is organized into three distinct parts across 12 lectures:
 
 - Laptop capable of running Python and Jupyter notebooks
 - Python (installed via uv package manager in class)
-- GitHub Copilot (free with Student Developer Pack)
+- An AI coding assistant (see the AI policy below; a free [Mistral](https://mistral.ai) account or [Zed](https://zed.dev)'s education plan both work — GitHub Copilot student signups are currently paused)
 - VS Code or similar IDE
 
 ## Getting Help
@@ -72,16 +72,13 @@ The course is organized into three distinct parts across 12 lectures:
 
 # AI Policy
 
-*Level 1: Pause – Use of AI defined by the educator*
+**Course chatbot.** A course chatbot is available on this website for exploratory study. It is designed to guide your problem-solving process rather than hand out answers: expect hints and questions back, not finished solutions. It runs on EU-hosted infrastructure (Mistral models, servers in Germany), and your conversations are not used to train models. Details are on the [privacy page](general/privacy.qmd).
 
-A course chatbot is available on the learning website for exploratory study. It is designed to guide your problem-solving process rather than provide answers directly. Use it as a learning tool, not a solution generator.
+**External AI tools.** You may use external AI tools (e.g., ChatGPT, Claude, Mistral, Gemini). You are responsible for every line of code and every sentence you hand in: understand what the AI produced before you rely on it. Letting AI solve your tasks for you weakens exactly the skills this course exists to build, and running code you do not understand can introduce errors and security risks.
 
-You may also use external AI tools (e.g., ChatGPT, Claude, Mistral, Gemini). However:
+**Disclosure.** Every submission that used AI says so, in one honest line: what the tool was used for, in your own words (for example: *"Used AI to explain the error message and to draft the plotting code, reworked by me."*). This is not about catching anyone out; being able to say clearly what a tool did for you is part of using it well.
 
-1. Please be careful and try to understand the code generated.
-2. Relying on AI to solve tasks for you weakens your own learning.
-3. AI should ideally support understanding — not replace practice.
-4. Using AI without understand the code can lead to security risks.
+**Exam.** In the examination itself, AI tools are not permitted unless your examination regulations or the exam instructions explicitly say otherwise.
 
 # How to Navigate This Course
 

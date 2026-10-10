@@ -6,10 +6,14 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_03_closing.qmd)'
     output-file: lec_03_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_03_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
-# <span class="flow">Working with AI Assistants</span>
+# <span class="flow">Using AI Assistants</span>
 
 ## Context Engineering
 
@@ -79,7 +83,7 @@ Write clear descriptions of what you want:
 
 - [ ] Have completed all the notebooks
 - [ ] Check whether you could follow so far
-- [ ] Set up Copilot
+- [ ] Set up your AI assistant (Mistral or Zed, see Lecture 2)
 
 . . .
 
@@ -91,7 +95,7 @@ Write clear descriptions of what you want:
 
 # <span class="flow">Literature</span>
 
-## Interesting Literature on Algorithms
+## Literature on Algorithms
 
 - Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^1]
 - Ferguson, T.S. (1989) 'Who solved the secretary problem?', Statistical Science, 4(3). doi:10.1214/ss/1177012493.

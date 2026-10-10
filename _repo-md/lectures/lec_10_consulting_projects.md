@@ -6,6 +6,10 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_10_consulting_projects.qmd)'
     output-file: lec_10_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_10_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
@@ -143,7 +147,7 @@ format:
 
 ------------------------------------------------------------------------
 
-## **<span class="invert-font">Client Briefing: TechMart Electronics</span>**
+## **<span class="invert-font">Client Briefing: TechMart</span>**
 
 . . .
 

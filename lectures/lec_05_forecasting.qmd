@@ -6,11 +6,15 @@ format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_05_forecasting.qmd)"
     output-file: lec_05_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_05_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: MegaMart Retail Chain]{.invert-font}** {background-image="https://unsplash.com/photos/pnmaLfF0U6w/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyNDUzNTAzfA&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: MegaMart]{.invert-font}** {background-image="https://images.unsplash.com/photo-1733506312514-267f8134208a?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
 
 . . .
 
@@ -222,7 +226,7 @@ plt.show()
 Recent data often predicts the future better than old data!
 :::
 
-# [Exponential Smoothing Methods]{.flow} {.title}
+# [Simple Smoothing]{.flow} {.title}
 
 ## Simple Exponential Smoothing
 
@@ -771,7 +775,7 @@ Notice how the forecast continues the seasonal pattern while following the trend
 - Seasonal pattern length unknown
 
 
-# [Method Selection & Validation]{.flow} {.title}
+# [Selection & Validation]{.flow} {.title}
 
 ## Measuring Forecast Accuracy
 
@@ -912,7 +916,7 @@ plt.show()
 The "best" forecast depends on your business context.
 :::
 
-# [Method Implementation]{.flow} {.title}
+# [Implementation]{.flow} {.title}
 
 ## Your Python Practice Notebook
 
@@ -935,7 +939,7 @@ The "best" forecast depends on your business context.
 The notebook guides you step-by-step through Bean Counter's seasonal demand forecasting challenge!
 :::
 
-# [AI & Machine Learning Forecasting]{.flow} {.title}
+# [AI & Machine Learning]{.flow} {.title}
 
 ## The Promise of AI
 
@@ -1048,6 +1052,7 @@ plt.show()
 #| echo: false
 setup_clean_style()
 fig, ax = plt.subplots()
+fig.set_figheight(3)  # lower than the default, so the slide fits
 
 # Create timeline visualization
 timeline = np.arange(0, 24)

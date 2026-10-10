@@ -6,6 +6,10 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_02_copilot_intro.qmd)'
     output-file: lec_02_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_02_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
@@ -128,7 +132,7 @@ Models work?
 
 > **Tip**
 >
-> There are alternative like Zed or Cursor, but you can use Copilot for free as student.
+> The same idea ships in many editors (Zed, Cursor, VS Code with various extensions): an assistant that reads your code and suggests the next step.
 
 ## Used autocomplete before?
 
@@ -276,44 +280,46 @@ def calculate_shipping_cost(weight, distance):
 >
 > Don't accept code blindly, especially later if things are more complicated.
 
-# <span class="flow">Getting Started with Copilot</span>
+# <span class="flow">AI Assistant Setup</span>
 
 ## Get Free Access
 
-**GitHub Student Developer Pack** gives you free Copilot access!
-
-. . .
-
-1.  Go to [education.github.com/pack](https://education.github.com/pack)
-2.  Sign up with your university email
-3.  Verify your student status
-4.  Wait for approval (usually 1-2 days)
-5.  Login into your account in VS Code
-
-. . .
-
-> **Note**
+> **Warning**
 >
-> You'll need a GitHub account. Create one at [github.com](https://github.com) if you don't have one.
-
-## Verifying Copilot is Working
-
-1.  Create a new Python file (`.py`) and type something
-2.  Wait 1-2 seconds
+> **GitHub Copilot's free student signups are currently paused**, so we use one of these instead. Everything this lecture shows about AI pair programming works the same way.
 
 . . .
 
-**If working, you'll see:**
+**Option 1 --- Mistral (free "Experiment" tier):**
 
-- Gray "ghost text" suggesting code
-- Press `Tab` to accept
-- Press `Esc` to reject
+1.  Go to [console.mistral.ai](https://console.mistral.ai) and sign up (phone verification, no credit card)
+2.  In the **Admin Console → Privacy** menu, disable "Anonymous improvement data" so your inputs are not used for training
+3.  Chat at [chat.mistral.ai](https://chat.mistral.ai) or connect the API key to your editor
+
+## Get Free Access II
+
+**Option 2 --- Zed's built-in AI:**
+
+1.  Install [Zed](https://zed.dev) and sign in with a GitHub account
+2.  Apply for the free student plan at [zed.dev/education](https://zed.dev/education) (12 months of model credits)
+
+## Verifying It Works
+
+1.  Create a new Python file (`.py`) and write a comment describing a small function
+2.  Ask the assistant to complete it (inline suggestion or chat)
+
+. . .
+
+**You should see:**
+
+- A code suggestion appearing next to or below your comment
+- Accept it, then **read it line by line** before running
 
 . . .
 
 > **Tip**
 >
-> Try to get copilot running on your own until next session.
+> Try to get one of the two options running on your own until next session.
 
 # <span class="flow">Best Practices</span>
 
@@ -374,17 +380,17 @@ def calculate_shipping_cost(weight, distance):
 
 ## Key Takeaways
 
-1.  **GitHub Copilot is a tool:** You still need to learn fundamentals
+1.  **An AI assistant is a tool:** You still need to learn fundamentals
 2.  **Understand before accepting:** Read every suggestion carefully
 3.  **Use it strategically:** Syntax help yes, thinking replacement no
-4.  **Get free access:** GitHub Student Developer Pack
-5.  **Practice:**The more you use it, the more helpful it becomes
+4.  **Get free access:** Mistral's free tier or Zed's student plan
+5.  **Practice:** The more you use it, the more helpful it becomes
 
 . . .
 
 > **Note**
 >
-> Before next lecture, make sure you applied for GitHub Student Developer Pack to get access to copilot!
+> Before next lecture, make sure you have one of the two AI-assistant options from this lecture up and running!
 
 . . .
 

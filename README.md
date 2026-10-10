@@ -28,15 +28,23 @@ uv sync
 ### Render the Website
 
 ```bash
-quarto render
+uv run quarto render
 ```
 
-Output is generated in `_site/`.
+Output is generated in `_site/`, including a PDF of every slide deck. The slide PDF hook needs the sibling checkout `../Lecture-Foundations`, `uv run playwright install chromium` once per machine, and rendering through `uv run`. A deck that cannot be printed fails the render on purpose, as its page already links the PDF.
+
+### Publish
+
+```bash
+bash ../Lecture-Foundations/scripts/publish-gh-pages.sh
+```
+
+Run it after a full render. It publishes `_site/` and keeps the `gh-pages` branch at one commit.
 
 ### Preview with Live Reload
 
 ```bash
-quarto preview
+uv run quarto preview
 ```
 
 ## License

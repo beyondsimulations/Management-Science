@@ -306,7 +306,6 @@ print("\nSample sales data (first 20 records):")
 print(sales_df.head(20).to_string(index=False))
 ```
 
-
     SALES HISTORY SUMMARY
     ================================================================================
     Date range: 2023-01-01 to 2025-11-09
@@ -368,7 +367,6 @@ print("  - You must forecast Black Friday demand for each SKU")
 print("  - Then decide which SKUs to store in fast warehouse")
 print("  - Goal: Minimize total delay costs!")
 ```
-
 
     WAREHOUSE SPECIFICATIONS
     ================================================================================

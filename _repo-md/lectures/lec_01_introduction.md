@@ -6,6 +6,10 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_01_introduction.qmd)'
     output-file: lec_01_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_01_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
@@ -29,9 +33,7 @@ format:
 
 What is
 
-Management
-
-Science?
+Management Science?
 
 <span class="white">Photo by <a href="https://unsplash.com/@patrickkonior?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Patrick Konior</a> on <a href="https://unsplash.com/photos/a-control-panel-in-a-building-at-night-rDyXca1ZGRI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
 
@@ -191,7 +193,7 @@ Management science is an interdisciplinary field that applies research-based met
 >
 > But you should *not* simply use them to *replace* your learning.
 
-# <span class="flow">How to learn programming</span>
+# <span class="flow">Learning to Program</span>
 
 ## My Recommendation
 
@@ -337,7 +339,7 @@ so far?
 
 # <span class="flow">Literature</span>
 
-## Interesting Literature on Algorithms
+## Literature on Algorithms
 
 - Christian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.[^2]
 - Ferguson, T.S. (1989) 'Who solved the secretary problem?', Statistical Science, 4(3). doi:10.1214/ss/1177012493.

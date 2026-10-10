@@ -6,12 +6,16 @@ format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_04_monte_carlo.qmd)"
     output-file: lec_04_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_04_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: TechVenture Innovation Fund]{.invert-font}** {background-image="https://unsplash.com/photos/K5DY18hy5JQ/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYxNDU4NjYzfA&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: TechVenture]{.invert-font}** {background-image="https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
 
 . . .
 
@@ -643,7 +647,7 @@ No metric tells the whole story. Investors consider multiple dimensions of risk 
 A portfolio with higher average returns might have catastrophic tail risk. Always look at the extremes!
 :::
 
-# [Correlation & Dependence]{.flow} {.title}
+# [Correlation]{.flow} {.title}
 
 ## The Independence Assumption
 
@@ -1108,7 +1112,7 @@ Think of our examples as learning the tool on simple problems so you can solve c
 Simulation is a tool for managing uncertainty, not creating false precision!
 :::
 
-# [Making Smart Decisions]{.flow} {.title}
+# [Smart Decisions]{.flow} {.title}
 
 ## Decision Framework
 

@@ -6,11 +6,15 @@ format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_07_local_search.qmd)"
     output-file: lec_07_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_07_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: Artisan Bakery]{.invert-font}** {background-image="https://unsplash.com/photos/RndRFJ1v1kk/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyODcwNzAzfA&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: Artisan Bakery]{.invert-font}** {background-image="https://images.unsplash.com/photo-1587241321921-91a834d6d191?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
 
 . . .
 
@@ -139,7 +143,7 @@ plt.show()
 TSP optimization where we find minimum cost tour → NP-Hard. This means no known algorithm can find the perfect solution quickly for large problems.
 :::
 
-# [Graph Theory Foundations]{.flow} {.title}
+# [Graph Theory]{.flow} {.title}
 
 ## What is a Graph?
 
@@ -210,9 +214,7 @@ A tour $T = (v_1, v_2, ..., v_n, v_1)$ where:
 2. **Symmetry:** $d(i,j) = d(j,i)$ \quad \forall $i,j \in V$
 3. **Triangle Inequality:** $d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V$
 
-. . .
-
-**Common Distance Functions:**
+## Common Distance Functions
 
 - **Euclidean:** $d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}$
 - **Manhattan:** $d(i,j) = |x_i - x_j| + |y_i - y_j|$
@@ -680,7 +682,7 @@ The better your starting point, the better your final result after local search!
 Can we improve our greedy solutions?
 :::
 
-# [Local Search Framework]{.flow} {.title}
+# [Local Search]{.flow} {.title}
 
 ## The Four Pillars of Local Search
 
@@ -728,7 +730,7 @@ The power of local search: The same "engine" works for routing, scheduling, or a
 Local search transforms "quick and dirty" solutions into "pretty good" ones!
 :::
 
-# [Local Search Improvements]{.flow} {.title}
+# [Local Improvements]{.flow} {.title}
 
 ## The 2-Opt Algorithm
 
@@ -1538,7 +1540,7 @@ What works great for routing might fail for scheduling. Always match your tool t
 [Industry usage for delivery optimization]{.highlight}
 
 | Method | Industry Use |
-|--------|------------|--------------|
+|--------|--------------|
 | Human intuition | Still common! |
 | Start + 2-opt | Common practice |
 | Advanced Meta | Sometimes practice |

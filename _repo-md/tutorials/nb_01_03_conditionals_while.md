@@ -283,7 +283,6 @@ for i, product in enumerate(products):
     print(f"  Item {i}: {product} costs ${prices[i]}")
 ```
 
-
     Using enumerate() - a cleaner approach:
       Item 0: Coffee costs $4.5
       Item 1: Milk costs $2.75

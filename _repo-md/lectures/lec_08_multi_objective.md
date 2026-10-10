@@ -6,6 +6,10 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_08_multi_objective.qmd)'
     output-file: lec_08_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_08_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
@@ -16,7 +20,7 @@ format:
 
 # <span class="flow">Introduction</span>
 
-## **<span class="invert-font">Client Briefing: EcoExpress Logistics</span>**
+## **<span class="invert-font">Client Briefing: EcoExpress</span>**
 
 . . .
 
@@ -167,7 +171,7 @@ format:
 >
 > Harder to visualize, but same principle applies!
 
-# <span class="flow">Fleet Composition Problem</span>
+# <span class="flow">Fleet Composition</span>
 
 ## The Fleet Challenge
 
@@ -286,7 +290,6 @@ Where $e_i$ = CO₂ emissions per km for vehicle type $i$
 ## Visualizing Fleet Trade-offs
 
 <img src="lec_08_multi_objective_files/figure-markdown_strict/cell-9-output-1.png" width="728" height="465" />
-
 
     Generated 68 feasible fleet compositions
 
@@ -468,7 +471,7 @@ def find_extreme_points(problem):
 
 <span class="highlight">This is what you'll implement in your assignments!</span>
 
-# <span class="flow">Construction & Improvement</span>
+# <span class="flow">Construct & Improve</span>
 
 ## Construction Methods for MOO
 
@@ -556,7 +559,7 @@ def find_extreme_points(problem):
 >
 > Always keep all your objectives in mind when making decisions.
 
-# <span class="flow">From Pareto Front to Decision</span>
+# <span class="flow">Pareto to Decision</span>
 
 ## How to Choose!
 

@@ -6,12 +6,16 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_05_forecasting.qmd)'
     output-file: lec_05_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_05_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
 # <span class="flow">Introduction</span>
 
-## **<span class="invert-font">Client Briefing: MegaMart Retail Chain</span>**
+## **<span class="invert-font">Client Briefing: MegaMart</span>**
 
 . . .
 
@@ -123,7 +127,7 @@ $$Y_t = T_t \times S_t \times R_t$$
 >
 > Recent data often predicts the future better than old data!
 
-# <span class="flow">Exponential Smoothing Methods</span>
+# <span class="flow">Simple Smoothing</span>
 
 ## Simple Exponential Smoothing
 
@@ -150,7 +154,7 @@ $$\text{Forecast}_{t+1} = \alpha \times \text{Actual}_t + (1-\alpha) \times \tex
 
 <span class="highlight">Simple smoothing assumes the data is flat. What if it's not?</span>
 
-    /Users/vlcek/Documents/git-teaching/Management-Science/.venv/lib/python3.12/site-packages/pandas/util/_decorators.py:213: EstimationWarning: Model has no free parameters to estimate. Set optimized=False to suppress this warning
+    /Users/tobi/development/lectures/Management-Science/.venv/lib/python3.12/site-packages/pandas/util/_decorators.py:213: EstimationWarning: Model has no free parameters to estimate. Set optimized=False to suppress this warning
       return func(*args, **kwargs)
 
 <img src="lec_05_forecasting_files/figure-markdown_strict/cell-5-output-2.png" width="754" height="466" />
@@ -268,7 +272,6 @@ for h in range(1, 4):
     forecast_values.append(forecast)
     print(f"  Period {len(sales_data)+h}: {forecast:.1f} units")
 ```
-
 
     Forecasts:
       Period 7: 134.0 units
@@ -454,7 +457,7 @@ $\alpha$ (level), $\beta$ (trend), $\gamma$ (seasonal), m (seasonal period lengt
 - Flat data with no trend
 - Seasonal pattern length unknown
 
-# <span class="flow">Method Selection & Validation</span>
+# <span class="flow">Selection & Validation</span>
 
 ## Measuring Forecast Accuracy
 
@@ -547,7 +550,7 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 >
 > The "best" forecast depends on your business context.
 
-# <span class="flow">Method Implementation</span>
+# <span class="flow">Implementation</span>
 
 ## Your Python Practice Notebook
 
@@ -568,7 +571,7 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 >
 > The notebook guides you step-by-step through Bean Counter's seasonal demand forecasting challenge!
 
-# <span class="flow">AI & Machine Learning Forecasting</span>
+# <span class="flow">AI & Machine Learning</span>
 
 ## The Promise of AI
 
@@ -623,7 +626,7 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 
 <span class="highlight">Never judge a complex model on the data it learned from!</span>
 
-<img src="lec_05_forecasting_files/figure-markdown_strict/cell-16-output-1.png" width="751" height="466" />
+<img src="lec_05_forecasting_files/figure-markdown_strict/cell-16-output-1.png" width="751" height="274" />
 
 - **Training Data:** Where the model learns patterns (70-80%)
 - **Validation Data:** Where you tune hyperparameters (10-15%)

@@ -6,11 +6,15 @@ format:
   revealjs:
     footer: " {{< meta title >}} | {{< meta author >}} | [Home](lec_09_metaheuristics.qmd)"
     output-file: lec_09_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_09_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: La Étoile]{.invert-font}** {background-image="https://unsplash.com/photos/N_Y88TWmGwA/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHx8fDE3NjM3OTIzNjZ8MA&force=true&w=2400" background-size="cover"}
+## **[Client Briefing: La Étoile]{.invert-font}** {background-image="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
 
 . . .
 
@@ -270,7 +274,7 @@ plt.show()
 [Question:]{.question} Any idea how to escape local optima?
 
 
-# [Why Simple Methods Fail]{.flow} {.title}
+# [Simple Methods Fail]{.flow} {.title}
 
 ## The Silo Problem
 
@@ -492,7 +496,7 @@ plt.show()
 
 [Question:]{.question} What can we do to cope with this situation?
 
-# [Metaheuristic #1: Simulated Annealing]{.flow} {.title}
+# [Simulated Annealing]{.flow} {.title}
 
 ## Core Concepts
 
@@ -634,7 +638,13 @@ def simulated_annealing_concept(current_schedule):
             # Cold temperature = less likely to accept
             if random() < acceptance_probability(temperature):
                 current_schedule = new_schedule  # Accept anyway!
-        
+```
+
+## Concept (continued)
+
+[How Simulated Annealing Works (Pseudocode)]{.highlight}
+
+```python
         # Step 3: Cool down (become less adventurous)
         temperature = temperature * 0.95
         
@@ -973,7 +983,7 @@ plt.show()
 The "Good Balance" explores widely early, then refines carefully. Often you need to balance exploration and exploitation by experimenting with different parameters.
 :::
 
-# [Metaheuristic #2: Genetic Algorithms]{.flow} {.title}
+# [Genetic Algorithms]{.flow} {.title}
 
 ## Evolution as Optimization
 
@@ -1601,7 +1611,7 @@ GA maintains population diversity, SA explores single solution path!
 - Population too large or too many generations
 - Fix: Start small (50-100), tune based on convergence
 
-# [Metaheuristic #3: Tabu Search]{.flow} {.title}
+# [Tabu Search]{.flow} {.title}
 
 ## Core Idea
 
@@ -1652,7 +1662,13 @@ def tabu_search_concept():
         for move in possible_moves:
             if move not in tabu_list:  # Not forbidden
                 allowed_moves.append(move)
-        
+```
+
+## Concept (continued)
+
+[How Tabu Search Works (Pseudocode)]{.highlight}
+
+```python
         # Pick the best allowed move (even if worse!)
         best_move = select_best(allowed_moves)
         current_solution = apply(best_move)
@@ -1777,7 +1793,7 @@ plt.show()
 Tabu Search's memory prevents revisiting bad solutions!
 :::
 
-# [Metaheuristic #4: Ant Colony Optimization]{.flow} {.title}
+# [Ant Colony (ACO)]{.flow} {.title}
 
 ## The Core Idea
 

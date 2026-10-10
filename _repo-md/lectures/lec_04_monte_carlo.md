@@ -6,12 +6,16 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_04_monte_carlo.qmd)'
     output-file: lec_04_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_04_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
 # <span class="flow">Introduction</span>
 
-## **<span class="invert-font">Client Briefing: TechVenture Innovation Fund</span>**
+## **<span class="invert-font">Client Briefing: TechVenture</span>**
 
 . . .
 
@@ -243,7 +247,6 @@ print(f" 75th: {np.percentile(returns, 75):.1%} (best 25% of scenarios)")
 print(f" 95th: {np.percentile(returns, 95):.1%} (best 5% of scenarios)")
 ```
 
-
     Percentiles:
       5th: -2.7% (worst 5% of scenarios)
      25th: 22.1% (worst 25% of scenarios)
@@ -407,7 +410,7 @@ $$\binom{4}{2} = \frac{4!}{2! \times 2!} = \frac{4 \times 3 \times 2 \times 1}{(
 >
 > A portfolio with higher average returns might have catastrophic tail risk. Always look at the extremes!
 
-# <span class="flow">Correlation & Dependence</span>
+# <span class="flow">Correlation</span>
 
 ## The Independence Assumption
 
@@ -660,7 +663,7 @@ print(f"90th percentile: {np.percentile(project_times, 90):.1f} days")
 >
 > Simulation is a tool for managing uncertainty, not creating false precision!
 
-# <span class="flow">Making Smart Decisions</span>
+# <span class="flow">Smart Decisions</span>
 
 ## Decision Framework
 

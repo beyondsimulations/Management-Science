@@ -184,7 +184,6 @@ print(f"\n  EU Compliant: {'✓ YES' if metrics['avg_co2'] <= 111 else '✗ NO'}
 print(f"  Sufficient Capacity: {'✓ YES' if metrics['total_capacity'] >= 22000 else '✗ NO'}")
 ```
 
-
     Example Fleet Performance:
       Total Cost: €21,912,600
       Service Score: 0.746

@@ -6,6 +6,10 @@ format:
   revealjs:
     footer: ' {{< meta title >}} | {{< meta author >}} | [Home](lec_09_metaheuristics.qmd)'
     output-file: lec_09_presentation.html
+format-links:
+  - text: Slides (PDF)
+    href: lec_09_presentation.pdf
+    icon: file-earmark-slides
 ---
 
 
@@ -102,7 +106,7 @@ format:
 
 <span class="question">Question:</span> Any idea how to escape local optima?
 
-# <span class="flow">Why Simple Methods Fail</span>
+# <span class="flow">Simple Methods Fail</span>
 
 ## The Silo Problem
 
@@ -156,7 +160,7 @@ format:
 
 <span class="question">Question:</span> What can we do to cope with this situation?
 
-# <span class="flow">Metaheuristic #1: Simulated Annealing</span>
+# <span class="flow">Simulated Annealing</span>
 
 ## Core Concepts
 
@@ -235,7 +239,13 @@ def simulated_annealing_concept(current_schedule):
             # Cold temperature = less likely to accept
             if random() < acceptance_probability(temperature):
                 current_schedule = new_schedule  # Accept anyway!
-        
+```
+
+## Concept (continued)
+
+<span class="highlight">How Simulated Annealing Works (Pseudocode)</span>
+
+``` python
         # Step 3: Cool down (become less adventurous)
         temperature = temperature * 0.95
         
@@ -321,7 +331,7 @@ La Étoile's Weekend Challenge:
 >
 > The "Good Balance" explores widely early, then refines carefully. Often you need to balance exploration and exploitation by experimenting with different parameters.
 
-# <span class="flow">Metaheuristic #2: Genetic Algorithms</span>
+# <span class="flow">Genetic Algorithms</span>
 
 ## Evolution as Optimization
 
@@ -485,7 +495,7 @@ La Étoile's Weekend Challenge:
 - Population too large or too many generations
 - Fix: Start small (50-100), tune based on convergence
 
-# <span class="flow">Metaheuristic #3: Tabu Search</span>
+# <span class="flow">Tabu Search</span>
 
 ## Core Idea
 
@@ -530,7 +540,13 @@ def tabu_search_concept():
         for move in possible_moves:
             if move not in tabu_list:  # Not forbidden
                 allowed_moves.append(move)
-        
+```
+
+## Concept (continued)
+
+<span class="highlight">How Tabu Search Works (Pseudocode)</span>
+
+``` python
         # Pick the best allowed move (even if worse!)
         best_move = select_best(allowed_moves)
         current_solution = apply(best_move)
@@ -559,7 +575,7 @@ def tabu_search_concept():
 >
 > Tabu Search's memory prevents revisiting bad solutions!
 
-# <span class="flow">Metaheuristic #4: Ant Colony Optimization</span>
+# <span class="flow">Ant Colony (ACO)</span>
 
 ## The Core Idea
 

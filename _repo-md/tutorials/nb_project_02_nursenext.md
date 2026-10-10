@@ -283,7 +283,6 @@ print(f"Available capacity (20 nurses × 6 shifts max): {20 * 6} shift-slots")
 print(f"Capacity margin: {20 * 6 - total_shifts_needed} shift-slots")
 ```
 
-
     SHIFT STAFFING REQUIREMENTS
     ======================================================================
 
@@ -333,7 +332,6 @@ print("\nWEEK SCHEDULE STRUCTURE (21 shifts total)")
 print("=" * 60)
 print(schedule_template_df.to_string(index=False))
 ```
-
 
     WEEK SCHEDULE STRUCTURE (21 shifts total)
     ============================================================
@@ -436,7 +434,6 @@ def calculate_schedule_cost(schedule, nurses_df):
 print("\nHelper function templates loaded")
 print("YOU must implement the full logic!")
 ```
-
 
     Helper function templates loaded
     YOU must implement the full logic!
