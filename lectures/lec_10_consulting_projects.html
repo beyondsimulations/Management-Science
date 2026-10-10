@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,14 +44,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -568,7 +571,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#client-briefing-nursenext-hospital" id="toc-client-briefing-nursenext-hospital" class="nav-link" data-scroll-target="#client-briefing-nursenext-hospital"><strong><span class="invert-font">Client Briefing: NurseNext Hospital</span></strong></a></li>
   <li><a href="#nursenext-the-burnout-problem" id="toc-nursenext-the-burnout-problem" class="nav-link" data-scroll-target="#nursenext-the-burnout-problem">NurseNext: The Burnout Problem</a></li>
   <li><a href="#nursenext-your-mission" id="toc-nursenext-your-mission" class="nav-link" data-scroll-target="#nursenext-your-mission">NurseNext: Your Mission</a></li>
-  <li><a href="#client-briefing-techmart-electronics" id="toc-client-briefing-techmart-electronics" class="nav-link" data-scroll-target="#client-briefing-techmart-electronics"><strong><span class="invert-font">Client Briefing: TechMart Electronics</span></strong></a></li>
+  <li><a href="#client-briefing-techmart" id="toc-client-briefing-techmart" class="nav-link" data-scroll-target="#client-briefing-techmart"><strong><span class="invert-font">Client Briefing: TechMart</span></strong></a></li>
   <li><a href="#techmart-the-allocation-disaster" id="toc-techmart-the-allocation-disaster" class="nav-link" data-scroll-target="#techmart-the-allocation-disaster">TechMart: The Allocation Disaster</a></li>
   <li><a href="#techmart-your-mission" id="toc-techmart-your-mission" class="nav-link" data-scroll-target="#techmart-your-mission">TechMart: Your Mission</a></li>
   </ul></li>
@@ -591,7 +594,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break">Break!</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_10_consulting_projects.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_10_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_10_consulting_projects.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_10_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="lec_10_presentation.pdf"><i class="bi bi-file-earmark-slides"></i>Slides (PDF)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -801,8 +804,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 </section>
-<section id="client-briefing-techmart-electronics" class="level2" data-background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" data-background-size="cover">
-<h2 data-background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-techmart-electronics"><strong><span class="invert-font">Client Briefing: TechMart Electronics</span></strong></h2>
+<section id="client-briefing-techmart" class="level2" data-background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" data-background-size="cover">
+<h2 data-background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-techmart"><strong><span class="invert-font">Client Briefing: TechMart</span></strong></h2>
 <p>. . .</p>
 <p><span class="invert-font">COO’s Inventory Paradox:</span></p>
 <p><span class="invert-font fragment">“We have <span class="highlight">€10M stuck in inventory</span>, yet we’re constantly out of stock on bestsellers! <span class="highlight">20% stockout rate</span> on popular items while slow-movers occupy our fast warehouse. Black Friday is in 3 weeks!”</span></p>

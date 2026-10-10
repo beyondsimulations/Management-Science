@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -76,14 +79,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -616,10 +619,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#accept-without-reading" id="toc-accept-without-reading" class="nav-link" data-scroll-target="#accept-without-reading">Accept without reading?</a></li>
   <li><a href="#my-take-just-be-careful-ok" id="toc-my-take-just-be-careful-ok" class="nav-link" data-scroll-target="#my-take-just-be-careful-ok">My take: Just be careful, ok?</a></li>
   </ul></li>
-  <li><a href="#getting-started-with-copilot" id="toc-getting-started-with-copilot" class="nav-link" data-scroll-target="#getting-started-with-copilot"><span class="flow">Getting Started with Copilot</span></a>
+  <li><a href="#ai-assistant-setup" id="toc-ai-assistant-setup" class="nav-link" data-scroll-target="#ai-assistant-setup"><span class="flow">AI Assistant Setup</span></a>
   <ul class="collapse">
   <li><a href="#get-free-access" id="toc-get-free-access" class="nav-link" data-scroll-target="#get-free-access">Get Free Access</a></li>
-  <li><a href="#verifying-copilot-is-working" id="toc-verifying-copilot-is-working" class="nav-link" data-scroll-target="#verifying-copilot-is-working">Verifying Copilot is Working</a></li>
+  <li><a href="#get-free-access-ii" id="toc-get-free-access-ii" class="nav-link" data-scroll-target="#get-free-access-ii">Get Free Access II</a></li>
+  <li><a href="#verifying-it-works" id="toc-verifying-it-works" class="nav-link" data-scroll-target="#verifying-it-works">Verifying It Works</a></li>
   </ul></li>
   <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="flow">Best Practices</span></a>
   <ul class="collapse">
@@ -631,7 +635,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_02_copilot_intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_02_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_02_copilot_intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_02_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="lec_02_presentation.pdf"><i class="bi bi-file-earmark-slides"></i>Slides (PDF)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -677,8 +681,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p></p>
 </center>
 </section>
-<section id="section" class="level2" data-background-image="https://unsplash.com/photos/M5tzZtFCOfs/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8c2VydmVyc3xlbnwwfHx8fDE3MzA1MDU5NDd8MA&amp;force=true&amp;w=1920">
-<h2 data-background-image="https://unsplash.com/photos/M5tzZtFCOfs/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8c2VydmVyc3xlbnwwfHx8fDE3MzA1MDU5NDd8MA&amp;force=true&amp;w=1920" class="anchored" data-anchor-id="section"></h2>
+<section id="section" class="level2" data-background-image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400">
+<h2 data-background-image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" class="anchored" data-anchor-id="section"></h2>
 <div class="r-fit-text white bold">
 <p>How do</p>
 <p>Large Language</p>
@@ -819,7 +823,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>There are alternative like Zed or Cursor, but you can use Copilot for free as student.</p>
+<p>The same idea ships in many editors (Zed, Cursor, VS Code with various extensions): an assistant that reads your code and suggests the next step.</p>
 </div>
 </div>
 </div>
@@ -904,7 +908,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="demo-the-result-hopefully" class="level2">
 <h2 class="anchored" data-anchor-id="demo-the-result-hopefully">Demo: The Result (hopefully)</h2>
-<div id="9885de3e" class="cell" data-execution_count="1">
+<div id="7efe5d41" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_shipping_cost(weight, distance):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Calculate shipping cost based on weight and distance."""</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    base_rate <span class="op">=</span> <span class="fl">5.0</span></span>
@@ -976,43 +980,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="getting-started-with-copilot" class="level1 title">
-<h1 class="title"><span class="flow">Getting Started with Copilot</span></h1>
+<section id="ai-assistant-setup" class="level1 title">
+<h1 class="title"><span class="flow">AI Assistant Setup</span></h1>
 <section id="get-free-access" class="level2">
 <h2 class="anchored" data-anchor-id="get-free-access">Get Free Access</h2>
-<p><strong>GitHub Student Developer Pack</strong> gives you free Copilot access!</p>
-<p>. . .</p>
-<ol type="1">
-<li>Go to <a href="https://education.github.com/pack">education.github.com/pack</a></li>
-<li>Sign up with your university email</li>
-<li>Verify your student status</li>
-<li>Wait for approval (usually 1-2 days)</li>
-<li>Login into your account in VS Code</li>
-</ol>
-<p>. . .</p>
-<div class="callout callout-style-simple callout-note">
+<div class="callout callout-style-simple callout-warning">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>You’ll need a GitHub account. Create one at <a href="https://github.com">github.com</a> if you don’t have one.</p>
+<p><strong>GitHub Copilot’s free student signups are currently paused</strong>, so we use one of these instead. Everything this lecture shows about AI pair programming works the same way.</p>
 </div>
 </div>
 </div>
-</section>
-<section id="verifying-copilot-is-working" class="level2">
-<h2 class="anchored" data-anchor-id="verifying-copilot-is-working">Verifying Copilot is Working</h2>
+<p>. . .</p>
+<p><strong>Option 1 — Mistral (free “Experiment” tier):</strong></p>
 <ol type="1">
-<li>Create a new Python file (<code>.py</code>) and type something</li>
-<li>Wait 1-2 seconds</li>
+<li>Go to <a href="https://console.mistral.ai">console.mistral.ai</a> and sign up (phone verification, no credit card)</li>
+<li>In the <strong>Admin Console → Privacy</strong> menu, disable “Anonymous improvement data” so your inputs are not used for training</li>
+<li>Chat at <a href="https://chat.mistral.ai">chat.mistral.ai</a> or connect the API key to your editor</li>
+</ol>
+</section>
+<section id="get-free-access-ii" class="level2">
+<h2 class="anchored" data-anchor-id="get-free-access-ii">Get Free Access II</h2>
+<p><strong>Option 2 — Zed’s built-in AI:</strong></p>
+<ol type="1">
+<li>Install <a href="https://zed.dev">Zed</a> and sign in with a GitHub account</li>
+<li>Apply for the free student plan at <a href="https://zed.dev/education">zed.dev/education</a> (12 months of model credits)</li>
+</ol>
+</section>
+<section id="verifying-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="verifying-it-works">Verifying It Works</h2>
+<ol type="1">
+<li>Create a new Python file (<code>.py</code>) and write a comment describing a small function</li>
+<li>Ask the assistant to complete it (inline suggestion or chat)</li>
 </ol>
 <p>. . .</p>
-<p><strong>If working, you’ll see:</strong></p>
+<p><strong>You should see:</strong></p>
 <ul>
-<li>Gray “ghost text” suggesting code</li>
-<li>Press <code>Tab</code> to accept</li>
-<li>Press <code>Esc</code> to reject</li>
+<li>A code suggestion appearing next to or below your comment</li>
+<li>Accept it, then <strong>read it line by line</strong> before running</li>
 </ul>
 <p>. . .</p>
 <div class="callout callout-style-simple callout-tip">
@@ -1021,7 +1029,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Try to get copilot running on your own until next session.</p>
+<p>Try to get one of the two options running on your own until next session.</p>
 </div>
 </div>
 </div>
@@ -1070,11 +1078,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="key-takeaways" class="level2">
 <h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
 <ol type="1">
-<li><strong>GitHub Copilot is a tool:</strong> You still need to learn fundamentals</li>
+<li><strong>An AI assistant is a tool:</strong> You still need to learn fundamentals</li>
 <li><strong>Understand before accepting:</strong> Read every suggestion carefully</li>
 <li><strong>Use it strategically:</strong> Syntax help yes, thinking replacement no</li>
-<li><strong>Get free access:</strong> GitHub Student Developer Pack</li>
-<li><strong>Practice:</strong>The more you use it, the more helpful it becomes</li>
+<li><strong>Get free access:</strong> Mistral’s free tier or Zed’s student plan</li>
+<li><strong>Practice:</strong> The more you use it, the more helpful it becomes</li>
 </ol>
 <p>. . .</p>
 <div class="callout callout-style-simple callout-note">
@@ -1083,7 +1091,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Before next lecture, make sure you applied for GitHub Student Developer Pack to get access to copilot!</p>
+<p>Before next lecture, make sure you have one of the two AI-assistant options from this lecture up and running!</p>
 </div>
 </div>
 </div>

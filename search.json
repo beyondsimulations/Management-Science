@@ -1691,11 +1691,11 @@
     "text": "NurseNext: Your Mission\nWhat you need to solve:\n\nEmployee Scheduling with complex constraints\nMultiple skill levels (Junior, Senior, Specialist) and departments\nShift patterns: Morning (7-15), Evening (15-23), Night (23-7)\nLabor law: Max consecutive shifts, rest periods, weekly hours\nFairness: Weekend equity, workload balance, distribution\nRobustness: What happens when nurses call in sick?\n\n\n\n\n\n\n\n\nAny questions?"
   },
   {
-    "objectID": "lectures/lec_10_presentation.html#client-briefing-techmart-electronics",
-    "href": "lectures/lec_10_presentation.html#client-briefing-techmart-electronics",
+    "objectID": "lectures/lec_10_presentation.html#client-briefing-techmart",
+    "href": "lectures/lec_10_presentation.html#client-briefing-techmart",
     "title": "Consulting Projects",
-    "section": "Client Briefing: TechMart Electronics",
-    "text": "Client Briefing: TechMart Electronics\n\nCOO’s Inventory Paradox:\n“We have €10M stuck in inventory, yet we’re constantly out of stock on bestsellers! 20% stockout rate on popular items while slow-movers occupy our fast warehouse. Black Friday is in 3 weeks!”"
+    "section": "Client Briefing: TechMart",
+    "text": "Client Briefing: TechMart\n\nCOO’s Inventory Paradox:\n“We have €10M stuck in inventory, yet we’re constantly out of stock on bestsellers! 20% stockout rate on popular items while slow-movers occupy our fast warehouse. Black Friday is in 3 weeks!”"
   },
   {
     "objectID": "lectures/lec_10_presentation.html#techmart-the-allocation-disaster",
@@ -1885,11 +1885,11 @@
     ]
   },
   {
-    "objectID": "lectures/lec_10_consulting_projects.html#client-briefing-techmart-electronics",
-    "href": "lectures/lec_10_consulting_projects.html#client-briefing-techmart-electronics",
+    "objectID": "lectures/lec_10_consulting_projects.html#client-briefing-techmart",
+    "href": "lectures/lec_10_consulting_projects.html#client-briefing-techmart",
     "title": "Consulting Projects",
-    "section": "Client Briefing: TechMart Electronics",
-    "text": "Client Briefing: TechMart Electronics\n. . .\nCOO’s Inventory Paradox:\n“We have €10M stuck in inventory, yet we’re constantly out of stock on bestsellers! 20% stockout rate on popular items while slow-movers occupy our fast warehouse. Black Friday is in 3 weeks!”",
+    "section": "Client Briefing: TechMart",
+    "text": "Client Briefing: TechMart\n. . .\nCOO’s Inventory Paradox:\n“We have €10M stuck in inventory, yet we’re constantly out of stock on bestsellers! 20% stockout rate on popular items while slow-movers occupy our fast warehouse. Black Friday is in 3 weeks!”",
     "crumbs": [
       "10 Consulting Projects",
       "Project Introduction"
@@ -2017,11 +2017,11 @@
     ]
   },
   {
-    "objectID": "lectures/lec_08_presentation.html#client-briefing-ecoexpress-logistics",
-    "href": "lectures/lec_08_presentation.html#client-briefing-ecoexpress-logistics",
+    "objectID": "lectures/lec_08_presentation.html#client-briefing-ecoexpress",
+    "href": "lectures/lec_08_presentation.html#client-briefing-ecoexpress",
     "title": "Multi-Objective Optimization",
-    "section": "Client Briefing: EcoExpress Logistics",
-    "text": "Client Briefing: EcoExpress Logistics\n\nOperations Director’s Dilemma:\n“EU regulations demand 40% emission cuts, but we can’t sacrifice profitability, service quality, or reliability!”"
+    "section": "Client Briefing: EcoExpress",
+    "text": "Client Briefing: EcoExpress\n\nOperations Director’s Dilemma:\n“EU regulations demand 40% emission cuts, but we can’t sacrifice profitability, service quality, or reliability!”"
   },
   {
     "objectID": "lectures/lec_08_presentation.html#the-fleet-challenge",
@@ -2357,8 +2357,8 @@
     ]
   },
   {
-    "objectID": "lectures/lec_08_multi_objective.html#client-briefing-ecoexpress-logistics",
-    "href": "lectures/lec_08_multi_objective.html#client-briefing-ecoexpress-logistics",
+    "objectID": "lectures/lec_08_multi_objective.html#client-briefing-ecoexpress",
+    "href": "lectures/lec_08_multi_objective.html#client-briefing-ecoexpress",
     "title": "Multi-Objective Optimization",
     "section": "",
     "text": ". . .\nOperations Director’s Dilemma:\n“EU regulations demand 40% emission cuts, but we can’t sacrifice profitability, service quality, or reliability!”",
@@ -2874,11 +2874,11 @@
     ]
   },
   {
-    "objectID": "lectures/lec_06_presentation.html#client-briefing-custom-cycles-manufacturing",
-    "href": "lectures/lec_06_presentation.html#client-briefing-custom-cycles-manufacturing",
+    "objectID": "lectures/lec_06_presentation.html#client-briefing-custom-cycles",
+    "href": "lectures/lec_06_presentation.html#client-briefing-custom-cycles",
     "title": "Smart Quick Decisions",
-    "section": "Client Briefing: Custom Cycles Manufacturing",
-    "text": "Client Briefing: Custom Cycles Manufacturing\n\nOperations Manager’s Friday Crisis:\n“It’s Friday at 06:00 in the morning. We just received 16 custom bicycle orders that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”"
+    "section": "Client Briefing: Custom Cycles",
+    "text": "Client Briefing: Custom Cycles\n\nOperations Manager’s Friday Crisis:\n“It’s Friday at 06:00 in the morning. We just received 16 custom bicycle orders that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#the-manufacturing-challenge",
@@ -3053,7 +3053,7 @@
     "href": "lectures/lec_06_presentation.html#professional-applications-ii",
     "title": "Smart Quick Decisions",
     "section": "Professional Applications II",
-    "text": "Professional Applications II\nOperations & Manufacturing:\n\nProduction line scheduling and supply chain optimization\nWarehouse picking routes and maintenance scheduling\n\n\nTransportation & Logistics:\n\nVehicle routing problems\nCrew scheduling and maintenance window planning\n\n\n\nHealthcare:\n\nPatient appointment scheduling and staff shift scheduling"
+    "text": "Professional Applications II\nOperations & Manufacturing:\n\nProduction line scheduling and supply chain optimization\nWarehouse picking routes and maintenance scheduling\n\n\nTransportation & Logistics:\n\nVehicle routing, crew scheduling and maintenance window planning\n\n\n\nHealthcare:\n\nPatient appointment scheduling and staff shift scheduling"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#metric-definitions",
@@ -3137,7 +3137,7 @@
     "href": "lectures/lec_06_presentation.html#johnsons-algorithm-the-intuition",
     "title": "Smart Quick Decisions",
     "section": "Johnson’s Algorithm: The Intuition",
-    "text": "Johnson’s Algorithm: The Intuition\n\nWhy does Johnson’s work? Let’s understand the logic first\n\n\nThink about bottlenecks in a two-stage flow:\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n\nKey Observation:\n\nIf a job is quick on Machine 1 → Do it early (Machine 1 finishes fast, Machine 2 starts sooner!)\nIf a job is quick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)"
+    "text": "Johnson’s Algorithm: The Intuition\n\nWhy does Johnson’s work? Let’s understand the logic first\n\n\nThink about bottlenecks in a two-stage flow:\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n\nKey Observation:\n\nQuick on Machine 1 → Do it early (Machine 2 starts sooner!)\nQuick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)"
   },
   {
     "objectID": "lectures/lec_06_presentation.html#johnsons-algorithm-the-rule",
@@ -3270,8 +3270,8 @@
     ]
   },
   {
-    "objectID": "lectures/lec_06_greedy_algorithms.html#client-briefing-custom-cycles-manufacturing",
-    "href": "lectures/lec_06_greedy_algorithms.html#client-briefing-custom-cycles-manufacturing",
+    "objectID": "lectures/lec_06_greedy_algorithms.html#client-briefing-custom-cycles",
+    "href": "lectures/lec_06_greedy_algorithms.html#client-briefing-custom-cycles",
     "title": "Smart Quick Decisions",
     "section": "",
     "text": ". . .\nOperations Manager’s Friday Crisis:\n“It’s Friday at 06:00 in the morning. We just received 16 custom bicycle orders that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”",
@@ -3549,7 +3549,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html#professional-applications-ii",
     "title": "Smart Quick Decisions",
     "section": "Professional Applications II",
-    "text": "Professional Applications II\nOperations & Manufacturing:\n\nProduction line scheduling and supply chain optimization\nWarehouse picking routes and maintenance scheduling\n\n. . .\nTransportation & Logistics:\n\nVehicle routing problems\nCrew scheduling and maintenance window planning\n\n. . .\nHealthcare:\n\nPatient appointment scheduling and staff shift scheduling",
+    "text": "Professional Applications II\nOperations & Manufacturing:\n\nProduction line scheduling and supply chain optimization\nWarehouse picking routes and maintenance scheduling\n\n. . .\nTransportation & Logistics:\n\nVehicle routing, crew scheduling and maintenance window planning\n\n. . .\nHealthcare:\n\nPatient appointment scheduling and staff shift scheduling",
     "crumbs": [
       "06 Greedy Search",
       "Lecture"
@@ -3681,7 +3681,7 @@
     "href": "lectures/lec_06_greedy_algorithms.html#johnsons-algorithm-the-intuition",
     "title": "Smart Quick Decisions",
     "section": "Johnson’s Algorithm: The Intuition",
-    "text": "Johnson’s Algorithm: The Intuition\n. . .\nWhy does Johnson’s work? Let’s understand the logic first\n. . .\nThink about bottlenecks in a two-stage flow:\n\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n. . .\nKey Observation:\n\n\nIf a job is quick on Machine 1 → Do it early (Machine 1 finishes fast, Machine 2 starts sooner!)\nIf a job is quick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)",
+    "text": "Johnson’s Algorithm: The Intuition\n. . .\nWhy does Johnson’s work? Let’s understand the logic first\n. . .\nThink about bottlenecks in a two-stage flow:\n\n\nMachine 2 sits idle waiting for Machine 1 to finish\nGoal: Minimize that idle time\n\n\n. . .\nKey Observation:\n\n\nQuick on Machine 1 → Do it early (Machine 2 starts sooner!)\nQuick on Machine 2 → Do it late (Machine 2 can finish quickly at the end, no wasted capacity)",
     "crumbs": [
       "06 Greedy Search",
       "Lecture"
@@ -3886,11 +3886,11 @@
     ]
   },
   {
-    "objectID": "lectures/lec_04_presentation.html#client-briefing-techventure-innovation-fund",
-    "href": "lectures/lec_04_presentation.html#client-briefing-techventure-innovation-fund",
+    "objectID": "lectures/lec_04_presentation.html#client-briefing-techventure",
+    "href": "lectures/lec_04_presentation.html#client-briefing-techventure",
     "title": "Dealing with Uncertainty",
-    "section": "Client Briefing: TechVenture Innovation Fund",
-    "text": "Client Briefing: TechVenture Innovation Fund\n\nCEO’s Dilemma:\n“We have €2M to invest in 2 of 4 startups. Each promises great returns, but the future is uncertain. How do we make the best choice without just gambling?”"
+    "section": "Client Briefing: TechVenture",
+    "text": "Client Briefing: TechVenture\n\nCEO’s Dilemma:\n“We have €2M to invest in 2 of 4 startups. Each promises great returns, but the future is uncertain. How do we make the best choice without just gambling?”"
   },
   {
     "objectID": "lectures/lec_04_presentation.html#business-valuing-uncertainty",
@@ -4205,8 +4205,8 @@
     ]
   },
   {
-    "objectID": "lectures/lec_04_monte_carlo.html#client-briefing-techventure-innovation-fund",
-    "href": "lectures/lec_04_monte_carlo.html#client-briefing-techventure-innovation-fund",
+    "objectID": "lectures/lec_04_monte_carlo.html#client-briefing-techventure",
+    "href": "lectures/lec_04_monte_carlo.html#client-briefing-techventure",
     "title": "Dealing with Uncertainty",
     "section": "",
     "text": ". . .\nCEO’s Dilemma:\n“We have €2M to invest in 2 of 4 startups. Each promises great returns, but the future is uncertain. How do we make the best choice without just gambling?”",
@@ -4756,7 +4756,7 @@
     "href": "lectures/lec_02_presentation.html#what-is-github-copilot",
     "title": "Lecture 2 - AI Programming",
     "section": "What is GitHub Copilot?",
-    "text": "What is GitHub Copilot?\nGitHub Copilot is an AI pair programmer that helps you write code faster and with less effort.\n\nThink of it as:\n\nAn autocomplete for entire lines or blocks of code\nA coding assistant that understands context\nA learning tool that shows you coding patterns\n\n\n\n\n\n\n\n\n\nCopilot uses AI trained on billions of lines of public code to suggest completions.\n\n\n\n\n\n\n\n\n\n\n\nThere are alternative like Zed or Cursor, but you can use Copilot for free as student."
+    "text": "What is GitHub Copilot?\nGitHub Copilot is an AI pair programmer that helps you write code faster and with less effort.\n\nThink of it as:\n\nAn autocomplete for entire lines or blocks of code\nA coding assistant that understands context\nA learning tool that shows you coding patterns\n\n\n\n\n\n\n\n\n\nCopilot uses AI trained on billions of lines of public code to suggest completions.\n\n\n\n\n\n\n\n\n\n\n\nThe same idea ships in many editors (Zed, Cursor, VS Code with various extensions): an assistant that reads your code and suggests the next step."
   },
   {
     "objectID": "lectures/lec_02_presentation.html#used-autocomplete-before",
@@ -4819,14 +4819,21 @@
     "href": "lectures/lec_02_presentation.html#get-free-access",
     "title": "Lecture 2 - AI Programming",
     "section": "Get Free Access",
-    "text": "Get Free Access\nGitHub Student Developer Pack gives you free Copilot access!\n\n\nGo to education.github.com/pack\nSign up with your university email\nVerify your student status\nWait for approval (usually 1-2 days)\nLogin into your account in VS Code\n\n\n\n\n\n\n\n\n\nYou’ll need a GitHub account. Create one at github.com if you don’t have one."
+    "text": "Get Free Access\n\n\n\n\n\n\nGitHub Copilot’s free student signups are currently paused, so we use one of these instead. Everything this lecture shows about AI pair programming works the same way.\n\n\n\n\nOption 1 — Mistral (free “Experiment” tier):\n\nGo to console.mistral.ai and sign up (phone verification, no credit card)\nIn the Admin Console → Privacy menu, disable “Anonymous improvement data” so your inputs are not used for training\nChat at chat.mistral.ai or connect the API key to your editor"
   },
   {
-    "objectID": "lectures/lec_02_presentation.html#verifying-copilot-is-working",
-    "href": "lectures/lec_02_presentation.html#verifying-copilot-is-working",
+    "objectID": "lectures/lec_02_presentation.html#get-free-access-ii",
+    "href": "lectures/lec_02_presentation.html#get-free-access-ii",
     "title": "Lecture 2 - AI Programming",
-    "section": "Verifying Copilot is Working",
-    "text": "Verifying Copilot is Working\n\nCreate a new Python file (.py) and type something\nWait 1-2 seconds\n\n\nIf working, you’ll see:\n\nGray “ghost text” suggesting code\nPress Tab to accept\nPress Esc to reject\n\n\n\n\n\n\n\n\n\nTry to get copilot running on your own until next session."
+    "section": "Get Free Access II",
+    "text": "Get Free Access II\nOption 2 — Zed’s built-in AI:\n\nInstall Zed and sign in with a GitHub account\nApply for the free student plan at zed.dev/education (12 months of model credits)"
+  },
+  {
+    "objectID": "lectures/lec_02_presentation.html#verifying-it-works",
+    "href": "lectures/lec_02_presentation.html#verifying-it-works",
+    "title": "Lecture 2 - AI Programming",
+    "section": "Verifying It Works",
+    "text": "Verifying It Works\n\nCreate a new Python file (.py) and write a comment describing a small function\nAsk the assistant to complete it (inline suggestion or chat)\n\n\nYou should see:\n\nA code suggestion appearing next to or below your comment\nAccept it, then read it line by line before running\n\n\n\n\n\n\n\n\n\nTry to get one of the two options running on your own until next session."
   },
   {
     "objectID": "lectures/lec_02_presentation.html#when-to-use-copilot",
@@ -4847,7 +4854,7 @@
     "href": "lectures/lec_02_presentation.html#key-takeaways",
     "title": "Lecture 2 - AI Programming",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nGitHub Copilot is a tool: You still need to learn fundamentals\nUnderstand before accepting: Read every suggestion carefully\nUse it strategically: Syntax help yes, thinking replacement no\nGet free access: GitHub Student Developer Pack\nPractice:The more you use it, the more helpful it becomes\n\n\n\n\n\n\n\n\nBefore next lecture, make sure you applied for GitHub Student Developer Pack to get access to copilot!\n\n\n\n\n\n\n\n\n\n\n\nIf you run into issues, we will solve them next week together!"
+    "text": "Key Takeaways\n\nAn AI assistant is a tool: You still need to learn fundamentals\nUnderstand before accepting: Read every suggestion carefully\nUse it strategically: Syntax help yes, thinking replacement no\nGet free access: Mistral’s free tier or Zed’s student plan\nPractice: The more you use it, the more helpful it becomes\n\n\n\n\n\n\n\n\nBefore next lecture, make sure you have one of the two AI-assistant options from this lecture up and running!\n\n\n\n\n\n\n\n\n\n\n\nIf you run into issues, we will solve them next week together!"
   },
   {
     "objectID": "lectures/lec_02_copilot_intro.html",
@@ -4964,7 +4971,7 @@
     "href": "lectures/lec_02_copilot_intro.html#what-is-github-copilot",
     "title": "Lecture 2 - AI Programming",
     "section": "What is GitHub Copilot?",
-    "text": "What is GitHub Copilot?\nGitHub Copilot is an AI pair programmer that helps you write code faster and with less effort.\n. . .\nThink of it as:\n\nAn autocomplete for entire lines or blocks of code\nA coding assistant that understands context\nA learning tool that shows you coding patterns\n\n. . .\n\n\n\n\n\n\nCopilot uses AI trained on billions of lines of public code to suggest completions.\n\n\n\n. . .\n\n\n\n\n\n\nThere are alternative like Zed or Cursor, but you can use Copilot for free as student.",
+    "text": "What is GitHub Copilot?\nGitHub Copilot is an AI pair programmer that helps you write code faster and with less effort.\n. . .\nThink of it as:\n\nAn autocomplete for entire lines or blocks of code\nA coding assistant that understands context\nA learning tool that shows you coding patterns\n\n. . .\n\n\n\n\n\n\nCopilot uses AI trained on billions of lines of public code to suggest completions.\n\n\n\n. . .\n\n\n\n\n\n\nThe same idea ships in many editors (Zed, Cursor, VS Code with various extensions): an assistant that reads your code and suggests the next step.",
     "crumbs": [
       "02 Advances",
       "Lecture"
@@ -5063,18 +5070,29 @@
     "href": "lectures/lec_02_copilot_intro.html#get-free-access",
     "title": "Lecture 2 - AI Programming",
     "section": "Get Free Access",
-    "text": "Get Free Access\nGitHub Student Developer Pack gives you free Copilot access!\n. . .\n\nGo to education.github.com/pack\nSign up with your university email\nVerify your student status\nWait for approval (usually 1-2 days)\nLogin into your account in VS Code\n\n. . .\n\n\n\n\n\n\nYou’ll need a GitHub account. Create one at github.com if you don’t have one.",
+    "text": "Get Free Access\n\n\n\n\n\n\nGitHub Copilot’s free student signups are currently paused, so we use one of these instead. Everything this lecture shows about AI pair programming works the same way.\n\n\n\n. . .\nOption 1 — Mistral (free “Experiment” tier):\n\nGo to console.mistral.ai and sign up (phone verification, no credit card)\nIn the Admin Console → Privacy menu, disable “Anonymous improvement data” so your inputs are not used for training\nChat at chat.mistral.ai or connect the API key to your editor",
     "crumbs": [
       "02 Advances",
       "Lecture"
     ]
   },
   {
-    "objectID": "lectures/lec_02_copilot_intro.html#verifying-copilot-is-working",
-    "href": "lectures/lec_02_copilot_intro.html#verifying-copilot-is-working",
+    "objectID": "lectures/lec_02_copilot_intro.html#get-free-access-ii",
+    "href": "lectures/lec_02_copilot_intro.html#get-free-access-ii",
     "title": "Lecture 2 - AI Programming",
-    "section": "Verifying Copilot is Working",
-    "text": "Verifying Copilot is Working\n\nCreate a new Python file (.py) and type something\nWait 1-2 seconds\n\n. . .\nIf working, you’ll see:\n\nGray “ghost text” suggesting code\nPress Tab to accept\nPress Esc to reject\n\n. . .\n\n\n\n\n\n\nTry to get copilot running on your own until next session.",
+    "section": "Get Free Access II",
+    "text": "Get Free Access II\nOption 2 — Zed’s built-in AI:\n\nInstall Zed and sign in with a GitHub account\nApply for the free student plan at zed.dev/education (12 months of model credits)",
+    "crumbs": [
+      "02 Advances",
+      "Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_02_copilot_intro.html#verifying-it-works",
+    "href": "lectures/lec_02_copilot_intro.html#verifying-it-works",
+    "title": "Lecture 2 - AI Programming",
+    "section": "Verifying It Works",
+    "text": "Verifying It Works\n\nCreate a new Python file (.py) and write a comment describing a small function\nAsk the assistant to complete it (inline suggestion or chat)\n\n. . .\nYou should see:\n\nA code suggestion appearing next to or below your comment\nAccept it, then read it line by line before running\n\n. . .\n\n\n\n\n\n\nTry to get one of the two options running on your own until next session.",
     "crumbs": [
       "02 Advances",
       "Lecture"
@@ -5107,7 +5125,7 @@
     "href": "lectures/lec_02_copilot_intro.html#key-takeaways",
     "title": "Lecture 2 - AI Programming",
     "section": "Key Takeaways",
-    "text": "Key Takeaways\n\nGitHub Copilot is a tool: You still need to learn fundamentals\nUnderstand before accepting: Read every suggestion carefully\nUse it strategically: Syntax help yes, thinking replacement no\nGet free access: GitHub Student Developer Pack\nPractice:The more you use it, the more helpful it becomes\n\n. . .\n\n\n\n\n\n\nBefore next lecture, make sure you applied for GitHub Student Developer Pack to get access to copilot!\n\n\n\n. . .\n\n\n\n\n\n\nIf you run into issues, we will solve them next week together!",
+    "text": "Key Takeaways\n\nAn AI assistant is a tool: You still need to learn fundamentals\nUnderstand before accepting: Read every suggestion carefully\nUse it strategically: Syntax help yes, thinking replacement no\nGet free access: Mistral’s free tier or Zed’s student plan\nPractice: The more you use it, the more helpful it becomes\n\n. . .\n\n\n\n\n\n\nBefore next lecture, make sure you have one of the two AI-assistant options from this lecture up and running!\n\n\n\n. . .\n\n\n\n\n\n\nIf you run into issues, we will solve them next week together!",
     "crumbs": [
       "02 Advances",
       "Lecture"
@@ -5129,7 +5147,7 @@
     "href": "general/uv.html",
     "title": "Installing Python",
     "section": "",
-    "text": "uv is a new (and very fast) Python tool written in Rust. It:\n\nInstalls Python for you (no manual downloads).\nCreates isolated virtual environments (safe sandboxes per project).\nInstalls and updates packages quickly.\n\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
+    "text": "uv is a new (and very fast) Python tool written in Rust. It: - Installs Python for you (no manual downloads). - Creates isolated virtual environments (safe sandboxes per project). - Installs and updates packages quickly.\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
     "crumbs": [
       "Installation"
     ]
@@ -5139,7 +5157,7 @@
     "href": "general/uv.html#why-we-use-uv-for-this-course",
     "title": "Installing Python",
     "section": "",
-    "text": "uv is a new (and very fast) Python tool written in Rust. It:\n\nInstalls Python for you (no manual downloads).\nCreates isolated virtual environments (safe sandboxes per project).\nInstalls and updates packages quickly.\n\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
+    "text": "uv is a new (and very fast) Python tool written in Rust. It: - Installs Python for you (no manual downloads). - Creates isolated virtual environments (safe sandboxes per project). - Installs and updates packages quickly.\n\n\n\n\n\n\nWHAT is a virtual environment? Think of each project as its own coffee shop with its own supplies. One shop changing its menu does not affect the others. WHY it matters: You avoid random breakage when different projects need different versions of the same package.",
     "crumbs": [
       "Installation"
     ]
@@ -5149,17 +5167,17 @@
     "href": "general/uv.html#install-uv",
     "title": "Installing Python",
     "section": "Install uv",
-    "text": "Install uv\nChoose the instructions for your operating system. To these, you need to work in your terminal.\n\n\n\n\n\n\nOpen the terminal in VS Code by selecting (Terminal → New Terminal).\n\n\n\n\nmacOS or Linux (Terminal)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nIf curl is missing:\nwget -qO- https://astral.sh/uv/install.sh | sh\nAfter installation: close and reopen your terminal (so your PATH updates).\n\n\nWindows (PowerShell)\nOpen PowerShell and run:\npowershell -ExecutionPolicy Bypass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\nIf you see a script execution warning, you can alternatively first run:\nSet-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\nThen re-run the install line.\n\n\nVerify installation\nRun (macOS / Linux / Windows):\nuv --version\nIf you see a version number: great!\n\n\n\n\n\n\nIf you get “command not found” or “‘uv’ is not recognized”:\n\nClose and reopen the terminal (important).\nOn Windows: make sure you used PowerShell (not Command Prompt).\nStill broken? Ask for help, no need of guessing the error.",
+    "text": "Install uv\nChoose the instructions for your operating system. For these, you need to work in your terminal.\n\n\n\n\n\n\nOpen the terminal directly in your IDE: in VS Code via (Terminal → New Terminal), in Zed via the terminal panel at the bottom.\n\n\n\n\nmacOS or Linux (Terminal)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\nIf curl is missing:\nwget -qO- https://astral.sh/uv/install.sh | sh\nAfter installation: close and reopen your terminal (so your PATH updates).\n\n\nWindows (PowerShell)\nOpen PowerShell and run:\npowershell -ExecutionPolicy Bypass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\nIf you see a script execution warning, you can alternatively first run:\nSet-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process\nThen re-run the install line.\n\n\nVerify installation\nRun (macOS / Linux / Windows):\nuv --version\nIf you see a version number: great!\n\n\n\n\n\n\nIf you get “command not found” or “‘uv’ is not recognized”:\n\nClose and reopen the terminal (important).\nOn Windows: make sure you used PowerShell (not Command Prompt).\nStill broken? Ask for help, no need of guessing the error.",
     "crumbs": [
       "Installation"
     ]
   },
   {
-    "objectID": "general/uv.html#installpython",
-    "href": "general/uv.html#installpython",
+    "objectID": "general/uv.html#install-python",
+    "href": "general/uv.html#install-python",
     "title": "Installing Python",
-    "section": "InstallPython",
-    "text": "InstallPython\nWe want everyone on the same Python version for consistency. Thus, we’ll use Python 3.12 for the course this year.\nInstall (you only need to do this once):\nuv python install 3.12\nCheck the installation:\nuv run python --version\nExpected output starts with:\nPython 3.12.",
+    "section": "Install Python",
+    "text": "Install Python\nWe want everyone on the same Python version for consistency. Thus, we’ll use Python 3.12 for the course this year.\nInstall (you only need to do this once):\nuv python install 3.12\nCheck the installation:\nuv run python --version\nExpected output starts with:\nPython 3.12.",
     "crumbs": [
       "Installation"
     ]
@@ -5169,7 +5187,7 @@
     "href": "general/uv.html#create-your-first-project",
     "title": "Installing Python",
     "section": "Create your first project",
-    "text": "Create your first project\nPick a folder where you keep course work. If you do not have one, make sure to create one! Open the course folder in your IDE and then run the following from the terminal:\nuv init\nuv init creates:\n\nmain.py (starter script)\npyproject.toml (project + dependencies config)\n.python-version (records the Python version we chose)\n.gitignore (useful if you ever use Git)\nREADME.md (you can jot notes here)\n(A .venv folder will appear later once packages are added or synced.)\n\n\n\n\n\n\n\nYou do not need to edit any of these (except maybe README.md for your notes and main.py if you want to run something different).",
+    "text": "Create your first project\nPick a folder where you keep course work. If you do not have one, make sure to create one! Open the course folder in your IDE and then run the following from the terminal:\nuv init my-first-project\ncd my-first-project\nThe first line creates a new folder named my-first-project (you can name it anything). The second line moves you into that folder. Alternatively, you can create the folder manually before, open it in your IDE and run uv init . inside it.\nuv init creates: - main.py (starter script) - pyproject.toml (project + dependencies config) - .python-version (records the Python version we chose) - .gitignore (useful if you ever use Git) - README.md (you can jot notes here) - (A .venv folder will appear later once packages are added or synced.)\nYou do not need to edit any of these (except maybe README.md for your notes and main.py if you want to run something different).",
     "crumbs": [
       "Installation"
     ]
@@ -5179,7 +5197,17 @@
     "href": "general/uv.html#run-the-starter-script",
     "title": "Installing Python",
     "section": "Run the starter script",
-    "text": "Run the starter script\nInside the project folder in your terminal:\nuv run python main.py\nYou should see something like:\nHello World!\n(If you want, you can open main.py and change the message, then re-run.)\n\nWhat does that code mean?\ndef main():\n    print(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    main()\n\ndef main(): defines a function (a reusable block of code).\nprint(...) shows text in the terminal.\nThe line if __name__ == \"__main__\": ensures this only auto-runs when the file is executed directly.\n\nDon’t worry about this yet, we’ll gradually build up to it.",
+    "text": "Run the starter script\nInside the project folder:\nuv run python main.py\nYou should see something like:\nHello World!\n(If you want, you can open main.py and change the message, then re-run.)\n\nWhat does that code mean?\ndef main():\n    print(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    main()\n\ndef main(): defines a function (a reusable block of code).\nprint(...) shows text in the terminal.\nThe line if __name__ == \"__main__\": ensures this only auto-runs when the file is executed directly.\n\nDon’t worry about this yet, we’ll gradually build up to it.",
+    "crumbs": [
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "general/uv.html#run-scripts-directly-in-zed",
+    "href": "general/uv.html#run-scripts-directly-in-zed",
+    "title": "Installing Python",
+    "section": "Run scripts directly in Zed",
+    "text": "Run scripts directly in Zed\nInstead of switching to the terminal every time, you can set up a task in Zed to run the currently open Python file with a single shortcut.\n\nCreate the task file\nInside your project folder, create a .zed/ directory and add a file called tasks.json inside it:\n[\n  {\n    \"label\": \"Run current Python file\",\n    \"command\": \"uv run python $ZED_FILE\",\n    \"use_new_terminal\": false\n  }\n]\n$ZED_FILE is a variable Zed fills in automatically with the path of the file you have open.\n\n\nRun the task\n\nOpen any .py file in your project.\nOpen the task picker with Cmd+Shift+P (macOS) / Ctrl+Shift+P (Windows/Linux).\nType task and choose task: spawn.\nSelect Run current Python file. Zed will execute uv run python &lt;your-file&gt; in the built-in terminal.\n\n\n\n\n\n\n\nYou can also bind the task to a keyboard shortcut. Open Zed → Settings → Key Bindings and add an entry for \"task: spawn\" to make it even faster.",
     "crumbs": [
       "Installation"
     ]
@@ -5199,7 +5227,7 @@
     "href": "general/uv.html#updating-uv",
     "title": "Installing Python",
     "section": "Updating uv",
-    "text": "Updating uv\nOccasionally:\nuv self update\n\n\n\n\n\n\nIf it ever errors, you can just reinstall using the same one-liner from earlier.",
+    "text": "Updating uv\nOccasionally:\nuv self update\n(If it ever errors, you can just reinstall using the same one-liner from earlier.)",
     "crumbs": [
       "Installation"
     ]
@@ -5219,7 +5247,7 @@
     "href": "general/uv.html#recap",
     "title": "Installing Python",
     "section": "Recap",
-    "text": "Recap\nYou can now:\n\nInstall uv.\nCreate a project.\nRun a script.\nAdd/remove/sync packages.\n\nNow, you’re set to continue the course.",
+    "text": "Recap\nYou can now: 1. Install uv. 2. Create a project. 3. Run a script. 4. Add/remove/sync packages.\nNow, you’re set to continue the course.",
     "crumbs": [
       "Installation"
     ]
@@ -5937,7 +5965,7 @@
     "href": "index.html#required-tools",
     "title": "Welcome to Management Science!",
     "section": "Required Tools",
-    "text": "Required Tools\n\nLaptop capable of running Python and Jupyter notebooks\nPython (installed via uv package manager in class)\nGitHub Copilot (free with Student Developer Pack)\nVS Code or similar IDE",
+    "text": "Required Tools\n\nLaptop capable of running Python and Jupyter notebooks\nPython (installed via uv package manager in class)\nAn AI coding assistant (see the AI policy below; a free Mistral account or Zed’s education plan both work — GitHub Copilot student signups are currently paused)\nVS Code or similar IDE",
     "crumbs": [
       "Welcome"
     ]
@@ -5987,7 +6015,7 @@
     "href": "general/faq.html#faqs",
     "title": "Frequently Asked Questions",
     "section": "FAQs",
-    "text": "FAQs\n\nHow can I download PDF slides from the lecture?\n\nFirst, open the lecture you want to download the slides from.\nThen, click on the RevealJS button in the top right corner.\nNow, click on the three stacked bars in the lower left corner.\nThen, click on Tools in the upper left corner.\nNow you can select PDF Export Mode and then save the slides as a PDF.\n\n\n\n\n\n\n\nUnfortunately, this method does not work perfectly on all browsers. If you have a Chrome based browser, you should be fine.",
+    "text": "FAQs\n\nHow can I download PDF slides from the lecture?\nOpen the lecture and click on Slides (PDF) in the top right corner: the slides are there as a finished PDF to download. The PDF button next to it gives you the lecture as a text document instead.",
     "crumbs": [
       "FAQs"
     ]
@@ -6003,31 +6031,31 @@
     ]
   },
   {
-    "objectID": "general/faq.html#is-using-copilot-cheating",
-    "href": "general/faq.html#is-using-copilot-cheating",
+    "objectID": "general/faq.html#is-using-an-ai-coding-assistant-cheating",
+    "href": "general/faq.html#is-using-an-ai-coding-assistant-cheating",
     "title": "Frequently Asked Questions",
-    "section": "Is using Copilot cheating?",
-    "text": "Is using Copilot cheating?\nNo! Think of it more like using a calculator. It is allowed and encouraged, but you must understand what it does in the background to check the results.",
+    "section": "Is using an AI coding assistant cheating?",
+    "text": "Is using an AI coding assistant cheating?\nNo! Think of it more like using a calculator. It is allowed and encouraged, but you must understand what it does in the background to check the results.",
     "crumbs": [
       "FAQs"
     ]
   },
   {
-    "objectID": "general/faq.html#will-copilot-make-me-a-worse-programmer",
-    "href": "general/faq.html#will-copilot-make-me-a-worse-programmer",
+    "objectID": "general/faq.html#will-an-ai-assistant-make-me-a-worse-programmer",
+    "href": "general/faq.html#will-an-ai-assistant-make-me-a-worse-programmer",
     "title": "Frequently Asked Questions",
-    "section": "Will Copilot make me a worse programmer?",
-    "text": "Will Copilot make me a worse programmer?\nIf you don’t learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better then just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.",
+    "section": "Will an AI assistant make me a worse programmer?",
+    "text": "Will an AI assistant make me a worse programmer?\nIf you don’t learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better than just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.",
     "crumbs": [
       "FAQs"
     ]
   },
   {
-    "objectID": "general/faq.html#what-if-copilot-suggests-wrong-code",
-    "href": "general/faq.html#what-if-copilot-suggests-wrong-code",
+    "objectID": "general/faq.html#what-if-the-assistant-suggests-wrong-code",
+    "href": "general/faq.html#what-if-the-assistant-suggests-wrong-code",
     "title": "Frequently Asked Questions",
-    "section": "What if Copilot suggests wrong code?",
-    "text": "What if Copilot suggests wrong code?\nCopilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.1 That’s why humans are still very important in the loop.",
+    "section": "What if the assistant suggests wrong code?",
+    "text": "What if the assistant suggests wrong code?\nAI assistants (and all large language models) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.1 That’s why humans are still very important in the loop.",
     "crumbs": [
       "FAQs"
     ]
@@ -6107,7 +6135,7 @@
     "href": "general/syllabus.html",
     "title": "Course Syllabus",
     "section": "",
-    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nGitHub Copilot integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios\n\n\n\n\n\nMini-competitions begin - apply algorithms to business problems\nFormat for Lectures 4-9:\n\nHour 1: Solution presentations of previous competition\nHour 2: Interactive lecture on core concepts\nHour 3: Hands-on notebook practice + class discussion\nHour 4: Mini-competition with real data\nBonus Points: Best solution teams earn points toward final grade\n\n\n\n\nProbability distributions and random sampling\nBusiness risk modeling techniques\nPortfolio optimization under uncertainty\nCoffee shop simulation case study\n\n\n\n\n\nTime series analysis fundamentals\nDemand forecasting methods\nForecast evaluation metrics\nSeasonal and trend analysis\n\n\n\n\n\nSPT (Shortest Processing Time) rule\nEDD (Earliest Due Date) rule\nGantt chart visualization\nPerformance metrics: makespan, tardiness, flow time\n\n\n\n\n\nNearest neighbor heuristic\n2-opt local search improvements\nRoute optimization metrics\nReal logistics applications\n\n\n\n\n\nWeighted scoring methods\nPareto efficiency concepts\nDecision criteria combination\nBusiness trade-off analysis\n\n\n\n\n\nWhen simple heuristics fail\nGenetic algorithms introduction\nSimulated annealing basics\nAlgorithm selection strategies\n\n\n\n\n\nReal client challenges with professional presentations\n\n\n\nThree client projects to choose from:\n\nQuickBite: Food delivery routing optimization\nNurseNext: Healthcare staff scheduling\nTechMart: E-commerce inventory optimization\n\nTeam formation and data exploration\nProject scope definition\n\n\n\n\n\nPresentation skills training\nIntensive solution development\nPeer consultation and feedback\nPrototype completion milestone\n\n\n\n\n\nProfessional presentation competition\n“Executive panel evaluation”\nSolution demonstration and Q&A",
+    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nAI pair programming: integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios\n\n\n\n\n\nMini-competitions begin - apply algorithms to business problems\nFormat for Lectures 4-9:\n\nHour 1: Solution presentations of previous competition\nHour 2: Interactive lecture on core concepts\nHour 3: Hands-on notebook practice + class discussion\nHour 4: Mini-competition with real data\nBonus Points: Best solution teams earn points toward final grade\n\n\n\n\nProbability distributions and random sampling\nBusiness risk modeling techniques\nPortfolio optimization under uncertainty\nCoffee shop simulation case study\n\n\n\n\n\nTime series analysis fundamentals\nDemand forecasting methods\nForecast evaluation metrics\nSeasonal and trend analysis\n\n\n\n\n\nSPT (Shortest Processing Time) rule\nEDD (Earliest Due Date) rule\nGantt chart visualization\nPerformance metrics: makespan, tardiness, flow time\n\n\n\n\n\nNearest neighbor heuristic\n2-opt local search improvements\nRoute optimization metrics\nReal logistics applications\n\n\n\n\n\nWeighted scoring methods\nPareto efficiency concepts\nDecision criteria combination\nBusiness trade-off analysis\n\n\n\n\n\nWhen simple heuristics fail\nGenetic algorithms introduction\nSimulated annealing basics\nAlgorithm selection strategies\n\n\n\n\n\nReal client challenges with professional presentations\n\n\n\nThree client projects to choose from:\n\nQuickBite: Food delivery routing optimization\nNurseNext: Healthcare staff scheduling\nTechMart: E-commerce inventory optimization\n\nTeam formation and data exploration\nProject scope definition\n\n\n\n\n\nPresentation skills training\nIntensive solution development\nPeer consultation and feedback\nPrototype completion milestone\n\n\n\n\n\nProfessional presentation competition\n“Executive panel evaluation”\nSolution demonstration and Q&A",
     "crumbs": [
       "Syllabus"
     ]
@@ -6117,7 +6145,7 @@
     "href": "general/syllabus.html#part-i-python-foundation-lectures-1-3",
     "title": "Course Syllabus",
     "section": "",
-    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nGitHub Copilot integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios",
+    "text": "No mini-competitions yet - focus on solid foundations\n\n\n\nCourse introduction\nPython setup with uv package manager\nVariables, data types, basic operations\nLists and indexing fundamentals\nConditionals and basic loops\n\n\n\n\n\nFunctions for code organization\nDictionaries for structured data\nTuples and multiple return values\nSorting and optimization fundamentals\nAI pair programming: integration and best practices\n\n\n\n\n\nNumPy for numerical computing and random simulation\nPandas for data manipulation and analysis\nData visualization with matplotlib\nCSV file handling and real dataset exploration\nIntegration practice with business scenarios",
     "crumbs": [
       "Syllabus"
     ]
@@ -6177,7 +6205,7 @@
     "href": "lectures/lec_01_introduction.html",
     "title": "Lecture 1 - Introduction & Python Setup",
     "section": "",
-    "text": "Field: Optimizing and simulating complex systems\nLanguages: of choice: Julia, Python and Rust\nInterest: Modelling, Simulations, Machine Learning\nTeaching: OR, Algorithms, and Programming\nContact: vlcek@beyondsimulations.com\n\n\n. . .\n\n\n\n\n\n\nI really appreciate active participation and interaction!\n\n\n\n\n\n\n\nWhat is\nManagement\nScience?\n\n\nPhoto by Patrick Konior on Unsplash\n\n\n\n\nManagement science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.1\n. . .\nIt is not the science of management!\n\n\n\n\n\nPart I: Python Foundation (Lectures 1-3)\n\nVariables, loops, functions, data science tools\n\nPart II: Management Science Tools (Lectures 4-9)\n\nMonte Carlo, Scheduling, Routing, Metaheuristics\n\nPart III: Consulting Competition (Lectures 10-12)\n\nClient briefings, development, final presentations\n\n\n\n. . .\n\n\n\n\n\n\nYou’re now consultants learning to solve real business problems!\n\n\n\n\n\n\nWhere Algorithms Make Millions\n\n\nAmazon: Routing algorithms save millions in delivery costs\nUber: Real-time matching algorithms connect drivers and riders\nHospitals: Scheduling algorithms optimize shifts and OR usage\nAirlines: Revenue algorithms price tickets dynamically\nManufacturing: Production scheduling reduces waste and delays\n\n\n. . .\nManagement Science is everywhere!\n\n\n\nThe Consultant Mindset\n\n\nYou’ll work on business problems\nLearn to communicate solutions to non-technical clients\nBuild practical tools that solve actual challenges\nCompete in a consulting competition with real scenarios\n\n\n. . .\n\n\n\n\n\n\nThink like a consultant: What value does my solution bring to the business?\n\n\n\n\n\n\n\n\n12 lectures of intensive learning\n3 hours per lecture (with breaks!)\nInteractive format:\n\nConcepts & Setup\nHands-on Python notebooks\nConsulting Competition\n\nFinal competition: Apply everything you’ve learned\n\n\n. . .\nEach lecture builds on the previous - attendance is important!\n\n\n\nGrade Composition:\n\nCourse has 100 points, 50 needed to pass\n2 Assignments: 30 points each\nFinal Consulting Project: 40 points\n\n. . .\n\n\n\n\n\n\nWe will have several competitions including our final competition, where you will have the chance to earn bonus points!\n\n\n\n\n\n\nAssignment Strategy:\n\nStart with easy warm-ups in tutorials\nProgress to real-world problems\nAll assignments have clear rubrics\nBonus points for creative solutions!\n\n. . .\n\n\n\n\n\n\nLate submissions: -10% per day (max 3 days)\n\n\n\n\n\n\n\nIn my experience, the best way to learn is by doing!\nHere, we will focus on decision algorithms\nYou will start to learn Python by doing the tutorials\n\n. . .\n\n\n\n\n\n\nDon’t worry, I will help you out if you have any questions!\n\n\n\n\n\n\n\n\nNo prior programming required - we start from zero!\nBut experience is helpful!\nFast-paced but with lots of support\nPractical focus - less theory, more doing\nMistakes are welcome - they’re how we learn\n\n\n. . .\n\n\n\n\n\n\nThe course gets easier after week 3 - the hardest part is getting started!\n\n\n\n\n\n\nBy the end, you will be able to:\n\n\nWrite Python code to solve business problems\nApply algorithms for scheduling, routing, and optimization\nSimulate uncertainty using Monte Carlo methods\nPresent solutions like a management consultant\nBuild tools that create business value\n\n\n. . .\nYou’ll leave with a portfolio of ideas to work on real solutions!\n\n\n\n\nOrigins: Conceived in late 1980s as a teaching and scripting language\nSimple Syntax: Python’s syntax is mostly straightforward and very easy to learn\nVersatility: Used in web development, data analysis, artificial intelligence, and more\nCommunity Support: A large community of users worldwide and extensive documentation\n\n\n\n\n\nYou are allowed to use AI in the course\nI use it as well (e.g., Claude, ChatGPT, Gemini, …)\nThese tools are great for learning Python!\nCan help you a lot to get started with programming\nI will also teach you how to use it effectively\n\n. . .\n\n\n\n\n\n\nBut you should not simply use them to replace your learning.",
+    "text": "Field: Optimizing and simulating complex systems\nLanguages: of choice: Julia, Python and Rust\nInterest: Modelling, Simulations, Machine Learning\nTeaching: OR, Algorithms, and Programming\nContact: vlcek@beyondsimulations.com\n\n\n. . .\n\n\n\n\n\n\nI really appreciate active participation and interaction!\n\n\n\n\n\n\n\nWhat is\nManagement Science?\n\n\nPhoto by Patrick Konior on Unsplash\n\n\n\n\nManagement science is an interdisciplinary field that applies research-based methods, such as modeling, statistics, and algorithms, to solve complex organizational problems and guide strategic decisions, seeking optimal or near‑optimal outcomes across institutions, corporations, and governments.1\n. . .\nIt is not the science of management!\n\n\n\n\n\nPart I: Python Foundation (Lectures 1-3)\n\nVariables, loops, functions, data science tools\n\nPart II: Management Science Tools (Lectures 4-9)\n\nMonte Carlo, Scheduling, Routing, Metaheuristics\n\nPart III: Consulting Competition (Lectures 10-12)\n\nClient briefings, development, final presentations\n\n\n\n. . .\n\n\n\n\n\n\nYou’re now consultants learning to solve real business problems!\n\n\n\n\n\n\nWhere Algorithms Make Millions\n\n\nAmazon: Routing algorithms save millions in delivery costs\nUber: Real-time matching algorithms connect drivers and riders\nHospitals: Scheduling algorithms optimize shifts and OR usage\nAirlines: Revenue algorithms price tickets dynamically\nManufacturing: Production scheduling reduces waste and delays\n\n\n. . .\nManagement Science is everywhere!\n\n\n\nThe Consultant Mindset\n\n\nYou’ll work on business problems\nLearn to communicate solutions to non-technical clients\nBuild practical tools that solve actual challenges\nCompete in a consulting competition with real scenarios\n\n\n. . .\n\n\n\n\n\n\nThink like a consultant: What value does my solution bring to the business?\n\n\n\n\n\n\n\n\n12 lectures of intensive learning\n3 hours per lecture (with breaks!)\nInteractive format:\n\nConcepts & Setup\nHands-on Python notebooks\nConsulting Competition\n\nFinal competition: Apply everything you’ve learned\n\n\n. . .\nEach lecture builds on the previous - attendance is important!\n\n\n\nGrade Composition:\n\nCourse has 100 points, 50 needed to pass\n2 Assignments: 30 points each\nFinal Consulting Project: 40 points\n\n. . .\n\n\n\n\n\n\nWe will have several competitions including our final competition, where you will have the chance to earn bonus points!\n\n\n\n\n\n\nAssignment Strategy:\n\nStart with easy warm-ups in tutorials\nProgress to real-world problems\nAll assignments have clear rubrics\nBonus points for creative solutions!\n\n. . .\n\n\n\n\n\n\nLate submissions: -10% per day (max 3 days)\n\n\n\n\n\n\n\nIn my experience, the best way to learn is by doing!\nHere, we will focus on decision algorithms\nYou will start to learn Python by doing the tutorials\n\n. . .\n\n\n\n\n\n\nDon’t worry, I will help you out if you have any questions!\n\n\n\n\n\n\n\n\nNo prior programming required - we start from zero!\nBut experience is helpful!\nFast-paced but with lots of support\nPractical focus - less theory, more doing\nMistakes are welcome - they’re how we learn\n\n\n. . .\n\n\n\n\n\n\nThe course gets easier after week 3 - the hardest part is getting started!\n\n\n\n\n\n\nBy the end, you will be able to:\n\n\nWrite Python code to solve business problems\nApply algorithms for scheduling, routing, and optimization\nSimulate uncertainty using Monte Carlo methods\nPresent solutions like a management consultant\nBuild tools that create business value\n\n\n. . .\nYou’ll leave with a portfolio of ideas to work on real solutions!\n\n\n\n\nOrigins: Conceived in late 1980s as a teaching and scripting language\nSimple Syntax: Python’s syntax is mostly straightforward and very easy to learn\nVersatility: Used in web development, data analysis, artificial intelligence, and more\nCommunity Support: A large community of users worldwide and extensive documentation\n\n\n\n\n\nYou are allowed to use AI in the course\nI use it as well (e.g., Claude, ChatGPT, Gemini, …)\nThese tools are great for learning Python!\nCan help you a lot to get started with programming\nI will also teach you how to use it effectively\n\n. . .\n\n\n\n\n\n\nBut you should not simply use them to replace your learning.",
     "crumbs": [
       "01 Let's Start",
       "Leture"
@@ -6199,7 +6227,7 @@
     "href": "lectures/lec_01_introduction.html#section",
     "title": "Lecture 1 - Introduction & Python Setup",
     "section": "",
-    "text": "What is\nManagement\nScience?\n\n\nPhoto by Patrick Konior on Unsplash",
+    "text": "What is\nManagement Science?\n\n\nPhoto by Patrick Konior on Unsplash",
     "crumbs": [
       "01 Let's Start",
       "Leture"
@@ -6459,11 +6487,11 @@
     ]
   },
   {
-    "objectID": "lectures/lec_01_introduction.html#interesting-literature-on-algorithms",
-    "href": "lectures/lec_01_introduction.html#interesting-literature-on-algorithms",
+    "objectID": "lectures/lec_01_introduction.html#literature-on-algorithms",
+    "href": "lectures/lec_01_introduction.html#literature-on-algorithms",
     "title": "Lecture 1 - Introduction & Python Setup",
-    "section": "Interesting Literature on Algorithms",
-    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.2\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.",
+    "section": "Literature on Algorithms",
+    "text": "Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.2\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.",
     "crumbs": [
       "01 Let's Start",
       "Leture"
@@ -6514,7 +6542,7 @@
     "href": "lectures/lec_01_presentation.html#section",
     "title": "Lecture 1 - Introduction & Python Setup",
     "section": "",
-    "text": "What is\nManagement\nScience?\n\n\nPhoto by Patrick Konior on Unsplash"
+    "text": "What is\nManagement Science?\n\n\nPhoto by Patrick Konior on Unsplash"
   },
   {
     "objectID": "lectures/lec_01_presentation.html#management-science",
@@ -6678,11 +6706,11 @@
     "text": "The End\nThat’s it for our introduction!\nMake sure you have:\n\nVS Code installed and running\nPython environment set up with uv\nJupyter notebooks working\nThe tutorial files downloaded\n\n\n\n\n\n\n\n\nTake a 10-minute break, then we’ll start with the interactive notebooks."
   },
   {
-    "objectID": "lectures/lec_01_presentation.html#interesting-literature-on-algorithms",
-    "href": "lectures/lec_01_presentation.html#interesting-literature-on-algorithms",
+    "objectID": "lectures/lec_01_presentation.html#literature-on-algorithms",
+    "href": "lectures/lec_01_presentation.html#literature-on-algorithms",
     "title": "Lecture 1 - Introduction & Python Setup",
-    "section": "Interesting Literature on Algorithms",
-    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.\n\nA great inspiration to learn more about Algorithms!"
+    "section": "Literature on Algorithms",
+    "text": "Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.\n\nA great inspiration to learn more about Algorithms!"
   },
   {
     "objectID": "lectures/lec_01_presentation.html#books-on-programming",
@@ -6758,18 +6786,18 @@
     "href": "lectures/lec_03_closing.html#the-end",
     "title": "Lecture 3 - Recap & Copilot Strategy",
     "section": "The End",
-    "text": "The End\nThat’s it for today! Make sure you:\n\nHave completed all the notebooks\nCheck whether you could follow so far\nSet up Copilot\n\n. . .\n\n\n\n\n\n\nEvery line of code you write makes you a better programmer. Every concept you understand makes you a better decision-maker. Keep practicing and keep learning!",
+    "text": "The End\nThat’s it for today! Make sure you:\n\nHave completed all the notebooks\nCheck whether you could follow so far\nSet up your AI assistant (Mistral or Zed, see Lecture 2)\n\n. . .\n\n\n\n\n\n\nEvery line of code you write makes you a better programmer. Every concept you understand makes you a better decision-maker. Keep practicing and keep learning!",
     "crumbs": [
       "03 Foundation",
       "Lecture"
     ]
   },
   {
-    "objectID": "lectures/lec_03_closing.html#interesting-literature-on-algorithms",
-    "href": "lectures/lec_03_closing.html#interesting-literature-on-algorithms",
+    "objectID": "lectures/lec_03_closing.html#literature-on-algorithms",
+    "href": "lectures/lec_03_closing.html#literature-on-algorithms",
     "title": "Lecture 3 - Recap & Copilot Strategy",
-    "section": "Interesting Literature on Algorithms",
-    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.",
+    "section": "Literature on Algorithms",
+    "text": "Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.",
     "crumbs": [
       "03 Foundation",
       "Lecture"
@@ -6841,14 +6869,14 @@
     "href": "lectures/lec_03_presentation.html#the-end",
     "title": "Lecture 3 - Recap & Copilot Strategy",
     "section": "The End",
-    "text": "The End\nThat’s it for today! Make sure you:\n\nHave completed all the notebooks\nCheck whether you could follow so far\nSet up Copilot\n\n\n\n\n\n\n\n\nEvery line of code you write makes you a better programmer. Every concept you understand makes you a better decision-maker. Keep practicing and keep learning!"
+    "text": "The End\nThat’s it for today! Make sure you:\n\nHave completed all the notebooks\nCheck whether you could follow so far\nSet up your AI assistant (Mistral or Zed, see Lecture 2)\n\n\n\n\n\n\n\n\nEvery line of code you write makes you a better programmer. Every concept you understand makes you a better decision-maker. Keep practicing and keep learning!"
   },
   {
-    "objectID": "lectures/lec_03_presentation.html#interesting-literature-on-algorithms",
-    "href": "lectures/lec_03_presentation.html#interesting-literature-on-algorithms",
+    "objectID": "lectures/lec_03_presentation.html#literature-on-algorithms",
+    "href": "lectures/lec_03_presentation.html#literature-on-algorithms",
     "title": "Lecture 3 - Recap & Copilot Strategy",
-    "section": "Interesting Literature on Algorithms",
-    "text": "Interesting Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.\n\nA great inspiration to learn more about Algorithms!"
+    "section": "Literature on Algorithms",
+    "text": "Literature on Algorithms\n\nChristian, B., & Griffiths, T. (2016). Algorithms to live by: the computer science of human decisions. First international edition. New York, Henry Holt and Company.1\nFerguson, T.S. (1989) ‘Who solved the secretary problem?’, Statistical Science, 4(3). doi:10.1214/ss/1177012493.\n\nA great inspiration to learn more about Algorithms!"
   },
   {
     "objectID": "lectures/lec_03_presentation.html#books-on-programming",
@@ -6876,8 +6904,8 @@
     ]
   },
   {
-    "objectID": "lectures/lec_05_forecasting.html#client-briefing-megamart-retail-chain",
-    "href": "lectures/lec_05_forecasting.html#client-briefing-megamart-retail-chain",
+    "objectID": "lectures/lec_05_forecasting.html#client-briefing-megamart",
+    "href": "lectures/lec_05_forecasting.html#client-briefing-megamart",
     "title": "Forecasting the Future",
     "section": "",
     "text": ". . .\nOperations Director’s Crisis:\n“Last Christmas, we ran out of PlayStation 5s but had 500 unsold fitness trackers. We lost €2M in missed sales and clearance losses. How do we predict what customers will actually buy?”",
@@ -7459,11 +7487,11 @@
     ]
   },
   {
-    "objectID": "lectures/lec_05_presentation.html#client-briefing-megamart-retail-chain",
-    "href": "lectures/lec_05_presentation.html#client-briefing-megamart-retail-chain",
+    "objectID": "lectures/lec_05_presentation.html#client-briefing-megamart",
+    "href": "lectures/lec_05_presentation.html#client-briefing-megamart",
     "title": "Forecasting the Future",
-    "section": "Client Briefing: MegaMart Retail Chain",
-    "text": "Client Briefing: MegaMart Retail Chain\n\nOperations Director’s Crisis:\n“Last Christmas, we ran out of PlayStation 5s but had 500 unsold fitness trackers. We lost €2M in missed sales and clearance losses. How do we predict what customers will actually buy?”"
+    "section": "Client Briefing: MegaMart",
+    "text": "Client Briefing: MegaMart\n\nOperations Director’s Crisis:\n“Last Christmas, we ran out of PlayStation 5s but had 500 unsold fitness trackers. We lost €2M in missed sales and clearance losses. How do we predict what customers will actually buy?”"
   },
   {
     "objectID": "lectures/lec_05_presentation.html#business-the-unknown-future",
@@ -7944,7 +7972,18 @@
     "href": "lectures/lec_07_local_search.html#distance-functions-and-metrics",
     "title": "Better Routing",
     "section": "Distance Functions and Metrics",
-    "text": "Distance Functions and Metrics\nThe weight function can have different properties:\n\nIdentity: \\(d(i,i) = 0\\) \\(i \\in V\\)\nSymmetry: \\(d(i,j) = d(j,i)\\) \\(i,j \\in V\\)\nTriangle Inequality: \\(d(i,k) \\leq d(i,j) + d(j,k) \\quad \\forall i,j,k \\in V\\)\n\n. . .\nCommon Distance Functions:\n\nEuclidean: \\(d(i,j) = \\sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\\)\nManhattan: \\(d(i,j) = |x_i - x_j| + |y_i - y_j|\\)\nReal road distances: Often violate triangle inequality!",
+    "text": "Distance Functions and Metrics\nThe weight function can have different properties:\n\nIdentity: \\(d(i,i) = 0\\) \\(i \\in V\\)\nSymmetry: \\(d(i,j) = d(j,i)\\) \\(i,j \\in V\\)\nTriangle Inequality: \\(d(i,k) \\leq d(i,j) + d(j,k) \\quad \\forall i,j,k \\in V\\)",
+    "crumbs": [
+      "07 Local Search",
+      "Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_07_local_search.html#common-distance-functions",
+    "href": "lectures/lec_07_local_search.html#common-distance-functions",
+    "title": "Better Routing",
+    "section": "Common Distance Functions",
+    "text": "Common Distance Functions\n\nEuclidean: \\(d(i,j) = \\sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\\)\nManhattan: \\(d(i,j) = |x_i - x_j| + |y_i - y_j|\\)\nReal road distances: Often violate triangle inequality!",
     "crumbs": [
       "07 Local Search",
       "Lecture"
@@ -8230,7 +8269,7 @@
     "href": "lectures/lec_07_local_search.html#how-good-is-good-enough",
     "title": "Better Routing",
     "section": "How Good is Good Enough?",
-    "text": "How Good is Good Enough?\nIndustry usage for delivery optimization\n\n\n\nMethod\nIndustry Use\n\n\n\n\n\nHuman intuition\nStill common!\n\n\n\nStart + 2-opt\nCommon practice\n\n\n\nAdvanced Meta\nSometimes practice\n\n\n\nExact (if possible)\nMostly research\n\n\n\n\n. . .\n\n\n\n\n\n\nA 10% improvement = millions in savings for large logistics companies. Even a 2-opt implementation could literally save a lot of money if not used yet!",
+    "text": "How Good is Good Enough?\nIndustry usage for delivery optimization\n\n\n\nMethod\nIndustry Use\n\n\n\n\nHuman intuition\nStill common!\n\n\nStart + 2-opt\nCommon practice\n\n\nAdvanced Meta\nSometimes practice\n\n\nExact (if possible)\nMostly research\n\n\n\n. . .\n\n\n\n\n\n\nA 10% improvement = millions in savings for large logistics companies. Even a 2-opt implementation could literally save a lot of money if not used yet!",
     "crumbs": [
       "07 Local Search",
       "Lecture"
@@ -8414,7 +8453,14 @@
     "href": "lectures/lec_07_presentation.html#distance-functions-and-metrics",
     "title": "Better Routing",
     "section": "Distance Functions and Metrics",
-    "text": "Distance Functions and Metrics\nThe weight function can have different properties:\n\nIdentity: \\(d(i,i) = 0\\) \\(i \\in V\\)\nSymmetry: \\(d(i,j) = d(j,i)\\) \\(i,j \\in V\\)\nTriangle Inequality: \\(d(i,k) \\leq d(i,j) + d(j,k) \\quad \\forall i,j,k \\in V\\)\n\n\nCommon Distance Functions:\n\nEuclidean: \\(d(i,j) = \\sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\\)\nManhattan: \\(d(i,j) = |x_i - x_j| + |y_i - y_j|\\)\nReal road distances: Often violate triangle inequality!"
+    "text": "Distance Functions and Metrics\nThe weight function can have different properties:\n\nIdentity: \\(d(i,i) = 0\\) \\(i \\in V\\)\nSymmetry: \\(d(i,j) = d(j,i)\\) \\(i,j \\in V\\)\nTriangle Inequality: \\(d(i,k) \\leq d(i,j) + d(j,k) \\quad \\forall i,j,k \\in V\\)"
+  },
+  {
+    "objectID": "lectures/lec_07_presentation.html#common-distance-functions",
+    "href": "lectures/lec_07_presentation.html#common-distance-functions",
+    "title": "Better Routing",
+    "section": "Common Distance Functions",
+    "text": "Common Distance Functions\n\nEuclidean: \\(d(i,j) = \\sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\\)\nManhattan: \\(d(i,j) = |x_i - x_j| + |y_i - y_j|\\)\nReal road distances: Often violate triangle inequality!"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#a-bad-start-random-route",
@@ -8596,7 +8642,7 @@
     "href": "lectures/lec_07_presentation.html#how-good-is-good-enough",
     "title": "Better Routing",
     "section": "How Good is Good Enough?",
-    "text": "How Good is Good Enough?\nIndustry usage for delivery optimization\n\n\n\nMethod\nIndustry Use\n\n\n\n\n\nHuman intuition\nStill common!\n\n\n\nStart + 2-opt\nCommon practice\n\n\n\nAdvanced Meta\nSometimes practice\n\n\n\nExact (if possible)\nMostly research\n\n\n\n\n\n\n\n\n\n\n\nA 10% improvement = millions in savings for large logistics companies. Even a 2-opt implementation could literally save a lot of money if not used yet!"
+    "text": "How Good is Good Enough?\nIndustry usage for delivery optimization\n\n\n\nMethod\nIndustry Use\n\n\n\n\nHuman intuition\nStill common!\n\n\nStart + 2-opt\nCommon practice\n\n\nAdvanced Meta\nSometimes practice\n\n\nExact (if possible)\nMostly research\n\n\n\n\n\n\n\n\n\n\nA 10% improvement = millions in savings for large logistics companies. Even a 2-opt implementation could literally save a lot of money if not used yet!"
   },
   {
     "objectID": "lectures/lec_07_presentation.html#time-windows",
@@ -8827,7 +8873,18 @@
     "href": "lectures/lec_09_metaheuristics.html#concept",
     "title": "Introduction to Metaheuristics",
     "section": "Concept",
-    "text": "Concept\nHow Simulated Annealing Works (Pseudocode)\ndef simulated_annealing_concept(current_schedule):\n    temperature = 500  # Start \"hot\" (adventurous)\n    best_schedule = current_schedule\n    \n    while temperature &gt; 1:\n        # Step 1: Try a random change (like swapping two shifts)\n        new_schedule = make_random_change(current_schedule)\n        \n        # Step 2: Is it better?\n        if cost(new_schedule) &lt; cost(current_schedule):\n            current_schedule = new_schedule  # Always accept improvements\n        else:\n            # NEW: Sometimes accept worse solutions!\n            # Hot temperature = more likely to accept\n            # Cold temperature = less likely to accept\n            if random() &lt; acceptance_probability(temperature):\n                current_schedule = new_schedule  # Accept anyway!\n        \n        # Step 3: Cool down (become less adventurous)\n        temperature = temperature * 0.95\n        \n        # Remember the best we've ever seen\n        if cost(current_schedule) &lt; cost(best_schedule):\n            best_schedule = current_schedule\n    \n    return best_schedule",
+    "text": "Concept\nHow Simulated Annealing Works (Pseudocode)\ndef simulated_annealing_concept(current_schedule):\n    temperature = 500  # Start \"hot\" (adventurous)\n    best_schedule = current_schedule\n    \n    while temperature &gt; 1:\n        # Step 1: Try a random change (like swapping two shifts)\n        new_schedule = make_random_change(current_schedule)\n        \n        # Step 2: Is it better?\n        if cost(new_schedule) &lt; cost(current_schedule):\n            current_schedule = new_schedule  # Always accept improvements\n        else:\n            # NEW: Sometimes accept worse solutions!\n            # Hot temperature = more likely to accept\n            # Cold temperature = less likely to accept\n            if random() &lt; acceptance_probability(temperature):\n                current_schedule = new_schedule  # Accept anyway!",
+    "crumbs": [
+      "09 Metaheuristics",
+      "Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_09_metaheuristics.html#concept-continued",
+    "href": "lectures/lec_09_metaheuristics.html#concept-continued",
+    "title": "Introduction to Metaheuristics",
+    "section": "Concept (continued)",
+    "text": "Concept (continued)\nHow Simulated Annealing Works (Pseudocode)\n        # Step 3: Cool down (become less adventurous)\n        temperature = temperature * 0.95\n        \n        # Remember the best we've ever seen\n        if cost(current_schedule) &lt; cost(best_schedule):\n            best_schedule = current_schedule\n    \n    return best_schedule",
     "crumbs": [
       "09 Metaheuristics",
       "Lecture"
@@ -9014,7 +9071,18 @@
     "href": "lectures/lec_09_metaheuristics.html#concept-1",
     "title": "Introduction to Metaheuristics",
     "section": "Concept",
-    "text": "Concept\nHow Tabu Search Works (Pseudocode)\ndef tabu_search_concept():\n    tabu_list = []  # Our \"never again\" list\n    current_solution = initial_schedule\n    best_solution = current_solution\n    \n    while not done:\n        # Look at all possible moves\n        possible_moves = get_all_neighbor_moves(current_solution)\n        \n        # Filter out the \"forbidden\" moves\n        allowed_moves = []\n        for move in possible_moves:\n            if move not in tabu_list:  # Not forbidden\n                allowed_moves.append(move)\n        \n        # Pick the best allowed move (even if worse!)\n        best_move = select_best(allowed_moves)\n        current_solution = apply(best_move)\n        \n        # Update best if improved\n        if cost(current_solution) &lt; cost(best_solution):\n            best_solution = current_solution\n        \n        # Remember this move (add to tabu list)\n        tabu_list.append(best_move)\n        if len(tabu_list) &gt; 10:  # Keep list size manageable\n            tabu_list.pop(0)  # Forget oldest\n    \n    return best_solution",
+    "text": "Concept\nHow Tabu Search Works (Pseudocode)\ndef tabu_search_concept():\n    tabu_list = []  # Our \"never again\" list\n    current_solution = initial_schedule\n    best_solution = current_solution\n    \n    while not done:\n        # Look at all possible moves\n        possible_moves = get_all_neighbor_moves(current_solution)\n        \n        # Filter out the \"forbidden\" moves\n        allowed_moves = []\n        for move in possible_moves:\n            if move not in tabu_list:  # Not forbidden\n                allowed_moves.append(move)",
+    "crumbs": [
+      "09 Metaheuristics",
+      "Lecture"
+    ]
+  },
+  {
+    "objectID": "lectures/lec_09_metaheuristics.html#concept-continued-1",
+    "href": "lectures/lec_09_metaheuristics.html#concept-continued-1",
+    "title": "Introduction to Metaheuristics",
+    "section": "Concept (continued)",
+    "text": "Concept (continued)\nHow Tabu Search Works (Pseudocode)\n        # Pick the best allowed move (even if worse!)\n        best_move = select_best(allowed_moves)\n        current_solution = apply(best_move)\n        \n        # Update best if improved\n        if cost(current_solution) &lt; cost(best_solution):\n            best_solution = current_solution\n        \n        # Remember this move (add to tabu list)\n        tabu_list.append(best_move)\n        if len(tabu_list) &gt; 10:  # Keep list size manageable\n            tabu_list.pop(0)  # Forget oldest\n    \n    return best_solution",
     "crumbs": [
       "09 Metaheuristics",
       "Lecture"
@@ -9325,7 +9393,14 @@
     "href": "lectures/lec_09_presentation.html#concept",
     "title": "Introduction to Metaheuristics",
     "section": "Concept",
-    "text": "Concept\nHow Simulated Annealing Works (Pseudocode)\ndef simulated_annealing_concept(current_schedule):\n    temperature = 500  # Start \"hot\" (adventurous)\n    best_schedule = current_schedule\n    \n    while temperature &gt; 1:\n        # Step 1: Try a random change (like swapping two shifts)\n        new_schedule = make_random_change(current_schedule)\n        \n        # Step 2: Is it better?\n        if cost(new_schedule) &lt; cost(current_schedule):\n            current_schedule = new_schedule  # Always accept improvements\n        else:\n            # NEW: Sometimes accept worse solutions!\n            # Hot temperature = more likely to accept\n            # Cold temperature = less likely to accept\n            if random() &lt; acceptance_probability(temperature):\n                current_schedule = new_schedule  # Accept anyway!\n        \n        # Step 3: Cool down (become less adventurous)\n        temperature = temperature * 0.95\n        \n        # Remember the best we've ever seen\n        if cost(current_schedule) &lt; cost(best_schedule):\n            best_schedule = current_schedule\n    \n    return best_schedule"
+    "text": "Concept\nHow Simulated Annealing Works (Pseudocode)\ndef simulated_annealing_concept(current_schedule):\n    temperature = 500  # Start \"hot\" (adventurous)\n    best_schedule = current_schedule\n    \n    while temperature &gt; 1:\n        # Step 1: Try a random change (like swapping two shifts)\n        new_schedule = make_random_change(current_schedule)\n        \n        # Step 2: Is it better?\n        if cost(new_schedule) &lt; cost(current_schedule):\n            current_schedule = new_schedule  # Always accept improvements\n        else:\n            # NEW: Sometimes accept worse solutions!\n            # Hot temperature = more likely to accept\n            # Cold temperature = less likely to accept\n            if random() &lt; acceptance_probability(temperature):\n                current_schedule = new_schedule  # Accept anyway!"
+  },
+  {
+    "objectID": "lectures/lec_09_presentation.html#concept-continued",
+    "href": "lectures/lec_09_presentation.html#concept-continued",
+    "title": "Introduction to Metaheuristics",
+    "section": "Concept (continued)",
+    "text": "Concept (continued)\nHow Simulated Annealing Works (Pseudocode)\n        # Step 3: Cool down (become less adventurous)\n        temperature = temperature * 0.95\n        \n        # Remember the best we've ever seen\n        if cost(current_schedule) &lt; cost(best_schedule):\n            best_schedule = current_schedule\n    \n    return best_schedule"
   },
   {
     "objectID": "lectures/lec_09_presentation.html#sa-in-action-restaurant-staffing",
@@ -9444,7 +9519,14 @@
     "href": "lectures/lec_09_presentation.html#concept-1",
     "title": "Introduction to Metaheuristics",
     "section": "Concept",
-    "text": "Concept\nHow Tabu Search Works (Pseudocode)\ndef tabu_search_concept():\n    tabu_list = []  # Our \"never again\" list\n    current_solution = initial_schedule\n    best_solution = current_solution\n    \n    while not done:\n        # Look at all possible moves\n        possible_moves = get_all_neighbor_moves(current_solution)\n        \n        # Filter out the \"forbidden\" moves\n        allowed_moves = []\n        for move in possible_moves:\n            if move not in tabu_list:  # Not forbidden\n                allowed_moves.append(move)\n        \n        # Pick the best allowed move (even if worse!)\n        best_move = select_best(allowed_moves)\n        current_solution = apply(best_move)\n        \n        # Update best if improved\n        if cost(current_solution) &lt; cost(best_solution):\n            best_solution = current_solution\n        \n        # Remember this move (add to tabu list)\n        tabu_list.append(best_move)\n        if len(tabu_list) &gt; 10:  # Keep list size manageable\n            tabu_list.pop(0)  # Forget oldest\n    \n    return best_solution"
+    "text": "Concept\nHow Tabu Search Works (Pseudocode)\ndef tabu_search_concept():\n    tabu_list = []  # Our \"never again\" list\n    current_solution = initial_schedule\n    best_solution = current_solution\n    \n    while not done:\n        # Look at all possible moves\n        possible_moves = get_all_neighbor_moves(current_solution)\n        \n        # Filter out the \"forbidden\" moves\n        allowed_moves = []\n        for move in possible_moves:\n            if move not in tabu_list:  # Not forbidden\n                allowed_moves.append(move)"
+  },
+  {
+    "objectID": "lectures/lec_09_presentation.html#concept-continued-1",
+    "href": "lectures/lec_09_presentation.html#concept-continued-1",
+    "title": "Introduction to Metaheuristics",
+    "section": "Concept (continued)",
+    "text": "Concept (continued)\nHow Tabu Search Works (Pseudocode)\n        # Pick the best allowed move (even if worse!)\n        best_move = select_best(allowed_moves)\n        current_solution = apply(best_move)\n        \n        # Update best if improved\n        if cost(current_solution) &lt; cost(best_solution):\n            best_solution = current_solution\n        \n        # Remember this move (add to tabu list)\n        tabu_list.append(best_move)\n        if len(tabu_list) &gt; 10:  # Keep list size manageable\n            tabu_list.pop(0)  # Forget oldest\n    \n    return best_solution"
   },
   {
     "objectID": "lectures/lec_09_presentation.html#tabu-search-on-restaurant-problem",

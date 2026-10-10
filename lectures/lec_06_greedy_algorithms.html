@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -76,14 +79,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -620,7 +623,7 @@ window.Quarto = {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="flow">Introduction</span></a>
   <ul class="collapse">
-  <li><a href="#client-briefing-custom-cycles-manufacturing" id="toc-client-briefing-custom-cycles-manufacturing" class="nav-link" data-scroll-target="#client-briefing-custom-cycles-manufacturing"><strong><span class="invert-font">Client Briefing: Custom Cycles Manufacturing</span></strong></a></li>
+  <li><a href="#client-briefing-custom-cycles" id="toc-client-briefing-custom-cycles" class="nav-link" data-scroll-target="#client-briefing-custom-cycles"><strong><span class="invert-font">Client Briefing: Custom Cycles</span></strong></a></li>
   <li><a href="#the-manufacturing-challenge" id="toc-the-manufacturing-challenge" class="nav-link" data-scroll-target="#the-manufacturing-challenge">The Manufacturing Challenge</a></li>
   <li><a href="#why-cant-we-just-try-everything" id="toc-why-cant-we-just-try-everything" class="nav-link" data-scroll-target="#why-cant-we-just-try-everything">Why Can’t We Just Try Everything?</a></li>
   <li><a href="#can-you-spot-the-pattern" id="toc-can-you-spot-the-pattern" class="nav-link" data-scroll-target="#can-you-spot-the-pattern">Can You Spot the Pattern?</a></li>
@@ -704,7 +707,7 @@ window.Quarto = {
   <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break">Break!</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_06_greedy_algorithms.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_06_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_06_greedy_algorithms.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_06_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="lec_06_presentation.pdf"><i class="bi bi-file-earmark-slides"></i>Slides (PDF)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -737,8 +740,8 @@ window.Quarto = {
 
 <section id="introduction" class="level1 title">
 <h1 class="title"><span class="flow">Introduction</span></h1>
-<section id="client-briefing-custom-cycles-manufacturing" class="level2" data-background-image="https://unsplash.com/photos/XwZKcZes8xo/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8Y3VzdG9tJTIwY3ljbGVzfGVufDB8fHx8MTc2MjU5OTU4NXww&amp;force=true&amp;w=2400" data-background-size="cover">
-<h2 data-background-image="https://unsplash.com/photos/XwZKcZes8xo/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8Y3VzdG9tJTIwY3ljbGVzfGVufDB8fHx8MTc2MjU5OTU4NXww&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-custom-cycles-manufacturing"><strong><span class="invert-font">Client Briefing: Custom Cycles Manufacturing</span></strong></h2>
+<section id="client-briefing-custom-cycles" class="level2" data-background-image="https://images.unsplash.com/photo-1761634731562-c7a152d89849?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<h2 data-background-image="https://images.unsplash.com/photo-1761634731562-c7a152d89849?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-custom-cycles"><strong><span class="invert-font">Client Briefing: Custom Cycles</span></strong></h2>
 <p>. . .</p>
 <p><span class="invert-font">Operations Manager’s Friday Crisis:</span></p>
 <p><span class="invert-font fragment">“It’s Friday at 06:00 in the morning. We just received <span class="highlight">16 custom bicycle orders</span> that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”</span></p>
@@ -810,39 +813,39 @@ window.Quarto = {
 <tr class="header">
 <th>Order</th>
 <th>Arrival</th>
-<th>Processing</th>
-<th>Due</th>
-<th>Penalty</th>
+<th style="text-align: right;">Processing</th>
+<th style="text-align: right;">Due</th>
+<th style="text-align: right;">Penalty</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>B12</td>
 <td>1st</td>
-<td>90 min</td>
-<td>180 min</td>
-<td>€150</td>
+<td style="text-align: right;">90 min</td>
+<td style="text-align: right;">180 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B08</td>
 <td>2nd</td>
-<td>45 min</td>
-<td>280 min</td>
-<td>€150</td>
+<td style="text-align: right;">45 min</td>
+<td style="text-align: right;">280 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="odd">
 <td>B15</td>
 <td>3rd</td>
-<td>75 min</td>
-<td>220 min</td>
-<td>€150</td>
+<td style="text-align: right;">75 min</td>
+<td style="text-align: right;">220 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B03</td>
 <td>4th</td>
-<td>30 min</td>
-<td>300 min</td>
-<td>€150</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">300 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 </tbody>
 </table>
@@ -947,7 +950,7 @@ window.Quarto = {
 </section>
 <section id="complexity-why-greedy-is-fast" class="level2">
 <h2 class="anchored" data-anchor-id="complexity-why-greedy-is-fast">Complexity: Why Greedy is Fast</h2>
-<div id="c1d4863e" class="cell" data-execution_count="1">
+<div id="a78fe45d" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1005,7 +1008,7 @@ window.Quarto = {
 </section>
 <section id="example-hospital-check-in" class="level2">
 <h2 class="anchored" data-anchor-id="example-hospital-check-in">Example: Hospital Check-In</h2>
-<div id="374ac3bc" class="cell" data-execution_count="2">
+<div id="6acaa06a" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1050,7 +1053,7 @@ window.Quarto = {
 </section>
 <section id="example-coffee-shop-orders" class="level2">
 <h2 class="anchored" data-anchor-id="example-coffee-shop-orders">Example: Coffee Shop Orders</h2>
-<div id="bb8686c0" class="cell" data-execution_count="3">
+<div id="2ca1a583" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1095,7 +1098,7 @@ window.Quarto = {
 </section>
 <section id="example-package-delivery" class="level2">
 <h2 class="anchored" data-anchor-id="example-package-delivery">Example: Package Delivery</h2>
-<div id="f558897d" class="cell" data-execution_count="4">
+<div id="7b5de808" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1120,7 +1123,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="implementing-spt-in-python-i">Implementing SPT in Python I</h2>
 <p><span class="highlight">Let’s code it together - it’s remarkably simple!</span></p>
 <p>Let’s assume we want to make some pizzas under deadlines.</p>
-<div id="42d123e8" class="cell" data-execution_count="5">
+<div id="483d3add" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pizza data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pizzas <span class="op">=</span> [</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
@@ -1135,7 +1138,7 @@ window.Quarto = {
 </section>
 <section id="implementing-spt-in-python-ii" class="level2">
 <h2 class="anchored" data-anchor-id="implementing-spt-in-python-ii">Implementing SPT in Python II</h2>
-<div id="5f9d1146" class="cell" data-output-location="fragment" data-execution_count="6">
+<div id="9e6704e2" class="cell" data-output-location="fragment" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SPT Rule: Sort by processing time</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1168,7 +1171,7 @@ window.Quarto = {
 <section id="implementing-edd-in-python" class="level2">
 <h2 class="anchored" data-anchor-id="implementing-edd-in-python">Implementing EDD in Python</h2>
 <p><span class="highlight">EDD is just as simple - change the sorting key!</span></p>
-<div id="830b43bd" class="cell" data-output-location="fragment" data-execution_count="7">
+<div id="9ecc3bfc" class="cell" data-output-location="fragment" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EDD Rule: Sort by due date</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1200,39 +1203,39 @@ window.Quarto = {
 <tr class="header">
 <th>Order</th>
 <th>Arrival</th>
-<th>Processing</th>
-<th>Due</th>
-<th>Penalty</th>
+<th style="text-align: right;">Processing</th>
+<th style="text-align: right;">Due</th>
+<th style="text-align: right;">Penalty</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>B12</td>
 <td>1st</td>
-<td>90 min</td>
-<td>180 min</td>
-<td>€150</td>
+<td style="text-align: right;">90 min</td>
+<td style="text-align: right;">180 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B08</td>
 <td>2nd</td>
-<td>45 min</td>
-<td>280 min</td>
-<td>€150</td>
+<td style="text-align: right;">45 min</td>
+<td style="text-align: right;">280 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="odd">
 <td>B15</td>
 <td>3rd</td>
-<td>75 min</td>
-<td>220 min</td>
-<td>€150</td>
+<td style="text-align: right;">75 min</td>
+<td style="text-align: right;">220 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B03</td>
 <td>4th</td>
-<td>30 min</td>
-<td>300 min</td>
-<td>€150</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">300 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 </tbody>
 </table>
@@ -1241,7 +1244,7 @@ window.Quarto = {
 </section>
 <section id="all-schedules-compared" class="level2">
 <h2 class="anchored" data-anchor-id="all-schedules-compared">All Schedules Compared</h2>
-<div id="a92b42a0" class="cell" data-execution_count="8">
+<div id="b913e175" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1323,8 +1326,7 @@ ELSE:
 <p>. . .</p>
 <p><strong>Transportation &amp; Logistics:</strong></p>
 <ul>
-<li>Vehicle routing problems</li>
-<li>Crew scheduling and maintenance window planning</li>
+<li>Vehicle routing, crew scheduling and maintenance window planning</li>
 </ul>
 <p>. . .</p>
 <p><strong>Healthcare:</strong></p>
@@ -1442,41 +1444,41 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Project</th>
-<th>Duration</th>
-<th>Revenue</th>
-<th>Revenue/Hour</th>
+<th style="text-align: right;">Duration</th>
+<th style="text-align: right;">Revenue</th>
+<th style="text-align: right;">Revenue/Hour</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>C</td>
-<td>55h</td>
-<td>€11,000</td>
-<td>€200</td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€11,000</td>
+<td style="text-align: right;">€200</td>
 </tr>
 <tr class="even">
 <td>A</td>
-<td>25h</td>
-<td>€6,000</td>
-<td>€240</td>
+<td style="text-align: right;">25h</td>
+<td style="text-align: right;">€6,000</td>
+<td style="text-align: right;">€240</td>
 </tr>
 <tr class="odd">
 <td>E</td>
-<td>55h</td>
-<td>€4,950</td>
-<td>€90</td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€4,950</td>
+<td style="text-align: right;">€90</td>
 </tr>
 <tr class="even">
 <td>D</td>
-<td>45h</td>
-<td>€5,400</td>
-<td>€120</td>
+<td style="text-align: right;">45h</td>
+<td style="text-align: right;">€5,400</td>
+<td style="text-align: right;">€120</td>
 </tr>
 <tr class="odd">
 <td>B</td>
-<td>35h</td>
-<td>€7,000</td>
-<td>€200</td>
+<td style="text-align: right;">35h</td>
+<td style="text-align: right;">€7,000</td>
+<td style="text-align: right;">€200</td>
 </tr>
 </tbody>
 </table>
@@ -1494,46 +1496,46 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Project</th>
-<th>Duration</th>
-<th>Revenue</th>
-<th>Revenue/Hour</th>
+<th style="text-align: right;">Duration</th>
+<th style="text-align: right;">Revenue</th>
+<th style="text-align: right;">Revenue/Hour</th>
 <th>Schedule</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>A</td>
-<td>25h</td>
-<td>€6,000</td>
-<td><strong>€240</strong></td>
+<td style="text-align: right;">25h</td>
+<td style="text-align: right;">€6,000</td>
+<td style="text-align: right;"><strong>€240</strong></td>
 <td>1st</td>
 </tr>
 <tr class="even">
 <td>B</td>
-<td>35h</td>
-<td>€7,000</td>
-<td><strong>€200</strong></td>
+<td style="text-align: right;">35h</td>
+<td style="text-align: right;">€7,000</td>
+<td style="text-align: right;"><strong>€200</strong></td>
 <td>2nd</td>
 </tr>
 <tr class="odd">
 <td>C</td>
-<td>55h</td>
-<td>€11,000</td>
-<td><strong>€200</strong></td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€11,000</td>
+<td style="text-align: right;"><strong>€200</strong></td>
 <td>3rd</td>
 </tr>
 <tr class="even">
 <td>D</td>
-<td>45h</td>
-<td>€5,400</td>
-<td>€120</td>
+<td style="text-align: right;">45h</td>
+<td style="text-align: right;">€5,400</td>
+<td style="text-align: right;">€120</td>
 <td>4th</td>
 </tr>
 <tr class="odd">
 <td>E</td>
-<td>55h</td>
-<td>€4,950</td>
-<td>€90</td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€4,950</td>
+<td style="text-align: right;">€90</td>
 <td>5th</td>
 </tr>
 </tbody>
@@ -1601,29 +1603,29 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Bike</th>
-<th>Assembly Time</th>
-<th>Painting Time</th>
-<th>Total</th>
+<th style="text-align: right;">Assembly Time</th>
+<th style="text-align: right;">Painting Time</th>
+<th style="text-align: right;">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>X</td>
-<td>30 min</td>
-<td>20 min</td>
-<td>50</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">20 min</td>
+<td style="text-align: right;">50</td>
 </tr>
 <tr class="even">
 <td>Y</td>
-<td>20 min</td>
-<td>30 min</td>
-<td>50</td>
+<td style="text-align: right;">20 min</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">50</td>
 </tr>
 <tr class="odd">
 <td>Z</td>
-<td>15 min</td>
-<td>15 min</td>
-<td>30</td>
+<td style="text-align: right;">15 min</td>
+<td style="text-align: right;">15 min</td>
+<td style="text-align: right;">30</td>
 </tr>
 </tbody>
 </table>
@@ -1632,7 +1634,7 @@ ELSE:
 </section>
 <section id="fifo-x-y-z" class="level2">
 <h2 class="anchored" data-anchor-id="fifo-x-y-z">FIFO: X → Y → Z</h2>
-<div id="5a1544e4" class="cell" data-execution_count="9">
+<div id="e80720c2" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1686,8 +1688,8 @@ ELSE:
 <p><strong>Key Observation:</strong></p>
 <div class="incremental">
 <ul class="incremental">
-<li>If a job is <strong>quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 1 finishes fast, Machine 2 starts sooner!)</li>
-<li>If a job is <strong>quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
+<li><strong>Quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 2 starts sooner!)</li>
+<li><strong>Quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
 </ul>
 </div>
 </section>
@@ -1723,28 +1725,28 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Bike</th>
-<th>Assembly</th>
-<th>Painting</th>
+<th style="text-align: right;">Assembly</th>
+<th style="text-align: right;">Painting</th>
 <th>Min Time</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>X</td>
-<td>30</td>
-<td>20</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">20</td>
 <td>20 (P)</td>
 </tr>
 <tr class="even">
 <td>Y</td>
-<td>20</td>
-<td>30</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">30</td>
 <td>20 (A)</td>
 </tr>
 <tr class="odd">
 <td>Z</td>
-<td>15</td>
-<td>15</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">15</td>
 <td>15 (A/P)</td>
 </tr>
 </tbody>
@@ -1770,7 +1772,7 @@ ELSE:
 </section>
 <section id="johnsons-schedule-z-y-x" class="level2">
 <h2 class="anchored" data-anchor-id="johnsons-schedule-z-y-x">Johnson’s Schedule: Z → Y → X</h2>
-<div id="efcc3813" class="cell" data-execution_count="10">
+<div id="851a1170" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">

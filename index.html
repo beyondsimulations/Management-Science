@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -40,14 +43,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -666,7 +669,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Laptop capable of running Python and Jupyter notebooks</li>
 <li>Python (installed via uv package manager in class)</li>
-<li>GitHub Copilot (free with Student Developer Pack)</li>
+<li>An AI coding assistant (see the AI policy below; a free <a href="https://mistral.ai">Mistral</a> account or <a href="https://zed.dev">Zed</a>’s education plan both work — GitHub Copilot student signups are currently paused)</li>
 <li>VS Code or similar IDE</li>
 </ul>
 </section>
@@ -681,15 +684,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ai-policy" class="level1">
 <h1>AI Policy</h1>
-<p><em>Level 1: Pause – Use of AI defined by the educator</em></p>
-<p>A course chatbot is available on the learning website for exploratory study. It is designed to guide your problem-solving process rather than provide answers directly. Use it as a learning tool, not a solution generator.</p>
-<p>You may also use external AI tools (e.g., ChatGPT, Claude, Mistral, Gemini). However:</p>
-<ol type="1">
-<li>Please be careful and try to understand the code generated.</li>
-<li>Relying on AI to solve tasks for you weakens your own learning.</li>
-<li>AI should ideally support understanding — not replace practice.</li>
-<li>Using AI without understand the code can lead to security risks.</li>
-</ol>
+<p><strong>Course chatbot.</strong> A course chatbot is available on this website for exploratory study. It is designed to guide your problem-solving process rather than hand out answers: expect hints and questions back, not finished solutions. It runs on EU-hosted infrastructure (Mistral models, servers in Germany), and your conversations are not used to train models. Details are on the <a href="./general/privacy.html">privacy page</a>.</p>
+<p><strong>External AI tools.</strong> You may use external AI tools (e.g., ChatGPT, Claude, Mistral, Gemini). You are responsible for every line of code and every sentence you hand in: understand what the AI produced before you rely on it. Letting AI solve your tasks for you weakens exactly the skills this course exists to build, and running code you do not understand can introduce errors and security risks.</p>
+<p><strong>Disclosure.</strong> Every submission that used AI says so, in one honest line: what the tool was used for, in your own words (for example: <em>“Used AI to explain the error message and to draft the plotting code, reworked by me.”</em>). This is not about catching anyone out; being able to say clearly what a tool did for you is part of using it well.</p>
+<p><strong>Exam.</strong> In the examination itself, AI tools are not permitted unless your examination regulations or the exam instructions explicitly say otherwise.</p>
 </section>
 <section id="how-to-navigate-this-course" class="level1">
 <h1>How to Navigate This Course</h1>

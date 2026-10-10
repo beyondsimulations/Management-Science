@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr.&nbsp;Tobias Vlćek">
   <title>Management Science – Better Routing</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -99,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-654872e9c78c99286fb12f6e27390190.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -191,6 +194,32 @@
       margin-right: 0; 
     }
   </style>
+  <!--
+    Canonical. Distributed to every deck repo as general/mathjax.html by
+    scripts/sync-mathjax.py. Edit it here, not there.
+
+    Reveal renders slide maths with MathJax 2.7.9 (its own plugin; the `html`
+    format's html-math-method: mathjax@3 does not apply to decks). Left alone,
+    MathJax 2 prefers a LOCALLY INSTALLED font set, picks the system STIX, and
+    renders \mathcal and friends at STIX private-use codepoints that live in the
+    STIXNonUnicode family. macOS ships that font, Windows does not, and headless
+    chromium does not resolve it either — so those glyphs came out as □ in every
+    exported PDF, and do the same on any machine without STIX.
+
+    Emptying availableFonts forbids the local shortcut, so MathJax loads its own
+    TeX webfonts: measured on Applied-Optimization lecture 1, one @font-face rule
+    (MathJax_Blank) became ten, and no private-use glyph survived. It also lines
+    the decks up with the reading pages, which already render in MathJax's TeX
+    fonts via MathJax 3.
+
+    Must run before MathJax loads, hence a plain head script rather than a
+    MathJax.Hub.Config call.
+  -->
+  <script>
+    window.MathJax = {
+      "HTML-CSS": { availableFonts: [], preferredFont: "TeX", webFont: "TeX" }
+    };
+  </script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -203,7 +232,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dr.&nbsp;Tobias Vlćek 
+Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
@@ -214,7 +243,7 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Introduction</span></h1>
 
 </section>
-<section id="client-briefing-artisan-bakery" class="slide level2" data-background-image="https://unsplash.com/photos/RndRFJ1v1kk/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyODcwNzAzfA&amp;force=true&amp;w=2400" data-background-size="cover">
+<section id="client-briefing-artisan-bakery" class="slide level2" data-background-image="https://images.unsplash.com/photo-1587241321921-91a834d6d191?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
 <h2><strong><span class="invert-font">Client Briefing: Artisan Bakery</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">Master Baker’s Morning Dilemma:</span></p>
@@ -276,7 +305,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>The Traveling Salesman Problem</h2>
 <p><span class="highlight">Visit all locations exactly once, minimize total distance.</span></p>
 <div class="fragment">
-<div id="543100f5" class="cell" data-execution_count="1">
+<div id="23c7edac" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -342,8 +371,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="graph-theory-foundations" class="title-slide slide level1 title center">
-<h1><span class="flow">Graph Theory Foundations</span></h1>
+<section id="graph-theory" class="title-slide slide level1 title center">
+<h1><span class="flow">Graph Theory</span></h1>
 
 </section>
 <section id="what-is-a-graph" class="slide level2">
@@ -418,14 +447,14 @@ Dr.&nbsp;Tobias Vlćek
 <li><strong>Symmetry:</strong> <span class="math inline">\(d(i,j) = d(j,i)\)</span> <span class="math inline">\(i,j \in V\)</span></li>
 <li><strong>Triangle Inequality:</strong> <span class="math inline">\(d(i,k) \leq d(i,j) + d(j,k) \quad \forall i,j,k \in V\)</span></li>
 </ol>
-<div class="fragment">
-<p><strong>Common Distance Functions:</strong></p>
+</section>
+<section id="common-distance-functions" class="slide level2">
+<h2>Common Distance Functions</h2>
 <ul>
 <li><strong>Euclidean:</strong> <span class="math inline">\(d(i,j) = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}\)</span></li>
 <li><strong>Manhattan:</strong> <span class="math inline">\(d(i,j) = |x_i - x_j| + |y_i - y_j|\)</span></li>
 <li><strong>Real road distances:</strong> Often violate triangle inequality!</li>
 </ul>
-</div>
 </section></section>
 <section>
 <section id="greedy-construction" class="title-slide slide level1 title center">
@@ -436,7 +465,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>A Bad Start: Random Route</h2>
 <p><span class="highlight">What happens if we pick cafés randomly?</span></p>
 <div class="fragment">
-<div id="e850746c" class="cell" data-execution_count="2">
+<div id="788329aa" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -462,7 +491,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-problem" class="slide level2">
 <h2>Nearest Neighbor: The Problem</h2>
 <p><span class="highlight">Given these 8 cafés, which should we visit first?</span></p>
-<div id="f9431e76" class="cell" data-execution_count="3">
+<div id="c796ea10" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -501,7 +530,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-solution" class="slide level2">
 <h2>Nearest Neighbor: The Solution</h2>
 <p><span class="highlight">Let’s see how nearest neighbor builds the route step by step:</span></p>
-<div id="10b93282" class="cell" data-execution_count="4">
+<div id="555f814c" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -526,7 +555,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="farthest-insertion-the-problem" class="slide level2">
 <h2>Farthest Insertion: The Problem</h2>
 <p><span class="highlight">Same 8 cafés - but now we’ll use a different strategy:</span></p>
-<div id="ba46fc96" class="cell" data-execution_count="5">
+<div id="f858a3b7" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -574,7 +603,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="farthest-insertion-step-by-step" class="slide level2">
 <h2>Farthest Insertion: Step-by-Step</h2>
-<div id="0bb65f8f" class="cell" data-execution_count="6">
+<div id="e410f21d" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -651,8 +680,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="local-search-framework" class="title-slide slide level1 title center">
-<h1><span class="flow">Local Search Framework</span></h1>
+<section id="local-search" class="title-slide slide level1 title center">
+<h1><span class="flow">Local Search</span></h1>
 
 </section>
 <section id="the-four-pillars-of-local-search" class="slide level2">
@@ -711,8 +740,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="local-search-improvements" class="title-slide slide level1 title center">
-<h1><span class="flow">Local Search Improvements</span></h1>
+<section id="local-improvements" class="title-slide slide level1 title center">
+<h1><span class="flow">Local Improvements</span></h1>
 
 </section>
 <section id="the-2-opt-algorithm" class="slide level2">
@@ -722,7 +751,7 @@ Dr.&nbsp;Tobias Vlćek
 <p><strong>The Idea:</strong> Take two edges and swap them (to uncross the route)</p>
 </div>
 <div class="fragment">
-<div id="e13bcb7c" class="cell" data-execution_count="7">
+<div id="75412b21" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -736,7 +765,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="example-step-by-step" class="slide level2">
 <h2>Example: Step-by-Step</h2>
 <p><span class="highlight">Let’s see exactly how 2-opt fixes a crossing in a real route:</span></p>
-<div id="f87506ac" class="cell" data-execution_count="8">
+<div id="0397f9ed" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -760,21 +789,21 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="how-2-opt-works" class="slide level2">
 <h2>How 2-Opt Works</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>improved <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb1-2"><a></a><span class="cf">while</span> improved:</span>
-<span id="cb1-3"><a></a>    improved <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb1-4"><a></a>    best_distance <span class="op">=</span> calculate_route_distance(route, distances)</span>
-<span id="cb1-5"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(route) <span class="op">-</span> <span class="dv">1</span>):</span>
-<span id="cb1-6"><a></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">2</span>, <span class="bu">len</span>(route)):</span>
-<span id="cb1-7"><a></a>            new_route <span class="op">=</span> route[:i<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> route[i<span class="op">+</span><span class="dv">1</span>:j<span class="op">+</span><span class="dv">1</span>][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j<span class="op">+</span><span class="dv">1</span>:]</span>
-<span id="cb1-8"><a></a>            new_distance <span class="op">=</span> calculate_route_distance(new_route, distances)</span>
-<span id="cb1-9"><a></a>            <span class="cf">if</span> new_distance <span class="op">&lt;</span> best_distance:</span>
-<span id="cb1-10"><a></a>                route <span class="op">=</span> new_route</span>
-<span id="cb1-11"><a></a>                best_distance <span class="op">=</span> new_distance</span>
-<span id="cb1-12"><a></a>                improved <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb1-13"><a></a>                <span class="cf">break</span></span>
-<span id="cb1-14"><a></a>        <span class="cf">if</span> improved:</span>
-<span id="cb1-15"><a></a>            <span class="cf">break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a>improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="cf">while</span> improved:</span>
+<span id="cb1-3"><a aria-label="3"></a>    improved <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-4"><a aria-label="4"></a>    best_distance <span class="op">=</span> calculate_route_distance(route, distances)</span>
+<span id="cb1-5"><a aria-label="5"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(route) <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb1-6"><a aria-label="6"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">2</span>, <span class="bu">len</span>(route)):</span>
+<span id="cb1-7"><a aria-label="7"></a>            new_route <span class="op">=</span> route[:i<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> route[i<span class="op">+</span><span class="dv">1</span>:j<span class="op">+</span><span class="dv">1</span>][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j<span class="op">+</span><span class="dv">1</span>:]</span>
+<span id="cb1-8"><a aria-label="8"></a>            new_distance <span class="op">=</span> calculate_route_distance(new_route, distances)</span>
+<span id="cb1-9"><a aria-label="9"></a>            <span class="cf">if</span> new_distance <span class="op">&lt;</span> best_distance:</span>
+<span id="cb1-10"><a aria-label="10"></a>                route <span class="op">=</span> new_route</span>
+<span id="cb1-11"><a aria-label="11"></a>                best_distance <span class="op">=</span> new_distance</span>
+<span id="cb1-12"><a aria-label="12"></a>                improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-13"><a aria-label="13"></a>                <span class="cf">break</span></span>
+<span id="cb1-14"><a aria-label="14"></a>        <span class="cf">if</span> improved:</span>
+<span id="cb1-15"><a aria-label="15"></a>            <span class="cf">break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
@@ -792,7 +821,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>2-Opt Applied</h2>
 <p><span class="highlight">Let’s see how this changes the route!</span></p>
 <div class="fragment">
-<div id="adf731d0" class="cell" data-execution_count="9">
+<div id="751b09a3" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -820,19 +849,19 @@ Dr.&nbsp;Tobias Vlćek
 <p><span class="highlight">Debug these scenarios you’ll encounter:</span></p>
 <div class="fragment">
 <p><strong>Bug 1: Infinite Loop</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># WRONG: Forgot to update route</span></span>
-<span id="cb2-2"><a></a><span class="cf">if</span> new_distance <span class="op">&lt;</span> current_distance:</span>
-<span id="cb2-3"><a></a>    improved <span class="op">=</span> <span class="va">True</span>  <span class="co"># But route never changes!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># WRONG: Forgot to update route</span></span>
+<span id="cb2-2"><a aria-label="2"></a><span class="cf">if</span> new_distance <span class="op">&lt;</span> current_distance:</span>
+<span id="cb2-3"><a aria-label="3"></a>    improved <span class="op">=</span> <span class="va">True</span>  <span class="co"># But route never changes!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Bug 2: Missing Return to Start</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># WRONG: Only measures cafe-to-cafe</span></span>
-<span id="cb3-2"><a></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between stops)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># WRONG: Only measures cafe-to-cafe</span></span>
+<span id="cb3-2"><a aria-label="2"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between stops)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Bug 3: Invalid Segment Reversal</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># WRONG: Off-by-one error</span></span>
-<span id="cb4-2"><a></a>new_route <span class="op">=</span> route[:i] <span class="op">+</span> route[i:j][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># WRONG: Off-by-one error</span></span>
+<span id="cb4-2"><a aria-label="2"></a>new_route <span class="op">=</span> route[:i] <span class="op">+</span> route[i:j][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Fix:</strong> <code>route[:i+1] + route[i+1:j+1][::-1] + route[j+1:]</code></p>
@@ -840,7 +869,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="what-about-1-opt" class="slide level2">
 <h2>What About 1-Opt?</h2>
-<div id="6b540cc7" class="cell" data-execution_count="10">
+<div id="4a556695" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -865,7 +894,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="or-opt-moving-sequences" class="slide level2">
 <h2>Or-Opt: Moving Sequences</h2>
 <p><span class="highlight">Moves sequence of 1-3 consecutive cities to different position.</span></p>
-<div id="d48e21a6" class="cell" data-execution_count="11">
+<div id="770017a4" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -996,7 +1025,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="visualizing-local-optima" class="slide level2">
 <h2>Visualizing Local Optima</h2>
-<div id="e6a036d6" class="cell" data-execution_count="12">
+<div id="343e728a" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1019,7 +1048,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="the-reality" class="slide level2">
 <h2>The Reality</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="9f6dd76c" class="cell" data-execution_count="13">
+<div id="fb7025df" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1072,29 +1101,24 @@ Dr.&nbsp;Tobias Vlćek
 <tr class="header">
 <th>Method</th>
 <th>Industry Use</th>
-<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Human intuition</td>
 <td>Still common!</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>Start + 2-opt</td>
 <td>Common practice</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>Advanced Meta</td>
 <td>Sometimes practice</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>Exact (if possible)</td>
 <td>Mostly research</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -1168,25 +1192,25 @@ Dr.&nbsp;Tobias Vlćek
 <section id="time-windows-nn-modification" class="slide level2">
 <h2>Time Windows: NN Modification</h2>
 <p><span class="highlight">Modify greedy construction to prioritize early deadlines:</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>unvisited <span class="op">=</span> <span class="bu">set</span>(<span class="bu">range</span>(<span class="bu">len</span>(locations)))<span class="op">;</span> route <span class="op">=</span> []<span class="op">;</span> current_time <span class="op">=</span> start_time</span>
-<span id="cb5-2"><a></a><span class="cf">while</span> unvisited:</span>
-<span id="cb5-3"><a></a>    <span class="co"># Find feasible neighbors (can reach before deadline)</span></span>
-<span id="cb5-4"><a></a>    feasible <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> unvisited</span>
-<span id="cb5-5"><a></a>                <span class="cf">if</span> current_time <span class="op">+</span> travel_time(current, i)</span>
-<span id="cb5-6"><a></a>                    <span class="op">&lt;=</span> time_windows[i][<span class="st">'latest'</span>]]</span>
-<span id="cb5-7"><a></a>    <span class="cf">if</span> <span class="kw">not</span> feasible:</span>
-<span id="cb5-8"><a></a>        <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No feasible route exists!</span></span>
-<span id="cb5-9"><a></a>    <span class="co"># Among feasible, choose most urgent</span></span>
-<span id="cb5-10"><a></a>    next_stop <span class="op">=</span> <span class="bu">min</span>(feasible, key<span class="op">=</span><span class="kw">lambda</span> i: (time_windows[i][<span class="st">'latest'</span>]))</span>
-<span id="cb5-11"><a></a>    <span class="co"># Update state</span></span>
-<span id="cb5-12"><a></a>    route.append(next_stop)</span>
-<span id="cb5-13"><a></a>    unvisited.remove(next_stop)</span>
-<span id="cb5-14"><a></a>    current_time <span class="op">+=</span> travel_time(current, next_stop) <span class="op">+</span> service_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>unvisited <span class="op">=</span> <span class="bu">set</span>(<span class="bu">range</span>(<span class="bu">len</span>(locations)))<span class="op">;</span> route <span class="op">=</span> []<span class="op">;</span> current_time <span class="op">=</span> start_time</span>
+<span id="cb5-2"><a aria-label="2"></a><span class="cf">while</span> unvisited:</span>
+<span id="cb5-3"><a aria-label="3"></a>    <span class="co"># Find feasible neighbors (can reach before deadline)</span></span>
+<span id="cb5-4"><a aria-label="4"></a>    feasible <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> unvisited</span>
+<span id="cb5-5"><a aria-label="5"></a>                <span class="cf">if</span> current_time <span class="op">+</span> travel_time(current, i)</span>
+<span id="cb5-6"><a aria-label="6"></a>                    <span class="op">&lt;=</span> time_windows[i][<span class="st">'latest'</span>]]</span>
+<span id="cb5-7"><a aria-label="7"></a>    <span class="cf">if</span> <span class="kw">not</span> feasible:</span>
+<span id="cb5-8"><a aria-label="8"></a>        <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No feasible route exists!</span></span>
+<span id="cb5-9"><a aria-label="9"></a>    <span class="co"># Among feasible, choose most urgent</span></span>
+<span id="cb5-10"><a aria-label="10"></a>    next_stop <span class="op">=</span> <span class="bu">min</span>(feasible, key<span class="op">=</span><span class="kw">lambda</span> i: (time_windows[i][<span class="st">'latest'</span>]))</span>
+<span id="cb5-11"><a aria-label="11"></a>    <span class="co"># Update state</span></span>
+<span id="cb5-12"><a aria-label="12"></a>    route.append(next_stop)</span>
+<span id="cb5-13"><a aria-label="13"></a>    unvisited.remove(next_stop)</span>
+<span id="cb5-14"><a aria-label="14"></a>    current_time <span class="op">+=</span> travel_time(current, next_stop) <span class="op">+</span> service_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="opt-with-time-windows" class="slide level2">
 <h2>2-Opt with Time Windows</h2>
 <p><span class="highlight">Problem: 2-opt can break time feasibility!</span></p>
-<div id="254a7775" class="cell" data-execution_count="14">
+<div id="f02b7a21" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1211,22 +1235,22 @@ Dr.&nbsp;Tobias Vlćek
 <section id="the-solution" class="slide level2">
 <h2>The Solution</h2>
 <p><span class="highlight">Only accept swaps that maintain feasibility!</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>improved <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb6-2"><a></a><span class="cf">while</span> improved:</span>
-<span id="cb6-3"><a></a>    improved <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb6-4"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(route) <span class="op">-</span> <span class="dv">1</span>):</span>
-<span id="cb6-5"><a></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">2</span>, <span class="bu">len</span>(route)):</span>
-<span id="cb6-6"><a></a>            new_route <span class="op">=</span> route[:i<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> route[i<span class="op">+</span><span class="dv">1</span>:j<span class="op">+</span><span class="dv">1</span>][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j<span class="op">+</span><span class="dv">1</span>:]</span>
-<span id="cb6-7"><a></a>            <span class="co"># Check feasibility FIRST</span></span>
-<span id="cb6-8"><a></a>            <span class="cf">if</span> <span class="kw">not</span> is_feasible(new_route, time_windows, start_time):</span>
-<span id="cb6-9"><a></a>                <span class="cf">continue</span>  <span class="co"># Skip infeasible swaps</span></span>
-<span id="cb6-10"><a></a>            <span class="co"># Among feasible swaps, take if shorter</span></span>
-<span id="cb6-11"><a></a>            <span class="cf">if</span> calculate_distance(new_route) <span class="op">&lt;</span> calculate_distance(route):</span>
-<span id="cb6-12"><a></a>                route <span class="op">=</span> new_route</span>
-<span id="cb6-13"><a></a>                improved <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb6-14"><a></a>                <span class="cf">break</span></span>
-<span id="cb6-15"><a></a>        <span class="cf">if</span> improved:</span>
-<span id="cb6-16"><a></a>            <span class="cf">break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb6-2"><a aria-label="2"></a><span class="cf">while</span> improved:</span>
+<span id="cb6-3"><a aria-label="3"></a>    improved <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb6-4"><a aria-label="4"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(route) <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb6-5"><a aria-label="5"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">2</span>, <span class="bu">len</span>(route)):</span>
+<span id="cb6-6"><a aria-label="6"></a>            new_route <span class="op">=</span> route[:i<span class="op">+</span><span class="dv">1</span>] <span class="op">+</span> route[i<span class="op">+</span><span class="dv">1</span>:j<span class="op">+</span><span class="dv">1</span>][::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> route[j<span class="op">+</span><span class="dv">1</span>:]</span>
+<span id="cb6-7"><a aria-label="7"></a>            <span class="co"># Check feasibility FIRST</span></span>
+<span id="cb6-8"><a aria-label="8"></a>            <span class="cf">if</span> <span class="kw">not</span> is_feasible(new_route, time_windows, start_time):</span>
+<span id="cb6-9"><a aria-label="9"></a>                <span class="cf">continue</span>  <span class="co"># Skip infeasible swaps</span></span>
+<span id="cb6-10"><a aria-label="10"></a>            <span class="co"># Among feasible swaps, take if shorter</span></span>
+<span id="cb6-11"><a aria-label="11"></a>            <span class="cf">if</span> calculate_distance(new_route) <span class="op">&lt;</span> calculate_distance(route):</span>
+<span id="cb6-12"><a aria-label="12"></a>                route <span class="op">=</span> new_route</span>
+<span id="cb6-13"><a aria-label="13"></a>                improved <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb6-14"><a aria-label="14"></a>                <span class="cf">break</span></span>
+<span id="cb6-15"><a aria-label="15"></a>        <span class="cf">if</span> improved:</span>
+<span id="cb6-16"><a aria-label="16"></a>            <span class="cf">break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="callout callout-tip callout-style-simple">
 <div class="callout-body">
@@ -1302,18 +1326,18 @@ Dr.&nbsp;Tobias Vlćek
 <p><span class="highlight">Common bugs that cost you time.</span></p>
 <div class="fragment">
 <p><strong>Forgetting return to bakery:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># WRONG</span></span>
-<span id="cb7-2"><a></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between consecutive stops)</span>
-<span id="cb7-3"><a></a><span class="co"># RIGHT</span></span>
-<span id="cb7-4"><a></a>total <span class="op">=</span> <span class="bu">sum</span>(distances) <span class="op">+</span> distance(last_stop, bakery)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># WRONG</span></span>
+<span id="cb7-2"><a aria-label="2"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances between consecutive stops)</span>
+<span id="cb7-3"><a aria-label="3"></a><span class="co"># RIGHT</span></span>
+<span id="cb7-4"><a aria-label="4"></a>total <span class="op">=</span> <span class="bu">sum</span>(distances) <span class="op">+</span> distance(last_stop, bakery)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Index confusion in 2-opt:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="co"># The 2-opt swap reverses route[i+1:j+1], not route[i:j]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># The 2-opt swap reverses route[i+1:j+1], not route[i:j]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Modifying while iterating:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a>new_route <span class="op">=</span> current_route.copy()  <span class="co"># Don't modify original</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>new_route <span class="op">=</span> current_route.copy()  <span class="co"># Don't modify original</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="escaping-local-optima-1" class="slide level2">
@@ -1542,9 +1566,9 @@ Dr.&nbsp;Tobias Vlćek
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1200,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

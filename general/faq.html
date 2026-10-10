@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -40,14 +43,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -560,9 +563,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#how-can-i-download-pdf-slides-from-the-lecture" id="toc-how-can-i-download-pdf-slides-from-the-lecture" class="nav-link" data-scroll-target="#how-can-i-download-pdf-slides-from-the-lecture">How can I download PDF slides from the lecture?</a></li>
   </ul></li>
   <li><a href="#how-does-the-chatbot-work" id="toc-how-does-the-chatbot-work" class="nav-link" data-scroll-target="#how-does-the-chatbot-work">How does the chatbot work?</a></li>
-  <li><a href="#is-using-copilot-cheating" id="toc-is-using-copilot-cheating" class="nav-link" data-scroll-target="#is-using-copilot-cheating">Is using Copilot cheating?</a></li>
-  <li><a href="#will-copilot-make-me-a-worse-programmer" id="toc-will-copilot-make-me-a-worse-programmer" class="nav-link" data-scroll-target="#will-copilot-make-me-a-worse-programmer">Will Copilot make me a worse programmer?</a></li>
-  <li><a href="#what-if-copilot-suggests-wrong-code" id="toc-what-if-copilot-suggests-wrong-code" class="nav-link" data-scroll-target="#what-if-copilot-suggests-wrong-code">What if Copilot suggests wrong code?</a></li>
+  <li><a href="#is-using-an-ai-coding-assistant-cheating" id="toc-is-using-an-ai-coding-assistant-cheating" class="nav-link" data-scroll-target="#is-using-an-ai-coding-assistant-cheating">Is using an AI coding assistant cheating?</a></li>
+  <li><a href="#will-an-ai-assistant-make-me-a-worse-programmer" id="toc-will-an-ai-assistant-make-me-a-worse-programmer" class="nav-link" data-scroll-target="#will-an-ai-assistant-make-me-a-worse-programmer">Will an AI assistant make me a worse programmer?</a></li>
+  <li><a href="#what-if-the-assistant-suggests-wrong-code" id="toc-what-if-the-assistant-suggests-wrong-code" class="nav-link" data-scroll-target="#what-if-the-assistant-suggests-wrong-code">What if the assistant suggests wrong code?</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="faq.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -601,40 +604,24 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="faqs">FAQs</h2>
 <section id="how-can-i-download-pdf-slides-from-the-lecture" class="level3">
 <h3 class="anchored" data-anchor-id="how-can-i-download-pdf-slides-from-the-lecture">How can I download PDF slides from the lecture?</h3>
-<ol type="1">
-<li>First, open the lecture you want to download the slides from.</li>
-<li>Then, click on the <code>RevealJS</code> button in the top right corner.</li>
-<li>Now, click on the three stacked bars in the lower left corner.</li>
-<li>Then, click on <code>Tools</code> in the upper left corner.</li>
-<li>Now you can select <code>PDF Export Mode</code> and then save the slides as a PDF.</li>
-</ol>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Unfortunately, this method does not work perfectly on all browsers. If you have a Chrome based browser, you should be fine.</p>
-</div>
-</div>
-</div>
+<p>Open the lecture and click on <strong>Slides (PDF)</strong> in the top right corner: the slides are there as a finished PDF to download. The <strong>PDF</strong> button next to it gives you the lecture as a text document instead.</p>
 </section>
 </section>
 <section id="how-does-the-chatbot-work" class="level2">
 <h2 class="anchored" data-anchor-id="how-does-the-chatbot-work">How does the chatbot work?</h2>
 <p>The course AI is a chatbot that uses the <a href="https://mistral.ai">Mistral</a> and some custom code hosted on Hetzner in Germany. If you have any questions about the course, feel free to ask the AI. Note, that the AI is not perfect and sometimes the answers might be incorrect. For more information about how the data is processed, please refer to the <a href="../general/privacy.html">privacy policy</a>.</p>
 </section>
-<section id="is-using-copilot-cheating" class="level2">
-<h2 class="anchored" data-anchor-id="is-using-copilot-cheating">Is using Copilot cheating?</h2>
+<section id="is-using-an-ai-coding-assistant-cheating" class="level2">
+<h2 class="anchored" data-anchor-id="is-using-an-ai-coding-assistant-cheating">Is using an AI coding assistant cheating?</h2>
 <p>No! Think of it more like using a calculator. It is allowed and encouraged, but you must understand what it does in the background to check the results.</p>
 </section>
-<section id="will-copilot-make-me-a-worse-programmer" class="level2">
-<h2 class="anchored" data-anchor-id="will-copilot-make-me-a-worse-programmer">Will Copilot make me a worse programmer?</h2>
-<p>If you don’t learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better then just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.</p>
+<section id="will-an-ai-assistant-make-me-a-worse-programmer" class="level2">
+<h2 class="anchored" data-anchor-id="will-an-ai-assistant-make-me-a-worse-programmer">Will an AI assistant make me a worse programmer?</h2>
+<p>If you don’t learn the basics first by yourself and try to come up with the solution structure, most likely yes. But it is still better than just copying everything into ChatGPT and if used wisely, it can also accelerate learning by showing you patterns.</p>
 </section>
-<section id="what-if-copilot-suggests-wrong-code" class="level2">
-<h2 class="anchored" data-anchor-id="what-if-copilot-suggests-wrong-code">What if Copilot suggests wrong code?</h2>
-<p>Copilot (and all Large Mondels) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> That’s why humans are still very important in the loop.</p>
+<section id="what-if-the-assistant-suggests-wrong-code" class="level2">
+<h2 class="anchored" data-anchor-id="what-if-the-assistant-suggests-wrong-code">What if the assistant suggests wrong code?</h2>
+<p>AI assistants (and all large language models) are far from perfect. They work based on statistics and there will always be lots of mistakes and hallucinations, which most likely never can be fixed.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> That’s why humans are still very important in the loop.</p>
 
 
 </section>

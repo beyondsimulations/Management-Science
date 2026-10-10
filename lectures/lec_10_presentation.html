@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr.&nbsp;Tobias Vlćek">
   <title>Management Science – Consulting Projects</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -33,7 +36,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-654872e9c78c99286fb12f6e27390190.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -125,6 +128,32 @@
       margin-right: 0; 
     }
   </style>
+  <!--
+    Canonical. Distributed to every deck repo as general/mathjax.html by
+    scripts/sync-mathjax.py. Edit it here, not there.
+
+    Reveal renders slide maths with MathJax 2.7.9 (its own plugin; the `html`
+    format's html-math-method: mathjax@3 does not apply to decks). Left alone,
+    MathJax 2 prefers a LOCALLY INSTALLED font set, picks the system STIX, and
+    renders \mathcal and friends at STIX private-use codepoints that live in the
+    STIXNonUnicode family. macOS ships that font, Windows does not, and headless
+    chromium does not resolve it either — so those glyphs came out as □ in every
+    exported PDF, and do the same on any machine without STIX.
+
+    Emptying availableFonts forbids the local shortcut, so MathJax loads its own
+    TeX webfonts: measured on Applied-Optimization lecture 1, one @font-face rule
+    (MathJax_Blank) became ten, and no private-use glyph survived. It also lines
+    the decks up with the reading pages, which already render in MathJax's TeX
+    fonts via MathJax 3.
+
+    Must run before MathJax loads, hence a plain head script rather than a
+    MathJax.Hub.Config call.
+  -->
+  <script>
+    window.MathJax = {
+      "HTML-CSS": { availableFonts: [], preferredFont: "TeX", webFont: "TeX" }
+    };
+  </script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -137,7 +166,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dr.&nbsp;Tobias Vlćek 
+Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
@@ -317,8 +346,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </section>
-<section id="client-briefing-techmart-electronics" class="slide level2" data-background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" data-background-size="cover">
-<h2><strong><span class="invert-font">Client Briefing: TechMart Electronics</span></strong></h2>
+<section id="client-briefing-techmart" class="slide level2" data-background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" data-background-size="cover">
+<h2><strong><span class="invert-font">Client Briefing: TechMart</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">COO’s Inventory Paradox:</span></p>
 <p><span class="invert-font fragment">“We have <span class="highlight">€10M stuck in inventory</span>, yet we’re constantly out of stock on bestsellers! <span class="highlight">20% stockout rate</span> on popular items while slow-movers occupy our fast warehouse. Black Friday is in 3 weeks!”</span></p>
@@ -779,9 +808,9 @@ Dr.&nbsp;Tobias Vlćek
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1200,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

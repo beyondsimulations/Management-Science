@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr.&nbsp;Tobias Vlćek">
   <title>Management Science – Smart Quick Decisions</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -99,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-654872e9c78c99286fb12f6e27390190.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -191,6 +194,32 @@
       margin-right: 0; 
     }
   </style>
+  <!--
+    Canonical. Distributed to every deck repo as general/mathjax.html by
+    scripts/sync-mathjax.py. Edit it here, not there.
+
+    Reveal renders slide maths with MathJax 2.7.9 (its own plugin; the `html`
+    format's html-math-method: mathjax@3 does not apply to decks). Left alone,
+    MathJax 2 prefers a LOCALLY INSTALLED font set, picks the system STIX, and
+    renders \mathcal and friends at STIX private-use codepoints that live in the
+    STIXNonUnicode family. macOS ships that font, Windows does not, and headless
+    chromium does not resolve it either — so those glyphs came out as □ in every
+    exported PDF, and do the same on any machine without STIX.
+
+    Emptying availableFonts forbids the local shortcut, so MathJax loads its own
+    TeX webfonts: measured on Applied-Optimization lecture 1, one @font-face rule
+    (MathJax_Blank) became ten, and no private-use glyph survived. It also lines
+    the decks up with the reading pages, which already render in MathJax's TeX
+    fonts via MathJax 3.
+
+    Must run before MathJax loads, hence a plain head script rather than a
+    MathJax.Hub.Config call.
+  -->
+  <script>
+    window.MathJax = {
+      "HTML-CSS": { availableFonts: [], preferredFont: "TeX", webFont: "TeX" }
+    };
+  </script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -203,7 +232,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dr.&nbsp;Tobias Vlćek 
+Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
@@ -214,8 +243,8 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Introduction</span></h1>
 
 </section>
-<section id="client-briefing-custom-cycles-manufacturing" class="slide level2" data-background-image="https://unsplash.com/photos/XwZKcZes8xo/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8Y3VzdG9tJTIwY3ljbGVzfGVufDB8fHx8MTc2MjU5OTU4NXww&amp;force=true&amp;w=2400" data-background-size="cover">
-<h2><strong><span class="invert-font">Client Briefing: Custom Cycles Manufacturing</span></strong></h2>
+<section id="client-briefing-custom-cycles" class="slide level2" data-background-image="https://images.unsplash.com/photo-1761634731562-c7a152d89849?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<h2><strong><span class="invert-font">Client Briefing: Custom Cycles</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">Operations Manager’s Friday Crisis:</span></p>
 <p><span class="invert-font fragment">“It’s Friday at 06:00 in the morning. We just received <span class="highlight">16 custom bicycle orders</span> that must be completed by this evening. Two workstations. Rush orders with penalties. Overtime costs €100/hour after Friday 19:00. How do we schedule production to minimize costs?”</span></p>
@@ -289,39 +318,39 @@ Dr.&nbsp;Tobias Vlćek
 <tr class="header">
 <th>Order</th>
 <th>Arrival</th>
-<th>Processing</th>
-<th>Due</th>
-<th>Penalty</th>
+<th style="text-align: right;">Processing</th>
+<th style="text-align: right;">Due</th>
+<th style="text-align: right;">Penalty</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>B12</td>
 <td>1st</td>
-<td>90 min</td>
-<td>180 min</td>
-<td>€150</td>
+<td style="text-align: right;">90 min</td>
+<td style="text-align: right;">180 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B08</td>
 <td>2nd</td>
-<td>45 min</td>
-<td>280 min</td>
-<td>€150</td>
+<td style="text-align: right;">45 min</td>
+<td style="text-align: right;">280 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="odd">
 <td>B15</td>
 <td>3rd</td>
-<td>75 min</td>
-<td>220 min</td>
-<td>€150</td>
+<td style="text-align: right;">75 min</td>
+<td style="text-align: right;">220 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B03</td>
 <td>4th</td>
-<td>30 min</td>
-<td>300 min</td>
-<td>€150</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">300 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 </tbody>
 </table>
@@ -429,7 +458,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="complexity-why-greedy-is-fast" class="slide level2">
 <h2>Complexity: Why Greedy is Fast</h2>
-<div id="c1d4863e" class="cell" data-execution_count="1">
+<div id="a78fe45d" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -486,7 +515,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-hospital-check-in" class="slide level2">
 <h2>Example: Hospital Check-In</h2>
-<div id="374ac3bc" class="cell" data-execution_count="2">
+<div id="6acaa06a" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -531,7 +560,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-coffee-shop-orders" class="slide level2">
 <h2>Example: Coffee Shop Orders</h2>
-<div id="bb8686c0" class="cell" data-execution_count="3">
+<div id="2ca1a583" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -576,7 +605,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-package-delivery" class="slide level2">
 <h2>Example: Package Delivery</h2>
-<div id="f558897d" class="cell" data-execution_count="4">
+<div id="7b5de808" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -602,15 +631,15 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Implementing SPT in Python I</h2>
 <p><span class="highlight">Let’s code it together - it’s remarkably simple!</span></p>
 <p>Let’s assume we want to make some pizzas under deadlines.</p>
-<div id="42d123e8" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Pizza data</span></span>
-<span id="cb1-2"><a></a>pizzas <span class="op">=</span> [</span>
-<span id="cb1-3"><a></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
-<span id="cb1-4"><a></a>    {<span class="st">'id'</span>: <span class="st">'P2'</span>, <span class="st">'time'</span>: <span class="dv">8</span>, <span class="st">'due'</span>: <span class="dv">15</span>},</span>
-<span id="cb1-5"><a></a>    {<span class="st">'id'</span>: <span class="st">'P3'</span>, <span class="st">'time'</span>: <span class="dv">6</span>, <span class="st">'due'</span>: <span class="dv">25</span>},</span>
-<span id="cb1-6"><a></a>    {<span class="st">'id'</span>: <span class="st">'P4'</span>, <span class="st">'time'</span>: <span class="dv">15</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
-<span id="cb1-7"><a></a>    {<span class="st">'id'</span>: <span class="st">'P5'</span>, <span class="st">'time'</span>: <span class="dv">12</span>, <span class="st">'due'</span>: <span class="dv">30</span>},</span>
-<span id="cb1-8"><a></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="483d3add" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Pizza data</span></span>
+<span id="cb1-2"><a aria-label="2"></a>pizzas <span class="op">=</span> [</span>
+<span id="cb1-3"><a aria-label="3"></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
+<span id="cb1-4"><a aria-label="4"></a>    {<span class="st">'id'</span>: <span class="st">'P2'</span>, <span class="st">'time'</span>: <span class="dv">8</span>, <span class="st">'due'</span>: <span class="dv">15</span>},</span>
+<span id="cb1-5"><a aria-label="5"></a>    {<span class="st">'id'</span>: <span class="st">'P3'</span>, <span class="st">'time'</span>: <span class="dv">6</span>, <span class="st">'due'</span>: <span class="dv">25</span>},</span>
+<span id="cb1-6"><a aria-label="6"></a>    {<span class="st">'id'</span>: <span class="st">'P4'</span>, <span class="st">'time'</span>: <span class="dv">15</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
+<span id="cb1-7"><a aria-label="7"></a>    {<span class="st">'id'</span>: <span class="st">'P5'</span>, <span class="st">'time'</span>: <span class="dv">12</span>, <span class="st">'due'</span>: <span class="dv">30</span>},</span>
+<span id="cb1-8"><a aria-label="8"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><span class="question">Question:</span> How should we proceed for SPT?</p>
@@ -618,15 +647,15 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="implementing-spt-in-python-ii" class="slide level2">
 <h2>Implementing SPT in Python II</h2>
-<div id="5f9d1146" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># SPT Rule: Sort by processing time</span></span>
-<span id="cb2-2"><a></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
-<span id="cb2-3"><a></a></span>
-<span id="cb2-4"><a></a><span class="bu">print</span>(<span class="st">"SPT Schedule:"</span>)</span>
-<span id="cb2-5"><a></a>current_time <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb2-6"><a></a><span class="cf">for</span> pizza <span class="kw">in</span> spt_order:</span>
-<span id="cb2-7"><a></a>    current_time <span class="op">+=</span> pizza[<span class="st">'time'</span>]</span>
-<span id="cb2-8"><a></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>pizza[<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">: due </span><span class="sc">{</span>pizza[<span class="st">'due'</span>]<span class="sc">}</span><span class="ss">, done </span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9e6704e2" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># SPT Rule: Sort by processing time</span></span>
+<span id="cb2-2"><a aria-label="2"></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
+<span id="cb2-3"><a aria-label="3"></a></span>
+<span id="cb2-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">"SPT Schedule:"</span>)</span>
+<span id="cb2-5"><a aria-label="5"></a>current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-6"><a aria-label="6"></a><span class="cf">for</span> pizza <span class="kw">in</span> spt_order:</span>
+<span id="cb2-7"><a aria-label="7"></a>    current_time <span class="op">+=</span> pizza[<span class="st">'time'</span>]</span>
+<span id="cb2-8"><a aria-label="8"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>pizza[<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">: due </span><span class="sc">{</span>pizza[<span class="st">'due'</span>]<span class="sc">}</span><span class="ss">, done </span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
@@ -654,15 +683,15 @@ Dr.&nbsp;Tobias Vlćek
 <section id="implementing-edd-in-python" class="slide level2">
 <h2>Implementing EDD in Python</h2>
 <p><span class="highlight">EDD is just as simple - change the sorting key!</span></p>
-<div id="830b43bd" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># EDD Rule: Sort by due date</span></span>
-<span id="cb4-2"><a></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a><span class="bu">print</span>(<span class="st">"EDD Schedule:"</span>)</span>
-<span id="cb4-5"><a></a>current_time <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-6"><a></a><span class="cf">for</span> pizza <span class="kw">in</span> edd_order:</span>
-<span id="cb4-7"><a></a>    current_time <span class="op">+=</span> pizza[<span class="st">'time'</span>]</span>
-<span id="cb4-8"><a></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>pizza[<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">: due </span><span class="sc">{</span>pizza[<span class="st">'due'</span>]<span class="sc">}</span><span class="ss">, done </span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9ecc3bfc" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># EDD Rule: Sort by due date</span></span>
+<span id="cb4-2"><a aria-label="2"></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
+<span id="cb4-3"><a aria-label="3"></a></span>
+<span id="cb4-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">"EDD Schedule:"</span>)</span>
+<span id="cb4-5"><a aria-label="5"></a>current_time <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-6"><a aria-label="6"></a><span class="cf">for</span> pizza <span class="kw">in</span> edd_order:</span>
+<span id="cb4-7"><a aria-label="7"></a>    current_time <span class="op">+=</span> pizza[<span class="st">'time'</span>]</span>
+<span id="cb4-8"><a aria-label="8"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>pizza[<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">: due </span><span class="sc">{</span>pizza[<span class="st">'due'</span>]<span class="sc">}</span><span class="ss">, done </span><span class="sc">{</span>current_time<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
@@ -690,39 +719,39 @@ Dr.&nbsp;Tobias Vlćek
 <tr class="header">
 <th>Order</th>
 <th>Arrival</th>
-<th>Processing</th>
-<th>Due</th>
-<th>Penalty</th>
+<th style="text-align: right;">Processing</th>
+<th style="text-align: right;">Due</th>
+<th style="text-align: right;">Penalty</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>B12</td>
 <td>1st</td>
-<td>90 min</td>
-<td>180 min</td>
-<td>€150</td>
+<td style="text-align: right;">90 min</td>
+<td style="text-align: right;">180 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B08</td>
 <td>2nd</td>
-<td>45 min</td>
-<td>280 min</td>
-<td>€150</td>
+<td style="text-align: right;">45 min</td>
+<td style="text-align: right;">280 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="odd">
 <td>B15</td>
 <td>3rd</td>
-<td>75 min</td>
-<td>220 min</td>
-<td>€150</td>
+<td style="text-align: right;">75 min</td>
+<td style="text-align: right;">220 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 <tr class="even">
 <td>B03</td>
 <td>4th</td>
-<td>30 min</td>
-<td>300 min</td>
-<td>€150</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">300 min</td>
+<td style="text-align: right;">€150</td>
 </tr>
 </tbody>
 </table>
@@ -733,7 +762,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="all-schedules-compared" class="slide level2">
 <h2>All Schedules Compared</h2>
-<div id="a92b42a0" class="cell" data-execution_count="8">
+<div id="b913e175" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -821,8 +850,7 @@ ELSE:
 <div class="fragment">
 <p><strong>Transportation &amp; Logistics:</strong></p>
 <ul>
-<li>Vehicle routing problems</li>
-<li>Crew scheduling and maintenance window planning</li>
+<li>Vehicle routing, crew scheduling and maintenance window planning</li>
 </ul>
 </div>
 <div class="fragment">
@@ -943,41 +971,41 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Project</th>
-<th>Duration</th>
-<th>Revenue</th>
-<th>Revenue/Hour</th>
+<th style="text-align: right;">Duration</th>
+<th style="text-align: right;">Revenue</th>
+<th style="text-align: right;">Revenue/Hour</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>C</td>
-<td>55h</td>
-<td>€11,000</td>
-<td>€200</td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€11,000</td>
+<td style="text-align: right;">€200</td>
 </tr>
 <tr class="even">
 <td>A</td>
-<td>25h</td>
-<td>€6,000</td>
-<td>€240</td>
+<td style="text-align: right;">25h</td>
+<td style="text-align: right;">€6,000</td>
+<td style="text-align: right;">€240</td>
 </tr>
 <tr class="odd">
 <td>E</td>
-<td>55h</td>
-<td>€4,950</td>
-<td>€90</td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€4,950</td>
+<td style="text-align: right;">€90</td>
 </tr>
 <tr class="even">
 <td>D</td>
-<td>45h</td>
-<td>€5,400</td>
-<td>€120</td>
+<td style="text-align: right;">45h</td>
+<td style="text-align: right;">€5,400</td>
+<td style="text-align: right;">€120</td>
 </tr>
 <tr class="odd">
 <td>B</td>
-<td>35h</td>
-<td>€7,000</td>
-<td>€200</td>
+<td style="text-align: right;">35h</td>
+<td style="text-align: right;">€7,000</td>
+<td style="text-align: right;">€200</td>
 </tr>
 </tbody>
 </table>
@@ -997,46 +1025,46 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Project</th>
-<th>Duration</th>
-<th>Revenue</th>
-<th>Revenue/Hour</th>
+<th style="text-align: right;">Duration</th>
+<th style="text-align: right;">Revenue</th>
+<th style="text-align: right;">Revenue/Hour</th>
 <th>Schedule</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>A</td>
-<td>25h</td>
-<td>€6,000</td>
-<td><strong>€240</strong></td>
+<td style="text-align: right;">25h</td>
+<td style="text-align: right;">€6,000</td>
+<td style="text-align: right;"><strong>€240</strong></td>
 <td>1st</td>
 </tr>
 <tr class="even">
 <td>B</td>
-<td>35h</td>
-<td>€7,000</td>
-<td><strong>€200</strong></td>
+<td style="text-align: right;">35h</td>
+<td style="text-align: right;">€7,000</td>
+<td style="text-align: right;"><strong>€200</strong></td>
 <td>2nd</td>
 </tr>
 <tr class="odd">
 <td>C</td>
-<td>55h</td>
-<td>€11,000</td>
-<td><strong>€200</strong></td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€11,000</td>
+<td style="text-align: right;"><strong>€200</strong></td>
 <td>3rd</td>
 </tr>
 <tr class="even">
 <td>D</td>
-<td>45h</td>
-<td>€5,400</td>
-<td>€120</td>
+<td style="text-align: right;">45h</td>
+<td style="text-align: right;">€5,400</td>
+<td style="text-align: right;">€120</td>
 <td>4th</td>
 </tr>
 <tr class="odd">
 <td>E</td>
-<td>55h</td>
-<td>€4,950</td>
-<td>€90</td>
+<td style="text-align: right;">55h</td>
+<td style="text-align: right;">€4,950</td>
+<td style="text-align: right;">€90</td>
 <td>5th</td>
 </tr>
 </tbody>
@@ -1108,29 +1136,29 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Bike</th>
-<th>Assembly Time</th>
-<th>Painting Time</th>
-<th>Total</th>
+<th style="text-align: right;">Assembly Time</th>
+<th style="text-align: right;">Painting Time</th>
+<th style="text-align: right;">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>X</td>
-<td>30 min</td>
-<td>20 min</td>
-<td>50</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">20 min</td>
+<td style="text-align: right;">50</td>
 </tr>
 <tr class="even">
 <td>Y</td>
-<td>20 min</td>
-<td>30 min</td>
-<td>50</td>
+<td style="text-align: right;">20 min</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">50</td>
 </tr>
 <tr class="odd">
 <td>Z</td>
-<td>15 min</td>
-<td>15 min</td>
-<td>30</td>
+<td style="text-align: right;">15 min</td>
+<td style="text-align: right;">15 min</td>
+<td style="text-align: right;">30</td>
 </tr>
 </tbody>
 </table>
@@ -1140,7 +1168,7 @@ ELSE:
 </section>
 <section id="fifo-x-y-z" class="slide level2">
 <h2>FIFO: X → Y → Z</h2>
-<div id="5a1544e4" class="cell" data-execution_count="9">
+<div id="e80720c2" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1198,8 +1226,8 @@ ELSE:
 <div class="fragment">
 <p><strong>Key Observation:</strong></p>
 <ul>
-<li class="fragment">If a job is <strong>quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 1 finishes fast, Machine 2 starts sooner!)</li>
-<li class="fragment">If a job is <strong>quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
+<li class="fragment"><strong>Quick on Machine 1</strong> → Do it <strong>early</strong> (Machine 2 starts sooner!)</li>
+<li class="fragment"><strong>Quick on Machine 2</strong> → Do it <strong>late</strong> (Machine 2 can finish quickly at the end, no wasted capacity)</li>
 </ul>
 </div>
 </section>
@@ -1236,28 +1264,28 @@ ELSE:
 <thead>
 <tr class="header">
 <th>Bike</th>
-<th>Assembly</th>
-<th>Painting</th>
+<th style="text-align: right;">Assembly</th>
+<th style="text-align: right;">Painting</th>
 <th>Min Time</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>X</td>
-<td>30</td>
-<td>20</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">20</td>
 <td>20 (P)</td>
 </tr>
 <tr class="even">
 <td>Y</td>
-<td>20</td>
-<td>30</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">30</td>
 <td>20 (A)</td>
 </tr>
 <tr class="odd">
 <td>Z</td>
-<td>15</td>
-<td>15</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">15</td>
 <td>15 (A/P)</td>
 </tr>
 </tbody>
@@ -1282,7 +1310,7 @@ ELSE:
 </section>
 <section id="johnsons-schedule-z-y-x" class="slide level2">
 <h2>Johnson’s Schedule: Z → Y → X</h2>
-<div id="efcc3813" class="cell" data-execution_count="10">
+<div id="851a1170" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1756,9 +1784,9 @@ ELSE:
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1200,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

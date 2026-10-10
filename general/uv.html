@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -75,14 +78,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -595,11 +598,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#windows-powershell" id="toc-windows-powershell" class="nav-link" data-scroll-target="#windows-powershell">Windows (PowerShell)</a></li>
   <li><a href="#verify-installation" id="toc-verify-installation" class="nav-link" data-scroll-target="#verify-installation">Verify installation</a></li>
   </ul></li>
-  <li><a href="#installpython" id="toc-installpython" class="nav-link" data-scroll-target="#installpython">InstallPython</a></li>
+  <li><a href="#install-python" id="toc-install-python" class="nav-link" data-scroll-target="#install-python">Install Python</a></li>
   <li><a href="#create-your-first-project" id="toc-create-your-first-project" class="nav-link" data-scroll-target="#create-your-first-project">Create your first project</a></li>
   <li><a href="#run-the-starter-script" id="toc-run-the-starter-script" class="nav-link" data-scroll-target="#run-the-starter-script">Run the starter script</a>
   <ul class="collapse">
   <li><a href="#what-does-that-code-mean" id="toc-what-does-that-code-mean" class="nav-link" data-scroll-target="#what-does-that-code-mean">What does that code mean?</a></li>
+  </ul></li>
+  <li><a href="#run-scripts-directly-in-zed" id="toc-run-scripts-directly-in-zed" class="nav-link" data-scroll-target="#run-scripts-directly-in-zed">Run scripts directly in Zed</a>
+  <ul class="collapse">
+  <li><a href="#create-the-task-file" id="toc-create-the-task-file" class="nav-link" data-scroll-target="#create-the-task-file">Create the task file</a></li>
+  <li><a href="#run-the-task" id="toc-run-the-task" class="nav-link" data-scroll-target="#run-the-task">Run the task</a></li>
   </ul></li>
   <li><a href="#adding-packages-later-in-the-course" id="toc-adding-packages-later-in-the-course" class="nav-link" data-scroll-target="#adding-packages-later-in-the-course">Adding packages (later in the course)</a></li>
   <li><a href="#updating-uv" id="toc-updating-uv" class="nav-link" data-scroll-target="#updating-uv">Updating <code>uv</code></a></li>
@@ -614,7 +622,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Installing Python</h1>
-<p class="subtitle lead">A small guide using uv</p>
+<p class="subtitle lead">A short guide using uv</p>
 </div>
 
 
@@ -633,12 +641,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="why-we-use-uv-for-this-course" class="level2">
 <h2 class="anchored" data-anchor-id="why-we-use-uv-for-this-course">Why we use <code>uv</code> for this course</h2>
-<p><code>uv</code> is a new (and very fast) Python tool written in Rust. It:</p>
-<ul>
-<li>Installs Python for you (no manual downloads).</li>
-<li>Creates isolated <em>virtual environments</em> (safe sandboxes per project).</li>
-<li>Installs and updates packages quickly.</li>
-</ul>
+<p><code>uv</code> is a new (and very fast) Python tool written in Rust. It: - Installs Python for you (no manual downloads). - Creates isolated <em>virtual environments</em> (safe sandboxes per project). - Installs and updates packages quickly.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -652,14 +655,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="install-uv" class="level2">
 <h2 class="anchored" data-anchor-id="install-uv">Install <code>uv</code></h2>
-<p>Choose the instructions for your operating system. To these, you need to work in your terminal.</p>
+<p>Choose the instructions for your operating system. For these, you need to work in your terminal.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Open the terminal in VS Code by selecting (Terminal → New Terminal).</p>
+<p>Open the terminal directly in your IDE: in VS Code via (Terminal → New Terminal), in Zed via the terminal panel at the bottom.</p>
 </div>
 </div>
 </div>
@@ -700,8 +703,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="installpython" class="level2">
-<h2 class="anchored" data-anchor-id="installpython">InstallPython</h2>
+<section id="install-python" class="level2">
+<h2 class="anchored" data-anchor-id="install-python">Install Python</h2>
 <p>We want everyone on the <strong>same</strong> Python version for consistency. Thus, we’ll use Python 3.12 for the course this year.</p>
 <p>Install (you only need to do this once):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> python install 3.12</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -713,31 +716,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-your-first-project" class="level2">
 <h2 class="anchored" data-anchor-id="create-your-first-project">Create your first project</h2>
 <p>Pick a folder where you keep course work. <strong>If you do not have one, make sure to create one!</strong> Open the course folder in your IDE and then run the following from the terminal:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>uv init</code> creates:</p>
-<ul>
-<li><code>main.py</code> (starter script)</li>
-<li><code>pyproject.toml</code> (project + dependencies config)</li>
-<li><code>.python-version</code> (records the Python version we chose)</li>
-<li><code>.gitignore</code> (useful if you ever use Git)</li>
-<li><code>README.md</code> (you can jot notes here)</li>
-<li>(A <code>.venv</code> folder will appear later once packages are added or synced.)</li>
-</ul>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init my-first-project</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> my-first-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first line creates a new folder named <code>my-first-project</code> (you can name it anything). The second line moves you into that folder. Alternatively, you can create the folder manually before, open it in your IDE and run <code>uv init .</code> inside it.</p>
+<p><code>uv init</code> creates: - <code>main.py</code> (starter script) - <code>pyproject.toml</code> (project + dependencies config) - <code>.python-version</code> (records the Python version we chose) - <code>.gitignore</code> (useful if you ever use Git) - <code>README.md</code> (you can jot notes here) - (A <code>.venv</code> folder will appear later once packages are added or synced.)</p>
 <p>You do <strong>not</strong> need to edit any of these (except maybe <code>README.md</code> for your notes and <code>main.py</code> if you want to run something different).</p>
-</div>
-</div>
-</div>
 <hr>
 </section>
 <section id="run-the-starter-script" class="level2">
 <h2 class="anchored" data-anchor-id="run-the-starter-script">Run the starter script</h2>
-<p>Inside the project folder <strong>in your terminal</strong>:</p>
+<p>Inside the project folder:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You should see something like:</p>
 <pre><code>Hello World!</code></pre>
@@ -757,14 +745,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Don’t worry about this yet, we’ll gradually build up to it.</p>
 </section>
 </section>
+<section id="run-scripts-directly-in-zed" class="level2">
+<h2 class="anchored" data-anchor-id="run-scripts-directly-in-zed">Run scripts directly in Zed</h2>
+<p>Instead of switching to the terminal every time, you can set up a <strong>task</strong> in Zed to run the currently open Python file with a single shortcut.</p>
+<section id="create-the-task-file" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-task-file">Create the task file</h3>
+<p>Inside your project folder, create a <code>.zed/</code> directory and add a file called <code>tasks.json</code> inside it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"label"</span><span class="fu">:</span> <span class="st">"Run current Python file"</span><span class="fu">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"uv run python $ZED_FILE"</span><span class="fu">,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"use_new_terminal"</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>$ZED_FILE</code> is a variable Zed fills in automatically with the path of the file you have open.</p>
+</section>
+<section id="run-the-task" class="level3">
+<h3 class="anchored" data-anchor-id="run-the-task">Run the task</h3>
+<ol type="1">
+<li>Open any <code>.py</code> file in your project.</li>
+<li>Open the task picker with <code>Cmd+Shift+P</code> (macOS) / <code>Ctrl+Shift+P</code> (Windows/Linux).</li>
+<li>Type <strong>task</strong> and choose <strong>task: spawn</strong>.</li>
+<li>Select <strong>Run current Python file</strong>. Zed will execute <code>uv run python &lt;your-file&gt;</code> in the built-in terminal.</li>
+</ol>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>You can also bind the task to a keyboard shortcut. Open <strong>Zed → Settings → Key Bindings</strong> and add an entry for <code>"task: spawn"</code> to make it even faster.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="adding-packages-later-in-the-course" class="level2">
 <h2 class="anchored" data-anchor-id="adding-packages-later-in-the-course">Adding packages (later in the course)</h2>
 <p>If/when you need a package (example: <code>pandas</code>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If you added the wrong one:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> remove pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> remove pandas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If your <code>pyproject.toml</code> changed (e.g.&nbsp;you pulled code from someone else):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -779,17 +802,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="updating-uv" class="level2">
 <h2 class="anchored" data-anchor-id="updating-uv">Updating <code>uv</code></h2>
 <p>Occasionally:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> self update</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>If it ever errors, you can just reinstall using the same one-liner from earlier.</p>
-</div>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> self update</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(If it ever errors, you can just reinstall using the same one-liner from earlier.)</p>
 <hr>
 </section>
 <section id="best-practices-for-this-course" class="level2">
@@ -801,17 +815,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Ask early for help, guessing usually takes much more time than asking.</li>
 </ul>
 <p>You can always see available commands:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="recap" class="level2">
 <h2 class="anchored" data-anchor-id="recap">Recap</h2>
-<p>You can now:</p>
-<ol type="1">
-<li>Install <code>uv</code>.</li>
-<li>Create a project.</li>
-<li>Run a script.</li>
-<li>Add/remove/sync packages.</li>
-</ol>
+<p>You can now: 1. Install <code>uv</code>. 2. Create a project. 3. Run a script. 4. Add/remove/sync packages.</p>
 <p>Now, you’re set to continue the course.</p>
 
 

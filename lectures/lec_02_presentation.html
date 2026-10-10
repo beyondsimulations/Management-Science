@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr.&nbsp;Tobias Vlćek">
   <title>Management Science – Lecture 2 - AI Programming</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -99,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-654872e9c78c99286fb12f6e27390190.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -191,6 +194,32 @@
       margin-right: 0; 
     }
   </style>
+  <!--
+    Canonical. Distributed to every deck repo as general/mathjax.html by
+    scripts/sync-mathjax.py. Edit it here, not there.
+
+    Reveal renders slide maths with MathJax 2.7.9 (its own plugin; the `html`
+    format's html-math-method: mathjax@3 does not apply to decks). Left alone,
+    MathJax 2 prefers a LOCALLY INSTALLED font set, picks the system STIX, and
+    renders \mathcal and friends at STIX private-use codepoints that live in the
+    STIXNonUnicode family. macOS ships that font, Windows does not, and headless
+    chromium does not resolve it either — so those glyphs came out as □ in every
+    exported PDF, and do the same on any machine without STIX.
+
+    Emptying availableFonts forbids the local shortcut, so MathJax loads its own
+    TeX webfonts: measured on Applied-Optimization lecture 1, one @font-face rule
+    (MathJax_Blank) became ten, and no private-use glyph survived. It also lines
+    the decks up with the reading pages, which already render in MathJax's TeX
+    fonts via MathJax 3.
+
+    Must run before MathJax loads, hence a plain head script rather than a
+    MathJax.Hub.Config call.
+  -->
+  <script>
+    window.MathJax = {
+      "HTML-CSS": { availableFonts: [], preferredFont: "TeX", webFont: "TeX" }
+    };
+  </script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -203,7 +232,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dr.&nbsp;Tobias Vlćek 
+Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
@@ -228,7 +257,7 @@ Dr.&nbsp;Tobias Vlćek
 </center>
 </div>
 </section>
-<section id="section" class="slide level2" data-background-image="https://unsplash.com/photos/M5tzZtFCOfs/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8c2VydmVyc3xlbnwwfHx8fDE3MzA1MDU5NDd8MA&amp;force=true&amp;w=1920">
+<section id="section" class="slide level2" data-background-image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400">
 <h2></h2>
 <div class="r-fit-text white bold">
 <p>How do</p>
@@ -375,7 +404,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>There are alternative like Zed or Cursor, but you can use Copilot for free as student.</p>
+<p>The same idea ships in many editors (Zed, Cursor, VS Code with various extensions): an assistant that reads your code and suggests the next step.</p>
 </div>
 </div>
 </div>
@@ -460,10 +489,10 @@ Dr.&nbsp;Tobias Vlćek
 <p><strong>Scenario:</strong> Calculate shipping costs based on weight and distance.</p>
 <div class="fragment">
 <p><strong>Step 1: Write a text describing what you want</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co">"""</span></span>
-<span id="cb1-2"><a></a><span class="co">Calculate shipping cost based on weight (kg) and distance (km)</span></span>
-<span id="cb1-3"><a></a><span class="co">Base rate: €5, plus €0.10 per kg, plus €0.05 per km</span></span>
-<span id="cb1-4"><a></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co">"""</span></span>
+<span id="cb1-2"><a aria-label="2"></a><span class="co">Calculate shipping cost based on weight (kg) and distance (km)</span></span>
+<span id="cb1-3"><a aria-label="3"></a><span class="co">Base rate: €5, plus €0.10 per kg, plus €0.05 per km</span></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>Step 2: Copilot suggests the function</strong></p>
@@ -474,13 +503,13 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="demo-the-result-hopefully" class="slide level2">
 <h2>Demo: The Result (hopefully)</h2>
-<div id="9885de3e" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> calculate_shipping_cost(weight, distance):</span>
-<span id="cb2-2"><a></a>    <span class="co">"""Calculate shipping cost based on weight and distance."""</span></span>
-<span id="cb2-3"><a></a>    base_rate <span class="op">=</span> <span class="fl">5.0</span></span>
-<span id="cb2-4"><a></a>    weight_rate <span class="op">=</span> <span class="fl">0.10</span></span>
-<span id="cb2-5"><a></a>    distance_rate <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb2-6"><a></a>    <span class="cf">return</span> base_rate <span class="op">+</span> (weight <span class="op">*</span> weight_rate) <span class="op">+</span> (distance <span class="op">*</span> distance_rate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7efe5d41" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="kw">def</span> calculate_shipping_cost(weight, distance):</span>
+<span id="cb2-2"><a aria-label="2"></a>    <span class="co">"""Calculate shipping cost based on weight and distance."""</span></span>
+<span id="cb2-3"><a aria-label="3"></a>    base_rate <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb2-4"><a aria-label="4"></a>    weight_rate <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb2-5"><a aria-label="5"></a>    distance_rate <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb2-6"><a aria-label="6"></a>    <span class="cf">return</span> base_rate <span class="op">+</span> (weight <span class="op">*</span> weight_rate) <span class="op">+</span> (distance <span class="op">*</span> distance_rate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>What Copilot did:</strong></p>
@@ -551,47 +580,50 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="getting-started-with-copilot" class="title-slide slide level1 title center">
-<h1><span class="flow">Getting Started with Copilot</span></h1>
+<section id="ai-assistant-setup" class="title-slide slide level1 title center">
+<h1><span class="flow">AI Assistant Setup</span></h1>
 
 </section>
 <section id="get-free-access" class="slide level2">
 <h2>Get Free Access</h2>
-<p><strong>GitHub Student Developer Pack</strong> gives you free Copilot access!</p>
-<div class="fragment">
-<ol type="1">
-<li>Go to <a href="https://education.github.com/pack">education.github.com/pack</a></li>
-<li>Sign up with your university email</li>
-<li>Verify your student status</li>
-<li>Wait for approval (usually 1-2 days)</li>
-<li>Login into your account in VS Code</li>
-</ol>
-</div>
-<div class="fragment">
-<div class="callout callout-note callout-style-simple">
+<div class="callout callout-warning callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>You’ll need a GitHub account. Create one at <a href="https://github.com">github.com</a> if you don’t have one.</p>
+<p><strong>GitHub Copilot’s free student signups are currently paused</strong>, so we use one of these instead. Everything this lecture shows about AI pair programming works the same way.</p>
 </div>
 </div>
 </div>
+<div class="fragment">
+<p><strong>Option 1 — Mistral (free “Experiment” tier):</strong></p>
+<ol type="1">
+<li>Go to <a href="https://console.mistral.ai">console.mistral.ai</a> and sign up (phone verification, no credit card)</li>
+<li>In the <strong>Admin Console → Privacy</strong> menu, disable “Anonymous improvement data” so your inputs are not used for training</li>
+<li>Chat at <a href="https://chat.mistral.ai">chat.mistral.ai</a> or connect the API key to your editor</li>
+</ol>
 </div>
 </section>
-<section id="verifying-copilot-is-working" class="slide level2">
-<h2>Verifying Copilot is Working</h2>
+<section id="get-free-access-ii" class="slide level2">
+<h2>Get Free Access II</h2>
+<p><strong>Option 2 — Zed’s built-in AI:</strong></p>
 <ol type="1">
-<li>Create a new Python file (<code>.py</code>) and type something</li>
-<li>Wait 1-2 seconds</li>
+<li>Install <a href="https://zed.dev">Zed</a> and sign in with a GitHub account</li>
+<li>Apply for the free student plan at <a href="https://zed.dev/education">zed.dev/education</a> (12 months of model credits)</li>
+</ol>
+</section>
+<section id="verifying-it-works" class="slide level2">
+<h2>Verifying It Works</h2>
+<ol type="1">
+<li>Create a new Python file (<code>.py</code>) and write a comment describing a small function</li>
+<li>Ask the assistant to complete it (inline suggestion or chat)</li>
 </ol>
 <div class="fragment">
-<p><strong>If working, you’ll see:</strong></p>
+<p><strong>You should see:</strong></p>
 <ul>
-<li>Gray “ghost text” suggesting code</li>
-<li>Press <code>Tab</code> to accept</li>
-<li>Press <code>Esc</code> to reject</li>
+<li>A code suggestion appearing next to or below your comment</li>
+<li>Accept it, then <strong>read it line by line</strong> before running</li>
 </ul>
 </div>
 <div class="fragment">
@@ -601,7 +633,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Try to get copilot running on your own until next session.</p>
+<p>Try to get one of the two options running on your own until next session.</p>
 </div>
 </div>
 </div>
@@ -617,18 +649,18 @@ Dr.&nbsp;Tobias Vlćek
 <p><span class="highlight">Use Copilot for:</span></p>
 <div class="fragment">
 <p><strong>1. Syntax Help</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Convert string to datetime</span></span>
-<span id="cb3-2"><a></a><span class="co"># Copilot remembers: pd.to_datetime()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Convert string to datetime</span></span>
+<span id="cb3-2"><a aria-label="2"></a><span class="co"># Copilot remembers: pd.to_datetime()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>2. Boilerplate Code</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="co"># Create a function to read CSV file and return DataFrame</span></span>
-<span id="cb4-2"><a></a><span class="co"># Copilot writes the import and function structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Create a function to read CSV file and return DataFrame</span></span>
+<span id="cb4-2"><a aria-label="2"></a><span class="co"># Copilot writes the import and function structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>3. Getting Unstuck</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="co"># I know I need to filter this list, but forget the syntax</span></span>
-<span id="cb5-2"><a></a><span class="co"># Copilot suggests: [x for x in items if x &gt; 10]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># I know I need to filter this list, but forget the syntax</span></span>
+<span id="cb5-2"><a aria-label="2"></a><span class="co"># Copilot suggests: [x for x in items if x &gt; 10]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="when-not-to-use-copilot" class="slide level2">
@@ -661,11 +693,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="key-takeaways" class="slide level2">
 <h2>Key Takeaways</h2>
 <ol type="1">
-<li><strong>GitHub Copilot is a tool:</strong> You still need to learn fundamentals</li>
+<li><strong>An AI assistant is a tool:</strong> You still need to learn fundamentals</li>
 <li><strong>Understand before accepting:</strong> Read every suggestion carefully</li>
 <li><strong>Use it strategically:</strong> Syntax help yes, thinking replacement no</li>
-<li><strong>Get free access:</strong> GitHub Student Developer Pack</li>
-<li><strong>Practice:</strong>The more you use it, the more helpful it becomes</li>
+<li><strong>Get free access:</strong> Mistral’s free tier or Zed’s student plan</li>
+<li><strong>Practice:</strong> The more you use it, the more helpful it becomes</li>
 </ol>
 <div class="fragment">
 <div class="callout callout-note callout-style-simple">
@@ -674,7 +706,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Before next lecture, make sure you applied for GitHub Student Developer Pack to get access to copilot!</p>
+<p>Before next lecture, make sure you have one of the two AI-assistant options from this lecture up and running!</p>
 </div>
 </div>
 </div>
@@ -876,9 +908,9 @@ Dr.&nbsp;Tobias Vlćek
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1200,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

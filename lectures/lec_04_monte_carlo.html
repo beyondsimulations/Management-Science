@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -76,14 +79,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -620,7 +623,7 @@ window.Quarto = {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="flow">Introduction</span></a>
   <ul class="collapse">
-  <li><a href="#client-briefing-techventure-innovation-fund" id="toc-client-briefing-techventure-innovation-fund" class="nav-link" data-scroll-target="#client-briefing-techventure-innovation-fund"><strong><span class="invert-font">Client Briefing: TechVenture Innovation Fund</span></strong></a></li>
+  <li><a href="#client-briefing-techventure" id="toc-client-briefing-techventure" class="nav-link" data-scroll-target="#client-briefing-techventure"><strong><span class="invert-font">Client Briefing: TechVenture</span></strong></a></li>
   <li><a href="#business-valuing-uncertainty" id="toc-business-valuing-uncertainty" class="nav-link" data-scroll-target="#business-valuing-uncertainty">Business: Valuing Uncertainty</a></li>
   <li><a href="#real-world-examples" id="toc-real-world-examples" class="nav-link" data-scroll-target="#real-world-examples">Real-World Examples</a></li>
   </ul></li>
@@ -651,7 +654,7 @@ window.Quarto = {
   <li><a href="#key-metrics-for-decision-making" id="toc-key-metrics-for-decision-making" class="nav-link" data-scroll-target="#key-metrics-for-decision-making">Key Metrics for Decision Making</a></li>
   <li><a href="#understanding-tail-risk" id="toc-understanding-tail-risk" class="nav-link" data-scroll-target="#understanding-tail-risk">Understanding Tail Risk</a></li>
   </ul></li>
-  <li><a href="#correlation-dependence" id="toc-correlation-dependence" class="nav-link" data-scroll-target="#correlation-dependence"><span class="flow">Correlation &amp; Dependence</span></a>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="flow">Correlation</span></a>
   <ul class="collapse">
   <li><a href="#the-independence-assumption" id="toc-the-independence-assumption" class="nav-link" data-scroll-target="#the-independence-assumption">The Independence Assumption</a></li>
   <li><a href="#what-is-correlation" id="toc-what-is-correlation" class="nav-link" data-scroll-target="#what-is-correlation">What is Correlation?</a></li>
@@ -674,7 +677,7 @@ window.Quarto = {
   <li><a href="#example-why-still-useful" id="toc-example-why-still-useful" class="nav-link" data-scroll-target="#example-why-still-useful">Example: Why Still Useful?</a></li>
   <li><a href="#when-not-to-use-monte-carlo" id="toc-when-not-to-use-monte-carlo" class="nav-link" data-scroll-target="#when-not-to-use-monte-carlo">When NOT to Use Monte Carlo</a></li>
   </ul></li>
-  <li><a href="#making-smart-decisions" id="toc-making-smart-decisions" class="nav-link" data-scroll-target="#making-smart-decisions"><span class="flow">Making Smart Decisions</span></a>
+  <li><a href="#smart-decisions" id="toc-smart-decisions" class="nav-link" data-scroll-target="#smart-decisions"><span class="flow">Smart Decisions</span></a>
   <ul class="collapse">
   <li><a href="#decision-framework" id="toc-decision-framework" class="nav-link" data-scroll-target="#decision-framework">Decision Framework</a></li>
   <li><a href="#the-plan-for-the-day" id="toc-the-plan-for-the-day" class="nav-link" data-scroll-target="#the-plan-for-the-day">The Plan for the Day</a></li>
@@ -687,7 +690,7 @@ window.Quarto = {
   <li><a href="#next-week" id="toc-next-week" class="nav-link" data-scroll-target="#next-week">Next Week</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_04_monte_carlo.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_04_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_04_monte_carlo.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_04_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="lec_04_presentation.pdf"><i class="bi bi-file-earmark-slides"></i>Slides (PDF)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -720,8 +723,8 @@ window.Quarto = {
 
 <section id="introduction" class="level1 title">
 <h1 class="title"><span class="flow">Introduction</span></h1>
-<section id="client-briefing-techventure-innovation-fund" class="level2" data-background-image="https://unsplash.com/photos/K5DY18hy5JQ/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYxNDU4NjYzfA&amp;force=true&amp;w=2400" data-background-size="cover">
-<h2 data-background-image="https://unsplash.com/photos/K5DY18hy5JQ/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYxNDU4NjYzfA&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-techventure-innovation-fund"><strong><span class="invert-font">Client Briefing: TechVenture Innovation Fund</span></strong></h2>
+<section id="client-briefing-techventure" class="level2" data-background-image="https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<h2 data-background-image="https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-techventure"><strong><span class="invert-font">Client Briefing: TechVenture</span></strong></h2>
 <p>. . .</p>
 <p><span class="invert-font">CEO’s Dilemma:</span></p>
 <p><span class="invert-font fragment">“We have €2M to invest in <span class="highlight">2 of 4 startups</span>. Each promises great returns, but the future is uncertain. How do we make the best choice without just gambling?”</span></p>
@@ -800,7 +803,7 @@ window.Quarto = {
 <p><span class="question">Question</span>: If you roll two dice, what’s the probability of getting exactly 7 as result?</p>
 <p>. . .</p>
 <p><strong>Method 2: Simulation</strong></p>
-<div id="5a3b6420" class="cell" data-output-location="fragment" data-execution_count="1">
+<div id="5b040b08" class="cell" data-output-location="fragment" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -819,7 +822,7 @@ window.Quarto = {
 </section>
 <section id="how-probability-converges" class="level2">
 <h2 class="anchored" data-anchor-id="how-probability-converges">How Probability Converges</h2>
-<div id="d43cc1a8" class="cell" data-execution_count="2">
+<div id="7a816e30" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -884,7 +887,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="why-this-matters-for-business">Why This Matters for Business</h2>
 <p><span class="question">Question</span>: How many simulations do we need for reliable results?</p>
 <p>. . .</p>
-<div id="4ec8f6c7" class="cell" data-output-location="fragment" data-execution_count="3">
+<div id="35a0e8b6" class="cell" data-output-location="fragment" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test convergence with different sample sizes</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sample_sizes <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>estimates <span class="op">=</span> []</span>
@@ -976,7 +979,7 @@ n=100000: Estimated probability = 0.1670</code></pre>
 <li><strong>size</strong>: How many samples to generate</li>
 </ul>
 <p>. . .</p>
-<div id="ce034cef" class="cell" data-output-location="fragment" data-execution_count="4">
+<div id="10e6f32f" class="cell" data-output-location="fragment" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI-Growth: average 38% return, ±25% volatility</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="fl">0.38</span>, scale<span class="op">=</span><span class="fl">0.25</span>, size<span class="op">=</span><span class="dv">10_000</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean return: </span><span class="sc">{</span>returns<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
@@ -997,7 +1000,7 @@ Maximum: 125.7%</code></pre>
 <p>. . .</p>
 <p><span class="question">Question:</span> Do you still know what a percentile is?</p>
 <p>. . .</p>
-<div id="cc23e13b" class="cell" data-output-location="fragment" data-execution_count="5">
+<div id="03e49bec" class="cell" data-output-location="fragment" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Percentiles:"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  5th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">5</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 5% of scenarios)"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" 25th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">25</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 25% of scenarios)"</span>)</span>
@@ -1019,7 +1022,7 @@ Percentiles:
 <h2 class="anchored" data-anchor-id="understanding-the-distribution">Understanding the Distribution</h2>
 <p><span class="question">Question</span>: Before we plot, what shape do you expect for <code>np.random.normal()</code>?</p>
 <p>. . .</p>
-<div id="fc2d9347" class="cell" data-execution_count="6">
+<div id="3d636d3b" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1033,7 +1036,7 @@ Percentiles:
 <h2 class="anchored" data-anchor-id="risk-analysis">Risk Analysis</h2>
 <p><span class="question">Question</span>: What’s the probability that AI-Growth loses money?</p>
 <p>. . .</p>
-<div id="82910bed" class="cell" data-output-location="fragment" data-execution_count="7">
+<div id="6c3dbec0" class="cell" data-output-location="fragment" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate risk metrics</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>prob_loss <span class="op">=</span> (returns <span class="op">&lt;</span> <span class="dv">0</span>).mean() <span class="co"># proportion of returns that are less than zero</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>prob_double <span class="op">=</span> (returns <span class="op">&gt;</span> <span class="fl">1.0</span>).mean()  <span class="co"># proportion greater than 100%</span></span>
@@ -1060,7 +1063,7 @@ Probability of doubling money: 0.8%</code></pre>
 <section id="different-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="different-distributions">Different Distributions</h2>
 <p><span class="highlight">Attention: Not everything follows a normal distribution!</span></p>
-<div id="f6105aa5" class="cell" data-execution_count="8">
+<div id="dcbed21c" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1076,7 +1079,7 @@ Probability of doubling money: 0.8%</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Normal</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Uniform</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Exponential</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div id="8258907d" class="cell" data-execution_count="9">
+<div id="065a2950" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most common in nature/business</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Bell-shaped, symmetric</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> np.random.normal(mean, std, size)</span>
@@ -1092,7 +1095,7 @@ Probability of doubling money: 0.8%</code></pre>
 </ul>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div id="beeee82c" class="cell" data-execution_count="10">
+<div id="0af605d8" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Equal probability across range</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: FinFlow returns between 10-35%</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>returns <span class="op">=</span> np.random.uniform(<span class="fl">0.10</span>, <span class="fl">0.35</span>, size)</span>
@@ -1108,7 +1111,7 @@ Probability of doubling money: 0.8%</code></pre>
 </ul>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div id="c86e50bc" class="cell" data-execution_count="11">
+<div id="35cd238d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Time between events</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Customer arrivals, equipment failure</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>times <span class="op">=</span> np.random.exponential(scale, size)</span>
@@ -1152,7 +1155,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="four-startup-profiles" class="level2">
 <h2 class="anchored" data-anchor-id="four-startup-profiles">Four Startup Profiles</h2>
-<div id="25f1ea89" class="cell" data-execution_count="13">
+<div id="ecec33a7" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1211,8 +1214,8 @@ Probability of doubling money: 0.8%</code></pre>
 </div>
 </section>
 </section>
-<section id="correlation-dependence" class="level1 title">
-<h1 class="title"><span class="flow">Correlation &amp; Dependence</span></h1>
+<section id="correlation" class="level1 title">
+<h1 class="title"><span class="flow">Correlation</span></h1>
 <section id="the-independence-assumption" class="level2">
 <h2 class="anchored" data-anchor-id="the-independence-assumption">The Independence Assumption</h2>
 <p><span class="highlight">So far, we’ve assumed startups succeed or fail independently.</span></p>
@@ -1251,7 +1254,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="correlation-in-practice" class="level2">
 <h2 class="anchored" data-anchor-id="correlation-in-practice">Correlation in Practice</h2>
-<div id="9c81d2b9" class="cell" data-fig-height="4" data-fig-width="12" data-execution_count="15">
+<div id="79ecd16a" class="cell" data-fig-height="4" data-fig-width="12" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1298,7 +1301,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="impact-on-portfolio-risk" class="level2">
 <h2 class="anchored" data-anchor-id="impact-on-portfolio-risk">Impact on Portfolio Risk</h2>
-<div id="b0ff50b8" class="cell" data-execution_count="16">
+<div id="88113e45" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1344,7 +1347,7 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="when-diversification-fails" class="level2">
 <h2 class="anchored" data-anchor-id="when-diversification-fails">When Diversification Fails</h2>
-<div id="5f9b72d1" class="cell" data-execution_count="17">
+<div id="7045b728" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1399,7 +1402,7 @@ Probability of doubling money: 0.8%</code></pre>
 <h2 class="anchored" data-anchor-id="real-monte-carlo-applications">Real Monte Carlo Applications</h2>
 <p><span class="highlight">Where Monte Carlo is ESSENTIAL, not just convenient:</span></p>
 <p><strong>1. Option Pricing with Path Dependencies</strong></p>
-<div id="b4d441e1" class="cell" data-output-location="fragment" data-execution_count="18">
+<div id="d288f62a" class="cell" data-output-location="fragment" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Payoff depends on AVERAGE price over time</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> strike_price <span class="op">=</span> <span class="dv">105</span><span class="op">;</span> payoffs <span class="op">=</span> []</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
@@ -1419,7 +1422,7 @@ Probability of profit: 68.9%</code></pre>
 </section>
 <section id="real-monte-carlo-applications-ii" class="level2">
 <h2 class="anchored" data-anchor-id="real-monte-carlo-applications-ii">Real Monte Carlo Applications II</h2>
-<div id="7001ddf7" class="cell" data-execution_count="19">
+<div id="728bb6cc" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1432,7 +1435,7 @@ Probability of profit: 68.9%</code></pre>
 <section id="real-monte-carlo-applications-iii" class="level2">
 <h2 class="anchored" data-anchor-id="real-monte-carlo-applications-iii">Real Monte Carlo Applications III</h2>
 <p><strong>2. Supply Chain with Cascading Effects</strong></p>
-<div id="3587f96f" class="cell" data-output-location="fragment" data-execution_count="20">
+<div id="a0e52ffe" class="cell" data-output-location="fragment" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Each stage affects the next (nonlinear dependencies)</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> factory_capacity <span class="op">=</span> <span class="dv">150</span><span class="op">;</span> demand <span class="op">=</span> <span class="dv">120</span><span class="op">;</span> price <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>penalty <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> revenues <span class="op">=</span> []</span>
@@ -1457,7 +1460,7 @@ Worst-case revenue: $325.00</code></pre>
 </section>
 <section id="real-monte-carlo-applications-iv" class="level2">
 <h2 class="anchored" data-anchor-id="real-monte-carlo-applications-iv">Real Monte Carlo Applications IV</h2>
-<div id="af81ee3d" class="cell" data-execution_count="21">
+<div id="fc4cb2b8" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1470,7 +1473,7 @@ Worst-case revenue: $325.00</code></pre>
 <section id="real-monte-carlo-applications-v" class="level2">
 <h2 class="anchored" data-anchor-id="real-monte-carlo-applications-v">Real Monte Carlo Applications V</h2>
 <p><strong>3. Project Management with Sequential Risks</strong></p>
-<div id="7d4e3100" class="cell" data-output-location="fragment" data-execution_count="22">
+<div id="ab883a6f" class="cell" data-output-location="fragment" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Project phases must happen in order, later phases only if earlier succeed</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> shape <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> scale <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> project_times <span class="op">=</span> []</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1495,7 +1498,7 @@ Worst-case revenue: $325.00</code></pre>
 </section>
 <section id="real-monte-carlo-applications-vi" class="level2">
 <h2 class="anchored" data-anchor-id="real-monte-carlo-applications-vi">Real Monte Carlo Applications VI</h2>
-<div id="2cc45e7c" class="cell" data-execution_count="23">
+<div id="e0e3801f" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1561,8 +1564,8 @@ Worst-case revenue: $325.00</code></pre>
 </div>
 </section>
 </section>
-<section id="making-smart-decisions" class="level1 title">
-<h1 class="title"><span class="flow">Making Smart Decisions</span></h1>
+<section id="smart-decisions" class="level1 title">
+<h1 class="title"><span class="flow">Smart Decisions</span></h1>
 <section id="decision-framework" class="level2">
 <h2 class="anchored" data-anchor-id="decision-framework">Decision Framework</h2>
 <ol type="1">

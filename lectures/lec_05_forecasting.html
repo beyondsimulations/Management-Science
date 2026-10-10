@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -76,14 +79,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c366505a46d5b46cf7fae82eb9e8fbfc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-018a56f84f553ab074084cbaa177a14c.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-fcd1a2993490c2d386cd11edf595946f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-07311628652e75f956396d70ae2c81bf.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-8d6508a0f4ab1fa03a98911d51c1ef8f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-2f19b2db3fad15d2f175130959bbc86e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4d741c68ea0317afad2337939f5fb765.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-a7c6cc26f36c4eefed42223badc0fd75.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -620,7 +623,7 @@ window.Quarto = {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="flow">Introduction</span></a>
   <ul class="collapse">
-  <li><a href="#client-briefing-megamart-retail-chain" id="toc-client-briefing-megamart-retail-chain" class="nav-link" data-scroll-target="#client-briefing-megamart-retail-chain"><strong><span class="invert-font">Client Briefing: MegaMart Retail Chain</span></strong></a></li>
+  <li><a href="#client-briefing-megamart" id="toc-client-briefing-megamart" class="nav-link" data-scroll-target="#client-briefing-megamart"><strong><span class="invert-font">Client Briefing: MegaMart</span></strong></a></li>
   <li><a href="#business-the-unknown-future" id="toc-business-the-unknown-future" class="nav-link" data-scroll-target="#business-the-unknown-future">Business: The Unknown Future</a></li>
   <li><a href="#hidden-patterns-in-data" id="toc-hidden-patterns-in-data" class="nav-link" data-scroll-target="#hidden-patterns-in-data">Hidden Patterns in Data</a></li>
   </ul></li>
@@ -632,7 +635,7 @@ window.Quarto = {
   <li><a href="#moving-average" id="toc-moving-average" class="nav-link" data-scroll-target="#moving-average">Moving Average</a></li>
   <li><a href="#simple-vs-weighted-averages" id="toc-simple-vs-weighted-averages" class="nav-link" data-scroll-target="#simple-vs-weighted-averages">Simple vs Weighted Averages</a></li>
   </ul></li>
-  <li><a href="#exponential-smoothing-methods" id="toc-exponential-smoothing-methods" class="nav-link" data-scroll-target="#exponential-smoothing-methods"><span class="flow">Exponential Smoothing Methods</span></a>
+  <li><a href="#simple-smoothing" id="toc-simple-smoothing" class="nav-link" data-scroll-target="#simple-smoothing"><span class="flow">Simple Smoothing</span></a>
   <ul class="collapse">
   <li><a href="#simple-exponential-smoothing" id="toc-simple-exponential-smoothing" class="nav-link" data-scroll-target="#simple-exponential-smoothing">Simple Exponential Smoothing</a></li>
   <li><a href="#when-simple-smoothing-fails" id="toc-when-simple-smoothing-fails" class="nav-link" data-scroll-target="#when-simple-smoothing-fails">When Simple Smoothing Fails</a></li>
@@ -662,7 +665,7 @@ window.Quarto = {
   <li><a href="#holt-winters-visual" id="toc-holt-winters-visual" class="nav-link" data-scroll-target="#holt-winters-visual">Holt-Winters: Visual</a></li>
   <li><a href="#when-to-use-holt-winters" id="toc-when-to-use-holt-winters" class="nav-link" data-scroll-target="#when-to-use-holt-winters">When to Use Holt-Winters</a></li>
   </ul></li>
-  <li><a href="#method-selection-validation" id="toc-method-selection-validation" class="nav-link" data-scroll-target="#method-selection-validation"><span class="flow">Method Selection &amp; Validation</span></a>
+  <li><a href="#selection-validation" id="toc-selection-validation" class="nav-link" data-scroll-target="#selection-validation"><span class="flow">Selection &amp; Validation</span></a>
   <ul class="collapse">
   <li><a href="#measuring-forecast-accuracy" id="toc-measuring-forecast-accuracy" class="nav-link" data-scroll-target="#measuring-forecast-accuracy">Measuring Forecast Accuracy</a></li>
   <li><a href="#forecast-accuracy" id="toc-forecast-accuracy" class="nav-link" data-scroll-target="#forecast-accuracy">Forecast Accuracy</a></li>
@@ -670,11 +673,11 @@ window.Quarto = {
   <li><a href="#the-real-cost-of-being-wrong" id="toc-the-real-cost-of-being-wrong" class="nav-link" data-scroll-target="#the-real-cost-of-being-wrong">The Real Cost of Being Wrong</a></li>
   <li><a href="#under-and-overforecasting" id="toc-under-and-overforecasting" class="nav-link" data-scroll-target="#under-and-overforecasting">Under and Overforecasting</a></li>
   </ul></li>
-  <li><a href="#method-implementation" id="toc-method-implementation" class="nav-link" data-scroll-target="#method-implementation"><span class="flow">Method Implementation</span></a>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><span class="flow">Implementation</span></a>
   <ul class="collapse">
   <li><a href="#your-python-practice-notebook" id="toc-your-python-practice-notebook" class="nav-link" data-scroll-target="#your-python-practice-notebook">Your Python Practice Notebook</a></li>
   </ul></li>
-  <li><a href="#ai-machine-learning-forecasting" id="toc-ai-machine-learning-forecasting" class="nav-link" data-scroll-target="#ai-machine-learning-forecasting"><span class="flow">AI &amp; Machine Learning Forecasting</span></a>
+  <li><a href="#ai-machine-learning" id="toc-ai-machine-learning" class="nav-link" data-scroll-target="#ai-machine-learning"><span class="flow">AI &amp; Machine Learning</span></a>
   <ul class="collapse">
   <li><a href="#the-promise-of-ai" id="toc-the-promise-of-ai" class="nav-link" data-scroll-target="#the-promise-of-ai">The Promise of AI</a></li>
   <li><a href="#common-aiml-forecasting" id="toc-common-aiml-forecasting" class="nav-link" data-scroll-target="#common-aiml-forecasting">Common AI/ML Forecasting</a></li>
@@ -705,7 +708,7 @@ window.Quarto = {
   <li><a href="#break" id="toc-break" class="nav-link" data-scroll-target="#break">Break!</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_05_forecasting.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_05_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lec_05_forecasting.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lec_05_presentation.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="lec_05_presentation.pdf"><i class="bi bi-file-earmark-slides"></i>Slides (PDF)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -738,8 +741,8 @@ window.Quarto = {
 
 <section id="introduction" class="level1 title">
 <h1 class="title"><span class="flow">Introduction</span></h1>
-<section id="client-briefing-megamart-retail-chain" class="level2" data-background-image="https://unsplash.com/photos/pnmaLfF0U6w/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyNDUzNTAzfA&amp;force=true&amp;w=2400" data-background-size="cover">
-<h2 data-background-image="https://unsplash.com/photos/pnmaLfF0U6w/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYyNDUzNTAzfA&amp;force=true&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-megamart-retail-chain"><strong><span class="invert-font">Client Briefing: MegaMart Retail Chain</span></strong></h2>
+<section id="client-briefing-megamart" class="level2" data-background-image="https://images.unsplash.com/photo-1733506312514-267f8134208a?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<h2 data-background-image="https://images.unsplash.com/photo-1733506312514-267f8134208a?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover" class="anchored" data-anchor-id="client-briefing-megamart"><strong><span class="invert-font">Client Briefing: MegaMart</span></strong></h2>
 <p>. . .</p>
 <p><span class="invert-font">Operations Director’s Crisis:</span></p>
 <p><span class="invert-font fragment">“Last Christmas, we ran out of PlayStation 5s but had <span class="highlight">500 unsold fitness trackers</span>. We lost €2M in missed sales and clearance losses. How do we predict what customers will actually buy?”</span></p>
@@ -770,7 +773,7 @@ window.Quarto = {
 <section id="hidden-patterns-in-data" class="level2">
 <h2 class="anchored" data-anchor-id="hidden-patterns-in-data">Hidden Patterns in Data</h2>
 <p>Look at this daily sales data. <span class="highlight">What patterns do you see?</span></p>
-<div id="792275a4" class="cell" data-execution_count="1">
+<div id="f120cf37" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -821,7 +824,7 @@ window.Quarto = {
 </section>
 <section id="visual-decomposition" class="level2">
 <h2 class="anchored" data-anchor-id="visual-decomposition">Visual Decomposition</h2>
-<div id="705dff3f" class="cell" data-execution_count="2">
+<div id="a4a0bd94" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -846,7 +849,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="moving-average">Moving Average</h2>
 <p><span class="question">Question</span>: How do we separate signal from noise?</p>
 <p>. . .</p>
-<div id="ee8978c3" class="cell" data-execution_count="3">
+<div id="780cd8f1" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -892,8 +895,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="exponential-smoothing-methods" class="level1 title">
-<h1 class="title"><span class="flow">Exponential Smoothing Methods</span></h1>
+<section id="simple-smoothing" class="level1 title">
+<h1 class="title"><span class="flow">Simple Smoothing</span></h1>
 <section id="simple-exponential-smoothing" class="level2">
 <h2 class="anchored" data-anchor-id="simple-exponential-smoothing">Simple Exponential Smoothing</h2>
 <p><span class="highlight">Not too simple, not too complex</span></p>
@@ -923,7 +926,7 @@ window.Quarto = {
 <section id="when-simple-smoothing-fails" class="level2">
 <h2 class="anchored" data-anchor-id="when-simple-smoothing-fails">When Simple Smoothing Fails</h2>
 <p><span class="highlight">Simple smoothing assumes the data is flat. What if it’s not?</span></p>
-<div id="efb12010" class="cell" data-execution_count="4">
+<div id="dfc10453" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -995,7 +998,7 @@ window.Quarto = {
 <section id="step-by-step-i" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-i">Step-by-Step I</h2>
 <p><span class="highlight">Let’s walk through 6 periods manually to build intuition</span></p>
-<div id="074bc33c" class="cell" data-output-location="fragment" data-execution_count="5">
+<div id="7f217238" class="cell" data-output-location="fragment" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data with clear upward trend</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sales_data <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">112</span>, <span class="dv">118</span>, <span class="dv">124</span>, <span class="dv">130</span>])</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1019,7 +1022,7 @@ window.Quarto = {
 </section>
 <section id="step-by-step-ii" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-ii">Step-by-Step II</h2>
-<div id="ed0abe58" class="cell" data-output-location="fragment" data-execution_count="6">
+<div id="3f17e532" class="cell" data-output-location="fragment" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Holt's method for periods 2-6</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(sales_data)):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update level</span></span>
@@ -1045,7 +1048,7 @@ Period 6: Sales=130, Level=128.4, Trend=5.5</code></pre>
 </section>
 <section id="step-by-step-iii" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-iii">Step-by-Step III</h2>
-<div id="fd81d230" class="cell" data-output-location="fragment" data-execution_count="7">
+<div id="70f908d0" class="cell" data-output-location="fragment" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forecast next 3 periods</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Forecasts:"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>forecast_values <span class="op">=</span> []</span>
@@ -1064,7 +1067,7 @@ Forecasts:
 </section>
 <section id="holts-method-visual-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="holts-method-visual-comparison">Holt’s Method: Visual Comparison</h2>
-<div id="6cfb4c48" class="cell" data-execution_count="8">
+<div id="61657a32" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1142,7 +1145,7 @@ Forecasts:
 <h2 class="anchored" data-anchor-id="the-problem-trend-seasonality">The Problem: Trend + Seasonality</h2>
 <p><span class="highlight">What if your data has BOTH trend AND seasonality?</span></p>
 <p>. . .</p>
-<div id="bafbde0b" class="cell" data-execution_count="9">
+<div id="3600afbc" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1165,7 +1168,7 @@ Forecasts:
 </section>
 <section id="holt-winters-visualized" class="level2">
 <h2 class="anchored" data-anchor-id="holt-winters-visualized">Holt-Winters Visualized</h2>
-<div id="b3bdb1a7" class="cell" data-execution_count="10">
+<div id="07390cb9" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1252,7 +1255,7 @@ Forecasts:
 </section>
 <section id="holt-winters-visual" class="level2">
 <h2 class="anchored" data-anchor-id="holt-winters-visual">Holt-Winters: Visual</h2>
-<div id="84690000" class="cell" data-execution_count="11">
+<div id="175d7616" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1292,8 +1295,8 @@ Forecasts:
 </ul>
 </section>
 </section>
-<section id="method-selection-validation" class="level1 title">
-<h1 class="title"><span class="flow">Method Selection &amp; Validation</span></h1>
+<section id="selection-validation" class="level1 title">
+<h1 class="title"><span class="flow">Selection &amp; Validation</span></h1>
 <section id="measuring-forecast-accuracy" class="level2">
 <h2 class="anchored" data-anchor-id="measuring-forecast-accuracy">Measuring Forecast Accuracy</h2>
 <p><span class="highlight">How wrong were we?</span></p>
@@ -1305,7 +1308,7 @@ Forecasts:
 <section id="forecast-accuracy" class="level2">
 <h2 class="anchored" data-anchor-id="forecast-accuracy">Forecast Accuracy</h2>
 <p><span class="highlight">Easy with Python</span></p>
-<div id="5837c8ec" class="cell" data-output-location="fragment" data-execution_count="12">
+<div id="1e94f2ef" class="cell" data-output-location="fragment" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Compare two forecasting methods</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>actual <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">110</span>, <span class="dv">108</span>, <span class="dv">112</span>])</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>forecast_a <span class="op">=</span> np.array([<span class="dv">98</span>, <span class="dv">107</span>, <span class="dv">109</span>, <span class="dv">110</span>, <span class="dv">111</span>])</span>
@@ -1328,7 +1331,7 @@ Better method: A</code></pre>
 <section id="when-to-use-which-method" class="level2">
 <h2 class="anchored" data-anchor-id="when-to-use-which-method">When to Use Which Method?</h2>
 <p>. . .</p>
-<div id="0e39c7a1" class="cell" data-execution_count="13">
+<div id="ccd95307" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1404,8 +1407,8 @@ Better method: A</code></pre>
 </div>
 </section>
 </section>
-<section id="method-implementation" class="level1 title">
-<h1 class="title"><span class="flow">Method Implementation</span></h1>
+<section id="implementation" class="level1 title">
+<h1 class="title"><span class="flow">Implementation</span></h1>
 <section id="your-python-practice-notebook" class="level2">
 <h2 class="anchored" data-anchor-id="your-python-practice-notebook">Your Python Practice Notebook</h2>
 <p><span class="highlight">All the hands-on coding happens in the interactive tutorial!</span></p>
@@ -1433,8 +1436,8 @@ Better method: A</code></pre>
 </div>
 </section>
 </section>
-<section id="ai-machine-learning-forecasting" class="level1 title">
-<h1 class="title"><span class="flow">AI &amp; Machine Learning Forecasting</span></h1>
+<section id="ai-machine-learning" class="level1 title">
+<h1 class="title"><span class="flow">AI &amp; Machine Learning</span></h1>
 <section id="the-promise-of-ai" class="level2">
 <h2 class="anchored" data-anchor-id="the-promise-of-ai">The Promise of AI</h2>
 <p><span class="highlight">Can machines predict better than classical methods?</span></p>
@@ -1496,7 +1499,7 @@ Better method: A</code></pre>
 <h2 class="anchored" data-anchor-id="the-issue-overfitting">The Issue: Overfitting</h2>
 <p><span class="question">Question</span>: What happens when we train an AI on all our data and use it to predict… the same data?</p>
 <p>. . .</p>
-<div id="4a5d1fab" class="cell" data-execution_count="14">
+<div id="4c61ed39" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1509,11 +1512,11 @@ Better method: A</code></pre>
 <section id="training-vs-test-data" class="level2">
 <h2 class="anchored" data-anchor-id="training-vs-test-data">Training vs Test Data</h2>
 <p><span class="highlight">Never judge a complex model on the data it learned from!</span></p>
-<div id="a8697a87" class="cell" data-execution_count="15">
+<div id="053e603e" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec_05_forecasting_files/figure-revealjs/cell-16-output-1.png" width="1131" height="418" class="figure-img"></p>
+<p><img src="lec_05_forecasting_files/figure-revealjs/cell-16-output-1.png" width="1131" height="274" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1558,7 +1561,7 @@ Better method: A</code></pre>
 </section>
 <section id="time-series-cross-validation" class="level2">
 <h2 class="anchored" data-anchor-id="time-series-cross-validation">Time Series Cross-Validation</h2>
-<div id="2a8f49e7" class="cell" data-execution_count="16">
+<div id="3ffe6ed9" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1619,7 +1622,7 @@ Better method: A</code></pre>
 <section id="forecast-horizons" class="level2">
 <h2 class="anchored" data-anchor-id="forecast-horizons">Forecast Horizons</h2>
 <p><span class="highlight">How far into the future can we predict?</span></p>
-<div id="dab9d4e7" class="cell" data-execution_count="17">
+<div id="8e8117e3" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1632,7 +1635,7 @@ Better method: A</code></pre>
 <section id="confidence-intervals" class="level2">
 <h2 class="anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h2>
 <p><span class="highlight">A forecast without confidence intervals is incomplete!</span></p>
-<div id="b2f37171" class="cell" data-execution_count="18">
+<div id="7185e8fe" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1646,7 +1649,7 @@ Better method: A</code></pre>
 <h2 class="anchored" data-anchor-id="forecast-combination">Forecast Combination</h2>
 <p><span class="highlight">Why choose one method when you can combine several?</span></p>
 <p>. . .</p>
-<div id="e7248d88" class="cell" data-output-location="fragment" data-execution_count="19">
+<div id="d4f2fb8f" class="cell" data-output-location="fragment" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Combining multiple forecasts</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ma_forecast <span class="op">=</span> <span class="dv">120</span>      <span class="co"># Moving average prediction</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>exp_forecast <span class="op">=</span> <span class="dv">125</span>     <span class="co"># Exponential smoothing prediction</span></span>
@@ -1670,7 +1673,7 @@ Weighted combination: 126 units</code></pre>
 </section>
 <section id="lead-times-and-safety-stock" class="level2">
 <h2 class="anchored" data-anchor-id="lead-times-and-safety-stock">Lead Times and Safety Stock</h2>
-<div id="5e382077" class="cell" data-execution_count="20">
+<div id="e12cb194" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1695,7 +1698,7 @@ Weighted combination: 126 units</code></pre>
 <h2 class="anchored" data-anchor-id="safety-stock-calculation">Safety Stock Calculation</h2>
 <p><span class="highlight">How much buffer do you need?</span></p>
 <p>. . .</p>
-<div id="2a5ea41a" class="cell" data-output-location="fragment" data-execution_count="21">
+<div id="3fe2ec66" class="cell" data-output-location="fragment" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Safety stock formula</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>

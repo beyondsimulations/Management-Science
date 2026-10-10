@@ -7,8 +7,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr.&nbsp;Tobias Vlćek">
   <title>Management Science – Introduction to Metaheuristics</title>
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -99,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-654872e9c78c99286fb12f6e27390190.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -191,6 +194,32 @@
       margin-right: 0; 
     }
   </style>
+  <!--
+    Canonical. Distributed to every deck repo as general/mathjax.html by
+    scripts/sync-mathjax.py. Edit it here, not there.
+
+    Reveal renders slide maths with MathJax 2.7.9 (its own plugin; the `html`
+    format's html-math-method: mathjax@3 does not apply to decks). Left alone,
+    MathJax 2 prefers a LOCALLY INSTALLED font set, picks the system STIX, and
+    renders \mathcal and friends at STIX private-use codepoints that live in the
+    STIXNonUnicode family. macOS ships that font, Windows does not, and headless
+    chromium does not resolve it either — so those glyphs came out as □ in every
+    exported PDF, and do the same on any machine without STIX.
+
+    Emptying availableFonts forbids the local shortcut, so MathJax loads its own
+    TeX webfonts: measured on Applied-Optimization lecture 1, one @font-face rule
+    (MathJax_Blank) became ten, and no private-use glyph survived. It also lines
+    the decks up with the reading pages, which already render in MathJax's TeX
+    fonts via MathJax 3.
+
+    Must run before MathJax loads, hence a plain head script rather than a
+    MathJax.Hub.Config call.
+  -->
+  <script>
+    window.MathJax = {
+      "HTML-CSS": { availableFonts: [], preferredFont: "TeX", webFont: "TeX" }
+    };
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
@@ -206,7 +235,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dr.&nbsp;Tobias Vlćek 
+Dr.&nbsp;Tobias Vlćek
 </div>
 </div>
 </div>
@@ -217,7 +246,7 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Introduction</span></h1>
 
 </section>
-<section id="client-briefing-la-étoile" class="slide level2" data-background-image="https://unsplash.com/photos/N_Y88TWmGwA/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Mnx8ZmluZSUyMGRpbmluZ3xlbnwwfHx8fDE3NjM3OTIzNjZ8MA&amp;force=true&amp;w=2400" data-background-size="cover">
+<section id="client-briefing-la-étoile" class="slide level2" data-background-image="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
 <h2><strong><span class="invert-font">Client Briefing: La Étoile</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">Restaurant Manager’s Crisis:</span></p>
@@ -264,7 +293,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="restaurant-staffing-the-numbers" class="slide level2">
 <h2>Restaurant Staffing: The Numbers</h2>
 <p><span class="highlight">The real-world complexity we’re dealing with:</span></p>
-<div id="4263a8b0" class="cell" data-execution_count="1">
+<div id="67e256a1" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -322,7 +351,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="recap-local-optima" class="slide level2">
 <h2>Recap: Local Optima</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="d6ef4b5d" class="cell" data-execution_count="2">
+<div id="8ab5fbc5" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -336,8 +365,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="why-simple-methods-fail" class="title-slide slide level1 title center">
-<h1><span class="flow">Why Simple Methods Fail</span></h1>
+<section id="simple-methods-fail" class="title-slide slide level1 title center">
+<h1><span class="flow">Simple Methods Fail</span></h1>
 
 </section>
 <section id="the-silo-problem" class="slide level2">
@@ -380,7 +409,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Why Greedy Gets Stuck</h2>
 <p><span class="highlight">Greedy algorithms can simply trap themselves:</span></p>
 <div class="fragment">
-<div id="7e818003" class="cell" data-execution_count="3">
+<div id="c7df7c68" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -407,7 +436,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Local Search Also Struggles</h2>
 <p><span class="highlight">Because we only ever accept better solutions during search:</span></p>
 <div class="fragment">
-<div id="f5d9235a" class="cell" data-execution_count="4">
+<div id="478dcfce" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -422,8 +451,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="metaheuristic-1-simulated-annealing" class="title-slide slide level1 title center">
-<h1><span class="flow">Metaheuristic #1: Simulated Annealing</span></h1>
+<section id="simulated-annealing" class="title-slide slide level1 title center">
+<h1><span class="flow">Simulated Annealing</span></h1>
 
 </section>
 <section id="core-concepts" class="slide level2">
@@ -482,7 +511,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="temperature-controls-acceptance" class="slide level2">
 <h2>Temperature Controls Acceptance</h2>
 <p><span class="highlight">Probability of accepting worse solutions lowers with temp:</span></p>
-<div id="ac34ce6f" class="cell" data-execution_count="5">
+<div id="c96e4a82" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -507,50 +536,53 @@ Dr.&nbsp;Tobias Vlćek
 <section id="concept" class="slide level2">
 <h2>Concept</h2>
 <p><span class="highlight">How Simulated Annealing Works (Pseudocode)</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> simulated_annealing_concept(current_schedule):</span>
-<span id="cb1-2"><a></a>    temperature <span class="op">=</span> <span class="dv">500</span>  <span class="co"># Start "hot" (adventurous)</span></span>
-<span id="cb1-3"><a></a>    best_schedule <span class="op">=</span> current_schedule</span>
-<span id="cb1-4"><a></a>    </span>
-<span id="cb1-5"><a></a>    <span class="cf">while</span> temperature <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb1-6"><a></a>        <span class="co"># Step 1: Try a random change (like swapping two shifts)</span></span>
-<span id="cb1-7"><a></a>        new_schedule <span class="op">=</span> make_random_change(current_schedule)</span>
-<span id="cb1-8"><a></a>        </span>
-<span id="cb1-9"><a></a>        <span class="co"># Step 2: Is it better?</span></span>
-<span id="cb1-10"><a></a>        <span class="cf">if</span> cost(new_schedule) <span class="op">&lt;</span> cost(current_schedule):</span>
-<span id="cb1-11"><a></a>            current_schedule <span class="op">=</span> new_schedule  <span class="co"># Always accept improvements</span></span>
-<span id="cb1-12"><a></a>        <span class="cf">else</span>:</span>
-<span id="cb1-13"><a></a>            <span class="co"># NEW: Sometimes accept worse solutions!</span></span>
-<span id="cb1-14"><a></a>            <span class="co"># Hot temperature = more likely to accept</span></span>
-<span id="cb1-15"><a></a>            <span class="co"># Cold temperature = less likely to accept</span></span>
-<span id="cb1-16"><a></a>            <span class="cf">if</span> random() <span class="op">&lt;</span> acceptance_probability(temperature):</span>
-<span id="cb1-17"><a></a>                current_schedule <span class="op">=</span> new_schedule  <span class="co"># Accept anyway!</span></span>
-<span id="cb1-18"><a></a>        </span>
-<span id="cb1-19"><a></a>        <span class="co"># Step 3: Cool down (become less adventurous)</span></span>
-<span id="cb1-20"><a></a>        temperature <span class="op">=</span> temperature <span class="op">*</span> <span class="fl">0.95</span></span>
-<span id="cb1-21"><a></a>        </span>
-<span id="cb1-22"><a></a>        <span class="co"># Remember the best we've ever seen</span></span>
-<span id="cb1-23"><a></a>        <span class="cf">if</span> cost(current_schedule) <span class="op">&lt;</span> cost(best_schedule):</span>
-<span id="cb1-24"><a></a>            best_schedule <span class="op">=</span> current_schedule</span>
-<span id="cb1-25"><a></a>    </span>
-<span id="cb1-26"><a></a>    <span class="cf">return</span> best_schedule</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="kw">def</span> simulated_annealing_concept(current_schedule):</span>
+<span id="cb1-2"><a aria-label="2"></a>    temperature <span class="op">=</span> <span class="dv">500</span>  <span class="co"># Start "hot" (adventurous)</span></span>
+<span id="cb1-3"><a aria-label="3"></a>    best_schedule <span class="op">=</span> current_schedule</span>
+<span id="cb1-4"><a aria-label="4"></a>    </span>
+<span id="cb1-5"><a aria-label="5"></a>    <span class="cf">while</span> temperature <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb1-6"><a aria-label="6"></a>        <span class="co"># Step 1: Try a random change (like swapping two shifts)</span></span>
+<span id="cb1-7"><a aria-label="7"></a>        new_schedule <span class="op">=</span> make_random_change(current_schedule)</span>
+<span id="cb1-8"><a aria-label="8"></a>        </span>
+<span id="cb1-9"><a aria-label="9"></a>        <span class="co"># Step 2: Is it better?</span></span>
+<span id="cb1-10"><a aria-label="10"></a>        <span class="cf">if</span> cost(new_schedule) <span class="op">&lt;</span> cost(current_schedule):</span>
+<span id="cb1-11"><a aria-label="11"></a>            current_schedule <span class="op">=</span> new_schedule  <span class="co"># Always accept improvements</span></span>
+<span id="cb1-12"><a aria-label="12"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-13"><a aria-label="13"></a>            <span class="co"># NEW: Sometimes accept worse solutions!</span></span>
+<span id="cb1-14"><a aria-label="14"></a>            <span class="co"># Hot temperature = more likely to accept</span></span>
+<span id="cb1-15"><a aria-label="15"></a>            <span class="co"># Cold temperature = less likely to accept</span></span>
+<span id="cb1-16"><a aria-label="16"></a>            <span class="cf">if</span> random() <span class="op">&lt;</span> acceptance_probability(temperature):</span>
+<span id="cb1-17"><a aria-label="17"></a>                current_schedule <span class="op">=</span> new_schedule  <span class="co"># Accept anyway!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="concept-continued" class="slide level2">
+<h2>Concept (continued)</h2>
+<p><span class="highlight">How Simulated Annealing Works (Pseudocode)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>        <span class="co"># Step 3: Cool down (become less adventurous)</span></span>
+<span id="cb2-2"><a aria-label="2"></a>        temperature <span class="op">=</span> temperature <span class="op">*</span> <span class="fl">0.95</span></span>
+<span id="cb2-3"><a aria-label="3"></a>        </span>
+<span id="cb2-4"><a aria-label="4"></a>        <span class="co"># Remember the best we've ever seen</span></span>
+<span id="cb2-5"><a aria-label="5"></a>        <span class="cf">if</span> cost(current_schedule) <span class="op">&lt;</span> cost(best_schedule):</span>
+<span id="cb2-6"><a aria-label="6"></a>            best_schedule <span class="op">=</span> current_schedule</span>
+<span id="cb2-7"><a aria-label="7"></a>    </span>
+<span id="cb2-8"><a aria-label="8"></a>    <span class="cf">return</span> best_schedule</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="sa-in-action-restaurant-staffing" class="slide level2">
 <h2>SA in Action: Restaurant Staffing</h2>
 <p><span class="highlight">A simplified weekend scheduling problem we’ll use throughout:</span></p>
-<div id="ac84d005" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># SIMPLIFIED PROBLEM (used across ALL metaheuristics today)</span></span>
-<span id="cb2-2"><a></a><span class="co">"""</span></span>
-<span id="cb2-3"><a></a><span class="co">La Étoile's Weekend Challenge:</span></span>
-<span id="cb2-4"><a></a><span class="co">- 12 servers: 4 experienced (E1-E4), 8 junior (J1-J8)</span></span>
-<span id="cb2-5"><a></a><span class="co">- 6 shifts: Need 2 servers each</span></span>
-<span id="cb2-6"><a></a><span class="co">- Everyone works exactly 1 shift</span></span>
-<span id="cb2-7"><a></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ad131984" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># SIMPLIFIED PROBLEM (used across ALL metaheuristics today)</span></span>
+<span id="cb3-2"><a aria-label="2"></a><span class="co">"""</span></span>
+<span id="cb3-3"><a aria-label="3"></a><span class="co">La Étoile's Weekend Challenge:</span></span>
+<span id="cb3-4"><a aria-label="4"></a><span class="co">- 12 servers: 4 experienced (E1-E4), 8 junior (J1-J8)</span></span>
+<span id="cb3-5"><a aria-label="5"></a><span class="co">- 6 shifts: Need 2 servers each</span></span>
+<span id="cb3-6"><a aria-label="6"></a><span class="co">- Everyone works exactly 1 shift</span></span>
+<span id="cb3-7"><a aria-label="7"></a><span class="co">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p><strong>The initial greedy schedule has the following results:</strong></p>
 </div>
 <div class="fragment">
-<div id="a7b30280" class="cell" data-execution_count="7">
+<div id="e1a99d80" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>Greedy Schedule Cost: €5,240
   Labor: €2250, Penalties: €1700, Unhappiness: €1290</code></pre>
@@ -573,7 +605,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="visualizing-sa-performance" class="slide level2">
 <h2>Visualizing SA Performance</h2>
 <p><span class="highlight">How temperature affects the search behavior:</span></p>
-<div id="f599ca48" class="cell" data-execution_count="8">
+<div id="44f6c1b1" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -627,7 +659,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="temperature-parameter-impact" class="slide level2">
 <h2>Temperature Parameter Impact</h2>
-<div id="aec15d1e" class="cell" data-execution_count="9">
+<div id="462bd49a" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -650,8 +682,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="metaheuristic-2-genetic-algorithms" class="title-slide slide level1 title center">
-<h1><span class="flow">Metaheuristic #2: Genetic Algorithms</span></h1>
+<section id="genetic-algorithms" class="title-slide slide level1 title center">
+<h1><span class="flow">Genetic Algorithms</span></h1>
 
 </section>
 <section id="evolution-as-optimization" class="slide level2">
@@ -716,7 +748,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-1-selection-tournament" class="slide level2">
 <h2>Stage 1: Selection (Tournament)</h2>
 <p><span class="highlight">How to choose which schedules get to “reproduce”:</span></p>
-<div id="588bd616" class="cell" data-execution_count="11">
+<div id="dbd743b3" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -741,7 +773,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-2-crossover-recombination" class="slide level2">
 <h2>Stage 2: Crossover (Recombination)</h2>
 <p><span class="highlight">Combine two parent schedules to create offspring:</span></p>
-<div id="6181ffb7" class="cell" data-execution_count="12">
+<div id="2ada8acf" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -766,7 +798,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-3-mutation" class="slide level2">
 <h2>Stage 3: Mutation</h2>
 <p><span class="highlight">Random changes maintain diversity and explore new solutions:</span></p>
-<div id="be3ea3e5" class="cell" data-execution_count="13">
+<div id="5dc8a49e" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -811,7 +843,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="stage-4-replacement-ii" class="slide level2">
 <h2>Stage 4: Replacement II</h2>
-<div id="89f73c91" class="cell" data-execution_count="14">
+<div id="e5a3666c" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -836,7 +868,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-5.-population-evolution" class="slide level2">
 <h2>Stage 5. Population Evolution</h2>
 <p><span class="highlight">How the population improves over generations:</span></p>
-<div id="e4cf9881" class="cell" data-execution_count="15">
+<div id="38b0122f" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -861,7 +893,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="ga-vs-sa-head-to-head" class="slide level2">
 <h2>GA vs SA: Head-to-Head</h2>
 <p><span class="highlight">Comparing exploration strategies on the restaurant problem:</span></p>
-<div id="1505055c" class="cell" data-execution_count="16">
+<div id="b7097e11" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -921,8 +953,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="metaheuristic-3-tabu-search" class="title-slide slide level1 title center">
-<h1><span class="flow">Metaheuristic #3: Tabu Search</span></h1>
+<section id="tabu-search" class="title-slide slide level1 title center">
+<h1><span class="flow">Tabu Search</span></h1>
 
 </section>
 <section id="core-idea" class="slide level2">
@@ -962,40 +994,43 @@ Dr.&nbsp;Tobias Vlćek
 <section id="concept-1" class="slide level2">
 <h2>Concept</h2>
 <p><span class="highlight">How Tabu Search Works (Pseudocode)</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> tabu_search_concept():</span>
-<span id="cb4-2"><a></a>    tabu_list <span class="op">=</span> []  <span class="co"># Our "never again" list</span></span>
-<span id="cb4-3"><a></a>    current_solution <span class="op">=</span> initial_schedule</span>
-<span id="cb4-4"><a></a>    best_solution <span class="op">=</span> current_solution</span>
-<span id="cb4-5"><a></a>    </span>
-<span id="cb4-6"><a></a>    <span class="cf">while</span> <span class="kw">not</span> done:</span>
-<span id="cb4-7"><a></a>        <span class="co"># Look at all possible moves</span></span>
-<span id="cb4-8"><a></a>        possible_moves <span class="op">=</span> get_all_neighbor_moves(current_solution)</span>
-<span id="cb4-9"><a></a>        </span>
-<span id="cb4-10"><a></a>        <span class="co"># Filter out the "forbidden" moves</span></span>
-<span id="cb4-11"><a></a>        allowed_moves <span class="op">=</span> []</span>
-<span id="cb4-12"><a></a>        <span class="cf">for</span> move <span class="kw">in</span> possible_moves:</span>
-<span id="cb4-13"><a></a>            <span class="cf">if</span> move <span class="kw">not</span> <span class="kw">in</span> tabu_list:  <span class="co"># Not forbidden</span></span>
-<span id="cb4-14"><a></a>                allowed_moves.append(move)</span>
-<span id="cb4-15"><a></a>        </span>
-<span id="cb4-16"><a></a>        <span class="co"># Pick the best allowed move (even if worse!)</span></span>
-<span id="cb4-17"><a></a>        best_move <span class="op">=</span> select_best(allowed_moves)</span>
-<span id="cb4-18"><a></a>        current_solution <span class="op">=</span> <span class="bu">apply</span>(best_move)</span>
-<span id="cb4-19"><a></a>        </span>
-<span id="cb4-20"><a></a>        <span class="co"># Update best if improved</span></span>
-<span id="cb4-21"><a></a>        <span class="cf">if</span> cost(current_solution) <span class="op">&lt;</span> cost(best_solution):</span>
-<span id="cb4-22"><a></a>            best_solution <span class="op">=</span> current_solution</span>
-<span id="cb4-23"><a></a>        </span>
-<span id="cb4-24"><a></a>        <span class="co"># Remember this move (add to tabu list)</span></span>
-<span id="cb4-25"><a></a>        tabu_list.append(best_move)</span>
-<span id="cb4-26"><a></a>        <span class="cf">if</span> <span class="bu">len</span>(tabu_list) <span class="op">&gt;</span> <span class="dv">10</span>:  <span class="co"># Keep list size manageable</span></span>
-<span id="cb4-27"><a></a>            tabu_list.pop(<span class="dv">0</span>)  <span class="co"># Forget oldest</span></span>
-<span id="cb4-28"><a></a>    </span>
-<span id="cb4-29"><a></a>    <span class="cf">return</span> best_solution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> tabu_search_concept():</span>
+<span id="cb5-2"><a aria-label="2"></a>    tabu_list <span class="op">=</span> []  <span class="co"># Our "never again" list</span></span>
+<span id="cb5-3"><a aria-label="3"></a>    current_solution <span class="op">=</span> initial_schedule</span>
+<span id="cb5-4"><a aria-label="4"></a>    best_solution <span class="op">=</span> current_solution</span>
+<span id="cb5-5"><a aria-label="5"></a>    </span>
+<span id="cb5-6"><a aria-label="6"></a>    <span class="cf">while</span> <span class="kw">not</span> done:</span>
+<span id="cb5-7"><a aria-label="7"></a>        <span class="co"># Look at all possible moves</span></span>
+<span id="cb5-8"><a aria-label="8"></a>        possible_moves <span class="op">=</span> get_all_neighbor_moves(current_solution)</span>
+<span id="cb5-9"><a aria-label="9"></a>        </span>
+<span id="cb5-10"><a aria-label="10"></a>        <span class="co"># Filter out the "forbidden" moves</span></span>
+<span id="cb5-11"><a aria-label="11"></a>        allowed_moves <span class="op">=</span> []</span>
+<span id="cb5-12"><a aria-label="12"></a>        <span class="cf">for</span> move <span class="kw">in</span> possible_moves:</span>
+<span id="cb5-13"><a aria-label="13"></a>            <span class="cf">if</span> move <span class="kw">not</span> <span class="kw">in</span> tabu_list:  <span class="co"># Not forbidden</span></span>
+<span id="cb5-14"><a aria-label="14"></a>                allowed_moves.append(move)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="concept-continued-1" class="slide level2">
+<h2>Concept (continued)</h2>
+<p><span class="highlight">How Tabu Search Works (Pseudocode)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>        <span class="co"># Pick the best allowed move (even if worse!)</span></span>
+<span id="cb6-2"><a aria-label="2"></a>        best_move <span class="op">=</span> select_best(allowed_moves)</span>
+<span id="cb6-3"><a aria-label="3"></a>        current_solution <span class="op">=</span> <span class="bu">apply</span>(best_move)</span>
+<span id="cb6-4"><a aria-label="4"></a>        </span>
+<span id="cb6-5"><a aria-label="5"></a>        <span class="co"># Update best if improved</span></span>
+<span id="cb6-6"><a aria-label="6"></a>        <span class="cf">if</span> cost(current_solution) <span class="op">&lt;</span> cost(best_solution):</span>
+<span id="cb6-7"><a aria-label="7"></a>            best_solution <span class="op">=</span> current_solution</span>
+<span id="cb6-8"><a aria-label="8"></a>        </span>
+<span id="cb6-9"><a aria-label="9"></a>        <span class="co"># Remember this move (add to tabu list)</span></span>
+<span id="cb6-10"><a aria-label="10"></a>        tabu_list.append(best_move)</span>
+<span id="cb6-11"><a aria-label="11"></a>        <span class="cf">if</span> <span class="bu">len</span>(tabu_list) <span class="op">&gt;</span> <span class="dv">10</span>:  <span class="co"># Keep list size manageable</span></span>
+<span id="cb6-12"><a aria-label="12"></a>            tabu_list.pop(<span class="dv">0</span>)  <span class="co"># Forget oldest</span></span>
+<span id="cb6-13"><a aria-label="13"></a>    </span>
+<span id="cb6-14"><a aria-label="14"></a>    <span class="cf">return</span> best_solution</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tabu-search-on-restaurant-problem" class="slide level2">
 <h2>Tabu Search on Restaurant Problem</h2>
 <p><span class="highlight">Real implementation with memory-based exploration:</span></p>
-<div id="8d9e1ef3" class="cell" data-execution_count="17">
+<div id="484e93ea" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1018,8 +1053,8 @@ Dr.&nbsp;Tobias Vlćek
 </div>
 </section></section>
 <section>
-<section id="metaheuristic-4-ant-colony-optimization" class="title-slide slide level1 title center">
-<h1><span class="flow">Metaheuristic #4: Ant Colony Optimization</span></h1>
+<section id="ant-colony-aco" class="title-slide slide level1 title center">
+<h1><span class="flow">Ant Colony (ACO)</span></h1>
 
 </section>
 <section id="the-core-idea" class="slide level2">
@@ -1115,7 +1150,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-1-pheromone-construction" class="slide level2">
 <h2>Stage 1: Pheromone Construction</h2>
 <p><span class="highlight">Ants don’t pick randomly, they follow the chemical trails</span></p>
-<div id="0f35c34c" class="cell" data-execution_count="18">
+<div id="d4ba9b9f" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1140,7 +1175,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-2-evaluation-evaporation" class="slide level2">
 <h2>Stage 2: Evaluation &amp; Evaporation</h2>
 <p><span class="highlight">After all ants build schedules:</span></p>
-<div id="0a1d4076" class="cell" data-execution_count="19">
+<div id="08d5c8c5" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1165,7 +1200,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-3-reinforcement" class="slide level2">
 <h2>Stage 3: Reinforcement</h2>
 <p><span class="highlight">Good ants deposit more pheromones:</span></p>
-<div id="36d9378a" class="cell" data-execution_count="20">
+<div id="cdfc8529" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1179,7 +1214,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="stage-4-evolution-over-iterations" class="slide level2">
 <h2>Stage 4: Evolution Over Iterations</h2>
 <p><span class="highlight">Full ACO implementation on restaurant staffing:</span></p>
-<div id="26ede6b4" class="cell" data-execution_count="21">
+<div id="d70ea7ae" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1204,7 +1239,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="aco-vs-other-algorithms" class="slide level2">
 <h2>ACO vs Other Algorithms</h2>
 <p><span class="highlight">How does the ant colony compare?</span></p>
-<div id="2e2a4ed4" class="cell" data-execution_count="22">
+<div id="2493b54a" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1255,7 +1290,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="when-to-use-which-metaheuristic" class="slide level2">
 <h2>When to Use Which Metaheuristic?</h2>
 <p><span class="highlight">A decision guide for algorithm selection:</span></p>
-<div id="83a75d34" class="cell" data-execution_count="23">
+<div id="5e3839c1" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <table class="dataframe table table-striped caption-top" data-border="1">
 <thead>
@@ -1665,9 +1700,9 @@ Dr.&nbsp;Tobias Vlćek
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1200,
+        width: 1280,
 
-        height: 700,
+        height: 720,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
