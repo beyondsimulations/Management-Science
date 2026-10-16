@@ -65,7 +65,7 @@ print(products.to_string(index=False))
 ## The Core Trade-off
 Notice the fundamental conflict:
 
-- **Sakura Cherry Coffee**: Highest profit (€4.5) but slowest to make (280s!)
+- **Dragon Fruit Frappé**: Highest profit (€4.8) but slowest to make (300s!)
 - **Charcoal Detox Shot**: Fastest (60s = 1 minute) but lowest profit (€1.8)
 
 We can't have both maximum profit AND minimum prep time. We must choose a trade-off.
@@ -107,6 +107,7 @@ plt.grid(True, alpha=0.3)            # Add grid
 ::: {.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
+#| fig-alt: "Scatter plot of the 14 products, profit margin against preparation time, each point labeled with its product. The points rise from lower left to upper right: products with higher profit take longer to prepare, so the ideal lower-right corner stays empty. A dashed line marks the 3-minute threshold at 180 seconds."
 # Solution
 plt.figure(figsize=(10, 6))
 
@@ -305,7 +306,7 @@ print(pareto_products[['Product', 'Profit_Margin', 'Prep_Time']].to_string(index
 # Test your Pareto frontier function
 assert 'find_pareto_frontier' in dir(), "Define find_pareto_frontier function"
 assert len(pareto_products) >= 3, "Should find at least 3 Pareto optimal products"
-assert 'Saffron Rose Milk' in pareto_products['Product'].values, "Saffron Rose Milk (fastest) should be on frontier"
+assert 'Saffron Rose Milk' in pareto_products['Product'].values, "Saffron Rose Milk (€4.3 in 270s) should be on frontier"
 print("Perfect! These are the ONLY products worth considering")
 ```
 
@@ -348,8 +349,8 @@ plt.show()
 ## Interpreting the Pareto Frontier
 Each point on the frontier represents a different trade-off:
 
-- **Classic Espresso** (left): Fastest prep, lowest profit → "Speed Strategy"
-- **Energy Smoothie** (right): Highest profit, slowest prep → "Profit Strategy"
+- **Charcoal Detox Shot** (left): Fastest prep, lowest profit → "Speed Strategy"
+- **Dragon Fruit Frappé** (right): Highest profit, slowest prep → "Profit Strategy"
 - **Middle products**: Balanced compromises
 
 **None dominates the others** - your choice depends on your priorities!
@@ -363,10 +364,10 @@ How do we choose ONE product from the Pareto frontier? We use **weights** to exp
 ## Why Normalization is Critical
 Before combining objectives, we MUST normalize them:
 
-- Profit range: 1.8 to 4.5 (range = 2.7)
-- Prep Time range: 60 to 270 (range = 210)
+- Profit range: 1.8 to 4.8 (range = 3.0)
+- Prep Time range: 60 to 300 (range = 240)
 
-Without normalization, prep time dominates because 210 >> 2.7, even with equal weights!
+Without normalization, prep time dominates because 240 >> 3.0, even with equal weights!
 :::
 
 ## Exercise 3.1: Normalize Objectives

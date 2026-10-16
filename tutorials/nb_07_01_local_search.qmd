@@ -300,6 +300,7 @@ The algorithm is simple but effective:
 
 ```{python}
 #| eval: true
+#| fig-alt: "Map of the delivery network on a 10 by 10 km area: the headquarters as a square at (2, 3) and ten franchises, F1 to F10, scattered as circles across the area. No route is drawn yet."
 # Visualize Bean Counter's delivery network
 plt.figure(figsize=(10, 8))
 
@@ -550,6 +551,7 @@ The nearest neighbor route works, but can we improve it? Enter 2-opt!
 
 ```{python}
 #| eval: true
+#| fig-alt: "The nearest neighbor route drawn on the franchise map: a closed tour that leaves the headquarters, visits all ten franchises and returns. The long return leg to the headquarters crosses an earlier leg, the kind of crossing that 2-opt removes."
 plt.figure(figsize=(10, 8))
 
 # Create route coordinates for plotting
@@ -1004,6 +1006,7 @@ As CEO, you need to choose the best approach for Bean Counter's deliveries.
 
 ```{python}
 #| eval: true
+#| fig-alt: "Four route maps: nearest neighbor, nearest neighbor after 2-opt, a random initial route, and the random route after 2-opt, each with its total distance in the title. The random route is a tangle of crossing legs; 2-opt shortens both starting routes, and the nearest neighbor start ends with the shorter tour."
 # Compare all approaches
 plt.figure(figsize=(14, 10))
 
@@ -1160,6 +1163,7 @@ print(f"Annual savings: €{best_savings * 250:.2f} (250 delivery days)")
 
 ```{python}
 #| eval: true
+#| fig-alt: "Left: daily delivery cost for the five approaches; the unimproved random route is by far the most expensive, while nearest neighbor with 2-opt and multi-start are the cheapest at about the same cost. Right: cumulative savings from nearest neighbor with 2-opt over plain nearest neighbor grow in a straight line across twelve months."
 # Create final recommendation visualization
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
 

@@ -151,6 +151,7 @@ print("Delivery costs depend on your network design!")
 Let's see the geographic distribution of cafés and potential centers across Europe:
 
 ```{python}
+#| fig-alt: "Map of Europe by longitude and latitude with 1,000 cafés as small dots and 200 potential distribution centers as larger squares. The cafés form dense clusters around the major cities; the candidate centers are scattered more loosely around the same cities."
 # Create visualization of Bean Counter's European network
 plt.figure(figsize=(14, 10))
 

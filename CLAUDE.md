@@ -53,12 +53,11 @@ uv run python main.py
 
 ### Post-Render Processing
 
-The build automatically runs four post-render scripts (configured in `_quarto.yml`):
+The build automatically runs three post-render scripts (configured in `_quarto.yml`):
 
 1. `helpers/convert_pypercent.py` - Converts Jupyter notebooks in `_site/tutorials/` to `.py` files in percent format
-2. `helpers/convert_qmd_to_md.py` - Moves all `.md` files from `_site/` to `_repo-md/` maintaining directory structure
-3. `../Lecture-Foundations/scripts/split_refs_post.py` - Spreads a deck's bibliography over slides of four entries
-4. `../Lecture-Foundations/scripts/create_pdf.py` - Prints each rendered deck to `lec_XX_presentation.pdf` next to it, linked per lecture via `format-links` ("Slides (PDF)")
+2. `../Lecture-Foundations/scripts/split_refs_post.py` - Spreads a deck's bibliography over slides of four entries
+3. `../Lecture-Foundations/scripts/create_pdf.py` - Prints each rendered deck to `lec_XX_presentation.pdf` next to it, linked per lecture via `format-links` ("Slides (PDF)")
 
 ## Project Structure
 
@@ -70,8 +69,7 @@ The build automatically runs four post-render scripts (configured in `_quarto.ym
 ├── lectures/         # Lecture slides in Quarto reveal.js format
 ├── tutorials/        # Interactive Python notebooks (prefixed with nb_)
 ├── assignments/      # Student assignments
-├── helpers/          # Post-render conversion scripts
-└── _repo-md/         # Generated markdown files from rendered site
+└── helpers/          # Post-render conversion scripts
 ```
 
 ### Key Files
@@ -114,9 +112,8 @@ Lectures use Quarto's reveal.js format for slides:
 
 After rendering, the build system:
 1. **Converts notebooks to Python scripts** - Tutorial notebooks are converted to `.py` files in percent format for easy code distribution
-2. **Archives markdown versions** - All `.md` files are moved to `_repo-md/` to provide plain markdown versions of content
 
-This allows students to access content in multiple formats (HTML, PDF via Typst, Python scripts, Markdown).
+This allows students to access content in multiple formats (HTML, PDF via Typst, Python scripts).
 
 ## Styling and Branding
 

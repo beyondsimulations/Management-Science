@@ -320,6 +320,7 @@ def get_sku_sales_history(sku_id, sales_df):
 
 ```{python}
 #| eval: true
+#| fig-alt: "Weekly sales of all 30 SKUs overlaid as thin lines from 2023 to late 2025. The lines move together in a yearly cycle that peaks toward the end of each year and dips in summer, with a faster ripple on top, while individual SKUs drift up or down over the three years."
 def plot_sku_sales_trend(sku_id, sales_df, skus_df):
     """Plot sales trend for a specific SKU."""
     sku_history = get_sku_sales_history(sku_id, sales_df)

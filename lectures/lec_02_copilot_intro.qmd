@@ -27,7 +27,7 @@ format-links:
 
 
 
-## {background-image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400"}
+## {background-image="https://images.beyondsimulations.com/ms/ms_photo-02-photo.jpg" background-color="#000000"}
 
 ::: {.r-fit-text .white .bold}
 How do
@@ -39,7 +39,7 @@ Models work?
 :::
 
 ::: footer
-[Photo by <a href="https://unsplash.com/@tvick">Taylor Vick</a> on Unsplash]{.white}
+[Photo by <a href="https://unsplash.com/@tvick">Taylor Vick</a> on Unsplash]{.invert-font}
 :::
 
 ## Large Language Models (LLMs)

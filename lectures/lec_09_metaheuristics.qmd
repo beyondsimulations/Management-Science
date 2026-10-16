@@ -14,7 +14,7 @@ format-links:
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: La Étoile]{.invert-font}** {background-image="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
+## **[Client Briefing: La Étoile]{.invert-font}** {background-image="https://images.beyondsimulations.com/ms/ms_photo-09-client-briefing-la-etoile.jpg" background-size="cover"}
 
 . . .
 
@@ -64,6 +64,7 @@ Potentially up to **large difference** between good and bad scheduling!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Three bar charts of the staffing problem. Shifts last 4 to 6 hours with penalties from €0 (Friday late) to €1,200 (Saturday dinner); 8 experienced servers are needed but only 6 of the 18 servers are experienced; typical costs are €3,500 labor, €1,600 experience penalties and €800 preference penalties."
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -194,6 +195,7 @@ This metaphor will guide us through all metaheuristics today!
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "A bumpy cost curve over the solution space with four marked local minima and one much deeper global minimum. A search that only moves downhill can end in any of the shallow dips and never reach the global minimum."
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -317,6 +319,7 @@ Sum of local bests ≠ Global best
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Left: greedy assigns two experienced servers to the first shift and one to each of the next four, leaving Sunday dinner with three juniors and no experienced server. Right: the resulting cost, €1,140 labor plus a €500 penalty, €1,640 in total."
 
 import sys
 sys.path.append('../helpers')
@@ -394,6 +397,7 @@ Greedy allocates resources early, creating problems later!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Left: a wavy cost curve; local search slides from the greedy start into the nearest local optimum and cannot cross the hill that separates it from the lower global optimum. Right: the current solution at €1,520 surrounded by eight neighbors that all cost more."
 
 import sys
 sys.path.append('../helpers')
@@ -556,6 +560,7 @@ The willingness to temporarily accept worse solutions is what enables finding th
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Acceptance probability exp(-Δcost/T) falls as the cost increase grows, and falls faster the colder it is. For a €150 increase the probability is 74% at T=500, 22% at T=100 and practically 0% at T=10."
 
 import sys
 sys.path.append('../helpers')
@@ -774,6 +779,7 @@ Let's see how Simulated Annealing can improve the solution!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Top: over 500 iterations the current SA cost jumps up and down early on and then settles, while the best cost found steps down well below the greedy start. Bottom: the temperature decays from 1000 towards zero; shading marks the phases explore, transition and exploit."
 
 import sys
 sys.path.append('../helpers')
@@ -934,6 +940,7 @@ Quick cooling is tempting for speed, but defeats the purpose of SA!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Best cost found over 500 iterations for three SA settings, all starting from the greedy baseline of €5,240. A too cold start and too fast cooling drop quickly and then stall; the balanced setting improves more slowly but keeps improving late in the run and ends slightly lowest."
 
 # Compare different temperature settings
 np.random.seed(42)
@@ -1133,6 +1140,7 @@ Let's see each stage in detail with our restaurant problem!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Left: a population of 20 schedules sorted by cost. Right: a tournament among three of them, schedules 5, 12 and 17; the cheapest of the three, schedule 5, wins and is selected as a parent."
 
 import sys
 sys.path.append('../helpers')
@@ -1202,6 +1210,7 @@ Each tournament selects one parent, then we pair them up sequentially for crosso
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Two parent schedules, each a row of six shift blocks, are cut after the third shift. The child takes Friday dinner, Friday late and Saturday lunch from parent 1 and Saturday dinner, Sunday lunch and Sunday dinner from parent 2."
 
 fig, ax = plt.subplots(1, 1)
 ax.set_xlim(0, 14)
@@ -1285,6 +1294,7 @@ Crossover randomly combines good building blocks from both parents!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "A schedule shown as six shift blocks before and after mutation: the assignments of two shifts, Friday late and Sunday lunch, are swapped, everything else stays the same. A note gives the mutation rate as 20%, one in five offspring."
 
 fig, ax = plt.subplots(1, 1)
 ax.set_xlim(0, 14)
@@ -1386,6 +1396,7 @@ Our approach: **Generational with Elitism**, we create 20 offspring via repeated
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Replacement with elitism in a population of six: the two cheapest schedules of the current generation (€3,800 and €3,900) are carried over unchanged and joined by the four best of the six offspring, led by a new best of €3,750."
 
 fig, ax = plt.subplots(1, 1)
 ax.set_xlim(0, 14)
@@ -1488,6 +1499,7 @@ Elitism ensures we never lose our best solutions while exploring new ones!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "GA cost over 500 generations: the best schedule drops well below the greedy start of €5,240 within the first few dozen generations and then stays flat; the population average falls with it and keeps fluctuating just above the best."
 
 # Use same plot style as head-to-head comparison
 fig, ax = plt.subplots(1, 1)
@@ -1538,6 +1550,7 @@ Notice how population average also improves (not just the best)!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Best cost per iteration for GA and SA on the same problem, both ending far below the greedy start of €5,240: GA drops within the first generations and then plateaus, SA improves in steps across the whole run and ends at a similar cost."
 
 # GA already ran earlier - just create comparison visualization
 fig, ax = plt.subplots(1, 1)
@@ -1692,6 +1705,7 @@ def tabu_search_concept():
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Tabu search over 150 iterations: the best cost falls steeply from the greedy start of €5,240 in the first iterations and then stays flat, while the current solution keeps moving through slightly worse schedules instead of settling."
 
 def get_all_neighbors(schedule, sample_size=20):
     """Generate multiple neighbor solutions"""
@@ -1879,6 +1893,7 @@ Start with ρ=0.3 and n_ants=20, then tune based on problem size.
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Heatmap of pheromone strength for eight servers (E1 to E4, J1 to J4) across the six shifts; stronger cells are more attractive, and experienced servers tend to score higher on the dinner shifts. The Saturday dinner column is outlined: an ant draws its servers for that shift at random, favoring the stronger cells."
 
 import sys
 sys.path.append('../helpers')
@@ -1954,6 +1969,7 @@ To build the initial pheromone matrix, each cell is initialized with a small pos
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Left: the costs of the schedules built by 20 ants, sorted from cheapest to most expensive. Right: pheromone levels of five server-shift pairings before and after evaporation with ρ = 0.3; every level shrinks by 30%, for example from 3.0 to 2.1."
 
 fig, (ax1, ax2) = plt.subplots(1, 2)
 
@@ -2017,15 +2033,18 @@ Evaporation prevents premature convergence as old patterns can fade away!
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Pheromone deposited on the pairing of E1 with Saturday dinner by three ants: the cheaper the schedule, the larger the deposit. A €3,800 schedule adds 0.26, a €4,100 schedule 0.24 and a €4,400 schedule 0.23."
 
 fig, ax = plt.subplots()
 
 # Three ants with different quality
 ant_data = [
-    {'id': 'Ant #7', 'cost': 3800, 'deposit': 0.42, 'color': BRAND_COLORS["threeDark"]},
-    {'id': 'Ant #12', 'cost': 4100, 'deposit': 0.36, 'color': BRAND_COLORS["oneDark"]},
-    {'id': 'Ant #18', 'cost': 4400, 'deposit': 0.29, 'color': BRAND_COLORS["darker"]},
+    {'id': 'Ant #7', 'cost': 3800, 'color': BRAND_COLORS["threeDark"]},
+    {'id': 'Ant #12', 'cost': 4100, 'color': BRAND_COLORS["oneDark"]},
+    {'id': 'Ant #18', 'cost': 4400, 'color': BRAND_COLORS["darker"]},
 ]
+for ant in ant_data:
+    ant['deposit'] = 1000 / ant['cost']  # Δτ = Q / cost with Q = 1000
 
 # Show pheromone deposits for one pairing
 pairing_name = "E1 → Sat Dinner"
@@ -2037,7 +2056,7 @@ for i, (ant, y_pos) in enumerate(zip(ant_data, y_positions)):
            edgecolor='black', linewidth=2)
     
     # Ant emoji and label
-    ax.text(0.5, y_pos, f"{ant['id']}\n€{ant['cost']}", fontsize=10, 
+    ax.text(0.31, y_pos, f"{ant['id']}\n€{ant['cost']}", fontsize=10, 
            ha='right', va='center', fontweight='bold')
     
     # Deposit value
@@ -2045,7 +2064,7 @@ for i, (ant, y_pos) in enumerate(zip(ant_data, y_positions)):
            fontsize=11, va='center', fontweight='bold', color=ant['color'])
 
 # Formula annotation
-ax.text(0.21, -1.5, 'Deposit Formula: Δτ = Q / cost\n(Q=1000, so better solutions deposit more)', 
+ax.text(0.13, -1.5, 'Deposit Formula: Δτ = Q / cost\n(Q=1000, so better solutions deposit more)', 
        fontsize=11, ha='center', style='italic')
 
 ax.set_xlabel('Pheromone Deposited', fontsize=13, fontweight='bold')
@@ -2067,6 +2086,7 @@ plt.show()
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "ACO over 500 iterations with 20 ants: the best ant's cost is found within the first iterations and then never improves, while the colony average falls during the exploration phase and afterwards fluctuates well above the best. Shading marks exploration, intensification and convergence."
 
 def ant_colony_optimization(n_ants=20, n_iterations=100, evaporation=0.5, alpha=1.0, beta=2.0):
     """
@@ -2214,6 +2234,7 @@ The colony learns collectively step by step.
 ```{python}
 #| echo: false
 #| eval: true
+#| fig-alt: "Best cost found over 500 iterations by SA, GA and ACO, all below the greedy cost of €5,240. GA and SA end at similar low costs, GA much sooner; ACO stalls after a few iterations at a clearly higher cost."
 
 fig, ax = plt.subplots(1, 1)
 

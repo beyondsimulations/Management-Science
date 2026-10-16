@@ -63,7 +63,7 @@ format-links:
 
 # Meet Your Clients {background-color="#002b36"}
 
-## **[Client Briefing: QuickBite]{.invert-font}** {background-image="https://images.unsplash.com/photo-1526367790999-0150786686a2?w=2400" background-size="cover"}
+## **[Client Briefing: QuickBite]{.invert-font}** {background-image="https://images.beyondsimulations.com/ms/ms_photo-10-client-briefing-quickbite.jpg" background-size="cover"}
 
 . . .
 
@@ -111,7 +111,7 @@ format-links:
 Any questions?
 :::
 
-## **[Client Briefing: NurseNext Hospital]{.invert-font}** {background-image="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=2400" background-size="cover"}
+## **[Client Briefing: NurseNext Hospital]{.invert-font}** {background-image="https://images.beyondsimulations.com/ms/ms_photo-10-client-briefing-nursenext-hospital.jpg" background-size="cover"}
 
 . . .
 
@@ -160,7 +160,7 @@ Any questions?
 
 ---
 
-## **[Client Briefing: TechMart]{.invert-font}** {background-image="https://images.unsplash.com/photo-1553413077-190dd305871c?w=2400" background-size="cover"}
+## **[Client Briefing: TechMart]{.invert-font}** {background-image="https://images.beyondsimulations.com/ms/ms_photo-10-client-briefing-techmart.jpg" background-size="cover"}
 
 . . .
 

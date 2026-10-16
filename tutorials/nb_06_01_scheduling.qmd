@@ -3,7 +3,7 @@ title: "Notebook 6.1 - Scheduling Mastery"
 subtitle: "Management Science - From Corporate Events to Rush Hours"
 code-links:
   - text: Python
-    href: nb_06_01_scheduling_mastery.py
+    href: nb_06_01_scheduling.py
     icon: hand-thumbs-up
 ---
 
@@ -436,6 +436,7 @@ print(f" All methods have same makespan: {comparison['makespan'].iloc[0]:.0f} mi
 
 ```{python}
 #| eval: true
+#| fig-alt: "Four bar charts compare FIFO, SPT and EDD on the corporate event orders, with the best rule outlined in each. Makespan is the same for all three; SPT has the lowest average flow time and here also the fewest late orders; EDD has the lowest total tardiness."
 # Create visual comparison
 fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
@@ -816,6 +817,7 @@ print(f" • EDD late orders: {metrics_dynamic_edd['late_orders']:.0f}")
 
 ```{python}
 #| eval: true
+#| fig-alt: "Four bar charts compare dynamic SPT and dynamic EDD on the Friday rush orders, with the better rule outlined in each. Makespan is identical and average flow time almost equal; EDD has clearly lower total tardiness, while SPT has slightly fewer late orders."
 # Calculate metrics for all Friday approaches
 friday_comparison = pd.DataFrame({
     'Dynamic_SPT': calculate_metrics(df_friday_dynamic_spt),

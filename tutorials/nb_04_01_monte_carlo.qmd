@@ -382,6 +382,7 @@ prob_target_range =
 :::{.content-visible when-profile="solutions"}
 ```{python}
 #| eval: true
+#| fig-alt: "Histogram of daily profit over 10,000 simulated days: roughly bell-shaped and mostly positive, with a dashed line at the mean and a solid line at break-even (zero). The bars left of zero are the days that end in a loss."
 # SOLUTION
 plt.figure(figsize=(10, 6))
 
@@ -643,6 +644,7 @@ Now let's visualize and make a final recommendation!
 
 ```{python}
 #| eval: true
+#| fig-alt: "Six two-location portfolios plotted by risk (standard deviation) against expected daily profit and labeled by pair. The points fall from upper left to lower right: the three pairs without the Airport offer more profit at less risk than the three pairs that include it."
 # Create risk-return scatter plot for Bean Counter expansion
 plt.figure(figsize=(10, 6))
 

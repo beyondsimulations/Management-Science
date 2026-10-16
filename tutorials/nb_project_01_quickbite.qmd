@@ -153,6 +153,7 @@ print(f"Total order value: €{deliveries_df['order_value'].sum():.2f}")
 
 ```{python}
 #| eval: true
+#| fig-alt: "Map of 120 delivery locations across Hamburg by longitude and latitude, with the depot at the main station marked as a square. The deliveries are grouped in six clusters, one around the depot and five in surrounding districts. No routes are drawn yet."
 def visualize_deliveries(deliveries_df, depot_location, routes=None):
     """
     Visualize all delivery locations and optional routes.

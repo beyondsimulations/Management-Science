@@ -2,7 +2,6 @@ project:
   type: website
   post-render:
     - helpers/convert_pypercent.py
-    - helpers/convert_qmd_to_md.py
     - ../Lecture-Foundations/scripts/split_refs_post.py
     - ../Lecture-Foundations/scripts/create_pdf.py
   render:
@@ -146,20 +145,26 @@ website:
         href: general/literature.qmd
 
   page-footer:
-    center: "Management Science, Tobias Vlćek </br>CC BY-NC-SA 4.0"
+    center: "Management Science, Dr. Tobias Vlćek </br>CC BY-NC-SA 4.0"
     left:
       - icon: github
         href: https://github.com/beyondsimulations/Management-Science
+        aria-label: GitHub repository
       - icon: linkedin
         href: https://linkedin.com/in/tobiasvlcek
+        aria-label: LinkedIn
       - icon: envelope
         href: mailto:vlcek@beyondsimulations.com
+        aria-label: Email
       - icon: skip-backward
         href: https://tobiasvlcek.com/lectures/
+        aria-label: All lectures
       - icon: shield-check
         href: general/privacy.qmd
-      - icon: file-text
+        aria-label: Privacy policy
+      - icon: info-circle
         href: general/imprint.qmd
+        aria-label: Imprint
 
 format:
   html:
@@ -195,9 +200,13 @@ format:
           });
         </script>
 
-  hugo-md: default
 
   typst:
+    template-partials:
+      - helpers/typst-show.typ
+    logo:
+      path: images/course-logo.svg
+      alt: "Management Science"
     papersize: a4
     include-before-body:
       - text: |
@@ -218,3 +227,7 @@ execute:
   freeze: auto
 
 brand: _brand.yml
+
+filters:
+  - helpers/typst-classes.lua
+  - helpers/page-pauses.lua

@@ -152,6 +152,7 @@ print(historical_data.tail(6))
 
 ```{python}
 #| eval: true
+#| fig-alt: "Three stacked line charts of weekly sales over three years, one per product. Techpod Pro grows steadily, Fitband Ultra is noisy with peaks around the turn of each year, and Cozythrow Deluxe swings strongly with the seasons, highest in winter and lowest in late summer. A dashed line marks the start of December 2023."
 # Quick statistics
 print("Product Statistics (weekly sales):")
 print("-" * 40)

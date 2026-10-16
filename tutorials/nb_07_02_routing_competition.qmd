@@ -3,7 +3,7 @@ title: "Competition 04 - The Bakery Delivery Route"
 subtitle: "Management Science - Artisan Bakery"
 code-links:
   - text: Python
-    href: nb_08_02_routing.py
+    href: nb_07_02_routing_competition.py
     icon: hand-thumbs-up
 ---
 
@@ -177,6 +177,7 @@ print("\nDistance matrix created. Ready to optimize!")
 
 ```{python}
 #| eval: true
+#| fig-alt: "Map of the bakery delivery network: the bakery as a square at (3, 1) and 16 numbered cafés scattered over a 10 by 10 km area. The three early cafés, numbers 1, 3 and 8, are highlighted in a different color from the 13 regular ones. No route is drawn yet."
 def visualize_route(route, cafe_info, bakery_loc, title="Delivery Route"):
     """Visualize the delivery route on a map."""
     plt.figure()
@@ -221,11 +222,11 @@ def visualize_route(route, cafe_info, bakery_loc, title="Delivery Route"):
     # Legend
     from matplotlib.patches import Patch
     legend_elements = [
-        Patch(facecolor='#D73502', label='Early Café (6:30-6:45 AM)'),
-        Patch(facecolor='#537E8F', label='Regular Café (7:00+ AM)'),
+        Patch(facecolor='#D73502', label='Early Café (6:30 AM)'),
+        Patch(facecolor='#537E8F', label='Regular Café (8:00 AM)'),
         Patch(facecolor='#F4A582', label='Bakery')
     ]
-    plt.legend(handles=legend_elements, loc='upper right')
+    plt.legend(handles=legend_elements, loc='upper center', bbox_to_anchor=(0.5, -0.18), ncol=3)
 
     plt.tight_layout()
     plt.show()

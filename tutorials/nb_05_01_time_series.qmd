@@ -209,6 +209,7 @@ Daily sales are noisy. Moving averages help us see the underlying patterns by av
 
 ```{python}
 #| eval: true
+#| fig-alt: "Daily sales for the first 60 days as a thin jagged line, with the 7-day moving average drawn over it as a thick line. The moving average starts only on day 7, is far smoother, and makes visible the gradual rise that the daily noise hides."
 # Example: 7-day moving average
 df['MA7'] = df['sales'].rolling(window=7).mean()
 
@@ -520,13 +521,14 @@ df.set_index('date').resample('W')['sales'].mean()
 **Breaking it down:**
 
 1. `set_index('date')` - Makes the date column the index (required for resample)
-2. `resample('W')` - Groups data by week ('W' = week, 'M' = month, 'D' = day)
+2. `resample('W')` - Groups data by week ('W' = week, 'ME' = month end, 'D' = day)
 3. `['sales']` - Selects the sales column
 4. `.mean()` - Calculates the average for each week
 
 **Example:**
 ```{python}
 #| eval: true
+#| fig-alt: "Two stacked line charts of three years of sales. Top: daily data, a dense noisy band. Bottom: weekly averages, a much smoother line in which the yearly cycle with summer peaks and the upward trend are easy to see."
 # Convert daily Bean Counter sales to weekly averages
 weekly_sales = df.set_index('date').resample('W')['sales'].mean()
 print(f"Daily data: {len(df)} observations")
@@ -692,7 +694,7 @@ Let's demonstrate with monthly data:
 ```{python}
 #| eval: true
 # Create data with trend AND seasonality
-months = pd.date_range('2022-01-01', periods=24, freq='M')
+months = pd.date_range('2022-01-01', periods=24, freq='ME')
 trend_comp = np.linspace(100, 150, 24)
 seasonal_comp = 30 * np.sin(2 * np.pi * np.arange(24) / 12)
 monthly_sales = trend_comp + seasonal_comp + np.random.normal(0, 5, 24)

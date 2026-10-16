@@ -14,7 +14,7 @@ format-links:
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: Custom Cycles]{.invert-font}** {background-image="https://images.unsplash.com/photo-1761634731562-c7a152d89849?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
+## **[Client Briefing: Custom Cycles]{.invert-font}** {background-image="https://images.beyondsimulations.com/ms/ms_photo-06-client-briefing-custom-cycles.jpg" background-size="cover"}
 
 . . .
 
@@ -30,7 +30,7 @@ format-links:
 - **Order Sequencing:** Which bike to build first?
 - **Workstation Management:** Assembly must finish before painting
 - **Deadline Pressure:** Rush orders have steep penalties (€150 each)
-- **Cost Control:** Overtime at €100/hour after Saturday 8 PM
+- **Cost Control:** Overtime at €100/hour after Friday 19:00
 :::
 
 . . .
@@ -194,6 +194,7 @@ This is the **greedy choice problem**: Which local decision leads to the best gl
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Operation counts on a log scale for 1 to 20 jobs: the n! curve of exhaustive search climbs steeply to nearly 500 million at 12 jobs, where it stops, while greedy n log n and linear n stay almost flat at the bottom. At 16 jobs a single point marks about 20 trillion operations for exhaustive search, while greedy needs about 64."
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -223,9 +224,10 @@ ax.set_title('Algorithm Complexity Comparison', fontsize=14, fontweight='bold')
 ax.legend(fontsize=11, loc='upper left')
 ax.grid(True, alpha=0.3)
 ax.set_xlim(1, 20)
-ax.set_ylim(1, 1e10)
+ax.set_ylim(1, 1e14)
 
 # Add annotations
+ax.semilogy(16, math.factorial(16), 'o', color=BRAND_COLORS["threeDark"], markersize=6)
 ax.annotate('16 jobs:\n20 trillion ops!', xy=(16, 1e13), xytext=(13, 1e9),
             fontsize=10, color=BRAND_COLORS["threeDark"], fontweight='bold',
             arrowprops=dict(arrowstyle='->', color=BRAND_COLORS["threeDark"], lw=2))
@@ -278,6 +280,7 @@ Like scheduling job interviews when all candidates applied at different times: Y
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Gantt chart of four hospital check-ins in arrival order: Patient A takes 5 minutes, B 3, C 4 and D 6, each starting when the previous one ends, so all are done after 18 minutes. The order ignores how long each check-in takes."
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -340,6 +343,7 @@ Like answering emails: Respond to quick 1-minute replies first, then tackle the 
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Gantt chart of four coffee orders sorted by preparation time: the two 1-minute orders (black coffee and espresso) come first, then the 3-minute cappuccino, then the 5-minute frappuccino, done after 10 minutes. Short orders never wait behind long ones."
 fig, ax = plt.subplots(1, 1)
 
 # Coffee shop scenario - SPT minimizes average wait time
@@ -399,6 +403,7 @@ Like grading assignments: Grade the papers due back tomorrow before the ones due
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Gantt chart of four deliveries in due-date order. Pkg A finishes at minute 30 (due 40) and Pkg B at 50 (due 50), both on time; Pkg C finishes at 75 (due 60) and Pkg D at 90 (due 70) and are marked late. EDD keeps the worst delay small but cannot save every deadline."
 fig, ax = plt.subplots(1, 1)
 
 # Delivery scenario - EDD minimizes late deliveries
@@ -540,6 +545,7 @@ for pizza in edd_order:
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Three Gantt charts of the same four bike orders with their deadlines. FIFO: no late order, average completion 169 minutes. SPT: lowest average completion at 124 minutes, but B12 finishes 60 minutes late and costs a €150 penalty. EDD: no late order, average 176 minutes. Each rule wins on a different measure."
 fig, axes = plt.subplots(3, 1)
 
 # Bike orders in arrival order (FIFO)
@@ -879,6 +885,7 @@ This is [Smith's Rule]{.highlight} in action: Sort by (value / time) to maximize
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Two Gantt rows for the order X, Y, Z. Assembly runs without gaps from 0 to 65 minutes; painting sits idle for the first 30 minutes while X is assembled, then paints X, Y and Z back to back and finishes at 95 minutes."
 fig, axes = plt.subplots(2, 1)
 
 # FIFO schedule: X, Y, Z
@@ -1035,6 +1042,7 @@ Easy, right?
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Two Gantt rows for the order Z, Y, X. Assembly runs without gaps from 0 to 65 minutes; painting is idle only for the first 15 minutes and for 5 more minutes later on, and finishes at 85 minutes, 10 minutes earlier than with the order X, Y, Z."
 fig, axes = plt.subplots(2, 1)
 
 # Johnson's schedule: Z, Y, X
@@ -1060,7 +1068,7 @@ ax.grid(axis='x', alpha=0.3)
 
 # Painting station
 ax = axes[1]
-painting_starts_j = [15, 30, 65]  # Optimized waiting
+painting_starts_j = [15, 35, 65]  # Optimized waiting
 for i, (bike, start, duration) in enumerate(zip(bikes_j, painting_starts_j, painting_j)):
     ax.barh(0, duration, left=start, height=0.6,
             color=BRAND_COLORS["twoDark"], alpha=0.7, edgecolor='black', linewidth=1.5)
@@ -1071,8 +1079,8 @@ for i, (bike, start, duration) in enumerate(zip(bikes_j, painting_starts_j, pain
 ax.barh(0, 15, left=0, height=0.6,
         color='red', alpha=0.3, edgecolor='black', linewidth=1, linestyle='--')
 ax.text(7.5, 0, 'IDLE', ha='center', va='center', fontsize=8, style='italic')
-# Small gap between Y and X
-ax.barh(0, 5, left=60, height=0.6,
+# Small gap between Z and Y
+ax.barh(0, 5, left=30, height=0.6,
         color='red', alpha=0.3, edgecolor='black', linewidth=1, linestyle='--')
 
 ax.set_ylim(-0.5, 0.5)

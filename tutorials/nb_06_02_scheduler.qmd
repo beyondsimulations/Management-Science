@@ -15,7 +15,7 @@ code-links:
 
 **Your Role:** You've been hired as the weekend operations manager to handle a critical scheduling crisis.
 
-## The Friday Afternoon Crisis
+## The Friday Morning Crisis
 
 **It's Friday at 06:00 in the morning.** The production manager just quit unexpectedly, leaving you with a major problem:
 
@@ -95,6 +95,7 @@ print(f"  Total if ALL orders late: €{df_bikes['penalty'].sum():,}")
 
 ```{python}
 #| eval: true
+#| fig-alt: "Four panels on the 16 bike orders. Assembly takes longer than painting for every order. Rush orders are due earliest, between minute 240 and 360, well before the overtime threshold at minute 780. Half the orders are Standard, 31% Rush and 19% Custom. Rush orders carry the largest penalty exposure, €750, against €400 for Standard and €300 for Custom."
 # Visualize order characteristics
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 
@@ -319,7 +320,7 @@ Prepare a one-slide presentation (PDF) containing:
 ## Common Pitfalls to Avoid
 
 - **Forgetting the two-stage constraint:** Painting MUST wait for assembly to finish
-- **Overtime calculation:** Only count minutes AFTER 1800, not total time
+- **Overtime calculation:** Only count minutes AFTER 780, not total time
 - **Penalty logic:** Only charge penalties if completion > due time
 - **Ignoring order types:** Rush orders have 3x the penalty of standard orders!
 
@@ -328,7 +329,7 @@ Prepare a one-slide presentation (PDF) containing:
 - [ ] All bikes scheduled through both stations
 - [ ] Painting never starts before assembly ends
 - [ ] No negative times
-- [ ] Overtime only charged after minute 1800
+- [ ] Overtime only charged after minute 780
 - [ ] Penalties only for late orders (completion > due)
 - [ ] Total cost = overtime + penalties
 

@@ -3,7 +3,7 @@ title: "Competition 01 - TechVenture Investment Challenge"
 subtitle: "Management Science"
 code-links:
   - text: Python
-    href: nb_01_03_conditionals_while.py
+    href: nb_04_02_techventure.py
     icon: hand-thumbs-up
 ---
 

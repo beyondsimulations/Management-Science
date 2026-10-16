@@ -14,7 +14,7 @@ format-links:
 
 # [Introduction]{.flow} {.title}
 
-## **[Client Briefing: MegaMart]{.invert-font}** {background-image="https://images.unsplash.com/photo-1733506312514-267f8134208a?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=2400" background-size="cover"}
+## **[Client Briefing: MegaMart]{.invert-font}** {background-image="https://images.beyondsimulations.com/ms/ms_photo-05-client-briefing-megamart.jpg" background-size="cover"}
 
 . . .
 
@@ -46,6 +46,7 @@ Look at this daily sales data. [What patterns do you see?]{.highlight}
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Daily sales of one product over a year: a noisy line that climbs from about 100 to about 150 units while swinging up and down in a regular weekly rhythm, so a trend and a seasonal pattern are both hidden in the data."
 import numpy as np
 import pandas as pd
 import sys
@@ -129,6 +130,7 @@ $$Y_t = T_t \times S_t \times R_t$$
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Four stacked panels over three months: the original sales series, then its three parts, a steadily rising trend line, a regular weekly wave and irregular noise around zero. Adding the three parts gives the original series."
 setup_clean_style()
 fig, axes = plt.subplots(4, 1)
 
@@ -176,6 +178,7 @@ plt.show()
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "First 60 days of daily sales as a faint jagged line with a 7-day moving average on top: the average removes the weekly swings and the noise and leaves a smooth, slowly rising line."
 setup_clean_style()
 fig, ax = plt.subplots()
 
@@ -258,6 +261,7 @@ Think of $\alpha$ like: How much do you trust the latest data point?
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Two panels of 20 weeks. Stable sales: the simple exponential smoothing line runs through the middle of the fluctuating data. Growing sales: the smoothed line stays below the rising data and the true trend line and never catches up."
 from statsmodels.tsa.holtwinters import SimpleExpSmoothing
 
 setup_clean_style()
@@ -422,6 +426,7 @@ for h in range(1, 4):
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Six historical sales points rising from 100 to 130, with the smoothed level line just below them ending at a final level of 128.4. Right of a dividing line, three forecast points continue upward by about 5.5 units per period, from about 134 to 145."
 setup_clean_style()
 fig, ax = plt.subplots()
 
@@ -532,6 +537,7 @@ You can implement Holt's method using Python's `statsmodels` library!
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Three years of monthly sales swinging in a yearly wave above and below a dashed trend line that rises from 100 to 200: the series has a trend and a seasonal pattern at the same time."
 setup_clean_style()
 fig, ax = plt.subplots()
 
@@ -570,6 +576,7 @@ plt.show()
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Three panels for the Holt-Winters components. Level: a rising line through the scattered monthly data. Trend: equal bars of about 2.8 units of growth per month. Seasonality: one yearly cycle that peaks at +40 in April and bottoms out at -40 in October."
 setup_clean_style()
 fig, axes = plt.subplots(1, 3)
 
@@ -601,7 +608,7 @@ month_indices = np.arange(12)
 seasonal_cycle = seasonality[:12]  # First year's seasonal pattern
 axes[2].plot(month_indices, seasonal_cycle, 'o-', linewidth=2.5, markersize=8,
             color=BRAND_COLORS["threeDark"])
-axes[2].set_title('Seasonality"', fontweight='bold', fontsize=10)
+axes[2].set_title('Seasonality', fontweight='bold', fontsize=10)
 axes[2].set_xlabel('Month of Year')
 axes[2].set_ylabel('Seasonal Effect')
 axes[2].set_xticks(range(12))
@@ -702,6 +709,7 @@ Q4 is typically 35% higher than Q1 in retail! Holt-Winters captures this automat
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Two years of monthly sales with a rising trend and a yearly wave; the dashed fitted values follow the data closely. In the shaded forecast period the six forecast points repeat the seasonal rise and fall at a higher level than the year before."
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 
 # Create monthly data with trend and seasonality
@@ -819,6 +827,7 @@ print(f"\nBetter method: {'A' if mae_a < mae_b else 'B'}")
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Four boxes match data characteristics to methods: variance only leads to Simple ES (flat data, no trend, no season), trend present to Holt's Method, seasonality present to Holt-Winters (needs at least a year of data), and simplicity needed to Moving Average (very stable data, short-term only)."
 setup_clean_style()
 fig, ax = plt.subplots()
 
@@ -1001,6 +1010,7 @@ More complex ≠ Better! Simple methods often win in forecasting.
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Two panels with the same 20 noisy points around a rising line. Left: a straight line follows the overall upward pattern. Right: a degree-15 polynomial bends towards almost every point and shoots off the chart near the ends, fitting the noise instead of the pattern."
 setup_clean_style()
 
 # Generate example of overfitting
@@ -1050,6 +1060,7 @@ plt.show()
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Timeline of 24 months of history split in time order: the first 18 months are training data, the next 4 are for tuning parameters, and the last 2 are held back for the final evaluation only."
 setup_clean_style()
 fig, ax = plt.subplots()
 fig.set_figheight(3)  # lower than the default, so the slide fits
@@ -1117,6 +1128,7 @@ Data leakage can make a terrible model look amazing... until it fails in product
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Five cross-validation folds as horizontal bars: the training window grows from 12 to 20 months in steps of two, and each fold tests on the two months directly after its training window, never on earlier data."
 setup_clean_style()
 fig, ax = plt.subplots()
 
@@ -1204,6 +1216,7 @@ Unlike regular cross-validation, we NEVER use future data to predict the past!
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Forecast accuracy falls steadily from 95% one week ahead to 48% at 24 weeks. Shaded bands mark high (above 80%), moderate (60 to 80%) and low confidence; the curve leaves the high band after week 5 and is in the low band by week 16."
 setup_clean_style()
 
 horizons = [1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24]
@@ -1222,6 +1235,7 @@ ax.axhspan(0, 60, alpha=0.1, color='red', label='Low Confidence')
 ax.set_xlabel('Forecast Horizon (weeks ahead)', fontsize=12)
 ax.set_ylabel('Forecast Accuracy (%)', fontsize=12)
 ax.set_title('The Forecast Accuracy Degradation Curve', fontsize=14, fontweight='bold')
+ax.legend(loc='upper right', fontsize=10, facecolor='white', framealpha=1)
 ax.grid(True, alpha=0.2)
 ax.set_ylim(40, 105)
 
@@ -1236,6 +1250,7 @@ plt.show()
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Point forecast rising from 1,010 to 1,120 units over 12 weeks, surrounded by nested 50%, 80% and 95% confidence bands that fan out as the horizon grows. The example actual values scatter around the line but stay inside the bands."
 setup_clean_style()
 
 # Generate forecast with confidence intervals
@@ -1306,6 +1321,7 @@ print(f"Weighted combination: {weighted_combo:.0f} units")
 ```{python}
 #| eval: true
 #| echo: false
+#| fig-alt: "Three horizontal lead-time bars that all end at the start of the shaded December sales period in week 8. TechPod (3 weeks) has to be ordered by week 5, FitBand (4 weeks) by week 4 and CozyThrow (6 weeks) by week 2. The longer the lead time, the earlier the order decision and the further ahead the forecast has to reach."
 setup_clean_style()
 fig, ax = plt.subplots()
 
@@ -1314,9 +1330,9 @@ timeline = np.arange(0, 12)
 
 # Different lead times from competition
 products_lead = {
-    'TechPod (3 weeks)': (0, 3, BRAND_COLORS["twoDark"]),
-    'FitBand (4 weeks)': (0, 4, BRAND_COLORS["oneDark"]),
-    'CozyThrow (6 weeks)': (0, 6, BRAND_COLORS["threeDark"])
+    'TechPod (3 weeks)': (5, 3, BRAND_COLORS["twoDark"]),
+    'FitBand (4 weeks)': (4, 4, BRAND_COLORS["oneDark"]),
+    'CozyThrow (6 weeks)': (2, 6, BRAND_COLORS["threeDark"])
 }
 
 y_positions = [3, 2, 1]
@@ -1331,9 +1347,10 @@ for (product, (start, duration, color)), y_pos in zip(products_lead.items(), y_p
             edgecolor='black', linewidth=2, linestyle='--')
 
     # Lead time arrow
-    ax.annotate('', xy=(duration, y_pos), xytext=(0, y_pos),
+    ax.annotate('', xy=(start + duration, y_pos), xytext=(start, y_pos),
                 arrowprops=dict(arrowstyle='<->', lw=2, color=color))
-    ax.text(duration/2, y_pos + 0.2, 'Lead Time', ha='center', fontsize=9, fontweight='bold')
+    ax.text(start + duration/2, y_pos + 0.2, 'Lead Time', ha='center', fontsize=9, fontweight='bold')
+    ax.text(start - 0.15, y_pos, f'Order by week {start}', ha='right', va='center', fontsize=9, fontweight='bold')
 
 # December highlight
 ax.axvspan(8, 12, alpha=0.15, color='green')
@@ -1345,7 +1362,7 @@ ax.set_ylim(0.5, 4.2)
 ax.set_xticks(timeline)
 ax.set_xlabel('Weeks from Now', fontsize=12)
 ax.set_title('Lead Times Force Early Decisions', fontsize=14, fontweight='bold')
-ax.set_yticks([])
+ax.set_yticks(y_positions, list(products_lead))
 
 plt.tight_layout()
 plt.show()
