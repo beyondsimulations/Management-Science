@@ -10,7 +10,7 @@
 #     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
-#     path: /Users/vlcek/Documents/git-teaching/Management-Science/.venv/share/jupyter/kernels/python3
+#     path: /Users/tobi/development/lectures/Management-Science/.venv/share/jupyter/kernels/python3
 # ---
 
 # %% [markdown]
@@ -459,8 +459,8 @@ print(f"  Forecast: {result[0]:.1f} for next 2 periods")
 #
 # 1.  `set_index('date')` - Makes the date column the index (required for
 #     resample)
-# 2.  `resample('W')` - Groups data by week (‘W’ = week, ‘M’ = month, ‘D’
-#     = day)
+# 2.  `resample('W')` - Groups data by week (‘W’ = week, ‘ME’ = month end,
+#     ‘D’ = day)
 # 3.  `['sales']` - Selects the sales column
 # 4.  `.mean()` - Calculates the average for each week
 #
@@ -617,7 +617,7 @@ plt.show()
 
 # %%
 # Create data with trend AND seasonality
-months = pd.date_range('2022-01-01', periods=24, freq='M')
+months = pd.date_range('2022-01-01', periods=24, freq='ME')
 trend_comp = np.linspace(100, 150, 24)
 seasonal_comp = 30 * np.sin(2 * np.pi * np.arange(24) / 12)
 monthly_sales = trend_comp + seasonal_comp + np.random.normal(0, 5, 24)

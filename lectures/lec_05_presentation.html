@@ -102,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ea2a0bf5853136e39e63eeb539868bef.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -243,7 +243,7 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Introduction</span></h1>
 
 </section>
-<section id="client-briefing-megamart" class="slide level2" data-background-image="https://images.unsplash.com/photo-1733506312514-267f8134208a?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<section id="client-briefing-megamart" class="slide level2" data-background-image="https://images.beyondsimulations.com/ms/ms_photo-05-client-briefing-megamart.jpg" data-background-size="cover">
 <h2><strong><span class="invert-font">Client Briefing: MegaMart</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">Operations Director’s Crisis:</span></p>
@@ -275,11 +275,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="hidden-patterns-in-data" class="slide level2">
 <h2>Hidden Patterns in Data</h2>
 <p>Look at this daily sales data. <span class="highlight">What patterns do you see?</span></p>
-<div id="f120cf37" class="cell" data-execution_count="1">
+<div id="9476c00d" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-2-output-1.png" width="1139" height="417"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-2-output-1.png" alt="Daily sales of one product over a year: a noisy line that climbs from about 100 to about 150 units while swinging up and down in a regular weekly rhythm, so a trend and a seasonal pattern are both hidden in the data." width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -330,11 +330,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="visual-decomposition" class="slide level2">
 <h2>Visual Decomposition</h2>
-<div id="a4a0bd94" class="cell" data-execution_count="2">
+<div id="7c0099e0" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-3-output-1.png" width="1133" height="418"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-3-output-1.png" alt="Four stacked panels over three months: the original sales series, then its three parts, a steadily rising trend line, a regular weekly wave and irregular noise around zero. Adding the three parts gives the original series." width="1133" height="418"></p>
 </figure>
 </div>
 </div>
@@ -356,11 +356,11 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Moving Average</h2>
 <p><span class="question">Question</span>: How do we separate signal from noise?</p>
 <div class="fragment">
-<div id="780cd8f1" class="cell" data-execution_count="3">
+<div id="a6322875" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-4-output-1.png" width="1137" height="418"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-4-output-1.png" alt="First 60 days of daily sales as a faint jagged line with a 7-day moving average on top: the average removes the weekly swings and the noise and leaves a smooth, slowly rising line." width="1137" height="418"></p>
 </figure>
 </div>
 </div>
@@ -438,11 +438,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="when-simple-smoothing-fails" class="slide level2">
 <h2>When Simple Smoothing Fails</h2>
 <p><span class="highlight">Simple smoothing assumes the data is flat. What if it’s not?</span></p>
-<div id="dfc10453" class="cell" data-execution_count="4">
+<div id="9ef0ce57" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-5-output-1.png" width="1138" height="418"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-5-output-1.png" alt="Two panels of 20 weeks. Stable sales: the simple exponential smoothing line runs through the middle of the fluctuating data. Growing sales: the smoothed line stays below the rising data and the true trend line and never catches up." width="1138" height="418"></p>
 </figure>
 </div>
 </div>
@@ -514,7 +514,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="step-by-step-i" class="slide level2">
 <h2>Step-by-Step I</h2>
 <p><span class="highlight">Let’s walk through 6 periods manually to build intuition</span></p>
-<div id="7f217238" class="cell" data-execution_count="5">
+<div id="58539f6e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Sample data with clear upward trend</span></span>
 <span id="cb1-2"><a aria-label="2"></a>sales_data <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">112</span>, <span class="dv">118</span>, <span class="dv">124</span>, <span class="dv">130</span>])</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
@@ -540,7 +540,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="step-by-step-ii" class="slide level2">
 <h2>Step-by-Step II</h2>
-<div id="3f17e532" class="cell" data-execution_count="6">
+<div id="f96739c2" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Apply Holt's method for periods 2-6</span></span>
 <span id="cb3-2"><a aria-label="2"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(sales_data)):</span>
 <span id="cb3-3"><a aria-label="3"></a>    <span class="co"># Update level</span></span>
@@ -568,7 +568,7 @@ Period 6: Sales=130, Level=128.4, Trend=5.5</code></pre>
 </section>
 <section id="step-by-step-iii" class="slide level2">
 <h2>Step-by-Step III</h2>
-<div id="70f908d0" class="cell" data-execution_count="7">
+<div id="ac0532ef" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Forecast next 3 periods</span></span>
 <span id="cb5-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Forecasts:"</span>)</span>
 <span id="cb5-3"><a aria-label="3"></a>forecast_values <span class="op">=</span> []</span>
@@ -589,11 +589,11 @@ Forecasts:
 </section>
 <section id="holts-method-visual-comparison" class="slide level2">
 <h2>Holt’s Method: Visual Comparison</h2>
-<div id="61657a32" class="cell" data-execution_count="8">
+<div id="b9ef3a7c" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-9-output-1.png" width="1125" height="416"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-9-output-1.png" alt="Six historical sales points rising from 100 to 130, with the smoothed level line just below them ending at a final level of 128.4. Right of a dividing line, three forecast points continue upward by about 5.5 units per period, from about 134 to 145." width="1125" height="416"></p>
 </figure>
 </div>
 </div>
@@ -673,11 +673,11 @@ Forecasts:
 <h2>The Problem: Trend + Seasonality</h2>
 <p><span class="highlight">What if your data has BOTH trend AND seasonality?</span></p>
 <div class="fragment">
-<div id="3600afbc" class="cell" data-execution_count="9">
+<div id="a88bf709" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-10-output-1.png" width="1138" height="418"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-10-output-1.png" alt="Three years of monthly sales swinging in a yearly wave above and below a dashed trend line that rises from 100 to 200: the series has a trend and a seasonal pattern at the same time." width="1138" height="418"></p>
 </figure>
 </div>
 </div>
@@ -695,11 +695,11 @@ Forecasts:
 </section>
 <section id="holt-winters-visualized" class="slide level2">
 <h2>Holt-Winters Visualized</h2>
-<div id="07390cb9" class="cell" data-execution_count="10">
+<div id="56085858" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-11-output-1.png" width="1138" height="442"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-11-output-1.png" alt="Three panels for the Holt-Winters components. Level: a rising line through the scattered monthly data. Trend: equal bars of about 2.8 units of growth per month. Seasonality: one yearly cycle that peaks at +40 in April and bottoms out at -40 in October." width="1138" height="442"></p>
 </figure>
 </div>
 </div>
@@ -786,11 +786,11 @@ Forecasts:
 </section>
 <section id="holt-winters-visual" class="slide level2">
 <h2>Holt-Winters: Visual</h2>
-<div id="175d7616" class="cell" data-execution_count="11">
+<div id="470ae7d1" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-12-output-1.png" width="1139" height="418"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-12-output-1.png" alt="Two years of monthly sales with a rising trend and a yearly wave; the dashed fitted values follow the data closely. In the shaded forecast period the six forecast points repeat the seasonal rise and fall at a higher level than the year before." width="1139" height="418"></p>
 </figure>
 </div>
 </div>
@@ -847,7 +847,7 @@ Forecasts:
 <section id="forecast-accuracy" class="slide level2">
 <h2>Forecast Accuracy</h2>
 <p><span class="highlight">Easy with Python</span></p>
-<div id="1e94f2ef" class="cell" data-execution_count="12">
+<div id="058a9028" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># Example: Compare two forecasting methods</span></span>
 <span id="cb7-2"><a aria-label="2"></a>actual <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">110</span>, <span class="dv">108</span>, <span class="dv">112</span>])</span>
 <span id="cb7-3"><a aria-label="3"></a>forecast_a <span class="op">=</span> np.array([<span class="dv">98</span>, <span class="dv">107</span>, <span class="dv">109</span>, <span class="dv">110</span>, <span class="dv">111</span>])</span>
@@ -872,11 +872,11 @@ Better method: A</code></pre>
 <section id="when-to-use-which-method" class="slide level2">
 <h2>When to Use Which Method?</h2>
 <div class="fragment">
-<div id="ccd95307" class="cell" data-execution_count="13">
+<div id="4b80e617" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-14-output-1.png" width="1140" height="420"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-14-output-1.png" alt="Four boxes match data characteristics to methods: variance only leads to Simple ES (flat data, no trend, no season), trend present to Holt's Method, seasonality present to Holt-Winters (needs at least a year of data), and simplicity needed to Moving Average (very stable data, short-term only)." width="1140" height="420"></p>
 </figure>
 </div>
 </div>
@@ -1049,11 +1049,11 @@ Better method: A</code></pre>
 <h2>The Issue: Overfitting</h2>
 <p><span class="question">Question</span>: What happens when we train an AI on all our data and use it to predict… the same data?</p>
 <div class="fragment">
-<div id="4c61ed39" class="cell" data-execution_count="14">
+<div id="d1370915" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-15-output-1.png" width="1139" height="418"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-15-output-1.png" alt="Two panels with the same 20 noisy points around a rising line. Left: a straight line follows the overall upward pattern. Right: a degree-15 polynomial bends towards almost every point and shoots off the chart near the ends, fitting the noise instead of the pattern." width="1139" height="418"></p>
 </figure>
 </div>
 </div>
@@ -1063,11 +1063,11 @@ Better method: A</code></pre>
 <section id="training-vs-test-data" class="slide level2">
 <h2>Training vs Test Data</h2>
 <p><span class="highlight">Never judge a complex model on the data it learned from!</span></p>
-<div id="053e603e" class="cell" data-execution_count="15">
+<div id="4036dabb" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-16-output-1.png" width="1131" height="274"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-16-output-1.png" alt="Timeline of 24 months of history split in time order: the first 18 months are training data, the next 4 are for tuning parameters, and the last 2 are held back for the final evaluation only." width="1131" height="274"></p>
 </figure>
 </div>
 </div>
@@ -1110,11 +1110,11 @@ Better method: A</code></pre>
 </section>
 <section id="time-series-cross-validation" class="slide level2">
 <h2>Time Series Cross-Validation</h2>
-<div id="3ffe6ed9" class="cell" data-execution_count="16">
+<div id="459ca1ae" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-17-output-1.png" width="1140" height="419"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-17-output-1.png" alt="Five cross-validation folds as horizontal bars: the training window grows from 12 to 20 months in steps of two, and each fold tests on the two months directly after its training window, never on earlier data." width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1178,11 +1178,11 @@ Better method: A</code></pre>
 <section id="forecast-horizons" class="slide level2">
 <h2>Forecast Horizons</h2>
 <p><span class="highlight">How far into the future can we predict?</span></p>
-<div id="8e8117e3" class="cell" data-execution_count="17">
+<div id="9deff6aa" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-18-output-1.png" width="1139" height="419"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-18-output-1.png" alt="Forecast accuracy falls steadily from 95% one week ahead to 48% at 24 weeks. Shaded bands mark high (above 80%), moderate (60 to 80%) and low confidence; the curve leaves the high band after week 5 and is in the low band by week 16." width="1139" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1191,11 +1191,11 @@ Better method: A</code></pre>
 <section id="confidence-intervals" class="slide level2">
 <h2>Confidence Intervals</h2>
 <p><span class="highlight">A forecast without confidence intervals is incomplete!</span></p>
-<div id="7185e8fe" class="cell" data-execution_count="18">
+<div id="b7cfbd9d" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-19-output-1.png" width="1140" height="419"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-19-output-1.png" alt="Point forecast rising from 1,010 to 1,120 units over 12 weeks, surrounded by nested 50%, 80% and 95% confidence bands that fan out as the horizon grows. The example actual values scatter around the line but stay inside the bands." width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1205,7 +1205,7 @@ Better method: A</code></pre>
 <h2>Forecast Combination</h2>
 <p><span class="highlight">Why choose one method when you can combine several?</span></p>
 <div class="fragment">
-<div id="d4f2fb8f" class="cell" data-execution_count="19">
+<div id="893655a2" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># Example: Combining multiple forecasts</span></span>
 <span id="cb9-2"><a aria-label="2"></a>ma_forecast <span class="op">=</span> <span class="dv">120</span>      <span class="co"># Moving average prediction</span></span>
 <span id="cb9-3"><a aria-label="3"></a>exp_forecast <span class="op">=</span> <span class="dv">125</span>     <span class="co"># Exponential smoothing prediction</span></span>
@@ -1232,11 +1232,11 @@ Weighted combination: 126 units</code></pre>
 </section>
 <section id="lead-times-and-safety-stock" class="slide level2">
 <h2>Lead Times and Safety Stock</h2>
-<div id="e12cb194" class="cell" data-execution_count="20">
+<div id="5d99e49a" class="cell" data-execution_count="20">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-21-output-1.png" width="1140" height="419"></p>
+<p><img data-src="lec_05_forecasting_files/figure-revealjs/cell-21-output-1.png" alt="Three horizontal lead-time bars that all end at the start of the shaded December sales period in week 8. TechPod (3 weeks) has to be ordered by week 5, FitBand (4 weeks) by week 4 and CozyThrow (6 weeks) by week 2. The longer the lead time, the earlier the order decision and the further ahead the forecast has to reach." width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1258,7 +1258,7 @@ Weighted combination: 126 units</code></pre>
 <h2>Safety Stock Calculation</h2>
 <p><span class="highlight">How much buffer do you need?</span></p>
 <div class="fragment">
-<div id="3fe2ec66" class="cell" data-execution_count="21">
+<div id="6ea7ad40" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Safety stock formula</span></span>
 <span id="cb11-2"><a aria-label="2"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
 <span id="cb11-3"><a aria-label="3"></a></span>

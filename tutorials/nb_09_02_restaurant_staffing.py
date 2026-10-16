@@ -10,7 +10,7 @@
 #     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
-#     path: /Users/vlcek/Documents/git-teaching/Management-Science/.venv/share/jupyter/kernels/python3
+#     path: /Users/tobi/development/lectures/Management-Science/.venv/share/jupyter/kernels/python3
 # ---
 
 # %% [markdown]
@@ -231,6 +231,8 @@ for bar, val in zip(bars, penalties):
     if val > 0:
         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 5,
                f'€{val}', ha='center', va='bottom', fontweight='bold')
+
+axes[1, 1].axis('off')
 
 plt.tight_layout()
 plt.show()

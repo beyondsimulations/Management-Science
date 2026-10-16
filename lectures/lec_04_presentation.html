@@ -102,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ea2a0bf5853136e39e63eeb539868bef.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -243,7 +243,7 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Introduction</span></h1>
 
 </section>
-<section id="client-briefing-techventure" class="slide level2" data-background-image="https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<section id="client-briefing-techventure" class="slide level2" data-background-image="https://images.beyondsimulations.com/ms/ms_photo-04-client-briefing-techventure.jpg" data-background-size="cover">
 <h2><strong><span class="invert-font">Client Briefing: TechVenture</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">CEO’s Dilemma:</span></p>
@@ -327,7 +327,7 @@ Dr.&nbsp;Tobias Vlćek
 <p><span class="question">Question</span>: If you roll two dice, what’s the probability of getting exactly 7 as result?</p>
 <div class="fragment">
 <p><strong>Method 2: Simulation</strong></p>
-<div id="5b040b08" class="cell" data-execution_count="1">
+<div id="66513db1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a aria-label="2"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
@@ -349,11 +349,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="how-probability-converges" class="slide level2">
 <h2>How Probability Converges</h2>
-<div id="7a816e30" class="cell" data-execution_count="2">
+<div id="89c911b1" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-3-output-1.png" width="1330" height="464"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-3-output-1.png" alt="Left: the estimated probability of rolling a 7 swings widely over the first rolls and settles on the true value 1/6 as the number of rolls grows to 10,000 (log scale). Right: observed frequencies of the sums 2 to 12 match the theoretical triangle-shaped distribution that peaks at 7." width="1330" height="464"></p>
 </figure>
 </div>
 </div>
@@ -419,7 +419,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Why This Matters for Business</h2>
 <p><span class="question">Question</span>: How many simulations do we need for reliable results?</p>
 <div class="fragment">
-<div id="35a0e8b6" class="cell" data-execution_count="3">
+<div id="08b6ca30" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Test convergence with different sample sizes</span></span>
 <span id="cb3-2"><a aria-label="2"></a>sample_sizes <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>]</span>
 <span id="cb3-3"><a aria-label="3"></a>estimates <span class="op">=</span> []</span>
@@ -514,7 +514,7 @@ n=100000: Estimated probability = 0.1670</code></pre>
 <li><strong>size</strong>: How many samples to generate</li>
 </ul>
 <div class="fragment">
-<div id="10e6f32f" class="cell" data-execution_count="4">
+<div id="72784b6a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># AI-Growth: average 38% return, ±25% volatility</span></span>
 <span id="cb5-2"><a aria-label="2"></a>returns <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="fl">0.38</span>, scale<span class="op">=</span><span class="fl">0.25</span>, size<span class="op">=</span><span class="dv">10_000</span>)</span>
 <span id="cb5-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f"Mean return: </span><span class="sc">{</span>returns<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
@@ -539,7 +539,7 @@ Maximum: 125.7%</code></pre>
 <p><span class="question">Question:</span> Do you still know what a percentile is?</p>
 </div>
 <div class="fragment">
-<div id="03e49bec" class="cell" data-execution_count="5">
+<div id="3577e75d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Percentiles:"</span>)</span>
 <span id="cb7-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"  5th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">5</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 5% of scenarios)"</span>)</span>
 <span id="cb7-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f" 25th: </span><span class="sc">{</span>np<span class="sc">.</span>percentile(returns, <span class="dv">25</span>)<span class="sc">:.1%}</span><span class="ss"> (worst 25% of scenarios)"</span>)</span>
@@ -564,11 +564,11 @@ Percentiles:
 <h2>Understanding the Distribution</h2>
 <p><span class="question">Question</span>: Before we plot, what shape do you expect for <code>np.random.normal()</code>?</p>
 <div class="fragment">
-<div id="3d636d3b" class="cell" data-execution_count="6">
+<div id="23fb8536" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-7-output-1.png" width="821" height="433"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-7-output-1.png" alt="Histogram of 10,000 simulated AI-Growth returns: a symmetric bell curve centred near the 38% mean, with only a small left tail below the break-even line at zero." width="821" height="433"></p>
 </figure>
 </div>
 </div>
@@ -579,7 +579,7 @@ Percentiles:
 <h2>Risk Analysis</h2>
 <p><span class="question">Question</span>: What’s the probability that AI-Growth loses money?</p>
 <div class="fragment">
-<div id="6c3dbec0" class="cell" data-execution_count="7">
+<div id="37905f8f" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># Calculate risk metrics</span></span>
 <span id="cb9-2"><a aria-label="2"></a>prob_loss <span class="op">=</span> (returns <span class="op">&lt;</span> <span class="dv">0</span>).mean() <span class="co"># proportion of returns that are less than zero</span></span>
 <span id="cb9-3"><a aria-label="3"></a>prob_double <span class="op">=</span> (returns <span class="op">&gt;</span> <span class="fl">1.0</span>).mean()  <span class="co"># proportion greater than 100%</span></span>
@@ -610,11 +610,11 @@ Probability of doubling money: 0.8%</code></pre>
 <section id="different-distributions" class="slide level2">
 <h2>Different Distributions</h2>
 <p><span class="highlight">Attention: Not everything follows a normal distribution!</span></p>
-<div id="dcbed21c" class="cell" data-execution_count="8">
+<div id="73d63cc1" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-9-output-1.png" width="1133" height="417"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-9-output-1.png" alt="Three histograms side by side: the normal distribution is a symmetric bell around its mean, the uniform distribution is flat between 10% and 35%, and the exponential distribution piles up near zero with a long right tail." width="1133" height="417"></p>
 </figure>
 </div>
 </div>
@@ -626,7 +626,7 @@ Probability of doubling money: 0.8%</code></pre>
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Normal</a></li><li><a href="#tabset-1-2">Uniform</a></li><li><a href="#tabset-1-3">Exponential</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div id="065a2950" class="cell" data-execution_count="9">
+<div id="21bcb040" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Most common in nature/business</span></span>
 <span id="cb11-2"><a aria-label="2"></a><span class="co"># Bell-shaped, symmetric</span></span>
 <span id="cb11-3"><a aria-label="3"></a>returns <span class="op">=</span> np.random.normal(mean, std, size)</span>
@@ -642,7 +642,7 @@ Probability of doubling money: 0.8%</code></pre>
 </ul>
 </div>
 <div id="tabset-1-2">
-<div id="0af605d8" class="cell" data-execution_count="10">
+<div id="7cdb864d" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="co"># Equal probability across range</span></span>
 <span id="cb12-2"><a aria-label="2"></a><span class="co"># Example: FinFlow returns between 10-35%</span></span>
 <span id="cb12-3"><a aria-label="3"></a>returns <span class="op">=</span> np.random.uniform(<span class="fl">0.10</span>, <span class="fl">0.35</span>, size)</span>
@@ -658,7 +658,7 @@ Probability of doubling money: 0.8%</code></pre>
 </ul>
 </div>
 <div id="tabset-1-3">
-<div id="35cd238d" class="cell" data-execution_count="11">
+<div id="d8f197ee" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Time between events</span></span>
 <span id="cb13-2"><a aria-label="2"></a><span class="co"># Example: Customer arrivals, equipment failure</span></span>
 <span id="cb13-3"><a aria-label="3"></a>times <span class="op">=</span> np.random.exponential(scale, size)</span>
@@ -707,11 +707,11 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="four-startup-profiles" class="slide level2">
 <h2>Four Startup Profiles</h2>
-<div id="ecec33a7" class="cell" data-execution_count="13">
+<div id="9d90d396" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-14-output-1.png" width="1138" height="418"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-14-output-1.png" alt="Four histograms of simulated returns with mean and break-even lines: CloudAI is a bell curve around 25%, GreenGrid a narrow one around 18%, HealthTrack a wide one around 30% with a visible share of losses, FinFlow flat between 10% and 35% with no losses. A higher average return comes with a wider spread." width="1138" height="418"></p>
 </figure>
 </div>
 </div>
@@ -813,11 +813,11 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="correlation-in-practice" class="slide level2">
 <h2>Correlation in Practice</h2>
-<div id="79ecd16a" class="cell" data-fig-height="4" data-fig-width="12" data-execution_count="15">
+<div id="ca7bea37" class="cell" data-fig-height="4" data-fig-width="12" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-16-output-1.png" width="1138" height="418"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-16-output-1.png" alt="Three scatter plots of Startup A against Startup B returns: with positive correlation the points rise along a narrow band, with no correlation they form a round cloud, with negative correlation they fall along a narrow band." width="1138" height="418"></p>
 </figure>
 </div>
 </div>
@@ -862,11 +862,11 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="impact-on-portfolio-risk" class="slide level2">
 <h2>Impact on Portfolio Risk</h2>
-<div id="88113e45" class="cell" data-execution_count="16">
+<div id="bbd35e2a" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-17-output-1.png" width="948" height="467"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-17-output-1.png" alt="Three overlaid histograms of 50-50 portfolio returns for correlations 0, 0.5 and 0.9: all share the same centre, but the distribution gets wider as correlation rises, pushing more outcomes towards the break-even line at zero." width="948" height="467"></p>
 </figure>
 </div>
 </div>
@@ -908,11 +908,11 @@ Probability of doubling money: 0.8%</code></pre>
 </section>
 <section id="when-diversification-fails" class="slide level2">
 <h2>When Diversification Fails</h2>
-<div id="7045b728" class="cell" data-execution_count="17">
+<div id="01875031" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-18-output-1.png" width="948" height="467"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-18-output-1.png" alt="Portfolio volatility against the number of assets (1 to 20) for correlations 0, 0.5 and 0.9: without correlation volatility keeps falling as assets are added, at 0.5 it levels off after a few assets, at 0.9 it stays almost flat." width="948" height="467"></p>
 </figure>
 </div>
 </div>
@@ -965,7 +965,7 @@ Probability of doubling money: 0.8%</code></pre>
 <h2>Real Monte Carlo Applications</h2>
 <p><span class="highlight">Where Monte Carlo is ESSENTIAL, not just convenient:</span></p>
 <p><strong>1. Option Pricing with Path Dependencies</strong></p>
-<div id="d288f62a" class="cell" data-execution_count="18">
+<div id="757f70bd" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># Payoff depends on AVERAGE price over time</span></span>
 <span id="cb14-2"><a aria-label="2"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> strike_price <span class="op">=</span> <span class="dv">105</span><span class="op">;</span> payoffs <span class="op">=</span> []</span>
 <span id="cb14-3"><a aria-label="3"></a><span class="cf">for</span> sim <span class="kw">in</span> <span class="bu">range</span>(n_simulations):</span>
@@ -987,11 +987,11 @@ Probability of profit: 68.9%</code></pre>
 </section>
 <section id="real-monte-carlo-applications-ii" class="slide level2">
 <h2>Real Monte Carlo Applications II</h2>
-<div id="728bb6cc" class="cell" data-execution_count="19">
+<div id="bea78bed" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-20-output-1.png" width="1140" height="419"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-20-output-1.png" alt="Histogram of simulated option payoffs: a tall spike at zero, where the option expires worthless, and a long right tail of rare large payoffs, so the 95th percentile lies far above the mean." width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1000,7 +1000,7 @@ Probability of profit: 68.9%</code></pre>
 <section id="real-monte-carlo-applications-iii" class="slide level2">
 <h2>Real Monte Carlo Applications III</h2>
 <p><strong>2. Supply Chain with Cascading Effects</strong></p>
-<div id="a0e52ffe" class="cell" data-execution_count="20">
+<div id="db0ce148" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Each stage affects the next (nonlinear dependencies)</span></span>
 <span id="cb16-2"><a aria-label="2"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> factory_capacity <span class="op">=</span> <span class="dv">150</span><span class="op">;</span> demand <span class="op">=</span> <span class="dv">120</span><span class="op">;</span> price <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb16-3"><a aria-label="3"></a>penalty <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> revenues <span class="op">=</span> []</span>
@@ -1027,11 +1027,11 @@ Worst-case revenue: $325.00</code></pre>
 </section>
 <section id="real-monte-carlo-applications-iv" class="slide level2">
 <h2>Real Monte Carlo Applications IV</h2>
-<div id="fc4cb2b8" class="cell" data-execution_count="21">
+<div id="baff4f3d" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-22-output-1.png" width="1140" height="419"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-22-output-1.png" alt="Histogram of simulated supply chain revenue: outcomes spread widely and the mean lies far below the 600 dollar target, which only a small share of runs reaches because delivered parts rarely cover demand." width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1040,7 +1040,7 @@ Worst-case revenue: $325.00</code></pre>
 <section id="real-monte-carlo-applications-v" class="slide level2">
 <h2>Real Monte Carlo Applications V</h2>
 <p><strong>3. Project Management with Sequential Risks</strong></p>
-<div id="ab883a6f" class="cell" data-execution_count="22">
+<div id="c7cd1474" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="co"># Project phases must happen in order, later phases only if earlier succeed</span></span>
 <span id="cb18-2"><a aria-label="2"></a>n_simulations <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span> shape <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> scale <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> project_times <span class="op">=</span> []</span>
 <span id="cb18-3"><a aria-label="3"></a></span>
@@ -1067,11 +1067,11 @@ Worst-case revenue: $325.00</code></pre>
 </section>
 <section id="real-monte-carlo-applications-vi" class="slide level2">
 <h2>Real Monte Carlo Applications VI</h2>
-<div id="e0e3801f" class="cell" data-execution_count="23">
+<div id="353b2590" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-24-output-1.png" width="1140" height="419"></p>
+<p><img data-src="lec_04_monte_carlo_files/figure-revealjs/cell-24-output-1.png" alt="Histogram of 10,000 simulated project durations: right-skewed, with the mean below the 100-day target but the 90th percentile above it, so a sizeable share of runs finishes late." width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1208,8 +1208,15 @@ Worst-case revenue: $325.00</code></pre>
 <li class="fragment"><strong>Your Deliverable:</strong> One-slide recommendation + 3-minute pitch</li>
 </ul>
 <div class="fragment">
-<div class="callout-tips">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
 <p>Consider multiple risk metrics and prepare a clear justification!</p>
+</div>
+</div>
 </div>
 </div>
 <div class="fragment">

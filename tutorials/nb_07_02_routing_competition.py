@@ -10,7 +10,7 @@
 #     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
-#     path: /Users/vlcek/Documents/git-teaching/Management-Science/.venv/share/jupyter/kernels/python3
+#     path: /Users/tobi/development/lectures/Management-Science/.venv/share/jupyter/kernels/python3
 # ---
 
 # %% [markdown]
@@ -238,11 +238,11 @@ def visualize_route(route, cafe_info, bakery_loc, title="Delivery Route"):
     # Legend
     from matplotlib.patches import Patch
     legend_elements = [
-        Patch(facecolor='#D73502', label='Early Café (6:30-6:45 AM)'),
-        Patch(facecolor='#537E8F', label='Regular Café (7:00+ AM)'),
+        Patch(facecolor='#D73502', label='Early Café (6:30 AM)'),
+        Patch(facecolor='#537E8F', label='Regular Café (8:00 AM)'),
         Patch(facecolor='#F4A582', label='Bakery')
     ]
-    plt.legend(handles=legend_elements, loc='upper right')
+    plt.legend(handles=legend_elements, loc='upper center', bbox_to_anchor=(0.5, -0.18), ncol=3)
 
     plt.tight_layout()
     plt.show()

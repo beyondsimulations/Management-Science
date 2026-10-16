@@ -102,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ea2a0bf5853136e39e63eeb539868bef.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -243,7 +243,7 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Introduction</span></h1>
 
 </section>
-<section id="client-briefing-artisan-bakery" class="slide level2" data-background-image="https://images.unsplash.com/photo-1587241321921-91a834d6d191?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<section id="client-briefing-artisan-bakery" class="slide level2" data-background-image="https://images.beyondsimulations.com/ms/ms_photo-07-client-briefing-artisan-bakery.jpg" data-background-size="cover">
 <h2><strong><span class="invert-font">Client Briefing: Artisan Bakery</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">Master Baker’s Morning Dilemma:</span></p>
@@ -305,11 +305,11 @@ Dr.&nbsp;Tobias Vlćek
 <h2>The Traveling Salesman Problem</h2>
 <p><span class="highlight">Visit all locations exactly once, minimize total distance.</span></p>
 <div class="fragment">
-<div id="23c7edac" class="cell" data-execution_count="1">
+<div id="837c26e1" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-2-output-1.png" width="1139" height="357"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-2-output-1.png" alt="Map of 16 cafés scattered over an area of about 30 by 10 km, with the bakery in the centre and no route drawn. The task is to link all points in one round trip that is as short as possible." width="1139" height="357"></p>
 </figure>
 </div>
 </div>
@@ -386,7 +386,7 @@ Dr.&nbsp;Tobias Vlćek
 <div class="fragment">
 <p><strong>For our bakery problem:</strong></p>
 <ul>
-<li class="fragment"><span class="math inline">\(|V| = 17\)</span> (1 bakery + 17 cafés)</li>
+<li class="fragment"><span class="math inline">\(|V| = 17\)</span> (1 bakery + 16 cafés)</li>
 <li class="fragment"><span class="math inline">\(|E| = \binom{17}{2} = 136\)</span> possible connections</li>
 <li class="fragment">Each edge <span class="math inline">\((i,j)\)</span> has weight <span class="math inline">\(w_{ij}\)</span> = distance between <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></li>
 </ul>
@@ -465,11 +465,11 @@ Dr.&nbsp;Tobias Vlćek
 <h2>A Bad Start: Random Route</h2>
 <p><span class="highlight">What happens if we pick cafés randomly?</span></p>
 <div class="fragment">
-<div id="788329aa" class="cell" data-execution_count="2">
+<div id="8530dfe0" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-3-output-1.png" width="1138" height="417"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-3-output-1.png" alt="The bakery B and eight cafés C1 to C8 connected in random order: the route zigzags back and forth across the map and crosses itself several times, which makes it much longer than necessary." width="1138" height="417"></p>
 </figure>
 </div>
 </div>
@@ -491,11 +491,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-problem" class="slide level2">
 <h2>Nearest Neighbor: The Problem</h2>
 <p><span class="highlight">Given these 8 cafés, which should we visit first?</span></p>
-<div id="c796ea10" class="cell" data-execution_count="3">
+<div id="56c40cbe" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-4-output-1.png" width="1138" height="395"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-4-output-1.png" alt="The bakery B and the eight cafés C1 to C8 as labelled points, without a route. Small numbers give each café's straight-line distance from the bakery: C3 and C2, just below and to the right of the bakery, are the closest; C7 on the far right is the farthest." width="1138" height="395"></p>
 </figure>
 </div>
 </div>
@@ -530,11 +530,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="nearest-neighbor-the-solution" class="slide level2">
 <h2>Nearest Neighbor: The Solution</h2>
 <p><span class="highlight">Let’s see how nearest neighbor builds the route step by step:</span></p>
-<div id="555f814c" class="cell" data-execution_count="4">
+<div id="174777a7" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-5-output-1.png" width="1140" height="384"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-5-output-1.png" alt="Eight small panels show nearest neighbour adding one café per step, always the closest unvisited one, in the order 3, 2, 6, 4, 8, 1, 5, 7. The tour ends at café 7 on the far right, so the last step draws a long return leg back to the bakery that cuts across the route." width="1140" height="384"></p>
 </figure>
 </div>
 </div>
@@ -546,7 +546,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p>Farthest insertion builds a more balanced tour by establishing the outer structure first!</p>
+<p>Nearest neighbor starts with short hops, but ends far out at café 7 and needs a long return leg!</p>
 </div>
 </div>
 </div>
@@ -555,11 +555,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="farthest-insertion-the-problem" class="slide level2">
 <h2>Farthest Insertion: The Problem</h2>
 <p><span class="highlight">Same 8 cafés - but now we’ll use a different strategy:</span></p>
-<div id="f858a3b7" class="cell" data-execution_count="5">
+<div id="a6ddf341" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-6-output-1.png" width="1138" height="395"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-6-output-1.png" alt="The same map again: the bakery B and the cafés C1 to C8 as labelled points, with no route and no distances shown. C7 on the far right is the café farthest from the bakery." width="1138" height="395"></p>
 </figure>
 </div>
 </div>
@@ -603,11 +603,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="farthest-insertion-step-by-step" class="slide level2">
 <h2>Farthest Insertion: Step-by-Step</h2>
-<div id="e410f21d" class="cell" data-execution_count="6">
+<div id="76aec96b" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-7-output-1.png" width="1140" height="384"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-7-output-1.png" alt="Eight small panels show farthest insertion step by step: it starts with a there-and-back trip to café 7, the farthest from the bakery, then inserts cafés 4, 6, 5, 2, 8, 3 and 1 one at a time where they lengthen the tour least. The outer shape comes first and the nearer cafés fill it in, ending in one loop without a long return leg." width="1140" height="384"></p>
 </figure>
 </div>
 </div>
@@ -751,11 +751,11 @@ Dr.&nbsp;Tobias Vlćek
 <p><strong>The Idea:</strong> Take two edges and swap them (to uncross the route)</p>
 </div>
 <div class="fragment">
-<div id="75412b21" class="cell" data-execution_count="7">
+<div id="b3365bc2" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-8-output-1.png" width="1068" height="426"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-8-output-1.png" alt="Two panels with the same four points. Before: edges A-B and C-D cross each other in an X. After the swap: edges A-C and B-D no longer cross, and their combined length drops from about 11.3 to 8." width="1068" height="426"></p>
 </figure>
 </div>
 </div>
@@ -765,11 +765,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="example-step-by-step" class="slide level2">
 <h2>Example: Step-by-Step</h2>
 <p><span class="highlight">Let’s see exactly how 2-opt fixes a crossing in a real route:</span></p>
-<div id="0397f9ed" class="cell" data-execution_count="8">
+<div id="794b736e" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-9-output-1.png" width="1149" height="326"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-9-output-1.png" alt="Three panels on one small route. 1: the tour B, C1, C3, C5, C2, C4, B crosses itself twice; edges C1-C3 and C2-C4 are marked for removal. 2: these two edges are replaced by C1-C2 and C3-C4, which reverses the segment in between. 3: the new tour B, C1, C2, C5, C3, C4, B is shorter and has only one crossing left." width="1149" height="326"></p>
 </figure>
 </div>
 </div>
@@ -821,11 +821,11 @@ Dr.&nbsp;Tobias Vlćek
 <h2>2-Opt Applied</h2>
 <p><span class="highlight">Let’s see how this changes the route!</span></p>
 <div class="fragment">
-<div id="751b09a3" class="cell" data-execution_count="9">
+<div id="47b408b3" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-10-output-1.png" width="1152" height="293"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-10-output-1.png" alt="Left: the nearest neighbour tour, whose long return leg from café 7 back to the bakery cuts across the rest of the route. Right: after 2-opt the same eight cafés form a single loop without crossings, and the tour is shorter." width="1152" height="293"></p>
 </figure>
 </div>
 </div>
@@ -869,11 +869,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="what-about-1-opt" class="slide level2">
 <h2>What About 1-Opt?</h2>
-<div id="4a556695" class="cell" data-execution_count="10">
+<div id="e05eabbf" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-11-output-1.png" width="942" height="419"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-11-output-1.png" alt="Left: a square tour A, B, C, D and back to A, with edge B-C marked for removal. Right: without that edge the tour is an open path with a gap between B and C. The only way to close it is to put the same edge back, so removing a single edge cannot change a tour." width="942" height="419"></p>
 </figure>
 </div>
 </div>
@@ -894,11 +894,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="or-opt-moving-sequences" class="slide level2">
 <h2>Or-Opt: Moving Sequences</h2>
 <p><span class="highlight">Moves sequence of 1-3 consecutive cities to different position.</span></p>
-<div id="770017a4" class="cell" data-execution_count="11">
+<div id="2dfc42a9" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-12-output-1.png" width="1149" height="342"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-12-output-1.png" alt="Three panels on a tour of the bakery and seven cafés that lie on a ring. 1: the tour B, C1, C2, C3, C4, C5, C6, C7, B crosses itself three times because it visits C2 and C3 at the top too early; these two consecutive stops are marked as the sequence to move. 2: an arrow shows the pair being taken out and inserted between C6 and C7 instead. 3: the new route B, C1, C4, C5, C6, C2, C3, C7, B is a ring without crossings, in which the pair keeps its order and three new edges reconnect the tour." width="1149" height="342"></p>
 </figure>
 </div>
 </div>
@@ -1025,11 +1025,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="visualizing-local-optima" class="slide level2">
 <h2>Visualizing Local Optima</h2>
-<div id="343e728a" class="cell" data-execution_count="12">
+<div id="e0a54dea" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-13-output-1.png" width="1138" height="414"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-13-output-1.png" alt="A curve of total distance over the solution space with two valleys separated by a high ridge. The left valley is the local minimum, labelled 'Stuck here!'; the right valley is only slightly deeper and is the global minimum, labelled 'Want here!'. A search that only moves downhill cannot leave the left valley." width="1138" height="414"></p>
 </figure>
 </div>
 </div>
@@ -1048,11 +1048,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="the-reality" class="slide level2">
 <h2>The Reality</h2>
 <p><span class="highlight">Real problems often have thousands of local optima!</span></p>
-<div id="fb7025df" class="cell" data-execution_count="13">
+<div id="872e8f70" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-14-output-1.png" width="1140" height="418"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-14-output-1.png" alt="A jagged curve of total distance over the solution space with many peaks and valleys. Four marked local minima sit at very different heights, all well above the single deep global minimum near the right end. Shaded bands grade solutions from excellent at the bottom to poor at the top." width="1140" height="419"></p>
 </figure>
 </div>
 </div>
@@ -1210,11 +1210,11 @@ Dr.&nbsp;Tobias Vlćek
 <section id="opt-with-time-windows" class="slide level2">
 <h2>2-Opt with Time Windows</h2>
 <p><span class="highlight">Problem: 2-opt can break time feasibility!</span></p>
-<div id="f02b7a21" class="cell" data-execution_count="14">
+<div id="099ccf35" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-15-output-1.png" width="1138" height="418"></p>
+<p><img data-src="lec_07_local_search_files/figure-revealjs/cell-15-output-1.png" alt="Arrival times per stop with dashed deadline marks. Original route: Early1 at 5.5 h and Early2 at 6.2 h arrive before their 6.5 h deadline, both late cafés before 8.0 h. After the 2-opt swap Early2 is reached only at 7.2 h, after its deadline, and is marked with a red cross." width="1138" height="418"></p>
 </figure>
 </div>
 </div>
@@ -1226,7 +1226,7 @@ Dr.&nbsp;Tobias Vlćek
 <i class="callout-icon"></i>
 </div>
 <div class="callout-content">
-<p><strong>Early2 now arrives at 7:12 AM.</strong> Missed its 6:45 deadline by 27 minutes!</p>
+<p><strong>Early2 now arrives at 7:12 AM.</strong> Missed its 6:30 deadline by 42 minutes!</p>
 </div>
 </div>
 </div>

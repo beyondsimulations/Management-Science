@@ -10,7 +10,7 @@
 #     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
-#     path: /Users/vlcek/Documents/git-teaching/Management-Science/.venv/share/jupyter/kernels/python3
+#     path: /Users/tobi/development/lectures/Management-Science/.venv/share/jupyter/kernels/python3
 # ---
 
 # %% [markdown]
@@ -84,8 +84,8 @@ print(products.to_string(index=False))
 # >
 # > Notice the fundamental conflict:
 # >
-# > - **Sakura Cherry Coffee**: Highest profit (€4.5) but slowest to make
-# >   (280s!)
+# > - **Dragon Fruit Frappé**: Highest profit (€4.8) but slowest to make
+# >   (300s!)
 # > - **Charcoal Detox Shot**: Fastest (60s = 1 minute) but lowest profit
 # >   (€1.8)
 # >
@@ -237,7 +237,7 @@ print(pareto_products[['Product', 'Profit_Margin', 'Prep_Time']].to_string(index
 # Test your Pareto frontier function
 assert 'find_pareto_frontier' in dir(), "Define find_pareto_frontier function"
 assert len(pareto_products) >= 3, "Should find at least 3 Pareto optimal products"
-assert 'Saffron Rose Milk' in pareto_products['Product'].values, "Saffron Rose Milk (fastest) should be on frontier"
+assert 'Saffron Rose Milk' in pareto_products['Product'].values, "Saffron Rose Milk (€4.3 in 270s) should be on frontier"
 print("Perfect! These are the ONLY products worth considering")
 
 # %% [markdown]
@@ -280,10 +280,10 @@ plt.show()
 # >
 # > Each point on the frontier represents a different trade-off:
 # >
-# > - **Classic Espresso** (left): Fastest prep, lowest profit → “Speed
+# > - **Charcoal Detox Shot** (left): Fastest prep, lowest profit → “Speed
 # >   Strategy”
-# > - **Energy Smoothie** (right): Highest profit, slowest prep → “Profit
-# >   Strategy”
+# > - **Dragon Fruit Frappé** (right): Highest profit, slowest prep →
+# >   “Profit Strategy”
 # > - **Middle products**: Balanced compromises
 # >
 # > **None dominates the others** - your choice depends on your
@@ -298,10 +298,10 @@ plt.show()
 # >
 # > Before combining objectives, we MUST normalize them:
 # >
-# > - Profit range: 1.8 to 4.5 (range = 2.7)
-# > - Prep Time range: 60 to 270 (range = 210)
+# > - Profit range: 1.8 to 4.8 (range = 3.0)
+# > - Prep Time range: 60 to 300 (range = 240)
 # >
-# > Without normalization, prep time dominates because 210 \>\> 2.7, even
+# > Without normalization, prep time dominates because 240 \>\> 3.0, even
 # > with equal weights!
 #
 # ## Exercise 3.1: Normalize Objectives

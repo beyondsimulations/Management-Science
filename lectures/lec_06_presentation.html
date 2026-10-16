@@ -102,7 +102,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ec452785352e566717932e259d26a423.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ea2a0bf5853136e39e63eeb539868bef.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -243,7 +243,7 @@ Dr.&nbsp;Tobias Vlćek
 <h1><span class="flow">Introduction</span></h1>
 
 </section>
-<section id="client-briefing-custom-cycles" class="slide level2" data-background-image="https://images.unsplash.com/photo-1761634731562-c7a152d89849?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=2400" data-background-size="cover">
+<section id="client-briefing-custom-cycles" class="slide level2" data-background-image="https://images.beyondsimulations.com/ms/ms_photo-06-client-briefing-custom-cycles.jpg" data-background-size="cover">
 <h2><strong><span class="invert-font">Client Briefing: Custom Cycles</span></strong></h2>
 <div class="fragment">
 <p><span class="invert-font">Operations Manager’s Friday Crisis:</span></p>
@@ -257,7 +257,7 @@ Dr.&nbsp;Tobias Vlćek
 <li class="fragment"><strong>Order Sequencing:</strong> Which bike to build first?</li>
 <li class="fragment"><strong>Workstation Management:</strong> Assembly must finish before painting</li>
 <li class="fragment"><strong>Deadline Pressure:</strong> Rush orders have steep penalties (€150 each)</li>
-<li class="fragment"><strong>Cost Control:</strong> Overtime at €100/hour after Saturday 8 PM</li>
+<li class="fragment"><strong>Cost Control:</strong> Overtime at €100/hour after Friday 19:00</li>
 </ul>
 <div class="fragment">
 <div class="callout callout-important callout-style-simple">
@@ -458,11 +458,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="complexity-why-greedy-is-fast" class="slide level2">
 <h2>Complexity: Why Greedy is Fast</h2>
-<div id="a78fe45d" class="cell" data-execution_count="1">
+<div id="1cac493d" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-2-output-1.png" width="1139" height="419"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-2-output-1.png" alt="Operation counts on a log scale for 1 to 20 jobs: the n! curve of exhaustive search climbs steeply to nearly 500 million at 12 jobs, where it stops, while greedy n log n and linear n stay almost flat at the bottom. At 16 jobs a single point marks about 20 trillion operations for exhaustive search, while greedy needs about 64." width="1139" height="419"></p>
 </figure>
 </div>
 </div>
@@ -515,11 +515,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-hospital-check-in" class="slide level2">
 <h2>Example: Hospital Check-In</h2>
-<div id="6acaa06a" class="cell" data-execution_count="2">
+<div id="175b65e0" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-3-output-1.png" width="1139" height="417"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-3-output-1.png" alt="Gantt chart of four hospital check-ins in arrival order: Patient A takes 5 minutes, B 3, C 4 and D 6, each starting when the previous one ends, so all are done after 18 minutes. The order ignores how long each check-in takes." width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -560,11 +560,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-coffee-shop-orders" class="slide level2">
 <h2>Example: Coffee Shop Orders</h2>
-<div id="2ca1a583" class="cell" data-execution_count="3">
+<div id="18275118" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-4-output-1.png" width="1140" height="417"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-4-output-1.png" alt="Gantt chart of four coffee orders sorted by preparation time: the two 1-minute orders (black coffee and espresso) come first, then the 3-minute cappuccino, then the 5-minute frappuccino, done after 10 minutes. Short orders never wait behind long ones." width="1140" height="417"></p>
 </figure>
 </div>
 </div>
@@ -605,11 +605,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="example-package-delivery" class="slide level2">
 <h2>Example: Package Delivery</h2>
-<div id="7b5de808" class="cell" data-execution_count="4">
+<div id="ed407aaf" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-5-output-1.png" width="1140" height="417"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-5-output-1.png" alt="Gantt chart of four deliveries in due-date order. Pkg A finishes at minute 30 (due 40) and Pkg B at 50 (due 50), both on time; Pkg C finishes at 75 (due 60) and Pkg D at 90 (due 70) and are marked late. EDD keeps the worst delay small but cannot save every deadline." width="1140" height="417"></p>
 </figure>
 </div>
 </div>
@@ -631,7 +631,7 @@ Dr.&nbsp;Tobias Vlćek
 <h2>Implementing SPT in Python I</h2>
 <p><span class="highlight">Let’s code it together - it’s remarkably simple!</span></p>
 <p>Let’s assume we want to make some pizzas under deadlines.</p>
-<div id="483d3add" class="cell" data-execution_count="5">
+<div id="f288c32e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Pizza data</span></span>
 <span id="cb1-2"><a aria-label="2"></a>pizzas <span class="op">=</span> [</span>
 <span id="cb1-3"><a aria-label="3"></a>    {<span class="st">'id'</span>: <span class="st">'P1'</span>, <span class="st">'time'</span>: <span class="dv">10</span>, <span class="st">'due'</span>: <span class="dv">20</span>},</span>
@@ -647,7 +647,7 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="implementing-spt-in-python-ii" class="slide level2">
 <h2>Implementing SPT in Python II</h2>
-<div id="9e6704e2" class="cell" data-execution_count="6">
+<div id="3bbf5bc4" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># SPT Rule: Sort by processing time</span></span>
 <span id="cb2-2"><a aria-label="2"></a>spt_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'time'</span>])</span>
 <span id="cb2-3"><a aria-label="3"></a></span>
@@ -683,7 +683,7 @@ Dr.&nbsp;Tobias Vlćek
 <section id="implementing-edd-in-python" class="slide level2">
 <h2>Implementing EDD in Python</h2>
 <p><span class="highlight">EDD is just as simple - change the sorting key!</span></p>
-<div id="9ecc3bfc" class="cell" data-execution_count="7">
+<div id="de806f90" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># EDD Rule: Sort by due date</span></span>
 <span id="cb4-2"><a aria-label="2"></a>edd_order <span class="op">=</span> <span class="bu">sorted</span>(pizzas, key<span class="op">=</span><span class="kw">lambda</span> p: p[<span class="st">'due'</span>])</span>
 <span id="cb4-3"><a aria-label="3"></a></span>
@@ -762,11 +762,11 @@ Dr.&nbsp;Tobias Vlćek
 </section>
 <section id="all-schedules-compared" class="slide level2">
 <h2>All Schedules Compared</h2>
-<div id="b913e175" class="cell" data-execution_count="8">
+<div id="36130394" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-9-output-1.png" width="1139" height="417"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-9-output-1.png" alt="Three Gantt charts of the same four bike orders with their deadlines. FIFO: no late order, average completion 169 minutes. SPT: lowest average completion at 124 minutes, but B12 finishes 60 minutes late and costs a €150 penalty. EDD: no late order, average 176 minutes. Each rule wins on a different measure." width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -1168,11 +1168,11 @@ ELSE:
 </section>
 <section id="fifo-x-y-z" class="slide level2">
 <h2>FIFO: X → Y → Z</h2>
-<div id="e80720c2" class="cell" data-execution_count="9">
+<div id="a58803f4" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-10-output-1.png" width="1139" height="417"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-10-output-1.png" alt="Two Gantt rows for the order X, Y, Z. Assembly runs without gaps from 0 to 65 minutes; painting sits idle for the first 30 minutes while X is assembled, then paints X, Y and Z back to back and finishes at 95 minutes." width="1139" height="417"></p>
 </figure>
 </div>
 </div>
@@ -1310,11 +1310,11 @@ ELSE:
 </section>
 <section id="johnsons-schedule-z-y-x" class="slide level2">
 <h2>Johnson’s Schedule: Z → Y → X</h2>
-<div id="851a1170" class="cell" data-execution_count="10">
+<div id="f2415ede" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-11-output-1.png" width="1139" height="417"></p>
+<p><img data-src="lec_06_greedy_algorithms_files/figure-revealjs/cell-11-output-1.png" alt="Two Gantt rows for the order Z, Y, X. Assembly runs without gaps from 0 to 65 minutes; painting is idle only for the first 15 minutes and for 5 more minutes later on, and finishes at 85 minutes, 10 minutes earlier than with the order X, Y, Z." width="1139" height="417"></p>
 </figure>
 </div>
 </div>

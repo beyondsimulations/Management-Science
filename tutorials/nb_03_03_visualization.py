@@ -10,7 +10,7 @@
 #     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
-#     path: /Users/vlcek/Documents/git-teaching/Management-Science/.venv/share/jupyter/kernels/python3
+#     path: /Users/tobi/development/lectures/Management-Science/.venv/share/jupyter/kernels/python3
 # ---
 
 # %% [markdown]

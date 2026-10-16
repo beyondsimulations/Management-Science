@@ -10,7 +10,7 @@
 #     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
-#     path: /Users/vlcek/Documents/git-teaching/Management-Science/.venv/share/jupyter/kernels/python3
+#     path: /Users/tobi/development/lectures/Management-Science/.venv/share/jupyter/kernels/python3
 # ---
 
 # %% [markdown]
@@ -31,7 +31,7 @@
 # **Your Role:** You’ve been hired as the weekend operations manager to
 # handle a critical scheduling crisis.
 #
-# ## The Friday Afternoon Crisis
+# ## The Friday Morning Crisis
 #
 # **It’s Friday at 06:00 in the morning.** The production manager just
 # quit unexpectedly, leaving you with a major problem:
@@ -343,8 +343,7 @@ print("\nThis is just ONE possible schedule. Can you do better?")
 #
 # - **Forgetting the two-stage constraint:** Painting MUST wait for
 #   assembly to finish
-# - **Overtime calculation:** Only count minutes AFTER 1800, not total
-#   time
+# - **Overtime calculation:** Only count minutes AFTER 780, not total time
 # - **Penalty logic:** Only charge penalties if completion \> due time
 # - **Ignoring order types:** Rush orders have 3x the penalty of standard
 #   orders!
@@ -354,7 +353,7 @@ print("\nThis is just ONE possible schedule. Can you do better?")
 # - [ ] All bikes scheduled through both stations
 # - [ ] Painting never starts before assembly ends
 # - [ ] No negative times
-# - [ ] Overtime only charged after minute 1800
+# - [ ] Overtime only charged after minute 780
 # - [ ] Penalties only for late orders (completion \> due)
 # - [ ] Total cost = overtime + penalties
 #
